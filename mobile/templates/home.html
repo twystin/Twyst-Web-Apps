@@ -1,0 +1,119 @@
+<div ng-include="'./templates/partials/header.html'"></div>
+<div ng-controller="HeaderCtrl">
+    <div ng-show="header.status.network && !header.status.version">
+        <div class="alert alert-danger">Your Twyst app is out of date. Please upgrade to the latest version.</div>
+    </div>
+    <div ng-hide="header.status.network && !header.status.version">
+        <div class="padding_top_big"></div>
+        <nav class="navbar navbar-default navbar-fixed-top" style="margin-top:60px">
+            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
+                <a class="btn btn-success btn-block btn-lg tb" href="#/"><i class="icon ion-home t_icon"></i><span class="t_main">&nbsp;For me</span></a>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
+                <a class="btn btn-primary btn-block btn-lg tb" href="#/my"><i class="icon ion-ios7-pricetag t_icon"></i><span class="t_main">&nbsp;Twysts</span></a>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
+                <a class="btn btn-primary btn-block btn-lg tb" href="#/near"><i class="icon ion-ios7-location t_icon"></i><span class="t_main">&nbsp;Nearby</span></a>
+            </div>
+        </nav>
+    </div>
+    <div>
+        <div ng-show="header.data.user.user.facebook.name && show_alert" class="alert alert-success">
+            <div class="divvy">
+                Welcome, {{header.data.user.user.facebook.name}}
+                <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="show_alert=!show_alert"></span>
+            </div>
+        </div>
+    </div>
+    <div ng-show="alert_ncr.show">
+        <div class="divvy alert alert-{{alert_ncr.color}} row">
+            <div class="col-sm-11 col-md-11 col-xs-11">{{alert_ncr.message}}</div>
+            <div class="col-sm-1 col-md-1 col-xs-1"><span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="alert_ncr.show=false"></span></div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+   <div class="panel-body">
+        <div class="list-group" ng-controller="DataCtrl">
+            <div ng-show="selectedTag" class="alert alert-warning">
+                <span>Tags: {{selectedTag}}</span>
+                <span class="icon ion-ios7-close-outline pull-right t_icon" ng-click="clearFilters($event)"></span>
+            </div>
+            <div ng-show="saveAlert" ng-init="showAlert = true" class="alert alert-warning">
+                <span>{{saveAlert}}</span>
+                <span class="icon ion-ios7-close-outline pull-right t_icon" ng-click="saveAlert = ''"></span>
+            </div>
+
+            <div ng-controller="HeaderCtrl">
+                <div ng-show="needPhone()">
+                    <div class="alert alert-warning">
+                        <span>Twyst needs your phone number to work well. We will never send you any unsolicited text messages. Please confirm your phone number.</span>
+                        <input class="input-lg" ng-model="phone" style="font-size:24px;">
+                        <button class="button btn-primary btn-lg" ng-click="addPhone(phone)">Confirm</button>
+                    </div>
+                </div>
+                <div ng-show="alert.show" class="alert alert-{{alert.color}}">{{alert.message}}</div>
+            </div>
+
+            <div ng-show="empty('reccos')" class="alert alert-warning">
+                <center>
+                <h4>Trying to get data from the Twyst service <i class="icon ion-refreshing t_icon"></i></h4>
+                </center>
+            </div>
+            <div ng-hide="empty('reccos')">
+                <div ng-repeat="recommendation in data.reccos | mySearch:selectedTag">
+                    <div class="row list-group-item t_list">
+                        <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <center>
+                                <div ng-show="recommendation.program.outlets.0.basics.is_a">
+                                    <img src="assets/transparent/{{recommendation.program.outlets.0.basics.is_a}}.png" class="ti" height="100px" width="auto"><br/><br/>
+                                </div>
+                                <div ng-hide="recommendation.program.outlets.0.basics.is_a">
+                                    <img src="assets/transparent/other.png" class="ti" height="100px" width="auto"><br/><br/>
+                                </div>
+
+                                <div>
+                                    <div class="row">
+                                        <center>
+                                        <div class="col-sm-1 col-md-2 col-xs-0"></div>
+                                        <div ng-show="isFave(recommendation.program.outlets.0)">
+                                            <div class="col-sm-4 col-md-3 col-xs-6"><i class="icon ion-ios7-heart t_icon_heart" ng-click="saveFave(recommendation.program.outlets.0)"></i></div>
+                                        </div>
+                                        <div ng-hide="isFave(recommendation.program.outlets.0)">
+                                            <div class="col-sm-4 col-md-3 col-xs-6"><i class="icon ion-ios7-heart-outline t_icon_heart" ng-click="saveFave(recommendation.program.outlets.0)"></i></div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-xs-6"><i class="icon ion-android-share t_icon_share" ng-click="shareRecco(recommendation)"></i></div>
+                                        <div class="col-sm-1 col-md-2 col-xs-0"></div>
+                                        </center>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-6 t_recco">
+                            <div ng-click="showDetail($index)">
+                                <h3 class="list-group-item-heading">{{recommendation.program.outlets.0.basics.name | shorttext:14}}</h3>
+                                <h4 class="list-group-item-text">{{recommendation.offer.basics.description | shorttext:35}}</h4>
+                            </div>
+
+                            <span ng-repeat="tag in getTags(recommendation.program.outlets.0.attributes.tags)">
+                                <button class="button btn-grey" ng-click="addFilter($event)">#{{tag}}</button>
+                            </span>
+                        </div>
+
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <span> {{distance(recommendation.program.outlets.0) | dist}}km </span><br/>
+                            <div ng-show="rewards(recommendation.program.outlets.0)">&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-gift t_icon_inline"></span><br/></div>
+                            <span>{{checkins(recommendation.program.outlets.0)}} </span><span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto"></span><br/>
+                        </div>
+                        </div>
+
+                    </div>
+
+            </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'./templates/partials/footer.html'"></div>
+</div>

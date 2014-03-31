@@ -1,0 +1,85 @@
+<div class="row-fluid">
+  <div class="span4">
+    <div class="row">
+      <div ng-repeat="imagesrc in outlet.basics.images">
+        <img src="{{imagesrc}}" class="img-circle">
+      </div>          
+    </div>                
+  </div>
+  <div class="offset1 span7">
+    <div class="row">
+      <span style="font-size: 31.5px;font-weight: bold;">{{outlet.basics.name}}</span>
+      <span ng-show="outlet.basics.is_a" tooltip-placement="top" tooltip="{{outlet.basics.is_a}}" style="padding-left:15px;"><img style="border:2px solid black" class="img-polaroid" src="../../../common/images/transparent/{{outlet.basics.is_a}}.png" width="50px" height="50px"></span>
+    </div> 
+    <div class="row">
+      <span class="lead" ng-show="outlet.basics.contact_person_name">{{outlet.basics.contact_person_name}}</span>
+      <span ng-show="outlet.basics.relationship"> ({{outlet.basics.relationship}})</span>
+    </div>   
+    <div class="row">
+      <small ng-show="outlet.contact.phones.landline">L:{{outlet.contact.phones.landline}}</small>
+      <small ng-show="outlet.contact.phones.mobile.length && outlet.contact.phones.mobile.0.num" ng-repeat="mobile in outlet.contact.phones.mobile"> | M: {{mobile.num}}</small>     
+    </div> 
+    <div class="row">
+      <small ng-show="outlet.contact.emails.email"><a href="mailto:{{outlet.basics.email}}">{{outlet.contact.emails.email}}</a></small>  
+    </div>    
+    <div class="row">
+      <small ng-show="outlet.contact.location.address">{{outlet.contact.location.address}}</small>
+    </div>
+    <div class="row">
+      <small ng-show="outlet.contact.location.locality_1">{{outlet.contact.location.locality_1.toString()}}</small>
+      <small ng-show="outlet.contact.location.locality_2"> | {{outlet.contact.location.locality_2.toString()}}</small>
+    </div>  
+    <div class="row">
+      <small ng-show="outlet.contact.location.landmarks">Near: {{outlet.contact.location.landmarks | atos}}</small>
+    </div> 
+    <div class="row">
+      <small ng-show="outlet.contact.location.city">City: {{outlet.contact.location.city}}</small>
+      <small ng-show="outlet.contact.location.pin">, Pin: {{outlet.contact.location.pin}}</small>        
+    </div>                                      
+    <div class="row">
+      <small ng-show="outlet.links.website_url"><a href="{{outlet.links.website_url}}">Web</a></small>
+      <small ng-show="outlet.links.facebook_url">| <a href="{{outlet.links.facebook_url}}">Facebook</a></small>
+      <small ng-show="outlet.links.twitter_url">| <a href="{{outlet.links.twitter_url}}">Twitter</a></small>
+    </div>
+  </div>
+</div>
+<div class="row-fluid" style="padding-top:20px">
+  <div class="span6">
+    <div class="row-fluid">
+      <span ng-show="ng-outlet.attributes.alcohol" tooltip-placement="top" tooltip="Alcohol"><img src="../../../common/images/transparent/drink2.png" width="40px" height="auto"></span>
+      <span ng-show="!(ng-outlet.attributes.alcohol)" tooltip-placement="top" tooltip="no Alcohol"><img id="attrimage" src="../../../common/images/transparent/drink2.png"></span>
+      <span ng-show="ng-outlet.attributes.dine_in" tooltip-placement="top" tooltip="Dine In"><img src="../../../common/images/transparent/dine_in2.png" width="40px" height="auto"><br/></span>         
+      <span ng-show="!(ng-outlet.attributes.dine_in)" tooltip-placement="top" tooltip="no Dine In"><img id="attrimage" src="../../../common/images/transparent/dine_in2.png"><br/></span>
+      <span ng-show="ng-outlet.attributes.smoking" tooltip-placement="top" tooltip="Smoking"><img src="../../../common/images/transparent/smoke.png" width="40px" height="auto"></span>
+      <span ng-show="!(ng-outlet.attributes.smoking)" tooltip-placement="top" tooltip="no Smoking"><img id="attrimage" src="../../../common/images/transparent/smoke.png"></span>         
+      <span ng-show="ng-outlet.attributes.veg" tooltip-placement="top" tooltip="Vegetarian"><img width="25px" height="auto" src="../../../common/images/transparent/vegetarian.png"></span>
+      <span ng-show="!(ng-outlet.attributes.veg)" tooltip-placement="top" tooltip="non Vegetarian"><img id="attrimage1" src="../../../common/images/transparent/vegetarian.png"></span>
+    </div>
+    <div class="row-fluid">           
+      <span ng-show="ng-outlet.attributes.chain" tooltip-placement="top" tooltip="Chain"><img src="../../../common/images/transparent/chain.png" width="40px" height="auto"></span>
+      <span ng-show="!(ng-outlet.attributes.chain)" tooltip-placement="top" tooltip="no Chain"><img id="attrimage" src="../../../common/images/transparent/chain.png"></span>         
+      <span ng-show="ng-outlet.attributes.outdoor" tooltip-placement="top" tooltip="Outdoor"><img src="../../../common/images/transparent/outdoor.png" width="40px" height="auto"><br/></span> 
+      <span ng-show="!(ng-outlet.attributes.outdoor)" tooltip-placement="top" tooltip="no Outdoor"><img id="attrimage" src="../../../common/images/transparent/outdoor.png"><br></span> 
+      <span ng-show="ng-outlet.attributes.home_delivery" tooltip-placement="top" tooltip="Home Delivery"><img src="../../../common/images/transparent/delivery.png" width="40px" height="auto"></span>
+      <span ng-show="!(ng-outlet.attributes.home_delivery)" tooltip-placement="top" tooltip="no Home Delivery"><img id="attrimage" src="../../../common/images/transparent/delivery.png"></span>
+      <span ng-show="ng-outlet.attributes.foodcourt" tooltip-placement="top" tooltip="Foodcourt"><img src="../../../common/images/transparent/foodcourt.png" width="40px" height="auto"></span>
+      <span ng-show="!(ng-outlet.attributes.foodcourt)" tooltip-placement="top" tooltip="no Foodcourt"><img id="attrimage" src="../../../common/images/transparent/foodcourt.png"></span>
+    </div> 
+  </div>
+  <div class="span6">
+    <div class="row-fluid">           
+      <div class="badge badge-info" ng-show="outlet.attributes.air_conditioning">Air-conditioning: {{outlet.attributes.air_conditioning}}</div>         
+      <div class="badge badge-info" ng-show="outlet.attributes.parking"> Parking: {{outlet.attributes.parking}}</div> 
+      <div class="badge badge-info" ng-show="outlet.attributes.reservation"> Reservation: {{outlet.attributes.reservation}}</div> 
+      <div class="badge badge-info" ng-show="outlet.attributes.wifi"> WiFi: {{outlet.attributes.wifi}}</div>
+    </div> 
+    <div class="row-fluid">           
+      <div class="badge badge-info" ng-if="outlet.attributes.cost_for_two.min && outlet.attributes.cost_for_two.max"> Cost For Two: {{getCostForTwoText(outlet)}} &#8377;</div>
+      <div class="badge badge-info" ng-show="outlet.attributes.timings">Timings: {{outlet.attributes.timings}}</div> 
+      <div class="badge badge-info" ng-show="outlet.attributes.cuisines">Cuisines: {{outlet.attributes.cuisines | atos}}</div>
+      <div class="badge badge-info" ng-show="outlet.attributes.payment_options.length">Payment: {{outlet.attributes.payment_options | atos}}</div>     
+
+      <div class="badge badge-info" ng-if="outlet.attributes.tags.length > 0">Tags: {{outlet.attributes.tags | atos}}</div>
+    </div>
+  </div>   
+</div>  

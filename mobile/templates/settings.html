@@ -1,0 +1,86 @@
+<div ng-controller="HeaderCtrl">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding:0px; margin:0px">
+        <div class="col-sm-3 col-xs-3 col-md-3">
+            <a class="btn btn-default  pull-left" href="#"><i class="icon ion-home t_icon"></i></a>
+        </div>
+        <div class="col-sm-6 col-xs-6 col-md-6">
+            <center>
+                <img src="assets/logo_2.png" height="70px" width="auto">
+            </center>
+        </div>
+        <div class="col-sm-3 col-xs-3 col-md-3">
+            <div ng-if="header.status.network === false">
+                <a class="btn btn-danger pull-right" ng-href="#"><i class="icon ion-wifi t_icon"></i> <span style="font-size:19px">No data</span></a>
+            </div>
+            <div ng-if="header.status.network === true">
+                <div ng-if="header.status.user === true">
+                    <button class="btn btn-default pull-right" ng-click="onRefresh()"><i class="icon ion-{{refreshing}} t_icon"></i></button>
+                </div>
+                <div ng-if="header.status.user === false">
+                    <a class="btn btn-primary pull-right" ng-href="#/signin"><i class="icon ion-social-facebook t_icon"></i> <span style="font-size:19px">Sign in</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<div class="panel panel-white" style="padding:15px">
+    <div class="panel-heading">
+        <h3>Settings</h3>
+    </div>
+    <div class="panel-body">
+        <div><br/>
+        <button class="button btn-white btn-block">
+        <h1 class="icon ion-star"></h1>&nbsp;
+        <span>Rate the Twyst app</span>
+        </button>
+        </div>
+        <div><br/>
+        <button class="button btn-white btn-block" ng-click="messages.feedback.show = true; fb=''">
+            <h1 class="icon ion-speakerphone"></h1>&nbsp;
+            <span>Send us Feedback!</span>
+        </button>
+        <div class="panel panel-success" style="padding: 15px" ng-show="messages.feedback.show">
+            <div class="alert alert-{{messages.feedback.color}} divvy" ng-show="messages.feedback.text">
+                {{messages.feedback.text}}
+                <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="messages.feedback.show = false; messages.feedback.text=''"></span>
+            </div>
+            <div ng-hide="messages.feedback.text">
+                <div class="panel-body">
+                    <div class="divvy">Give us feedback</div>
+                    <textarea class="form-control" rows="3" ng-init="fb=''" ng-model="fb" style="font-size:24px;"></textarea>
+                    <div>
+                        <button class="button btn-primary btn-lg" ng-click="feedback(fb)">Send feedback</button>
+                        <button class="button btn-default btn-lg" ng-click="fb = ''; messages.feedback.show = false">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div><br/>
+        <button class="button btn-white btn-block">
+        <h1 class="icon ion-help-circled"></h1>&nbsp;
+        <span>Get help</span>
+        </button>
+        </div>
+        <div><br/>
+            <button class="button btn-white btn-block" ng-click="checkVersion()">
+            <h1 class="icon ion-ios7-cloud-download"></h1>&nbsp;
+            <span>Check for updates</span>
+            </button>
+            <br/>
+            <div class="alert alert-{{messages.version.color}} divvy" ng-show="messages.version.show">
+                {{messages.version.text}}
+                <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="messages.version.show=!messages.version.show"></span>
+            </div>
+        </div>
+        <div><br/>
+            <button class="button btn-white btn-block">
+                <h1 class="icon ion-social-facebook"></h1>&nbsp;
+                <span>Log out from Twyst</span>
+            </button>
+        </div>
+    </div>
+</div>
+

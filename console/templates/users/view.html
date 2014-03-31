@@ -1,0 +1,18 @@
+<div ng-init="query()" >
+    <div>{{message}}</div>
+    <div ng-repeat="user in users">
+        <ul>
+            <li>Username: {{user.username}}</li>
+            <span>
+                <strong>Role:</strong>{{user.role || "Not set"}},</span>
+            <span>
+                <strong>Validated:</strong>{{user.validated.role_validated || "Not set"}}</span>
+            <p>
+                <a ng-href="/console/#/users/edit/{{user.username}}" class="btn btn-info">Edit</a>
+                <button ng-click="delete(user)" class="btn btn-warning" ng-show="user.role != 'root'">Delete</button>
+                <button ng-click="resendValidationEmail(user.username)" class="btn btn-success" ng-show="user.role != 'root'">Send validation email</button>                
+            </p>
+        </ul>
+
+    </div>
+</div>

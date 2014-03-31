@@ -1,0 +1,57 @@
+<div class="row-fluid one-edge-shadow outHeadder" ng-controller="RoleCtrl">
+	<div class="row-fluid offset1 span3">
+		<div class="row-fluid span7">	
+			<a href="#/dashboard/home"><img id="logo" src="../common/images/logo_2.png" ></a>
+		</div>
+		<div id="outMerchant" class="row-fluid span4">
+			<h3 ng-if="permission"><strong><a href="#/dashboard/home">Merchant</a></strong></h3>
+			<h3 ng-if="!permission"><strong><a href="#/panel">Merchant</a></strong></h3>
+		</div>
+	</div>
+		<div class="row-fluid span7" style="margin-top:8px;padding-right:4px">
+			<ul class="nav nav-pills pull-right">
+				<li ng-if="permission">
+					<a href="#/dashboard/home"><b>Home</b></a>
+				</li>
+				<li class="dropdown" onclick="this.style.active= 'true'" ng-if="permission">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Outlets</b>
+					</a>
+					<ul class="dropdown-menu">
+					<li><a href="/merchant/#/outlets/create">Create</a></li>
+					<li><a href="/merchant/#/outlets/">View</a></li>
+					</ul>
+				</li> 
+				<li class="dropdown" ng-if="permission">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Offers</b>
+					</a>
+					<ul class="dropdown-menu">
+					<li><a href="/merchant/#/offers/create/loyality">Create</a></li>
+					<li><a href="/merchant/#/offers/">View</a></li>
+					</ul>
+				</li>
+				<li class="dropdown" ng-if="permission">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Reports</b>
+					</a>
+					<ul class="dropdown-menu">
+					<li><a href="/merchant/#/analytics">Analytics</a></li>
+					<li><a href="/merchant/#/analytics/summary">Summary</a></li>
+					</ul>
+				</li>
+				<li class="">
+					<a href="#/panel" data-toggle=""><b>Panel</b></a>
+				</li>
+				<li class="dropdown"> 
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Welcome {{auth.user}}</b>
+					</a>
+					<ul class="dropdown-menu">
+					<li ng-if="permission"><a href="/merchant/#/settings">Profile</a></li>								
+					<li><a href="" ng-click="logout()">Logout</a></li>
+					</ul> 
+				</li>
+			</ul>
+		</div>		
+	<div class="span1">
+	</div>
+</div>
+
+

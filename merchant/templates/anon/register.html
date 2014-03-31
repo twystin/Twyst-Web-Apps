@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h3>Contact us</h3>
+</div>
+<div class="modal-body" ng-controller="AuthCtrl">
+<form name='getInTouchForm'>
+	<label>Establishment name</label>
+	<input class="input-xlarge" type="text" required ng-model="merchant.establishment_name" name="establishment_name" ng-minlength = 5></input>
+	<div class="error"
+	ng-show="getInTouchForm.establishment_name.$dirty && getInTouchForm.establishment_name.$error.required">
+		            Required field
+	</div>
+	<div class="error" ng-show="getInTouchForm.establishment_name.$dirty && getInTouchForm.establishment_name.$error.minlength">
+	            At least 5 characters
+	</div>
+	<label>Contact person name</label>
+	<input class="input-xlarge" type="text" required ng-model="merchant.person_name" name="person_name" ng-minlength=5></input>
+	
+	<div class="error"
+	ng-show="getInTouchForm.person_name.$dirty && getInTouchForm.person_name.$error.required">
+		            Required field
+	</div>
+	<div class="error" ng-show="getInTouchForm.person_name.$dirty && getInTouchForm.person_name.$error.minlength">
+	            At least 5 characters
+	</div>
+	<label>Phone number</label>
+	<input ng-pattern="/^\+?\d+\-?\d+$/" class="input-xlarge" type="text" rows="3" required ng-model="merchant.phone_number" name="phone_number"></input>
+	<div class="error"
+	ng-show="getInTouchForm.phone_number.$dirty && getInTouchForm.phone_number.$error.required ">
+		            Required field
+	</div>
+	<div class="error"
+	ng-show="getInTouchForm.phone_number.$dirty && getInTouchForm.phone_number.$invalid && !getInTouchForm.phone_number.$error.required" >
+		            Invalid phone number
+	</div>
+	<label>Email ID</label>
+	<input class="input-xlarge" type="email" id="email" name="email" ng-model="merchant.email" required></input>
+	<div class="error"
+	ng-show="getInTouchForm.email.$dirty && getInTouchForm.email.$error.required ">
+		            Required field
+	</div>
+	<div class="error"
+	ng-show="getInTouchForm.email.$dirty && getInTouchForm.email.$error.email && !getInTouchForm.email.$error.required ">
+		            Invalid e-mail
+	</div>
+	<div class="alert alert-success" ng-show="merchant.thank_you">Great! You will hear from us shortly.</div>
+	<div class="alert alert-warning" ng-show="merchant.error">You are already registered!</div>	
+</form>
+</div>
+<div class="modal-footer">
+  <button type="button" ng-hide="merchant.thank_you" class="btn btn-primary" ng-click="addMerchant()">Submit</button>
+
+  <button type="button" ng-click="cancel()" class="btn btn-warning">Close</button>
+</div>

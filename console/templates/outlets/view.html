@@ -1,0 +1,17 @@
+<div ng-init="outletQuery()" >
+    <div>{{message}}</div>
+    <div ng-repeat="outlet in outlets">
+        <ul>
+            <li>Outlet name: {{outlet.basics.name}}</li>
+            <span>
+                <strong>Latitude:</strong>{{outlet.contact.location.coords.latitude || "Not set"}},
+            </span>
+            <span>
+                <strong>Longitude:</strong>{{outlet.contact.location.coords.longitude || "Not set"}}
+            </span>
+            <p>
+                <a ng-href="/console/#/outlets/edit/{{outlet._id}}" class="btn btn-info">Edit</a>
+            </p>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+
+<div ng-controller="HeaderCtrl">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding:0px; margin:0px">
+        <div class="col-sm-3 col-xs-3 col-md-3">
+            <a class="btn btn-default  pull-left" href="#"><i class="icon ion-home t_icon"></i></a>
+        </div>
+        <div class="col-sm-6 col-xs-6 col-md-6">
+            <center>
+                <img src="assets/logo_2.png" height="70px" width="auto">
+            </center>
+        </div>
+        <div class="col-sm-3 col-xs-3 col-md-3">
+            <div ng-if="header.status.network === false">
+                <a class="btn btn-danger pull-right" ng-href="#"><i class="icon ion-wifi t_icon"></i> <span style="font-size:19px">No data</span></a>
+            </div>
+            <div ng-if="header.status.network === true">
+                <div ng-if="header.status.user === true">
+                    <button class="btn btn-default pull-right" ng-click="onRefresh()"><i class="icon ion-{{refreshing}} t_icon"></i></button>
+                </div>
+                <div ng-if="header.status.user === false">
+                    <a class="btn btn-primary pull-right" ng-href="#/signin"><i class="icon ion-social-facebook t_icon"></i> <span style="font-size:19px">Sign in</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<br/><br/>
+<div class="panel panel-primary" style="padding:15px">
+    <div class="panel-body">
+        <div class="list-group" ng-controller="DataCtrl">
+            <div class="row list-group-item t_list">
+                <h3 class="list-group-item-heading">{{recco.program.outlets.0.basics.name}}</h3>
+                <h4 class="list-group-item-heading">{{recco.program.outlets.0.contact.location.address}}</h4>
+
+                <div class="well">
+                    <h4 class="alert alert-success">{{recco.offer.basics.title}}</h4>
+                    <span>{{recco.offer.basics.description}}</span>
+                    <hr/><div class="divvy text-success">This offer unlocks {{recco.offer.user_eligibility.criteria.condition}} {{recco.offer.user_eligibility.criteria.value}} checkins.</div>
+                    <hr/><div class="divvy"><strong>You have {{recco.offer.user_eligibility.criteria.value - checkins(recco.program.outlets.0)}} checkins to go for your next reward.</strong></div>
+                    <hr/><div class="divvy">You have {{rewards(recco.program.outlets.0)}} vouchers to be redeemed at this outlet.</div>
+                </div>
+            </div>
+            <div class="row list-group-item t_list">
+                <button class="button btn-lg btn-default">Follow</button>
+                    &nbsp;&nbsp;
+                <button class="button btn-lg btn-default">Recommend</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'./templates/partials/footer.html'"></div>

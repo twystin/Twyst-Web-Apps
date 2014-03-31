@@ -1,0 +1,40 @@
+<fieldset>
+<h3>Outlet Creation: Links</h3>
+
+
+<div class="control-group alert alert-success" ng-init="outlet.links.urls = []">
+  <label class="control-label">Link</label>
+  <div class="controls">
+    <input id="outlet_url" name="outlet_url"  class="span8" type="url" placeholder="Eg: http://example.com" ng-model="tmpo.link.url">
+  </div>  
+
+  <label class="control-label">Type</label>
+  <div class="controls">
+    <select id="link_type" name="link_type" class="span4" ng-model="tmpo.link.type">
+        <option value="facebook">Facebook</option>
+        <option value="twitter">Twitter</option>
+        <option value="website">Website</option>
+        <option value="zomato">Zomato</option>
+    </select>
+  </div> 
+  <div class="controls">
+    <button class="btn btn-inverse" ng-click="addLink()">Save this link</button>
+  </div>
+  <br/>
+  <blockquote class="controls">
+  <div ng-repeat="link in outlet.links.urls">
+
+  <div class="row-fluid">
+    <div class="span4">
+      <a href="{{link.url}}">
+        {{link.type}}
+      </a>
+    </div>
+    <div class="span2"><a ng-click="removeLink(link)" class="label label-warning">Remove</a></div>
+    <div class="span2"><a ng-click="editLink(link)" class="label label-info">Edit</a></div>
+  </div>
+  </div> 
+  </blockquote>
+</div>
+
+</fieldset>

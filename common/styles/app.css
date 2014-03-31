@@ -1,0 +1,525 @@
+.center-select {
+    padding-top: 2%;
+    padding-right: 2%;
+}
+
+.btn-shadow {
+    -webkit-box-shadow: 5px 5px 10px #666;
+    -moz-box-shadow: 5px 5px 10px #666;
+    box-shadow: 5px 5px 10px #666;
+}
+
+.paneldata-voucher {
+
+    padding-left: 3%;
+    padding-top: 3%;
+    font-size: 120%;
+}
+
+.paneldata-error {
+
+    padding-left: 3%;
+    padding-top: 3%;
+    color: red;
+    font-size: 160%;
+}
+
+.paneldata-success {
+
+    padding-left: 3%;
+    padding-top: 3%;
+    color: #009344;
+    font-size: 160%;
+}
+
+.paneltemplates {
+    height: 350px;
+    margin-top: 10px;
+    background-color: white;
+    border:5px groove #e9ebec;
+}
+
+.btn-custom {
+    height: 40%;
+    width: 30%;
+    margin-top: -2.5%;
+}
+
+.panel-action-body {
+    padding-left: 5%;
+    padding-top: 2%;
+}
+
+.notif-error-font {
+    color: orange;
+    font-size: 30px;
+}
+
+.image-padding {
+    padding-top: 3%;
+}
+
+.data-font {
+    padding-top: 6%;
+    color: orange;
+    font-size: 50px;
+}
+
+.outlethead {
+    min-width: 100%;
+    min-height: 30px;
+    background-color: #d1d3d4;
+    font-size: 80%;
+}
+
+.cardhead {
+    min-width: 100%;
+    min-height: 20px;
+    background-color: #D91B5B;
+    font-size: 80%;
+}
+
+.card-padding {
+    padding-top: 1%;
+    padding-left: 5%;
+    font-size: 150%;
+    color: white;
+}
+
+.outletcard-body {
+    padding-top: 1%;
+}
+
+.card-padding1 {
+    padding-top: 1%;
+    padding-left: 5%;
+    font-size: 150%;
+    color: black;
+}
+
+.card-padding2 {
+    padding-top: 1%;
+    padding-left: 10%;
+    font-size: 150%;
+    color: black;
+}
+
+.card-checkin {
+    margin-top: 10px;
+    min-height: 110px;
+    background-color: #e9ebec;
+}
+
+.card-voucher {
+    min-height: 110px;
+    background-color: #e9ebec;
+    margin-left: 2%;
+}
+
+.card-redeemed {
+    min-height: 110px;
+    background-color: #e9ebec;
+    margin-left: 2%;
+}
+
+.panel-part1 {
+    padding-top: 1%;
+}
+
+.outlet-name {
+    font-size: 150%;
+    padding-left: 5%;
+}
+
+.outlet-locality {  
+    font-size: 150%;
+}
+
+.activity-background {
+    min-width: 100%;
+    min-height: 50px;
+}
+
+.notif-padding {
+    padding-left: 5%;
+}
+
+.activity-padding {
+    padding-top: 5%;
+    padding-left: 5%;
+    font-size: 150%;
+}
+
+.panel-page {
+  height: 580px;
+}
+
+.voucher-active {
+    color: green;
+    font-size: 150%;
+}
+
+.voucher-orange {
+    color: orange;
+    font-size: 150%;
+}
+
+.voucher-redeemed {
+    color: red;
+    font-size: 150%;
+}
+
+.notifications {
+    padding-right: 2%;
+    height: 580px;
+    overflow:scroll;
+    background-color: #e9ebec;
+}
+
+.twyst-font {
+    color: orange;
+    font-size: 70px;
+}
+
+.mobile-padding {
+    padding-left: 6%;
+}
+
+.alert-err {
+  color: #ffffff;
+  background-color: #DC8828;
+  border-color: transparent;
+}
+
+.voffset  { 
+    margin-top: 10px; 
+}
+.previewIcon{
+    height: 50px;
+    width: 50px;
+}
+.selected-icon {
+        border-color: green;
+        border-style: solid;
+        border-width: thin;        
+}
+
+#viewPlay{
+    /*
+    overflow-x:hidden;
+    overflow-y:auto;
+    */
+    max-height:585px;
+
+}
+#attrimage {
+    opacity: 0.4;
+    filter: alpha(opacity=40); 
+    width:40px;
+    height:auto;
+}
+#attrimage1 {
+    opacity: 0.4;
+    padding-left: 8px;
+    filter: alpha(opacity=40); 
+    width:25px;
+    height:auto;
+}
+
+#offers{
+    word-wrap:break-word;
+}
+#offers span{
+    word-wrap:break-word;
+}
+
+#offerViewRemoveOffset{
+    margin-left:-2.4%;
+}
+
+#offerPreviewImage{
+    width:100px;
+    height:80px;
+}
+
+#backgroudImg{
+    background-image: url('../../common/images/phone2.png');
+    height: 725px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position: top;
+
+}
+
+#offerViewCont{
+    margin-left:-2.8%;
+}
+
+#tierNav{
+    background-color: #4CB649;
+    color:white;
+    padding:6px;
+    border: lightgreen 1px solid;
+    border-radius: 5px
+}
+
+#offerNavPriv{
+    padding:6px 0px 0px 6px;
+    border: lightblue 1px solid;
+    background: lightcyan;
+    border-radius: 5px;
+}
+
+#offerNav{
+    margin:0px; border:1px solid black; padding:6px 0px 0px 6px;
+}
+
+#btnAddTier{
+    margin:0px; padding: 8px 0px 8px 0px;
+}
+
+#btnAddOffer{
+    margin:0px 0px 6px 0px;
+}
+
+.clearDiv{
+    margin:0px;
+}
+
+.borderBlack{
+    border:1px solid black;
+}
+
+.reviewProgramDiv{
+    border:1px solid black;
+    padding:0.52%;
+    margin:0.52%;
+    min-height: 110px;
+}
+
+.reviewProgramDiv1{
+    margin: 3.6% 0% 3.6% 0%;
+    padding: 0% 9% 0% 9%;
+    min-height: 70px;
+}
+
+#uploadPhoto{
+    background:gray;
+    text-align: center;
+    width:100px;
+    height:80px;
+    margin:0px 6px 6px 0px;
+}
+
+.carousel-control {
+    display: none;
+}
+
+.carousel-indicators li {
+    display: none;
+}
+
+.bgCarouselColor{
+    background-color:#F0F0F0;
+    margin:0px;
+}
+
+.carousel-header {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.75);
+  font-weight: bold;
+}
+
+span{
+    word-wrap:break-word;
+}
+
+#outletsViewDynamicDiv{
+    border:1px solid black;
+    margin: 0px 0px 10px 10px;
+}
+
+#outletBtn{
+    margin:0px;
+    padding:6px;
+    border:1px solid black
+}
+
+.negativeMargin{
+    margin-left:-3.4%
+}
+
+div.fileinputs {
+    position: relative;
+}
+
+div.fakefile {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width:70px;
+}
+
+input.file {
+    position: relative;
+    text-align: right;
+    -moz-opacity:0 ;
+    filter:alpha(opacity: 0);
+    opacity: 0;
+    z-index: 2;
+}
+
+.info-header {
+    border: 1px solid blue;
+    background-color: lightblue;
+    font-size: larger;
+    padding: 10px;
+}
+
+.preview-header {
+    border: 1px solid green;
+    background-color: lightgreen;
+    font-size: larger;
+    padding: 10px;
+}
+
+.info-detail {
+	border: 1px solid black;
+	padding: 20px;
+}
+
+.preview-detail {
+    border: 1px solid black;
+    padding: 20px;
+}
+.preview-details {
+    padding: 20px;
+}
+
+#outMerchant a {
+    text-decoration: none !important;
+    color: black;
+    opacity: 0.8;
+}
+
+.one-edge-shadow {
+    -webkit-box-shadow: 0 8px 6px -6px black;
+       -moz-box-shadow: 0 8px 6px -6px black;
+            box-shadow: 0 8px 6px -6px black;
+}
+
+#landingPageBulletPoints{
+    height:114px;
+    width:auto;
+    margin: 0px;
+    padding: 8px 0px 0px 0px;
+}
+
+.outHeadder{
+    padding-top: 22px;
+    height: 70px;
+}
+
+#outNavBtnRightSpacing{
+    padding-right:62px;
+    margin-top: 7px;
+}
+
+#outMerchant{
+    margin: 1px 0px 0px -11px;
+    opacity: 0.8;
+}
+
+.error {
+    color:orange;
+}
+
+.success {
+    color: green;
+}
+
+#logo{
+    height:auto; /*67px*/
+    width: 190px;
+}
+
+#outMerchant{
+    padding-top:7px;
+}
+
+#heading {
+	font-size: 1.5em;
+	padding-left: 20px;
+	font-weight: bold;
+}
+
+#h2{
+    margin: 0px 0px 0px 8px;
+}
+
+#h2 h2 {
+  font-size: 31.5px;
+  padding-top:30px;
+}
+
+#outletView h2 {
+  font-size: 31.5px;
+}
+
+.nav-pills li{
+    padding-right: 10px;
+}
+
+.pulldown{
+    margin-top:40px;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+    margin: 0 5px 0 5px;
+}
+
+input[type='checkbox']:checked {
+    background: gold;
+}
+
+#attributes small{
+    font-size: 12.6px;
+}
+
+#outletPayment small{
+    font-size: 12.6px;
+}
+
+/*footer css*/
+
+.footer{
+    margin:0px;
+    border-top:1px solid black;
+    padding-top:15px;
+    margin-top:15px;
+}
+
+.pushTop10px{
+    margin:10px 0px 0px 0px;
+}
+
+.bodderPaddingOutlet{
+    border:1px solid black;
+    padding:20px;
+}
+
+.boxtop {
+    background: #CCCCCC;
+    padding: 6px;
+}

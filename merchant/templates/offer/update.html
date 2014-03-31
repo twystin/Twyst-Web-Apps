@@ -1,0 +1,90 @@
+<div class="row-fluid" ng-init="edit()" style="min-height:580px;" >	
+	<div class="lead row-fluid offset1 span11" style="padding-top:30px;">
+		<h2>Update an offer</h2>
+	</div>
+	<div class="row-fluid span11 offset1">
+	  <div class="span5 well">
+	    <div>
+	      <div ng-show="true" class="span5">
+	        <div ng-repeat="imagesrc in program.images">
+	          <img id="offerPreviewImage" src="{{imagesrc}}" style="height:auto;width:auto;">
+	        </div> 
+	      </div>
+	      <div class="span7">
+	      <i class="icon icon-edit pull-right" ng-click="editProgram(program)"></i>
+	        <div class="span12" style="margin:0px;">
+	            <h2>{{program.name}}</h2>
+	        </div>
+	        <div>
+	          <h4>Program running on: </h4>
+	          <div ng-repeat="outlet in program.outlets">
+	            <div class="success">{{outlet.basics.name}}</div>
+	          </div>
+	        </div>
+	        <div class="row-fluid span12" style="margin:0px;">
+	            <small><span ng-show="program.validity.earn_start"><b>Earn Period :</b> <small><b>{{program.validity.earn_start | date:'shortDate'}}</b>&nbsp;&nbsp;<span ng-show="program.validity.earn_end"><strong>to</strong>&nbsp;&nbsp;</span><b>{{program.validity.earn_end | date:'shortDate'}}</b></small></span></small>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="row-fluid span12" ng-repeat="tier in program.tiers">
+	      <div id="tierNav" class="row-fluid" ng-show="tier.basics.name">
+	        <div class="row-fluid"><small>Tier Name:&nbsp;{{tier.basics.name}} | Opens at:&nbsp;{{tier.basics.start_value}} | Closes at: {{tier.basics.end_value}}</small>
+	        <i class="icon icon-trash pull-right" ng-click="deleteTier(tier)"></i>
+	        <i class="icon icon-edit pull-right" ng-click="editTier(tier)"></i>
+	        </div>
+	      </div>
+	      <div id="offers" class="row-fluid" ng-repeat="offer in tier.offers" ng-show="true">
+	        <div id="offerNavPriv" class="row-fluid span12">
+	          <div class="row-fluid span3">
+	            <small>Offer Name :</small>
+	          </div>
+	          <div class="row-fluid span9">
+	            <small>{{offer.basics.title}}</small>
+	          </div>
+	          <i class="icon icon-trash pull-right" ng-click="deleteOffer(offer)"></i>
+	        	<i class="icon icon-edit pull-right" ng-click="editOffer(offer)"></i>
+	         <!--  <div class="row-fluid span1">
+	            <i ng-click="viewPlay1()" class="icon-remove-sign icon-white"></i>
+	          </div> -->
+	        <div class="row-fluid span12" style="margin:0px">
+	          <div class="row-fluid span3"><small>Description:</small></div>
+	          <div class="row-fluid span9"><small>{{offer.basics.description}}</small></div>
+	        </div>
+	        <div class="row-fluid span12" style="margin:0px">
+	          <div class="row-fluid span3"><small>Eligibility:</small></div>
+	          <div class="row-fluid span9"><small>{{offer.user_eligibility.criteria.condition}}&nbsp;&nbsp;{{offer.user_eligibility.criteria.value}}</small></div>
+	        </div>
+	        <div class="row-fluid span12" style="margin:0px">
+	          <div class="row-fluid span3"><small>Reward:</small></div>
+	          <div class="row-fluid span9"><small>{{offer.reward.discount.Name}}&nbsp;&nbsp;{{offer.reward.discount.percentage}}{{offer.reward.discount.max}}  {{offer.reward.flat.off}}{{offer.reward.flat.spend}}  {{offer.reward.free.title}} {{offer.reward.free._with}} {{offer.reward.buy_one_get_one.title}}   {{offer.reward.happyhours.extension}}  {{offer.reward.reduced.what}}{{offer.reward.reduced.worth}}{{offer.reward.reduced.for_what}} {{offer.reward.custom.text}}</small></div>
+	        </div>
+	        <div id="" class="row-fluid span12" style="margin:0px">
+	          <div class="row-fluid span3"><small>Applicability:</small></div>
+	          <div class="row-fluid span9"><small><span ng-show="checkedTime"></span><p>Valid on&nbsp;:&nbsp;{{checkedTime.toString()}}
+	          {{offer.reward_applicability.time_of_day.toString()}}</p>
+	          <span ng-show="checkedDays"></span><p>Used on&nbsp;:&nbsp;{{checkedDays.toString()}}
+	          {{offer.reward_applicability.day_of_week.toString()}}</p>
+	          </small></div>
+	        </div>
+	        <div class="row-fluid">
+	        	<div class="badge badge-info" ng-if="offer.tags.length > 0">Tags: {{offer.tags | atos}}</div>
+	        </div>
+	        </div>
+	      </div>
+	      <hr>
+	    </div>
+	  </div> 
+	  <div class="span6">
+	  	<div>
+			<tabset vertical="false" type="'pills'">		   
+			    <tab class="well" ng-repeat="tab in update_tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+  					<div class="container-fluid well" ng-include="'/merchant/templates/offer/steps/update/' + tab.content + '.html'"></div>
+				</tab>
+			</tabset>
+			<div>
+				<a class="btn btn-large btn-warning" href="#/offers">Cancel update</a>
+			</div>
+		</div>
+	  </div>
+</div>
+</div>

@@ -1,0 +1,29 @@
+<div class="row-fluid paneldata-voucher">
+    <div>
+        Voucher is <b class="{{voucherStatusClass(voucher)}}">
+         {{checkVoucherApplicability(voucher)}}
+        </b>
+    </div>
+    <div ng-show="voucher.used_details.used_time">
+        <b>Used time: </b>{{voucher.used_details.used_time | date:'medium'}}
+    </div>
+    <div>
+        <b>Code: </b>{{voucher.basics.code}}
+    </div>
+    <div>
+        <b>Issued to: </b>{{voucher.issue_details.issued_to.phone}}
+    </div>
+    <div>
+        <b>Reward details: </b> {{voucher.issue_details.issued_for.basics.description}}
+    </div>
+    <div>
+        <b>T & C: </b>{{voucher.issue_details.issued_for.terms}}
+    </div>
+    <div>
+        <b>Reward Applicability: </b>{{voucher.issue_details.issued_for.reward_applicability.time_of_day.toString() === 'all day' ? 'All through the day;': voucher.issue_details.issued_for.reward_applicability.time_of_day.toString()+";"}} {{voucher.issue_details.issued_for.reward_applicability.day_of_week.toString() === 'all days' ? 'All days of the week' : voucher.issue_details.issued_for.reward_applicability.day_of_week.toString()}} 
+    </div>
+    <div>
+        <b>Validity: </b>{{voucher.validity.start_date | date:'medium'}} to {{voucher.validity.end_date | date:'medium'}}
+    </div>
+    <button ng-show="voucher.basics.status === 'active'" class="btn btn-success" ng-click="createRedeem()">Redeem</button>
+</div>

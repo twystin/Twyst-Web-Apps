@@ -1,0 +1,74 @@
+<div class="row-fluid span12" ng-init="getProfileInfo()">
+	<h3>My Info</h3>
+	<div>
+		<div class="row-fluid span3">
+			Company Name
+		</div>
+		<div class="row-fluid span9">
+			<input id="company_name" name="company_name" type="text" placeholder="e.g. Twyst Technology" ng-model="user.company"></input>
+		</div>
+	</div>
+	<div>
+		<div class="row-fluid span3">
+			Address
+		</div>
+		<div class="row-fluid span9">
+			<textarea id="address" name="address" type="text" ng-model="user.address"></textarea>
+		</div>
+	</div>
+	<div>
+		<div class="row-fluid span3">
+			Contact Person Name
+		</div>
+		<div class="row-fluid span9">
+			<input id="contact_name" name="contact_name" placeholder=" e.g. JayRam" type="text" ng-model="user.contact_person"></input>
+		</div>
+	</div>
+	<div>
+		<div class="row-fluid span3">
+			Email
+		</div>
+		<div class="row-fluid span9">
+			<input id="contact_ person_email" name="contact_person_email" placeholder=" JayRam@twyst.in" type="text" ng-model="user.email"></input>
+		</div>
+	</div>
+	<div>
+		<div class="row-fluid span3">
+			   Phone Number
+		</div>
+		<div class="row-fluid span9">
+			<input id="phone_number" name="phone_number" type="text" ng-model="user.phone"></input>
+		</div>
+	</div>
+	<div>
+		<div class="row-fluid span3">
+			   Website URL
+		</div>
+		<div class="row-fluid span9">
+			<input id="website_url" name="website_url" type="text" ng-model="user.website"></input>
+		</div>
+	</div>					
+	<div>
+		<div class="row-fluid span3">
+			   Facebook URL
+		</div>
+		<div class="row-fluid span9">
+			<input id="facebook_url" name="website_url" type="text" ng-model="user.facebook_url"></input>
+		</div>
+	</div>
+	<div>
+		<div class="row-fluid span3">
+			   Twitter URL
+		</div>
+		<div class="row-fluid span9">
+			<input id="twitter_url" name="twitter_url" type="text" ng-model="user.twitter_url"></input>
+		</div>
+	</div>				
+	<div>
+		<div class="row-fluid span3">
+		</div>
+		<div class="row-fluid span9">
+			<button class="btn btn-inverse" ng-click="addInfo(user)">Add Information</button>
+		</div>
+	</div>	
+</div>

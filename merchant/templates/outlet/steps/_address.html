@@ -1,0 +1,206 @@
+<div class="row">
+   <div class="span7 info-header lead">
+      <strong>Outlet Contact Information</strong>
+   </div>
+   <div class="span5 preview-header lead">
+      <strong>Preview Card</strong>
+   </div>
+</div>
+<form role="form" name="outlet_info" novalidate>
+   <div class="row">
+      <div class="span7 info-detail" >
+         <div class="well">
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Contact Person Name*</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input id="contact_name" name="contact_name" class="span8" type="text" ng-model="outlet.basics.contact_person_name" required>
+                  <div class="error" ng-show="outlet_info.contact_name.$dirty && outlet_info.contact_name.$invalid">
+                     <div class="error"
+                        ng-show="outlet_info.contact_name.$error.required">
+                        Required field
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid" >
+               <div class="row-fluid span4">
+                  <label>Relationship with Merchant</label>
+               </div>
+               <div class="row-fluid span8">
+                  <select id="relationship" name="relationship" class="span8" value="outlet.basics.relationship" ng-model="outlet.basics.relationship">
+                     <option value="Owner">Owner</option>
+                     <option value="General Manager">General Manager</option>
+                     <option value="Floor Manager">Floor Manager</option>
+                  </select>
+               </div>
+            </div>
+         </div>
+         <div class="well">
+            <div id="spacing" class="row-fluid">
+               <div class="span4">
+                  <label>Landline phone</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input ng-pattern="/^\+?\d+\-?\d+$/" id="contact_name" name="landline"  class="span8" type="text" ng-model="outlet.contact.phones.landline" placeholder="e.g. 011-20003000">
+                  <div ng-show="outlet_info.landline.$invalid" class="alert alert-error">Invalid phone number</div>
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="span4">
+                  <label>Mobile phone</label>
+               </div>
+               <div ng-repeat="mobile in outlet.contact.phones.mobile track by $index" ng-class="{'span8': $index===0, 'span8 offset3 mobile-padding': $index > 0}">
+                  <input  id="contact_name" name="mobile" class="span8" type="text" ng-model="mobile.num">
+                  <button class="btn btn-xs btn-danger" ng-show="$index > 0" ng-click="outlet.contact.phones.mobile.splice($index, 1)">X</button>
+                  <!-- <div ng-show="mobileError" class="alert alert-error">{{mobileError}}</div> -->
+               </div>
+               <div class="row-fluid">
+                <button class="btn btn-success btn-small" ng-click="newMobile($event)">Add mobile</button>
+              </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="span4">
+                  <label>Email</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input id="outlet_email" name="outlet_email" type="email" class="span8" type="email" ng-model="outlet.contact.emails.email">
+               </div>
+            </div>
+         </div>
+         <div class="well">
+         	<h4>Registered mobile number(s)</h4>
+         	<h6>
+          		(You will be able to check Redemptions only using these mobile numbers. Please enter all that apply.)
+          </h6>
+         	<div id="spacing" class="row-fluid">
+               <div class="span4">
+                  <label>Mobile number</label>
+               </div>
+               <div ng-repeat="mobile in outlet.contact.phones.reg_mobile track by $index" ng-class="{'span8': $index===0, 'span8 offset3 mobile-padding': $index > 0}">
+                  <input  id="contact_name" name="mobile" class="span8" type="text" ng-model="mobile.num">
+                  <button class="btn btn-xs btn-danger" ng-show="$index > 0" ng-click="outlet.contact.phones.reg_mobile.splice($index, 1)">X</button>
+                  <!-- <div ng-show="mobileError" class="alert alert-error">{{mobileError}}</div> -->
+               </div>
+            </div>
+            <div class="row-fluid">
+                <button class="btn btn-success btn-small" ng-click="newRegMobile($event)">Add mobile</button>
+            </div>
+         </div>
+         <div class="well">
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4" style="word-wrap:break-word;">
+                  <label style="word-wrap:break-word;">Full Address*</label>
+               </div>
+               <div class="row-fluid span8">
+                  <textarea id="outlet_address" name="outlet_address" class="span8" type="text" value="outlet.contact.location.address" ng-model="outlet.contact.location.address"></textarea>
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Locality 1</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input id="outlet_locality_1" name="outlet_locality_1" class="span8" type="text" value="outlet.contact.location.locality_1" ng-model="outlet.contact.location.locality_1" placeholder="Eg: Green Park">
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Locality 2</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input id="outlet_locality_2" name="outlet_locality_2" class="span8" type="text" value="outlet.contact.location.locality_2" ng-model="outlet.contact.location.locality_2" placeholder="Eg: Hauz Khas">
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Landmark</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input id="outlet_landmarks" name="outlet_landmarks" class="span8" type="text" ng-list value="outlet.contact.location.landmarks" ng-model="outlet.contact.location.landmarks" placeholder="Eg: Gurudwara, Temple">
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>City</label>
+               </div>
+               <div class="row-fluid span8">
+                  <select id="outlet_type" name="outlet_type" class="span8" value="outlet.contact.location.city" ng-model="outlet.contact.location.city">
+                     <option value="Gurgaon">Gurgaon</option>
+                     <option value="Delhi">Delhi</option>
+                     <option value="Mumbai">Mumbai</option>
+                     <option value="Bangalore">Bangalore</option>
+                  </select>
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Pin Code</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input id="outlet_pin" name="outlet_pin" class="span8" type="text" value="outlet.contact.location.pin" ng-model="outlet.contact.location.pin">
+                  <div ng-show="pincodeError" class="alert alert-error">{{pincodeError}}</div>
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Longitude</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input name="longitude" type="text" class="span8" ng-model="outlet.contact.location.coords.longitude"></input>
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Latitude</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input name="longitude" type="text" class="span8" ng-model="outlet.contact.location.coords.latitude"></input>
+               </div>
+               <div class="row-fluid">
+                  <div class="span9">
+                     If you are at an outlet, just click this button to get the location automatically
+                  </div>
+                  <div class="span2">
+                     <button class="btn btn-warning" ng-click="getCurrentLocation()">Get location</button>
+                  </div>
+               </div>
+            </div>
+            <div class="error" ng-show="message">{{message}}</div>
+         </div>
+         <div class="well">
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Website URL</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input id="website_url" name="website_url"  class="span8" type="text" placeholder="Eg: http://example.com" ng-model="outlet.links.website_url">
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Facebook</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input id="outlet_url" name="outlet_url"  class="span8" type="text" placeholder="Eg: http://example.com" ng-model="outlet.links.facebook_url">
+               </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+               <div class="row-fluid span4">
+                  <label>Twitter</label>
+               </div>
+               <div class="row-fluid span8">
+                  <input id="outlet_url" name="outlet_url"  class="span8" type="text" placeholder="Eg: http://example.com" ng-model="outlet.links.twitter_url">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="span5 preview-detail" ng-include="'/merchant/templates/outlet/preview.html'"></div>
+   </div>
+   <div class="row well">
+      <button class="btn btn-inverse" ng-click="tabs[0].active=true">< Back </button>
+      <button class="btn btn-inverse" ng-click="tabs[2].active=true">Next ></button>
+      <button ng-click="init()" class="btn btn-warning">Clear form</button>
+   </div>
+</form>

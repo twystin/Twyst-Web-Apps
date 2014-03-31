@@ -1,0 +1,34 @@
+<h3>Vouchers</h3>
+<div ng-repeat='voucher in vouchers'>
+		<ul>
+      <li>{{voucher.basics.name}}
+        <ul>
+          <li>Code-- {{voucher.basics.code}}
+          <li>Description-- {{voucher.basics.description}}
+          <li>Type-- {{voucher.basics.type}}
+          <li>Applicability-- {{voucher.basics.applicability}}
+          <li>Status-- {{voucher.basics.status}}
+          <li>Validity Details
+          <ul>
+            <li>Start Date-- {{voucher.validity.start_date}}
+            <li>End date-- {{voucher.validity.end_date}}
+            <li>Valid for(Days)-- {{voucher.validity.number_of_days}}
+          </ul>
+          <li>Issue Details
+          <ul>
+            <li>Issue Date-- {{voucher.issue_details.issue_date}}
+            <li>Issue time-- {{voucher.issue_details.issue_time}}
+            <li>Issued to-- {{voucher.issued_to.issued_to}}
+          </ul>
+          <li>Used Details
+          <ul>
+            <li>Used by-- {{voucher.used_details.used_by}}
+            <li>Used at-- {{voucher.used_details.used_at}}
+            <li>Used Date-- {{voucher.used_details.used_date}}
+            <li>Used Time-- {{voucher.used_details.used_time}}
+          </ul>
+          <li>Redemption Phone No: {{voucher.redemption_phone_number}}
+          <li>Free Text-- {{voucher.free_text}}
+        </ul>
+    </ul>
+</div>

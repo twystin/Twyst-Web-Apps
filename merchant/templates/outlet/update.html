@@ -1,0 +1,16 @@
+<div class="row-fluid" style="min-height:580px;" ng-init="view()">	
+	<div class="lead row-fluid offset1 span11" style="padding-top:30px;">
+		<h2>Update an outlet</h2>
+	</div>
+	<div class="row-fluid">
+		<div class="row-fluid offset1 span10">
+			<div>
+				<tabset vertical="false" type="'pills'">		   
+				    <tab class="well" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+	  					<div class="container-fluid" ng-include="'/merchant/templates/outlet/steps/' + tab.content + '.html'"></div>
+					</tab>
+				</tabset>
+			</div>
+		</div>
+	</div>
+</div>

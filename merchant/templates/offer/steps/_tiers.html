@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="span7 info-header lead">
+        <strong>Tiers & Offers</strong>
+    </div>
+    <div class="span5 preview-header lead">
+        <strong>Preview Card</strong>
+    </div>
+</div>
+<form role="form" name="tier_basics" novalidate>
+    <div class="row">
+        <div class="span7 info-detail">
+            <div class="row-fluid">
+                <div class="row-fluid span4">
+                    <label>Tier Name*</label>
+                </div>
+                <div class="row-fluid span8">
+                    <input id="tier_name" name="tier_name" placeholder="e.g. Gold, Silver etc." required type="text" ng-model="tmpo.tier.basics.name" ng-disabled="tier_disabled">
+                    <div class="error" ng-show="tier_basics.tier_name.$error.required && tier_basics.tier_name.$dirty">
+                        Required field
+                    </div>
+                </div>
+            </div>
+            <div id="spacing" class="row-fluid">
+                <div class="row-fluid span4">
+                    <label>Tier starts on</label>
+                </div>
+                <div class="span8">
+                    <input id="start_value" name="start_value" placeholder="e.g.1" type="text" ng-model="tmpo.tier.basics.start_value" ng-disabled="tier_disabled" ng-pattern="/^[0]*[1-9][0-9]*$/"><span class="add-on"> visit(s)</span>
+                    <div ng-show="tier_basics.start_value.$invalid" class="error">Please enter numbers greater than zero.</div>
+                </div>
+
+            </div>
+            <div id="spacing" class="row-fluid">
+                <div class="row-fluid span4">
+                    <label>Tier ends on</label>
+                </div>
+                <div class="span8">
+                    <input id="end_value" name="end_value" placeholder="e.g.1" type="text" ng-model="tmpo.tier.basics.end_value" ng-disabled="tier_disabled" ng-pattern="/^[1-9][0-9]*$/"><span class="add-on"> visit(s)</span>
+                    <div ng-show="tier_basics.end_value.$invalid" class="error">Please enter numbers greater than zero.</div>
+                    <div class="error" ng-show="basicVal==3">
+                        The start value should be less than the end value.
+                    </div>
+                    <div class="error" ng-show="!properVal">
+                        The specified tier values overlap with existing tiers. Please change them.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span5 preview-detail" ng-include="'/merchant/templates/offer/preview.html'"></div>
+    </div>
+    <div class="row well">
+        <button class='btn btn-inverse' ng-click="tabs[0].active=true">
+            < Back</button>
+                <button class="btn btn-inverse" ng-disabled="!program.name || offer_basics.program.name.$dirty && offer_basics.program.name.$invalid || buttonDisabled || tier_basics.end_value.$invalid || tier_basics.start_value.$invalid || tier_basics.tier_name.$error.required"
+                ng-click="addTier(); tabs[2].active=true">Next ></button>
+                <button ng-click="clear()" class="btn btn-warning">Clear</button>
+    </div>
+</form>

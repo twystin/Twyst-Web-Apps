@@ -1,0 +1,32 @@
+<div class="row-fluid paneldata-voucher">
+	<div>
+		User Phone: <b>{{phone}}</b>
+	</div>
+	<div class="span11">
+		<hr/>
+	</div>
+	<div class="row-fluid">
+		<div class="span4">
+            <b>Voucher Code</b>
+        </div>
+        <div class="span4">
+            <b>Voucher Status</b>
+        </div>
+        <div class="span4">
+            <b>Action</b>
+        </div>
+	</div>
+	<div ng-repeat="voucher in vouchers">
+	    <div>   
+	        <div class="span4">
+	            <b>{{voucher.basics.code}}</b>
+	        </div>
+	        <div class="span4">
+	            {{voucher.basics.status !== 'active' ? 'Redeemed' : 'Active'}}
+	        </div>
+	        <div class="span4">
+	            <button class="btn btn-xs btn-success" ng-click="getDetails(voucher)">Get details</button>
+	        </div>
+	    </div>
+	</div>
+</div>

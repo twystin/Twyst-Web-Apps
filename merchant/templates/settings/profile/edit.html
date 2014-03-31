@@ -1,0 +1,50 @@
+<div class="row-fluid span12" ng-init="query()">
+	<h3>Manage a user</h3>
+	<div class="alert alert-err" ng-if="message">
+		{{message}}
+	</div>
+	<div ng-if="users.length <= 0">
+		No user created. Create one?
+	</div>
+	<div ng-repeat="user in users">
+		<div class="well span5 offest1">
+			<div>
+				<div class="row-fluid span3">
+					User Role 
+				</div>
+				<div class="row-fluid span9">
+					<div ng-if="user.role === 4">
+						:&nbsp;&nbsp;&nbsp;Marketing manager
+					</div>
+					<div ng-if="user.role === 5">
+						:&nbsp;&nbsp;&nbsp;Outlet manager
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="row-fluid span3">
+					User Name
+				</div>
+				<div class="row-fluid span9">
+					:&nbsp;&nbsp;&nbsp;{{user.username}}
+				</div>		        							 
+			</div>
+			<div>
+				<div class="row-fluid span3">
+					Email 
+				</div>
+				<div class="row-fluid span9">
+					:&nbsp;&nbsp;&nbsp;{{user.email}}
+				</div>		        							 
+			</div>
+			<div>
+				<div class="row-fluid span3">
+				</div>
+				<div class="row-fluid span9">
+					<a ng-click="editUser(user)" class="btn btn-info">Edit</a>
+					<button ng-click="delete(user)" class="btn btn-inverse">Delete</button>  
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+<div class="row-fluid"  style="min-height:580px;" ng-init="query()"> 
+  <div id="outletView" class="lead row-fluid offset1 span11" style="padding-top:30px;">
+    <h2>Outlet Summary</h2>
+  </div>
+  <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span5">
+            <div class="preview-header lead">
+              <strong>Your outlets</strong>
+            </div>
+            <div class="well" ng-repeat="outlet in outlets">
+              <div>
+                <div class="span6">
+                  <div ng-repeat="imagesrc in outlet.basics.images">
+                    <img id="offerPreviewImage" src="{{imagesrc}}">
+                  </div>
+                </div>
+                <div class="span6">
+                  <div>
+                    <h2>{{outlet.basics.name}}</h2>
+                  </div>
+                  <div>
+                    <small ng-show="outlet.contact.location.address"><b>Address: </b>{{outlet.contact.location.address}}</small>
+                  </div>
+                  <div>
+                    <b>Localities: </b>
+                    <small ng-show="outlet.contact.location.locality_1">{{outlet.contact.location.locality_1.toString()}}</small>
+                    <small ng-show="outlet.contact.location.locality_2"> | {{outlet.contact.location.locality_2.toString()}}</small>
+                  </div>                  
+                </div>
+              </div>
+              <div class="row-fluid">
+                <div class="boxtop pull-right">
+                  <button class="btn btn-success" ng-click="viewOutlet(outlet)">View details</button>
+                  <a class="btn btn-success" ng-href="/merchant/#/outlets/update/{{outlet._id}}">Update</a>
+                  <button class="btn btn-danger" ng-click="deleteOutlet(outlet)">Delete</button>
+                </div>
+              </div>
+            </div>       
+            <div class="alert alert-error" ng-show="outlets.length===0">No outlets have been created yet. Click <a ng-href="#/outlets/create">here</a> to create one</div>
+          </div>
+          <div class="span5">
+              <div class="preview-header lead">
+                <strong>Outlet details</strong>
+              </div>
+              <div class="row preview-details" ng-include="'/merchant/templates/outlet/preview.html'"></div>
+          </div>
+      </div>
+  </div>
+</div>

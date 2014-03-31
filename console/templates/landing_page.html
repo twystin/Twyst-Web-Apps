@@ -1,0 +1,32 @@
+<div>
+    <h3>Twyst Console</h3>
+    <form ng-controller="AuthCtrl">
+        <div class="alert alert-info" ng-show="message.length">{{message}}</div>
+        <div class="control-group">
+            <label class="control-label">Username</label>
+            <div class="controls">
+                <input type="text" placeholder="Username" id="username" name="username" required="true" ng-model="user.name">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Password</label>
+
+            <div class="controls">
+                <input type="password" placeholder="Password" id="password" name="password" required="" ng-model="user.pass">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-small btn-success" ng-click="login()">Sign in</button>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label>
+                    <strong style="color:red" ng-show="auth.errors">Wrong username or password</strong>
+                </label>
+            </div>
+        </div>
+    </form>
+</div>

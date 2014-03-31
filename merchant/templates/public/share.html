@@ -1,0 +1,21 @@
+<div class="container-fluid" style="padding-top:30px;">
+    <div ng-init="getDetails()">
+    	<div class="span5 well">
+    		<div>
+    			Outlet Name: {{outlet.basics.name}}
+    		</div>
+    		<div>
+    			<img src="../../../../common/images/transparent/{{outlet.basics.is_a}}.png" height="auto" width="30px">
+    		</div>
+    		<div>
+    			Offer description: {{offer.basics.description}}
+    		</div>
+    		<div>
+    			Locality: {{outlet.contact.location.locality_1.toString()}}
+    		</div>
+    		<span ng-repeat="tag in offer.tags">
+                <span class="tagbox">{{tag}}</span>
+            </span>
+    	</div>
+    </div>
+</div>

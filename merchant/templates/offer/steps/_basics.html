@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="span7 info-header lead">
+    <strong>Program Name & Photo</strong>
+  </div>
+  <div class="span5 preview-header lead">
+    <strong>Preview Card</strong>
+  </div>  
+</div>
+
+<form role="form" name="offer_basics" novalidate>
+  <div class="row">
+    <div class="span7 info-detail">
+        <div id="spacing" class="row-fluid">
+          <div class="row-fluid span4">
+            <label>Program Name*</label>
+          </div>
+          <div class="row-fluid span8">
+            <input id="outlet_name" name="outlet_name" required ng-minlength=5 ng-maxlength=256 type="text" ng-model="program.name" class="span7">  
+          
+            <div class="error" ng-show="offer_basics.outlet_name.$dirty && offer_basics.outlet_name.$invalid">
+              <div class="error"
+              ng-show="offer_basics.outlet_name.$error.required">
+              Required field
+              </div>
+              <div class="error"
+              ng-show="offer_basics.outlet_name.$error.minlength">
+              At least 5 characters
+              </div>
+              <div class="error"
+              ng-show="offer_basics.outlet_name.$error.maxlength">
+              No more than 256 characters
+              </div>         
+            </div>                    
+          </div>
+        </div>
+        <div id="spacing" class="row-fluid">
+          <div class="row-fluid span4">
+            <label>Upload a picture of the program</label>
+          </div>
+          <div class="row-fluid span8">
+            <div class="fileinputs span7">        
+              <input style="width:70px; height:100px;" type="file" class="file" ng-file-select="onFileSelect($files)" multiple ng-disabled='disableImgUploadButton'/>
+              <div class="btn btn-{{upload_color}} fakefile" ng-disabled='disableImgUploadButton'>      
+                    <b>{{upload_label}}</b>
+                    <div class="span12" ng-show="image_loading">
+                      <progress percent="dynamicObject" class="progress-striped active"></progress>
+                    </div>                   
+              </div>
+            </div>
+            <div class="error" ng-if="image_upload_message">
+              {{image_upload_message}}
+            </div>          
+          </div>
+        </div>
+    </div>
+    <div class="span5 preview-detail" ng-include="'/merchant/templates/offer/preview.html'"></div>
+  </div>
+  <div class="row well">
+    <button class="btn btn-inverse" ng-disabled="!program.name || offer_basics.program.name.$dirty && offer_basics.program.name.$invalid" ng-click="tabs[1].active=true">Next ></button>
+    <button ng-click="clear()" class="btn btn-warning">Clear</button>
+  </div>  
+</form>

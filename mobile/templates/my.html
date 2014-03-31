@@ -1,0 +1,106 @@
+<div ng-include="'./templates/partials/header.html'"></div>
+<div ng-controller="HeaderCtrl">
+    <div ng-show="header.status.network && !header.status.version">
+        <div class="alert alert-danger">Your Twyst app is out of date. Please upgrade to the latest version.</div>
+    </div>
+    <div ng-hide="header.status.network && !header.status.version">
+        <div class="padding_top_big"></div>
+        <nav class="navbar navbar-default navbar-fixed-top" style="margin-top:60px">
+            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
+                <a class="btn btn-primary btn-block btn-lg tb" href="#/"><i class="icon ion-home t_icon"></i><span class="t_main">&nbsp;For me</span></a>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
+                <a class="btn btn-success btn-block btn-lg tb" href="#/my"><i class="icon ion-ios7-pricetag t_icon"></i><span class="t_main">&nbsp;Twysts</span></a>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
+                <a class="btn btn-primary btn-block btn-lg tb" href="#/near"><i class="icon ion-ios7-location t_icon"></i><span class="t_main">&nbsp;Nearby</span></a>
+            </div>
+        </nav>
+    </div>
+    <div>
+        <div ng-show="header.data.user.user.facebook.name && show_alert" class="alert alert-success">
+            <div class="divvy">
+                Welcome, {{header.data.user.user.facebook.name}}
+                <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="show_alert=!show_alert"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <div class="list-group" ng-controller="DataCtrl">
+            <div ng-show="selectedTag" class="alert alert-warning">
+                <span class="lead">Tags: {{selectedTag}}</span>
+                <span class="glyphicon glyphicon-remove-circle pull-right" style="font-size:24px" ng-click="clearFilters($event)"></span>
+            </div>
+            <div ng-controller="HeaderCtrl">
+                <div ng-show="header.status.user">
+                    <div ng-show="empty('mystuff')" class="alert alert-warning">
+                        <h4>Trying to get data from the Twyst service <i class="icon ion-refreshing t_icon"></i></h4>
+                    </div>
+                    <div ng-hide="empty('mystuff')">
+                        <div ng-repeat= "outlet in data.mystuff | mySearch:selectedTag">
+                            <div class="row list-group-item t_list">
+                                <div class="row">
+                                    <div class="col-xs-3 col-sm-3 col-md-3">
+                                        <center>
+                                            <div ng-show="outlet.details.basics.is_a">
+                                                <img src="assets/transparent/{{outlet.details.basics.is_a}}.png" class="ti" height="100px" width="auto"><br/><br/>
+                                            </div>
+                                            <div ng-hide="outlet.details.basics.is_a">
+                                                <img src="assets/transparent/other.png" class="ti" height="100px" width="auto"><br/><br/>
+                                            </div>
+
+                                            <div>
+                                                <div class="row">
+                                                    <center>
+                                                        <div class="col-sm-1 col-md-2 col-xs-0"></div>
+                                                        <div ng-show="isFave(outlet.details)">
+                                                            <div class="col-sm-4 col-md-3 col-xs-6"><i class="icon ion-ios7-heart t_icon_heart" ng-click="saveFave(outlet.details)"></i></div>
+                                                        </div>
+                                                        <div ng-hide="isFave(outlet.details)">
+                                                            <div class="col-sm-4 col-md-3 col-xs-6"><i class="icon ion-ios7-heart-outline t_icon_heart" ng-click="saveFave(outlet.details)"></i></div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-3 col-xs-6"><i class="icon ion-android-share t_icon_share" ng-click="shareRecco(recommendation)"></i></div>
+                                                        <div class="col-sm-1 col-md-2 col-xs-0"></div>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </center>
+                                    </div>
+
+                                    <div class="col-xs-6 col-sm-6 col-md-6 t_recco">
+                                        <div ng-click="show_this=!show_this">
+                                            <h3 class="list-group-item-heading">{{outlet.details.basics.name | shorttext:10}}</h3>
+                                            <div ng-repeat="voucher in outlet.vouchers">
+                                                <h4>Voucher: {{voucher.code}}, {{voucher.status}}</h4>
+                                            </div>
+                                        </div>
+                                            <span ng-repeat="tag in getTags(outlet.details.attributes.tags)">
+                                                 <button class="button btn-grey" ng-click="addFilter($event)">#{{tag}}</button>
+                                            </span>
+                                    </div>
+
+                                    <div class="col-xs-3 col-sm-3 col-md-3">
+                                        <center>
+                                            <span style="font-size:18px; font-weight: bold"> {{distance(outlet.details) | dist}}km </span><br/>
+                                            <span style="font-size:18px; font-weight: bold">{{outlet.checkins}} </span></span><span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto"></span><br/>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="header.status.user" class="alert alert-warning">
+                    <center>
+                        <h4>You need to be signed in to see your stuff</h4>
+                        <a class="btn btn-primary" ng-href="#/signin"><i class="icon ion-social-facebook t_icon"></i> <span style="font-size:19px">Sign in</span></a>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'./templates/partials/footer.html'"></div>

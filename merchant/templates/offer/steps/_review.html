@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="preview-header lead" >
+    <strong>Review and Save Program</strong>
+  </div>
+  <div class="row-fluid">
+    <div class="span5 preview-detail" ng-include="'/merchant/templates/offer/preview.html'"></div>
+  </div> 
+  <div style="padding-top:10px;">
+  	<button class='btn btn-inverse' ng-click="tabs[4].active=true;"> < Back</button>
+    <button class="btn btn-success btn-large" ng-click="create()" ng-disabled="(outlets.length === 0) || (!program.name || offer_basics.program.name.$dirty && offer_basics.program.name.$invalid)">Save</button>
+  </div>
+</div>

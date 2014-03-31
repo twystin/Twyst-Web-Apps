@@ -1,0 +1,60 @@
+<div ng-include="'./templates/partials/header.html'"></div>
+<div ng-if="session.status.network === false">
+
+    <div class="container" style="padding:15px">
+        <h4 class="alert alert-warning">You are not connected to the network</h4>
+        <div class="panel panel-white"  style="padding:15px">
+            <div class="panel-heading">
+                <h3>Check-in with SMS</h3>
+            </div>
+            <div class="panel-body has-warning">
+                <br/><ol><li>Trouble with the QR Code?</li><li>Ask the server for the Twyst SMS code. Enter SMS code below and hit 'Send SMS'.</li></ol>
+                <input class="form-control input-lg" type="text" placeholder="Enter the outlet code here" ng-model="smscode">
+                <button class="button btn-block btn-primary checkin" ng-click="sendSMS(smscode)"><h3>Send SMS</h3></button>
+            </div>
+            <div class="panel-footer">
+                <div ng-show="alert.show && alert.where === 'sms'" class="alert alert-{{alert.color}}>">{{alert.message}}</div>
+                <br/><span>Still no luck? Sorry about that – you could also give your phone number to the server and the outlet will check you in.</span><br/><br/>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div ng-if="session.status.network === true" style="padding:15px">
+    <div class="panel panel-white" style="padding:15px">
+        <div class="panel-heading">
+            <h3>Check-in with QR Code</h3>
+        </div>
+        <div class="panel-body">
+            <br/><ol><li>Ask your server for the Twyst QR code.</li><li>Click 'Scan QR' below and point the camera at the Twyst QR code.</li></ol>
+            <button class="button btn-primary btn-block checkin" ng-click="scan()"><h3>Scan QR</h3></button>
+        </div>
+        <div class="panel-footer">
+            <div ng-show="alert.show && alert.where === 'qr'" class="alert alert-{{alert.color}}>">{{alert.message}}</div>
+        </div>
+    </div>
+
+    <div class="panel panel-white"  style="padding:15px">
+        <div class="panel-heading">
+            <h3>Check-in with SMS</h3>
+        </div>
+        <div class="panel-body has-warning">
+            <br/><ol><li>Trouble with the QR Code?</li><li>Ask the server for the Twyst SMS code. Enter SMS code below and hit 'Send SMS'.</li></ol>
+            <input class="form-control input-lg" type="text" placeholder="Enter the outlet code here" ng-model="smscode">
+            <button class="button btn-primary btn-block checkin" ng-click="sendSMS(smscode)"><h3>Send SMS</h3></button>
+        </div>
+        <div class="panel-footer">
+            <div ng-show="alert.show && alert.where === 'sms'" class="alert alert-{{alert.color}}>">{{alert.message}}</div>
+            <br/><span>Still no luck? Sorry about that – you could also give your phone number to the server and the outlet will check you in.</span><br/><br/>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

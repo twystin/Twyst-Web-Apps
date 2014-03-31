@@ -1,0 +1,109 @@
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Update your voucher</legend>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">Name</label>
+  <div class="controls">
+    <input id="name" name="name" value="voucher.basics.name" class="input-xlarge" required="" type="text" ng-model="voucher.basics.name">
+    <p class="help-block">Enter a descriptive name for the voucher</p>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">Voucher Code</label>
+  <div class="controls">
+    <input id="code" name="code" value="voucher.basics.code" class="input-xlarge" required="" type="text" ng-model="voucher.basics.code">
+    <p class="help-block">Enter code for voucher</p>
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="control-group">
+  <label class="control-label">Description</label>
+  <div class="controls">                     
+    <textarea id="textarea" name="textarea" value="voucher.basics.description" ng-model="voucher.basics.description"></textarea>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="control-group">
+  <label class="control-label">Voucher Type</label>
+  <div class="controls">
+    <select id="type" name="type" class="input-xlarge" value="voucher.basic.type" ng-model="voucher.basics.type">
+      <option>Test 1</option>
+      <option>Test 2</option>
+      <option>Test 3</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">Validity Start Date</label>
+  <div class="controls">
+    <input id="start_date" name="start_date" value="voucher.validity.start_date" class="input-xlarge" required="" type="text" ng-model="voucher.validity.start_date">
+    <p class="help-block">Enter validity start date for voucher</p>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">Validity End Date</label>
+  <div class="controls">
+    <input id="end_date" name="end_date" value="voucher.validity.end_date" class="input-xlarge" required="" type="text" ng-model="voucher.validity.end_date">
+    <p class="help-block">Enter validity end date for voucher</p>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">Isseued Date</label>
+  <div class="controls">
+    <input id="issue_date" name="issue_date" value="voucher.issue_details.issue_date" class="input-xlarge" required="" type="text" ng-model="voucher.issue_details.issue_date">
+    <p class="help-block">Enter validity issue date for voucher</p>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">Isseued Time</label>
+  <div class="controls">
+    <input id="issue_time" name="issue_time" value="voucher.issue_details.issue_time" class="input-xlarge" required="" type="text" ng-model="voucher.issue_details.issue_time">
+    <p class="help-block">Enter validity issue time for voucher</p>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">Isseued To</label>
+  <div class="controls">
+    <input id="issued_to" name="issued_to" value="voucher.issue_details.issued_to" class="input-xlarge" required="" type="text" ng-model="voucher.issue_details.issued_to">
+    <p class="help-block">Enter the person to which voucher is issued</p>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">Free Text</label>
+  <div class="controls">
+    <input id="free_text" name="free_text" value="voucher.free_text" class="input-xlarge" required="" type="text" ng-model="voucher.free_text">
+    <p class="help-block">Enter any other information for voucher</p>
+  </div>
+</div>
+
+
+<!-- Button (Double) -->
+<div class="control-group">
+  <label class="control-label">Submit</label>
+  <div class="controls">
+    <button id="button1id" name="button1id" class="btn btn-success" ng-click="updateVoucher()">Create voucher</button>
+  </div>
+</div>
+
+</fieldset>
+</form>

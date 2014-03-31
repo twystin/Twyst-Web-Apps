@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" ng-app="twystConsole">
+	<title>Twyst</title>
+	<head>
+	    <script src="../common/libs/angular/angular.js"></script>		
+	    <script src="../common/libs/angular/angular-route.js"></script>
+	    <script src="../common/libs/angular/angular-cookies.js"></script>
+	    <script src="../common/libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<script src="../common/libs/holder/holder.js"></script>
+		<script src="./app.js"></script>
+		<script src="./scripts/controllers.js"></script>
+	    <link rel="stylesheet" href="../common/libs/bootstrap/css/bootstrap.css"></link>
+	    <link rel="stylesheet" href="../common/styles/bootstrap-cosmo-2.3.2.css">
+		<link rel="stylesheet" href="./styles/app.css"></link>
+	</head>
+	<body>
+	<div class="container-fluid">	
+		
+		<div class="row-fluid offset2">		
+			<div class="span8 hero-unit">
+				<div ng-view></div>
+    		</div>
+    	</div>
+	    
+	</body>
+</html>		

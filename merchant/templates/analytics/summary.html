@@ -1,0 +1,83 @@
+<div style="min-height:580px;">
+    <div class="lead row-fluid offset1 span11" style="padding-top:30px;">
+        <h2>Analytics (Summary)</h2>
+    </div>
+    <div class="row-fluid" ng-init="onlyPrograms()">
+        <div class="row-fluid offset1 span10">
+            <div>
+                <h4>Select Program to get Analytics</h4>
+                <select ng-model="program_id">
+                    <div>
+                      <option value="{{program._id}}" ng-repeat="program in programs">{{program.name}}</option>
+                    </div>
+                </select>
+            </div>
+            <div class="row-fluid">
+                <div class="span6" ng-if="checkins_summary">
+                    <h3>Checkins Summary</h3>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <th>
+                                Tier
+                            </th>
+                            <th>
+                                Participating Customers
+                            </th>
+                            <th>
+                                Twyst-ins
+                            </th>
+                            <th>
+                                In Tier
+                            </th>
+                        </thead> 
+                        <tbody>
+                            <tr ng-repeat="checkin in checkins_summary">
+                                <td>
+                                    {{checkin.tier.basics.name}}
+                                </td>
+                                <td>
+                                    {{checkin.customer_count}}
+                                </td>
+                                <td>
+                                    {{checkin.total_checkins}}
+                                </td>
+                                <td>
+                                    {{checkin.in_tier}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="span6" ng-if="vouchers_summary">
+                    <h3>Vouchers Summary</h3>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <th>
+                                Tier
+                            </th>
+                            <th>
+                                Earned
+                            </th>
+                            <th>
+                                Redeemed
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="voucher in vouchers_summary">
+                                <td>
+                                    {{voucher.tier.basics.name}}
+                                </td>
+                                <td>
+                                    {{voucher.earned}}
+                                </td>
+                                <td>
+                                    {{voucher.redeemed}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

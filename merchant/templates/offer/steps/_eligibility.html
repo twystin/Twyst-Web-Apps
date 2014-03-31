@@ -1,0 +1,29 @@
+<h3>Offer Creation: Eligibility</h3>
+
+<!-- Select Basic -->
+<div class="control-group">
+    <label class="control-label">Reward unlocked</label>
+    <div class="controls">
+        <select id="prefix" name="prefix" class="span4" value="offer.user_eligibility.criteria.condition" ng-model="offer.user_eligibility.criteria.condition">
+            <option selected value="on every">on every</option>
+            <option value="after">after</option>
+            <option value="on only">on only</option>
+        </select>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">Number</label>
+    <div class="controls">
+        <div class="input-append">
+            <input id="title" name="title" placeholder="Eg: 10" class="span8" type="number" min="0" max="100" value="offer.user_eligibility.criteria.value" ng-model="offer.user_eligibility.criteria.value"><span class="add-on">check-ins</span>
+        </div>
+    </div>
+</div>
+
+<blockquote>
+    <p class="lead">How this will show up to the user</p>
+    <div class="alert alert-info" ng-show="offer.user_eligibility.criteria.condition && offer.user_eligibility.criteria.value"><strong>{{generateEligibilityText()}}</strong> 
+    </div>
+</blockquote>
+</fieldset>
