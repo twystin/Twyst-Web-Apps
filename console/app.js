@@ -30,6 +30,10 @@ twystConsole.config(function ($routeProvider) {
 		controller: UsersController,
 		templateUrl: '/console/templates/outlets/edit.html',
 	}).
+	when('/notifs', {
+		controller: NotifController,
+		templateUrl: '/console/templates/notifs/notif.html',
+	}).
 	otherwise({
 		redirectTo: '/error'
 	});

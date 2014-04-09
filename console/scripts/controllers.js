@@ -2,6 +2,50 @@ function PublicController($scope) {
 
 }
 
+function NotifController($scope, $http) {
+
+	$scope.success = {};
+	$scope.error = {};
+	$scope.valid = {};
+	$scope.message = {};
+
+	function validate() {
+		if($scope.phones 
+			&& $scope.message.head
+			&& $scope.message.body
+			&& $scope.valid.date
+			&& $scope.hours
+			&& $scope.minutes) {
+
+			return true;
+		}
+		return false;
+	}
+
+	$scope.addNotif = function () {
+
+		var obj = {};
+		if(validate()) {
+			obj.phones = $scope.phones.split(',');
+			obj.message = $scope.message;
+			obj.scheduled_at = $scope.valid.date.setHours($scope.hours, $scope.minutes ,0);
+			sendRequest(obj);
+		}
+		else {
+			$scope.error.message = "Please fill all the fields."
+		}
+	}
+
+	function sendRequest (obj) {
+		console.log(obj)
+		$http.post('/api/v2/notifs', {obj:obj}).success(function (data) {
+			$scope.success.message = data.message;
+		}).error(function (data) {
+			$scope.error.message = data.message;
+		});
+	}
+}
+
 function DatePickerCtrl($scope, $timeout) {
 	
 	$scope.today = function() {
