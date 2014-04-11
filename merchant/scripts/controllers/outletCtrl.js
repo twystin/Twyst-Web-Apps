@@ -1,6 +1,8 @@
 'use strict';
 
-twystApp.controller('OutletCtrl', function ($scope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, $log) {
+twystApp.controller('OutletCtrl', 
+    ['$scope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', '$log',
+    function ($scope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, $log) {
 
     if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -365,9 +367,10 @@ twystApp.controller('OutletCtrl', function ($scope, $timeout, $modal, $window, $
         
     });
     
-});
+}]);
 
 twystApp.controller('OutletDeleteCtrl', 
+     ['$scope', '$route', '$http', '$location', '$modalInstance', 'outletService','outlet',
     function ($scope, $route, $http, $location, $modalInstance, outletService, outlet) {
 
         var outlet_title = outlet.basics.name;
@@ -379,4 +382,4 @@ twystApp.controller('OutletDeleteCtrl',
         $scope.delete = function () {
             outletService.delete($scope, $http, $location, outlet_title, $route, $modalInstance);
         };      
-});
+}]);

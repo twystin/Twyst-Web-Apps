@@ -301,8 +301,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
         $scope.vouchers = [];
         if (($scope.phone !== undefined)) {
             $http.get('/api/v1/vouchers_by_phone/' + $scope.phone).success(function(data, status, header, config) {
-                
-                if(data.info.length > 0) {
+                if(data.info !== "null" && data.info.length > 0) {
                     $scope.vouchers = JSON.parse(data.info);
                     templateController(false, false, false, true, false);
                 }
