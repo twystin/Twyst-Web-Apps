@@ -1,0 +1,12 @@
+.city-div {
+	padding-left: 2%;
+    height: 150px;
+    overflow:scroll;
+    background-color: #e9ebec;
+}
+
+.date-div {
+	padding-left: 2%;
+    height: 150px;
+    background-color: #e9ebec;
+}

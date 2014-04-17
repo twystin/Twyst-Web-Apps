@@ -50,7 +50,7 @@ twystApp.factory('authService', function ($rootScope, $cookieStore, $log) {
                 $cookieStore.put('_id', data.info._id);
                 $cookieStore.put('role', data.info.role);
                 authSvc.broadcastChange();
-                console.log(data.info.role);
+                
                 if(data.info.role > 4) {
                     $location.path('/panel');
                 }

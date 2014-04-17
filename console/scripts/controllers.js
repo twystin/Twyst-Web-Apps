@@ -65,7 +65,7 @@ function DatePickerCtrl($scope, $timeout) {
     $scope.toggleMin = function() {
         $scope.minDate = ( $scope.minDate ) ? null : new Date();
     };
-    $scope.toggleMin();
+    //$scope.toggleMin();
 
     $scope.open = function() {
         $timeout(function() {

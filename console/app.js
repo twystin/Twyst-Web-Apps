@@ -34,6 +34,10 @@ twystConsole.config(function ($routeProvider) {
 		controller: NotifController,
 		templateUrl: '/console/templates/notifs/notif.html',
 	}).
+	when('/data', {
+		controller: DataCtrl,
+		templateUrl: '/console/templates/data/analytics.html',
+	}).
 	otherwise({
 		redirectTo: '/error'
 	});
