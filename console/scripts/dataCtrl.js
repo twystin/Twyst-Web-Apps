@@ -57,7 +57,7 @@ function DataCtrl($scope, $timeout, dataService) {
     	if($scope.selected_merchant && $scope.cities.length > 0) {
         	getOutlets($scope.selected_merchant, $scope.cities);
         }
-    })
+    });
 
     function getOutlets(merchant, cities) {
     	dataService.getOutlets(merchant, cities).then(function(data) {
@@ -87,34 +87,42 @@ function DataCtrl($scope, $timeout, dataService) {
     	return id;
     }
 
-    $scope.$watch('cities + outlets + range.start + range.end', function () {
+    $scope.$watch('selected_merchant + outlets', function () {
     	
-    	if($scope.cities.length > 0 
-    		&& $scope.outlets.length > 0
-    		&& $scope.range.start
-    		&& $scope.range.end) {
+    	if($scope.selected_merchant
+    		&& $scope.outlets.length > 0) {
 
-    		getData();
+    		getPrograms($scope.outlets);
     	}
     }, true);
 
-    function getData() {
-    	var post_data = {
-    		outlets : $scope.outlets,
-    		range : {}
-    	}
-
-    	post_data.range.start = new Date($scope.range.start).setHours(0,0,1);
-		post_data.range.end = new Date($scope.range.end).setHours(23,59,59);
-		
-    	dataService.getData(post_data).then(function(data) {
-    		if(data.status && data.status !== "error") {
-    			
+    function getPrograms(outlets) {
+    	dataService.getPrograms(outlets).then(function(data) {
+    		if(data.status !== "error") {
+    			$scope.programs = data.info;
     		}
     		else {
-    			
+    			$scope.programs = [];
     		}
-    		console.log(data)
+    	});
+    }
+
+    $scope.$watch('selected_program', function () {
+    	
+    	if($scope.selected_merchant) {
+
+    		getData($scope.selected_program, $scope.range);
+    	}
+    }, true);
+
+    function getData(program, range) {
+    	dataService.getData(program, range).then(function(data) {
+    		if(data.status !== "error") {
+    			console.log(data)
+    		}
+    		else {
+    			console.log(data)
+    		}
     	});
     }
 };

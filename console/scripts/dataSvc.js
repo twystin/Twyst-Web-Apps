@@ -33,12 +33,27 @@ twystConsole.factory('dataService', function ($http, $q) {
         return deferred.promise;
     };
 
-    dataSvc.getData = function (post_data) {
+    dataSvc.getPrograms = function (outlets) {
 
         var deferred = $q.defer();
 
-        $http.post(
-            '/api/v2/outlets/data', post_data
+        $http.get(
+            '/api/v2/admin/programs/' + outlets
+        ).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.resolve(data);
+        });
+        
+        return deferred.promise;
+    };
+
+    dataSvc.getData = function (program, range) {
+        
+        var deferred = $q.defer();
+
+        $http.get(
+            '/api/v2/admin/data/'+ program + '/' + range.start + '/' + range.end
         ).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
