@@ -10,7 +10,7 @@ function DataCtrl($scope, $timeout, dataService) {
 	$scope.outlets = [];
 
 	$scope.range = {
-		'start': Date.now() - 7 * 24 * 60 * 60 * 1000,
+		'start': Date.now() - 6 * 24 * 60 * 60 * 1000,
 		'end': Date.now()
 	};
 
@@ -115,13 +115,32 @@ function DataCtrl($scope, $timeout, dataService) {
     	}
     }, true);
 
+    $scope.$watch('range.start', function() {
+        if($scope.selected_merchant && $scope.selected_program) {
+
+            getData($scope.selected_program, $scope.range);
+        }
+    }, true);
+
+    $scope.$watch('range.end', function() {
+        if($scope.selected_merchant && $scope.selected_program) {
+
+            getData($scope.selected_program, $scope.range);
+        }
+    }, true);
+
     function getData(program, range) {
-    	dataService.getData(program, range).then(function(data) {
+        var start = new Date(range.start).setHours(0, 0, 1);
+        var end = new Date(range.end).setHours(23, 59, 59);
+
+    	dataService.getData(program, start, end).then(function(data) {
     		if(data.status !== "error") {
-    			console.log(data)
+    			$scope.data = data;
+                console.log($scope.data);
     		}
     		else {
-    			console.log(data)
+    			$scope.data = data;
+                console.log($scope.data);
     		}
     	});
     }

@@ -48,12 +48,12 @@ twystConsole.factory('dataService', function ($http, $q) {
         return deferred.promise;
     };
 
-    dataSvc.getData = function (program, range) {
+    dataSvc.getData = function (program, start, end) {
         
         var deferred = $q.defer();
 
         $http.get(
-            '/api/v2/admin/data/'+ program + '/' + range.start + '/' + range.end
+            '/api/v2/admin/data/'+ program + '/' + start + '/' + end
         ).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
