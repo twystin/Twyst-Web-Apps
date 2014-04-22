@@ -18,12 +18,11 @@ twystConsole.factory('dataService', function ($http, $q) {
         return deferred.promise;
     };
 
-    dataSvc.getOutlets = function (merchant, cities) {
+    dataSvc.getOutlets = function (merchants, cities) {
 
         var deferred = $q.defer();
-
-        $http.get(
-            '/api/v2/outlets/city/' + merchant + '/' + cities
+        $http.post(
+            '/api/v2/outlets/city/', {'merchants': merchants, 'cities': cities}
         ).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
@@ -54,6 +53,25 @@ twystConsole.factory('dataService', function ($http, $q) {
 
         $http.get(
             '/api/v2/admin/data/'+ program + '/' + start + '/' + end
+        ).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.resolve(data);
+        });
+        
+        return deferred.promise;
+    };
+
+    dataSvc.getAnonData = function (outlets, start, end) {
+        
+        var deferred = $q.defer();
+
+        $http.post(
+            '/api/v2/admin/outlets/', {
+                'outlets': outlets,
+                'start': start,
+                'end': end
+            }
         ).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
