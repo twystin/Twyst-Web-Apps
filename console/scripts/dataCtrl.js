@@ -20,9 +20,11 @@ function DataCtrl($scope, $timeout, dataService) {
 		dataService.getMerchants(cities).then(function(data) {
     		if(data.status !== "error") {
     			$scope.merchants = data.info;
+                $scope.selected_merchants = data.info;
     		}
     		else {
     			$scope.merchants = [];
+                $scope.selected_merchants = [];
     		}
     	});
 	};
