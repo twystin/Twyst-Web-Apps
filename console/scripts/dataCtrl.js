@@ -86,7 +86,7 @@ function DataCtrl($scope, $timeout, dataService) {
         if ($scope.outlets.indexOf(fruit) === -1) {
             $scope.outlets.push(fruit);
         } else {
-            $scope.outlets.splice($scope.outlet.indexOf(fruit), 1);
+            $scope.outlets.splice($scope.outlets.indexOf(fruit), 1);
         }
     };
 
