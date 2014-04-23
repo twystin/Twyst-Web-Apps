@@ -2,7 +2,7 @@
 
 twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, authService, outletService) {
     
-    if (!authService.isLoggedIn()) {
+    if(!authService.isLoggedIn()) {
         $location.path('/');
     }
 
@@ -243,7 +243,17 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
         templateController(false, true, false, false, false);
     }
 
-    $scope.createCheckin = function () {
+    function isMobileNumber(phone) {
+        if(isNaN(phone)) {
+            return false;
+        }
+        if(phone.length !== 10) {
+            return false;
+        }
+        return true;
+    }
+
+    function goForCheckin() {
         if ($scope.outlet._id && $scope.checkin.phone_no) {
             $http.post('/api/v1/checkins', {
                 phone: $scope.checkin.phone_no,
@@ -259,6 +269,15 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             }).error(function (data) {
                 errorController(data.status, data.message);
             });
+        }
+    };
+
+    $scope.createCheckin = function () {
+        if(isMobileNumber($scope.checkin.phone_no)) {
+            goForCheckin();
+        }
+        else {
+            $scope.checkin_phone_no_dirty = true;
         }
     };
     $scope.createRedeem = function () {
@@ -299,6 +318,15 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     };
     $scope.getVoucherDetailsByPhone = function () {
         $scope.vouchers = [];
+        if(isMobileNumber($scope.phone)) {
+            goForVoucher();
+        }
+        else {
+            $scope.phone_no_dirty = true;
+        }
+    };
+
+    function goForVoucher() {
         if (($scope.phone !== undefined)) {
             $http.get('/api/v1/vouchers_by_phone/' + $scope.phone).success(function(data, status, header, config) {
                 if(data.info !== "null" && data.info.length > 0) {
@@ -312,7 +340,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                 errorController(data.status, data.message);
             });
         }
-    };
+    }
 
     $scope.getDetails = function ( item ) {
         $scope.voucher = item;
