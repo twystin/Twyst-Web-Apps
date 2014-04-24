@@ -133,7 +133,6 @@ function DataCtrl($scope, $timeout, dataService) {
     $scope.$watch('selected_program', function () {
     	
     	if($scope.selected_program) {
-
     		getData($scope.selected_program, $scope.range);
     	}
         else {
@@ -173,7 +172,8 @@ function DataCtrl($scope, $timeout, dataService) {
         var end = new Date(range.end).setHours(23, 59, 59);
 
     	dataService.getData(program, start, end).then(function(data) {
-    		if(data.status !== "error") {
+    		console.log(data)
+            if(data.status !== "error") {
     			$scope.data = data;
     		}
     		else {
@@ -184,6 +184,7 @@ function DataCtrl($scope, $timeout, dataService) {
 
     function getAnonData(outlets) {
         $scope.program_analytics = false;
+        $scope.selected_program = null;
         var start = new Date($scope.range.start).setHours(0, 0, 1);
         var end = new Date($scope.range.end).setHours(23, 59, 59);
 

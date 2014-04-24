@@ -1,18 +1,21 @@
 <div>
 	<div class="row-fluid">
-		<h3>Checkins</h3>
-		<div class="row-fluid">
+		<h2>Checkins</h2>
+		<div class="row-fluid lead">
 			Total checkins: {{data.CHECKINS.TOTAL}}
 		</div>
         <div class="row-fluid">
-            PANEL Checkins: {{data.CHECKINS.RESULTS.PANEL}}<br/>
-            QR Checkins: {{data.CHECKINS.RESULTS.QR || 0}}<br/>
-            SMS Checkins: {{data.CHECKINS.RESULTS.SMS || 0}}<br/>
+            <h3>Checkins in date range specified: </h3>
+            <div class="lead">
+                P: {{data.CHECKINS.RESULTS.PANEL}}<br/>
+                Q: {{data.CHECKINS.RESULTS.QR || 0}}<br/>
+                S: {{data.CHECKINS.RESULTS.SMS || 0}}<br/>
+            </div>
         </div>
 		<div class="row-fluid">
-			<div>
-				Per day Checkins
-			</div>
+			<h3>
+			    Daily Checkins
+			</h3>
 			<div>
 				<table class="table table-bordered table-hover">
                     <thead>
@@ -41,22 +44,26 @@
 <div>
 	<div class="row-fluid">
 		<h3>Vouchers</h3>
-		<div>
-			Total vouchers earned: {{data.VOUCHERS.TOTAL.EARNED}}
-		</div>
-		<div>
-			Total vouchers redeemed: {{data.VOUCHERS.TOTAL.REDEEMED}}
-		</div>
+		<div class="lead">
+            <div>
+                Total vouchers earned: {{data.VOUCHERS.TOTAL.EARNED}}
+            </div>
+            <div>
+                Total vouchers redeemed: {{data.VOUCHERS.TOTAL.REDEEMED}}
+            </div>
+        </div>
         <div class="row-fluid">
-            Vouchers in date range specified.
+            <h3>Vouchers in date range specified.</h3>
             <br/>
-            Vouchers earned: {{data.VOUCHERS.RESULTS.earned}}<br/>
-            Vouchers redeemed: {{data.VOUCHERS.RESULTS.redeemed}}
+            <div class="lead">
+                Vouchers earned: {{data.VOUCHERS.RESULTS.earned}}<br/>
+                Vouchers redeemed: {{data.VOUCHERS.RESULTS.redeemed}}
+            </div>
         </div>
 		<div class="row-fluid">
-			<div>
-				Per day Voucher redemptions
-			</div>
+			<h3>
+				Daily redemptions
+			</h3>
 			<div>
 				<table class="table table-bordered table-hover">
                     <thead>
@@ -81,4 +88,41 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="row-fluid">
+    <div class="row-fluid">
+        <h3>Users</h3>
+        <div class="lead">
+            <h3>Users by checkin no</h3>
+            <div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <th>
+                            # Checkin
+                        </th>
+                        <th>
+                            # Users
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in data.USERS_BY_CHECKIN_NO.DATA">
+                            <td>
+                                {{item._id}}                            
+                            </td>
+                            <td>
+                                {{item.value}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="lead">
+            <h3>Users by APP</h3>
+            <div>
+                APP_USERS: {{data.USERS_BY_APP.RESULTS.APP_USERS}}<br/>
+                NON_APP_USERS: {{data.USERS_BY_APP.RESULTS.NON_APP_USERS}}<br/>
+            </div>
+        </div>
+    </div>
 </div>
