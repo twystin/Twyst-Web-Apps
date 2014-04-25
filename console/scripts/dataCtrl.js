@@ -172,8 +172,7 @@ function DataCtrl($scope, $timeout, dataService) {
         var end = new Date(range.end).setHours(23, 59, 59);
 
     	dataService.getData(program, start, end).then(function(data) {
-    		console.log(data)
-            if(data.status !== "error") {
+    		if(data.status !== "error") {
     			$scope.data = data;
     		}
     		else {
