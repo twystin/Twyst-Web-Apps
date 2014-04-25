@@ -39,10 +39,12 @@ function DataCtrl($scope, $timeout, dataService) {
 
 
     $scope.$watch('selected_merchants', function() {
+        console.log($scope.selected_merchants.length)
         if($scope.selected_merchants.length === 0) {
           $timeout(function() {
+            $scope.selected_merchants = [];
             $scope.selected_merchants = $scope.selected_merchants.concat($scope.merchants)
-          },0);
+          },1000);
         };
 
         if($scope.selected_merchants.length > 0 && $scope.cities.length > 0) {
