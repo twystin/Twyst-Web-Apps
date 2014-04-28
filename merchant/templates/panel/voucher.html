@@ -1,6 +1,6 @@
 <div class="row-fluid paneldata-voucher">
     <div>
-        Voucher is <b class="{{voucherStatusClass(voucher)}}">
+        Voucher <b class="{{voucherStatusClass(voucher)}}">
          {{checkVoucherApplicability(voucher)}}
         </b>
     </div>
@@ -25,5 +25,7 @@
     <div>
         <b>Validity: </b>{{voucher.validity.start_date | date:'medium'}} to {{voucher.validity.end_date | date:'medium'}}
     </div>
-    <button ng-show="voucher.basics.status === 'active'" class="btn btn-success" ng-click="createRedeem()">Redeem</button>
+    <div>
+        <button ng-show="voucher.basics.status !== 'merchant redeemed'" class="btn btn-success btn-shadow" ng-click="createRedeem()">Ok. We gave the Reward!</button>
+    </div>
 </div>
