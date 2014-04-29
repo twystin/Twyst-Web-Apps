@@ -9,7 +9,7 @@
   <div class="offset1 span7">
     <div class="row">
       <span style="font-size: 31.5px;font-weight: bold;">{{outlet.basics.name}}</span>
-      <span ng-show="outlet.basics.is_a" tooltip-placement="top" tooltip="{{outlet.basics.is_a}}" style="padding-left:15px;"><img style="border:2px solid black" class="img-polaroid" src="../../../common/images/transparent/{{outlet.basics.is_a}}.png" width="50px" height="50px"></span>
+      <span ng-show="outlet.basics.icon || outlet.basics.is_a" tooltip-placement="top" tooltip="{{outlet.basics.icon}}" style="padding-left:15px;"><img style="border:2px solid black" class="img-polaroid" src="../../../common/images/transparent/{{outlet.basics.icon || outlet.basics.is_a}}.png" width="50px" height="50px"></span>
     </div> 
     <div class="row">
       <span class="lead" ng-show="outlet.basics.contact_person_name">{{outlet.basics.contact_person_name}}</span>
@@ -69,7 +69,7 @@
   <div class="span6">
     <div class="row-fluid">           
       <div class="badge badge-info" ng-show="outlet.attributes.air_conditioning">Air-conditioning: {{outlet.attributes.air_conditioning}}</div>         
-      <div class="badge badge-info" ng-show="outlet.attributes.parking"> Parking: {{outlet.attributes.parking}}</div> 
+      <div class="badge badge-info" ng-show="outlet.attributes.parking"> Parking: {{outlet.attributes.parking}}</div>
       <div class="badge badge-info" ng-show="outlet.attributes.reservation"> Reservation: {{outlet.attributes.reservation}}</div> 
       <div class="badge badge-info" ng-show="outlet.attributes.wifi"> WiFi: {{outlet.attributes.wifi}}</div>
     </div> 
