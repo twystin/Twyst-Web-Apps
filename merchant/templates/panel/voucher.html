@@ -26,6 +26,7 @@
         <b>Validity: </b>{{voucher.validity.start_date | date:'medium'}} to {{voucher.validity.end_date | date:'medium'}}
     </div>
     <div>
-        <button ng-show="voucher.basics.status !== 'merchant redeemed'" class="btn btn-success btn-shadow" ng-click="createRedeem()">Ok. We gave the Reward!</button>
+        <button ng-show="voucher.basics.status === 'active'" class="btn btn-success btn-shadow" ng-click="createRedeem()">Ok. We gave the Reward!</button>
+        <button ng-show="voucher.basics.status === 'user redeemed'" class="btn btn-success btn-shadow" ng-click="changeVoucherStatus(voucher.basics.code)">Ok. We gave the Reward!</button>
     </div>
 </div>
