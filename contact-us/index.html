@@ -1,0 +1,111 @@
+<!doctype html>
+<html ng-app="twystContact">
+	<head>
+		<title>Twyst</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	    <link rel="stylesheet" href="../common/styles/bootstrap-cosmo-2.3.2.css">
+	    <link rel="stylesheet" href="../common/styles/style.css">
+	    <style type="text/css">
+	    	.top-margin{
+			    margin:0px 0px 15px 0px;
+			}
+			.contactUsMessage{
+			    width: 400px;
+			}
+	    </style>
+
+		<script src="../common/libs/angular/angular.min.js"></script>
+	    <script src="./app.js"></script>	
+
+  		<link rel="icon" type="image/png" href="../common/images/favicon/twyst.ico">
+	</head>
+	<body ng-controller="ContactCtrl">
+		<div class="row-fluid span12" style="margin:0px;">
+			<div id="header" class="row-fluid one-edge-shadow outHeadder">
+				<div class="offset1 span3">
+					<div class="span7">	
+						<a href="http://www.twyst.in/launchpage/faq.html"><img id="logoLaunchpage" src="../common/images/logo_2.png" ></a>
+					</div>
+				</div> 
+				<div id="outNavBtn" class="span7">					
+					<ul class="nav nav-pills pull-right">
+						<li><a href="http://www.twyst.in">Home</a></li>
+<!-- 						<li><a href="http://www.twyst.in/launchpage/faq.html">FAQ</a></li>
+ -->						<li class="active"><a href="http://www.twyst.in/launchpage/Contact-Us.html">Contact Us</a></li>
+						<li><a href="http://www.twyst.in/merchant/#/"><b>For Businesses</b></a></li>
+					</ul>
+				</div>
+				<div class="span1">
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span10 offset1">
+					<br/>
+
+					<div class="span7" style="margin:0px;">	
+
+						<h2>Contact Us</h2>
+
+						<div ng-show="user.thank_you">
+							Thank you. We will get back to you.
+						</div>
+						<div ng-show="user.error">
+							We have already recieved your request.
+						</div>
+
+						<form name='usersGetInTouchForm' ng-hide="user.error || user.thank_you">
+							<label>Name*</label>
+							<input class="input-xlarge" type="text" ng-model="user.name"></input>
+							<label>Email ID*</label>
+							<input class="input-xlarge" type="text" ng-model="user.email"></input>
+							<label>Mobile No</label>
+							<input class="input-xlarge" type="text" ng-model="user.phone"></input>
+							<label>Message*</label>
+							<textarea class="contactUsMessage" rows="5" ng-model="user.message"></textarea>
+							<div class="row-fluid" ng-show="user.fill" style="color: red">
+								<small>*Fill all required fields.<small>
+							</div>
+							<div class="row-fluid">
+							  <button type="button" class="btn btn-success btn-large" ng-click="addUser()">Submit</button>
+							</div>
+						</form>
+
+					</div>
+					<div class="span5">
+						<div class="span12">
+							<div class="span12" style="margin:0px;"><h3>Own a restaurant, cafe or pub?</h3></div>
+							<button class="btn btn-info btn-large top-margin" ng-click="getInTouch()">Get in Touch</button>
+						</div>
+						<br>
+						<div ng-show="merchant.thank_you">
+							Thank you. We will get back to you.
+						</div>
+						<div ng-show="merchant.error">
+							We have already recieved your request.
+						</div>
+						<form ng-show ="contactUs">
+							<label>Business Name*</label>
+							<input class="input-xlarge" ng-model="merchant.establishment_name" type="text"></input> 
+
+							<label>City*</label>
+							<input class="input-xlarge" ng-model="merchant.city" type="text"></input>
+
+							<label>Name of Contact Person*</label>
+							<input class="input-xlarge" ng-model="merchant.person_name" type="text"></input>
+
+							<label>Email ID*</label>
+							<input class="input-xlarge" ng-model="merchant.email" type="text"></input>
+
+							<label>Mobile No*</label>
+							<input class="input-xlarge" ng-model="merchant.phone_number" type="text"></input><br/>
+							<div class="row-fluid" ng-show="merchant.fill" style="color: red">
+								<small>*Fill all required fields.<small>
+							</div>
+							<button type="button" class="btn btn-success btn-large" ng-click="addMerchant()" ng-disabled="isTouchEnabled()">Submit</button>
+						</form> 
+					</div>
+				</div>
+			</div>	
+		</div>
+	</body>
+</html>
