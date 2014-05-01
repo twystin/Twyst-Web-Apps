@@ -119,7 +119,12 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
         }
 
         if(voucher.basics.status === 'user redeemed') {
-            return 'voucher-active';
+            if((new Date()-new Date(voucher.used_details.used_time)) <= 3*60*60*1000) {
+                return 'voucher-orange';
+            }
+            else {
+                return 'voucher-redeemed';
+            }
         }
     }
 
@@ -129,16 +134,16 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             return;
         }
 
-        if(voucher.basics.status === 'merchant redeemed') {
-            return 'has already been used.';
+        if(voucher.basics.status !== 'active') {
+            return 'REDEEMED';
         }
 
         if(checkApplicabilityDay(voucher) && checkApplicabilityTime(voucher)) {
-            return 'is ACTIVE and VALID at this time.'
+            return 'ACTIVE and VALID at this time.'
         }
         else {
-            return 'is ACTIVE but NOT VALID at this time.'
-        } 
+            return 'ACTIVE but NOT VALID at this time.'
+        }
     }
 
     function checkApplicabilityDay (voucher) {

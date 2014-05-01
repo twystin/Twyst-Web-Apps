@@ -9,6 +9,10 @@ twystApp.controller('AuthCtrl', function ($scope, $route, $http, $location, $rou
         $location.path('/panel');
     }
 
+    if (authService.isLoggedIn() && authService.getAuthStatus().role <= 4) {
+        $location.path('/dashboard/home');
+    }
+
     // Private functions
     var update_auth = function () {
         $scope.auth = authService.getAuthStatus();

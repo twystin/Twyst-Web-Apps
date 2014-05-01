@@ -75,8 +75,8 @@ twystApp.controller('OutletCtrl',
     });
 
     $scope.selectIcon = function (icon) {
-        if(!($scope.outlet.basics.icon === icon)) {
-            $scope.outlet.basics.icon = icon;
+        if(!($scope.outlet.basics.is_a === icon)) {
+            $scope.outlet.basics.is_a = icon;
         }
     };
 

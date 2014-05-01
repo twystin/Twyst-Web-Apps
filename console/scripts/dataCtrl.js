@@ -39,12 +39,10 @@ function DataCtrl($scope, $timeout, dataService) {
 
 
     $scope.$watch('selected_merchants', function() {
-        console.log($scope.selected_merchants.length)
         if($scope.selected_merchants.length === 0) {
           $timeout(function() {
-            $scope.selected_merchants = [];
             $scope.selected_merchants = $scope.selected_merchants.concat($scope.merchants)
-          },1000);
+          },0);
         };
 
         if($scope.selected_merchants.length > 0 && $scope.cities.length > 0) {
@@ -135,6 +133,7 @@ function DataCtrl($scope, $timeout, dataService) {
     $scope.$watch('selected_program', function () {
     	
     	if($scope.selected_program) {
+
     		getData($scope.selected_program, $scope.range);
     	}
         else {
@@ -185,7 +184,6 @@ function DataCtrl($scope, $timeout, dataService) {
 
     function getAnonData(outlets) {
         $scope.program_analytics = false;
-        $scope.selected_program = null;
         var start = new Date($scope.range.start).setHours(0, 0, 1);
         var end = new Date($scope.range.end).setHours(23, 59, 59);
 
