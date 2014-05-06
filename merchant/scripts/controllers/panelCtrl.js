@@ -261,8 +261,10 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                     $scope.success.message = data.message;
                     templateController(true, false, false, false, false);
                 }
+                $scope.refresh();
             }).error(function (data) {
                 errorController(data.status, data.message);
+                $scope.refresh();
             });
         }
     };
@@ -289,8 +291,10 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                     templateController(true, false, false, false, false);
                     $scope.success.message = data.message;
                 }
+                $scope.refresh();
             }).error(function (data) {
                 errorController(data.status, data.message);
+                $scope.refresh();
             });
         }
     };
@@ -365,10 +369,9 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     $scope.changeVoucherStatus = function (code) {
         
         $http.get('/api/v1/vouchers/status/change/'+code).success(function(data) {
-           $scope.getVoucherNotify();
-            
+            $scope.refresh();
         }).error(function (data) {
-
+            $scope.refresh();
             $scope.voucher_change_status_error = data.message;
         });
     };
