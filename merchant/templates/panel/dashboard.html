@@ -146,7 +146,7 @@
             </div>
         </div>
     </div>
-    <div class="row-fluid span3 notifications">
+    <div class="row-fluid span3 notif">
         <div class="row-fluid activity-background">
             <div class="row-fluid">
                 <div class="activity-padding">
@@ -155,13 +155,13 @@
                         <img src="../../../common/images/refresh.png" width="20px" height="20px" title="Click to refresh" ng-click="refresh();">
                     </span>
                 </div>
+                <hr/>
             </div>
-            <div class="row-fluid notif-padding">
+            <div class="row-fluid notif-padding notifications" when-scrolled="getCommonNotify()">
                 <div class="notif-error-font" ng-hide="notifs.length > 0">
                     <center>No notifications.</center>
                 </div>
                 <div class="row-fluid" ng-repeat="notif in notifs">
-                    <hr/>
                     <div class="row-fluid" ng-show="notif.type === 'REDEEM'">
                         <div class="span2">
                             <img src="../../../common/images/gift_used.png" width="32px" height="32px" title="Redemptions">
@@ -202,6 +202,7 @@
                             User <b>{{notif.phone}}</b> favourited your offer at <b>{{notif.date | date: 'medium'}}</b>.
                         </div>
                     </div>
+                    <hr/>
                 </div>
             </div>
         </div>

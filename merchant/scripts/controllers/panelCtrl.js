@@ -12,6 +12,9 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
 
     var days = [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
+    $scope.notifs = [];
+    var skip = 0;
+
     var reward = {
         "breakfast": {
             'start': {
@@ -358,9 +361,10 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     };
     $scope.getCommonNotify = function () {
         $scope.voucher_change_status_error = null;
-        $http.get('/api/v2/notify/merchants').success(function(data) {           
+        skip += 10;
+        $http.get('/api/v2/notify/merchants/' + skip).success(function(data) {           
             if(data.info && data.info.length > 0) {
-                $scope.notifs = data.info;
+                $scope.notifs = $scope.notifs.concat(data.info);
             }
         }).error(function (data) {
            
