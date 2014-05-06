@@ -173,8 +173,8 @@
                             {{notif.data.issue_details.issued_for.basics.description}} -
                             {{notif.data.issue_details.issued_for.terms}}
                         </div>
-                        <div class="span10 offset2">
-                            <button class="btn btn-small btn-success btn-shadow" ng-click="changeVoucherStatus(notif.data.basics.code)" ng-show="notif.data.basics.status === 'user redeemed'">Ok. We gave the Reward!</button>
+                        <div class="span10 offset2" ng-hide="notif.data.basics.status !== 'user redeemed'">
+                            <button class="btn btn-small btn-success btn-shadow" ng-click="changeVoucherStatus(notif.data.basics.code)">Ok. We gave the Reward!</button>
                         </div>
                     </div>
                     <div class="row-fluid" ng-show="notif.type === 'CHECKIN'">
