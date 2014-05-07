@@ -90,8 +90,8 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     }, 1000*60*10);
 
     $scope.refresh = function () {
-
-        $scope.getCommonNotify();
+        $scope.notifs = [];
+        $scope.getCommonNotify(0);
         if($scope.outlet._id) {
             getCounts();
         }
@@ -359,9 +359,8 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             $locationProvider.location.path('#/panel')
         });
     };
-    $scope.getCommonNotify = function () {
+    $scope.getCommonNotify = function (skip) {
         $scope.voucher_change_status_error = null;
-        skip += 10;
         $http.get('/api/v2/notify/merchants/' + skip).success(function(data) {           
             if(data.info && data.info.length > 0) {
                 $scope.notifs = $scope.notifs.concat(data.info);
@@ -370,6 +369,10 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
            
         });
     };
+    $scope.loadMore = function () {
+        skip += 10;
+        $scope.getCommonNotify(skip);
+    }
     $scope.changeVoucherStatus = function (code) {
         
         $http.get('/api/v1/vouchers/status/change/'+code).success(function(data) {
