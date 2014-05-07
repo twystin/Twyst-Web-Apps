@@ -356,7 +356,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                 $scope.voucher_notify = JSON.parse(data.info);
             }
         }).error(function (data) {
-           
+            $locationProvider.location.path('#/panel')
         });
     };
     $scope.getCommonNotify = function () {
