@@ -29,7 +29,7 @@
                     <div class="span4" tooltip="Total checkins">
                         <div class="card-checkin">
                             <div class="cardhead">
-                                <h3 class="card-padding">Checkins</h3>
+                                <h3 class="card-padding">Check-ins</h3>
                             </div>
                             <div>
                                 <center>
@@ -46,7 +46,7 @@
                     <div class="span4" tooltip="Total vouchers generated">
                         <div class="card-voucher">
                             <div class="cardhead">
-                                <h3 class="card-padding">Vouchers</h3>
+                                <h3 class="card-padding">Vouchers Generated</h3>
                             </div>
                             <div>
                                 <center>
@@ -63,7 +63,7 @@
                     <div class="span4" tooltip="Total voucher Redemptions">
                         <div class="card-redeemed">
                             <div class="cardhead">
-                                <h3 class="card-padding">Redemptions</h3>
+                                <h3 class="card-padding">Vouchers Used</h3>
                             </div>
                             <div>
                                 <center>
@@ -167,7 +167,7 @@
                             <img src="../../../common/images/gift_used.png" width="32px" height="32px" title="Redemptions">
                         </div>
                         <div class="span10">
-                            Voucher <b>{{notif.data.basics.code}}</b> redeemed by 
+                            Voucher <b>{{notif.data.basics.code}}</b> used by 
                             <b>{{notif.phone}}</b> on 
                             {{notif.data.used_details.used_time | date: 'medium'}} at <b>{{notif.data.used_details.used_at.basics.name}} {{notif.data.used_details.used_at.contact.location.locality_1.toString()}}</b> -
                             {{notif.data.issue_details.issued_for.basics.description}} -
