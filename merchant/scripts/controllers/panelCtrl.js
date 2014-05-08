@@ -268,7 +268,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
 
     function goForCheckin() {
         if ($scope.outlet._id && $scope.checkin.phone_no) {
-            $http.post('/api/v2/checkins', {
+            $http.post('/api/v1/checkins', {
                 phone: $scope.checkin.phone_no,
                 outlet: $scope.outlet._id,
                 location: $scope.checkin.location
