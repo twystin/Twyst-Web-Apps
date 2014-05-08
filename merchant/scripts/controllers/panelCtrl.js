@@ -113,6 +113,10 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             return;
         }
 
+        if(new Date(voucher.validity.end_date) <= new Date()) {
+            return 'voucher-redeemed';
+        }
+
         if(voucher.basics.status === 'active') {
             return 'voucher-active';
         }
@@ -126,10 +130,21 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
         }
     }
 
+    $scope.isVoucherExpired = function (voucher) {
+        if(new Date(voucher.validity.end_date) <= new Date()) {
+            return true;
+        }
+        return false;
+    }
+
     $scope.checkVoucherApplicability = function(voucher) {
 
         if(_.isEmpty(voucher)) {
             return;
+        }
+
+        if(new Date(voucher.validity.end_date) <= new Date()) {
+            return 'has Expired.';
         }
 
         if(voucher.basics.status === 'merchant redeemed') {
