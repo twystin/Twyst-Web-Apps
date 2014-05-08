@@ -253,9 +253,10 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
 
     function goForCheckin() {
         if ($scope.outlet._id && $scope.checkin.phone_no) {
-            $http.post('/api/v1/checkins', {
+            $http.post('/api/v2/checkins', {
                 phone: $scope.checkin.phone_no,
-                outlet: $scope.outlet._id
+                outlet: $scope.outlet._id,
+                location: $scope.checkin.location
             }).success(function (data) {
                 if(data.status === 'error') {
                     errorController(data.status, data.message);
@@ -273,7 +274,10 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     };
 
     $scope.createCheckin = function () {
-        if(isMobileNumber($scope.checkin.phone_no)) {
+        if(!$scope.checkin.location) {
+            $scope.checkin_select_dirty = true;
+        }
+        else if(isMobileNumber($scope.checkin.phone_no)) {
             goForCheckin();
         }
         else {
