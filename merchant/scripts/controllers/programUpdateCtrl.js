@@ -1,5 +1,5 @@
 twystApp.controller('programUpdateCtrl', 
-	function ($scope, $routeParams, $timeout, $http, $modal, $parse, $route, $location, authService, outletService, programService, proSupService, imageService) {
+	function ($scope, $routeParams, $timeout, $http, $modal, $parse, $route, $location, authService, outletService, programService, proSupService, imageService, typeaheadService) {
 			
 		if (!authService.isLoggedIn()) {
 	        $location.path('/');
@@ -191,25 +191,9 @@ twystApp.controller('programUpdateCtrl',
 	        $scope.tag_list.tags = '';
 	    };
 
-	    $scope.$watch('tag_list.tags', function() {
-	    	if($scope.tag_list.tags) {
-	    		var length = $scope.tag_list.tags.length;
-		        var typed = $scope.tag_list.tags[length-1];
-		        $scope.tags = [];
-		        $http.get(
-		            '/api/v1/typeahead/tags/' + typed
-		            ).success(function (data) {
-		                var info_length = data.info.length;
-		                if(info_length > 0) {
-		                    for(var i = 0; i < info_length; i++) {
-		                        $scope.tags.push(data.info[i].name);
-		                    }
-		                }
-		            }).error(function (data) {
-		                console.log(data);
-		        });
-	    	}
-	    });
+	    $scope.getTags = function (tagKey) {
+	        return typeaheadService.getTagNames(tagKey);
+	    };
 
 	    $scope.onFileSelect = function ($files) {
 

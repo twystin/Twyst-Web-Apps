@@ -1,8 +1,8 @@
 'use strict';
 
 twystApp.controller('OutletCtrl', 
-    ['$scope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', '$log',
-    function ($scope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, $log) {
+    ['$scope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', 'typeaheadService', '$log',
+    function ($scope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, typeaheadService, $log) {
 
     if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -137,25 +137,9 @@ twystApp.controller('OutletCtrl',
         $scope.tag_list.tags = '';
     };
 
-    $scope.$watch('tag_list.tags', function() {
-        if($scope.tag_list.tags) {
-            var length = $scope.tag_list.tags.length;
-            var typed = $scope.tag_list.tags[length-1];
-            $scope.tags = [];
-            $http.get(
-                '/api/v1/typeahead/tags/' + typed
-                ).success(function (data) {
-                    var info_length = data.info.length;
-                    if(info_length > 0) {
-                        for(var i = 0; i < info_length; i++) {
-                            $scope.tags.push(data.info[i].name);
-                        }
-                    }
-                }).error(function (data) {
-                    console.log(data);
-            });
-        }
-    });
+    $scope.getTags = function (tagKey) {
+        return typeaheadService.getTagNames(tagKey);
+    };
 
     $scope.getCurrentLocation = function () {
         $window.navigator.geolocation.getCurrentPosition(function(position) {

@@ -247,7 +247,7 @@
               <small>Tags</small>
             </div>
             <div class="row-fluid span8">
-              <input class="span8" typeahead="tag for tag in tags" ng-model="tag_list.tags" ng-list placeholder="Fun, Bright" type="text" ng-enter="fixupTags()">
+              <input class="span8" typeahead="tag for tag in getTags($viewValue)" ng-model="tag_list.tags" ng-list placeholder="Fun, Bright" type="text" ng-enter="fixupTags()">
               <div>
                   <span ng-repeat="t in offer.tags"><button class="btn btn-small btn-warning" ng-click="offer.tags.splice($index,1)">{{t}}<i class=" icon-remove icon-white"></i></button>&nbsp;</span>
               </div>
