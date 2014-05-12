@@ -1,6 +1,6 @@
 'use strict';
  
-twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $modal, $http, $location, $routeParams, $upload, authService, outletService, programService, imageService) {
+twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $modal, $http, $location, $routeParams, $upload, authService, outletService, programService, imageService, typeaheadService) {
     if (!authService.isLoggedIn()) {
         $location.path('/');
     }
@@ -158,27 +158,11 @@ twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $mo
         $scope.tag_list.tags = '';
     };
     
-    $scope.$watch('tag_list.tags', function() {
-        if($scope.tag_list.tags) { 
-            var length = $scope.tag_list.tags.length;
-            var typed = $scope.tag_list.tags[length-1];
-            $scope.tags = [];
-            $http.get(
-                '/api/v1/typeahead/tags/' + typed
-                ).success(function (data) {
-                    var info_length = data.info.length;
-                    if(info_length > 0) {
-                        for(var i = 0; i < info_length; i++) {
-                            $scope.tags.push(data.info[i].name);
-                        }
-                    }
-                }).error(function (data) {
-                    console.log(data);
-            });
-        }
-    });
-
-     $scope.onFileSelect = function ($files) {
+    $scope.getTags = function (tagKey) {
+        return typeaheadService.getTagNames(tagKey);
+    };    
+    
+    $scope.onFileSelect = function ($files) {
 
         if(($files[0].type === "image/jpeg") || 
             ($files[0].type === "image/png") ||
