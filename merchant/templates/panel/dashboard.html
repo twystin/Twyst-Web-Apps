@@ -136,6 +136,9 @@
             </div>
             <div class="row-fluid span7">
                 <div class="paneltemplates">
+                    <div class="row-fluid offset5" style="margin-top: 25%" ng-show="loading">
+                        <img src="../../../common/images/panel_loading.gif">
+                    </div>
                     <div ng-show="template.success">
                         <div ng-include="'./templates/panel/successpage.html'" onload=""></div>
                     </div>

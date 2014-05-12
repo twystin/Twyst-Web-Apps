@@ -14,6 +14,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
 
     $scope.notifs = [];
     var skip = 0;
+    $scope.loading = false;
 
     var reward = {
         "breakfast": {
@@ -267,12 +268,17 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     }
 
     function goForCheckin() {
+
         if ($scope.outlet._id && $scope.checkin.phone_no) {
+
+            $scope.loading = true;
+
             $http.post('/api/v1/checkins', {
                 phone: $scope.checkin.phone_no,
                 outlet: $scope.outlet._id,
                 location: $scope.checkin.location
             }).success(function (data) {
+                $scope.loading = false;
                 if(data.status === 'error') {
                     errorController(data.status, data.message);
                 }
@@ -282,6 +288,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                 }
                 $scope.refresh();
             }).error(function (data) {
+                $scope.loading = false;
                 errorController(data.status, data.message);
                 $scope.refresh();
             });
@@ -301,15 +308,20 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     };
     $scope.createRedeem = function () {
         if ($scope.outlet._id && $scope.voucher.basics.code) {
+            $scope.loading = true;
             $http.post('/api/v1/redeem/vouchers', {
                 code: $scope.voucher.basics.code,
                 phone: $scope.phone,
                 used_at: $scope.outlet._id
             }).success(function(data, status, header, config) {
+                
+                $scope.loading = false;
+                
                 if(data.status === 'error') {
                     errorController(data.status, data.message);
                 }
                 else {
+                    $scope.loading = false;
                     templateController(true, false, false, false, false);
                     $scope.success.message = data.message;
                 }
@@ -322,9 +334,14 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     };
     $scope.getVoucherDetails = function () {
         if (($scope.code)) {
+
+            $scope.loading = true;
+            
             $http.get('/api/v1/vouchers/' + $scope.code.toUpperCase(), {
                 code: $scope.code
             }).success(function(data, status, header, config) {
+                $scope.loading = false;
+                
                 if(JSON.parse(data.info) !== null) {
                     $scope.voucher = JSON.parse(data.info); 
                     templateController(false, false, true, false, false);                   
@@ -333,6 +350,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                     errorController(data.status, data.message);
                 }
             }).error(function (data) {
+                $scope.loading = false;
                 errorController(data.status, data.message);
             });
         }
@@ -349,7 +367,13 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
 
     function goForVoucher() {
         if (($scope.phone !== undefined)) {
+
+            $scope.loading = true;
+            
             $http.get('/api/v1/vouchers_by_phone/' + $scope.phone).success(function(data, status, header, config) {
+                
+                $scope.loading = false;
+
                 if(data.info !== "null" && data.info.length > 0) {
                     $scope.vouchers = JSON.parse(data.info);
                     templateController(false, false, false, true, false);
@@ -357,7 +381,8 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                 else {
                     errorController(data.status, data.message);
                 }
-            }).error(function (data) {                
+            }).error(function (data) {    
+                $scope.loading = false;            
                 errorController(data.status, data.message);
             });
         }
