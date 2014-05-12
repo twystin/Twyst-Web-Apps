@@ -90,10 +90,10 @@
                         </div>
                         <div class="panel-action-body"> 
                             <div class="row-fluid" style="line-height: 30px;">
-                                Select one: <input type="radio" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false"> Dine-in <input type="radio" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false"> Home delivery
+                                Select one: <input type="radio" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false"> Dine-in <input type="radio" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false"> Home delivery / Take-away
                             </div>
                             <div class="row-fluid">
-                                <small class="text-error" ng-show="checkin_select_dirty">* Please select one.</small>
+                                <small class="text-error" ng-show="checkin_select_dirty">* Please select Dine-in / Home delivery / Take-away.</small>
                             </div>                      
                             <div class="row-fluid">
                                 <input type="text" placeholder="10 digit mobile number" id="phone_no" name="phone_no" required="true" ng-model="checkin.phone_no" ng-change="checkin_phone_no_dirty = false">
@@ -201,7 +201,7 @@
                             <img src="../../../common/images/gift_given.png" width="32px" height="32px" title="Vouchers">
                         </div>
                         <div class="span10">
-                            Voucher generated for user <b>XXXXX</b> at <b>{{notif.date | date: 'medium'}}</b>.
+                            Voucher generated at <b>{{notif.date | date: 'medium'}}</b>.
                         </div>
                         <!-- <button class="btn btn-small btn-success btn-shadow" ng-click="changeVoucherStatus(notif.basics.code)">Ok. We gave the Reward!</button> -->
                     </div>
