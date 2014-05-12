@@ -341,7 +341,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                 code: $scope.code
             }).success(function(data, status, header, config) {
                 $scope.loading = false;
-                
+
                 if(JSON.parse(data.info) !== null) {
                     $scope.voucher = JSON.parse(data.info); 
                     templateController(false, false, true, false, false);                   
