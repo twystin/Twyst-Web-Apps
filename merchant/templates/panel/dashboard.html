@@ -139,17 +139,19 @@
                     <div class="row-fluid offset5" style="margin-top: 25%" ng-show="loading">
                         <img src="../../../common/images/panel_loading.GIF">
                     </div>
-                    <div ng-show="template.success">
-                        <div ng-include="'./templates/panel/successpage.html'" onload=""></div>
-                    </div>
-                    <div ng-show="template.voucher">
-                        <div ng-include="'./templates/panel/voucher.html'" onload=""></div>
-                    </div>
-                    <div ng-show="template.user">
-                        <div ng-include="'./templates/panel/user_vouchers.html'" onload=""></div>
-                    </div>
-                    <div ng-show="template.error">
-                        <div ng-include="'./templates/panel/errorpage.html'" onload=""></div>
+                    <div ng-hide="loading">
+                        <div ng-show="template.success">
+                            <div ng-include="'./templates/panel/successpage.html'" onload=""></div>
+                        </div>
+                        <div ng-show="template.voucher">
+                            <div ng-include="'./templates/panel/voucher.html'" onload=""></div>
+                        </div>
+                        <div ng-show="template.user">
+                            <div ng-include="'./templates/panel/user_vouchers.html'" onload=""></div>
+                        </div>
+                        <div ng-show="template.error">
+                            <div ng-include="'./templates/panel/errorpage.html'" onload=""></div>
+                        </div>
                     </div>
                 </div>
             </div>
