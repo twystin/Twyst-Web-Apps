@@ -414,7 +414,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
         });
     };
     $scope.loadMore = function () {
-        skip += 10;
+        skip += 20;
         $scope.getCommonNotify(skip);
     }
     $scope.changeVoucherStatus = function (code) {
