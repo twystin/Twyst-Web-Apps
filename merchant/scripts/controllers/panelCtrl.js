@@ -114,7 +114,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             return;
         }
 
-        if(new Date(voucher.validity.end_date) <= new Date()) {
+        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
             return 'voucher-redeemed';
         }
 
@@ -132,7 +132,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     }
 
     $scope.isVoucherExpired = function (voucher) {
-        if(new Date(voucher.validity.end_date) <= new Date()) {
+        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
             return true;
         }
         return false;
@@ -144,7 +144,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             return;
         }
 
-        if(new Date(voucher.validity.end_date) <= new Date()) {
+        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
             return 'has Expired.';
         }
 
