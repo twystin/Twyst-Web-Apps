@@ -89,7 +89,7 @@
                             <h3 class="card-padding1">Check-in a User</h3>
                         </div>
                         <div class="panel-action-body"> 
-                            <div class="row-fluid" style="line-height: 30px;">
+                            <div class="row-fluid" style="line-height: 30px;" ng-show="outlet.attributes.home_delivery">
                                 Select one: <input type="radio" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false"> Dine-in <input type="radio" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false"> Home delivery / Take-away
                             </div>
                             <div class="row-fluid">
