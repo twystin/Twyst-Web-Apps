@@ -160,6 +160,23 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
         }
     }
 
+    $scope.getStatus = function(voucher) {
+
+        if(_.isEmpty(voucher)) {
+            return;
+        }
+
+        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+            return 'Expired';
+        }
+
+        if(voucher.basics.status === 'merchant redeemed') {
+            return 'Used';
+        }
+
+        return 'Active';
+    }
+
     function checkApplicabilityDay (voucher) {
 
         var mark_valid = false;
