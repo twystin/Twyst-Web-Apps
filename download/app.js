@@ -6,6 +6,10 @@ app.config(function ($routeProvider, $httpProvider) {
             controller  : 'MainCtrl',
             templateUrl : './helper.html'
         }).
+        when('/:mobile/', {
+            controller  : 'MainCtrl',
+            templateUrl : './helper.html'
+        }).
         otherwise({
             redirectTo  : '/'
         });
