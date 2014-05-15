@@ -295,9 +295,6 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                 outlet: $scope.outlet._id,
                 location: $scope.checkin.location
             }).success(function (data) {
-
-                $scope.checkin = {};
-
                 $scope.loading = false;
                 if(data.status === 'error') {
                     errorController(data.status, data.message);
@@ -316,11 +313,6 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     };
 
     $scope.createCheckin = function () {
-
-        if(!outlet.attributes.home_delivery) {
-            $scope.checkin.location = "DINE_IN";
-        }
-
         if(!$scope.checkin.location) {
             $scope.checkin_select_dirty = true;
         }
