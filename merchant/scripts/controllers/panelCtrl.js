@@ -290,7 +290,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
 
             $scope.loading = true;
 
-            $http.post('/api/v1/checkins', {
+            $http.post('/api/v2/checkins', {
                 phone: $scope.checkin.phone_no,
                 outlet: $scope.outlet._id,
                 location: $scope.checkin.location
