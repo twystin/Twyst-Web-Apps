@@ -25,8 +25,27 @@
     <div>
         <b>Validity: </b>{{voucher.validity.start_date | date:'medium'}} to {{voucher.validity.end_date | date:'medium'}}
     </div>
-    <div>
-        <button ng-show="voucher.basics.status === 'active' && !isVoucherExpired(voucher)" class="btn btn-success btn-shadow" ng-click="createRedeem()">Ok. We gave the Reward!</button>
-        <button ng-show="voucher.basics.status === 'user redeemed' && !isVoucherExpired(voucher)" class="btn btn-success btn-shadow" ng-click="changeVoucherStatus(voucher.basics.code)">Ok. We gave the Reward!</button>
+    <hr/>
+    <div class="row-fluid" ng-show="voucher.basics.status === 'active' && !isVoucherExpired(voucher)">
+        <div class="row-fluid">
+            <h4>To Redeem this voucher, select date and click button</h4>
+        </div>
+        <div class="row-fluid">
+            <div  class="span6" ng-controller="DatePickerCtrl" class="row-fluid">
+                <div ng-show="isAuthorized()">
+                    <div class="span5">
+                    Select Date:
+                    </div>
+                    <div class="span7">
+                       <input id="appendedInput" class="input-small" type="text" datepicker-popup="{{format}}" is-open="opened" min="min_date" max='max_date' datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start date" type="date" style="margin:0px;" ng-model="used.time" />
+                        <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <button class="btn btn-success btn-shadow" ng-click="createRedeem()">Ok. We gave the Reward!</button>
+                <button ng-show="voucher.basics.status === 'user redeemed' && !isVoucherExpired(voucher)" class="btn btn-success btn-shadow" ng-click="changeVoucherStatus(voucher.basics.code)">Ok. We gave the Reward!</button>
+            </div>
+        </div>
     </div>
 </div>

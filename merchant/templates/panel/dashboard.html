@@ -87,10 +87,21 @@
                     <div class="card-checkin">
                         <div class="outlethead">
                             <h3 class="card-padding1">Check-in a User</h3>
-                        </div>
+                        </div> 
                         <div class="panel-action-body"> 
+                            <div ng-controller="DatePickerCtrl" class="row-fluid">
+                                <div class="row-fluid" ng-show="isAuthorized()">
+                                    <div class="span4">
+                                    Checkin date:
+                                    </div>
+                                    <div class="span8">
+                                       <input id="appendedInput" class="input-small" type="text" datepicker-popup="{{format}}" is-open="opened" min="min_date" max='max_date' datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start date" type="date" style="margin:0px;" ng-model="checkin.created_date" />
+                                        <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row-fluid" style="line-height: 30px;">
-                                Select one: <input type="radio" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false"> Dine-in <input type="radio" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false"> Home delivery / Take-away
+                                Location: <input type="radio" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false"> Dine-in <input type="radio" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false"> Home delivery / Take-away
                             </div>
                             <div class="row-fluid">
                                 <small class="text-error" ng-show="checkin_select_dirty">* Please select Dine-in / Home delivery / Take-away.</small>
@@ -111,8 +122,10 @@
                             <h3 class="card-padding1">Redeem Voucher</h3>
                         </div>
                         <div class="panel-action-body">
-                            <input type="text" placeholder="Voucher code" id="voucher_code" name="voucher_code" required="true" ng-model="code">
-                            <button type="submit" class="btn btn-custom btn-warning" ng-click="getVoucherDetails()">Get details</button>
+                            <div class="row-fluid">
+                                <input type="text" placeholder="Voucher code" id="voucher_code" name="voucher_code" required="true" ng-model="code">
+                                <button type="submit" class="btn btn-custom btn-warning" ng-click="getVoucherDetails()">Get details</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,9 +193,12 @@
                         <div class="span10">
                             Voucher <b>{{notif.data.basics.code}}</b> used by 
                             <b>{{notif.phone}}</b> on 
-                            {{notif.data.used_details.used_time | date: 'medium'}} at <b>{{notif.data.used_details.used_at.basics.name}} {{notif.data.used_details.used_at.contact.location.locality_1.toString()}}</b> -
+                            {{notif.actual_date | date: 'mediumDate'}} at <b>{{notif.data.used_details.used_at.basics.name}} {{notif.data.used_details.used_at.contact.location.locality_1.toString()}}</b> -
                             {{notif.data.issue_details.issued_for.basics.description}} -
                             {{notif.data.issue_details.issued_for.terms}}
+                        </div>
+                        <div class="span10 padding-notif-top">
+                            <small class="grayed">{{notif.date | date: 'MMM d, y h:mm a'}}</small>
                         </div>
                         <div class="span10 offset2" ng-hide="notif.data.basics.status !== 'user redeemed'">
                             <button class="btn btn-small btn-success btn-shadow" ng-click="changeVoucherStatus(notif.data.basics.code)">Ok. We gave the Reward!</button>
@@ -193,7 +209,10 @@
                             <img src="../../../common/images/favicon/twyst.ico" width="32px" height="32px" title="Checkins">
                         </div>
                         <div class="span10">
-                            User <b>{{notif.data.phone}}</b> checked-in via <b>{{notif.data.checkin_type}}</b> at <b>{{notif.date | date: 'medium'}}</b>.  
+                            User <b>{{notif.data.phone}}</b> checked-in via <b>{{notif.data.checkin_type}}</b> on <b>{{notif.actual_date | date: 'mediumDate'}}</b>.  
+                        </div>
+                        <div class="span10 padding-notif-top">
+                            <small class="grayed">{{notif.date | date: 'MMM d, y h:mm a'}}</small>
                         </div>
                     </div>
                     <div class="row-fluid" ng-show="notif.type === 'VOUCHER'">
@@ -201,16 +220,22 @@
                             <img src="../../../common/images/gift_given.png" width="32px" height="32px" title="Vouchers">
                         </div>
                         <div class="span10">
-                            Voucher generated at <b>{{notif.date | date: 'medium'}}</b>.
+                            Voucher generated on <b>{{notif.actual_date | date: 'mediumDate'}}</b>.
                         </div>
                         <!-- <button class="btn btn-small btn-success btn-shadow" ng-click="changeVoucherStatus(notif.basics.code)">Ok. We gave the Reward!</button> -->
+                        <div class="span10 padding-notif-top">
+                            <small class="grayed">{{notif.date | date: 'MMM d, y h:mm a'}}</small>
+                        </div>
                     </div>
                     <div class="row-fluid" ng-show="notif.type === 'FAVS'">
                         <div class="span2">
                             <img src="../../../common/images/favs.png" width="32px" height="32px" title="Favourites">
                         </div>
                         <div class="span10">
-                            User <b>{{notif.phone}}</b> favourited your offer at <b>{{notif.date | date: 'medium'}}</b>.
+                            User <b>{{notif.phone}}</b> favourited your offer on <b>{{notif.actual_date | date: 'mediumDate'}}</b>.
+                        </div>
+                        <div class="span10 padding-notif-top">
+                            <small class="grayed">{{notif.date | date: 'MMM d, y h:mm a'}}</small>
                         </div>
                     </div>
                     <hr/>

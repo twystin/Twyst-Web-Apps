@@ -1,3 +1,11 @@
+ .padding-notif-top {
+    padding-top: 5%;
+ }
+
+.grayed {
+    color: gray;
+}
+
 .loadingContent {
     position: absolute;
     display: block;

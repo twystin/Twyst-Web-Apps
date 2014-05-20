@@ -1,13 +1,16 @@
 'use strict';
 
 twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, authService, outletService) {
-    
-    if(!authService.isLoggedIn()) {
-        $location.path('/');
-    }
 
     if (authService.isLoggedIn() && authService.getAuthStatus().role > 4) {
         $location.path('/panel');
+    }
+
+    $scope.isAuthorized = function () {
+        if(authService.getAuthStatus().role <= 5) {
+            return true;
+        }
+        return false;
     }
 
     var days = [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -15,6 +18,8 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     $scope.notifs = [];
     var skip = 0;
     $scope.loading = false;
+    $scope.max_date = new Date();
+    $scope.min_date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
     var reward = {
         "breakfast": {
@@ -84,6 +89,9 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     };
 
     $scope.checkin = {};
+    $scope.checkin.created_date = new Date();
+    $scope.used = {};
+    $scope.used.time = new Date();
     $scope.outlet = {};
     
     $interval(function () {
@@ -293,7 +301,8 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             $http.post('/api/v2/checkins', {
                 phone: $scope.checkin.phone_no,
                 outlet: $scope.outlet._id,
-                location: $scope.checkin.location
+                location: $scope.checkin.location,
+                created_date: $scope.checkin.created_date
             }).success(function (data) {
                 $scope.loading = false;
                 if(data.status === 'error') {
@@ -326,10 +335,12 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     $scope.createRedeem = function () {
         if ($scope.outlet._id && $scope.voucher.basics.code) {
             $scope.loading = true;
+            var used_time = $scope.used.time;
             $http.post('/api/v1/redeem/vouchers', {
                 code: $scope.voucher.basics.code,
                 phone: $scope.phone,
-                used_at: $scope.outlet._id
+                used_at: $scope.outlet._id,
+                used_time: used_time
             }).success(function(data, status, header, config) {
                 
                 $scope.loading = false;
