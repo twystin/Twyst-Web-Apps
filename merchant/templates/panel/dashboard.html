@@ -108,7 +108,7 @@
                             </div>                      
                             <div class="row-fluid">
                                 <input type="text" placeholder="10 digit mobile number" id="phone_no" name="phone_no" required="true" ng-model="checkin.phone_no" ng-change="checkin_phone_no_dirty = false">
-                                <button type="submit" class="btn btn-custom btn-warning" ng-click="createCheckin()">Check-in</button>
+                                <button type="submit" class="btn btn-custom btn-warning" ng-click="createCheckin()" ng-disabled="loading">Check-in</button>
                             </div>
                             <div class="row-fluid">
                                 <small class="text-error" ng-show="checkin_phone_no_dirty">* Please enter a 10 digit mobile number.</small>
