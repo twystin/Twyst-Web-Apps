@@ -6,29 +6,52 @@ function NotifController($scope, $http) {
 
 	$scope.success = {};
 	$scope.error = {};
-	$scope.valid = {};
 	$scope.message = {};
+	$scope.min_date = new Date();
+    $scope.max_date = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
-	function validate() {
-		if($scope.phones 
+	function isValid() {
+		if(($scope.message.phones
+			|| $scope.message.gcms
+			)
 			&& $scope.message.head
 			&& $scope.message.body
-			&& $scope.valid.date
-			&& $scope.hours
-			&& $scope.minutes) {
-
+			&& $scope.message.date
+			&& $scope.message.hours
+			&& $scope.message.minutes) {
+			if($scope.message.gcms) {
+				if($scope.message.server_key) {
+					return true;
+				}
+				return false;
+			}
 			return true;
 		}
 		return false;
 	}
 
+	$scope.makeEmpty = function(type) {
+		$scope.success = {};
+		$scope.error = {};
+		$scope.message = {};
+		$scope.message.type = type;
+	}
+
 	$scope.addNotif = function () {
 
 		var obj = {};
-		if(validate()) {
-			obj.phones = $scope.phones.split(',');
-			obj.message = $scope.message;
-			obj.scheduled_at = $scope.valid.date.setHours($scope.hours, $scope.minutes ,0);
+		obj.message_type = $scope.message.type;
+		if(isValid()) {
+			if($scope.message.phones) {
+				obj.phones = $scope.message.phones.split(/,|;/);
+			}
+			if($scope.message.gcms) {
+				obj.gcms = $scope.message.gcms.split(/,|;/);
+			}
+			obj.head = $scope.message.head;
+			obj.body = $scope.message.body;
+			obj.server_key = $scope.message.server_key;
+			obj.scheduled_at = $scope.message.date.setHours($scope.message.hours, $scope.message.minutes ,0);
 			sendRequest(obj);
 		}
 		else {
@@ -37,7 +60,6 @@ function NotifController($scope, $http) {
 	}
 
 	function sendRequest (obj) {
-		console.log(obj)
 		$http.post('/api/v2/notifs', {obj:obj}).success(function (data) {
 			$scope.success.message = data.message;
 		}).error(function (data) {
