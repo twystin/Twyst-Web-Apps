@@ -1,6 +1,10 @@
 'use strict';
 
-function DataCtrl($scope, $timeout, dataService) {
+function DataCtrl($scope, $timeout, $location, dataService, authService) {
+
+    if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
 
 
 	$scope.all_cities = ['Gurgaon','Delhi','Mumbai','Bangalore'];

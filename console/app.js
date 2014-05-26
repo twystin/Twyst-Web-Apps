@@ -3,6 +3,10 @@ var twystConsole = angular.module('twystConsole', ['ngCookies', 'ui.bootstrap', 
 twystConsole.config(function ($routeProvider) {
 	$routeProvider.
 	when('/', {
+		controller: AuthController,
+		templateUrl: '/console/templates/landing.html'
+	}).
+	when('/dashboard', {
 		controller: PublicController,
 		templateUrl: '/console/templates/dashboard.html'
 	}).

@@ -1,8 +1,16 @@
-function PublicController($scope) {
+function PublicController($scope, $location, authService) {
+
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
 
 }
 
-function NotifController($scope, $http) {
+function NotifController($scope, $http, $location, authService) {
+
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
 
 	$scope.success = {};
 	$scope.error = {};
@@ -43,10 +51,10 @@ function NotifController($scope, $http) {
 		obj.message_type = $scope.message.type;
 		if(isValid()) {
 			if($scope.message.phones) {
-				obj.phones = $scope.message.phones.split(/,|;/);
+				obj.phones = $scope.message.phones.split(/,|;|\n/);
 			}
 			if($scope.message.gcms) {
-				obj.gcms = $scope.message.gcms.split(/,|;/);
+				obj.gcms = $scope.message.gcms.split(/,|;|\n/);
 			}
 			obj.head = $scope.message.head;
 			obj.body = $scope.message.body;
@@ -104,28 +112,43 @@ function DatePickerCtrl($scope, $timeout) {
     $scope.format = $scope.formats[0];
 }
 
-/*function AuthController($scope, $http, $location) {
-	$scope.message = "";
-	$scope.login = function() {
-		var request = $http.post('/api/v1/auth/login', {username: $scope.user.name, password: $scope.user.pass});
-		return request.then(function(response) {
-			var user = eval(response).data.info;
-			if (user.role == "root") {
-				$location.path('/dashboard');
-			} else {
-				$scope.message = "You dont have enough privileges";
-			}
-		}, function(response) {
-				$scope.message = "No such user & password exists";
-		});
-	}
-}*/
+function AuthController($scope, $http, $location, authService) {
 
-function DashboardController($scope, $http, $location) {
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
+
+	$scope.auth = {};
+
+	$scope.isLoggedIn = function () {
+		if(authService.isLoggedIn()) {
+			return true;
+		}
+		return false;
+	}
+
+	$scope.login = function() {
+		authService.login($scope, $http, $location);
+	}
+
+	$scope.logout = function () {
+		authService.logout($scope, $http, $location);
+	}
+}
+
+function DashboardController($scope, $http, $location, authService) {
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
 
 }
 
-function UsersController($scope, $http, $location, $routeParams) {
+function UsersController($scope, $http, $location, $routeParams, authService) {
+	
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
+
 	$scope.user = {};
 	$scope.user.validated = {};
 	$scope.users = [];

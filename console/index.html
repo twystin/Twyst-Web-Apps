@@ -11,6 +11,7 @@
 		<script src="./app.js"></script>
 		<script src="./scripts/controllers.js"></script>
 		<script src="./scripts/dataCtrl.js"></script>
+		<script src="./scripts/authSvc.js"></script>
 		<script src="./scripts/dataSvc.js"></script>
 
 	    <link rel="stylesheet" href="../common/libs/bootstrap/css/bootstrap.css"></link>
@@ -18,9 +19,14 @@
 		<link rel="stylesheet" href="./styles/app.css"></link>
 	</head>
 	<body>
-	<div class="container-fluid">	
+	<div class="container-fluid">
+		<div class="row-fluid offset2 padding-logout" ng-controller="AuthController">
+	        <div class="span8" ng-show="isLoggedIn()">
+	            <button class="btn btn-medium pull-right" ng-click="logout()">Logout</button>
+	        </div>
+	    </div>
 		
-		<div class="row-fluid offset2">		
+		<div class="row-fluid offset2 padding-logout">		
 			<div class="span8">
 				<div ng-view></div>
     		</div>

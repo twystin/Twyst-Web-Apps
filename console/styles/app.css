@@ -1,3 +1,22 @@
+.padding-logout {
+	padding-top: 1%;
+}
+
+.main-div-padding {
+	padding-top: 15%;
+}
+
+.shadow {
+	padding-left: 2%;
+	-webkit-box-shadow: 5px 5px 10px #666;
+    -moz-box-shadow: 5px 5px 10px #666;
+    box-shadow: 5px 5px 10px #666;
+}
+
+.orange {
+	color: #F7931D;
+}
+
 .city-div {
 	padding-left: 2%;
     height: 150px;
