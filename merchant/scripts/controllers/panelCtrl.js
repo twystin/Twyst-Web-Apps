@@ -304,6 +304,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                 location: $scope.checkin.location,
                 created_date: $scope.checkin.created_date
             }).success(function (data) {
+                $scope.checkin.phone_no = '';
                 $scope.loading = false;
                 if(data.status === 'error') {
                     errorController(data.status, data.message);
@@ -314,6 +315,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                 }
                 $scope.refresh();
             }).error(function (data) {
+                $scope.checkin.phone_no = '';
                 $scope.loading = false;
                 errorController(data.status, data.message);
                 $scope.refresh();

@@ -34,9 +34,6 @@ twystConsole.factory('authService', function ($rootScope, $cookieStore, $log) {
                 else {
                     $scope.auth.errors = 'You are not authorized.'
                 }
-                if ($scope.user.remember_me) {
-                    _authStatus.remember_me = true;
-                }
                 authSvc.broadcastChange();
             }).error(function (data) {
                 authSvc.setAuthStatus(false);
