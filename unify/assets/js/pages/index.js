@@ -19,7 +19,9 @@ var Index = function () {
 		            hoverPrevNext : true,
 		            responsive : true,
 		            responsiveUnder : 960,
-		            sublayerContainer : 960
+		            sublayerContainer : 960,
+slideDelay:10000,
+pauseOnHover: false
 		        });
 		    });     
         },
