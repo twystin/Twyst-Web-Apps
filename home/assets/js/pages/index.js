@@ -20,6 +20,8 @@ var Index = function () {
 		            responsive : true,
 		            responsiveUnder : 960,
 		            sublayerContainer : 960,
+		            navButtons: false,
+		            navStartStop: false,
 slideDelay:10000,
 pauseOnHover: false
 		        });
