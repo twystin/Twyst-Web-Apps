@@ -1441,3 +1441,20 @@ ul.blog-tags a:hover i {
 .info-blocks .info-blocks-in p {
 	font-size: 12px;
 }
+
+.videowrapper {
+    float: none;
+    clear: both;
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+}
+.videowrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
