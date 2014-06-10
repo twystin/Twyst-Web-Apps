@@ -79,7 +79,12 @@ twystApp.factory('authService', function ($rootScope, $cookieStore, $log) {
             });
     };
     authSvc.register = function ($scope, $http, $location) {
-        var request = $http.post('/api/v1/auth/register', {username: $scope.user.name, password: $scope.user.pass1, email: $scope.user.email});
+        var request = $http.post('/api/v1/auth/register', {
+            username: $scope.user.name, 
+            password: $scope.user.pass1, 
+            email: $scope.user.email,
+            role: 3
+        });
         return request.then(function (response) {
             if (response.data.status === "success") {
                 authSvc.setAuthStatus(false, false, "Validation E-mail sent", response.data.info.username);
