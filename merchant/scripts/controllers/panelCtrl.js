@@ -93,6 +93,14 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     $scope.used = {};
     $scope.used.time = new Date();
     $scope.outlet = {};
+
+    $scope.voucher_filters = [
+        {'status':'active', name:'Active'}, 
+        {'status':'merchant redeemed', name:'Used'},
+        {'status': '', 'name':'All'}
+    ];
+
+    $scope.voucher_filter = 'active';
     
     $interval(function () {
         $scope.refresh();

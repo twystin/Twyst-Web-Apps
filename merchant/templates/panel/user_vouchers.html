@@ -6,34 +6,47 @@
 		<hr/>
 	</div>
 	<div class="row-fluid span10">
-		<h4>Vouchers: </h4>
-		<table class="table table-bordered table-striped">
-			<thead>
-				<tr>
-					<th>
-						Code
-					</th>
-					<th>
-						Status
-					</th>
-					<th>
-						Action
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="voucher in vouchers">
-					<td>
-						<b>{{voucher.basics.code}}</b>
-					</td>
-					<td>
-						{{getStatus(voucher)}}
-					</td>
-					<td>
-						<button class="btn btn-xs btn-success" ng-click="getDetails(voucher)">Get details</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="row-fluid">
+			<div class="span6">
+				<b>Vouchers</b>
+			</div>
+			<div class="span6">
+				Filter by:<select ng-model="voucher_filter" ng-options="Quarter.status as Quarter.name for Quarter in voucher_filters" class="span6 pull-right">
+                </select>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div ng-show="vouchers.length === 0">
+				No vouchers for this user.
+			</div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>
+							Code
+						</th>
+						<th>
+							Status
+						</th>
+						<th>
+							Action
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="voucher in vouchers | filter: {'basics.status': voucher_filter}">
+						<td>
+							<b>{{voucher.basics.code}}</b>
+						</td>
+						<td>
+							{{getStatus(voucher)}}
+						</td>
+						<td>
+							<button class="btn btn-xs btn-success" ng-click="getDetails(voucher)">Get details</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
