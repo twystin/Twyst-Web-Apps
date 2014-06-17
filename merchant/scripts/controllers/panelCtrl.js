@@ -93,14 +93,6 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     $scope.used = {};
     $scope.used.time = new Date();
     $scope.outlet = {};
-
-    $scope.voucher_filters = [
-        {'status':'active', name:'Active'}, 
-        {'status':'merchant redeemed', name:'Used'},
-        {'status': '', 'name':'All'}
-    ];
-
-    $scope.voucher_filter = 'active';
     
     $interval(function () {
         $scope.refresh();
@@ -113,6 +105,39 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             getCounts();
         }
     };
+
+    $scope.filterChanged = function (value) {
+        $scope.filtered_vouchers = [];
+        if(value) {
+            if(value === 'Active') {
+
+                $scope.vouchers.forEach(function (voucher) {
+                    if((voucher.basics.status === 'active'
+                        || voucher.basics.status === 'user redeemed')
+                        && (voucher.issue_details.program.validity.burn_end > new Date())) {
+                        $scope.filtered_vouchers.push(voucher);
+                    }
+                })
+            } 
+            if(value === 'Used') {
+                $scope.vouchers.forEach(function (voucher) {
+                    if(voucher.basics.status === 'merchant redeemed') {
+                        $scope.filtered_vouchers.push(voucher);
+                    }
+                })
+            } 
+            if(value === 'Expired') {
+                $scope.vouchers.forEach(function (voucher) {
+                    if(voucher.issue_details.program.validity.burn_end <= new Date()) {
+                        $scope.filtered_vouchers.push(voucher);
+                    }
+                })
+            } 
+            if(value === 'All') {
+                $scope.filtered_vouchers = $scope.vouchers;
+            } 
+        }
+    }
 
     $scope.$watch('selected_outlet', function() {
         
@@ -164,12 +189,12 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             return;
         }
 
-        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
-            return 'has Expired.';
-        }
-
         if(voucher.basics.status === 'merchant redeemed') {
             return 'has already been used.';
+        }
+
+        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+            return 'has Expired.';
         }
 
         if(checkApplicabilityDay(voucher) && checkApplicabilityTime(voucher)) {
@@ -186,12 +211,12 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             return;
         }
 
-        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
-            return 'Expired';
-        }
-
         if(voucher.basics.status === 'merchant redeemed') {
             return 'Used';
+        }
+
+        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+            return 'Expired';
         }
 
         return 'Active';
@@ -404,6 +429,7 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
     };
     $scope.getVoucherDetailsByPhone = function () {
         $scope.vouchers = [];
+        $scope.filtered_vouchers = [];
         if(isMobileNumber($scope.phone)) {
             goForVoucher();
         }
@@ -423,6 +449,9 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
 
                 if(data.info !== "null" && data.info.length > 0) {
                     $scope.vouchers = JSON.parse(data.info);
+                    $scope.filtered_vouchers = JSON.parse(data.info);
+                    $scope.voucher_filter = 'Active';
+                    $scope.filterChanged('Active');
                     templateController(false, false, false, true, false);
                 }
                 else {
