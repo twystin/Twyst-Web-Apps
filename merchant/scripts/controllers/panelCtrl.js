@@ -1,6 +1,6 @@
 'use strict';
 
-twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, authService, outletService) {
+twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $location, authService, outletService) {
 
     if (authService.isLoggedIn() && authService.getAuthStatus().role > 4) {
         $location.path('/panel');
@@ -440,7 +440,6 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
 
     function goForVoucher() {
         if (($scope.phone !== undefined)) {
-
             $scope.loading = true;
             
             $http.get('/api/v1/vouchers_by_phone/' + $scope.phone).success(function(data, status, header, config) {
@@ -450,9 +449,9 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
                 if(data.info !== "null" && data.info.length > 0) {
                     $scope.vouchers = JSON.parse(data.info);
                     $scope.filtered_vouchers = JSON.parse(data.info);
-                    $scope.voucher_filter = 'Active';
                     $scope.filterChanged('Active');
                     templateController(false, false, false, true, false);
+                    $scope.voucher_filter = 'Active';
                 }
                 else {
                     errorController(data.status, data.message);
