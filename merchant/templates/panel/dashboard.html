@@ -26,7 +26,22 @@
             </div>
             <div class="row-fluid span7">
                 <div class="row-fluid">
-                    <div class="span4" tooltip="Total checkins">
+                    <div class="span3">
+                        <div class="card-checkin">
+                            <div class="cardhead">
+                                <h3 class="card-padding">Program</h3>
+                            </div>
+                            <div>
+                                <center>
+                                    <div class="row-fluid" ng-init="getPrograms()">
+                                        <select ng-model="program" ng-options="Quarter.name for Quarter in programs" class="span12">
+                                        </select>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3" tooltip="Total checkins">
                         <div class="card-checkin">
                             <div class="cardhead">
                                 <h3 class="card-padding">Check-ins</h3>
@@ -43,10 +58,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="span4" tooltip="Total vouchers generated">
+                    <div class="span3" tooltip="Total vouchers generated">
                         <div class="card-voucher">
                             <div class="cardhead">
-                                <h3 class="card-padding">Vouchers Generated</h3>
+                                <h4 class="card-padding">Vouchers Generated</h4>
                             </div>
                             <div>
                                 <center>
@@ -60,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="span4" tooltip="Total voucher Redemptions">
+                    <div class="span3" tooltip="Total voucher Redemptions">
                         <div class="card-redeemed">
                             <div class="cardhead">
                                 <h3 class="card-padding">Vouchers Used</h3>

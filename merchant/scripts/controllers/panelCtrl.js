@@ -116,6 +116,10 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
         };
     });
 
+    $scope.$watch('program', function() {
+        getCounts();
+    });
+
     $scope.voucherStatusClass = function (voucher) {
 
         if(_.isEmpty(voucher)) {
@@ -257,13 +261,18 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
 
     function getCounts () {
 
-        $http.get('/api/v1/getcounts/' + $scope.outlet._id).success(function(data, status, header, config) {
-            $scope.counts.checkin = data.info.checkin_count;
-            $scope.counts.voucher = data.info.voucher_count;
-            $scope.counts.redeem = data.info.redeem_count;
-        }).error(function (data) {
-            
-        });
+        if($scope.program && $scope.selected_outlet) {
+            $http.get(
+                '/api/v1/getcounts/' + $scope.outlet._id + '/' + $scope.program._id
+                ).success(function(data, status, header, config) {
+                
+                $scope.counts.checkin = data.info.checkin_count;
+                $scope.counts.voucher = data.info.voucher_count;
+                $scope.counts.redeem = data.info.redeem_count;
+            }).error(function (data) {
+                
+            });
+        }
     }
 
     function templateController (v1, v2, v3, v4, v5) {
@@ -466,6 +475,32 @@ twystApp.controller('PanelCtrl', function ($scope, $interval, $http, $location, 
             if($scope.outlets.length > 0) {
                 $scope.outlet = $scope.outlets[0];
                 $scope.selected_outlet = $scope.outlets[0]._id;
+            }
+        }).error(function (data) {
+            
+        });
+    };
+
+    $scope.getPrograms = function () {
+        $scope.auth = authService.getAuthStatus();
+        var user_id = $scope.auth._id;
+
+        $http.get('/api/v1/programs/' + user_id).success(function (data) {
+            $scope.programs = JSON.parse(data.info) || [];
+            if($scope.programs.length > 0) {
+                $scope.programs.forEach (function (program) {
+                    if(program.status === 'active') {
+                        $scope.program = program;
+                    }
+                });
+                var program = {
+                    'name': 'All',
+                    '_id': 'ALL'
+                };
+                $scope.programs.push(program);
+                if(!$scope.program) {
+                    $scope.program = $scope.programs[0];
+                }
             }
         }).error(function (data) {
             
