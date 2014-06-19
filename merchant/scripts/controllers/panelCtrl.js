@@ -119,21 +119,22 @@ twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $
                     }
                 })
             } 
-            if(value === 'Used') {
+            else if(value === 'Used') {
                 $scope.vouchers.forEach(function (voucher) {
                     if(voucher.basics.status === 'merchant redeemed') {
                         $scope.filtered_vouchers.push(voucher);
                     }
                 })
             } 
-            if(value === 'Expired') {
+            else if(value === 'Expired') {
                 $scope.vouchers.forEach(function (voucher) {
-                    if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+                    if(voucher.basics.status !== 'merchant redeemed'
+                        && new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
                         $scope.filtered_vouchers.push(voucher);
                     }
                 })
             } 
-            if(value === 'All') {
+            else if(value === 'All') {
                 $scope.filtered_vouchers = $scope.vouchers;
             } 
         }
