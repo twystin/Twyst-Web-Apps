@@ -1,0 +1,62 @@
+<div ng-init="getReccoConfig()">
+<h3>Update recco configuration</h3>
+<form class="form-horizontal">
+	<div class="control-group">
+		<label class="control-label">Normalized weight</label>
+		<div class="controls">
+			<input required type="text" ng-model="recco_config.NORMALIZED_WEIGHT"></input>
+		</div>
+	</div>
+
+
+	<div class="control-group">
+		<label class="control-label">Number of recco</label>
+		<div class="controls">
+			<input type="text" ng-model="recco_config.NUMBER_OF_RECCO"></input>
+		</div>
+	</div>	
+
+	<div class="control-group">
+		<label class="control-label">Checkin cut-off interval</label>
+		<div class="controls">
+			<input type="text" ng-model="recco_config.CHECKIN_CUTOFF_INTERVAL"></input>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label">User checkin weight</label>
+		<div class="controls">
+			<input type="text" ng-model="recco_config.USER_CHECKIN_WEIGHT"></input>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label">Outlet popularity weight</label>
+		<div class="controls">
+			<input type="text" ng-model="recco_config.OUTLET_POPULARITY_WEIGHT"></input>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label">Relevance match weight</label>
+		<div class="controls">
+			<input type="text" ng-model="recco_config.RELEVANCE_MATCH_WEIGHT"></input>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label">Distance weight</label>
+		<div class="controls">
+			<input type="text" ng-model="recco_config.DISTANCE_WEIGHT"></input>
+		</div>
+	</div>	
+
+	<div class="control-group">
+		<div class="controls">
+			<button id="submit" name="submit" ng-click="updateReccoConfig()" class="btn btn-info">Update</button>
+			<button id="submit" name="submit" ng-click="getDefaultValue()" class="btn btn-default">Get default values</button>
+		</div>
+	</div>		
+
+</form>
+</div>

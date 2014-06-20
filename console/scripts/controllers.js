@@ -6,6 +6,48 @@ function PublicController($scope, $location, authService) {
 
 }
 
+function ReccoController($scope, $location, $http, $route, authService) {
+
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
+
+    var RECCO_CONFIG = {
+		USER_CHECKIN_WEIGHT : 5,
+		NUMBER_OF_RECCO : 10,
+		CHECKIN_CUTOFF_INTERVAL : 15,
+		NORMALIZED_WEIGHT : 100,
+		OUTLET_POPULARITY_WEIGHT : 100,
+		RELEVANCE_MATCH_WEIGHT : 100,
+		DISTANCE_WEIGHT : 100
+	};
+
+	$scope.getDefaultValue = function () {
+		$scope.recco_config = RECCO_CONFIG;
+	}
+
+    $scope.getReccoConfig = function () {
+    	$http.get(
+            '/api/v2/recco_config'
+        ).success(function (data) {
+            $scope.recco_config = data.info;
+        }).error(function (data) {
+    
+        });
+    }
+
+    $scope.updateReccoConfig = function () {
+    	$http.put(
+            '/api/v2/recco_config', $scope.recco_config
+        ).success(function (data) {
+            $route.reload();
+        }).error(function (data) {
+    
+        });
+    }
+
+}
+
 function NotifController($scope, $http, $location, authService) {
 
 	if (!authService.isLoggedIn()) {
