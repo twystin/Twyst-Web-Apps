@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="twystContact"> 
+<html ng-app="twystContest"> 
 <head>
     <title>Twyst | Get in touch</title>
 
@@ -22,9 +22,8 @@
     <link rel="stylesheet" href="assets/css/pages/page_contact.css">
     <!-- CSS Theme -->    
     <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color">
-    <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1"> 
     <script src="assets/js/angular.min.js"></script>
-    <script type="text/javascript" src="assets/js/pages/contact.js"></script>
+    <script type="text/javascript" src="assets/js/pages/contest.js"></script>
     <style type="text/css">
         .flag{
             width: 30px;
@@ -50,7 +49,7 @@
     </script>       
 </head> 
 
-<body ng-controller="ContactCtrl">
+<body ng-controller="ContestCtrl">
 <!--=== Top ===-->    
 <div class="top">
     <div class="container">         
@@ -144,26 +143,35 @@
     <div class="row">
         <div class="col-md-6">
             <div ng-show="user.thank_you">
-                Thank you. We will get back to you.
+                Thank you for participating. We will contact the lucky winners after the results are declared on 15th July 2014.
             </div>
             <div ng-show="user.error">
-                We have already recieved your request.
+                You have already participated in the contest. Results will be declared on 15th July 2014.
             </div>
             <div class="headline"><h4>To enter the contest, fill out the details below:</h4></div>
             The CUPnCAKE Factory is running a special contest for its valued customers. Simply predict the winner of the FIFA World Cup 2014 and you could win some delicious treats! 3 lucky winners will be chosen at random from all the correct entries we receive.
             <br>
-             <form name='usersGetInTouchForm' ng-hide="user.error || user.thank_you" role="form">
+             <form ng-hide="user.error || user.thank_you" role="form">
                 <div class="form-group">
                     <label>Name*</label>
                     <input class="input-xlarge form-control" type="text" ng-model="user.name"></input>
+                    <div ng-hide="filled.name">
+                        <small style="color:red;">Please enter your name.</small>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>Mobile No*</label>
+                    <label>Mobile No* <small>(Winners will receive their voucher code via SMS)</small></label>
                     <input type="text" class="input-xlarge form-control" required="true" ng-model="user.phone">
+                    <div ng-hide="filled.phone">
+                        <small style="color:red;">Please enter a valid mobile number.</small>
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" ng-form="contestForm">
                     <label>Email ID*</label>
-                    <input class="input-xlarge form-control" type="text" ng-model="user.email"></input>
+                    <input name="email" class="input-xlarge form-control" type="email" ng-model="user.email" required="true"></input>
+                    <div ng-hide="filled.email">
+                        <small style="color:red;">Please enter a valid email address.</small>
+                    </div>
                 </div>                
                 <div class="form-group">
                     <label>My predicted winner for this year is:</label><br>
@@ -208,7 +216,12 @@
                         <div class="col-md-3">
                             <input type="radio" name="country" ng-model="user.message" value="ALG">&nbsp;ALG&nbsp;<img class="flag" src="../common/images/Flags/algeria.jpg" alt="" />
                         </div>
-                    </div><br>
+                    </div>
+                    <br>
+                </div>
+                <br/>
+                <div ng-hide="filled.message" class="form-gr">
+                    <small style="color:red;">Please select your team.</small>
                 </div>
                 <br>
                 <br>
@@ -219,12 +232,8 @@
                     <br>
                     <input type="checkbox" name="agree" value="true" checked> I wish to join The CUPnCAKE Factory loyalty program on Twyst.
                 </div>
-                <div class="row-fluid" ng-show="user.fill" style="color: red">
-                    <span>*Fill all required fields.</span>
+                <button type="button" class="btn btn-success btn-lg spacing" ng-click="enterContest()">Submit</button>
                 </div>
-                <button type="button" class="btn btn-success btn-lg spacing" ng-click="addUser()">Submit</button>
-                </div>
-                
                         
                 </div>
             </form>
