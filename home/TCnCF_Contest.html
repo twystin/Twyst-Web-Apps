@@ -152,10 +152,15 @@
                     You have already participated in the contest. Results will be declared on 15th July 2014.
                 </h3>
             </div>
-            <div class="headline"><h4>To enter the contest, fill out the details below:</h4></div>
-            The CUPnCAKE Factory is running a special contest for its valued customers. Simply predict the winner of the FIFA World Cup 2014 and you could win some delicious treats! 3 lucky winners will be chosen at random from all the correct entries we receive.
+            <div class="headline">
+                <h4>To enter the contest, fill out the details below:
+                </h4>
+            </div>
+            <div class="">
+                The CUPnCAKE Factory is running a special contest for its valued customers. Simply predict the winner of the FIFA World Cup 2014 and you could win some delicious treats! 3 lucky winners will be chosen at random from all the correct entries we receive.
+            </div>
             <br>
-             <form ng-hide="user.error || user.thank_you" role="form">
+            <form ng-hide="user.error || user.thank_you" role="form">
                 <div class="form-group">
                     <label>Name*</label>
                     <input class="input-xlarge form-control" type="text" ng-model="user.name"></input>
@@ -192,7 +197,8 @@
                         <div class="col-md-3">
                             <input type="radio" name="country" ng-model="user.message" value="GER">&nbsp;GER&nbsp;<img class="flag" src="../common/images/Flags/germany.jpg" alt="" />
                         </div>
-                    </div><br>
+                    </div>
+                    <br>
                     <div class="col-md-11">
                         <div class="col-md-3">
                             <input type="radio" name="country" ng-model="user.message" value="ARG">&nbsp;ARG&nbsp;<img class="flag" src="../common/images/Flags/argentina.gif" alt="" />
@@ -206,21 +212,8 @@
                         <div class="col-md-3">
                             <input type="radio" name="country" ng-model="user.message" value="NED">&nbsp;NED&nbsp;<img class="flag" src="../common/images/Flags/Netherlands.jpg" alt="" />
                         </div>
-                    </div><br>
-                    <div class="col-md-11">
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="USA">&nbsp;USA&nbsp;<img class="flag" src="../common/images/Flags/usa.gif" alt="" />
-                        </div>
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="NGA">&nbsp;NGA&nbsp;<img class="flag" src="../common/images/Flags/nigeria.jpg" alt="" />
-                        </div>
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="SUI">&nbsp;SUI&nbsp;<img class="flag" src="../common/images/Flags/switzerland.gif" alt="" />
-                        </div>
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="ALG">&nbsp;ALG&nbsp;<img class="flag" src="../common/images/Flags/algeria.jpg" alt="" />
-                        </div>
                     </div>
+                    <br>
                     <br>
                 </div>
                 <br/>
@@ -228,23 +221,29 @@
                     <small style="color:red;">Please select your team.</small>
                 </div>
                 <br>
-                <br>
-                <h4>The CUPnCAKE Factory Program on Twyst!</h4>
-                <img class="prog" src="../common/images/cupncake.png" alt="" />
+                <div>
+                    <div class="col-md-12">
+                        <h4>Also join the CUPnCAKE Factory Program on Twyst!</h4>
+                        <img class="prog" src="../common/images/cupncake.png" alt="" />
+                    </div>
+                </div>
                 <br>
                 <div class="form-group">
-                    <br>
                     <input type="checkbox" name="agree" value="true" checked> I wish to join The CUPnCAKE Factory loyalty program on Twyst.
                 </div>
-                <button type="button" class="btn btn-success btn-lg spacing" ng-click="enterContest()">Submit</button>
-                </div>
-                        
+                <div>
+                    <button type="button" class="btn btn-success btn-lg spacing" ng-click="enterContest()">Submit</button>
                 </div>
             </form>
         </div>
+        <div>
+            <div class="col-md-5">
+                <img class="prog" src="./assets/img/contest.jpg" alt="" />
+            </div>
+        </div>
     </div>
 </div>  
-</div><!--/container-->     
+    <!--/container-->     
 <!-- End Content Part -->
 
 <!--=== Footer ===-->
