@@ -44,8 +44,10 @@
             </div>
             <div class="span6">
                 <button class="btn btn-success btn-shadow" ng-click="createRedeem()">Ok. We gave the Reward!</button>
-                <button ng-show="voucher.basics.status === 'user redeemed' && !isVoucherExpired(voucher)" class="btn btn-success btn-shadow" ng-click="changeVoucherStatus(voucher.basics.code)">Ok. We gave the Reward!</button>
             </div>
         </div>
+    </div>
+    <div class="row-fluid">
+        <button ng-show="voucher.basics.status === 'user redeemed' && !isVoucherExpired(voucher)" class="btn btn-success btn-shadow" ng-click="changeVoucherStatus(voucher.basics.code)">Ok. We gave the Reward!</button>
     </div>
 </div>

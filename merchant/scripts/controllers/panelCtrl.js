@@ -400,6 +400,7 @@ twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $
                 }
                 $scope.refresh();
             }).error(function (data) {
+                $scope.loading = false;
                 errorController(data.status, data.message);
                 $scope.refresh();
             });
@@ -494,12 +495,16 @@ twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $
         $scope.getCommonNotify(skip);
     }
     $scope.changeVoucherStatus = function (code) {
-        
+        $scope.loading = true;
+
         $http.get('/api/v1/vouchers/status/change/'+code).success(function(data) {
-            $scope.refresh();
+            $scope.loading = false;
+            templateController(true, false, false, false, false);
+            $scope.success.message = data.message;
         }).error(function (data) {
+            $scope.loading = false;
+            errorController(data.status, data.message);
             $scope.refresh();
-            $scope.voucher_change_status_error = data.message;
         });
     };
     
