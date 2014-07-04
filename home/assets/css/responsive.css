@@ -64,6 +64,10 @@
 	.md-margin-bottom-60 {
 		margin-bottom: 60px;
 	}
+
+	.padding-img {
+		padding-top: 100px;
+	}
 	/*End Spacea (Margin Bottom)*/
 }
 
@@ -80,6 +84,10 @@
 	/*Slider Parallax*/
 	.da-slide .da-img {
 		display:none;
+	}
+
+	.padding-img {
+		padding-top: 100px;
 	}
 }
 
@@ -100,5 +108,9 @@
 	/*Slider Parallax*/
 	.da-slide p {
 		display:none;
+	}
+
+	.padding-img {
+		padding-top: 100px;
 	}
 }
