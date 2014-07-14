@@ -2,6 +2,10 @@
 
 twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $location, authService, outletService) {
 
+    if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
+
     if (authService.isLoggedIn() && authService.getAuthStatus().role > 4) {
         $location.path('/panel');
     }
