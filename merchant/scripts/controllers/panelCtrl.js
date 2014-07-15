@@ -113,7 +113,7 @@ twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $
     $scope.filterChanged = function (value) {
         $scope.filtered_vouchers = [];
         if(value) {
-            if(value === 'Active') {
+            if(value === 'Active') { 
 
                 $scope.vouchers.forEach(function (voucher) {
                     if((voucher.basics.status === 'active'
@@ -455,9 +455,9 @@ twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $
                 if(data.info !== "null" && data.info.length > 0) {
                     $scope.vouchers = JSON.parse(data.info);
                     $scope.filtered_vouchers = JSON.parse(data.info);
-                    $scope.filterChanged('Active');
+                    $scope.filterChanged('All');
                     templateController(false, false, false, true, false);
-                    $scope.voucher_filter = 'Active';
+                    $scope.voucher_filter = 'All';
                 }
                 else {
                     errorController(data.status, data.message);
