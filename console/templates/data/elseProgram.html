@@ -7,9 +7,10 @@
         <div class="row-fluid">
             <h3>Checkins in date range specified: </h3>
             <div class="lead">
-                P: {{data.CHECKINS.RESULTS.PANEL}}<br/>
+                P: {{data.CHECKINS.RESULTS.PANEL || 0}}<br/>
                 Q: {{data.CHECKINS.RESULTS.QR || 0}}<br/>
                 S: {{data.CHECKINS.RESULTS.SMS || 0}}<br/>
+                B: {{data.CHECKINS.RESULTS.BATCH || 0}}
             </div>
         </div>
 		<div class="row-fluid">
