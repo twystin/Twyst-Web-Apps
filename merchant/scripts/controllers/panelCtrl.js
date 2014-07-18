@@ -453,9 +453,9 @@ twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $
                 $scope.loading = false;
 
                 if(data.info) {
-                    $scope.vouchers = data.info.VOUCHERS;
-                    $scope.filtered_vouchers = $scope.vouchers;
-                    $scope.CHECKIN_COUNT = data.info.CHECKIN_COUNT;
+                    $scope.vouchers = data.info.VOUCHERS || [];
+                    $scope.filtered_vouchers = $scope.vouchers || [];
+                    $scope.CHECKIN_COUNT = data.info.CHECKIN_COUNT || 0;
                     $scope.filterChanged('All');
                     templateController(false, false, false, true, false);
                     $scope.voucher_filter = 'All';
