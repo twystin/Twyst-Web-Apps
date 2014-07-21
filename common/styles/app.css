@@ -1,3 +1,19 @@
+.checkin-table {
+    cursor:pointer;
+}
+
+.voucher-table {
+    cursor:pointer;
+}
+
+.redeem-table {
+    cursor:pointer;
+}
+
+a {
+    cursor:pointer;
+}
+
  .padding-notif-top {
     padding-top: 5%;
  }

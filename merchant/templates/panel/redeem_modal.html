@@ -1,0 +1,81 @@
+<div class="modal-header">
+	<div class="row-fluid">
+        <div class="span4">
+            <h3>Checkins</h3>
+        </div>
+        <div class="span8">
+            <div class="span6" ng-init="outletQuery()">
+                <select id="offer_valid_on_outlets" ng-model="data_redeem.outlet" class="span12">
+                    <option value="{{o._id}}" ng-repeat="o in outlets">{{o.basics.name}}, {{o.contact.location.locality_1.toString()}}</option>
+                </select>
+            </div>
+            <div class="span6">
+                <div ng-init="getPrograms()">
+                    <select ng-model="data_redeem.program" class="span12">
+                        <option value="{{program._id}}" ng-repeat="program in programs">{{program.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-body" style="height: 300px">
+
+	<div class="row-fluid">
+		<table class="table table-bordered table-striped" ng-show="redeems.length > 0">
+            <thead>
+                <tr> 
+                    <th>
+                        Voucher Code
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        Reward
+                    </th>
+                    <th>
+                        Used time
+                    </th>
+                    <th>
+                        Redeemed at
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in redeems">
+                    <td>
+                        {{c.basics.code}}
+                    </td>
+                    <td>
+                        {{c.issue_details.issued_to.phone}}
+                    </td>
+                    <td>
+                        {{c.basics.description}}
+                    </td>
+                    <td>
+                        {{c.used_details.used_time | date: 'medium'}}
+                    </td>
+                    <td>
+                        {{c.used_details.used_at.contact.location.locality_1.toString()}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="redeems.length === 0" class="text-error">
+            No redemptions found.
+        </div>
+	</div>
+</div>
+<div class="modal-footer">
+    <div class="row-fluid" ng-show="redeems.length > 0">
+        <div class="row-fluid">
+            <pagination  total-items="totalRedeems" page="page.currentPage" items-per-page="totalCountPerPage" max-size="maxSize" boundary-links="true" rotate="false"></pagination>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div>
+            <button ng-click="cancel();" class="btn pull-right">Close</button>
+        </div>
+    </div>
+</div>

@@ -41,8 +41,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="span3" tooltip="Total checkins">
-                        <div class="card-checkin">
+                    <div class="span3 checkin-table" tooltip="Total checkins">
+                        <div class="card-checkin" ng-click="checkinsModal()">
                             <div class="cardhead">
                                 <h3 class="card-padding">Check-ins</h3>
                             </div>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="span3" tooltip="Total vouchers generated">
+                    <div class="span3 voucher-table" tooltip="Total vouchers generated" ng-click="vouchersModal()">
                         <div class="card-voucher">
                             <div class="cardhead">
                                 <h4 class="card-padding">Vouchers Generated</h4>
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="span3" tooltip="Total voucher Redemptions">
+                    <div class="span3 redeem-table" tooltip="Total voucher Redemptions" ng-click="redeemsModal()">
                         <div class="card-redeemed">
                             <div class="cardhead">
                                 <h3 class="card-padding">Vouchers Used</h3>

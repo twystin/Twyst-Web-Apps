@@ -1,6 +1,6 @@
 'use strict';
 
-twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $location, authService, outletService) {
+twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, $http, $location, authService, outletService) {
 
     if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -24,6 +24,25 @@ twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $
     $scope.loading = false;
     $scope.max_date = new Date();
     $scope.min_date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+    $scope.data_checkin = {
+        'outlet': null,
+        'program': null
+    };
+
+    $scope.data_voucher = {
+        'outlet': null,
+        'program': null
+    };
+
+    $scope.data_redeem = {
+        'outlet': null,
+        'program': null
+    };
+
+    $scope.page = {
+        'currentPage' : 1
+    }
 
     var reward = {
         "breakfast": {
@@ -553,4 +572,160 @@ twystApp.controller('PanelCtrl', function ($scope, $timeout, $interval, $http, $
             
         });
     };
-});
+
+    $scope.checkinsModal = function () {
+        var modalInstance = $modal.open({
+            templateUrl : './templates/panel/checkin_modal.html',
+            controller  : 'CheckinDataCtrl',
+            backdrop    : 'static',
+            keyboard    : true,
+            scope: $scope
+        });
+    };
+
+    $scope.vouchersModal = function () {
+        var modalInstance = $modal.open({
+            templateUrl : './templates/panel/voucher_modal.html',
+            controller  : 'VoucherDataCtrl',
+            backdrop    : 'static',
+            keyboard    : true,
+            scope: $scope
+        });
+    };
+
+    $scope.redeemsModal = function () {
+        var modalInstance = $modal.open({
+            templateUrl : './templates/panel/redeem_modal.html',
+            controller  : 'RedeemDataCtrl',
+            backdrop    : 'static',
+            keyboard    : true,
+            scope: $scope
+        });
+    };
+}).
+
+controller('CheckinDataCtrl', function ($modalInstance, $scope, $location, dataService) {
+    
+
+    function init () {
+        $scope.page.currentPage = 1;
+        $scope.totalCountPerPage = 10;
+        $scope.totalCheckins = 10;
+        $scope.maxSize = 4;
+        $scope.checkins = [];
+    }
+
+    init();
+
+    $scope.data_checkin.outlet = $scope.selected_outlet;
+    $scope.data_checkin.program = $scope.program._id;
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.$watch('page.currentPage', function() {
+        $scope.getCheckinData();
+    });
+
+    $scope.$watch('data_checkin', function() {
+        init();
+        $scope.getCheckinData();
+    }, true);
+
+    $scope.getCheckinData = function () {
+        dataService.getCheckinData(
+            $scope.data_checkin.outlet,
+            $scope.data_checkin.program,
+            $scope.page.currentPage,
+            $scope.totalCountPerPage).then(function (data) {
+
+            $scope.checkins = data.info.CHECKINS || [];
+            $scope.totalCheckins = data.info.totalCount;
+        })
+    }
+}).
+
+controller('VoucherDataCtrl', function ($modalInstance, $scope, $location, dataService) {
+    
+
+    function init () {
+        $scope.page.currentPage = 1;
+        $scope.totalCountPerPage = 10;
+        $scope.totalVouchers = 10;
+        $scope.maxSize = 4;
+        $scope.vouchers_list = [];
+    }
+
+    init();
+
+    $scope.data_voucher.outlet = $scope.selected_outlet;
+    $scope.data_voucher.program = $scope.program._id;
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.$watch('page.currentPage', function() {
+        $scope.getVoucherData();
+    });
+
+    $scope.$watch('data_voucher', function() {
+        init();
+        $scope.getVoucherData();
+    }, true);
+
+    $scope.getVoucherData = function () {
+        dataService.getVoucherData(
+            $scope.data_voucher.outlet,
+            $scope.data_voucher.program,
+            $scope.page.currentPage,
+            $scope.totalCountPerPage).then(function (data) {
+
+            $scope.vouchers_list = data.info.VOUCHERS || [];
+            $scope.totalVouchers = data.info.totalCount;
+        })
+    }
+}).
+
+controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataService) {
+    
+
+    function init () {
+        $scope.page.currentPage = 1;
+        $scope.totalCountPerPage = 10;
+        $scope.totalRedeems = 10;
+        $scope.maxSize = 4;
+        $scope.redeems = [];
+    }
+
+    init();
+
+    $scope.data_redeem.outlet = $scope.selected_outlet;
+    $scope.data_redeem.program = $scope.program._id;
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.$watch('page.currentPage', function() {
+        $scope.getRedeemData();
+    });
+
+    $scope.$watch('data_redeem', function() {
+        init();
+        $scope.getRedeemData();
+    }, true);
+
+    $scope.getRedeemData = function () {
+        dataService.getRedeemData(
+            $scope.data_redeem.outlet,
+            $scope.data_redeem.program,
+            $scope.page.currentPage,
+            $scope.totalCountPerPage).then(function (data) {
+
+            $scope.redeems = data.info.REDEEMS || [];
+            $scope.totalRedeems = data.info.totalCount;
+        })
+    }
+})
