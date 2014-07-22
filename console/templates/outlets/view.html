@@ -1,17 +1,71 @@
-<div ng-init="outletQuery()" >
-    <div>{{message}}</div>
-    <div ng-repeat="outlet in outlets">
-        <ul>
-            <li>Outlet name: {{outlet.basics.name}}</li>
-            <span>
-                <strong>Latitude:</strong>{{outlet.contact.location.coords.latitude || "Not set"}},
-            </span>
-            <span>
-                <strong>Longitude:</strong>{{outlet.contact.location.coords.longitude || "Not set"}}
-            </span>
-            <p>
-                <a ng-href="/console/#/outlets/edit/{{outlet._id}}" class="btn btn-info">Edit</a>
-            </p>
-        </ul>
+<div class="row-fluid">
+    <div class="row-fluid">
+        <div class="span6">
+            <h3>All Outlets</h3>
+        </div>
     </div>
+    <div class="row-fluid">
+        <div class="span6">
+            &nbsp;
+        </div>
+        <div class="span6">
+            <input class="input pull-right" type="text" ng-model="searchTerm">
+            <small class="pull-right">Search &nbsp;&nbsp;&nbsp;</small>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <table class="table table-bordered table-striped" ng-show="outlets.length > 0">
+            <thead>
+                <tr> 
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Location
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in outlets">
+                    <td>
+                        {{c.basics.name}}
+                    </td>
+                    <td>
+                        {{c.contact.location.locality_1.toString()}}
+                    </td>
+                    <td>
+                        {{c.contact.location.city}}
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                          <button class="btn btn-default" ng-class="{'btn-success':c.outlet_meta.status === 'active'}" ng-disabled="c.status === 'active'" ng-click="initChange(c, 'Active')">
+                            Active
+                          </button>
+                          <button class="btn btn-default" ng-class="{'btn-primary':c.outlet_meta.status === 'draft'}" ng-disabled="true">
+                            Draft
+                          </button>
+                          <button class="btn btn-default" ng-class="{'btn-danger':c.outlet_meta.status === 'archived'}" ng-disabled="c.status === 'archived'" ng-click="initChange(c, 'Archived')">
+                            Archived
+                          </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="outlets.length === 0" class="text-error">
+            No outlets found.
+        </div>
+    </div>
+    <div class="row-fluid" ng-show="outlets.length > 0">
+        <div class="row-fluid">
+            <pagination  total-items="totalOutlets" page="currentPage" items-per-page="totalCountPerPage" max-size="maxSize" boundary-links="true" rotate="false"></pagination>
+        </div>
+    </div>
+
 </div>

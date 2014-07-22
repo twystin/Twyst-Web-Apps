@@ -1,3 +1,8 @@
+.offerPreviewImage{
+    width:80px;
+    height:80px;
+}
+
 .checkin-table {
     cursor:pointer;
 }
@@ -276,11 +281,6 @@ a {
 
 #offerViewRemoveOffset{
     margin-left:-2.4%;
-}
-
-#offerPreviewImage{
-    width:100px;
-    height:80px;
 }
 
 #backgroudImg{

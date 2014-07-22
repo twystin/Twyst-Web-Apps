@@ -1,0 +1,19 @@
+<div class="modal-header">
+	<div class="row-fluid">
+        <h3>Change outlet status</h3>
+    </div>
+</div>
+<div class="modal-body">
+	<div class="row-fluid">
+		Are you sure you want to change <b>{{outlet.basics.name}}</b> to <b>{{status}}</b>?
+	</div>
+</div>
+<div class="modal-footer">
+    <div class="row-fluid">
+        <div>
+            <button ng-click="changeStatus();" class="btn btn-success pull-right">Yes</button>
+            <span class="pull-right">&nbsp;&nbsp;</span>
+            <button ng-click="cancel();" class="btn pull-right">No</button>
+        </div>
+    </div>
+</div>

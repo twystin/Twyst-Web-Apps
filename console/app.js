@@ -31,8 +31,12 @@ twystConsole.config(function ($routeProvider) {
 		templateUrl: '/console/templates/users/edit.html',
 	}).
 	when('/outlets', {
-		controller: UsersController,
+		controller: AdminOutletCtrl,
 		templateUrl: '/console/templates/outlets/view.html',
+	}).
+	when('/programs', {
+		controller: AdminProgramCtrl,
+		templateUrl: '/console/templates/programs/view.html',
 	}).
 	when('/outlets/edit/:outlet_id', {
 		controller: UsersController,

@@ -9,28 +9,38 @@
           <strong>Your programs</strong>
         </div>
         <div class="well" ng-repeat="program in programs">
-          <div>
+          <div class="row-fluid">
             <div class="span5">
               <div ng-repeat="imagesrc in program.images">
-                <img id="offerPreviewImage" src="{{imagesrc}}" style="height:auto;width:auto;">
+                <div class="programImgaePadding">
+                  <img src="{{imagesrc}}" style="height:auto;width:auto;" class="img-polaroid img-rounded offerPreviewImage">
+                </div>
               </div>
             </div>
-            <div class="span7">
+            <div class="span1">
+              &nbsp;
+            </div>
+            <div class="span6">
               <div class="span12" style="margin:0px;">
                   <h2>{{program.name}}</h2>
               </div>
               <div ng-if="program.outlets">
                 <h4>Program running on: </h4>
-                <div ng-repeat="outlet in program.outlets">
-                  <div class="success">{{outlet.basics.name}}</div>
-                </div>
+                <ul ng-repeat="outlet in program.outlets">
+                  <li class="success">
+                    {{outlet.basics.name}} <small>({{outlet.contact.location.locality_1.toString()}})</small>
+                  </li>
+                </ul>
               </div>
               <div class="row-fluid span12" style="margin:0px;">
                   <small><span ng-show="program.validity.earn_start"><b>Earn Period :</b> <small><b>{{program.validity.earn_start | date:'shortDate'}}</b>&nbsp;&nbsp;<span ng-show="program.validity.earn_end"><strong>to</strong>&nbsp;&nbsp;</span><b>{{program.validity.earn_end | date:'shortDate'}}</b></small></span></small>
               </div>
+              <div class="row-fluid span12" style="margin:0px;">
+                  <small><span ng-show="program.validity.earn_start"><b>Burn Period :</b> <small><b>{{program.validity.burn_start | date:'shortDate'}}</b>&nbsp;&nbsp;<span ng-show="program.validity.earn_end"><strong>to</strong>&nbsp;&nbsp;</span><b>{{program.validity.burn_end | date:'shortDate'}}</b></small></span></small>
+              </div>
             </div>
           </div>
-          <div class="boxtop">
+          <div>
               <button class="btn btn-success" ng-click="viewProgram(program._id)">View details</button>
               <a class="btn btn-success" ng-href="#/offers/update/{{program._id}}">Update</a>
               <button class="btn btn-danger" ng-click="deleteProgram(program)">Delete</button>
@@ -38,7 +48,7 @@
           </div>       
           <div class="alert alert-error" ng-show="programs.length===0">No offers have been created yet. Click <a ng-href="#/offers/create/loyality">here</a> to create one</div>
     </div>
-    <div class="span5">
+    <div class="span7">
         <div class="preview-header lead">
           <strong>Program details</strong>
         </div>
