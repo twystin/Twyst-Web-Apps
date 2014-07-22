@@ -66,7 +66,8 @@ function OutletStatusChangeCtrl($scope, $route, $modalInstance, data, adminOutle
     $scope.changeStatus = function () {
     	$scope.outlet.outlet_meta.status = $scope.status.toLowerCase();
     	adminOutletService.changeStatus($scope.outlet).then(function (data) {
-    		$route.reload();
+    		//$route.reload();
+            $scope.getOutlets();
     		$scope.cancel();
     	})
     }

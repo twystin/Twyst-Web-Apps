@@ -65,7 +65,8 @@ function ProgramStatusChangeCtrl($scope, $route, $modalInstance, data, adminProg
     $scope.changeStatus = function () {
     	$scope.program.status = $scope.status.toLowerCase();
     	adminProgramService.changeStatus($scope.program).then(function (data) {
-    		$route.reload();
+    		//$route.reload();
+            $scope.getPrograms();
     		$scope.cancel();
     	})
     }

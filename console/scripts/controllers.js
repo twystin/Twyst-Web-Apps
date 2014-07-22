@@ -155,7 +155,7 @@ function DatePickerCtrl($scope, $timeout) {
 }
 
 function AuthController($scope, $http, $location, authService) {
-
+	
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
