@@ -115,19 +115,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row-fluid" style="line-height: 30px;">
-                                Location: <input type="radio" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false"> Dine-in <input type="radio" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false"> Home delivery / Take-away
-                            </div>
-                            <div class="row-fluid">
-                                <small class="text-error" ng-show="checkin_select_dirty">* Please select Dine-in / Home delivery / Take-away.</small>
-                            </div>                      
-                            <div class="row-fluid">
-                                <input type="text" placeholder="10 digit mobile number" id="phone_no" name="phone_no" required="true" ng-model="checkin.phone_no" ng-change="checkin_phone_no_dirty = false">
-                                <button type="submit" class="btn btn-custom btn-warning" ng-click="createCheckin()" ng-disabled="loading">Check-in</button>
-                            </div>
-                            <div class="row-fluid">
-                                <small class="text-error" ng-show="checkin_phone_no_dirty">* Please enter a 10 digit mobile number.</small>
-                            </div>
+                            <form name="checkinForm">
+                                <div class="row-fluid" style="line-height: 30px;">
+                                    Location: <input type="radio" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false"> Dine-in <input type="radio" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false"> Home delivery / Take-away
+                                </div>
+                                <div class="row-fluid">
+                                    <small class="text-error" ng-show="checkin_select_dirty">* Please select Dine-in / Home delivery / Take-away.</small>
+                                </div>                      
+                                <div class="row-fluid">
+                                    <input type="text" placeholder="10 digit mobile number" id="phone_no" name="phone_no" required="true" ng-model="checkin.phone_no" ng-change="checkin_phone_no_dirty = false">
+                                    <button type="submit" class="btn btn-custom btn-warning" ng-click="createCheckin()" ng-disabled="loading">Check-in</button>
+                                </div>
+                                <div class="row-fluid">
+                                    <small class="text-error" ng-show="checkin_phone_no_dirty">* Please enter a 10 digit mobile number.</small>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -137,10 +139,12 @@
                             <h3 class="card-padding1">Redeem Voucher</h3>
                         </div>
                         <div class="panel-action-body">
-                            <div class="row-fluid">
-                                <input type="text" placeholder="Voucher code" id="voucher_code" name="voucher_code" required="true" ng-model="code">
-                                <button type="submit" class="btn btn-custom btn-warning" ng-click="getVoucherDetails()">Get details</button>
-                            </div>
+                            <form name="voucherForm">
+                                <div class="row-fluid">
+                                    <input type="text" placeholder="Voucher code" id="voucher_code" name="voucher_code" required="true" ng-model="code">
+                                    <button type="submit" class="btn btn-custom btn-warning" ng-click="getVoucherDetails()">Get details</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -150,13 +154,15 @@
                             <h3 class="card-padding1">Search Voucher</h3>
                         </div>
                         <div class="panel-action-body">
-                            <div>
-                                <input type="text" placeholder="10 digit mobile number" id="voucher_code" name="voucher_code" required="true" ng-model="phone" ng-change="phone_no_dirty = false">
-                                <button type="submit" class="btn btn-custom btn-warning" ng-click="getVoucherDetailsByPhone()">Search</button>
-                            </div>
-                            <div class="row-fluid">
-                                <small class="text-error" ng-show="phone_no_dirty">* Please enter a 10 digit mobile number.</small>
-                            </div>
+                            <form name="voucherSearchForm">
+                                <div>
+                                    <input type="text" placeholder="10 digit mobile number" id="voucher_code" name="voucher_code" required="true" ng-model="phone" ng-change="phone_no_dirty = false">
+                                    <button type="submit" class="btn btn-custom btn-warning" ng-click="getVoucherDetailsByPhone()">Search</button>
+                                </div>
+                                <div class="row-fluid">
+                                    <small class="text-error" ng-show="phone_no_dirty">* Please enter a 10 digit mobile number.</small>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
