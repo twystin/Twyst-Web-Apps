@@ -3,6 +3,8 @@ function AdminUserCtrl($scope, $http, $location, authService, adminUserService) 
         $location.path('/');
     }
 
+    $scope.roles = ['1', '2', '3', '4', '5', '6', '7', 'All'];
+
     function init () {
         $scope.currentPage = 1;
         $scope.totalCountPerPage = 50;
@@ -17,6 +19,10 @@ function AdminUserCtrl($scope, $http, $location, authService, adminUserService) 
         $scope.getUsers();
     });
 
+    $scope.$watch('userRole', function() {
+        $scope.getUsers();
+    });
+
     $scope.$watch('searchTerm', function() {
         init();
         $scope.getUsers();
@@ -25,6 +31,7 @@ function AdminUserCtrl($scope, $http, $location, authService, adminUserService) 
     $scope.getUsers = function () {
     	adminUserService.getUsers(
             $scope.searchTerm,
+            $scope.userRole,
             $scope.currentPage,
             $scope.totalCountPerPage).then(function (data) {
 
