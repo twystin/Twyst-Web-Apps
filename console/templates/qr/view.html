@@ -1,0 +1,76 @@
+<div class="row-fluid">
+    <div class="row-fluid">
+        <div class="span6">
+            <h3>All Qrs</h3>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            &nbsp;
+        </div>
+        <div class="span6">
+            <input class="input pull-right" type="text" ng-model="searchTerm">
+            <small class="pull-right">Search &nbsp;&nbsp;&nbsp;</small>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <table class="table table-bordered table-striped" ng-show="qrs.length > 0">
+            <thead>
+                <tr> 
+                    <th>
+                        Code
+                    </th>
+                    <th>
+                        Outlet
+                    </th>
+                    <th>
+                        Location
+                    </th>
+                    <th>
+                        # used
+                    </th>
+                    <th>
+                        Validity
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in qrs">
+                    <td>
+                        <b>{{c.code}}</b>
+                    </td>
+                    <td>
+                        <b>{{c.outlet_id.basics.name}}</b>
+                    </td>
+                    <td>
+                        <b>{{c.outlet_id.contact.location.locality_1.toString()}}</b>
+                    </td>
+                    <td>
+                        <b>{{c.times_used}}</b>
+                    </td>
+                    <td>
+                        <div>
+                            <b>{{c.validity.start | date:'longDate'}}</b> to <b>{{c.validity.end | date:'longDate'}}</b>
+                            <button class="btn pull-right" ng-click="initChange(c)">Change</button>
+                        </div>
+                    </td>
+                    <td>
+                        <b>{{c.type}}</b>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="qrs.length === 0" class="text-error">
+            No qrs found.
+        </div>
+    </div>
+    <div class="row-fluid" ng-show="qrs.length > 0">
+        <div class="row-fluid">
+            <pagination  total-items="totalQrs" page="currentPage" items-per-page="totalCountPerPage" max-size="maxSize" boundary-links="true" rotate="false"></pagination>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,49 @@
+<style type="text/css">
+    .modal {
+        width: 700px
+    }
+    .modal-body {
+        height: 350px
+    }
+</style>
+<div class="modal-header">
+    <div class="row-fluid">
+        <h3>Change qr validity</h3>
+    </div>
+</div>
+<div class="modal-body">    
+    <div class="row-fluid">
+        Code: <b>{{qr.code}}</b>
+    </div>
+    <div class="row-fluid">
+          <div class="row-fluid span6">
+            <label>Start date</label>
+            <div ng-controller="DatePickerCtrl">
+                <div class="form-horizontal">
+                    <p>
+                        <input id="appendedInput" type="text" datepicker-popup="{{format}}" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start date" type="date" style="margin:0px;" ng-model="qr.validity.start" />
+                    </p>
+                </div>
+            </div>
+          </div>
+        <div class="row-fluid span6" style="margin:0px">
+            <label>End date</label>
+            <div ng-controller="DatePickerCtrl">
+                <div class="form-horizontal">
+                    <p>
+                        <input id="appendedInput" type="text" datepicker-popup="{{format}}" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="End date" type="date" style="margin:0px" ng-model="qr.validity.end" />
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="row-fluid">
+        <div>
+            <button ng-click="changeValidity(qr);" class="btn btn-success pull-right">Change</button>
+            <span class="pull-right">&nbsp;&nbsp;</span>
+            <button ng-click="cancel();" class="btn pull-right">Cancel</button>
+        </div>
+    </div>
+</div>

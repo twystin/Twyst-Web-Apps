@@ -1,18 +1,61 @@
-<div ng-init="query()" >
-    <div>{{message}}</div>
-    <div ng-repeat="user in users">
-        <ul>
-            <li>Username: {{user.username}}</li>
-            <span>
-                <strong>Role:</strong>{{user.role || "Not set"}},</span>
-            <span>
-                <strong>Validated:</strong>{{user.validated.role_validated || "Not set"}}</span>
-            <p>
-                <a ng-href="/console/#/users/edit/{{user.username}}" class="btn btn-info">Edit</a>
-                <button ng-click="delete(user)" class="btn btn-warning" ng-show="user.role != 'root'">Delete</button>
-                <button ng-click="resendValidationEmail(user.username)" class="btn btn-success" ng-show="user.role != 'root'">Send validation email</button>                
-            </p>
-        </ul>
-
+<div class="row-fluid">
+    <div class="row-fluid">
+        <div class="span6">
+            <h3>All Users</h3>
+        </div>
     </div>
+    <div class="row-fluid">
+        <div class="span6">
+            &nbsp;
+        </div>
+        <div class="span6">
+            <input class="input pull-right" type="text" ng-model="searchTerm">
+            <small class="pull-right">Search &nbsp;&nbsp;&nbsp;</small>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <table class="table table-bordered table-striped" ng-show="users.length > 0">
+            <thead>
+                <tr> 
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Role
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        Created at
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in users">
+                    <td>
+                        {{c.username}}
+                    </td>
+                    <td>
+                        {{c.role}}
+                    </td>
+                    <td>
+                        {{c.phone}}
+                    </td>
+                    <td>
+                        {{c.created_at | date: 'medium'}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="users.length === 0" class="text-error">
+            No users found.
+        </div>
+    </div>
+    <div class="row-fluid" ng-show="users.length > 0">
+        <div class="row-fluid">
+            <pagination  total-items="totalUsers" page="currentPage" items-per-page="totalCountPerPage" max-size="maxSize" boundary-links="true" rotate="false"></pagination>
+        </div>
+    </div>
+
 </div>

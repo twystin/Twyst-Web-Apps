@@ -14,12 +14,16 @@ twystConsole.config(function ($routeProvider) {
 		controller: UsersController,
 		templateUrl: '/console/templates/qr/qr.html'
 	}).
+	when('/qrs', {
+		controller: AdminQrCtrl,
+		templateUrl: '/console/templates/qr/view.html'
+	}).
 	when('/recco_config', {
 		controller: ReccoController,
 		templateUrl: '/console/templates/recco/config.html'
 	}).
-	when('/users/view', {
-		controller: UsersController,
+	when('/users/', {
+		controller: AdminUserCtrl,
 		templateUrl: '/console/templates/users/view.html',
 	}).
 	when('/users/create', {
