@@ -70,7 +70,7 @@ function DataCtrl($scope, $timeout, $location, dataService, authService) {
         };
         if($scope.selected_merchants.length > 0 && $scope.cities.length > 0) {
             getOutlets($scope.selected_merchants, $scope.cities);
-        };       
+        };
     }, true);
 
     function getOutlets(merchant, cities) {
