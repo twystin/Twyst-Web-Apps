@@ -11,9 +11,10 @@
             </div>
             <div class="span6">
                 <div>
-                    <select ng-model="data_checkin.program" class="span12">
+                    <select ng-model="data_checkin.program" ng-options="item._id as item.name for item in programs" class="span12"></select>
+                    <!-- <select ng-model="data_checkin.program" class="span12">
                         <option value="{{p._id}}" ng-repeat="p in programs">{{p.name}}</option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
         </div>
