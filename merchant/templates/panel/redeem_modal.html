@@ -4,16 +4,14 @@
             <h3>Checkins</h3>
         </div>
         <div class="span8">
-            <div class="span6" ng-init="outletQuery()">
+            <div class="span6">
                 <select id="offer_valid_on_outlets" ng-model="data_redeem.outlet" class="span12">
                     <option value="{{o._id}}" ng-repeat="o in outlets">{{o.basics.name}}, {{o.contact.location.locality_1.toString()}}</option>
                 </select>
             </div>
             <div class="span6">
-                <div ng-init="getPrograms()">
-                    <select ng-model="data_redeem.program" class="span12">
-                        <option value="{{program._id}}" ng-repeat="program in programs">{{program.name}}</option>
-                    </select>
+                <div>
+                    <select ng-model="data_redeem.program" ng-options="item._id as item.name for item in programs" class="span12"></select>
                 </div>
             </div>
         </div>
