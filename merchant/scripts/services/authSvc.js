@@ -36,7 +36,7 @@ twystApp.factory('authService', function ($rootScope, $cookieStore, $log) {
         return $cookieStore.get('logged_in') && $cookieStore.get('user');
     };
     authSvc.login = function ($scope, $http, $location) {
-        $http.post('/api/v1/auth/login', {username: $scope.user.name, password: $scope.user.pass})
+        $http.post('/api/v1/auth/login', {username: $scope.user.name.toLowerCase(), password: $scope.user.pass})
             .success(function (data) {
                 if ($scope.user.remember_me) {
                     _authStatus.remember_me = true;
@@ -80,7 +80,7 @@ twystApp.factory('authService', function ($rootScope, $cookieStore, $log) {
     };
     authSvc.register = function ($scope, $http, $location) {
         var request = $http.post('/api/v1/auth/register', {
-            username: $scope.user.name, 
+            username: $scope.user.name.toLowerCase(), 
             password: $scope.user.pass1, 
             email: $scope.user.email,
             role: 3
