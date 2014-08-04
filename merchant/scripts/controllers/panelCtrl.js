@@ -526,6 +526,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             $scope.loading = false;
             templateController(true, false, false, false, false);
             $scope.success.message = data.message;
+            $scope.refresh();
         }).error(function (data) {
             $scope.loading = false;
             errorController(data.status, data.message);
