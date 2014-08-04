@@ -434,8 +434,9 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
 
             $scope.loading = true;
             
-            $http.get('/api/v1/vouchers/' + $scope.code.toUpperCase(), {
-                code: $scope.code
+            $http.get('/api/v1/vouchers/' + $scope.code.toUpperCase() + '/'+ $scope.outlet._id, {
+                code: $scope.code,
+                searchedAt: $scope.outlet._id
             }).success(function(data, status, header, config) {
                 $scope.loading = false;
 
