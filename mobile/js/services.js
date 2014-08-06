@@ -1,21 +1,302 @@
-var CLIENT_VERSION = 1,
+var CLIENT_VERSION = 2,
     API_VERSION = 1;
+
 //var telephoneNumber = cordova.require("cordova/plugin/telephonenumber");
 
 twystClient.factory('constSvc', function() {
+    'use strict';
     var constSvc = {};
-    constSvc.service_url = 'http://dogfood.twyst.in';
+    constSvc.service_url = 'http://twyst.in';
+    constSvc.debug = false;
+    constSvc.send_logs = false;
     return constSvc;
 });
 
-twystClient.factory('dataSvc', function ($rootScope, $window, $http, $log, $timeout, $interval, sessionSvc, constSvc) {
-    var dataSvc = {};
-    var storage = $window.localStorage;
+twystClient.factory('alertSvc', function() {
+    'use strict';
+    var alertSvc = {};
+    alertSvc.alert_ncr = {};
+    alertSvc.alert_ncr.show = alertSvc.alert_ncr.show || null;
+    return alertSvc;
+});
+
+twystClient.factory('logSvc', function($http, $log, uuid4, sessionSvc, constSvc, $rootScope) {
+    'use strict';
+    var logSvc = {},
+        num = 1,
+        session = uuid4.generate(),
+        msg = '',
+        send_message = {},
+        user = function() {
+            return sessionSvc.data.user || null;
+        },
+        position = function() {
+            return sessionSvc.data.position || null;
+        },
+        log = function(level, message) {
+            if (user()) {
+                if (position()) {
+                    msg = level + ":SESSION:" + session + ":PATH:" + num + ":USER:" + user()._id + message + ":POS: (" + position.latitude + "," + position.longitude + ")";
+                    send_message.level = level;
+                    send_message.session = session;
+                    send_message.path = num;
+                    send_message.user = user()._id;
+                    send_message.pos = position();
+                    send_message.message = message;
+                } else {
+                    msg = level + ":SESSION:" + session + ":PATH:" + num + ":USER:" + user()._id + message + ":POS: (NULL,NULL)";
+                    send_message.level = level;
+                    send_message.session = session;
+                    send_message.path = num;
+                    send_message.user = user()._id;
+                    send_message.pos = "empty";
+                    send_message.message = message;
+                }
+            } else {
+                if (position()) {
+                    msg = level + ":SESSION:" + session + ":PATH:" + num + ":USER:[EMPTY]" + message + ":POS: (" + position.latitude + "," + position.longitude + ")";
+                    send_message.level = level;
+                    send_message.session = session;
+                    send_message.path = num;
+                    send_message.user = "empty";
+                    send_message.pos = position();
+                    send_message.message = message;
+                } else {
+                    msg = level + ":SESSION:" + session + ":PATH:" + num + ":USER:[EMPTY]" + message + ":POS: (NULL,NULL)";
+                    send_message.level = level;
+                    send_message.session = session;
+                    send_message.path = num;
+                    send_message.user = "empty";
+                    send_message.pos = "empty";
+                    send_message.message = message;
+                }
+            }
+            if (constSvc.debug) {
+                $log.warn(msg);
+            }
+
+            if (constSvc.send_logs) {
+                $http.post(constSvc.service_url + '/api/v1/log', send_message)
+                    .success(function(data) {
+                        ////$rootScope.$$phase || $rootScope.$apply();
+                        // saved log
+                    })
+                    .error(function(data) {
+                        // couldnt save log
+                    });
+            }
+            num = num + 1;
+        };
+
+    logSvc.info = function(message) {
+        log("INFO", message);
+    };
+
+    logSvc.warn = function(message) {
+        log("WARN", message);
+    };
+
+    logSvc.error = function(message) {
+        log("ERROR", message);
+    };
+
+    return logSvc;
+
+});
+
+twystClient.factory('placesSvc', function(sessionSvc) {
+    'use strict';
+    var placesSvc = {};
+    placesSvc.places = [{
+        name: 'Rajouri Garden',
+        boundaries: {
+            long_left: 77.11640,
+            long_right: 77.12904,
+            lat_lower: 28.64163,
+            lat_upper: 28.65473
+        }
+    }, {
+        name: 'Connaught Place',
+        boundaries: {
+            long_left: 77.20609,
+            long_right: 77.22875,
+            lat_lower: 28.62178,
+            lat_upper: 28.64118
+        }
+    }, {
+        name: 'Khan Market & Surroundings',
+        boundaries: {
+            long_left: 77.21106,
+            long_right: 77.24015,
+            lat_lower: 28.58871,
+            lat_upper: 28.61041
+        }
+    }, {
+        name: 'Saket',
+        boundaries: {
+            long_left: 77.21246,
+            long_right: 77.22443,
+            lat_lower: 28.52509,
+            lat_upper: 28.53447
+        }
+    }, {
+        name: 'Hauz Khas Village',
+        boundaries: {
+            long_left: 77.18827,
+            long_right: 77.20117,
+            lat_lower: 28.55166,
+            lat_upper: 28.55867
+        }
+    }, {
+        name: 'Greater Kailash, Lajpat Nagar, Nehru Place',
+        boundaries: {
+            long_left: 77.22597,
+            long_right: 77.25918,
+            lat_lower: 28.54243,
+            lat_upper: 28.57040
+        }
+    }, {
+        name: 'DLF Cyber City & Cyber Hub',
+        boundaries: {
+            long_left: 77.086333,
+            long_right: 77.092963,
+            lat_lower: 28.487915,
+            lat_upper: 28.498646
+        }
+    }, {
+        name: 'Ambience Mall',
+        boundaries: {
+            long_left: 77.095817,
+            long_right: 77.100195,
+            lat_lower: 28.500701,
+            lat_upper: 28.506019
+        }
+    }, {
+        name: 'MG Road and around',
+        boundaries: {
+            long_left: 77.070529,
+            long_right: 77.106278,
+            lat_lower: 28.477528,
+            lat_upper: 28.481790
+        }
+    }, {
+        name: 'Sector 29',
+        boundaries: {
+            long_left: 77.056603,
+            long_right: 77.074049,
+            lat_lower: 28.456703,
+            lat_upper: 28.479045
+        }
+    }, {
+        name: 'DLF Phase 4',
+        boundaries: {
+            long_left: 77.075336,
+            long_right: 77.091601,
+            lat_lower: 28.457269,
+            lat_upper: 28.470247
+        }
+    }, {
+        name: 'Golf Course Road',
+        boundaries: {
+            long_left: 77.082868,
+            long_right: 77.120204,
+            lat_lower: 28.421692,
+            lat_upper: 28.462974
+        }
+    }, {
+        name: 'Sector 15,30,31',
+        boundaries: {
+            long_left: 77.039716,
+            long_right: 77.061088,
+            lat_lower: 28.452062,
+            lat_upper: 28.463456
+        }
+    }, {
+        name: 'Sohna Road',
+        boundaries: {
+            long_left: 77.026219,
+            long_right: 77.054372,
+            lat_lower: 28.398893,
+            lat_upper: 28.449316
+        }
+    }];
+
+    placesSvc.getPlace = function() {
+        return _.find(placesSvc.places, function(item) {
+            if (sessionSvc.data.position.latitude < item.boundaries.lat_upper &&
+                sessionSvc.data.position.latitude > item.boundaries.lat_lower &&
+                sessionSvc.data.position.longitude > item.boundaries.long_left &&
+                sessionSvc.data.position.longitude < item.boundaries.long_right) {
+                return true;
+            }
+        });
+    };
+
+    return placesSvc;
+});
+
+twystClient.factory('checkinSvc', function(constSvc, sessionSvc, dataSvc, $rootScope, $http) {
+    'use strict';
+    var checkinSvc = {};
+    checkinSvc.data = {};
+
+    checkinSvc.qrCheckin = function(result) {
+        checkinSvc.data = {};
+        $rootScope.state = 'checkin_detail';
+        $http.post(constSvc.service_url + '/api/v1/qr/checkins', {
+            code: result.text
+        })
+            .success(function(data) {
+                checkinSvc.data = data;
+                console.log("CHECKIN SVC DATA" + JSON.stringify(data));
+                if (data.status === 'error') {
+                    $rootScope.$broadcast('checkind');
+                } else {
+                    dataSvc.temp.checkins.push(JSON.parse(data.info));
+                }
+                $rootScope.$broadcast('checkind');
+                ////$rootScope.$$phase || $rootScope.$apply();
+            }).error(function(data) {
+                checkinSvc.data = data;
+                $rootScope.$broadcast('checkind');
+            });
+    };
+
+    checkinSvc.smsCheckin = function(smscode) {
+        var intent = "INTENT"; //leave empty for sending sms using default intent
+        var success = function() {
+            checkinSvc.data.status = "success";
+            checkinSvc.data.message = "Successful checkin through SMS";
+            checkinSvc.data.info = "";
+            $rootScope.$broadcast('checkinSuccess');
+        };
+        var error = function(e) {
+            checkinSvc.data.status = "error";
+            checkinSvc.data.message = "Couldn't checkin through SMS";
+            checkinSvc.data.info = JSON.stringify(e);
+            $rootScope.$broadcast('checkinError');
+        };
+
+        sms.send(sessionSvc.data.smsprovider.number,
+            sessionSvc.data.smsprovider.prefix + ' ' + smscode,
+            intent, success, error);
+    };
+
+    return checkinSvc;
+});
+
+twystClient.factory('dataSvc', function($rootScope, $window, $http, $log, $timeout, $interval, uuid4, sessionSvc, constSvc) {
+    'use strict';
+    var dataSvc = {},
+        storage = $window.localStorage;
+
     dataSvc.status = {};
     dataSvc.status.nearby = false;
     dataSvc.status.checkins = false;
     dataSvc.status.rewards = false;
     dataSvc.status.reccos = false;
+    dataSvc.status.reccos2 = false;
+    dataSvc.status.refreshing = false;
 
     dataSvc.data = {};
     dataSvc.data.position = {};
@@ -23,196 +304,266 @@ twystClient.factory('dataSvc', function ($rootScope, $window, $http, $log, $time
     dataSvc.data.checkins = {};
     dataSvc.data.rewards = {};
     dataSvc.data.reccos = {};
+    dataSvc.data.reccos2 = {};
     dataSvc.data.mystuff = null;
 
     dataSvc.errors = [];
+    dataSvc.temp = {};
+    dataSvc.temp.faves = [];
+    dataSvc.temp.checkins = [];
 
     dataSvc.getdata = function() {
-        return JSON.parse(storage.getItem('twystData'));
+        return JSON.parse(storage.getItem('twystData')) || {};
     };
 
-    dataSvc.setMyStuff = function () {
-        var i;
-        var mystuff = {};
-        var oname = "";
-        for (i = 0; i < dataSvc.data.rewards.length; i = i + 1) {
-            oname = dataSvc.data.rewards[i].issue_details.issued_at.basics.name;
-            mystuff[oname] = mystuff[oname] || {};
-            mystuff[oname].vouchers = mystuff[oname].vouchers || [];
-            mystuff[oname].vouchers.push(
-                {
-                    code:dataSvc.data.rewards[i].basics.code,
-                    status:dataSvc.data.rewards[i].basics.status
-                }
-            );
-            mystuff[oname].details = dataSvc.data.rewards[i].issue_details.issued_at;
-        }
+    //dataSvc.data = dataSvc.getdata();
 
-        for (i = 0; i < dataSvc.data.checkins.length; i = i + 1) {
-            oname = dataSvc.data.checkins[i].outlet.basics.name;
-            mystuff[oname] = mystuff[oname] || {};
-            mystuff[oname].checkins = mystuff[oname].checkins || 0;
-            mystuff[oname].checkins += dataSvc.data.checkins[i].count;
-            mystuff[oname].details = dataSvc.data.checkins[i].outlet;
-        }
+    dataSvc.saveFaveTemp = function(off, o) {
+        dataSvc.temp.faves.push({
+            _id: uuid4.generate(),
+            offers: off,
+            outlets: o,
+            created_date: Date.now()
+        });
+        dataSvc.createTimeline();
+    };
 
-        if (dataSvc.data.faves && dataSvc.data.faves.length !== 0) {
-            for (i = 0; i < dataSvc.data.faves.length; i = i + 1) {
-                if (dataSvc.data.faves[i].outlets) {
-                    console.log(dataSvc.data.faves[i]);
-                    oname = dataSvc.data.faves[i].outlets.basics.name;
-                    mystuff[oname] = mystuff[oname] || {};
-                    mystuff[oname].fave = true;
-                    mystuff[oname].offers = dataSvc.data.faves[i].offers;
-                    mystuff[oname].details = dataSvc.data.faves[i].outlets;
-                } else {
-                    // outlets is null
+    dataSvc.deleteFaveTemp = function(fave_id) {
+        //if (!dataSvc.data.faves) {
+        // do nothing
+        //} else {
+        dataSvc.data.faves = _.filter(dataSvc.data.faves, function(item) {
+            return (item._id !== fave_id);
+        });
+        dataSvc.temp.faves = _.filter(dataSvc.temp.faves, function(item) {
+            return (item._id !== fave_id);
+        });
+        dataSvc.createTimeline();
+        //}
+    };
+
+    dataSvc.createTimeline = function() {
+        ///console.log("GOT TO CREATE TIMELINE");
+        var timeline = [];
+        var i = 0;
+
+        if (dataSvc.data.rewards && !_.isEmpty(dataSvc.data.rewards)) {
+            for (i = 0; i < dataSvc.data.rewards.length; i = i + 1) {
+                var entry = {};
+                var entry_redemption = {};
+                entry.type = "reward";
+                console.log("REWARD " + JSON.stringify(dataSvc.data.rewards[i]));
+                entry.details = dataSvc.data.rewards[i];
+                entry.date = dataSvc.data.rewards[i].issue_details.issue_date;
+                timeline.push(entry);
+
+                // NEW CODE TO ADD REDEMPTION TO TIMELINE
+                if (dataSvc.data.rewards[i].basics.status === 'user redeemed' || dataSvc.data.rewards[i].basics.status === 'merchant redeemed') {
+                    entry_redemption.type = "redemption";
+                    entry_redemption.details = dataSvc.data.rewards[i];
+                    entry_redemption.date = dataSvc.data.rewards[i].used_details.used_time;
+                    timeline.push(entry_redemption);
                 }
-                //console.log(JSON.stringify(dataSvc.data.faves[i]));
             }
         }
-        dataSvc.data.mystuff =  _.values(mystuff);
-        storage.setItem('twystData', JSON.stringify(dataSvc.data));
-    };
-
-    dataSvc.run = function () {
-        $timeout(dataSvc.refresh, 500);
-        $interval(dataSvc.refresh, 30000);
-    };
-
-    dataSvc.refresh = function () {
-        if (!_.isEmpty(dataSvc.data.checkins) && !_.isEmpty(dataSvc.data.vouchers)) {
-            dataSvc.setMyStuff();
+        //console.log("CHECKINS" + JSON.stringify(dataSvc.data.checkins));
+        if (dataSvc.data.checkins && !_.isEmpty(dataSvc.data.checkins)) {
+            for (i = 0; i < dataSvc.data.checkins.length; i = i + 1) {
+                var entry = {};
+                entry.type = "checkin";
+                entry.details = dataSvc.data.checkins[i];
+                entry.date = dataSvc.data.checkins[i].checkin_date;
+                timeline.push(entry);
+            }
         }
-        // if network
+
+        /*
+
+         if (dataSvc.temp.checkins && !_.isEmpty(dataSvc.temp.checkins)) {
+         for (i = 0; i < dataSvc.temp.checkins.length; i = i + 1) {
+         var entry = {};
+         entry.type = "checkin";
+         entry.details = dataSvc.temp.checkins[i];
+         entry.date = dataSvc.temp.checkins[i].checkin_date;
+         timeline.push(entry);
+         }
+         }
+         */
+
+        if (dataSvc.data.faves && !_.isEmpty(dataSvc.data.faves)) {
+
+            for (i = 0; i < dataSvc.data.faves.length; i = i + 1) {
+                var entry = {};
+                entry.type = "favourite";
+                entry.details = dataSvc.data.faves[i];
+                entry.date = dataSvc.data.faves[i].created_date;
+                timeline.push(entry);
+            }
+        }
+
+        if (dataSvc.temp.faves && !_.isEmpty(dataSvc.temp.faves)) {
+
+            for (i = 0; i < dataSvc.temp.faves.length; i = i + 1) {
+                var entry = {};
+                entry.type = "favourite";
+                entry.details = dataSvc.temp.faves[i];
+                entry.date = dataSvc.temp.faves[i].created_date;
+                timeline.push(entry);
+            }
+        }
+        //console.log("TIMELINE" + JSON.stringify(timeline));
+
+        dataSvc.data.timeline = _.sortBy(timeline, function(item) {
+            return item.date;
+        }).reverse();
+        storage.setItem('twystData', JSON.stringify(dataSvc.data));
+        $rootScope.$broadcast('dataUpdated');
+    };
+
+
+    dataSvc.run = function() {
+        console.log("TWYST:Running an update!!!");
+        dataSvc.refresh();
+        $interval(function() {
+            console.log("TWYST: Calling data refresh")
+            dataSvc.refresh()
+        }, 90000);
+       
+    };
+
+    dataSvc.refresh = function() {
+        dataSvc.data = dataSvc.getdata();
+        dataSvc.status.refreshing = true;
+        $rootScope.$broadcast('dataUpdated');
+        console.log("NETWORK STATUS " + sessionSvc.status.network);
+        var latitude, longitude;
+        if(sessionSvc.data.position && sessionSvc.data.position.latitude) {
+            latitude = sessionSvc.data.position.latitude;
+        }
+        else {
+            latitude = 28.4669448;
+        }
+        if(sessionSvc.data.position && sessionSvc.data.position.longitude) {
+            longitude = sessionSvc.data.position.longitude;
+        }   
+        else {
+            longitude = 77.06652;
+        }
         if (sessionSvc.status.network) {
-            console.log("REFRESHING SVC");
-            $http.get(constSvc.service_url + '/api/v1/recommendations')
-                .success(function (data, status, header, config) {
-                    console.log("REFRESHING RECCOS");
-                    dataSvc.status.reccos = true;
-                    dataSvc.data.reccos = data.info;
+            $http.get(constSvc.service_url + '/api/v2/data/' + latitude + '/' + longitude, {
+                timeout: 30000,
+                cache: false,
+                headers: {
+                    'Accept': 'application/json',
+                    'Pragma': 'no-cache'
+                }
+            })
+                .success(function(data) {
+                    dataSvc.data.nearby = data.info.NEAR.info || [];
+                    dataSvc.data.checkins = data.info.CHECKINS.info || [];
+                    dataSvc.data.rewards = data.info.VOUCHERS.info || [];
+                    dataSvc.data.reccos2 = data.info.RECCO.info || [];
+                    dataSvc.data.faves = data.info.FAVOURITES.info || [];
+
+                    dataSvc.status.nearby = true;
+                    dataSvc.status.checkins = true;
+                    dataSvc.status.rewards = true;
+                    dataSvc.status.reccos2 = true;
+                    dataSvc.status.faves = true;
+
                     storage.setItem('twystData', JSON.stringify(dataSvc.data));
+                    $rootScope.$broadcast('dataUpdated');
 
-                    $http.get(constSvc.service_url + '/api/v1/near/' + sessionSvc.data.position.latitude + '/' + sessionSvc.data.position.longitude)
-                        .success(function (data, status, header, config) {
-                            dataSvc.status.nearby = true;
-                            dataSvc.data.nearby = JSON.parse(data.info);
-                            //console.log("NEARBY" + JSON.stringify(dataSvc.data.nearby));
-                            $rootScope.$broadcast('dataUpdated');
-                            storage.setItem('twystData', JSON.stringify(dataSvc.data));
-
-                            if (sessionSvc.status.user) {
-                                $http.get(constSvc.service_url + '/api/v1/mycheckins')
-                                    .success(function(data, status, header, config) {
-                                        dataSvc.status.checkins = true;
-                                        dataSvc.data.checkins = JSON.parse(data.info);
-                                        $http.get(constSvc.service_url + '/api/v1/myvouchers')
-                                            .success(function(data, status, header, config) {
-                                                dataSvc.status.rewards = true;
-                                                dataSvc.data.rewards = JSON.parse(data.info);
-                                                $http.get(constSvc.service_url + '/api/v1/favourites')
-                                                    .success(function(data,status,header,config) {
-                                                        dataSvc.status.faves = true;
-                                                        dataSvc.data.faves = JSON.parse(data.info);
-                                                        dataSvc.setMyStuff();
-                                                        storage.setItem('twystData', JSON.stringify(dataSvc.data));
-                                                        $rootScope.$broadcast('dataUpdated');
-                                                    })
-                                                    .error(function(data) {
-                                                        $log.warn("COULDNT GET FAVES");
-                                                        dataSvc.status.faves = false;
-                                                        dataSvc.data.faves = {};
-                                                        dataSvc.errors.push("Couldnt get faves");
-                                                    });
-                                            }).error(function(data, status, header, config) {
-                                                $log.warn("COULDNT GET REWARDS");
-                                                dataSvc.status.rewards = false;
-                                                dataSvc.data.rewards = {};
-                                                dataSvc.errors.push("Couldnt get rewards");
-                                            });
-                                    }).error(function(data, status, header, config) {
-                                        $log.warn("COULDNT GET CHECKINS");
-                                        dataSvc.status.checkins = false;
-                                        dataSvc.data.checkins = {};
-                                        dataSvc.errors.push("Couldnt get checkins");
-                                    });
-                            }
-                        }).error(function (data, status, header, config) {
-                            $log.warn("COULDNT GET NEARBY")
-                            dataSvc.status.nearby = false;
-                            dataSvc.data.nearby = {};
-                            dataSvc.errors.push("Couldnt get nearby");
-                        });
-                }).error(function(data, status, header, config) {
-                    $log.warn("COULDNT GET RECCOS")
-                    dataSvc.status.reccos = false;
-                    dataSvc.data.reccos = {};
-                    dataSvc.errors.push("Couldnt get reccos");
+                }).error(function(error) {
+                    console.log("GETTING ERROR ON TWYST DATA")
+                    console.log(error);
                 });
         }
     };
 
+    dataSvc.status.refreshing = false;
     return dataSvc;
 });
 
-twystClient.factory('sessionSvc', function ($window, $rootScope, $http, $q, $log, $timeout, $interval, constSvc) {
+twystClient.factory('sessionSvc', function($window, $rootScope, $http, $q, $log, $timeout, $interval, constSvc) {
     var sessionSvc = {},
-        networkState = null;
+        networkState = null,
+        stop = null;
 
-    sessionSvc.status = {};
+    // New code for OTP
+    var storage = $window.localStorage;
+    sessionSvc.localData = JSON.parse(storage.getItem('twystData')) || {};
+    if (sessionSvc.localData) {
+        console.log(sessionSvc.localData);
+        if (sessionSvc.localData.auth) {
+            sessionSvc.auth = sessionSvc.localData.auth;
+        } else {
+            sessionSvc.auth = {
+                state: 0
+            };
+        }
+    } else {
+        sessionSvc.auth = {
+            state: 0
+        };
+    }
+
     sessionSvc.data = {};
-    sessionSvc.status.network = true;
+    sessionSvc.status = {};
+    sessionSvc.data.version = null;
+    sessionSvc.status.server_up = false;
+    sessionSvc.status.network = false;
     sessionSvc.status.user = false;
     sessionSvc.status.version = true;
     sessionSvc.errors = [];
 
-    sessionSvc.getSMSProviderInfo = function () {
+    sessionSvc.getSMSProviderInfo = function() {
         var deferred = $q.defer();
         $http.get(constSvc.service_url + '/api/v1/sms/provider')
-            .success(function (data) {
+            .success(function(data) {
+                //$rootScope.$$phase || $rootScope.$apply();
                 sessionSvc.status.smsprovider = true;
                 sessionSvc.data.smsprovider = data.info;
-                console.log("SMS PROVIDER=====>:" + JSON.stringify(data.info));
                 $rootScope.$broadcast('sessionUpdated');
                 deferred.resolve(data);
-            }).error(function (data) {
+            }).error(function(data) {
                 sessionSvc.status.smsprovider = false;
                 sessionSvc.data.smsprovider = null;
                 $rootScope.$broadcast('sessionUpdated');
-                console.log("SMS PROVIDER ERROR:" + data);
                 deferred.reject(data);
             });
         return deferred.promise;
     };
 
-    sessionSvc.getPhoneNumber = function () {
+
+    sessionSvc.getPhoneNumber = function() {
         var deferred = $q.defer();
         /*telephoneNumber.get(function (result) {
-            sessionSvc.status.phone = true;
-            sessionSvc.data.phone = result;
-            console.log("PHONE NUMBER:" + result);
-            deferred.resolve(result);
-        }, function (error) {
-            sessionSvc.status.phone = false;
-            sessionSvc.data.phone = null;
-            console.log("PHONE NUMBER ERROR:" + error);
-            deferred.reject(error);
-        });*/
+         sessionSvc.status.phone = true;
+         sessionSvc.data.phone = result;
+         console.log("PHONE NUMBER:" + result);
+         deferred.resolve(result);
+         }, function (error) {
+         sessionSvc.status.phone = false;
+         sessionSvc.data.phone = null;
+         console.log("PHONE NUMBER ERROR:" + error);
+         deferred.reject(error);
+         });*/
         return deferred.promise;
     };
 
-    sessionSvc.getLoggedInUser = function () {
+    sessionSvc.getLoggedInUser = function() {
         var deferred = $q.defer();
         $http.get(constSvc.service_url + '/api/v1/auth/get_logged_in_user')
-            .success(function (data) {
+            .success(function(data) {
+                //$rootScope.$$phase || $rootScope.$apply();
                 sessionSvc.data.user = data;
                 sessionSvc.status.user = true;
                 $rootScope.$broadcast('sessionUpdated');
-                console.log("USER:" + data);
                 deferred.resolve(data);
-            }).error(function (data) {
-                console.log("USER ERROR:" + data);
+            }).error(function(data) {
+                // log-in the user if OTP creds are there locally
+
                 sessionSvc.data.user = null;
                 sessionSvc.status.user = false;
                 $rootScope.$broadcast('sessionUpdated');
@@ -221,24 +572,26 @@ twystClient.factory('sessionSvc', function ($window, $rootScope, $http, $q, $log
         return deferred.promise;
     };
 
-    sessionSvc.getVersion = function () {
+    sessionSvc.getVersion = function() {
         var deferred = $q.defer();
         $http.get(constSvc.service_url + '/api/v1/clientversion')
-            .success(function (data) {
+            .success(function(data) {
+                //$rootScope.$$phase || $rootScope.$apply();
                 var v = JSON.parse(data.info);
+                sessionSvc.status.server_up = true;
                 if (Number(CLIENT_VERSION) < Number(v.client) ||
                     Number(API_VERSION) < Number(v.api)) {
-                    console.log("NOT COMPATIBLE");
+                    console.log("BAD CLIENT");
                     sessionSvc.status.version = false;
                 } else {
-                    console.log("COMPATIBLE");
+                    console.log("GOOD CLIENT");
                     sessionSvc.status.version = true;
                 }
                 sessionSvc.data.version = JSON.parse(data.info);
                 $rootScope.$broadcast('sessionUpdated');
                 deferred.resolve(data);
-            }).error(function (data) {
-                console.log("VERSION ERROR:" + data);
+            }).error(function(data) {
+                sessionSvc.status.server_up = true;
                 sessionSvc.data.version = null;
                 sessionSvc.status.version = false;
                 $rootScope.$broadcast('sessionUpdated');
@@ -247,90 +600,414 @@ twystClient.factory('sessionSvc', function ($window, $rootScope, $http, $q, $log
         return deferred.promise;
     };
 
-    sessionSvc.getNetwork = function() {
-        var deferred = $q.defer();
+    sessionSvc.setHomeLocation = function() {
+        if (sessionSvc.status && sessionSvc.status.position && sessionSvc.status.user) {
+            $http.post(constSvc.service_url + '/api/v1/user/home', sessionSvc.data.position)
+                .success(function() {
+                    //$rootScope.$$phase || $rootScope.$apply();
+                }).error(function() {
+
+                });
+        }
+
+    };
+
+    sessionSvc.registerGCM = function() {
+        var pushNotification = $window.plugins.pushNotification;
+        //if (sessionSvc && sessionSvc.status && sessionSvc.status.user && !sessionSvc.data.user.user.gcm) {
+        if (sessionSvc && sessionSvc.status && sessionSvc.status.user) {
+            pushNotification.register(function(result) {
+                //alert('Callback Success! Result = '+result)
+            }, function(error) {
+                $interval(function() {
+                    pushNotification.register(function(result) {
+                        //Ignore
+                    }, function(error) {
+                        //Ignore
+                    }, {
+                        "senderID": "216832068690",
+                        "ecb": "onNotificationGCM"
+                    });
+                }, 3600000);
+            }, {
+                "senderID": "216832068690",
+                "ecb": "onNotificationGCM"
+            });
+        }
+    };
+
+    $window.onNotificationGCM = function(e) {
+        switch (e.event) {
+            case 'registered':
+                if (e.regid.length > 0 && sessionSvc.status.user) {
+                    $http.post(constSvc.service_url + '/api/v1/user/gcm', {
+                        id: e.regid
+                    }).
+                    success(function() {
+                        //$rootScope.$$phase || $rootScope.$apply();
+                    }).error(function() {
+
+                    });
+                    //
+                    // alert('registration id = ' + e.regid);
+                }
+                break;
+
+            case 'message':
+                // this is the actual push notification. its format depends on the data model from the push server
+                //alert('message = '+e.message+' msgcnt = '+ e.msgcnt);
+                break;
+
+            case 'error':
+                //alert('GCM error = '+e.msg);
+                break;
+
+            default:
+                //alert('An unknown GCM event has occurred');
+                break;
+        }
+    };
+
+    sessionSvc.getNetwork = function(callback) {
         sessionSvc.status.network = true;
+        callback(true);
         $rootScope.$broadcast('sessionUpdated');
-        deferred.resolve();
-        return deferred.promise;
+        sessionSvc.getData(); //get session info when network comes up
     };
     sessionSvc.getPosition = function() {
         var deferred = $q.defer();
-        $window.navigator.geolocation.getCurrentPosition(function (position) {
+        $window.navigator.geolocation.getCurrentPosition(function(position) {
             sessionSvc.status.position = true;
-            sessionSvc.data.position =  {
+            sessionSvc.data.position = {
                 latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-                accuracy: position.coords.accuracy
+                longitude: position.coords.longitude
             };
             $rootScope.$broadcast('sessionUpdated');
             deferred.resolve(position);
-        }, function (error) {
+        }, function(error) {
             $log.warn("COULDN'T GET POSITION" + JSON.stringify(error));
             sessionSvc.status.position = false;
             sessionSvc.data.position = {};
             deferred.reject(error);
-        }, {enableHighAccuracy : false, maximumAge : 3000, timeout : 60000, frequency: 5000});
+        }, {
+            enableHighAccuracy: false,
+            maximumAge: 1200000,
+            timeout: 1260000,
+            frequency: 5000
+        });
 
         return deferred.promise;
     };
 
-    sessionSvc.run = function () {
-        // One time, 5 seconds after startup
-        $timeout(function() {
-            sessionSvc.getLoggedInUser();
-            sessionSvc.getSMSProviderInfo();
-            sessionSvc.getPhoneNumber();
-            sessionSvc.getVersion();
-            sessionSvc.getNetwork();
-            sessionSvc.getPosition();
-        }, 1000);
+    sessionSvc.getData = function() {
+        console.log("TWYST: Getting session data!");
+        $http.get(constSvc.service_url + '/api/v2/constants')
+            .success(function(data) {
+                if (data.info.USER) {
+                    sessionSvc.data.user = data.info.USER;
+                    sessionSvc.status.user = true;
+                    sessionSvc.auth.state = 3;
+                } else {
+                    if (sessionSvc.auth && sessionSvc.auth.phone) {
+                        $http.post(constSvc.service_url + '/api/v1/auth/login', {
+                            username: sessionSvc.auth.phone,
+                            password: sessionSvc.auth.phone
+                        })
+                            .success(function(data) {
+                                sessionSvc.localData.auth = sessionSvc.auth = {
+                                    state: 3,
+                                    data: data,
+                                    phone: sessionSvc.auth.phone
+                                };
+                                storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                                $rootScope.state = 'home';
+                                sessionSvc.getLoggedInUser();
+                            }).error(function(err, data) {
+                                sessionSvc.status.user = false;
+                                sessionSvc.localData.auth = sessionSvc.auth = {
+                                    state: 0,
+                                    phone: sessionSvc.auth.phone
+                                };
+                                storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                                $rootScope.$broadcast('sessionUpdated');
+                            });
+                    } else {
+                        sessionSvc.status.user = false;
+                        sessionSvc.localData.auth = sessionSvc.auth = {
+                            state: 0,
+                            phone: sessionSvc.auth.phone
+                        };
+                        storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                    }
+                }
 
-        // Every 3 seconds
-        $interval(function () {
-            sessionSvc.getNetwork();
+                if (data.info.SMS_PROVIDER) {
+                    sessionSvc.status.smsprovider = true;
+                    sessionSvc.data.smsprovider = data.info.SMS_PROVIDER;
+                }
+
+                if (data.info.VERSION) {
+                    var v = data.info.VERSION;
+                    if (Number(CLIENT_VERSION) < Number(v.client) ||
+                        Number(API_VERSION) < Number(v.api)) {
+                        console.log("BAD CLIENT");
+                        sessionSvc.status.version = false;
+                    } else {
+                        console.log("GOOD CLIENT");
+                        sessionSvc.status.version = true;
+                    }
+                } else {
+                    sessionSvc.data.version = null;
+                    sessionSvc.status.version = false;
+                }
+                sessionSvc.status.server_up = true;
+
+                $rootScope.$broadcast('sessionUpdated');
+                console.log(data);
+            }).error(function(error) {
+                console.log(error);
+            });
+    };
+
+    sessionSvc.run = function() {
+        //$window.alert(device.uuid);
+        // Try and find the version
+        // TODO - fix this interval code
+        /*
+         stop = $interval(function() {
+         sessionSvc.getVersion();
+         if (sessionSvc.data.version) {
+         console.log("GOT HERE CANCEL STOP")
+         $interval.cancel(stop);
+         stop = undefined;
+         sessionSvc.getLoggedInUser();
+         sessionSvc.getSMSProviderInfo();
+         sessionSvc.getPhoneNumber();
+         sessionSvc.getNetwork();
+         sessionSvc.getPosition();
+         }
+         }, 5000);
+         */
+        console.log("TWYST:Calling session svc run");
+        $timeout(function() {
             sessionSvc.getPosition();
-        }, 3000);
+        }, 5000);
+
+        sessionSvc.getNetwork(function (networkState) {
+            if(networkState) {
+                sessionSvc.getData();
+                sessionSvc.getPhoneNumber();
+                sessionSvc.setHomeLocation();
+            }
+        });
+
+        $interval(function() {
+            sessionSvc.getPosition();
+        }, 300000);
+        $interval(function() {
+            //sessionSvc.getData();
+            sessionSvc.getNetwork(function (networkState) {
+                // Nothing to do here
+            });
+        }, 5000);
     };
 
     var window_ref = null;
-    sessionSvc.fblogin = function () {
+
+    sessionSvc.otplogin = function(phone) {
+        $http.post(constSvc.service_url + '/api/v1/auth/login', {
+            username: phone,
+            password: phone
+        })
+            .success(function(data) {
+                console.log("CAME HERE TO SUCCEED IN LOGGING IN");
+                sessionSvc.localData.auth = sessionSvc.auth = {
+                    state: 3,
+                    data: data,
+                    phone: sessionSvc.auth.phone
+                };
+                storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                $rootScope.state = 'home';
+                sessionSvc.getLoggedInUser();
+            }).error(function(err, data) {
+                console.log("CAME HERE TO CALL OTP");
+                $http.get(constSvc.service_url + '/api/v2/otp/' + phone, {
+                    timeout: 30000,
+                    cache: false,
+                    headers: {
+                        'Accept': 'application/json',
+                        'Pragma': 'no-cache'
+                    }
+                })
+                    .success(function(data) {
+                        sessionSvc.localData.auth = sessionSvc.auth = {
+                            state: 1,
+                            data: data,
+                            phone: phone
+                        };
+                        storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                        $rootScope.$broadcast('authRelatedEvent');
+                    }).error(function(err) {
+                        sessionSvc.localData.auth = sessionSvc.auth = {
+                            state: -1,
+                            prev: 0,
+                            data: err
+                        };
+                        storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+
+                        $rootScope.$broadcast('authRelatedEvent');
+                    });
+            });
+    };
+
+    // TODO Handle error cases
+    sessionSvc.otpverify = function(otp, phone) {
+        $http.post(constSvc.service_url + '/api/v2/otp', {
+            otp: otp,
+            phone: phone,
+            device_id: phone
+        })
+            .success(function(err, data) {
+                $http.post(constSvc.service_url + '/api/v1/auth/login', {
+                    username: phone,
+                    password: phone
+                })
+                    .success(function(data) {
+                        sessionSvc.getLoggedInUser();
+                        sessionSvc.localData.auth = sessionSvc.auth = {
+                            state: 3,
+                            data: data,
+                            phone: phone
+                        };
+                        storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                        $rootScope.$broadcast('authRelatedEvent');
+                        //$rootScope.state = 'home';
+                    }).error(function(err) {
+                        sessionSvc.status.user = false;
+                        sessionSvc.localData.auth = sessionSvc.auth = {
+                            state: -1,
+                            prev: 1,
+                            data: err
+                        };
+                        storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                        $rootScope.$broadcast('authRelatedEvent');
+                    });
+            }).error(function(err) {
+                sessionSvc.localData.auth = sessionSvc.auth = {
+                    state: -1,
+                    prev: 1,
+                    data: err
+                };
+                storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                $rootScope.$broadcast('authRelatedEvent');
+            });
+    }
+
+    sessionSvc.facebook = function() {
+        var plugin = new CC.CordovaFacebook();
+        plugin.init('763534923659747', 'Twyst', ['basic_info', 'email', 'publish_actions'],
+            function(response) {
+                plugin.login(function(response) {
+                    plugin.info(function(data) {
+                        $http.post(constSvc.service_url + '/api/v2/social', {
+                            access: {
+                                token: response.accessToken,
+                                expires: response.expirationDate,
+                                permissions: response.permissions
+                            },
+                            info: data
+                        }).success(function(data) {
+                            sessionSvc.localData.auth = sessionSvc.auth = {
+                                state: 3,
+                                data: {
+                                    access: {
+                                        token: response.accessToken,
+                                        expires: response.expirationDate,
+                                        permissions: response.permissions
+                                    },
+                                    info: data
+                                }
+                            };
+                            storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                            $rootScope.$broadcast('authRelatedEvent');
+                            $rootScope.state = 'home';
+                        }).error(function(err) {
+                            sessionSvc.localData.auth = sessionSvc.auth = {
+                                state: -1,
+                                prev: 2,
+                                data: err
+                            };
+                            storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                            $rootScope.$broadcast('authRelatedEvent');
+                        });
+                    });
+                }, function(err) {
+                    sessionSvc.localData.auth = sessionSvc.auth = {
+                        state: -1,
+                        prev: 2,
+                        data: err
+                    };
+                    storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                    $rootScope.$broadcast('authRelatedEvent');
+                });
+            }, function(err) {
+                sessionSvc.localData.auth = sessionSvc.auth = {
+                    state: -1,
+                    prev: 2,
+                    data: err
+                };
+                storage.setItem('twystData', JSON.stringify(sessionSvc.localData));
+                $rootScope.$broadcast('authRelatedEvent');
+            });
+    };
+
+    sessionSvc.fblogin = function() {
         window_ref = $window.open(constSvc.service_url + '/api/v1/auth/facebook', '_blank');
         window_ref.addEventListener('loadstop', iabLoadStop);
         window_ref.addEventListener('exit', iabClose);
     };
 
-    var iabLoadStop = function (event) {
+    sessionSvc.logout = function() {
+        $http.get(constSvc.service_url + '/api/v1/auth/logout')
+            .success(function() {
+                sessionSvc.status.user = false;
+                sessionSvc.data.user = null;
+            }).error(function() {
+                //TODO: Is this code OK?
+                sessionSvc.status.user = false;
+                sessionSvc.data.user = null;
+            });
+    };
+
+    var iabLoadStop = function(event) {
         if (event.url.search(/code=/) !== -1) {
             $log.warn("GETTING LOGGED IN USER");
             $http.get(constSvc.service_url + '/api/v1/auth/get_logged_in_user')
-                .success(function (data) {
+                .success(function(data) {
+                    //$rootScope.$$phase || $rootScope.$apply();
                     sessionSvc.data.user = data;
                     login();
                     window_ref.close();
-                }).error(function (data) {
-                    console.log(data);
+                }).error(function(data) {
                     window_ref.close();
                 });
         }
     };
 
-    var iabClose = function (event) {
-        window_ref.removeEventListener('loadstop',iabLoadStop);
-        window_ref.removeEventListener('exit',iabClose);
+    var iabClose = function(event) {
+        window_ref.removeEventListener('loadstop', iabLoadStop);
+        window_ref.removeEventListener('exit', iabClose);
     };
 
-    var login = function () {
-        console.log('in login function');
+    var login = function() {
         if (sessionSvc.data.user) {
             $http.get(constSvc.service_url + '/api/v1/auth/facebook/callback')
-                .success(function (data, status, headers, config) {
+                .success(function(data, status, headers, config) {
+                    //$rootScope.$$phase || $rootScope.$apply();
                     sessionSvc.status.user = true;
                     $rootScope.$broadcast('sessionUpdated');
-                    console.log('logged in')
-                }).error(function (data, status, headers, config) {
+                }).error(function(data, status, headers, config) {
                     sessionSvc.status.user = false;
-                    console.log("couldnt log in");
                 });
         }
     };

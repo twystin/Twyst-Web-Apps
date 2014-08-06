@@ -1,6 +1,6 @@
 'use strict';
 
-var twystClient = angular.module('twystClient', ["ngMap", "ngRoute", "ui.bootstrap"])
+var twystClient = angular.module('twystClient', ["ngRoute", "angularMoment", "ngTouch", "ui.bootstrap", "uuid4"])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -9,44 +9,7 @@ var twystClient = angular.module('twystClient', ["ngMap", "ngRoute", "ui.bootstr
         function ($routeProvider) {
             $routeProvider.
                 when('/', {
-                    templateUrl: 'templates/home.html',
-                    controller: 'HomeCtrl'
-                }).
-                when('/recco/:id', {
-                    templateUrl: 'templates/recco_detail.html',
-                    controller: 'ReccoDetailCtrl'
-                }).
-                when('/near/:id', {
-                    templateUrl: 'templates/near_detail.html',
-                    controller: 'NearDetailCtrl'
-                }).
-                when('/settings', {
-                    templateUrl: 'templates/settings.html',
-                    controller: 'SettingsCtrl'
-                }).
-                when('/errors', {
-                    templateUrl: 'templates/error.html',
-                    controller: 'DataCtrl'
-                }).
-                when('/near', {
-                    templateUrl: 'templates/near.html',
-                    controller: 'NearCtrl'
-                }).
-                when('/my', {
-                    templateUrl: 'templates/my.html',
-                    controller: 'MyCtrl'
-                }).
-                when('/settings', {
-                    templateUrl: 'templates/settings.html',
-                    controller: 'SettingsCtrl'
-                }).
-                when('/checkin', {
-                    templateUrl: 'templates/checkin.html',
-                    controller: 'CheckinCtrl'
-                }).
-                when('/signin', {
-                    templateUrl: 'templates/signin.html',
-                    controller: 'SignInCtrl'
+                    templateUrl: 'templates/home.html'
                 }).
                 otherwise({
                     redirectTo: '/'
@@ -54,11 +17,15 @@ var twystClient = angular.module('twystClient', ["ngMap", "ngRoute", "ui.bootstr
         }
         ]);
 
-twystClient.run(function ($rootScope, $log, $timeout, sessionSvc, dataSvc) {
-    sessionSvc.run();
-    $timeout(function() {
+twystClient.run(function ($rootScope, $log, $timeout, $interval, sessionSvc, dataSvc, logSvc) {
+    logSvc.info("Starting the app");
+    $timeout(function () {
+        sessionSvc.run();
+    }, 5000);
+
+    $timeout(function () {
         dataSvc.run();
-    }, 1000);
+    }, 10000);
 
     $rootScope.distance = function (p1, p2) {
         var R = 6371; // km
@@ -67,21 +34,45 @@ twystClient.run(function ($rootScope, $log, $timeout, sessionSvc, dataSvc) {
                 return this * Math.PI / 180;
             };
         }
-        if (!p1 || !p2) {
-            return null;
+
+        if (!p1 || !p2 || _.isEmpty(p1) || _.isEmpty(p2)) {
+            return 6371;
+            //return null;
         }
 
         var dLat = (p2.latitude-p1.latitude).toRad();
         var dLon = (p2.longitude-p1.longitude).toRad();
+
         var lat1 = p1.latitude.toRad();
         var lat2 = p2.latitude.toRad();
+
         var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
             Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         var d = R * c;
-        return d;
+        if (d > 20) {
+            return 21;
+        }
+        return d.toFixed(1);
     };
+
     $rootScope.plural = function(word, count) {
         return count > 1 ? word + 's' : word;
     }
+
+    // HANDLE THE BACK BUTTON CLICK
+    var onDeviceReady = function(){
+        document.addEventListener("backbutton", handleDeviceBackButton, false);
+        setTimeout(function() {
+            navigator.splashscreen.hide();
+        }, 10000);
+    }
+
+    function handleDeviceBackButton(evt){
+        evt.preventDefault();
+        evt.stopPropagation();
+        $rootScope.state = 'home'; // ideally should track current and previous state
+    }
+
+    document.addEventListener("deviceready", onDeviceReady, false);
 });
