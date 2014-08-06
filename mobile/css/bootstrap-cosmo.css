@@ -532,6 +532,10 @@ cite {
   color: #ffffff;
 }
 
+.text-muted {
+  color: #666666;
+}
+
 .text-warning:hover {
   color: #e6e6e6;
 }

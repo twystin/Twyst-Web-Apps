@@ -1,10 +1,33 @@
 @font-face {
     font-family: 'OpenSans';
-    src: URL('../assets/opensans/OpenSans-Regular.ttf') format('truetype');
+    src: URL('../assets/fonts/sapient/SAPISM.TTF') format('truetype');
 }
 @font-face {
     font-family: 'OpenSansBold';
-    src: URL('../assets/opensans/OpenSans-Bold.ttf') format('truetype');
+    src: URL('../assets/fonts/sapient/SAPISB.TTF') format('truetype');
+}
+
+.terms-font {
+    font-size:70% !important;
+}
+
+.font-short {
+    font-size:75% !important;
+} 
+
+.well-enabled {
+    background-color: white;
+}
+
+.focused-input {
+    border-color: rgba(82,168,236,.8);
+    outline: 0;
+    -moz-box-shadow: 0 0 8px rgba(82,168,236,.6);
+    box-shadow: 0 0 8px rgba(82,168,236,.6);
+}
+
+.well-disabled {
+    background-color: #E6E6E6;
 }
 
 .padding_small {
@@ -24,10 +47,11 @@
     font-size:36px !important;
 }
 
-.t_icon_inline {
-    color:#F05A28 ;
+.t_icon_grey {
+    color:lightslategrey;
     font-size:28px
 }
+
 
 .t_icon_heart {
     color: #D91B5B;
@@ -38,9 +62,61 @@
     font-size:32px
 }
 .padding_top_big {
-    padding-top:80px;
+    padding-top:90px;
 }
 
+.padding_top_too_big {
+    padding-top:150px;
+}
+
+span, button, .divvy, li  {
+    font-size: 22px !important;
+}
+
+.tagbox {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 13px;
+    line-height: 1;
+    color: #4680C2;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    text-decoration: underline;
+}
+
+.rewardbox {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 13px;
+    line-height: 1;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #8CC63E;
+}
+
+.tagdot {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 13px;
+    line-height: 1;
+    color: #4680C2;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.tline {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: 0;
+    border-top: 1px solid white;
+}
 
 .t_head {
     font: OpenSansBold, sans-serif;
@@ -54,6 +130,7 @@
 body {
     background-color: white;
     font-family: OpenSans, sans-serif;
+     padding-bottom: 70px;
 }
 
 .panel-white {
@@ -123,9 +200,26 @@ map, div[map] {display:block; width:600px; height:400px;}
     border-top: none !important;
     border-right: none !important;
     border-left: none !important;
-    padding-bottom: 5px !important;
-    border-bottom: 2px solid orange;
+    padding-bottom: 20px !important;
+    border-bottom: 1px solid #808080;
+    margin: 5px !important;
+    box-shadow: 1px 1px 2px 0px darkslategrey;
 
+}
+
+.t_reward {
+    background-color: #FFF2BC !important;
+}
+
+.t_redemption {
+    background-color: #d3d3d3 !important;
+}
+
+.t_checkin {
+    background-color: white !important;
+}
+.t_favourite {
+    background-color: white !important;
 }
 
 body {
@@ -188,26 +282,35 @@ body {
     background-color: #8CC63E;
 }
 
+.outlet_name {
+    color: #BC212D;
+    font-weight: bold;
+    font: OpenSansBold, sans-serif !important;
+}
+
 .btn-danger, .alert-danger {
     background-color: #D91B5B;
 }
 
 .btn-warning, .alert-warning {
-    background-color: #F05A28 !important;
+    background-color: #f6921e !important;
 }
 
 .btn-primary, .alert-primary {
     background-color: #4680C2;
 }
+
 .t_recco a {
     text-decoration: none;
 }
 
 .tbig {
+    font-size:18px;
     color: orange;
 }
 
 .tbig1 {
+    font-size:24px;
     color: orange;
 }
 
@@ -218,3 +321,41 @@ body {
 .container {
     padding: 5px !important;
 }
+
+.wellorange {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #FEF3E8;
+  border: 1px solid orange;
+  border-radius: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+
+}
+
+.wellsmall {
+  min-height: 20px;
+  padding: 10px;
+  margin-bottom: 1px;
+  background-color: #FEF3E8;
+  border: 1px solid orange;
+  border-radius: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.badgered {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 10px;
+  line-height: 1;
+  color: #ffffff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #EA001D;
+  border-radius: 10px;
+}
+

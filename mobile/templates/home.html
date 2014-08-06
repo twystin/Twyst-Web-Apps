@@ -1,39 +1,75 @@
-<div ng-include="'./templates/partials/header.html'"></div>
-<div ng-controller="HeaderCtrl">
-    <div ng-show="header.status.network && !header.status.version">
-        <div class="alert alert-danger">Your Twyst app is out of date. Please upgrade to the latest version.</div>
-    </div>
-    <div ng-hide="header.status.network && !header.status.version">
-        <div class="padding_top_big"></div>
-        <nav class="navbar navbar-default navbar-fixed-top" style="margin-top:60px">
-            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
-                <a class="btn btn-success btn-block btn-lg tb" href="#/"><i class="icon ion-home t_icon"></i><span class="t_main">&nbsp;For me</span></a>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
-                <a class="btn btn-primary btn-block btn-lg tb" href="#/my"><i class="icon ion-ios7-pricetag t_icon"></i><span class="t_main">&nbsp;Twysts</span></a>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
-                <a class="btn btn-primary btn-block btn-lg tb" href="#/near"><i class="icon ion-ios7-location t_icon"></i><span class="t_main">&nbsp;Nearby</span></a>
-            </div>
-        </nav>
-    </div>
-    <div>
-        <div ng-show="header.data.user.user.facebook.name && show_alert" class="alert alert-success">
-            <div class="divvy">
-                Welcome, {{header.data.user.user.facebook.name}}
-                <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="show_alert=!show_alert"></span>
-            </div>
+<div ng-include="'./templates/header.html'"></div>
+<div class="panel panel-success container" ng-controller="FirstRunCtrl" ng-if="state==='first_run'">
+    <div class="panel-heading" style="padding-top:30px;">
+        <div class="divvy">How to Twyst - Tutorial <span class="btn btn-warning pull-right" ng-click="dismiss()">Dismiss</span>
         </div>
     </div>
-    <div ng-show="alert_ncr.show">
-        <div class="divvy alert alert-{{alert_ncr.color}} row">
-            <div class="col-sm-11 col-md-11 col-xs-11">{{alert_ncr.message}}</div>
-            <div class="col-sm-1 col-md-1 col-xs-1"><span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="alert_ncr.show=false"></span></div>
+    <div class="panel-body">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="span10 offset1 divvy well" ng-show="show === 1">
+                    <p>Hi, and welcome to Twyst!</p>
+                    <p>Twyst helps you earn special rewards for frequenting your favourite restaurants, cafes and pubs.</p>
+                    <p>Here's a quick guide to using Twyst.</p>
+                    <br/>
+                    <button class="btn btn-success" ng-click="show=2">Next</button>
+                </div>
+                <div class="span10 offset1 divvy well" ng-show="show === 2">
+                    <strong>1. Login to get started</strong>
+                    <ul>
+                        <li>Click on
+                        <img src="assets/fr/fb.png">to log in with your Facebook account.</li>
+                        <li>Confirm your mobile number (only once) on Twyst to check-in, redeem rewards, and personalise your Twyst experience.</li>
+                        <li>Twyst will never post to your Facebook timeline without your permission.</li>
+                    </ul>
+                    <button class="btn btn-success" ng-click="show=3">Next</button>
+                </div>
+                <div class="span10 offset1 divvy well" ng-show="show === 3">
+                    <strong>2. Navigating the app</strong>
+                    <ul>
+                        <li>Use the nav bar
+                            <br/>
+                            <img class="span10 offset1 barImage" src="assets/fr/nav.png" />
+                        <br/>to navigate across the app.</li>
+                        <li><strong>For me</strong> is a list of the most relevant offers on Twyst for you. The more you use Twyst, the better the recommendations become.</li>
+                        <li><strong>My Twysts</strong> is a timeline of all your check-ins, favourited offers, and reward vouchers.</li>
+                        <li><strong>Nearby</strong> is a list of Twyst offers and locations near you.</li>
+                    </ul>
+                    <button class="btn btn-success" ng-click="show=4">Next</button>
+                </div>
+                <div class="span10 offset1 divvy well" ng-show="show === 4">
+                    <strong>3. Checking in</strong>
+                    <ul>
+                        <li>Click on
+                        <img class="span10 offset1 checkIn" src="assets/fr/2.png" />to check-in when you are at a Twyst location.</li>
+                        <li>You can check-in by scanning the QR code or sending an SMS</li>
+                        <li>Ask the outlet staff for help if you are having any difficulties checking-in.</li>
+                    </ul>
+                    <button class="btn btn-success" ng-click="show=5">Next</button>
+                </div>
+                <div class="span10 offset1 divvy well" ng-show="show === 5">
+                    <strong>4. Important Icons</strong>
+                    <ul>
+                        <li>
+                        <img class="icons" src="assets/fr/3.png" />Shows your current check-ins against that offer.</li>
+                        <li>
+                        <img class="icons" src="assets/fr/4.png" />Click to 'favourite' an offer you like, and track it at any time from My Twysts.</li>
+                        <li>
+                            <img class="span10 offset1 barImage" src="assets/fr/5.png" />
+                        <br>On the offer detail, see how many check-ins you have left for your next reward!</li>
+                        <li>
+                        <img class="icons" src="assets/fr/6.png" />Is a reward that you can redeem at the outlet. Click on the icon to see the voucher.</li>
+                        <li>
+                        <img src="assets/fr/7.png" />Click on 'How to Twyst' in the Settings to see the tutorial again, anytime!</li>
+                    </ul>
+                    <button class="btn btn-success" ng-click="dismiss()">Happy Twystin!</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="panel panel-primary">
-   <div class="panel-body">
+<div class="panel panel-primary" ng-controller="ItemsCtrl" ng-if="state==='home'">
+    <div class="panel-body">
         <div class="list-group" ng-controller="DataCtrl">
             <div ng-show="selectedTag" class="alert alert-warning">
                 <span>Tags: {{selectedTag}}</span>
@@ -43,77 +79,700 @@
                 <span>{{saveAlert}}</span>
                 <span class="icon ion-ios7-close-outline pull-right t_icon" ng-click="saveAlert = ''"></span>
             </div>
-
-            <div ng-controller="HeaderCtrl">
-                <div ng-show="needPhone()">
-                    <div class="alert alert-warning">
-                        <span>Twyst needs your phone number to work well. We will never send you any unsolicited text messages. Please confirm your phone number.</span>
-                        <input class="input-lg" ng-model="phone" style="font-size:24px;">
-                        <button class="button btn-primary btn-lg" ng-click="addPhone(phone)">Confirm</button>
+            <div ng-show="empty('reccos2')" style="padding-top:50px !important">
+                <div ng-init="getdata()">
+                    <center>
+                    <span>Fetching awesome offers from Twyst!</span>
+                    <br/>
+                    <i class="icon ion-loading-c t_icon" style="color:orange; font-size:larger"></i>
+                    </center>
+                </div>
+            </div>
+            <div ng-hide="empty('reccos2')">
+                <div class="divvy alert alert-warning">Top {{limit}} suggestions for you on Twyst!</div>
+                <div ng-repeat="recommendation in data.reccos2 | mySearch:selectedTag | limitTo:limit" ng-if="!!recommendation.outlet.basics.name">
+                    <div class="row list-group-item t_list" ng-controller="HomeItemDetailCtrl" ng-init="process(recommendation)">
+                        <!--<div class="pull-right text-warning">Twyst score {{item.weight | number:2}}&nbsp;&nbsp;</div>-->
+                        <div ng-include="'./templates/item_detail.html'"></div>
                     </div>
                 </div>
-                <div ng-show="alert.show" class="alert alert-{{alert.color}}">{{alert.message}}</div>
-            </div>
-
-            <div ng-show="empty('reccos')" class="alert alert-warning">
-                <center>
-                <h4>Trying to get data from the Twyst service <i class="icon ion-refreshing t_icon"></i></h4>
-                </center>
-            </div>
-            <div ng-hide="empty('reccos')">
-                <div ng-repeat="recommendation in data.reccos | mySearch:selectedTag">
-                    <div class="row list-group-item t_list">
-                        <div class="row">
-                        <div class="col-xs-3 col-sm-3 col-md-3">
-                            <center>
-                                <div ng-show="recommendation.program.outlets.0.basics.is_a">
-                                    <img src="assets/transparent/{{recommendation.program.outlets.0.basics.is_a}}.png" class="ti" height="100px" width="auto"><br/><br/>
-                                </div>
-                                <div ng-hide="recommendation.program.outlets.0.basics.is_a">
-                                    <img src="assets/transparent/other.png" class="ti" height="100px" width="auto"><br/><br/>
-                                </div>
-
-                                <div>
-                                    <div class="row">
-                                        <center>
-                                        <div class="col-sm-1 col-md-2 col-xs-0"></div>
-                                        <div ng-show="isFave(recommendation.program.outlets.0)">
-                                            <div class="col-sm-4 col-md-3 col-xs-6"><i class="icon ion-ios7-heart t_icon_heart" ng-click="saveFave(recommendation.program.outlets.0)"></i></div>
-                                        </div>
-                                        <div ng-hide="isFave(recommendation.program.outlets.0)">
-                                            <div class="col-sm-4 col-md-3 col-xs-6"><i class="icon ion-ios7-heart-outline t_icon_heart" ng-click="saveFave(recommendation.program.outlets.0)"></i></div>
-                                        </div>
-                                        <div class="col-sm-4 col-md-3 col-xs-6"><i class="icon ion-android-share t_icon_share" ng-click="shareRecco(recommendation)"></i></div>
-                                        <div class="col-sm-1 col-md-2 col-xs-0"></div>
-                                        </center>
-                                    </div>
-                                </div>
-                            </center>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-6 col-md-6 t_recco">
-                            <div ng-click="showDetail($index)">
-                                <h3 class="list-group-item-heading">{{recommendation.program.outlets.0.basics.name | shorttext:14}}</h3>
-                                <h4 class="list-group-item-text">{{recommendation.offer.basics.description | shorttext:35}}</h4>
-                            </div>
-
-                            <span ng-repeat="tag in getTags(recommendation.program.outlets.0.attributes.tags)">
-                                <button class="button btn-grey" ng-click="addFilter($event)">#{{tag}}</button>
-                            </span>
-                        </div>
-
-                        <div class="col-xs-3 col-sm-3 col-md-3">
-                            <span> {{distance(recommendation.program.outlets.0) | dist}}km </span><br/>
-                            <div ng-show="rewards(recommendation.program.outlets.0)">&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-gift t_icon_inline"></span><br/></div>
-                            <span>{{checkins(recommendation.program.outlets.0)}} </span><span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto"></span><br/>
-                        </div>
-                        </div>
-
-                    </div>
-
-            </div>
+                <div class="divvy" ng-show="limit < data.reccos2.length">
+                    <center><button class="btn btn-inverse btn-block" ng-click="limit = limit+5">See More<br/><i class="icon ion-chevron-down"></i></button></center>
+                </div>
             </div>
         </div>
     </div>
-    <div ng-include="'./templates/partials/footer.html'"></div>
+    <div ng-include="'./templates/footer.html'"></div>
+</div>
+<div class="panel panel-primary" ng-controller="TimelineCtrl" ng-if="state==='timeline'">
+    <div class="panel-body">
+        <div class="list-group" ng-controller="DataCtrl" ng-init="searchFilter = ''">
+            <nav class="navbar navbar-default navbar-fixed-top" style="margin-top:150px">
+                <div class="well" style="margin:0px !important; padding:0px !important;">
+                    <span class="{{searchFilter===''?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('')">All</span>
+                    <span class="{{searchFilter==='reward'?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('reward')">Rewards</span>
+                    <span class="{{searchFilter==='checkin'?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('checkin')">Check-ins</span>
+                    <span class="{{searchFilter==='favourite'?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('favourite')">Favourites</span>
+                </div>
+            </nav>
+            <div style="margin-top:50px;">
+                <div ng-repeat="entry in data.timeline | filter: {type:searchFilter}">
+                    <div class="row list-group-item t_list t_{{entry.type}}">
+                        <div class="row">
+                            <div ng-if="entry.type === 'redemption'">
+                                <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <img src="assets/gift_grey.png" ng-click="addFilterForTimleine('reward')" height="70px" width="auto">
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 t_recco" ng-init="limitVal = 1">
+                                    <div ng-click="showDetail(entry.details._id)">
+                                        <span>Reward claimed at <span class="list-group-item-heading outlet_name">{{entry.details.used_details.used_at.basics.name}}</span></span>
+                                        <br/>
+                                        <span class="list-group-item-text">{{entry.details.issue_details.issued_for | rewardify}}</span>
+                                        <hr class="tline" />
+                                        <i class="icon ion-ios7-location t_icon_grey"></i>&nbsp;&nbsp;&nbsp;<span class="list-group-item-heading">{{entry.details.used_details.used_at.contact.location.locality_1.0 | shorttext:16}}</span>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <div><span> {{distance(entry.details.used_details.used_at)}}km </span>
+                                    </div>
+                                    <br/>
+                                    <span>{{program_checkins(entry.details.issue_details.program)}} </span><span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto"></span>
+                                    <br/>
+                                    <div class="divvy"><span am-time-ago="entry.date" class="text-muted"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="entry.type ==='reward'">
+                                <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <img src="assets/gift.png" ng-click="addFilterForTimleine('reward')" height="70px" width="auto">
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 t_recco" ng-init="limitVal = 1">
+                                    <div ng-click="showDetail(entry.details._id)">
+                                        <span>Reward unlocked at <span class="list-group-item-heading outlet_name">{{entry.details.issue_details.issued_at.0.basics.name}}</span></span>
+                                        <br/>
+                                        <span class="list-group-item-text">{{entry.details.issue_details.issued_for | rewardify}}</span>
+                                        <hr class="tline" />
+                                        <div ng-repeat="outlet in entry.details.issue_details.issued_at"><i class="icon ion-ios7-location t_icon_grey"></i>&nbsp;&nbsp;&nbsp;<span>{{outlet.contact.location.locality_1.0 | shorttext:16}}</span>
+                                        </div>
+                                        <div class="badgered divvy" ng-if="isEndingSoon(entry.details) === true">Ending soon</div></div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <!-- <div><span> {{distance(entry.details.issue_details.issued_at)}}km </span></div><br/> -->
+                                    <span>{{program_checkins(entry.details.issue_details.program)}} </span><span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto"></span>
+                                    <br/>
+                                    <div class="divvy"><span am-time-ago="entry.date" class="text-muted"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="entry.type ==='checkin'">
+                                <div class="col-xs-3 col-sm-3 col-md-3" ng-click="searchFilter='checkin'">
+                                    <img src="assets/fav_icon.png" ng-click="addFilterForTimleine('checkin')" height="70px" width="auto">
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 t_recco" ng-init="limitVal = 1">
+                                    <div ng-click="showItemDetail(entry.details.checkin_program, entry.details.checkin_tier, entry.details.outlet, entry.details.checkin_for)">
+                                        <span>Checked-in at <span class="list-group-item-heading outlet_name">{{entry.details.outlet.basics.name}}</span></span>
+                                        <br/>
+                                        <span class="list-group-item-text">{{entry.details.checkin_for.basics.description | shorttext:30}}</span>
+                                        <hr class="tline" />
+                                        <i class="icon ion-ios7-location t_icon_grey"></i>&nbsp;&nbsp;&nbsp;<span class="list-group-item-heading">{{entry.details.outlet.contact.location.locality_1.0 | shorttext:16}}</span>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3">
+                                    <div><span> {{distance(entry.details.outlet)}}km </span>
+                                    </div>
+                                    <br/>
+                                    <span>{{program_checkins(entry.details.checkin_program)}} </span><span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto"></span>
+                                    <br/>
+                                    <div class="divvy"><span am-time-ago="entry.date" class="text-muted"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="entry.type ==='favourite'">
+                                <div>
+                                    <div class="col-xs-3 col-sm-3 col-md-3" ng-click="searchFilter='favourite'">
+                                        <img src="assets/heart2.png" ng-click="addFilterForTimleine('favourite')" height="70px" width="auto">
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 t_recco" ng-init="limitVal = 1">
+                                        <div ng-click="showItemDetail(entry.details.program, entry.details.tier, entry.details.outlets, entry.details.offers)">
+                                            <span>Favourited an offer at <span class="list-group-item-heading outlet_name">{{entry.details.outlets.basics.name}}</span></span>
+                                            <br/>
+                                            <span class="list-group-item-text">{{entry.details.offers.basics.description | shorttext:30}}</span>
+                                            <hr class="tline" />
+                                            <i class="icon ion-ios7-location t_icon_grey"></i>&nbsp;&nbsp;&nbsp;<span class="list-group-item-heading">{{entry.details.outlets.contact.location.locality_1.0 | shorttext:16}}</span>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 col-sm-3 col-md-3">
+                                        <div><span> {{distance(entry.details.outlets)}}km </span>
+                                        </div>
+                                        <br/>
+                                        <span>{{program_checkins(entry.details.program)}} </span><span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto"></span>
+                                        <br/>
+                                        <div ng-show="rewards(entry.details.outlets)">&nbsp;&nbsp;&nbsp;&nbsp; <span class="tbig"><img src="assets/gift.png" height="35px" width="auto"></span>
+                                            <br/>
+                                        </div>
+                                        <div class="divvy"><span am-time-ago="entry.date" class="text-muted"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'./templates/footer.html'"></div>
+</div>
+<div class="panel panel-primary" ng-controller="ItemsCtrl" ng-if="state==='near'">
+    <div class="panel-body">
+        <div class="list-group" ng-controller="DataCtrl">
+            <div class="well">
+                <div class="divvy alert alert-success">Showing offers in a {{dist.kms
+                < 21 ? dist.kms + ' kms' : 'more than 20 km'}} radius</div>
+                <select class="form-control input-lg" style="font-size:24px;" ng-model="dist" ng-options="d.kms < 21 ? d.kms + ' kms' : 'more than 20 kms'  for d in distances">
+                    <option value="">Pick a different distance</option>
+                </select>
+            </div>
+            <div ng-show="selectedTag" class="alert alert-warning">
+                <span>Tags: {{selectedTag}}</span>
+                <span class="icon ion-ios7-close-outline pull-right t_icon" ng-click="clearFilters($event)"></span>
+            </div>
+            <div ng-show="empty('nearby')" style="padding-top:50px !important">
+                <div ng-init="getdata()">
+                    <center>
+                    <span>Fetching awesome offers from Twyst!</span>
+                    <br/>
+                    <i class="icon ion-loading-c t_icon" style="color:orange; font-size: larger"></i>
+                    </center>
+                </div>
+            </div>
+            <div ng-hide="empty('nearby')">
+                <div ng-repeat="near in data.nearby | mySearch:selectedTag | filter: distanceFilter | orderBy:distance">
+                    <div class="row list-group-item t_list" ng-controller="NearItemDetailCtrl" ng-init="process(near)">
+                        <div ng-include="'./templates/item_detail.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'./templates/footer.html'"></div>
+</div>
+<div ng-controller="DetailsCtrl" ng-if="state==='detail'">
+    <div ng-controller="HeaderCtrl">
+        <div class="container" ng-controller="DataCtrl" ng-init="init()" style="padding:20px !important;">
+            <div class="row" style="padding-top:10px;margin:0px !important">
+                <span style="font-size:30px !important;">{{item.outlet.basics.name}}</span>
+                <span class="pull-right">
+                <span ng-show="isFave(item.outlet, item.offer)" class="btn">
+                <span ng-click="deleteFave(item.outlet, item.offer)"><i class="icon ion-ios7-heart t_icon_heart" ></i>  </span>
+                </span>
+                <span ng-hide="isFave(item.outlet, item.offer)" class="btn">
+                <span ng-click="saveFave(item.program, item.tier, item.outlet, item.offer)"><i class="icon ion-ios7-heart-outline t_icon_heart"></i></span>
+                </span>
+                </span>
+                <!--                    <div class="badge"><span>{{program_checkins(item.program)}} </span><span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto"> </span><span>CHECK-IN(S)</span></div>                        -->
+                <!--<button class="btn btn-primary pull-right">Follow</button>-->
+                <hr style="margin-bottom:0px !important" />
+            </div>
+            <div class="row" style="margin:0px !important">
+                <div class="divvy">{{item.outlet.contact.location.address}}</div>
+                <div class="row">
+                    <span ng-show="item.outlet.contact.phones.landline"><a href="tel:{{item.outlet.contact.phones.landline}}"><img src="assets/phone.jpg" height="30px" width="auto">{{item.outlet.contact.phones.landline}}</a></span>&nbsp;
+                    <span ng-repeat="mobile in item.outlet.contact.phones.mobile | limitTo:1"><a ng-href="tel:{{mobile.num}}"><img src="assets/phone.jpg" height="30px" width="auto">{{mobile.num}}</a></span>
+                </div>
+            </div>
+            <div class="row">
+                <div style="padding:10px;">
+                    <center>
+                    <img src="{{item.program.images.0}}" height="200px" width="auto" class="img-rounded img-responsive" style="border: 2px solid black">
+                    </center>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="row-fluid">
+                <b>{{item.program.name}}</b>&nbsp;&nbsp;
+                <span ng-if="isNewProgram(item.program) === true" class="badgered pull-right">New offer</span>
+                <span ng-if="isEndingProgram(item.program) === true" class="badgered pull-right">Ending soon</span>
+
+                </h4>
+                <div class="well divvy">Program ends: {{item.program.validity.earn_end | date}}
+                    <span class="pull-right">
+                    <span>{{program_checkins(item.program)}} </span>
+                    <span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto">&nbsp;</span>
+                    </span>
+                </div>
+                
+            </div>
+            <div class="row wellorange">
+                <div ng-if="getNext2(program_checkins(item.program)) !== undefined">
+                    <div class="progress" style="height:42px !important;">
+                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{getNext2(checkins(item.program))[0]}}" aria-valuemin="0" aria-valuemax="{{program_checkins(item.program) + getNext2(checkins(item.program))[0]}}" style="width:{{program_checkins(item.program)*100/(program_checkins(item.program) + getNext2(program_checkins(item.program))[0])}}%;">
+                        </div>
+                    </div>
+                    <center><span>{{getNext2(program_checkins(item.program))[0]}} visits to go for the next reward</span>
+                    </center>
+                </div>
+                <hr/>
+                <div ng-repeat="tier in programs | limitTo: 1" >
+                    <div class="row" ng-init="getRewardDetails(program_checkins(item.program), reward_details_limit)">
+                        <div ng-repeat="obj in final_rewards">
+                            <div>
+                                <span class="pull-left"><img ng-src="assets/transparent/unlocked.png" ng-if="obj.tier.basics.name === item.tier.basics.name" style="margin-top: -5px;margin-right: 5px"></span>
+                                <span class="pull-left"><img ng-src="assets/transparent/lock.png" ng-if="obj.tier.basics.name !== item.tier.basics.name" style="margin-top: -5px;margin-right: 5px"></span>
+                                <span>{{obj.tier.basics.name}}</span>
+                                <span class="pull-right">{{obj.tier.basics.start_value}} - {{obj.tier.basics.end_value}} visits</span>
+                                <br/><br/>
+                                <table class="table table-responsive">
+                                    <thead>
+                                        <th><span><img src="assets/fav_icon.png" height="35px" width="auto"></span></th>
+                                        <th><span>Reward</span></th>
+                                        <th></th>
+                                        <th></th>
+                                    </thead>
+                                    <tr ng-repeat="reward in obj.rewards" ng-click="expandReward(reward.num)" style="background:{{getClass(program_checkins(item.program), reward.num + 1)}} !important">
+                                        <td><span><center>{{reward.num + 1}}</center></span></td>
+                                        <td>
+                                            <span class="text-muted">{{reward.offer.basics.title}}</span><br/>
+                                            <span ng-show="reward.show">
+                                            {{reward.offer.basics.description}}<br/>
+                                            <small class="text-muted">Terms: {{reward.offer.terms}}</small>
+                                            </span>
+                                        </td>
+                                        <td ng-click="showReward(item.outlet.basics.name)">
+                                            <span><img src="assets/gift_{{should_i_show_a_reward_2(item.outlet, item.program, obj.tier, reward.offer)}}.png" height="35px" width="auto"></span>
+                                        </td>
+                                        <td>
+                                            <span ng-show="reward.show"><i class="icon ion-chevron-up pull-right"></i></span>
+                                            <span ng-hide="reward.show"><i class="icon ion-chevron-down pull-right"></i></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="divvy">
+                            <center><button class="btn btn-inverse btn-block" ng-click="getRewardDetails(program_checkins(item.program), reward_details_limit+5)">See more<br/><i class="icon ion-chevron-down"></i></button></center>
+                        </div> 
+                    </div>
+                </div>
+                <div style="margin-top: 10px;">
+                    <button ng-click="show_terms = true" ng-show="!show_terms">Terms and conditions</button>
+                </div>
+                <div ng-show="show_terms" class="well-enabled">
+                    <span>Terms and conditions</span>
+                    <ol>
+                        <li>No 2 (or more) offers can be clubbed.</li>
+                        <li>Offers are not valid on specially priced combinations e.g. Buffets / Brunch / Corporate dining rates etc.</li>
+                        <li>Only 1 voucher can be used per bill generated.</li>
+                        <li>In certain cases specific items may be part of the offer. The redemption of such offers is subject to availability of the item.</li>
+                        <li>The offers are provided at the sole discretion of the merchant and the merchant reserves the right to alter or withdraw the offer at any time.</li>
+                        <li>Rewards consisting of alcohol / alcohol-based products will be available only to individuals above legal drinking age. The establishment reserves the right to verify the customer's age before providing such reward.</li>
+                    </ol>
+                    <div>
+                        <button ng-click="show_terms = false">Close</button>
+                    </div>
+                </div>
+                <div>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'./templates/footer.html'"></div>
+</div>
+<div ng-controller="SettingsCtrl" ng-if="state==='settings'">
+    <div class="panel panel-white" style="padding:15px">
+        <div class="panel-heading">
+            <h3>Settings</h3>
+        </div>
+        <div class="panel-body">
+            <!--
+            <div><br/>
+                <button class="button btn-white btn-block" ng-click="twyst()">
+                <h1 class="icon ion-paper-airplane"></h1>&nbsp;
+                <span>How to Twyst</span>
+                </button>
+            </div>
+            -->
+            <!--<div>
+                <br/>
+                <button class="button btn-white btn-block" ng-click="rate()">
+                <h1 class="icon ion-star"></h1>&nbsp;
+                <span>Rate the Twyst app</span>
+                </button>
+            </div>-->
+            <div>
+                <br/>
+                <button class="button btn-white btn-block" ng-click="messages.feedback.show = true; fb=''">
+                <h1 class="icon ion-speakerphone"></h1>&nbsp;
+                <span>Send us Feedback!</span>
+                </button>
+                <div class="panel panel-success" style="padding: 15px" ng-show="messages.feedback.show">
+                    <div class="alert alert-{{messages.feedback.color}} divvy" ng-show="messages.feedback.text">
+                        {{messages.feedback.text}}
+                        <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="messages.feedback.show = false; messages.feedback.text=''"></span>
+                    </div>
+                    <div ng-hide="messages.feedback.text">
+                        <div class="panel-body">
+                            <div class="divvy">Give us feedback</div>
+                            <textarea class="form-control" rows="3" ng-init="fb=''" ng-model="fb" style="font-size:24px;"></textarea>
+                            <div>
+                                <button class="button btn-primary btn-lg" ng-click="feedback(fb)">Send feedback</button>
+                                <button class="button btn-default btn-lg" ng-click="fb = ''; messages.feedback.show = false">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br/>
+                <button class="button btn-white btn-block" ng-click="messages.suggest.show = true; fb=''">
+                <h1 class="icon ion-ios7-lightbulb"></h1>&nbsp;
+                <span>Suggest an outlet</span>
+                </button>
+                <div class="panel panel-success" style="padding: 15px" ng-show="messages.suggest.show">
+                    <div class="alert alert-{{messages.suggest.color}} divvy" ng-show="messages.suggest.text">
+                        {{messages.suggest.text}}
+                        <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="messages.suggest.show = false; messages.suggest.text=''"></span>
+                    </div>
+                    <div ng-hide="messages.suggest.text">
+                        <div class="panel-body">
+                            <div class="divvy">Suggest an outlet you would like to see on Twyst</div>
+                            <textarea class="form-control" rows="3" ng-init="fb=''" ng-model="fb" style="font-size:24px;"></textarea>
+                            <div>
+                                <button class="button btn-primary btn-lg" ng-click="suggest(fb)">Suggest an outlet</button>
+                                <button class="button btn-default btn-lg" ng-click="fb = ''; messages.suggest.show = false">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br/>
+                <button class="button btn-white btn-block" ng-click="help()">
+                <h1 class="icon ion-help-circled"></h1>&nbsp;
+                <span>Get help</span>
+                </button>
+            </div>
+            <!--<div>
+                <br/>
+                <button class="button btn-white btn-block" ng-click="checkVersion()">
+                <h1 class="icon ion-ios7-cloud-download"></h1>&nbsp;
+                <span>Check for updates</span>
+                </button>
+                <br/>
+                <div class="alert alert-{{messages.version.color}} divvy" ng-show="messages.version.show">
+                    {{messages.version.text}} <span ng-show="messages.version.link.length > 0"><a href="{{messages.version.link}}">Upgrade</a></span>
+                    <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="messages.version.show=!messages.version.show"></span>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+<div ng-controller="CheckinCtrl" ng-if="state==='checkin'">
+    <div ng-controller="HeaderCtrl">
+        <div ng-if="header.status.network === false">
+            <div class="container" style="padding:15px">
+                <div class="panel panel-white" style="padding:15px">
+                    <div class="panel-body">
+                        <br/><span>You are not connected to the network - please ask the outlet staff to help you check-in.</span>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="header.status.network === true" style="padding:15px">
+            <div ng-if="header.status.user === true">
+                <div class="panel panel-white" style="padding:15px">
+                    <div class="panel-heading">
+                        <h3>Check-in with QR Code</h3>
+                    </div>
+                    <div class="panel-body">
+                        <br/>
+                        <ol>
+                            <li>Ask your server for the Twyst QR code.</li>
+                            <li>Click 'Scan QR' below and point the camera at the Twyst QR code.</li>
+                        </ol>
+                        <div class="row" style="padding-top:10px;">
+                            <div class="col-xs-2 col-sm-2 col-md-2"></div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <button class="button btn-primary btn-block checkin" ng-click="scan()" style="height: 70px !important;"><span style="font-size:30px !important;">Scan QR </span>
+                                <img src="assets/qrcode.png" height="30px" width="auto" style="margin-top:-10px">
+                                </button>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-white" style="padding:15px">
+                    <div class="panel-body">
+                        <br/><span>No luck? Sorry about that - please ask the outlet staff to help you check-in.</span>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="header.status.user === false">
+                <div class="divvy alert alert-warning">Please verify your number before checking-in.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-controller="CheckinDetailCtrl" ng-if="state==='checkin_detail'">
+    <div ng-if="empty(checkin.data) === true">
+        <div class="well">
+            <div class="divvy text-success">
+                <center>
+                <i class="icon ion-paper-airplane t_icon" style="color:grey"></i>
+                &nbsp;&nbsp;Checking you in
+                </center>
+            </div>
+        </div>
+    </div>
+    <div ng-if="empty(checkin.data) === false">
+        <div class="container" style="padding:15px; margin-top:40px !important;" ng-controller="DataCtrl" ng-init="init(checkin.data.info.offer.user_eligibility, program_checkins(checkin.data.info.program))">
+            <h4 class="alert alert-{{detail.color}}">{{detail.header}}</h4>
+            <div class="panel panel-white" style="padding:15px">
+                <p><span class="text-{{detail.subcolor}}">{{detail.sub}}</span>
+                </p>
+                <div ng-repeat="fact in detail.facts">
+                    <p><span>{{fact}}</span>
+                    </p>
+                </div>
+                <p><span>{{detail.message}}</span>
+                </p>
+            </div>
+            <div ng-if="detail.button === 'retry'">
+                <p ng-controller="HeaderCtrl"><span><button class="btn btn-primary" ng-click="showTab('checkin')">Try again</button></span>
+                </p>
+            </div>
+            <div ng-if="detail.button === 'twysts'">
+                <p ng-controller="HeaderCtrl">
+                <span><button class="btn btn-success" ng-click="showTab('timeline')">Visit 'My Twysts'</button></span>
+                <!--<span><button class="btn btn-info" ng-click="shareCheckin(checkin.data)">Share</button></span>-->
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-controller="RewardDetailCtrl" ng-if="state==='reward_detail'">
+    <div>
+        <div class="container" ng-controller="DataCtrl" ng-init="init()" style="padding:20px !important;">
+            <div ng-if="reward.basics.status === 'user redeemed' || reward.basics.status === 'merchant redeemed'">
+                <div class="row">
+                    <div class="row">
+                        <h3 class="alert alert-warning">Used voucher {{reward.basics.code}}</h3>
+                        <hr/>
+                    </div>
+                </div>
+                <div class="row well">
+                    <span>You have already used this voucher at {{reward.used_details.used_at.basics.name}} on {{reward.used_details.used_time|date:medium}}.</span>
+                    <span>This voucher entitled you to: </span>
+                    <br/>
+                    <br/>
+                    <div class="alert alert-success divvy">{{reward.issue_details.issued_for | rewardify}}</div>
+                    <br/>
+                </div>
+            </div>
+            <div ng-if="reward.basics.status === 'active'">
+                <div ng-controller="HeaderCtrl">
+                    <div ng-if="header.status.network === true">
+                        <div class="row">
+                            <h3 class="alert alert-success">Voucher Available!</h3>
+                            <hr/>
+                        </div>
+                        <div class="row well">
+                            <span>Congratulations! You've unlocked a voucher at {{reward.issue_details.issued_at.0.basics.name}}. You get:</span>
+                            <br/>
+                            <br/>
+                            <div class="alert alert-success divvy">{{reward.issue_details.issued_for | rewardify}}</div>
+                            <br/>
+                            <span ng-if="reward.issue_details.program.validity.burn_end !== false">Voucher valid till: {{reward.issue_details.program.validity.burn_end|date:medium}}</span>
+                            <br/>
+                            <br/>
+                            <span>This voucher can be used:</span>
+                            <br/>
+                            <ul>
+                                <li>On: {{reward.issue_details.issued_for.reward_applicability.day_of_week.0}}</li>
+                                <li>During: {{reward.issue_details.issued_for.reward_applicability.time_of_day.0}}</li>
+                                <li>At: <span class="list-group-item-heading" ng-repeat="outlet in reward.issue_details.issued_at">{{outlet.contact.location.locality_1.0 | shorttext:16}} </span>
+                                </li>
+                                <li ng-if="reward.issue_details.issued_for.terms.length > 0">T&C:{{reward.issue_details.issued_for.terms}}</li>
+                            </ul>
+                            <span>To get your reward, select your location & press the "Redeem" button below.</span>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="row well">
+                            <span>Pick your location: </span>
+                            <select class="form-control input-lg" ng-model="selected_outlet" ng-options="outlet.contact.location.locality_1.0 for outlet in reward.issue_details.issued_at">
+                                <option value="">Choose location</option>
+                            </select>
+                            <button class="btn" ng-click="redeem(reward.basics.code, selected_outlet._id)">Redeem now</button>
+                        </div>
+                    </div>
+                    <div ng-if="header.status.network === false">
+                        <div class="row">
+                            <h3 class="alert alert-success">Voucher code: {{reward.basics.code}}</h3>
+                            <hr/>
+                        </div>
+                        <div class="row well">
+                            <span>Congratulations! You unlocked a voucher at {{reward.issue_details.issued_at.0.basics.name}}. Get:</span>
+                            <br/>
+                            <br/>
+                            <div class="alert alert-success divvy">{{reward.issue_details.issued_for | rewardify}}</div>
+                            <br/>
+                            <span ng-if="reward.issue_details.program.validity.burn_end !== false">Voucher valid till: {{reward.issue_details.program.validity.burn_end|date:medium}}</span>
+                            <br/>
+                            <br/>
+                            <span>This voucher can be used:</span>
+                            <br/>
+                            <ul>
+                                <li>On: {{reward.issue_details.issued_for.reward_applicability.day_of_week.0}}</li>
+                                <li>During: {{reward.issue_details.issued_for.reward_applicability.time_of_day.0}}</li>
+                                <li>At: <span class="list-group-item-heading" ng-repeat="outlet in reward.issue_details.issued_at">{{outlet.contact.location.locality_1.0 | shorttext:16}} </span>
+                                </li>
+                                <li>T&C:{{reward.issue_details.issued_for.terms}}</li>
+                            </ul>
+                        </div>
+                        <div class="row well">
+                            <span>Please present the voucher code at the time of placing the order (subject to verification). Please ensure you place the order in the next 30 minutes.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-controller="AuthCtrl" ng-if="state==='auth'">
+    <div class="panel panel-white" style="padding:15px;">
+        <!-- Error state -->
+        <div ng-show="auth.state === -1">
+            <div class="panel-heading">
+                <h3>Error</h3>
+            </div>
+            <div class="panel-body">
+                <span>{{auth.data.message}}</span>
+                <br>
+                <button class="btn btn-success" ng-click="auth.state = auth.prev">Try again?</button>
+                </span>
+                <button ng-controller="HeaderCtrl" class="btn btn-warning" ng-click="showTab('home')">Dismiss</button>
+                </span>
+            </div>
+        </div>
+        <!-- First run state -->
+        <div ng-show="auth.state === 0">
+            <div class="panel-heading">
+                <h3>Enter your phone number</h3>
+            </div>
+            <div class="panel-body">
+                <span>You need to verify your mobile number to check-in & see personalized offers.</span>
+                <!--<br/><span> Please enter your number below to sign-in. If this is the first time you are signing-in to Twyst, you will be sent an OTP code to verify your number.</span>-->
+                <br/>
+                <input class="form-control input-lg focused-input" placeholder="example: 9779000000" ng-model="phone">
+                <br/>
+                <button class="btn btn-lg btn-block btn-warning" ng-click="otplogin(phone)">Sign-in</button>
+                <br/>
+                <br/>
+            </div>
+        </div>
+        <!-- Verify OTP state -->
+        <div ng-show="auth.state === 1">
+            <div class="panel-heading">
+                <h3>Enter your OTP code</h3>
+            </div>
+            <div class="panel-body">
+                <span>Phone number </span>
+                <input class="form-control input-lg " ng-model="phone">
+                <br/>
+                <span>OTP code </span>
+                <input class="form-control input-lg focused-input" ng-model="otpcode">
+                <br/>
+                <button class="btn btn-lg btn-block btn-success" ng-click="otpverify(otpcode)">Verify!</button>
+                <br/>
+                <br/>
+                <span>Didn't get the OTP code?
+                <button class="btn btn-warning" ng-click="otplogin(phone)">Resend!</button></span>
+            </div>
+        </div>
+        <div ng-if="auth.state === 3">
+            <div ng-controller="HeaderCtrl" ng-init="showTab('home')"></div>
+        </div>
+        <!-- Connect to Facebook state -->
+        <!--
+        <div ng-show="auth.state === 2">
+            <div class="panel-heading">
+                <h3>Connect to Facebook</h3>
+            </div>
+            <div class="panel-body ">
+                <br/>
+                <span>Connecting to Facebook helps us show you personalized and relevant suggestions. It also helps you check-in to and win rewards at your favourite places via Twyst!</span><br/><br/>
+                <div class="alert alert-warning">
+                    <span>Twyst will never share or post anything to your Facebook without your permission.</span>
+                </div><br/><br/>
+                <center>
+                <img src="assets/facebook.png" style="height:auto; width:80%;" ng-click="facebook()">
+                <button ng-controller="HeaderCtrl" class="btn btn-link" ng-click="showTab('home')">Skip</button>
+                </center>
+                <br/><br/>
+            </div>
+        </div>
+        -->
+    </div>
+</div>
+<div ng-if="state==='redeemed'">
+    <div ng-if="redeemed.status === 'success'">
+        <div class="row">
+            <h3 class="alert alert-warning">Voucher redeemed!</h3>
+        </div>
+        <div class="row well">
+            <span>Congratulations! Your voucher code is: </span>
+            <br>
+            <div class="alert alert-success divvy">
+                <center>{{redeemed.reward.basics.code}}</center>
+            </div>
+            <span>To claim the reward:</span>
+            <ul>
+                <li>Present the voucher at the outlet BEFORE placing the order.</li>
+                <li>Make sure you place the order in the next 30 minutes.</li>
+            </ul>
+            <span>You get:</span>
+            <ul>
+                <li>{{redeemed.reward.issue_details.issued_for | rewardify}}</li>
+                <li>On: {{redeemed.reward.issue_details.issued_for.reward_applicability.day_of_week.0}}</li>
+                <li>During: {{redeemed.reward.issue_details.issued_for.reward_applicability.time_of_day.0}}</li>
+                <li>T&C:{{redeemed.reward.issue_details.issued_for.terms}}</li>
+                <li ng-if="reward.issue_details.program.validity.burn_end !== false">Voucher valid till: {{reward.issue_details.program.validity.burn_end|date:medium}}</li>
+            </ul>
+        </div>
+    </div>
+    <div ng-if="redeemed.status !== 'success'">
+        <div class="row">
+            <h3 class="alert alert-warning">Error redeeming the voucher</h3>
+        </div>
+        <div class="row well">
+            <span>Sorry, we couldn't redeem your voucher at this time. {{redeemed.message}}</span>
+            <br/>
+            <div ng-if="!!redeemed.reward.issue_details.issued_for === true">
+                <div class="alert alert-warning divvy">{{redeemed.reward.issue_details.issued_for | rewardify}}</div>
+                <br/>
+                <span ng-if="reward.issue_details.program.validity.burn_end !== false">Voucher valid till: {{redeemed.reward.issue_details.program.validity.burn_end|date:medium}}</span>
+                <br/>
+                <br/>
+                <span>This voucher can be used:</span>
+                <br/>
+                <ul>
+                    <li>On: {{redeemed.reward.issue_details.issued_for.reward_applicability.day_of_week.0}}</li>
+                    <li>During: {{redeemed.reward.issue_details.issued_for.reward_applicability.time_of_day.0}}</li>
+                    <li>T&C:{{redeemed.reward.issue_details.issued_for.terms}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

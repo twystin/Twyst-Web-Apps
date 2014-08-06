@@ -26,10 +26,45 @@ twystClient.filter('capitalize', function () {
     };
 });
 
+twystClient.filter('rewardify', function () {
+    return function (input) {
+        //console.log("REWARD REWARD " + JSON.stringify(input.reward));
+        if (!_.isEmpty(input.reward)) {
+            if (!_.isEmpty(input.reward.custom)) {
+                return input.reward.custom.text;
+            } else if (!_.isEmpty(input.reward.flat)) {
+                return "Get Rs." + input.reward.flat.off + " off on a minimum spend of Rs." + input.reward.flat.spend;
+            } else if (!_.isEmpty(input.reward.free)) {
+                return "Get a free " + input.reward.free.title + " with " + input.reward.free._with;
+            } else if (!_.isEmpty(input.reward.buy_one_get_one)) {
+                return "Get " + input.reward.buy_one_get_one.title;
+            } else if (!_.isEmpty(input.reward.reduced)) {
+                return "Get " + input.reward.reduced.what + " worth Rs. " + input.reward.reduced.worth + " for Rs. " + input.reward.reduced.for_what;
+            } else if (!_.isEmpty(input.reward.happyhours)) {
+                return "Extended happy hours by " + input.reward.happyhours.extension;
+            } else if (!_.isEmpty(input.reward.discount)) {
+                if (input.reward.discount.max) {
+                    return "Get " + input.reward.discount.percentage + " off, subject to a maximum discount of Rs." + input.reward.discount.max;
+                } else {
+                    return "Get " + input.reward.discount.percentage + " off";
+                }
+            } else {
+                return input.basics.description;
+            }
+        }
+        //console.log(JSON.stringify(input));
+        //Fix this to show correct reward detail
+        //var temp = input.basics.description.replace(/get a /i, '');
+        //return temp.charAt(0).toUpperCase() + temp.slice(1);
+    };
+});
+
 twystClient.filter('shorttext', function () {
     return function (input, param) {
         var spaces = "", i = 0;
-
+        if (!input) {
+            return '';
+        }
         if (input.length < param) {
             for (i = 0; i < param - input.length; i = i + 1) {
                 spaces += " ";
