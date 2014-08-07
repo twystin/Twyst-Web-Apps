@@ -238,7 +238,7 @@
                         <div class="span10">
                             Voucher <b>{{notif.data.basics.code}}</b> used by 
                             <b>{{notif.phone}}</b> on 
-                            {{notif.date | date: 'mediumDate'}} at <b>{{notif.data.used_details.used_at.basics.name}} {{notif.data.used_details.used_at.contact.location.locality_1.toString()}}</b> -
+                            {{notif.actual_date | date: 'mediumDate'}} at <b>{{notif.data.used_details.used_at.basics.name}} {{notif.data.used_details.used_at.contact.location.locality_1.toString()}}</b> -
                             {{notif.data.issue_details.issued_for.basics.description}} -
                             {{notif.data.issue_details.issued_for.terms}}
                         </div>
@@ -254,7 +254,7 @@
                             <img src="../../../common/images/favicon/twyst.ico" width="32px" height="32px" title="Checkins">
                         </div>
                         <div class="span10">
-                            User <b>{{notif.data.phone}}</b> checked-in via <b>{{notif.data.checkin_type}}</b> on <b>{{notif.date | date: 'mediumDate'}}</b>.  
+                            User <b>{{notif.data.phone}}</b> checked-in via <b>{{notif.data.checkin_type}}</b> on <b>{{notif.actual_date | date: 'mediumDate'}}</b>.  
                         </div>
                         <div class="span10 padding-notif-top">
                             <small class="grayed">{{notif.actual_date | date: 'MMM d, y h:mm a'}}</small>
@@ -265,7 +265,7 @@
                             <img src="../../../common/images/gift_given.png" width="32px" height="32px" title="Vouchers">
                         </div>
                         <div class="span10">
-                            Voucher generated on <b>{{notif.date | date: 'mediumDate'}}</b>.
+                            Voucher generated on <b>{{notif.actual_date | date: 'mediumDate'}}</b>.
                         </div>
                         <!-- <button class="btn btn-small btn-success btn-shadow" ng-click="changeVoucherStatus(notif.basics.code)">Ok. We gave the Reward!</button> -->
                         <div class="span10 padding-notif-top">
@@ -277,7 +277,7 @@
                             <img src="../../../common/images/favs.png" width="32px" height="32px" title="Favourites">
                         </div>
                         <div class="span10">
-                            User <b>{{notif.phone}}</b> favourited your offer on <b>{{notif.date | date: 'mediumDate'}}</b>.
+                            User <b>{{notif.phone}}</b> favourited your offer on <b>{{notif.actual_date | date: 'mediumDate'}}</b>.
                         </div>
                         <div class="span10 padding-notif-top">
                             <small class="grayed">{{notif.actual_date | date: 'MMM d, y h:mm a'}}</small>
