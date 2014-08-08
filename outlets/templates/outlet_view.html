@@ -190,7 +190,7 @@
 
                         <b>Cuisines:</b> {{outlet.attributes.cuisines.toString()}}
                         <hr>
-                        <b>Cost For Two: </b><i class="fa fa-inr"> <b>{{outlet.attributes.cost_for_two.min}}</b></i> <b>to</b> <i class="fa fa-inr"> <b>{{outlet.attributes.cost_for_two.max}}</b></i><br><b>Payment options:</b> {{outlet.attributes.payment_options.toString()}}.
+                        <b>Cost For Two: </b><i class="fa fa-inr"> <b>{{getCostForTwoText(outlet)[0]}}</b></i> <b>to</b> <i class="fa fa-inr"> <b>{{getCostForTwoText(outlet)[1]}}</b></i><br><b>Payment options:</b> {{outlet.attributes.payment_options.toString()}}.
                         <hr>
                         <b>Opening Hours</b><br>
                         {{outlet.attributes.timings}}
@@ -211,12 +211,13 @@
                                      
                     <div class="right-inner">
                         <h2 class="panel-title heading-sm pull-left"><i class="fa fa-qrcode"></i><b>Offers by Check-in No</b></h2><br><br>
-                        <div class="people-say margin-bottom-20" ng-repeat="offer in offers">
-                            <img src="" alt="">
-                            <div class="overflow-h padding-top-5">
-                                <span>{{offer.basics.title}}</span>
-                                <p>{{offer.basics.description}}</p>
-                            </div>    
+                        <div class="people-say margin-bottom-20" ng-repeat="offer in rewards">
+                            <div class="col-md-1">
+                                <p>{{offer.count}}</p>
+                            </div>
+                            <div class="overflow-h col-md-11">
+                                <p>{{offer.title}}</p>
+                            </div>  
                         </div>
 
                         <hr> 
