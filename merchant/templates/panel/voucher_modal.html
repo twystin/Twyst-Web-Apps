@@ -40,7 +40,7 @@
             <tbody>
                 <tr ng-repeat="c in vouchers_list">
                     <td>
-                        {{c.basics.modified_at | date: 'medium'}}
+                        {{c.issue_details.issue_date | date: 'medium'}}
                     </td>
                     <td>
                         {{c.basics.description}}
