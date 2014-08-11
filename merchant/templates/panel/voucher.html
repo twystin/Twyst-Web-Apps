@@ -37,7 +37,7 @@
                     Select Date:
                     </div>
                     <div class="span7">
-                       <input id="appendedInput" class="input-small" type="text" datepicker-popup="{{format}}" is-open="opened" min="min_date" max='max_date' datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start date" type="date" style="margin:0px;" ng-model="used.time" />
+                       <input id="appendedInput" class="input-small" type="text" datepicker-popup="{{format}}" is-open="opened" min="min_date" max='max_date' datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start date" type="date" style="margin:0px;" ng-model="used.time" ng-disabled="true"/>
                         <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button>
                     </div>
                 </div>

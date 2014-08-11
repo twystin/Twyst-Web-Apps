@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="outletApp">
+<head>
+	<title>Twyst</title>
+	<!-- Javascript -->
+	<script src="../common/libs/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../common/libs/angular/angular-route.min.js"></script>
+    <script src="../common/libs/angular-file-upload/angular-file-upload.min.js"></script>
+    <script src="../common/libs/angular/angular-cookies.min.js"></script>
+    <script src="../common/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../common/libs/html5shiv.js"></script>
+    <script src='../common/libs/underscore/underscore-min.js'></script>
+    <!-- -->
+    <script type="text/javascript" src="app.js" ></script>
+    <script type="text/javascript" src="donutdirective.js" ></script>
+    <script type="text/javascript" src="d3Svc.js" ></script>
+    
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="../../home/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/app.css">
+    <link rel="stylesheet" type="text/css" href="../../home/assets/css/themes/default.css">     
+    <link rel="stylesheet" type="text/css" href="styles/custom.css"> 
+   <!--  <link rel="stylesheet" type="text/css" href="../common/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/page_job_inner1.css">
+ -->
+	 <!-- Merchant Page Dependencies -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <!--=== Top ===-->
+    <div class="top">
+        <div class="container">
+            <ul class="loginbar pull-right">
+            </ul>
+        </div>
+    </div>
+    <!--/top-->
+    <!--=== End Top ===-->
+	   <div ng-include="'./templates/_partials/header.html'"></div>
+	   <div ng-view></div>
+	   <div ng-include="'./templates/_partials/footer.html'"></div>
+
+	<!-- JS Global Compulsory -->
+	<script src="./app.js"></script>
+    <script type="text/javascript" src="../common/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../common/libs/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="../../home/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- JS -->
+</body>
+	
+</html>
