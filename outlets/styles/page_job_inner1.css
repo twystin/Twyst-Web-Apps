@@ -19,6 +19,7 @@
 }
 
 /*Left-Inner*/
+
 .job-description .left-inner {
 	padding: 20px;
 	background: #fff;
@@ -177,3 +178,37 @@
 	text-align: right;
 	font-style: italic;
 }
+
+/* Custom CSS */
+
+.left-inner-parent {
+	background: #fff;
+}
+
+/* moving CSS from top of outlet_view */
+
+    .center{
+        text-align: center;
+    }
+    .color_black{
+        color: black;        
+    }
+    .merchant_logo{
+        width: 200px;
+        height: auto;
+    }
+    .bg{
+        background-image: url("../images/Twyst_blur.jpg");
+        background-repeat: no-repeat;
+        z-index: -9999;
+       
+    }
+    .padding-top{
+        padding-top: 10px;
+    }
+    .padding-top-5{
+        padding-top: 5px;
+    }
+    .header{
+        padding:8px 0px 8px 0px;
+    }
