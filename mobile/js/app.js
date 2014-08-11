@@ -19,13 +19,8 @@ var twystClient = angular.module('twystClient', ["ngRoute", "angularMoment", "ng
 
 twystClient.run(function ($rootScope, $log, $timeout, $interval, sessionSvc, dataSvc, logSvc) {
     logSvc.info("Starting the app");
-    $timeout(function () {
-        sessionSvc.run();
-    }, 5000);
-
-    $timeout(function () {
-        dataSvc.run();
-    }, 10000);
+    sessionSvc.run();
+    dataSvc.run();
 
     $rootScope.distance = function (p1, p2) {
         var R = 6371; // km

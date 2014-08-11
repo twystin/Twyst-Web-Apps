@@ -1,8 +1,6 @@
 var CLIENT_VERSION = 2,
     API_VERSION = 1;
 
-//var telephoneNumber = cordova.require("cordova/plugin/telephonenumber");
-
 twystClient.factory('constSvc', function() {
     'use strict';
     var constSvc = {};
@@ -262,26 +260,6 @@ twystClient.factory('checkinSvc', function(constSvc, sessionSvc, dataSvc, $rootS
             });
     };
 
-    checkinSvc.smsCheckin = function(smscode) {
-        var intent = "INTENT"; //leave empty for sending sms using default intent
-        var success = function() {
-            checkinSvc.data.status = "success";
-            checkinSvc.data.message = "Successful checkin through SMS";
-            checkinSvc.data.info = "";
-            $rootScope.$broadcast('checkinSuccess');
-        };
-        var error = function(e) {
-            checkinSvc.data.status = "error";
-            checkinSvc.data.message = "Couldn't checkin through SMS";
-            checkinSvc.data.info = JSON.stringify(e);
-            $rootScope.$broadcast('checkinError');
-        };
-
-        sms.send(sessionSvc.data.smsprovider.number,
-            sessionSvc.data.smsprovider.prefix + ' ' + smscode,
-            intent, success, error);
-    };
-
     return checkinSvc;
 });
 
@@ -424,10 +402,10 @@ twystClient.factory('dataSvc', function($rootScope, $window, $http, $log, $timeo
     dataSvc.run = function() {
         console.log("TWYST:Running an update!!!");
         dataSvc.refresh();
-        $interval(function() {
-            console.log("TWYST: Calling data refresh")
-            dataSvc.refresh()
-        }, 90000);
+        //$interval(function() {
+        //    console.log("TWYST: Calling data refresh")
+        //    dataSvc.refresh()
+        //}, 90000);
        
     };
 
@@ -435,19 +413,25 @@ twystClient.factory('dataSvc', function($rootScope, $window, $http, $log, $timeo
         dataSvc.data = dataSvc.getdata();
         dataSvc.status.refreshing = true;
         $rootScope.$broadcast('dataUpdated');
-        console.log("NETWORK STATUS " + sessionSvc.status.network);
+        console.log("ZZZ NETWORK STATUS " + sessionSvc.status.network);
         var latitude, longitude;
         if(sessionSvc.data.position && sessionSvc.data.position.latitude) {
             latitude = sessionSvc.data.position.latitude;
         }
         else {
             latitude = 28.4669448;
+            sessionSvc.data = sessionSvc.data || {};
+            sessionSvc.data.position = sessionSvc.data.position || {};
+            sessionSvc.data.position.latitude = sessionSvc.data.position.latitude || latitude;
         }
-        if(sessionSvc.data.position && sessionSvc.data.position.longitude) {
+        if(sessionSvc.data.position && sessionSvc.data.position.longitude) {            
             longitude = sessionSvc.data.position.longitude;
         }   
         else {
             longitude = 77.06652;
+            sessionSvc.data = sessionSvc.data || {};
+            sessionSvc.data.position = sessionSvc.data.position || {};
+            sessionSvc.data.position.longitude = sessionSvc.data.position.longitude || longitude;            
         }
         if (sessionSvc.status.network) {
             $http.get(constSvc.service_url + '/api/v2/data/' + latitude + '/' + longitude, {
@@ -459,18 +443,51 @@ twystClient.factory('dataSvc', function($rootScope, $window, $http, $log, $timeo
                 }
             })
                 .success(function(data) {
-                    dataSvc.data.nearby = data.info.NEAR.info || [];
-                    dataSvc.data.checkins = data.info.CHECKINS.info || [];
-                    dataSvc.data.rewards = data.info.VOUCHERS.info || [];
-                    dataSvc.data.reccos2 = data.info.RECCO.info || [];
-                    dataSvc.data.faves = data.info.FAVOURITES.info || [];
+                    console.log("DATA IS " + JSON.stringify(data));
+                    if (data && data.info) {
+                        if (data.info.NEAR && data.info.NEAR.info) {
+                            dataSvc.data.nearby = data.info.NEAR.info;    
+                        } else {
+                            dataSvc.data.nearby = [];
+                        }
+
+                        if (data.info.CHECKINS && data.info.CHECKINS.info) {
+                            dataSvc.data.checkins = data.info.CHECKINS.info;    
+                        } else {
+                            dataSvc.data.checkins = [];
+                        }
+
+                        if (data.info.VOUCHERS && data.info.VOUCHERS.info) {
+                            dataSvc.data.rewards = data.info.VOUCHERS.info;    
+                        } else {
+                            dataSvc.data.rewards = [];
+                        }         
+
+                        if (data.info.RECCO && data.info.RECCO.info) {
+                            dataSvc.data.reccos2 = data.info.RECCO.info;    
+                        } else {
+                            dataSvc.data.reccos2 = [];
+                        }           
+
+                        if (data.info.FAVOURITES && data.info.FAVOURITES.info) {
+                            dataSvc.data.faves = data.info.FAVOURITES.info;    
+                        } else {
+                            dataSvc.data.faves = [];
+                        }                                                    
+
+                    } else {
+                        dataSvc.data.nearby = [];
+                        dataSvc.data.checkins = [];
+                        dataSvc.data.rewards = [];
+                        dataSvc.data.reccos2 = [];
+                        dataSvc.data.faves = [];                        
+                    }
 
                     dataSvc.status.nearby = true;
                     dataSvc.status.checkins = true;
                     dataSvc.status.rewards = true;
                     dataSvc.status.reccos2 = true;
                     dataSvc.status.faves = true;
-
                     storage.setItem('twystData', JSON.stringify(dataSvc.data));
                     $rootScope.$broadcast('dataUpdated');
 
@@ -512,45 +529,10 @@ twystClient.factory('sessionSvc', function($window, $rootScope, $http, $q, $log,
     sessionSvc.status = {};
     sessionSvc.data.version = null;
     sessionSvc.status.server_up = false;
-    sessionSvc.status.network = false;
+    sessionSvc.status.network = true;
     sessionSvc.status.user = false;
     sessionSvc.status.version = true;
     sessionSvc.errors = [];
-
-    sessionSvc.getSMSProviderInfo = function() {
-        var deferred = $q.defer();
-        $http.get(constSvc.service_url + '/api/v1/sms/provider')
-            .success(function(data) {
-                //$rootScope.$$phase || $rootScope.$apply();
-                sessionSvc.status.smsprovider = true;
-                sessionSvc.data.smsprovider = data.info;
-                $rootScope.$broadcast('sessionUpdated');
-                deferred.resolve(data);
-            }).error(function(data) {
-                sessionSvc.status.smsprovider = false;
-                sessionSvc.data.smsprovider = null;
-                $rootScope.$broadcast('sessionUpdated');
-                deferred.reject(data);
-            });
-        return deferred.promise;
-    };
-
-
-    sessionSvc.getPhoneNumber = function() {
-        var deferred = $q.defer();
-        /*telephoneNumber.get(function (result) {
-         sessionSvc.status.phone = true;
-         sessionSvc.data.phone = result;
-         console.log("PHONE NUMBER:" + result);
-         deferred.resolve(result);
-         }, function (error) {
-         sessionSvc.status.phone = false;
-         sessionSvc.data.phone = null;
-         console.log("PHONE NUMBER ERROR:" + error);
-         deferred.reject(error);
-         });*/
-        return deferred.promise;
-    };
 
     sessionSvc.getLoggedInUser = function() {
         var deferred = $q.defer();
@@ -612,68 +594,13 @@ twystClient.factory('sessionSvc', function($window, $rootScope, $http, $q, $log,
 
     };
 
-    sessionSvc.registerGCM = function() {
-        var pushNotification = $window.plugins.pushNotification;
-        //if (sessionSvc && sessionSvc.status && sessionSvc.status.user && !sessionSvc.data.user.user.gcm) {
-        if (sessionSvc && sessionSvc.status && sessionSvc.status.user) {
-            pushNotification.register(function(result) {
-                //alert('Callback Success! Result = '+result)
-            }, function(error) {
-                $interval(function() {
-                    pushNotification.register(function(result) {
-                        //Ignore
-                    }, function(error) {
-                        //Ignore
-                    }, {
-                        "senderID": "216832068690",
-                        "ecb": "onNotificationGCM"
-                    });
-                }, 3600000);
-            }, {
-                "senderID": "216832068690",
-                "ecb": "onNotificationGCM"
-            });
-        }
-    };
-
-    $window.onNotificationGCM = function(e) {
-        switch (e.event) {
-            case 'registered':
-                if (e.regid.length > 0 && sessionSvc.status.user) {
-                    $http.post(constSvc.service_url + '/api/v1/user/gcm', {
-                        id: e.regid
-                    }).
-                    success(function() {
-                        //$rootScope.$$phase || $rootScope.$apply();
-                    }).error(function() {
-
-                    });
-                    //
-                    // alert('registration id = ' + e.regid);
-                }
-                break;
-
-            case 'message':
-                // this is the actual push notification. its format depends on the data model from the push server
-                //alert('message = '+e.message+' msgcnt = '+ e.msgcnt);
-                break;
-
-            case 'error':
-                //alert('GCM error = '+e.msg);
-                break;
-
-            default:
-                //alert('An unknown GCM event has occurred');
-                break;
-        }
-    };
-
     sessionSvc.getNetwork = function(callback) {
-        sessionSvc.status.network = true;
         callback(true);
         $rootScope.$broadcast('sessionUpdated');
         sessionSvc.getData(); //get session info when network comes up
+
     };
+
     sessionSvc.getPosition = function() {
         var deferred = $q.defer();
         $window.navigator.geolocation.getCurrentPosition(function(position) {
@@ -770,24 +697,6 @@ twystClient.factory('sessionSvc', function($window, $rootScope, $http, $q, $log,
     };
 
     sessionSvc.run = function() {
-        //$window.alert(device.uuid);
-        // Try and find the version
-        // TODO - fix this interval code
-        /*
-         stop = $interval(function() {
-         sessionSvc.getVersion();
-         if (sessionSvc.data.version) {
-         console.log("GOT HERE CANCEL STOP")
-         $interval.cancel(stop);
-         stop = undefined;
-         sessionSvc.getLoggedInUser();
-         sessionSvc.getSMSProviderInfo();
-         sessionSvc.getPhoneNumber();
-         sessionSvc.getNetwork();
-         sessionSvc.getPosition();
-         }
-         }, 5000);
-         */
         console.log("TWYST:Calling session svc run");
         $timeout(function() {
             sessionSvc.getPosition();
@@ -796,7 +705,6 @@ twystClient.factory('sessionSvc', function($window, $rootScope, $http, $q, $log,
         sessionSvc.getNetwork(function (networkState) {
             if(networkState) {
                 sessionSvc.getData();
-                sessionSvc.getPhoneNumber();
                 sessionSvc.setHomeLocation();
             }
         });
@@ -805,7 +713,6 @@ twystClient.factory('sessionSvc', function($window, $rootScope, $http, $q, $log,
             sessionSvc.getPosition();
         }, 300000);
         $interval(function() {
-            //sessionSvc.getData();
             sessionSvc.getNetwork(function (networkState) {
                 // Nothing to do here
             });

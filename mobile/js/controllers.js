@@ -31,6 +31,7 @@ twystClient.controller('AuthCtrl', function($scope, $window, $rootScope, session
 
     $scope.otplogin = function(phone) {
         console.log(phone);
+        $rootScope.state = 'home';        
         sessionSvc.otplogin(phone);
     };
 
@@ -1269,7 +1270,7 @@ twystClient.controller('CheckinDetailCtrl', function($scope, $rootScope, checkin
                 $scope.detail.sub = "You successfully checked in at " + $scope.checkin.data.info.outlet.basics.name + ", " + $scope.checkin.data.info.outlet.contact.location.locality_1[0];
                 $scope.detail.color = 'success';
                 $scope.detail.button = "twysts";
-                if (getNext2(count, $scope.checkin.data.info.program)[0] <= 1) {
+                if (getNext2(count+1, $scope.checkin.data.info.program)[0] <= 1) {
                     $scope.detail.facts = $scope.detail.facts || [];
                     //$scope.detail.facts.push("Get " + rewardifyFilter($scope.checkin.data.info.offer));
                     //$scope.detail.facts.push("Terms " + $scope.checkin.data.info.offer.terms);
@@ -1286,7 +1287,7 @@ twystClient.controller('CheckinDetailCtrl', function($scope, $rootScope, checkin
                     $scope.detail.sub = "You successfully checked-in at " + $scope.checkin.data.info.outlet.basics.name + ", " + $scope.checkin.data.info.outlet.contact.location.locality_1[0];
                     $scope.detail.subcolor = "success";
                     $scope.detail.facts = $scope.detail.facts || [];
-                    $scope.detail.facts.push("You are " + getNext2(count + 1, $scope.checkin.data.info.program)[0] + " checkins away from a reward.");
+                    $scope.detail.facts.push("You are " + getNext2(count+1, $scope.checkin.data.info.program)[0] + " checkins away from a reward.");
                     $scope.detail.message = "Your Check-in will show up in the My Twysts' section soon.";
                 }
             } else {
@@ -1328,14 +1329,6 @@ twystClient.controller('CheckinCtrl', function($scope, $rootScope, $location, lo
             function(result) {
                 checkinSvc.qrCheckin(result);
             });
-    };
-
-    $scope.sendSMS = function(smscode) {
-        logSvc.info("Send SMS to check-in");
-        checkinSvc.smsCheckin(smscode);
-        //$location.path('/checkin_detail');
-
-        $rootScope.state = 'home';
     };
 });
 
