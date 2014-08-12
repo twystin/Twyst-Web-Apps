@@ -4,14 +4,31 @@
     <div class="job-description">
     <div class="bg">
         <div class="container content" >
-            <div class="title-box-v2 center">
+            <div class="col-md-12">
+                <div class="col-md-6">
                 <img class="center merchant_logo" ng-hide="!outlet.basics.images.length" ng-src="{{outlet.basics.images[0]}}" >
-                <img class="center merchant_logo" ng-show="!outlet.basics.images.length" src="images/Twyst/cupncake.jpg">
+                     <img class="center merchant_logo" ng-show="!outlet.basics.images.length" src="images/Twyst/cupncake.jpg">
                 <h2><b class="color_black">{{outlet.basics.name}}<b></h2>
                 <h2><small ><b class="color_black">PHONE: &nbsp;</b><b class="color_black">{{ outlet.contact.phones.landline}}&nbsp;&nbsp;</b><b class="color_black" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</b></small></h2>
                 <p class="color_black"><b class="color_black">ADDRESS:</b>{{outlet.contact.location.address}}</p>
+                </div>
 
-            </div>    
+                <div class="col-md-6">
+                <div class="right_container_carousel">
+                    <carousel>
+                    <slide id="outlet_image_carousel">
+                        <img src="images/Twyst/cupncake.jpg">
+                    </slide>
+                    <slide id="outlet_image_carousel">
+                        <img src="images/Twyst/cupncake.jpg">
+                    </slide>
+                </carousel>
+                </div>
+                </div>
+                 
+                
+            </div>  
+           
             <div class="row">
                 <!-- Left Inner -->
                 <div class="col-md-7 left-inner-parent">
@@ -28,15 +45,38 @@
                                 <p>{{offer.terms}}</p>
                             </div>
                         </div>  
+                     </div>
+                     <div class="left-inner">
+                      <h2 class="panel-title heading-sm pull-left"><i class="fa fa-qrcode"></i><b>Past Offers</b></h2><br><br>
+                          <div>
+                            <accordion>
+                                <accordion-group>
+                                    <accordion-heading is-open="status.isFirstOpen">
+                                        Program 1 <i class="glyphicon glyphicon-chevron-right animated"></i>
+                                    </accordion-heading>
+                                    <p>
+                                      This is awesome
+                                    </p> 
+                                </accordion-group>
+                                <accordion-group>
+                                    <accordion-heading>
+                                     Program 2 <i class="glyphicon glyphicon-chevron-right animated"></i></accordion-heading>
+                                    <p>
+                                        Super awesome
+                                    </p> 
+                                </accordion-group>
+
+                            </accordion>
+                            </div>
+                     </div>
                 </div>
-            </div>
 
                 <!-- End Left Inner -->
                 
                 <!-- Right Inner -->
                 <div class="col-md-5"> 
                                      
-                    <div class="right-inner">
+                    <div class="right-inner color_black">
                        <!-- <h3>Recent Events</h3>     
                         <img ng-src="images/cnc.jpg" alt="">
                         <div class="overflow-h">
@@ -50,7 +90,7 @@
                             </ul>
                         </div>
 
- -->                       
+ -->                       <h2 class="panel-title heading-sm pull-left"><i class="fa fa-qrcode"></i><b>Highlights</b></h2><br><br>
                            
                              <div class="col-sm-12">
                                 <div class="overview">
