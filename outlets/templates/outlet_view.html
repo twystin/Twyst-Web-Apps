@@ -4,50 +4,44 @@
     <div class="job-description">
     <div class="bg">
         <div class="container content" >
-            <div class="col-md-12">
-                <div class="col-md-6">
-                <img class="center merchant_logo" ng-hide="!outlet.basics.images.length" ng-src="{{outlet.basics.images[0]}}" >
-                     <img class="center merchant_logo" ng-show="!outlet.basics.images.length" src="images/Twyst/cupncake.jpg">
-                <h2><b class="color_black">{{outlet.basics.name}}<b></h2>
-                <h2><small ><b class="color_black">PHONE: &nbsp;</b><b class="color_black">{{ outlet.contact.phones.landline}}&nbsp;&nbsp;</b><b class="color_black" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</b></small></h2>
-                <p class="color_black"><b class="color_black">ADDRESS:</b>{{outlet.contact.location.address}}</p>
-                </div>
+            <div class="center">
+                <img class="center merchant_logo" src="images/BBLogo.jpg">
+                <h2><b class="color_white" id="outlet_name">{{outlet.basics.name}}</b></h2>
+                <h2 class=""><small><b class="color_white">PHONE: &nbsp;</b><b class="color_white">{{ outlet.contact.phones.landline}}&nbsp;&nbsp;</b><b class="color_white" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</b></small></h2>
+                <p class="color_white"><b class="color_white">ADDRESS:</b>{{outlet.contact.location.address}}</p>
+                <p class="color_white">
+                 <b>Check in to {{outlet.basics.name}} via Twyst and win great rewards on your next visit. Download the app today.</b>
+                    <span>
+                        <img alt="Get it on Google Play" src="images/googleplay.png" />
+                    </span>
+                </p>
+            </div>
 
-                <div class="col-md-6">
-                <div class="right_container_carousel">
-                    <carousel>
-                    <slide id="outlet_image_carousel">
-                        <img src="images/Twyst/cupncake.jpg">
-                    </slide>
-                    <slide id="outlet_image_carousel">
-                        <img src="images/Twyst/cupncake.jpg">
-                    </slide>
-                </carousel>
-                </div>
-                </div>
-                 
-                
-            </div>  
            
             <div class="row">
                 <!-- Left Inner -->
                 <div class="col-md-7 left-inner-parent">
                     <div class="left-inner">
-                         <h2 class="panel-title heading-sm pull-left"><i class="fa fa-qrcode"></i><b>Offers by Check-in No</b></h2><br><br>
-                        <div class="people-say margin-bottom-20" ng-repeat="offer in rewards|limitTo:5">
-                            <div class="col-md-1">
-                                <p>{{offer.count}}</p>
-                            </div>
-                            <div class="overflow-h col-md-7">
-                                <p>{{offer.title}}</p>
-                            </div>  
-                            <div class="col-md-4">
-                                <p>{{offer.terms}}</p>
-                            </div>
-                        </div>  
+                         <h2 class="panel-title heading-sm pull-left overview_grey"><i class="fa fa-qrcode"></i><b class="panel-heading">Offers by Check-in No</b></h2><br><br>
+                         <div class="clearfix"></div>
+                         <ul ng-repeat="offer in rewards|limitTo:5" class="timeline">
+                            <li class="timeline-inverted">
+                                <div class="timeline-badge warning"><p>{{offer.count}}</p></div>
+                                <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title"><p><b>{{offer.title}}</b></p></h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>{{offer.terms}}</p>
+                                </div>
+                                </div>
+                             </li>
+                         </ul> 
                      </div>
                      <div class="left-inner">
-                      <h2 class="panel-title heading-sm pull-left"><i class="fa fa-qrcode"></i><b>Past Offers</b></h2><br><br>
+                      <h2 class="panel-title heading-sm pull-left overview_grey"><i class="fa fa-qrcode"></i><b class="panel-heading">Past Offers</b></h2><br><br>
+                      <div class="clearfix"></div>
+
                           <div>
                             <accordion>
                                 <accordion-group>
@@ -77,7 +71,7 @@
                 <div class="col-md-5"> 
                                      
                     <div class="right-inner color_black">
-                       <!-- <h3>Recent Events</h3>     
+                       <h2 class="panel-title heading-sm pull-left"><b class="panel-heading">Recent Events</b></h2><br><br>   
                         <img ng-src="images/cnc.jpg" alt="">
                         <div class="overflow-h">
                             <span class="font-s">Predict FIFA World Cup 2014 winner</span>
@@ -90,103 +84,119 @@
                             </ul>
                         </div>
 
- -->                       <h2 class="panel-title heading-sm pull-left"><i class="fa fa-qrcode"></i><b>Highlights</b></h2><br><br>
-                           
+                    <h2 class="panel-title heading-sm pull-left"><b class="panel-heading">Highlights</b></h2><br><br>
+                           <div class="clearfix"></div>
+
                              <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-glass"></i>
-                                    <div class="overflow-h padding-top">
-                                        Alcohol <span ng-show="outlet.attributes.alcohol">Available</span>
-                                         <span ng-show="!outlet.attributes.alcohol">Not Available</span>
-                                    </div>    
-                                </div>
-                            </div>
+                             <div class="overview" ng-show="outlet.attributes.alcohol">
+                                 <i class="fa fa-check"></i><div class="overflow-h padding-top">Alcohol Available</div>
+                             </div>
+                             <div class="overview_unavailable" ng-show="!outlet.attributes.alcohol">
+                                 <i class="fa fa-times left_margin_icon"></i><div class="overflow-h padding-top">Alcohol Not Available</div>
+                             </div>
                             <div class="clearfix"></div>
 
                             <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-magic"></i>
-                                    <div class="overflow-h padding-top">
-                                        Smoking Area <span ng-show="outlet.attributes.smoking">Available</span>
-                                         <span ng-show="!outlet.attributes.smoking">Not Available</span>
+                                <div class="overview" ng-show="outlet.attributes.smoking">
+                                    <i class="fa fa-check"></i><div class="overflow-h padding-top">Smoking Area <span ng-show="">Available</span>
+                                    </div>     
+                                </div>
+                                 <div class="overview_unavailable" ng-show="!outlet.attributes.smoking">
+                                    <i class="fa fa-times"></i><div class="overflow-h padding-top">No Smoking
                                     </div>     
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-pagelines"></i>
+                                <div class="overview" ng-show="outlet.attributes.veg">
+                                    <i class="fa fa-check"></i>
                                     <div class="overflow-h padding-top">
-                                        Veg  <span ng-show="outlet.attributes.veg">Available</span>
-                                         <span ng-show="!outlet.attributes.veg">Not Available</span>
+                                        Veg Available
+                                    </div>  
+                                </div>
+                                <div class="overview_unavailable" ng-show="!outlet.attributes.veg">
+                                    <i class="fa fa-times"></i>
+                                    <div class="overflow-h padding-top">
+                                     Vegetarian Not Available
                                     </div>  
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-sitemap"></i>
+                                <div class="overview" ng-show="outlet.attributes.foodcourt">
+                                    <i class="fa fa-check"></i>
                                     <div class="overflow-h padding-top">
-                                        Food Court <span ng-show="outlet.attributes.foodcourt">Available</span>
-                                         <span ng-show="!outlet.attributes.foodcourt">Not Available</span>
+                                        Food Court
                                     </div> 
                                 </div>
                             </div>
                             <div class="clearfix"></div>
 
                             <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-pagelines"></i>
+                                <div class="overview" ng-show="outlet.attributes.home_delivery">
+                                    <i class="fa fa-check"></i>
                                     <div class="overflow-h padding-top">
-                                        Veg  <span ng-show="outlet.attributes.veg">Available</span>
-                                         <span ng-show="!outlet.attributes.veg">Not Available</span>
-                                    </div>  
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-truck"></i>
-                                    <div class="overflow-h padding-top">
-                                        Home Delivery <span ng-show="outlet.attributes.home_delivery">Available</span>
+                                        Home Delivery Available
                                          <span ng-show="!outlet.attributes.home_delivery">Not Available</span>
                                     </div>  
                                 </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-chain"></i>
+                                <div class="overview_unavailable" ng-show="!outlet.attributes.home_delivery">
+                                    <i class="fa fa-times"></i>
                                     <div class="overflow-h padding-top">
-                                        Part of a Chain: <span ng-show="outlet.attributes.chain">Yes</span>
-                                         <span ng-show="!outlet.attributes.chain">No</span>
+                                       No Home Delivery 
                                     </div>  
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-sm-12">
-                                <div class="overview">
-                                     <i class="fa fa-road"></i>
+                                <div class="overview" ng-show="outlet.attributes.chain">
+                                    <i class="fa fa-check"></i>
                                     <div class="overflow-h padding-top">
-                                        Outdoor Seating: <span ng-show="outlet.attributes.outdoor">Yes</span>
-                                         <span ng-show="!outlet.attributes.outdoor">No</span>
+                                        Part of a Chain
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-12">
+                                <div class="overview" ng-show="outlet.attributes.outdoor">
+                                     <i class="fa fa-check"></i>
+                                    <div class="overflow-h padding-top">
+                                        Outdoor Seating
+                                         
+                                    </div>   
+                                </div>
+                                <div class="overview_unavailable" ng-show="!outlet.attributes.outdoor">
+                                     <i class="fa fa-times"></i>
+                                    <div class="overflow-h padding-top">
+                                        No Outdoor Seating
                                     </div>   
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-sm-12">
-                                <div class="overview">
-                                   <i class="fa fa-asterisk"></i>
+                                <div class="overview" ng-show="outlet.attributes.air_conditioning !== 'Not Available'">
+                                   <i class="fa fa-check"></i>
                                     <div class="overflow-h padding-top">
-                                        Air-conditioning: <span ng-show="outlet.attributes.air_conditioning">{{outlet.attributes.air_conditioning}}</span>
+                                        Air-conditioning: <span >{{outlet.attributes.air_conditioning}}</span>
                                     </div>    
+                                </div>
+                                <div class="overview_unavailable" ng-show="outlet.attributes.air_conditioning === 'Not Available'">
+                                     <i class="fa fa-times"></i>
+                                    <div class="overflow-h padding-top">
+                                        No Outdoor Seating
+                                    </div>   
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-sm-12">
-                                <div class="overview">
-                                     <i class="fa fa-signal"></i>
+                                <div class="overview" ng-show="outlet.attributes.wifi !== 'Not Available'">
+                                     <i class="fa fa-check"></i>
+                                    <div class="overflow-h padding-top">
+                                        WiFi: <span >{{outlet.attributes.wifi}}</span>
+                                    </div>     
+                                </div>
+                                <div class="overview_unavailable" ng-show="outlet.attributes.wifi === 'Not Available'">
+                                     <i class="fa fa-times"></i>
                                     <div class="overflow-h padding-top">
                                         WiFi: <span >{{outlet.attributes.wifi}}</span>
                                     </div>     
@@ -194,8 +204,14 @@
                             </div>
                             <div class="clearfix"></div>
                               <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-tags"></i>
+                                <div class="overview" ng-show="outlet.attributes.reservation === 'Recommended'">
+                                    <i class="fa fa-check"></i>
+                                    <div class="overflow-h padding-top">
+                                        Reservation: <span >{{outlet.attributes.reservation}}</span>
+                                    </div>    
+                                </div>
+                                <div class="overview_unavailable" ng-show="outlet.attributes.reservation === 'Not Required'">
+                                    <i class="fa fa-times"></i>
                                     <div class="overflow-h padding-top">
                                         Reservation: <span >{{outlet.attributes.reservation}}</span>
                                     </div>    
@@ -204,8 +220,14 @@
 
                             <div class="clearfix"></div>
                             <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-car"></i>
+                                <div class="overview" ng-show="outlet.attributes.parking !== 'Not Available'">
+                                    <i class="fa fa-check"></i>
+                                    <div class="padding-top">
+                                        Parking: <span >{{outlet.attributes.parking}}</span>
+                                    </div>    
+                                </div>
+                                <div class="overview_unavailable" ng-show="outlet.attributes.parking === 'Not Available'">
+                                    <i class="fa fa-times"></i>
                                     <div class="padding-top">
                                         Parking: <span >{{outlet.attributes.parking}}</span>
                                     </div>    
@@ -230,6 +252,12 @@
                         <div class="row margin-bottom-20">
                             
                         <!-- End Pie Chart Progress Bar -->
+                        <carousel>
+                            <slide><img src="images/Twyst/CnD 1.jpg"></slide>
+                            <slide><img src="images/Twyst/CnD 2.JPG"></slide>
+                            <slide><img src="images/Twyst/CnD 3.JPG"></slide>
+                            <slide><img src="images/Twyst/speakeasylogo.jpg"></slide>
+                        </carousel>
                     </div>   
                 </div>
                 <!-- End Right Inner -->
