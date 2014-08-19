@@ -172,8 +172,7 @@ span, div, p, li, a, h1, h2, h3, h4, button {
 }
 
 .list-group-item:nth-child(even) {
-    background-color: white;
-    padding: 10px;
+    background-color: orange;
 }
 map, div[map] {display:block; width:600px; height:400px;}
 .list-group-item:nth-child(odd) {
@@ -193,14 +192,13 @@ map, div[map] {display:block; width:600px; height:400px;}
 
 
 .list-group-item {
-    patting-top: 5px !important;
     padding-right: 0px !important;
     padding-left: 0px !important;
     margin: 0px !important;
     border-top: none !important;
     border-right: none !important;
     border-left: none !important;
-    padding-bottom: 20px !important;
+    padding-bottom: 5px !important;
     border-bottom: 1px solid #808080;
     margin: 5px !important;
     box-shadow: 1px 1px 2px 0px darkslategrey;
@@ -220,6 +218,12 @@ map, div[map] {display:block; width:600px; height:400px;}
 }
 .t_favourite {
     background-color: white !important;
+}
+
+.btn-smf {
+  padding: 5px 5px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 
 body {
