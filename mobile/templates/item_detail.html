@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-xs-2 col-sm-2 col-md-2">
+        <center>
+            <div ng-show="item.outlet.basics.icon">
+                <img src="assets/transparent/{{item.outlet.basics.icon}}.png" class="ti" height="70px" width="auto" ng-click="addFil(item.outlet.basics.icon)"><br/><br/>
+            </div>
+            <div ng-hide="item.outlet.basics.icon">
+                <div ng-show="item.outlet.basics.is_a">
+                    <img src="assets/transparent/{{item.outlet.basics.is_a}}.png" class="ti" height="70px" width="auto" ng-click="addFil(item.outlet.basics.is_a)"><br/><br/>
+                </div>
+                <div ng-hide="item.outlet.basics.is_a">
+                    <img src="assets/transparent/other.png" class="ti" height="70px" width="auto"><br/><br/>
+                </div>
+            </div>
+        </center>
+    </div>
+
+    <div class="col-xs-7 col-sm-7 col-md-7 t_recco" ng-init="limitVal = 1">
+        <div ng-click="showDetail(item.program, item.tier, item.outlet, item.offer)">
+            <span class="list-group-item-heading outlet_name">{{item.outlet.basics.name | shorttext:15}}</span><br/>
+            <span class="list-group-item-text">{{item.offer.basics.description | shorttext:45}}</span><hr class="tline"/>
+            <i class="icon ion-ios7-location t_icon_grey"></i>&nbsp;&nbsp;&nbsp;<span class="list-group-item-heading">{{item.outlet.contact.location.locality_1.0 | shorttext:16}}</span>
+        </div>
+        <i class="icon ion-ios7-pricetag t_icon_grey"></i>&nbsp;
+            <span ng-repeat="tag in getTags(item.outlet.attributes.tags, item.offer.tags) | limitTo:limitVal">
+                <span class="tagbox" ng-click="addFilter($event)">{{tag}}</span>
+            </span>
+        <span class="tagdot" ng-show="getTags(item.outlet.attributes.tags, item.offer.tags).length > 1" ng-click="limitVal = limitVal === 1 ? 100 : 1">...</span>
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3">
+        <div><span> {{distance(item.outlet)}}km </span></div><br/>
+        <span>{{program_checkins(item.program)}} </span><span class="tbig"><img src="assets/fav_icon.png" height="35px" width="auto"></span><br/>
+        <div ng-show="should_i_show_a_reward(item.outlet, item.program, item.tier, item.offer)" ng-click="showReward(item.outlet.basics.name)">&nbsp;&nbsp;&nbsp;&nbsp; <img src="assets/gift.png" height="30px" width="auto"></div><br/>        
+        <span ng-if="isNewProgram(item.program) === true" class="badgered">New</span>
+        <span ng-if="isEndingProgram(item.program) === true" class="badgered">Ending</span>
+
+    </div>
+</div>

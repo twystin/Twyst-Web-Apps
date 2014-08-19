@@ -1,0 +1,77 @@
+<div ng-controller="HeaderCtrl">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding-top:10px; margin:0px; padding-bottom:10px !important">
+        <div class="row">
+            <!--<span ng-if="state!=='first_run'"><button class="btn btn-default" ng-click="showTab('settings')"><i class="icon ion-navicon-round t_icon"></i></button></span>-->
+            <span ng-if="state==='first_run'"><button class="btn btn-default"><i class="icon ion-paper-airplane t_icon"></i></button></span>
+            <img src="assets/logo_2.png" ng-click="showTab('home')" height="60px" width="auto">
+            <span ng-if="state!=='first_run'">
+                <span ng-if="header.status.network === true">
+                <!--
+                    <span ng-if="header.status.user === true"> -->
+                        <!-- <button class="btn btn-success pull-right" ng-click="facebook()"><i class="icon ion-ios7-telephone t_icon"></i> <span style="font-size:19px">Facebook</span></button>
+                        -->
+                    <!-- </span>
+                -->
+                </span>
+            </span>
+        </div>
+    </nav>
+    <div ng-if="state!=='first_run'">
+        <div class="padding_top_big"></div>
+        <nav class="navbar navbar-default navbar-fixed-top" style="margin-top:80px">
+            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
+                <button class="btn btn-{{state === 'home' ? 'warning' : 'primary'}} btn-block btn-lg tb" ng-click="showTab('home')"><i class="icon ion-home" style="font-size:26px;"></i><span class="t_main">&nbsp;For me</span></button>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
+                <button class="btn btn-{{state === 'timeline' ? 'warning' : 'primary'}} btn-block btn-lg tb" ng-click="showTab('timeline')"><span class="t_main">My Twysts</span></button>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4" style="margin:0px;padding:0px;">
+                <button class="btn btn-{{state === 'near' ? 'warning' : 'primary'}} btn-block btn-lg tb" ng-click="showTab('near')"><span class="t_main">Nearby</span></button>
+            </div>
+        </nav>
+
+        <div ng-if="header.status.network === true">
+            <div ng-if="header.status.server_up === true">
+                <div ng-if="header.status.version === true">
+                    <div ng-if="header.auth.state === 3">
+                        <div ng-if="header.status.position === true">
+                            <div ng-if="alert_ncr.show === true">
+                                <div class="divvy alert alert-{{alert_ncr.color}} row">
+                                    <span>{{alert_ncr.message}}</span>
+                                    <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="alert_ncr.show=false"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="header.status.position === false">
+                            <div class="divvy alert alert-danger row">
+                                <div class="col-sm-11 col-md-11 col-xs-11">Unable to get your location. Try turning on GPS or restarting your device.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div  ng-if="header.auth.state !== 3">
+                        <div ng-if="state !== 'auth'">
+                            <div class="divvy alert alert-warning row">
+                                <div class="col-sm-11 col-md-11 col-xs-11"><span>Welcome to Twyst! Please enter your mobile number to sign-in.&nbsp;</span><button class="btn btn-block btn-success" ng-click="showTab('auth')"><span class="icon ion-iphone t_icon"></span>&nbsp;Enter your number</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="header.status.version === false">
+                    <div class="divvy alert alert-danger row">
+                        <div class="col-sm-11 col-md-11 col-xs-11">Your Twyst app is out of date. Please get the latest version from <button class="btn-link" ng-click="getDownloadURL()">here</button>.</div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="header.status.server_up === false">
+                <div class="divvy alert alert-warning row">
+                    <div class="col-sm-11 col-md-11 col-xs-11">Trying to connect to Twyst.</div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="header.status.network === false">
+            <div class="divvy alert alert-warning row">
+                <div class="col-sm-11 col-md-11 col-xs-11">You're not connected to the network.</div>
+            </div>
+        </div>
+    </div>
+</div>

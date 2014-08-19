@@ -107,14 +107,18 @@
 <div class="panel panel-primary" ng-controller="TimelineCtrl" ng-if="state==='timeline'">
     <div class="panel-body">
         <div class="list-group" ng-controller="DataCtrl" ng-init="searchFilter = ''">
-            <nav class="navbar navbar-default navbar-fixed-top" style="margin-top:150px">
-                <div class="well" style="margin:0px !important; padding:0px !important;">
-                    <span class="{{searchFilter===''?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('')">All</span>
-                    <span class="{{searchFilter==='reward'?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('reward')">Rewards</span>
-                    <span class="{{searchFilter==='checkin'?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('checkin')">Check-ins</span>
-                    <span class="{{searchFilter==='favourite'?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('favourite')">Favourites</span>
+            <div ng-controller="HeaderCtrl">
+                <div ng-if="header.auth.state === 3">
+                    <nav class="navbar navbar-default navbar-fixed-top" style="margin-top:150px">
+                        <div class="well" style="margin:0px !important; padding:0px !important;">
+                            <span class="{{searchFilter===''?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('')">All</span>
+                            <span class="{{searchFilter==='reward'?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('reward')">Rewards</span>
+                            <span class="{{searchFilter==='checkin'?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('checkin')">Check-ins</span>
+                            <span class="{{searchFilter==='favourite'?'btn btn-warning btn-sm':'btn btn-grey btn-sm'}}" ng-click="addFilterForTimleine('favourite')">Favourites</span>
+                        </div>
+                    </nav>
                 </div>
-            </nav>
+            </div>
             <div style="margin-top:50px;">
                 <div ng-repeat="entry in data.timeline | filter: {type:searchFilter}">
                     <div class="row list-group-item t_list t_{{entry.type}}">
@@ -385,27 +389,14 @@
     </div>
     <div ng-include="'./templates/footer.html'"></div>
 </div>
+<!--
 <div ng-controller="SettingsCtrl" ng-if="state==='settings'">
     <div class="panel panel-white" style="padding:15px">
         <div class="panel-heading">
             <h3>Settings</h3>
         </div>
         <div class="panel-body">
-            <!--
-            <div><br/>
-                <button class="button btn-white btn-block" ng-click="twyst()">
-                <h1 class="icon ion-paper-airplane"></h1>&nbsp;
-                <span>How to Twyst</span>
-                </button>
-            </div>
-            -->
-            <!--<div>
-                <br/>
-                <button class="button btn-white btn-block" ng-click="rate()">
-                <h1 class="icon ion-star"></h1>&nbsp;
-                <span>Rate the Twyst app</span>
-                </button>
-            </div>-->
+
             <div>
                 <br/>
                 <button class="button btn-white btn-block" ng-click="messages.feedback.show = true; fb=''">
@@ -459,21 +450,11 @@
                 <span>Get help</span>
                 </button>
             </div>
-            <!--<div>
-                <br/>
-                <button class="button btn-white btn-block" ng-click="checkVersion()">
-                <h1 class="icon ion-ios7-cloud-download"></h1>&nbsp;
-                <span>Check for updates</span>
-                </button>
-                <br/>
-                <div class="alert alert-{{messages.version.color}} divvy" ng-show="messages.version.show">
-                    {{messages.version.text}} <span ng-show="messages.version.link.length > 0"><a href="{{messages.version.link}}">Upgrade</a></span>
-                    <span class="icon ion-ios7-close-outline t_icon pull-right" ng-click="messages.version.show=!messages.version.show"></span>
-                </div>
-            </div>-->
+
         </div>
     </div>
 </div>
+-->
 <div ng-controller="CheckinCtrl" ng-if="state==='checkin'">
     <div ng-controller="HeaderCtrl">
         <div ng-if="header.status.network === false">
