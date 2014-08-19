@@ -468,7 +468,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         if (($scope.phone !== undefined)) {
             $scope.loading = true;
             
-            $http.get('/api/v1/vouchers_by_phone/' + $scope.phone).success(function(data, status, header, config) {
+            $http.get('/api/v1/vouchers_by_phone/' + $scope.phone + '/' + $scope.outlet._id).success(function(data, status, header, config) {
                 
                 $scope.loading = false;
 
