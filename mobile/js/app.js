@@ -2,8 +2,8 @@
 
 var twystClient = angular.module('twystClient', ["ngRoute", "angularMoment", "ngTouch", "ui.bootstrap", "uuid4"])
     .config(['$httpProvider', function ($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        // $httpProvider.defaults.useXDomain = true;
+        // delete $httpProvider.defaults.headers.common['X-Requested-With'];
         $httpProvider.defaults.cache = true;
     }]).config(['$routeProvider',
         function ($routeProvider) {

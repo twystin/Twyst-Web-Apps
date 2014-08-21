@@ -3782,3 +3782,9 @@ body.dark .tp-banner-container .btn-u.btn-brd.btn-u-light {
 	margin-left: -35px;
 	position: absolute;
 }
+
+/* some custom attributes */
+/* Facebook widget Header */
+.uiBoxLightblue {
+    background-color: #f59221 !important;
+}

@@ -1,1 +1,87 @@
 /* Add here all your css styles (customizations) */
+
+
+/* Brand Color Classes. Caution: will override any other style */
+
+.brand_red {
+	color: #eb2227 !important;
+}
+
+.brand_yellow {
+	color: #f59221 !important;
+}
+
+.brand_grey {
+	color: #bfbebd !important;
+}
+.brand_green{
+	color: #bfbebd !important;
+}
+/* brand color background */
+
+.brand_bg_red {
+	background-color: #eb2227 !important;
+}
+
+.brand_bg_yellow {
+	background-color: #f59221 !important;
+}
+
+.brand_bg_grey {
+	background-color: #bfbebd !important;
+}
+.brand_bg_blue {
+	background-color: #397bbf !important;
+}
+
+/* Rounded icons, circles etc. */
+
+.make_it_round {
+	border-radius: 50% !important;
+}
+
+/* Box shadow for header */
+
+.header .navbar-default {
+	box-shadow: 0px 1px 6px 6px #ccc !important;
+}
+
+/* fonts */
+
+.knockout50 {
+	font-family: "knockout50" !important;
+	font-size: 200;
+}
+.left_top {
+	border-bottom: 2px solid #b1b1b1;
+	margin-bottom: 0.3em;
+}
+.right_top {
+	border-top: 2px solid #b1b1b1;
+	margin-bottom: 0.3em;
+}
+#letterpress {
+	text-shadow: 0px 1px 1px #4d4d4d;
+	color: #585f69;
+	font: 50px 'knockout50';
+	line-height: 0;
+	text-align: center;
+}
+.facebook_timeline {
+	background: #fff;
+	height: 25em;
+	border: 4px solid #e1e1e1;
+}
+.margin_left_point_seven {
+	margin-left: 0.7em;
+}
+.margin_left_one {
+	margin-left: 1em;
+}
+/* Facebook widget Header */
+.uiBoxLightblue {
+    background-color: #f59221 !important;
+}
+.text_center_align {
+	text-align: center;
+}
