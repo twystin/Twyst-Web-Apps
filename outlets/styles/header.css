@@ -141,6 +141,19 @@
 }
 
 /*Custom CSS */
+.navbar-brand {
+	margin-left: 1.3em;
+}
+ .get_the_app {
+	margin-right: 2em;
+}
+#get_the_android {
+	width: 160px;
+	margin-top: -1em;
+}
+#get_the_apple {
+	width: 170px;
+}
 
 /*Custom CSS ends */
 

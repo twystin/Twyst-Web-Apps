@@ -1,23 +1,31 @@
 /* Custom Fonts */
 @font-face {
-	font-family: "sapientnormal";
-	src: url(../fonts/sapient sans/SAPISM.TTF);
+	font-family: 'sapientnormal';
+	src: url('../fonts/sapient sans/SAPISM.TTF');
 }
 @font-face {
-    font-family: "knockout50";
-    src: url(../fonts/knockout/Knockout-50_0.otf);
+    font-family: 'knockout50';
+    src: url('../fonts/knockout/Knockout-50_0.otf');
 }
-
+@font-face {
+    font-family: 'sapientregular';
+    src: url('../fonts/sapient sans/SAPISRG.TTF');
+}
+@font-face {
+    font-family: 'sapientbold';
+    src: url('../fonts/sapient sans/SAPISB.TTF');
+}
 
 /*Job-Description
 ------------------------------------*/
 .job-description {
 	padding-bottom: 30px;
 	position: relative;
-	background: url(../images/BG.jpg);
+	background-color: #f1f1f1 !important;
 	border-top: 1px solid #eee;
     background-size: cover;
     background-repeat: no-repeat;
+    font-family: "sapientnormal";
 }
 
 /*Visit*/
@@ -193,9 +201,29 @@
 }
 
 /* Custom CSS */
+#image_address_icon {
+    height: 15px;
+    margin-top: -0.3em;
+}
+/* Previous Program */
+.previous_program_clickable {
+    background: #000;
+    width: 100%;
+    color: #fff;
+    text-align: left;
+    padding: 0.5em 1em 0.3em 0.3em;
+    margin-left: 1em;
+}
+.previous_program_clickable:hover,.previous_program_clickable > i:hover {
+    background: none;
+    color: #1da075;
+    text-decoration: underline;
+    font-style: italic;
+    text-decoration-color: #1da075;
+}
 /* facebook like box */
 #facebook_like_box {
-    margin-top: -3em;
+    margin-top: -2.6em;
 }
 /*Accordion */
 .panel-default>.panel-heading {
@@ -219,19 +247,27 @@ div.panel-heading > h4 > a > span {
 .outlet_view_container{
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
 }
+.outlet_info > h1 {
+    margin: 0.4em 0 0.3em 0;
+}
+.outlet_info > h1 > b {
+    font-size: 1.2em;
+    font-weight: 500;
+}
 .outlet_info {
     background: #262626;
     text-align: center;
     color: white !important;
     height: 27em;
-    margin: 4em 0em 4em 0em;
+    margin: 6em 0em 0em 0em;
+    box-shadow: 0 0 8px #333;
 }
 .image_outlet_card{
-    background-image: url("../images/Twyst_blur.jpg");
+    background-image: url("../images/Biryani Blues .jpg");
     background-size: cover;
     background-repeat: no-repeat;
     height: 27em;
-    margin: 4em 0em 4em 0em;
+    margin: 6em 0em 0em 0em;
 }
 .left_padding_outlet_card{
     margin-right: 6%;
@@ -271,6 +307,8 @@ div.panel-heading > h4 > a > span {
 /* moving highlights to left */
 .left-inner-highlights{
 	margin-left: -1em;
+    margin-top: 0.5em;
+    font-family: "sapientregular";
 }
 
 /* Carousel */
@@ -300,7 +338,7 @@ div.panel-heading > h4 > a > span {
  }
 
 #outlet_name, .font_fixed_sapient{
-	font-family: "sapientnormal";
+	font-family: "sapientregular";
 	font-weight: 200;
 }
 .social-icons li a {
@@ -316,7 +354,6 @@ div.panel-heading > h4 > a > span {
 	margin-left: 2em;
 }
 .left-inner-parent{
-	margin-top: 0em;
 	border-top-left-radius: 5px !important;
 	border-top-right-radius: 5px !important;
 }
@@ -334,7 +371,7 @@ div.panel-heading > h4 > a > span {
 	margin-top: 1em;
 }
 #right_inner_block {
-	margin-top: 4em;
+	margin-top: 3.9em;
 }
 
 
@@ -350,7 +387,7 @@ div.panel-heading > h4 > a > span {
         color: black;        
     }
     .merchant_logo{
-        width: 100px;
+        width: 125px;
         height: auto;
     }
    /* background-image: url("../images/Twyst_blur.jpg");
@@ -417,9 +454,7 @@ div.panel-heading > h4 > a > span {
     	background: #fff;
     	border-bottom: solid 0px #e1e1e1;
     }
-    #get_the_app {
-	margin-right: 2em;
-}
+ 
     body > div:nth-child(2) > div > div > div > div.collapse.navbar-collapse.navbar-responsive-collapse {
     	padding-top: 0.5em;
     }

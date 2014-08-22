@@ -2754,8 +2754,3 @@ img.img-circle {
    transform: scale(2) rotate(5deg);
 }
 
-/* some custom attributes */
-/* Facebook widget Header */
-.uiBoxLightblue {
-    background-color: #f59221 !important;
-}
