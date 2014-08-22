@@ -169,6 +169,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             return obj._id === $scope.selected_outlet;
         });
         if (!_.isEmpty($scope.outlet) && $scope.outlet._id) {
+            getActiveProgram($scope.programs, $scope.outlet);
             getCounts();
         };
     });
@@ -555,25 +556,53 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
 
         $http.get('/api/v1/programs/' + user_id).success(function (data) {
             $scope.programs = JSON.parse(data.info) || [];
-            if($scope.programs.length > 0) {
-                $scope.programs.forEach (function (program) {
-                    if(program.status === 'active') {
-                        $scope.program = program;
-                    }
-                });
-                var program = {
-                    'name': 'All',
-                    '_id': 'ALL'
-                };
-                $scope.programs.push(program);
-                if(!$scope.program) {
-                    $scope.program = $scope.programs[0];
-                }
-            }
+            getActiveProgram($scope.programs, $scope.outlet)
         }).error(function (data) {
             
         });
     };
+
+    function getActiveProgram (programs, outlet) {
+        var program_running_on_outlet = null;
+        if(programs && programs.length > 0) {
+            programs.forEach (function (program) {
+                if(program.status === 'active') {
+                    var active_program_running = getProgramRunningOnThisOutlet(program, $scope.outlet);
+                    console.log(active_program_running)
+                    if(active_program_running) {
+                        program_running_on_outlet = active_program_running;
+                    }
+                }
+            });
+            if(program_running_on_outlet) {
+                $scope.program = program_running_on_outlet;
+            };
+            var program = {
+                'name': 'All',
+                '_id': 'ALL'
+            };
+            if(programs[programs.length - 1]._id !== 'ALL') {
+                $scope.programs.push(program);
+            }
+            if(!$scope.program) {
+                $scope.program = $scope.programs[0];
+            }
+        }
+    }
+
+    function getProgramRunningOnThisOutlet(program, outlet) {
+        if(!outlet) {
+            return null;
+        }
+        var p = null;
+        program.outlets.forEach(function (o) {
+            console.log(o._id.toString() === outlet._id.toString())
+            if(o._id.toString() === outlet._id.toString()) {
+                p = program;
+            }
+        });
+        return p;
+    }
 
     $scope.checkinsModal = function () {
         var modalInstance = $modal.open({
