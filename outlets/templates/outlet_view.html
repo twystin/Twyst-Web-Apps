@@ -1,203 +1,260 @@
 <link rel="stylesheet" type="text/css" href="styles/page_job_inner1.css">
 
 <!--=== Job Description ===-->
-    <div class="job-description">
-    <div class="bg">
-        <div class="container content" >
-            <div class="title-box-v2 center">
-                <img class="center merchant_logo" ng-hide="!outlet.basics.images.length" ng-src="{{outlet.basics.images[0]}}" >
-                <img class="center merchant_logo" ng-show="!outlet.basics.images.length" src="images/Twyst/cupncake.jpg">
-                <h2><b class="color_black">{{outlet.basics.name}}<b></h2>
-                <h2><small ><b class="color_black">PHONE: &nbsp;</b><b class="color_black">{{ outlet.contact.phones.landline}}&nbsp;&nbsp;</b><b class="color_black" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</b></small></h2>
-                <p class="color_black"><b class="color_black">ADDRESS:</b>{{outlet.contact.location.address}}</p>
+<div class="job-description">
+  <div class="bg">
+    <div class="background">
 
-            </div>    
-            <div class="row">
-                <!-- Left Inner -->
-                <div class="col-md-7 left-inner-parent">
-                    <div class="left-inner">
-                         <h2 class="panel-title heading-sm pull-left"><i class="fa fa-qrcode"></i><b>Offers by Check-in No</b></h2><br><br>
-                        <div class="people-say margin-bottom-20" ng-repeat="offer in rewards|limitTo:5">
-                            <div class="col-md-1">
-                                <p>{{offer.count}}</p>
-                            </div>
-                            <div class="overflow-h col-md-7">
-                                <p>{{offer.title}}</p>
-                            </div>  
-                            <div class="col-md-4">
-                                <p>{{offer.terms}}</p>
-                            </div>
-                        </div>  
-                </div>
-            </div>
-
-                <!-- End Left Inner -->
-                
-                <!-- Right Inner -->
-                <div class="col-md-5"> 
-                                     
-                    <div class="right-inner">
-                       <!-- <h3>Recent Events</h3>     
-                        <img ng-src="images/cnc.jpg" alt="">
-                        <div class="overflow-h">
-                            <span class="font-s">Predict FIFA World Cup 2014 winner</span>
-                            <p>Predict the winner of FIFA World Cup 2014 and you could win some exciting treats! 3 lucky winners will be eligible to win the following prizes in order of precedence: 1st. Red Velvet Cake, 2nd. Blueberry Cheesecake 3rd. Box of 6 cupcakes! Contest closes 8th July 2014.</p>
-                            <ul class="social-icons">
-                                <li><a class="social_facebook" data-original-title="Facebook" href="#"></a></li>
-                                <li><a class="social_googleplus" data-original-title="Google Plus" href="#"></a></li>
-                                <li><a class="social_tumblr" data-original-title="Tumblr" href="#"></a></li>
-                                <li><a class="social_twitter" data-original-title="Twitter" href="#"></a></li>
-                            </ul>
-                        </div>
-
- -->                       
-                           
-                             <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-glass"></i>
-                                    <div class="overflow-h padding-top">
-                                        Alcohol <span ng-show="outlet.attributes.alcohol">Available</span>
-                                         <span ng-show="!outlet.attributes.alcohol">Not Available</span>
-                                    </div>    
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-magic"></i>
-                                    <div class="overflow-h padding-top">
-                                        Smoking Area <span ng-show="outlet.attributes.smoking">Available</span>
-                                         <span ng-show="!outlet.attributes.smoking">Not Available</span>
-                                    </div>     
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-pagelines"></i>
-                                    <div class="overflow-h padding-top">
-                                        Veg  <span ng-show="outlet.attributes.veg">Available</span>
-                                         <span ng-show="!outlet.attributes.veg">Not Available</span>
-                                    </div>  
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-sitemap"></i>
-                                    <div class="overflow-h padding-top">
-                                        Food Court <span ng-show="outlet.attributes.foodcourt">Available</span>
-                                         <span ng-show="!outlet.attributes.foodcourt">Not Available</span>
-                                    </div> 
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-pagelines"></i>
-                                    <div class="overflow-h padding-top">
-                                        Veg  <span ng-show="outlet.attributes.veg">Available</span>
-                                         <span ng-show="!outlet.attributes.veg">Not Available</span>
-                                    </div>  
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-truck"></i>
-                                    <div class="overflow-h padding-top">
-                                        Home Delivery <span ng-show="outlet.attributes.home_delivery">Available</span>
-                                         <span ng-show="!outlet.attributes.home_delivery">Not Available</span>
-                                    </div>  
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-chain"></i>
-                                    <div class="overflow-h padding-top">
-                                        Part of a Chain: <span ng-show="outlet.attributes.chain">Yes</span>
-                                         <span ng-show="!outlet.attributes.chain">No</span>
-                                    </div>  
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                     <i class="fa fa-road"></i>
-                                    <div class="overflow-h padding-top">
-                                        Outdoor Seating: <span ng-show="outlet.attributes.outdoor">Yes</span>
-                                         <span ng-show="!outlet.attributes.outdoor">No</span>
-                                    </div>   
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                   <i class="fa fa-asterisk"></i>
-                                    <div class="overflow-h padding-top">
-                                        Air-conditioning: <span ng-show="outlet.attributes.air_conditioning">{{outlet.attributes.air_conditioning}}</span>
-                                    </div>    
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                     <i class="fa fa-signal"></i>
-                                    <div class="overflow-h padding-top">
-                                        WiFi: <span >{{outlet.attributes.wifi}}</span>
-                                    </div>     
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                              <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-tags"></i>
-                                    <div class="overflow-h padding-top">
-                                        Reservation: <span >{{outlet.attributes.reservation}}</span>
-                                    </div>    
-                                </div>
-                            </div>
-
-                            <div class="clearfix"></div>
-                            <div class="col-sm-12">
-                                <div class="overview">
-                                    <i class="fa fa-car"></i>
-                                    <div class="padding-top">
-                                        Parking: <span >{{outlet.attributes.parking}}</span>
-                                    </div>    
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                      <hr>
-                         <b>Cuisines:</b> {{outlet.attributes.cuisines.toString()}}
-                        <hr>
-                        <b>Cost For Two: </b><i class="fa fa-inr"> <b>{{getCostForTwoText(outlet)[0]}}</b></i> <b>to</b> <i class="fa fa-inr"> <b>{{getCostForTwoText(outlet)[1]}}</b></i><br><b>Payment options:</b> {{outlet.attributes.payment_options.toString()}}.
-                        <hr>
-                        <b>Opening Hours</b><br>
-                        {{outlet.attributes.timings}}
-                        <hr>
-                        <b>Photos</b>{{outlet.attributes.photos.thumbnail}}
-                        
-                        <hr>
-                        <b>Location: {{outlet.contact.location.locality_1.toString()}}</b><br>
-
-                        <hr>
-                        <!-- Pie Chart Progress Bar -->    
-                        <div class="row margin-bottom-20">
-                            
-                        <!-- End Pie Chart Progress Bar -->
-                    </div>   
-                </div>
-                <!-- End Right Inner -->
-            </div>    
-        </div>   
     </div>
+    <div class="container content" >
+      <div class="inner_row_begins">
+       <div class="col-md-1 left_padding_outlet_card"> </div>
+       <div class="col-md-4 outlet_info">
+        <h1 class="col-md-12"><b class="color_white knockout50" id="outlet_name">{{outlet.basics.name}}</b></h1>
+        <img class="merchant_logo" src="images/BBLogo.png">
+
+
+        <h2 class=""><small><b class="color_white font_fixed_sapient"><i class="fa fa-phone"></i></b><b class="color_white font_fixed_sapient"><a ng-ref="tel:{{outlet.contact.phones.landline}}" class="color_white">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</b> <i class="fa fa-mobile-phone color_white"></i><b class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</b></small></h2>
+        <p class="color_white font_fixed_sapient"><b class="color_white font_fixed_sapient"><img src="images/Address.png" id="image_address_icon"> </b>{{outlet.contact.location.address}}</p>
+        <p class="color_white"><i class="fa fa-globe"></i><span class="font_fixed_sapient"><a ng-ref="{{outlet.links.website_url }}" class="color_white">&nbsp;{{outlet.links.website_url }}</a></span></p> <h2 class="fa fa-share-alt brand_yellow"><a href=""></a></h2>                           
+         
+       </div> 
+       <div class="col-md-5 image_outlet_card">
+       </div>
+     </div>
+     <div class="clearfix"></div>
+     
+   <div class="row inner_row">
+    <!-- Left Inner -->
+    <div class="col-md-6 left-inner-parent">
+      <div class="left-inner">
+       <h2 class="panel-title heading-sm pull-left text_center_align"><b class="color_black" id="heading_left_column">Check-in to unlock rewards</b></h2><br><br>
+       <div class="clearfix"></div>
+       <div class="col-md-12 table-responsive table_checkin_and_offer_details">
+         <table class="table-striped table-bordered" >
+            <tr class="table_headings">
+              <td class="table_check_in_no col-md-4 brand_bg_grey">Check in No.</td>
+              <td class="table_offer col-md-8 brand_bg_yellow">Offer</td>
+            </tr>
+           <tr class="table_offer_details" ng-repeat="offer in rewards|limitTo:5">
+             <td class="col-md-4 offer_count">{{offer.count}}</td>
+             <td class="col-md-8 offer_title">{{offer.title}}</td>
+           </tr>
+         </table>
+       </div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12 margin_left_one">
+       <h5 class="color_black"><b>Check in to {{outlet.basics.name}} on Twyst for these rewards.Download the Twyst app today.</b>
+       </h5>
+       <div class="download_app_call_to_action col-md-12 col-sm-12 col-xs-12">
+        <span class="col-md-6 col-sm-6 col-xs-6">
+          <img id="google_play" alt="Get it on Google Play" src="images/Google play badge.svg" />
+        </span>
+        <span class="col-md-6 col-sm-6 col-xs-6">
+          <img alt="Get it on App Store" src="images/Download_on_the_App_Store_Badge_US-UK_135x40.svg" />
+        </span>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <h2 class="panel-title heading-sm pull-left text_center_align"><b class="color_black" id="heading_left_column">Previous Programs</b></h2><br><br>
+    <div class="clearfix"></div>
+    <div><h4 class="previous_program_clickable" ng-click="showDetails = ! showDetails">Program 1 <i class="fa fa-angle-right"></i></h4></div>
+    <div class="clearfix"></div>
+    <div class="col-md-12 table-responsive table_checkin_and_offer_details" ng-class="{ 'hidden': ! showDetails }">
+         <table class="table-striped table-bordered" >
+            <tr class="table_headings">
+              <td class="table_check_in_no col-md-4 brand_bg_grey">Check in No.</td>
+              <td class="table_offer col-md-8 brand_bg_yellow">Offer</td>
+            </tr>
+           <tr class="table_offer_details" ng-repeat="offer in rewards|limitTo:5">
+             <td class="col-md-4 offer_count">{{offer.count}}</td>
+             <td class="col-md-8 offer_title">{{offer.title}}</td>
+           </tr>
+         </table>
+       </div>
+   
+
+                         
+  </div>
+</div>
+
+<!-- End Left Inner -->
+<div class="col-md-1"></div>
+<!-- Right Inner -->
+
+<div class="col-md-5" id="right_inner_block">     
+  <div class="right-inner color_black">
+      <div class="col-md-10 col-sm-10 col-xs-10" ng-if="outlet.links.facebook_url" id="facebook_like_box">
+
+<div class="fb-like-box col-md-10 col-sm-10 col-xs-1" ng-href={{outlet.links.facebook_url}} data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="true" data-show-border="true" data-height="400" data-width="350"></div>
+      </div>
+    <div class="clearfix"></div>
+    <h2 class="panel-title heading-sm pull-left heading-padded-blocks text_center_align"><b class="color_white brand_">Other Info</b></h2><br><br>
+    <div class="clearfix"></div>
+    <hr>
+    <b class="col-md-12 col-sm-12 col-xs-12">Cuisines:</b> {{outlet.attributes.cuisines.toString()}}
+    <hr>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <b>Cost For Two: </b><i class="fa fa-inr"> <b>{{getCostForTwoText(outlet)[0]}}</b></i> <b>to</b> <i class="fa fa-inr"> <b>{{getCostForTwoText(outlet)[1]}}</b></i><br>
+    </div>
+    <hr>
+    <div class="col-md-12 col-xs-12 col-sm-12 left-inner-highlights">
+     <div class="col-md-6 col-sm-6 col-xs-6 left-inner-highlights">
+       <div ng-show="outlet.attributes.dine_in">
+         <img src="images/Dine-in.png" class="margin_left_one">
+         <div class="overflow-h padding-top">
+          Dine In Available
+        </div>
+      </div>
+      <div class="overview_unavailable" ng-show="!outlet.attributes.dine_in">
+       <img src="images/No Dine-in.png" class="margin_left_one">
+       <div class="overflow-h padding-top">
+        No Dine In
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-6">
+   <div class="overview" ng-show="outlet.attributes.home_delivery">
+    <img src="images/Home Delivery.png">
+    <div class="overflow-h padding-top">
+    Home Delivery
+  </div>     
+</div>
+<div class="overview_unavailable" ng-show="!outlet.attributes.home_delivery">
+  <img src="images/No Home Delivery.png">
+  <div class="overflow-h padding-top">
+  No Home Delivery
+</div>   
+</div>
+
+</div>
+
+
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12 left-inner-highlights">
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <div class="overview_unavailable" ng-show="outlet.attributes.veg">
+      <img src="images/Veg.png">
+      <div class="overflow-h padding-top">
+        Vegetarian Only
+      </div>  
+    </div>
+    <div class="overview_unavailable" ng-show="!outlet.attributes.veg">
+      <img src="images/Non Veg.png">
+      <div class="overflow-h padding-top">
+       Serves non veg
+     </div>  
+   </div>
+ </div>
+ <div class="col-md-6 col-sm-6 col-xs-6">
+  <div class="" ng-show="outlet.attributes.alcohol">
+    <img src="images/Yes to Alcohol.png">
+    <div class="overflow-h padding-top">
+      Serves Alcohol
+    </div> 
+  </div>
+   <div class="" ng-show="!outlet.attributes.alcohol">
+      <img src="images/No Alcohol.png">
+      <div class="overflow-h padding-top">
+       No Alcohol
+     </div>  
+   </div>
+
+</div>  
+</div>
+<div class="clearfix"></div>
+
+<div class="col-md-12 col-sm-12 col-xs-12 left-inner-highlights">
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <div class="" ng-show="outlet.attributes.smoking">
+      <img src="images/Smoking.png">
+      <div class="overflow-h padding-top">
+        Smoking Area Available
+      </div>  
+    </div>
+    <div class="" ng-show="!outlet.attributes.smoking">
+      <img src="images/No Smoking.png">
+      <div class="overflow-h padding-top">
+       No Smoking
+     </div>  
+   </div>
+ </div>
+   <div class="col-md-6 col-sm-6 col-xs-6">
+    <div class="overview" ng-show="outlet.attributes.outdoor">
+      <img src="images/Outdoor Seating.png">
+      <div class="overflow-h padding-top">
+        Outdoor Seating Available
+      </div>  
+    </div>
+ </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="col-md-12 col-sm-12 col-xs-12 left-inner-highlights">
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <div class="overview" ng-show="outlet.attributes.foodcourt">
+     <img src="images/Food Court.png">
+     <div class="overflow-h padding-top">
+      Part of a food court
+
     </div>   
-    <!--=== End Job Description ===-->
-    <script>
-    
-    </script>
+  </div>
+</div>
+</div>
+
+</div>
+
+<div class="clearfix"></div>
+<hr>
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    Air conditioning: {{outlet.attributes.air_conditioning}}
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    Parking: {{outlet.attributes.parking}}
+  </div>
+</div>
+<div class="clearfix"></div>
+<hr>
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="col-md-7 col-sm-7 col-xs-7">
+    Reservation: {{outlet.attributes.reservation}}
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-4" id="wifi_shift_left">
+    Wi-fi: {{outlet.attributes.wifi}}
+  </div>
+</div>
+<div class="clearfix"></div>
+<hr>
+<b class="col-md-12 margin_left_one">Open From</b>
+<span>{{outlet.attributes.timings}}</span>
+<hr>
+<!-- Pie Chart Progress Bar -->    
+<div class="row margin-bottom-20">
+
+  <!-- End Pie Chart Progress Bar -->
+
+</div>   
+</div>
+<!-- End Right Inner -->
+</div>    
+</div> 
+</div>
+</div>
+<div class="clearfix"> </div>
+<div class="col-md-12">
+  <div class="col-md-1"></div>
+  <h2 class="panel-title heading-sm pull-left text_center_align heading-padded-blocks-auto col-md-3 col-sm-3 col-xs-3"><b class="color_white brand_bg_yellow">Visit {{outlet.basics.name}} on</b></h2><br><br>
+  <div class="col-md-7 col-sm-7 col-xs-7 brand_bg_yellow_line"></div>
+  <div class="clearfix"></div>
+</div>
+<div class="col-md-12">
+  <div class="col-md-1"></div>
+  <div class="col-md-6">
+    <img class="col-md-6 col-sm-6 col-xs-6" src="images/foodpanda.png" style="height: 80px; width: auto; ">
+  <img class="col-md-6 col-sm-6 col-xs-6" src="images/zomato.jpg" style="height: 80px; width: auto; ">
+  </div>
+</div>
+<div class="clearfix"></div>
+<!--=== End Job Description ===-->
