@@ -1,8 +1,7 @@
 /*Top Bar (login, search etc.)
 ------------------------------------*/
 .top {
-	padding-top: 0px;
-	display: none;
+	padding-top: 8px;
 }
 
 .top ul.loginbar {
@@ -15,7 +14,7 @@
 .top ul.loginbar > li {
 	display: inline;
 	list-style: none;
-	padding-bottom: 5px;
+	padding-bottom: 15px;
 }
 
 .top ul.loginbar > li > a, 
@@ -140,23 +139,6 @@
 	color: #72c02c;
 }
 
-/*Custom CSS */
-.navbar-brand {
-	margin-left: 1.3em;
-}
- .get_the_app {
-	margin-right: 2em;
-}
-#get_the_android {
-	width: 160px;
-	margin-top: -1em;
-}
-#get_the_apple {
-	width: 170px;
-}
-
-/*Custom CSS ends */
-
 /*Dropdown*/
 .header .navbar-right .dropdown-menu {
 	right: inherit;
@@ -242,7 +224,6 @@
 	/*Navbar*/
 	.header .navbar-nav {
 		top: 2px;
-		margin-top: 10px;
 		position: relative;
 	}
 
@@ -311,12 +292,34 @@
 	.header .navbar .search-open {
 		width: 330px;
 	}	
+/* custom */
+.navbar-fixed-top {
+	background: #fff !important;
+	height: 5.4em;
+}
+.navbar-fixed-top > .container {
+	margin-top: 1.4em;
+}
+.navbar-left{
+	float: left !important;
+	margin-top: -1em !important;
+	margin-left: 3em;
+}
+.header_menu_items > img {
+	height: 42px;
+	width: auto;
+}
+#get_the_android, #get_the_apple {
+	margin-right: 1em;
+	margin-top: 0.6em;
+}
+#menu_get_app {
+	margin-left: -2em;
+}
+#menu_get_app > a {
+	padding: 9px 10px 9px 0px;
+}
 
-	/* custom CSS */
-
-	body > div:nth-child(2) > div > div {
-		
-	}
 }
 
 @media (max-width: 767px) {

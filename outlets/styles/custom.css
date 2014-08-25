@@ -1,6 +1,9 @@
 /* Add here all your css styles (customizations) */
 
-
+@font-face {
+    font-family: 'opensans';
+    src: url('http://fonts.googleapis.com/css?family=Open+Sans');
+}
 /* Brand Color Classes. Caution: will override any other style */
 
 .brand_red {
@@ -36,7 +39,13 @@
 .brand_bg_blue {
 	background-color: #397bbf !important;
 }
-
+.brand_bg_dark_grey {
+	background-color: #585858 !important;
+}
+/* hr */
+hr {
+	border-top: solid 1px #b6b6b6;
+}
 /* Rounded icons, circles etc. */
 
 .make_it_round {
@@ -49,9 +58,21 @@
 	box-shadow: 0px 1px 6px 6px rgba(0, 0, 0, 0.4) !important;
 }
 #heading_left_column {
-	margin-left: 1em;
+	margin-left: 0.6em;
 }
-
+/* margin */
+.margin_top_one {
+	margin-top: 1em;
+}
+.margin_right_one {
+	margin-right: 1em;
+}
+.margin_negative_two {
+	margin-left: -2.4em;
+}
+.margin_negative_one {
+	margin-left: -1em;
+}
 /* fonts */
 
 .knockout50 {
@@ -82,7 +103,7 @@
 	margin-left: 0.7em;
 }
 .margin_left_one {
-	margin-left: 1em;
+	margin-left: 1.1em;
 }
 /* Facebook widget Header */
 .uiBoxLightblue {
@@ -92,47 +113,12 @@
 	text-align: center;
 }
 
-/* Header Styles */
-
-
-.get_the_app {
-	margin-right: 2em;
-}
-#get_the_android{
-	margin-right: 0em;
-}
-#get_the_apple {
-	margin-left: -2em;
-}
-#get_the_android > img {
-	width: 175px;
-	margin-top: -0.5em;
-	height: 4.5em;
-}
-#get_the_apple > img {
-	width: 170px;
-	margin-top: 0.4em;
-	height: 3.2em;
-}
-.header_menu_items{
-	font-family: "sapientregular";
-}
-.menu_text {
-	margin-top: 0.7em;
-}
-.menu_text > a {
-	color: #585858 !important;
-}
-#menu_text_works {
-	margin-right: -1.5em;
+.offer_title, .offer_count {
+	font-size: 13px;
+	font-family: 'sapientregular';
 
 }
-#menu_text_merchant {
-	margin-right: -1.3em;
-	float: right !important;
-
-}
-.offer_count:hover, .offer_title:hover {
+tr:hover{
 	background: #fff;
 	color: #000;
 }
@@ -163,4 +149,65 @@
 }
 .offer_count {
 	font-family: "sapientbold";
+}
+.table-responsive {
+	border: 0px solid #ccc !important;
+}
+  .heading_blocks {
+        color: #666;
+        display: block;
+        font-size: 28px !important;
+        font-weight: 200;
+        line-height: 35px;
+        margin-bottom: 12px;
+        font-family: 'opensans', sans-serif;
+    }
+ .yellow_line {
+ 	width:100%; 
+ 	margin:0px auto; 
+ 	border-bottom:6px solid #b6b6b6; 
+ 	padding-top:10px !important; 
+
+ }
+ .smaller_yellow_line {
+ 	margin:0px auto; 
+ 	border-top:9px solid #b6b6b6;
+ }
+ .heading_button {
+ 	font-weight: bold;
+ 	font-size: 18px;
+ 	line-height: 24px;
+ 	text-align: center;
+ 	font-family: 'opensans', sans-serif;
+ }
+ /* footer */
+ .footer_menu_items > img {
+ 	height: 42px;
+ 	width: auto;
+ }
+
+ /* carousel */
+
+ .carousel-control 			 { width:  4%; }
+.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
+@media (max-width: 767px) {
+	.carousel-inner .active.left { left: -100%; }
+	.carousel-inner .next        { left:  100%; }
+	.carousel-inner .prev		 { left: -100%; }
+	.active > div { display:none; }
+	.active > div:first-child { display:block; }
+
+}
+@media (min-width: 767px) and (max-width: 992px ) {
+	.carousel-inner .active.left { left: -50%; }
+	.carousel-inner .next        { left:  50%; }
+	.carousel-inner .prev		 { left: -50%; }
+	.active > div { display:none; }
+	.active > div:first-child { display:block; }
+	.active > div:first-child + div { display:block; }
+}
+@media (min-width: 992px ) {
+	.carousel-inner .active.left { left: -25%; }
+	.carousel-inner .next        { left:  25%; }
+	.carousel-inner .prev		 { left: -25%; }	
 }
