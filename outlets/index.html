@@ -10,11 +10,14 @@
     <meta name="author" content="">
 
     <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" type="text/css" href="styles/custom.css">
     <link rel="stylesheet" href="../home/assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../home/assets/css/style.css">
     <link rel="stylesheet" href="../home/assets/css/headers/header1.css">
     <link rel="stylesheet" href="../home/assets/css/responsive.css">
-    <link rel="shortcut icon" href="favicon.ico">        
+    <link rel="shortcut icon" href="favicon.ico">   
+    <link rel="stylesheet" type="text/css" href="styles/page_job_inner1.css"> 
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">    
     <!-- CSS Implementing Plugins -->    
     <link rel="stylesheet" href="../home/assets/plugins/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../home/assets/plugins/flexslider/flexslider.css" type="text/css" media="screen">          
@@ -23,6 +26,7 @@
     <!-- CSS Theme -->    
     <link rel="stylesheet" href="../home/assets/css/themes/default.css" id="style_color">
     <link rel="stylesheet" href="../home/assets/css/themes/headers/default.css" id="style_color-header-1"> 
+    
     
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.theme.min.css">
@@ -53,7 +57,24 @@
         </ul>
     </div>      
 </div><!--/top-->
-<!--=== End Top ===-->    
+<!--=== End Top ===-->   
+<div id="fb-root"></div>
+            <script>
+             window.fbAsyncInit = function() {
+                FB.init({
+                appId      : '763534923659747',
+                xfbml      : true,
+                version    : 'v2.0'
+                });
+            };
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script> 
 
 <!--=== Header ===-->    
 <div class="header">
@@ -72,7 +93,7 @@
                 </a>
             </div>
             <ul class="nav navbar-nav navbar-left">
-                <li style="display: inline-flex;" class="panel panel-success" >
+                <li style="display: inline-flex;" class="panel panel-success" id="get-the-app">
                         <a href="about.html">
                         Get Twyst 
                         </a>    
@@ -191,12 +212,8 @@
 <script type="text/javascript" src="../home/assets/plugins/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="../home/assets/plugins/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="../home/assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
-<script type="text/javascript" src="../home/assets/plugins/hover-dropdown.min.js"></script> 
-<script type="text/javascript" src="../home/assets/plugins/back-to-top.js"></script>
 <!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript" src="../home/assets/plugins/gmap/gmap.js"></script>
-<script type="text/javascript" src="../home/assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+
 <!-- JS Page Level -->  
 <script type="text/javascript" src="../common/libs/angular/angular-route.min.js"></script>
     <script src="../common/libs/angular-file-upload/angular-file-upload.min.js"></script>

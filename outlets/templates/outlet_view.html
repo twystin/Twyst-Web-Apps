@@ -2,8 +2,12 @@
 <!--=== Job Description ===-->
 <div class="job-description">
   <div class="bg">
+  <div class="background_image_div"><img src="http://twyst.in/home/assets/img/b3.jpg" class="z_background_image"></div>
+  
     <div class="container content" >
+
       <div class="inner_row_begins row">
+
        <div class="col-md-1 hidden-sm hidden-xs left_padding_outlet_card"> </div>
        <div class="col-md-4 col-sm-12 col-xs-12 outlet_info">
         <h1 class="col-md-12 col-sm-12 col-xs-12"><b class="color_white knockout50" id="outlet_name">{{outlet.basics.name}}</b></h1>
@@ -26,256 +30,192 @@
            </div>
          </div>
        </div> 
-       <div class="col-md-5 hidden-sm hidden-xs image_outlet_card">
+       <div class="col-md-2 hidden-sm hidden-xs">
        </div>
-       <div class="col-md-2 hidden-sm hidden-xs"></div>
+       <div class="col-md-4 outlet_card_info" >
+       <h1 class="col-md-12 col-sm-12 col-xs-12"><b class="color_white knockout50 label label-info" id="outlet_name">Our Rewards Program on Twyst</b></h1>
+          <div  class="hero_header_offers" ng-repeat="offer in rewards|limitTo:5">
+          <span class="label label-success">Visit {{offer.count}}</span>:
+         <span class="col-md-12 offer_count color_white brand_bg_yellow">{{offer.title | limitTo:36}} </span>
+         </div>
+         
+       </div>
      </div>
      <div class="clearfix"></div>
      
      <div class="row inner_row">
-      <!-- Left Inner -->
-      <div class="col-md-6 left-inner-parent">
-        <div class="left-inner">
-         <span class="hidden-xs"><span class="panel-title heading-sm pull-left heading_blocks" id="heading_left_column">Check-in to unlock rewards</span><br><br></span>
-         <span class="hidden-md hidden-lg hidden-sm">
-           <span class="panel-title heading-sm lead pull-left" id="heading_left_column">Check in to unlock rewards</span>
-         </span>
-         <div class="clearfix"></div>
-         <div class="col-md-12 col-sm-12 col-xs-12 table_checkin_and_offer_details">
-           <table class="table-bordered table-responsive" >
-            <tr class="table_headings">
-              <td class="table_check_in_no col-md-4 col-sm-4 col-xs-4 brand_bg_dark_grey heading_button">Check in No.</td>
-              <td class="table_offer col-md-8 col-sm-8 col-xs-8 brand_bg_yellow heading_button">Rewards</td>
-            </tr>
-            <tr class="table_offer_details" ng-repeat="offer in rewards|limitTo:5">
-             <td class="col-md-4 col-sm-4 col-xs-4 offer_count">{{offer.count}}</td>
-             <td class="col-md-8 col-sm-4 col-xs-4 offer_title">{{offer.title}}</td>
-           </tr>
-         </table>
-       </div>
-       <div class="clearfix"></div>
-       <div class="col-md-12 col-sm-12 col-xs-12 margin_left_one text_center_align margin_top_one">
-         <p class="lead">Check-in on Twyst to unlock these rewards.<br>Download the app today!
-         </p>
-       </div>
-       <div class="clearfix"></div>
-       <hr>
-       <div class="col-md-12 col-sm-12 hidden-xs">
-        <h2 class="panel-title heading-sm pull-left heading-padded-blocks text_center_align" id="heading_left_aligned"><b class="color_white">Visit {{outlet.basics.name}} on</b></h2><br><br>
-        
+      <div class="container">
+      <div class="row">
+        <div class="col-md-4 hero_highlight_column                                                                                                  ">
+              <h4 class="margin_left_one">Info</h4>
+              <div class="clearfix"></div>
+              <hr>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                   Cuisines: {{outlet.attributes.cuisines.toString()}}    
+              </div>    
+              <div class="clearfix"></div>
+              <hr>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <span>Cost For Two: </span><i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[0]}}</span></i> <span>to</span> <i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[1]}}</span></i><br>
+              </div>
+              <hr>
+              <div class="clearfix"></div>
+              <div class="col-md-12 col-xs-12 col-sm-12">
+              <div class="col-md-12 margin_negative_one">
+                 <div class="col-md-6 col-sm-6 col-xs-12">
+                 <div ng-show="outlet.attributes.dine_in">
+                   <img src="images/Dine-in.png" class="image_overview_column_attribute">
+                   <div class="overflow-h padding-top">
+                    Dine In Available
+                  </div>
+                </div>
+                <div  ng-show="!outlet.attributes.dine_in">
+                 <img src="images/No Dine-in.png" class="image_overview_column_attribute">
+                 <div class="overflow-h padding-top">
+                  No Dine In
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12" id="float_right_highlight">
+             <div ng-show="outlet.attributes.home_delivery">
+              <img src="images/Home Delivery.png" class="image_overview_column_attribute">
+              <div class="overflow-h padding-top">
+                Home Delivery
+              </div>     
+            </div>
+            <div ng-show="!outlet.attributes.home_delivery">
+              <img src="images/No Home Delivery.png" class="image_overview_column_attribute">
+              <div class="overflow-h padding-top">
+                No Home Delivery
+              </div>   
+            </div>
+            </div>
+              </div>
+          <div class="clearfix"></div>
+          <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div  ng-show="outlet.attributes.veg">
+                <img src="images/Veg.png" class="image_overview_column_attribute">
+                <div class="overflow-h padding-top">
+                  Vegetarian Only
+                </div>  
+              </div>
+              <div ng-show="!outlet.attributes.veg">
+                <img src="images/Non Veg.png" class="image_overview_column_attribute">
+                <div class="overflow-h padding-top">
+                 Serves non veg
+               </div>  
+             </div>
+           </div>
+           <div class="col-md-6 col-sm-12 col-xs-12">
+            <div ng-show="outlet.attributes.alcohol">
+              <img src="images/Yes to Alcohol.png" class="image_overview_column_attribute">
+              <div class="overflow-h padding-top">
+                Serves Alcohol
+              </div> 
+            </div>
+            <div ng-show="!outlet.attributes.alcohol">
+              <img src="images/No Alcohol.png" class="image_overview_column_attribute">
+              <div class="overflow-h padding-top">
+               No Alcohol
+             </div>  
+           </div>
+
+         </div>  
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-      <div class="col-md-12 hidden-xs text_center_align" id="foodpanda_zomato_links">
-        <img class="" src="images/foodpanda.png" style="height: 80px; width: auto; ">
-        <img class="" src="images/zomato.jpg" style="height: 80px; width: auto; ">
-      </div>
 
-      <div class="clearfix"></div>
-
-
-
-
-    </div>
-  </div>
-
-  <!-- End Left Inner -->
-  <div class="col-md-1 hidden-xs"></div>
-  <!-- Right Inner -->
-
-  <div class="col-md-5 col-xs-12" id="right_inner_block">     
-    <div class="right-inner color_black">
-      <div class="col-md-10 col-sm-10 col-xs-12 margin_negative_one" ng-if="outlet.links.facebook_url" id="facebook_like_box">
-
-        <div class="fb-like-box col-md-10 col-sm-10 hidden-xs" ng-href={{outlet.links.facebook_url}} data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="true" data-show-border="true" data-height="400" data-width="350"></div>
-      </div>
-      <div class="clearfix"></div>
-      <h2 class="panel-title heading-sm pull-left heading-padded-blocks text_center_align"><b class="color_white brand_">Other Info</b></h2><br><br>
-      <div class="clearfix"></div>
-      <hr>
-      <span class="col-md-12 col-sm-12 col-xs-12">Cuisines:</span> {{outlet.attributes.cuisines.toString()}}
-      <hr>
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <span>Cost For Two: </span><i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[0]}}</span></i> <span>to</span> <i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[1]}}</span></i><br>
-      </div>
-      <hr>
-      <div class="col-md-12 col-xs-12 col-sm-12 margin_negative_two">
-       <div class="col-md-6 col-sm-6 col-xs-12">
-         <div ng-show="outlet.attributes.dine_in">
-           <img src="images/Dine-in.png" class="margin_left_one">
-           <div class="overflow-h padding-top">
-            Dine In Available
+        <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div ng-show="outlet.attributes.smoking">
+              <img src="images/Smoking.png" class="image_overview_column_attribute">
+              <div class="overflow-h padding-top">
+                Smoking Area Available
+              </div>  
+            </div>
+            <div ng-show="!outlet.attributes.smoking">
+              <img src="images/No Smoking.png" class="image_overview_column_attribute">
+              <div class="overflow-h padding-top">
+               No Smoking
+             </div>  
+           </div>
+         </div>
+         <div class="col-md-6 col-sm-6 col-xs-12">
+          <div ng-show="outlet.attributes.outdoor">
+            <img src="images/Outdoor Seating.png" class="image_overview_column_attribute">
+            <div class="overflow-h padding-top">
+              Outdoor Seating Available
+            </div>  
           </div>
         </div>
-        <div class="overview_unavailable" ng-show="!outlet.attributes.dine_in">
-         <img src="images/No Dine-in.png" class="margin_left_one">
-         <div class="overflow-h padding-top">
-          No Dine In
         </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 margin_left_highlights" id="float_right_highlight">
-     <div class="overview" ng-show="outlet.attributes.home_delivery">
-      <img src="images/Home Delivery.png">
-      <div class="overflow-h padding-top">
-        Home Delivery
-      </div>     
-    </div>
-    <div class="overview_unavailable" ng-show="!outlet.attributes.home_delivery">
-      <img src="images/No Home Delivery.png">
-      <div class="overflow-h padding-top">
-        No Home Delivery
-      </div>   
-    </div>
 
-  </div>
+        <div class="clearfix"></div>
 
+        <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div ng-show="outlet.attributes.foodcourt">
+             <img src="images/Food Court.png" class="image_overview_column_attribute">
+             <div class="overflow-h padding-top">
+              Part of a food court
 
-  <div class="clearfix"></div>
-  <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one">
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <div class="overview_unavailable" ng-show="outlet.attributes.veg">
-        <img src="images/Veg.png">
-        <div class="overflow-h padding-top">
-          Vegetarian Only
-        </div>  
-      </div>
-      <div class="overview_unavailable" ng-show="!outlet.attributes.veg">
-        <img src="images/Non Veg.png">
-        <div class="overflow-h padding-top">
-         Serves non veg
-       </div>  
-     </div>
-   </div>
-   <div class="col-md-6 col-sm-12 col-xs-12 margin_left_highlights">
-    <div class="" ng-show="outlet.attributes.alcohol">
-      <img src="images/Yes to Alcohol.png">
-      <div class="overflow-h padding-top">
-        Serves Alcohol
-      </div> 
-    </div>
-    <div class="" ng-show="!outlet.attributes.alcohol">
-      <img src="images/No Alcohol.png">
-      <div class="overflow-h padding-top">
-       No Alcohol
-     </div>  
-   </div>
+            </div>   
+          </div>
+          </div>
+          <div class="clearfix"></div>
+        <hr>
+        <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one">
+            Air conditioning: {{outlet.attributes.air_conditioning}}          
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one">
+            Parking: {{outlet.attributes.parking}}
+          </div>
+        <div class="clearfix"></div>
+        <hr>
+        <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one">
+            Reservation: {{outlet.attributes.reservation}}
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one">
+            Wi-fi: {{outlet.attributes.wifi}}
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        <span class="col-md-12 margin_negative_one">Open From</span>
+        <span>{{outlet.attributes.timings}}</span>
+        <hr>
+        </div>
+        </div>
+        </div>
+        <div class="col-md-4 hero_highlight_column">
+            <h4>Facebook</h4>
+            <div class="col-md-12" ng-if="outlet.links.facebook_url" id="facebook_like_box">
 
- </div>  
-</div>
-<div class="clearfix"></div>
-
-<div class="col-md-12 col-sm-12 col-xs-12 margin_top_one">
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <div class="" ng-show="outlet.attributes.smoking">
-      <img src="images/Smoking.png">
-      <div class="overflow-h padding-top">
-        Smoking Area Available
-      </div>  
-    </div>
-    <div class="" ng-show="!outlet.attributes.smoking">
-      <img src="images/No Smoking.png">
-      <div class="overflow-h padding-top">
-       No Smoking
-     </div>  
-   </div>
- </div>
- <div class="col-md-6 col-sm-6 col-xs-12">
-  <div class="overview" ng-show="outlet.attributes.outdoor">
-    <img src="images/Outdoor Seating.png">
-    <div class="overflow-h padding-top">
-      Outdoor Seating Available
-    </div>  
-  </div>
+              <div class="fb-like-box col-md-10 col-sm-10 hidden-xs" ng-href={{outlet.links.facebook_url}} data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="true" data-show-border="true" data-height="400" data-width="350"></div>
+            </div>
+        </div>
+        <div class="col-md-4 hero_highlight_column">
+          <h4 class="margin_left_one">Links</h4>
+          <div class="col-md-12 hidden-xs text_left_align" id="foodpanda_zomato_links">
+            <div class="col-md-3">
+                <img class="" src="images/foodpanda.png" style="height: 48px; width: auto; ">
+                <a href="#"><span>Order on</span></a>
+            </div>
+            <div class="col-md-3">
+                <img class="" src="images/zomato.jpg" style="height: 48px; width: auto; ">
+                <a href="#"><span>Reviews</span></a>
+            </div>
+            
+            
+          </div>
+        </div>
 </div>
 </div>
+          
 
 <div class="clearfix"></div>
 
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <div class="overview" ng-show="outlet.attributes.foodcourt">
-     <img src="images/Food Court.png">
-     <div class="overflow-h padding-top">
-      Part of a food court
-
-    </div>   
-  </div>
-</div>
-</div>
-
-</div>
-
-<div class="clearfix"></div>
-<hr>
-<div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one">
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    Air conditioning: {{outlet.attributes.air_conditioning}}
-  </div>
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    Parking: {{outlet.attributes.parking}}
-  </div>
-</div>
-<div class="clearfix"></div>
-<hr>
-<div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one">
-  <div class="col-md-7 col-sm-7 col-xs-7">
-    Reservation: {{outlet.attributes.reservation}}
-  </div>
-  <div class="col-md-4 col-sm-4 col-xs-4" id="wifi_shift_left">
-    Wi-fi: {{outlet.attributes.wifi}}
-  </div>
-</div>
-<div class="clearfix"></div>
-<hr>
-<span class="col-md-12">Open From</span>
-<span>{{outlet.attributes.timings}}</span>
-<hr>
-<!-- Pie Chart Progress Bar -->    
-<div class="row margin-bottom-20">
-
-  <!-- End Pie Chart Progress Bar -->
-
-</div>   
-</div>
-<!-- End Right Inner -->
-</div>    
-</div> 
-</div>
-</div>
-<div class="clearfix"> </div>
-<div class="col-md-12 col-sm-12 col-xs-12 yellow_line"></div>
-<div class="col-md-12">
-  <div class="col-md-4 col-sm-4 col-xs-4"></div>
-  <div class="col-md-4 col-sm-4 col-xs-4 smaller_yellow_line headline-md"></div>
-  <div class="col-md-4"></div>
-</div>
-<div class="clearfix"></div>
-<div class="col-md-12 text-center">
-  <h3 class="panel-title heading-sm text_center_align heading_blocks">Check other outlets on Twyst</h3>
-</div>
-<div class="clearfix"></div>
-<wrap-owlcarousel class="owl-carousel"   
-data-options="{autoPlay: 5000, stopOnHover: true,  
-slideSpeed : 300, paginationSpeed : 400, singleItem : false, items: 3, navigation: true, navigationText: ['<','>']}">  
-<div>  
-  <img src="http://graphics8.nytimes.com/images/2011/05/07/business/Flowers1/Flowers1-articleLarge.jpg"/>  
-</div>  
-<div>  
-  <img src="http://graphics8.nytimes.com/images/2011/05/07/business/Flowers1/Flowers1-articleLarge.jpg"/>  
-</div>
-<div>  
-  <img src="http://graphics8.nytimes.com/images/2011/05/07/business/Flowers1/Flowers1-articleLarge.jpg"/>  
-</div>
-<div>  
-  <img src="http://graphics8.nytimes.com/images/2011/05/07/business/Flowers1/Flowers1-articleLarge.jpg"/>  
-</div>
-<div>  
-  <img src="http://graphics8.nytimes.com/images/2011/05/07/business/Flowers1/Flowers1-articleLarge.jpg"/>  
-</div>
-</wrap-owlcarousel>
-
-<div class="clearfix"></div>
-
-
-<!--=== End Job Description ===-->
+      
