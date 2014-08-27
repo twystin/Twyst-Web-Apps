@@ -12,8 +12,8 @@
 @import url(ie8.css);
 
 /*Import CSS Plugins*/
-@import url(plugins/animate.css);
-@import url(plugins/box-shadows.css);
+@import url(animate.css);
+@import url(box-shadows.css);
 
 /*Boxed Layout
 ------------------------------------*/
@@ -836,7 +836,7 @@
     top: 8px;
     right: 9px;
     font-size: 11px;
-    content: "\f105";
+    content: "";
     position: absolute;
     font-weight: normal;
     display: inline-block;
@@ -852,7 +852,7 @@
 .dropdown > a:after {
     top: 9px;
     right: 15px;
-    content: "\f107";
+    content: "";
 }
 
 .dropdown-submenu > .dropdown-menu { 
