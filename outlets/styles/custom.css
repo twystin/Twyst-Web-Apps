@@ -185,6 +185,9 @@ tr:hover{
  	height: 42px;
  	width: auto;
  }
+ .copyright-row-footer {
+ 	margin-top: 1em;
+ }
 
  /* carousel */
 

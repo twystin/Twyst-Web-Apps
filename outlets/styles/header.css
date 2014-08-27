@@ -80,7 +80,15 @@
 	text-transform: uppercase; 
 	font-family:'Open Sans', sans-serif;	
 }
-
+.images_header{
+	padding: none;
+	margin-bottom: none;
+}
+.images_header > img {
+	height: 42px;
+	width: auto;
+	margin-top: -0.5em;
+}
 .top ul.lenguages li.active a i {
 	color: #999;
 	float: right;

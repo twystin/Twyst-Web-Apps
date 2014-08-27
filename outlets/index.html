@@ -14,13 +14,14 @@
     <script src="../common/libs/angular-file-upload/angular-file-upload.min.js"></script>
     <script src="../common/libs/angular/angular-cookies.min.js"></script>
     <!-- Angular Bootstrap CDN 0.10.0 -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
     <script src="../common/libs/html5shiv.js"></script>
     <script src='../common/libs/underscore/underscore-min.js'></script>
     <!-- -->
     <script type="text/javascript" src="app.js" ></script>
     <script type="text/javascript" src="donutdirective.js"></script>
     <script type="text/javascript" src="d3Svc.js"></script>
+
 
 
 	<!-- Styles -->
@@ -35,22 +36,18 @@
     <!-- CSS theme -->
      <link rel="stylesheet" href="../../assets/css/themes/orange.css" id="style_color">
     <link rel="stylesheet" href="../../assets/css/themes/headers/default.css" id="style_color-header-1">
+    <link rel="stylesheet" type="text/css" href="http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="http://owlgraphic.com/owlcarousel/owl-carousel/owl.theme.css">
    <!--  <link rel="stylesheet" type="text/css" href="../common/libs/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="styles/page_job_inner1.css">
  -->
 	 <!-- Merchant Page Dependencies -->
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
+
 <body>
     <!--=== Top ===-->
        <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+              
     <div class="top">
         <div class="container">
             <ul class="loginbar pull-right">
@@ -63,11 +60,18 @@
 	   <div ng-view></div>
 	   <div ng-include="'./templates/_partials/footer.html'"></div>
 
-	<!-- JS Global Compulsory -->
-	<script src="./app.js"></script>
-    <script type="text/javascript" src="../common/libs/jquery/jquery.min.js"></script>
+
+       <!-- scripts -->
+       <script type="text/javascript" src="../common/libs/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="../common/libs/jquery/jquery-migrate.min.js"></script>
     <script type="text/javascript" src="../../home/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.min.js"></script>
+    
+
+	<!-- JS Global Compulsory -->
+	<script src="./app.js"></script>
+    
+</head>
     
     <!-- JS -->
 </body>

@@ -138,7 +138,6 @@
 .job-description .p-chart .overflow-h li a {
 	font-size: 11px;
 }
-
 /*Circle in Responsive*/
 @media (max-width: 450px) {
 	.job-description .p-chart.col-xs-6 {
@@ -463,5 +462,32 @@ div.panel-heading > h4 > a > span {
     #heading_left_aligned {
         margin-left: 0em !important;
     }
+    /* Responsive */
+@media (max-width: 999px) {
+    .heading-padded-blocks {
+        width: 100%;
+    }
+    .margin_left_highlights {
+        float: left;
+    }
+    #float_right_highlight {
+        margin-left: 1em;
+    }
+    .heading-padded-blocks{
+        margin: 0em !important;
+    }
+    .job-description .left-inner {
+        padding: 0px;
+    }
+    .heading_button {
+        padding: 0.6em;
+        font-size: 13px;
+        font-weight: 100;
+        color: #fff;
+        line-height: 1em;
+    }
+
 }
-    
+ 
+}
+

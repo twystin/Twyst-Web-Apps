@@ -383,8 +383,11 @@
 	/*Responsive code for max-width: 1000px*/
     .header .navbar-header {
         float: none;
+        background-color: #fff;
     }
-    
+    .outlet_info {
+    	margin: 0em;
+    }
     .header .navbar-toggle {
         display: block;
     }
@@ -427,6 +430,7 @@
 	.header .navbar-default .navbar-nav > li a {
 		/*margin-bottom: 1px;*/
 		border-bottom: solid 1px #eee;
+		background: #fff;
 	}	
 
 	.header .navbar-default .navbar-nav > li > a:focus {
