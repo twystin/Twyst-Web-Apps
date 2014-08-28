@@ -202,12 +202,19 @@
         </div>
         
         <div class="col-md-6 col-xs-12 hero_highlight_column">
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-if="outlet.basics.is_a">
            <div class="panel-heading">
             <h4>Where We Are Located</h4>
           </div>
             <div class="panel-body">
-              <gm-map gm-map-id="'myMap'" gm-center="center" gm-zoom="zoom" gm-bounds="bounds" gm-map-type-id="mapTypeId" style="width:500px;height:400px;">
+            <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:500px;height:420px;">
+                <gm-markers gm-objects="volcanoes"
+                            gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
+                            gm-get-marker-options="getVolcanoOpts(object)"
+                            gm-on-click="selectVolcano(object, marker)">
+                </gm-markers>
+              </gm-map>
+              <!-- <gm-map gm-map-id="'myMap'" gm-center="center" gm-zoom="zoom" gm-bounds="bounds" gm-map-options="options.map" gm-map-type-id="mapTypeId" style="width:500px;height:400px;">
 
               <gm-markers gm-objects="volcanoes"
                     gm-id="object.id"
@@ -215,7 +222,7 @@
                     gm-marker-options="{ title: object.name, clickable: true }"
                     >
              </gm-markers>
-              </gm-map>
+              </gm-map> -->
             </div>
         </div>
          
@@ -241,16 +248,16 @@
           
 
 <div class="clearfix"></div>
-<div class="col-md-12">
+<div class="row">
   <div class="col-md-6 col-xs-12 hero_highlight_column">
         <div class="panel panel-default">
            <div class="panel-heading">
             <h4>From our Facebook page</h4>
           </div>
             <div class="panel-body">
-              <div class="col-md-12" ng-if="outlet.links.facebook_url" id="facebook_like_box">
+              <div class="col-md-12" ng-show="outlet.links.facebook_url" id="facebook_like_box">
 
-              <div class="fb-like-box col-md-10 col-sm-10 hidden-xs" ng-href={{outlet.links.facebook_url}} data-colorscheme="dark" data-force-wall="true" data-show-faces="true" data-header="true" data-stream="true" data-show-border="false" data-height="500" data-width="500"></div>
+              <div class="fb-like-box col-md-10 col-sm-10 hidden-xs" ng-href="https://{{outlet.links.facebook_url}}" data-colorscheme="dark" data-force-wall="true" data-show-faces="true" data-header="false" data-stream="true" data-show-border="false" data-height="500" data-width="500"></div>
             </div>
             </div>
         </div>
