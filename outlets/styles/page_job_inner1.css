@@ -21,7 +21,7 @@
 .job-description {
 	padding-bottom: 30px;
 	position: relative;
-	background-color: #f1f1f1 !important;
+	background-color: #fff !important;
 	border-top: 1px solid #eee;
     background-size: cover;
     background-repeat: no-repeat;
@@ -138,7 +138,6 @@
 .job-description .p-chart .overflow-h li a {
 	font-size: 11px;
 }
-
 /*Circle in Responsive*/
 @media (max-width: 450px) {
 	.job-description .p-chart.col-xs-6 {
@@ -201,6 +200,13 @@
 }
 
 /* Custom CSS */
+ .z_background_image {
+        width: 100%;
+        height: 35em;
+        z-index: 0;
+        position: absolute;
+        top: 0;
+    }
 #image_address_icon {
     height: 15px;
     margin-top: -0.3em;
@@ -223,7 +229,7 @@
 }
 /* facebook like box */
 #facebook_like_box {
-    margin-top: -0.3em;
+    margin-left: -2em;
 }
 /*Accordion */
 .panel-default>.panel-heading {
@@ -243,6 +249,13 @@ div.panel-heading > h4 > a > span {
 }
 /*outlet card */
 
+.outlet_card_info {
+    text-align: center;
+    color: white !important;
+    height: 27em;
+    margin: 4em 0em 0em 0em;
+    opacity: 0.95;
+}
 .outlet_info > h1 {
     margin: 0.4em 0 0.3em 0;
 }
@@ -255,10 +268,11 @@ div.panel-heading > h4 > a > span {
     text-align: center;
     color: white !important;
     height: 27em;
-    margin: 6em 0em 0em 0em;
+    margin: 4em 0em 0em 0em;
+    opacity: 0.95;
 }
 .image_outlet_card{
-    background-image: url("../images/Biryani Blues .jpg");
+    background-image:
     background-size: cover;
     background-repeat: no-repeat;
     height: 27em;
@@ -389,7 +403,6 @@ div.panel-heading > h4 > a > span {
    /* background-image: url("../images/Twyst_blur.jpg");
    background-image: url("../images/b3.jpg"); */
     .bg{
-    	background-image: url("../images/Merchant Section .jpg");
         background-repeat: no-repeat;
         z-index: -9999;
         background-size: contain;
@@ -452,7 +465,8 @@ div.panel-heading > h4 > a > span {
     #share_image {
         border: solid 1px #f59221;
         padding: 0.3em;
-        margin: 0.4em -1em 0em 0em;
+        margin: -0.5em -1em 0em 0em;
+        display: none;
     }
     #share_text {
         line-height: 2;
@@ -463,5 +477,32 @@ div.panel-heading > h4 > a > span {
     #heading_left_aligned {
         margin-left: 0em !important;
     }
+    /* Responsive */
+@media (max-width: 999px) {
+    .heading-padded-blocks {
+        width: 100%;
+    }
+    .margin_left_highlights {
+        float: left;
+    }
+    #float_right_highlight {
+        margin-left: 1em;
+    }
+    .heading-padded-blocks{
+        margin: 0em !important;
+    }
+    .job-description .left-inner {
+        padding: 0px;
+    }
+    .heading_button {
+        padding: 0.6em;
+        font-size: 13px;
+        font-weight: 100;
+        color: #fff;
+        line-height: 1em;
+    }
+   
 }
-    
+ 
+}
+

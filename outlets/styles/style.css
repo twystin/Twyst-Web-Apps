@@ -12,8 +12,8 @@
 @import url(ie8.css);
 
 /*Import CSS Plugins*/
-@import url(plugins/animate.css);
-@import url(plugins/box-shadows.css);
+@import url(animate.css);
+@import url(box-shadows.css);
 
 /*Boxed Layout
 ------------------------------------*/
@@ -383,8 +383,11 @@
 	/*Responsive code for max-width: 1000px*/
     .header .navbar-header {
         float: none;
+        background-color: #fff;
     }
-    
+    .outlet_info {
+    	margin: 0em;
+    }
     .header .navbar-toggle {
         display: block;
     }
@@ -427,6 +430,7 @@
 	.header .navbar-default .navbar-nav > li a {
 		/*margin-bottom: 1px;*/
 		border-bottom: solid 1px #eee;
+		background: #fff;
 	}	
 
 	.header .navbar-default .navbar-nav > li > a:focus {
@@ -832,7 +836,7 @@
     top: 8px;
     right: 9px;
     font-size: 11px;
-    content: "\f105";
+    content: "";
     position: absolute;
     font-weight: normal;
     display: inline-block;
@@ -848,7 +852,7 @@
 .dropdown > a:after {
     top: 9px;
     right: 15px;
-    content: "\f107";
+    content: "";
 }
 
 .dropdown-submenu > .dropdown-menu { 

@@ -1,6 +1,14 @@
 
 var outletApp = angular.module('outletApp',["ngRoute",'ui.bootstrap','ngCookies','d3onut']);
-
+outletApp.directive('wrapOwlcarousel', function () {  
+    return {  
+        restrict: 'E',  
+        link: function (scope, element, attrs) {  
+            var options = scope.$eval($(element).attr('data-options'));  
+            $(element).owlCarousel(options);  
+        }  
+    };  
+});
 outletApp.controller('OutletCtrl', function($scope, $routeParams, outletService) {
 	($scope.getOutlet = function() {
 		var outlet_id = $routeParams.outlet_id;

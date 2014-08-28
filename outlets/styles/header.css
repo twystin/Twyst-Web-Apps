@@ -1,7 +1,7 @@
 /*Top Bar (login, search etc.)
 ------------------------------------*/
 .top {
-	padding-top: 8px;
+	padding-top: 0px;
 }
 
 .top ul.loginbar {
@@ -224,6 +224,7 @@
 	/*Navbar*/
 	.header .navbar-nav {
 		top: 2px;
+		margin-top: 10px;
 		position: relative;
 	}
 
@@ -292,34 +293,7 @@
 	.header .navbar .search-open {
 		width: 330px;
 	}	
-/* custom */
-.navbar-fixed-top {
-	background: #fff !important;
-	height: 5.4em;
-}
-.navbar-fixed-top > .container {
-	margin-top: 1.4em;
-}
-.navbar-left{
-	float: left !important;
-	margin-top: -1em !important;
-	margin-left: 3em;
-}
-.header_menu_items > img {
-	height: 42px;
-	width: auto;
-}
-#get_the_android, #get_the_apple {
-	margin-right: 1em;
-	margin-top: 0.6em;
-}
-#menu_get_app {
-	margin-left: -2em;
-}
-#menu_get_app > a {
-	padding: 9px 10px 9px 0px;
-}
-
+	
 }
 
 @media (max-width: 767px) {
@@ -333,4 +307,4 @@
 		box-shadow: none;
 		background: none; 
 	}	
-}
+}f
