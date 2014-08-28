@@ -204,13 +204,18 @@
         <div class="col-md-6 col-xs-12 hero_highlight_column">
         <div class="panel panel-default">
            <div class="panel-heading">
-            <h4>From our Facebook page</h4>
+            <h4>Where We Are Located</h4>
           </div>
             <div class="panel-body">
-              <div class="col-md-12" ng-if="outlet.links.facebook_url" id="facebook_like_box">
+              <gm-map gm-map-id="'myMap'" gm-center="center" gm-zoom="zoom" gm-bounds="bounds" gm-map-type-id="mapTypeId" style="width:500px;height:400px;">
 
-              <div class="fb-like-box col-md-10 col-sm-10 hidden-xs" ng-href={{outlet.links.facebook_url}} data-colorscheme="dark" data-force-wall="true" data-show-faces="true" data-header="true" data-stream="true" data-show-border="false" data-height="500" data-width="500"></div>
-            </div>
+              <gm-markers gm-objects="volcanoes"
+                    gm-id="object.id"
+                    gm-position="{ lat: object.location.lat, lng: object.location.lng }"
+                    gm-marker-options="{ title: object.name, clickable: true }"
+                    >
+             </gm-markers>
+              </gm-map>
             </div>
         </div>
          
@@ -236,5 +241,41 @@
           
 
 <div class="clearfix"></div>
+<div class="col-md-12">
+  <div class="col-md-6 col-xs-12 hero_highlight_column">
+        <div class="panel panel-default">
+           <div class="panel-heading">
+            <h4>From our Facebook page</h4>
+          </div>
+            <div class="panel-body">
+              <div class="col-md-12" ng-if="outlet.links.facebook_url" id="facebook_like_box">
+
+              <div class="fb-like-box col-md-10 col-sm-10 hidden-xs" ng-href={{outlet.links.facebook_url}} data-colorscheme="dark" data-force-wall="true" data-show-faces="true" data-header="true" data-stream="true" data-show-border="false" data-height="500" data-width="500"></div>
+            </div>
+            </div>
+        </div>
+       </div>   
+  <div class="col-md-6 col-xs-12 hero_highlight_column">
+        <div class="panel panel-default">
+           <div class="panel-heading">
+            <h4>Visit Us On</h4>
+          </div>
+            <div class="panel-body">
+              <div class="col-md-12">
+
+              <div class="col-md-6 well">
+                
+                <a href="#"><img class="" src="images/foodpanda.png" style="height: 48px; width: auto;margin-right: 1em; "><span>Order food online</span></a>
+            </div>
+            <div class="col-md-6 well">
+                
+                <a href="#"><img class="" src="images/zomato.jpg" style="height: 48px; width: auto; margin-right: 1em;"><span>Reviews us on Zomato</span></a>
+            </div>
+            </div>
+            </div>
+        </div>
+
 
       
+</div>
+ 

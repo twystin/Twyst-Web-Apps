@@ -1,5 +1,5 @@
 
-var outletApp = angular.module('outletApp',["ngRoute",'ui.bootstrap','ngCookies','d3onut']);
+var outletApp = angular.module('outletApp',["ngRoute",'ui.bootstrap','ngCookies','d3onut', 'AngularGM']);
 outletApp.directive('wrapOwlcarousel', function () {  
     return {  
         restrict: 'E',  
@@ -14,9 +14,22 @@ outletApp.controller('OutletCtrl', function($scope, $routeParams, outletService)
 		var outlet_id = $routeParams.outlet_id;
 		outletService.getOutlet(outlet_id).then(function(data) {
 			$scope.outlet = data.OUTLET;
+            $scope.center = new google.maps.LatLng($scope.outlet.contact.location.coords.latitude, $scope.outlet.contact.location.coords.longitude);
+            $scope.zoom = 14;
+            $scope.volcanoes = [
+                            {
+                                  id: 0,
+                                  name: 'Mount Rainier',
+                                  elevationMeters: 4392,
+                                  location: {
+                                    lat: $scope.outlet.contact.location.coords.latitude, 
+                                    lng: $scope.outlet.contact.location.coords.longitude
+                                  }
+                                }];
 			$scope.rewards = data.REWARDS;
 		})
 	})();
+
     $scope.getUrI = function(outlet) {
         if (outlet && outlet.links) {
            var outlet_fb_url = outlet.links.facebook_url.slice(13);
