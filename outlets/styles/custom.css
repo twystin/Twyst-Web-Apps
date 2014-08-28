@@ -57,6 +57,9 @@ hr {
 .header .navbar-default {
 	
 }
+.navbar-left {
+	margin-top: 1.1em !important;
+}
 #heading_left_column {
 	margin-left: 0.6em;
 }
@@ -113,7 +116,7 @@ hr {
 	margin-top: 5px; 
    text-shadow: none; 
    font-weight: normal !important; 
-   font-family: 'Open Sans', sans-serif; 
+   font-family: 'sapientregular'; 
 }
 .hero_highlight_column{
 	float: left;
@@ -196,8 +199,8 @@ tr:hover{
  	font-family: 'Open Sans', sans-serif;
  }
  .image_overview_column_attribute{
- 	height: 42px;
- 	width: 42px;
+ 	height: 26px;
+ 	width: 26px;
  }
  /* footer */
  .footer_menu_items > img {
@@ -211,9 +214,29 @@ tr:hover{
 	margin-bottom: 0px;
 	margin-top: -0.4em;
 }
+
+/* header changes */
+.clip .position-1:hover {
+	transform: rotate(15deg);
+}
+.padding_class {
+	padding: 10px 0px 10px 0px;
+}
+.label-success-black {
+	color: #000 !important;
+	background-color: #fff !important;
+}
+
 .inner_row > .container{
 	margin-top: 4em;
 }
+.outlet_heading_images{
+	height: 48px;
+	width: 48px;
+	float: right;
+	margin-top: -2.5em;
+}
+
  /* carousel */
 
  .carousel-control 			 { width:  4%; }
