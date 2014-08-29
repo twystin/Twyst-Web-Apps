@@ -13,17 +13,16 @@ outletApp.directive('wrapOwlcarousel', function () {
 outletApp.controller('OutletCtrl', function($scope, $routeParams, outletService) {
 
 
-    $scope.getVolcanoOpts = function(volcano) {
+    $scope.getOutletOpts = function(outlet) {
      return angular.extend(
-       { title: volcano.name },
-       $scope.options.volcanoes
+       { title: outlet.name },
+       $scope.options.outlets
       );
     };
     
-    $scope.selectVolcano = function(volcano, marker) {
-      $scope.volcano = volcano;
+    $scope.selectOutlet = function(outlet, marker) {
       if ($scope.prev) {
-        $scope.prev.setOptions($scope.options.volcanoes);
+        $scope.prev.setOptions($scope.options.outlets);
       }
       $scope.prev = marker;
       marker.setOptions($scope.options.selected);
@@ -40,7 +39,7 @@ $scope.options = {
         zoom: 14,
         mapTypeId: google.maps.MapTypeId.TERRAIN
       },
-      volcanoes: {
+      outlets: {
         icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png',
       },
       selected: {
@@ -48,9 +47,9 @@ $scope.options = {
       }
     };
     
-    $scope.volcanoes = [
+    $scope.outlets = [
       {
-        name: 'Mount Rainier',
+        name: $scope.outlet.basics.name + ', ' + $scope.outlet.contact.location.locality_1.toString(),
         img: 'http://www.thetrackerfoundation.org/Images/MountRainier_SM.jpg',
         elevationMeters: 4392,
         location: {

@@ -208,10 +208,10 @@
           </div>
             <div class="panel-body">
             <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:500px;height:420px;">
-                <gm-markers gm-objects="volcanoes"
+                <gm-markers gm-objects="outlets"
                             gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
-                            gm-get-marker-options="getVolcanoOpts(object)"
-                            gm-on-click="selectVolcano(object, marker)">
+                            gm-get-marker-options="getOutletOpts(object)"
+                            gm-on-click="selectOutlet(object, marker)">
                 </gm-markers>
               </gm-map>
               <!-- <gm-map gm-map-id="'myMap'" gm-center="center" gm-zoom="zoom" gm-bounds="bounds" gm-map-options="options.map" gm-map-type-id="mapTypeId" style="width:500px;height:400px;">
