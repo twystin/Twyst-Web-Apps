@@ -2,7 +2,7 @@
 <!--=== Job Description ===-->
 <div class="job-description">
   <div class="bg">
-  <div class="background_image_div"><img src="http://twyst.in/home/assets/img/b3.jpg" class="z_background_image"></div>
+  <div class="background_image_div"><img src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/background.jpg" class="z_background_image"></div>
   
     <div class="container content" >
 
@@ -16,11 +16,11 @@
 
         <h2 class=""><small><b class="color_white font_fixed_sapient"><i class="fa fa-phone"></i>
 
-          <a ng-ref="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a></b> <i class="fa fa-mobile-phone color_white"></i><a ng-ref="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a></small></h2>
+          <a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a></b> <i class="fa fa-mobile-phone color_white"></i><a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a></small></h2>
 
 
           <p class="color_white font_fixed_sapient"><b class="color_white font_fixed_sapient"><img src="images/Address.png" id="image_address_icon"> </b>{{outlet.contact.location.address}}</p>
-          <p class="color_white"><i class="fa fa-globe"></i><span class="font_fixed_sapient"><a ng-ref="{{outlet.links.website_url }}" class="color_white font_fixed_sapient">&nbsp;{{outlet.links.website_url }}</a></span></p>                           
+          <p class="color_white"><i class="fa fa-globe"></i>&nbsp;<span class="font_fixed_sapient"><a ng-href="http://{{outlet.links.website_url }}" class="color_white font_fixed_sapient">{{outlet.links.website_url }}</a></span></p>                           
           <div class="col-md-12">
            <div class="col-md-8 col-sm-8 col-xs-4 margin_right_one"></div>
            <div class="col-md-4 col-sm-4 col-xs-4" id="share_image">
