@@ -1,5 +1,5 @@
 
-var outletApp = angular.module('outletApp',["ngRoute",'ui.bootstrap','ngCookies','d3onut']);
+var outletApp = angular.module('outletApp',["ngRoute",'ui.bootstrap','ngCookies','d3onut', 'AngularGM']);
 outletApp.directive('wrapOwlcarousel', function () {  
     return {  
         restrict: 'E',  
@@ -9,14 +9,77 @@ outletApp.directive('wrapOwlcarousel', function () {
         }  
     };  
 });
+    
 outletApp.controller('OutletCtrl', function($scope, $routeParams, outletService) {
+
+
+    $scope.getOutletOpts = function(outlet) {
+     return angular.extend(
+       { title: outlet.name },
+       $scope.options.outlets
+      );
+    };
+    
+    $scope.selectOutlet = function(outlet, marker) {
+      if ($scope.prev) {
+        $scope.prev.setOptions($scope.options.outlets);
+      }
+      $scope.prev = marker;
+      marker.setOptions($scope.options.selected);
+    };
+
 	($scope.getOutlet = function() {
 		var outlet_id = $routeParams.outlet_id;
 		outletService.getOutlet(outlet_id).then(function(data) {
 			$scope.outlet = data.OUTLET;
+
+$scope.options = {
+      map: {
+        center: new google.maps.LatLng($scope.outlet.contact.location.coords.latitude, $scope.outlet.contact.location.coords.longitude),
+        zoom: 14,
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+      },
+      outlets: {
+        icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png',
+      },
+      selected: {
+        icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',
+      }
+    };
+    
+    $scope.outlets = [
+      {
+        name: $scope.outlet.basics.name + ', ' + $scope.outlet.contact.location.locality_1.toString(),
+        img: 'http://www.thetrackerfoundation.org/Images/MountRainier_SM.jpg',
+        elevationMeters: 4392,
+        location: {
+          lat: $scope.outlet.contact.location.coords.latitude, 
+          lng: $scope.outlet.contact.location.coords.longitude  
+        }
+      }
+    ];
+//scope.center = new google.maps.LatLng($scope.outlet.contact.location.coords.latitude, $scope.outlet.contact.location.coords.longitude);
+             //$scope.volcanoes[0].location.lat = $scope.outlet.contact.location.coords.latitude;
+             //$scope.volcanoes[0].location.lng = $scope.outlet.contact.location.coords.longitude;
+            // $scope.zoom = 14;
+            //  $scope.options = {
+            //   volcanoes: {
+            //      icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png',
+            //     }
+            // };
+            // $scope.volcanoes = [
+            //     {
+            //       id: 0,
+            //       name: 'Mount Rainier',
+            //       location: {
+            //         lat: $scope.outlet.contact.location.coords.latitude, 
+            //         lng: $scope.outlet.contact.location.coords.longitude
+            //     }
+            // }];
 			$scope.rewards = data.REWARDS;
 		})
 	})();
+
     $scope.getUrI = function(outlet) {
         if (outlet && outlet.links) {
            var outlet_fb_url = outlet.links.facebook_url.slice(13);

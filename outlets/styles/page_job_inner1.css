@@ -200,6 +200,18 @@
 }
 
 /* Custom CSS */
+
+/* sprites */
+
+.clip {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.position-1 {
+    clip: rect(0 120px 38px 0);
+    margin-left: -5em;
+}
  .z_background_image {
         width: 100%;
         height: 35em;
@@ -484,9 +496,6 @@ div.panel-heading > h4 > a > span {
     }
     .margin_left_highlights {
         float: left;
-    }
-    #float_right_highlight {
-        margin-left: 1em;
     }
     .heading-padded-blocks{
         margin: 0em !important;

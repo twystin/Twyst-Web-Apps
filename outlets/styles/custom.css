@@ -57,6 +57,9 @@ hr {
 .header .navbar-default {
 	
 }
+.navbar-left {
+	margin-top: 1.1em !important;
+}
 #heading_left_column {
 	margin-left: 0.6em;
 }
@@ -113,7 +116,7 @@ hr {
 	margin-top: 5px; 
    text-shadow: none; 
    font-weight: normal !important; 
-   font-family: 'Open Sans', sans-serif; 
+   font-family: 'sapientregular'; 
 }
 .hero_highlight_column{
 	float: left;
@@ -196,8 +199,8 @@ tr:hover{
  	font-family: 'Open Sans', sans-serif;
  }
  .image_overview_column_attribute{
- 	height: 42px;
- 	width: 42px;
+ 	height: 26px;
+ 	width: 26px;
  }
  /* footer */
  .footer_menu_items > img {
@@ -211,31 +214,31 @@ tr:hover{
 	margin-bottom: 0px;
 	margin-top: -0.4em;
 }
+
+/* header changes */
+.clip .position-1:hover {
+	transform: rotate(15deg);
+}
+.padding_class {
+	padding: 10px 0px 10px 0px;
+}
+.label-success-black {
+	color: #000 !important;
+	background-color: #fff !important;
+}
+.panel-heading {
+	opacity: 0.75;
+}
 .inner_row > .container{
 	margin-top: 4em;
 }
- /* carousel */
-
- .carousel-control 			 { width:  4%; }
-.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
-@media (max-width: 767px) {
-	.carousel-inner .active.left { left: -100%; }
-	.carousel-inner .next        { left:  100%; }
-	.carousel-inner .prev		 { left: -100%; }
-	.active > div { display:none; }
-	.active > div:first-child { display:block; }
-
+.outlet_heading_images{
+	height: 48px;
+	width: 48px;
+	float: right;
+	margin-top: -2.9em;
 }
-@media (min-width: 767px) and (max-width: 992px ) {
-	.carousel-inner .active.left { left: -50%; }
-	.carousel-inner .next        { left:  50%; }
-	.carousel-inner .prev		 { left: -50%; }
-	.active > div { display:none; }
-	.active > div:first-child { display:block; }
-	.active > div:first-child + div { display:block; }
-}
-@media (min-width: 992px ) {
-	.carousel-inner .active.left { left: -25%; }
-	.carousel-inner .next        { left:  25%; }
-	.carousel-inner .prev		 { left: -25%; }	
+
+.panel-body > .padding_class > div > p {
+	word-wrap: break-word;
 }
