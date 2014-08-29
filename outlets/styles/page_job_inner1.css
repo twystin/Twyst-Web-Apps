@@ -497,9 +497,6 @@ div.panel-heading > h4 > a > span {
     .margin_left_highlights {
         float: left;
     }
-    #float_right_highlight {
-        margin-left: 1em;
-    }
     .heading-padded-blocks{
         margin: 0em !important;
     }

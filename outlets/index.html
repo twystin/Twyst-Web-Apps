@@ -50,23 +50,6 @@
 </head> 
 
 <body>
-<div id="fb-root"></div>
-            <script>
-             window.fbAsyncInit = function() {
-                FB.init({
-                appId      : 763534923659747,
-                xfbml      : true,
-                version    : 'v2.0'
-                });
-            };
-            (function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script> 
 
 <!--=== Top ===-->    
 <div class="top">
@@ -96,7 +79,7 @@
            
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-responsive-collapse">
-                 <ul class="nav navbar-nav navbar-left">
+                 <ul class="nav navbar-nav navbar-left hidden-sm">
                 <li style="display: inline-flex;" id="get-the-app">
                         <a href="about.html">
                         Get Twyst 
@@ -230,9 +213,19 @@
     <!-- -->
     <script type="text/javascript" src="app.js" ></script>
     <script type="text/javascript" src="donutdirective.js"></script>
+    <script type="text/javascript" src="fbdirective.js"></script>
     <script type="text/javascript" src="d3Svc.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.min.js"></script>
-<script type="text/javascript" src="app.js"></script>
+<div id="fb-root"></div>
+            <script>
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "https://connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=763534923659747&version=v2.0";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script> 
 
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

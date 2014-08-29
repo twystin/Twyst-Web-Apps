@@ -38,7 +38,15 @@ Images:
 		Carousal:
 
 Icons:
-	Sizes:
+	Sizes: {
+		Logo: 120px
+		Highlight I : 120px;
+		Highlght II : 80px;
+		Highlight III: 64px;
+		Highlight IV : 48 or 42 px;
+
+		Badges Header: 42px;
+	}
 
 Widgets:
 	Vertical and Horizontal Sizes:
