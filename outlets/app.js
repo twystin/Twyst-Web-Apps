@@ -100,7 +100,7 @@ $scope.options = {
         };
     };
 	$scope.getCostForTwoText = function (outlet) {
-        if(outlet.attributes.cost_for_two.min
+        if(outlet && outlet.attributes && outlet.attributes.cost_for_two.min
             && outlet.attributes.cost_for_two.max) {
             var costs = ["100", "300", "500", "1000","1500","2000", "2500", "3000", "> 3000"],
                 bottom = Number(outlet.attributes.cost_for_two.min) - 1,
