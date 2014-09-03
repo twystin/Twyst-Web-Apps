@@ -57,7 +57,7 @@ twystClient.run(function ($rootScope, $log, $timeout, $interval, sessionSvc, dat
 
     // HANDLE THE BACK BUTTON CLICK
     var onDeviceReady = function(){
-        document.addEventListener("backbutton", handleDeviceBackButton, false);
+-        document.addEventListener("backbutton", handleDeviceBackButton, false);
         setTimeout(function() {
             navigator.splashscreen.hide();
         }, 10000);
