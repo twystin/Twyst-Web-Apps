@@ -4,6 +4,9 @@
 #left_container_contest_page {
 	width: 100%;
 }
+.prizes_contest > h3 {
+	line-height: 2.5;
+}
 /*Colored Content Boxes
 ------------------------------------*/
 .servive-block {

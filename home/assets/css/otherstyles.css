@@ -2384,6 +2384,7 @@ ul.labels-demo li {
 .banner-info h3 {
 	font-size: 21px;
 	margin-bottom: 5px;
+	line-height: 1.2;
 }
 
 .banner-info.light h3 { color: #fff; }
