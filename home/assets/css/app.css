@@ -627,8 +627,8 @@ a.read-more:hover {
 .flexslider.home {
     border: 0;
     overflow: hidden;
-    margin-top: 10px;      
-    margin-bottom: 30px;      
+    margin-top: 10px !important;      
+    margin-bottom: 10px !important;      
 }
 
 .flexslider { 
