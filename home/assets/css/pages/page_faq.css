@@ -7,6 +7,16 @@
 .prizes_contest > h3 {
 	line-height: 2.5;
 }
+i.fa.fa-qrcode.icons_fa_styled:hover {
+	color: #f59221;
+}
+i.fa.fa-gift.icons_fa_styled:hover {
+	color: #397bbf;
+}
+i.fa.fa-institution.icons_fa_styled:hover {
+	color: #eb2227;
+}
+
 /*Colored Content Boxes
 ------------------------------------*/
 .servive-block {
@@ -62,12 +72,16 @@
 }
 .servive-block-green {
   background: #2ecc71;
-}
+}/*
+-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
 
 .faq-breadcrumb {
 	text-align: center;
 	position: relative;
-	background: url(../../img/Ribbon.svg) no-repeat center center fixed;
+	background: url(../../img/BG.png) no-repeat center;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -115,6 +129,16 @@
 	.faq-page .main-check .col-xs-6 {
 		width: 100%;
 	}
+	.faq-breadcrumb {
+	text-align: center;
+	position: relative;
+	background: url(../../img/BGsmall.png) no-repeat center;
+	-webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+	}
+
 }
 
 /*Faq-add*/
