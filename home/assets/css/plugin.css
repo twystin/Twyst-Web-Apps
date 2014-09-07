@@ -337,11 +337,6 @@
 .owl-wrapper {
   height: 140px;
 }
-.owl-item {
-  top: 20%;
-  transform: translateY(-20%);
-  position: relative;
-}
 
 /*Pie Chart
 ------------------------------------*/
