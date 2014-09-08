@@ -1,7 +1,8 @@
-var contestApp = angular.module("contestApp", ["firebase"]);
+var contestApp = angular.module("contestApp", ["firebase", 'ui.bootstrap']);
 
 contestApp.controller('MyController', ['$scope', '$firebase', '$window',
   function($scope, $firebase, $window) {
+
     //CREATE A FIREBASE REFERENCE
     var ref = new Firebase("https://twyst-contest.firebaseio.com/users");
     // GET MESSAGES AS AN ARRAY
@@ -146,3 +147,37 @@ contestApp.directive('wrapOwlcarousel', function () {
         }  
     };  
 }); 
+contestApp.controller('DatePickerCtrl', function ($scope, $timeout) {
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.showWeeks = true;
+    $scope.toggleWeeks = function () {
+        $scope.showWeeks = ! $scope.showWeeks;
+    };
+
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
+
+    $scope.toggleMin = function() {
+        $scope.minDate = new Date (1914-01-01);
+    };
+    $scope.toggleMin();
+
+    $scope.open = function() {
+        $timeout(function() {
+            $scope.opened = true;
+        });
+    };
+
+    $scope.dateOptions = {
+        'year-format': "'yy'",
+        'starting-day': 1
+    };
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+    $scope.format = $scope.formats[0];
+});
