@@ -161,6 +161,7 @@
             <h5 class="heading-md"><a href="#"><i class="fa fa-institution icons_fa_styled" style="font-size: 36px;"></i></a><span style="vertical-align: super;">&nbsp;Check-ins at most <span style="text-decoration: underline;">outlets</span> for the week</span></h5>
         </div>
     </div>
+    <p style="font-size: 14px;">Each week the winner in each of these categories will win a meal voucher worth Rs. 500/- from Twyst</p>
     <div class="clearfix"></div>
     <!-- Participating outlets block -->
     <div class="row">
@@ -245,29 +246,28 @@
           <div class="col-md-6 col-sm-6 col-xs-12 col-sm-push-6">
             <div class="reg-block" style="border-top: 0px solid #e1e1e1; margin-top: -1em;">
                <div class="headline margin-bottom-20">
-                <h2>Sign Up for the Contest</h2>
+                <h2 class="label" style="background-color: #e67e22; color: #fff;">Sign Up for the Contest</h2>
             </div>
             <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
             <div class="form-group margin-bottom-20" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
               <!--   <span class="input-group-addon"><i class="fa fa-user"></i></span> -->
-                <input type="text" name="name" class="form-control" placeholder="Name* [More than 5 characters]" ng-minlength=5 ng-model="username" required novalidate />
+                 <input type="text" name="name" class="form-control" placeholder="Name* [More than 3 characters]" ng-minlength=3 ng-maxlength=20 ng-model="username" required novalidate />
                 <span ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="text-danger">Your name is required.</span>
             </div>
             <div class="form-group margin-bottom-20" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
            <!--      <span class="input-group-addon"><i class="fa fa-envelope"></i></span> -->
                 <!-- <span class="label label-danger" data-ng-show="submitted && email.$error.required">Required!</span>
                 <span class="label label-danger" data-ng-show="submitted && error.email">Invalid email!</span> -->
-                <input type="email" name="email" class="form-control" placeholder="Email*[abc@mail.com]" ng-model="email" required novalidate />
+                <input type="email" name="email" class="form-control" placeholder="Email*[abc@mail.com]" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" ng-model="email" required novalidate />
                 <span ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="text-danger">A valid email is required.</span>
             </div>
             <div class="form-group margin-bottom-20" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
              <!--    <span class="input-group-addon"><i class="fa fa-mobile"></i></span> -->
-                <input name="phone" type="text" class="form-control" placeholder="Mobile Number*[Ten digit mobile number]" ng-minlength=10 ng-model="phone" required novalidate >
+                <input name="phone" type="text" class="form-control" placeholder="Mobile Number*[Ten digit mobile number]" ng-minlength=10 ng-maxlength=10 ng-model="phone" required novalidate >
                 <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Enter a ten digit phone number</p>
             </div>
             <div class="form-group margin-bottom-30">
-                <!-- <span class="input-group-addon"><i class="fa fa-calendar"></i></span> -->
-                <input type="text" class="form-control" placeholder="Date of Birth" ng-model="dob">
+                 <input type="text" name="dob" class="form-control" placeholder="Date of Birth(dd/mm/yyyy)" ng-model="dob" >
             </div>
             <div class="form-group margin-bottom-20" ng-show="submitted">
                 <!-- <span class="input-group-addon"><i class="fa fa-facebook"></i></span> -->
@@ -275,9 +275,10 @@
             </div> 
             <hr>
             <label class="checkbox">
-                <input type="checkbox"> 
-                <p>I read <a ng-click="gototerms()">Terms & Conditions</a></p>
+                <input type="checkbox" name="checkbox" ng-model="checkbox" required> 
+                <p>I read <a href="T&C.html">Terms & Conditions</a></p>
             </label>
+            <div ng-show="!userForm.$pristine && userForm.checkbox.$invalid" class="alert alert-danger" >Please read Terms and Conditions.</div>
                                  
             <div class="row">
                 <div class="col-md-12">
@@ -285,7 +286,6 @@
                 </div>
             </div>
             </form>
-            <br>
             <br>
 
         </div>
@@ -377,38 +377,11 @@
     <!--=== Parallax Background ===-->
     <div class="parallax-bg parallaxBg1 faq-bg margin-bottom-20">            
         <div class="container content">
-            <div class="headline margin-bottom-20 terms_and_conditions">
-                <h2>Terms & Conditions</h2>
+            <div class="headline margin-bottom-20 terms_and_conditions" style="text-align: center;">
+                <a href="T&C.html"><h2>Click to read Terms & Conditions</h2></a>
             </div>
 
-            <div class="row margin-bottom-20">
-                <!-- Begin Banner Info -->
-                <div class="col-md-12 md-margin-bottom-20">
-                    <div class="banner-info">
-
-                        <div class="overflow-h">
-                            <p>1. The contest is open to users with the Twyst app installed on their iPhone or Android phones ONLY. The contest is not open to owners and employees of outlets participating in the contest.</p>
-
-                            <p>2. The contest will run for a period of 6 weeks, starting on 08-Sep 2014 and ending on 19-Oct 2014.</p>
-
-                            <p>3. User registration for the contest is mandatory. In case a user fails to complete the registration form, his/her Twyst activity (check-ins and voucher redemptions) will not be considered for the contest.</p>
-
-                            <p>4. User check-ins and voucher redemptions done only via the Twyst app for iPhone or Android will be eligible for the contest. Check-ins by users done by filling out visit cards at Twyst outlets, and voucher redemptions completed by showing voucher SMS messages to outlet staff will not be eligible for the contest.</p>
-
-                            <p>5. User check-ins and redemptions via the app only at the ‘participating outlets’ will be considered for the scoring each week. The list of participating outlets for each week will be available under the ‘Outlets You Can Twyst At’ section.</p>
-
-                            <p>6. There will be 3 categories  be one winner per week in each category. If there are more than one person at the same ‘score’ (no. of check-ins / redemptions / outlets), the person who reaches that ‘score’ first during that week will be adjudged the winner.</p>
-
-                            <p>7. Weekly vouchers will be for use at HUDA Metro Park outlets that are on Twyst only.</p>
-
-                            <p>8. The grand prize will be awarded to the user with the highest number of check-ins over the duration of the contest. The grand prize vouchers will be eligible for use at any Twyst outlet.</p>
-
-                            <p>9. Fraudulent check-ins and voucher redemptions will lead to the user being disqualified from the contest. Twyst.in’s decisions in this regard will be final.</p>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- End Banner Info -->
+            
 
             </div>    
         </div><!--/container--> 
