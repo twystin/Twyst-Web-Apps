@@ -10,6 +10,7 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
     var msg = {}
       //ADD MESSAGE METHOD
     $scope.register = function() {
+
        $scope.submitted = true;
       var flag = 0;
       new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone).once('value', function(snap) {
@@ -41,6 +42,8 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
       }*/
     }
     $scope.addSimple = function() {
+      $scope.hideThis = false;
+      $scope.fbConnect = false;
       //ADD TO FIREBASE
       var flag = 0;
       new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone).once('value', function(snap) {
@@ -73,6 +76,7 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
         ref2.set(msg);
       //}
       $scope.msg = "";
+      $scope.hideThis = true;
     }
     $scope.addFB = function() {
       //     var firebaseRef = new Firebase("https://twyst-contest.firebaseio.com/");
@@ -80,6 +84,7 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
       var flag = 0;
       new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone+"/accessToken").once('value', function(snap) {
         console.log('I fetched access token!', snap.val());
+        
         //var obj=JSON.parse(snap.val());
         if (snap.val()) {
           console.log("facebook is already registered");
@@ -117,7 +122,7 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
 
             //$scope.messages.$add(msg);
             ref2.set(msg);
-
+            $scope.fbConnect = true;
           } else {
             // user is logged out
             console.log('logged out');
