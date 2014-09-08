@@ -16,7 +16,9 @@ i.fa.fa-gift.icons_fa_styled:hover {
 i.fa.fa-institution.icons_fa_styled:hover {
 	color: #eb2227;
 }
-
+.owl-item {
+	width: 140px;
+}
 /*Colored Content Boxes
 ------------------------------------*/
 .servive-block {
@@ -129,6 +131,9 @@ i.fa.fa-institution.icons_fa_styled:hover {
 	.faq-page .main-check .col-xs-6 {
 		width: 100%;
 	}
+	.col-sm-pull-6 {
+		margin-top: -7em;
+	}
 	.faq-breadcrumb {
 	text-align: center;
 	position: relative;
@@ -137,6 +142,16 @@ i.fa.fa-institution.icons_fa_styled:hover {
 	  -moz-background-size: cover;
 	  -o-background-size: cover;
 	  background-size: cover;
+	}
+	h2 {
+		font-size: 1.5em !important;
+	}
+	.reg-block {
+		width: 100% !important;
+		padding: 0.6em !important;
+	}
+	 h3 {
+		font-size: 1.3em !important;
 	}
 
 }
