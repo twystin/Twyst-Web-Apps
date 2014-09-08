@@ -250,7 +250,7 @@
             <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
             <div class="form-group margin-bottom-20" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
               <!--   <span class="input-group-addon"><i class="fa fa-user"></i></span> -->
-                <input type="text" name="name" class="form-control" placeholder="Name* [More than 5 characters]" ng-minlength=5 ng-model="name" required novalidate />
+                <input type="text" name="name" class="form-control" placeholder="Name* [More than 5 characters]" ng-minlength=5 ng-model="username" required novalidate />
                 <span ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="text-danger">Your name is required.</span>
             </div>
             <div class="form-group margin-bottom-20" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
@@ -278,40 +278,10 @@
                 <input type="checkbox"> 
                 <p>I read <a ng-click="gototerms()">Terms & Conditions</a></p>
             </label>
-
-                <div class="input-group margin-bottom-20">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Name* [More than 5 characters]" ng-minlength=5 ng-model="username" required novalidate />
-                </div>
-                <div class="input-group margin-bottom-20">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                    <input type="text" class="form-control" placeholder="Email*[abc@mail.com]" ng-model="email" required novalidate />
-                </div>
-                <div class="input-group margin-bottom-20">
-                    <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-                    <input type="number" class="form-control" placeholder="Mobile Number*[Ten digit mobile number]" ng-model="phone" required novalidate >
-                </div>
-                <div class="input-group margin-bottom-30">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input type="text" class="form-control" placeholder="Date of Birth" ng-model="dob">
-                </div>
-                <div class="input-group margin-bottom-20">
-                    <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
-                    <input class="btn btn-primary btn-lg btn-block" type="button" value="Connect with facebook">
-                </div> 
-                <hr>
-                <label class="checkbox">
-                    <input type="checkbox"> 
-                    <p>I read <a ng-click="gototerms()">Terms & Conditions</a></p>
-                </label>
                                  
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-lg btn-block btn-warning" ng-click="register()">Submit</button>                
-                    </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-lg btn-block btn-warning" ng-click="clickAdd()" ng-disabled="userForm.$invalid">Submit</button>                
+                    <button type="submit" class="btn btn-lg btn-block btn-warning" ng-click="register()" ng-disabled="userForm.$invalid">Submit</button>                
                 </div>
             </div>
             </form>
