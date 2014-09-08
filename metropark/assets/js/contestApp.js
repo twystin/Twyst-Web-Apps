@@ -16,15 +16,20 @@ contestApp.controller('MyController', ['$scope', '$firebase',
         console.log('I fetched a user!', snap.val());
         //var obj=JSON.parse(snap.val());
         if (snap.val()) {
-          console.log("true");
+          console.log("inside if");
+          console.log("User is already registered");
           flag = 1;
         } else {
-          console.log("You are already registered");
+          console.log("inside else");
+         // console.log("You are already registered");
 
+        }
+        if (flag==0){
+          $scope.addSimple();
         }
         //    alert(obj.dob);
       });
-      if (flag == 0) {
+      /*if (flag == 0) {
         if (confirm('Do you also want to connect your Facebook account?')) {
           $scope.addFB();
         } else {
@@ -32,7 +37,7 @@ contestApp.controller('MyController', ['$scope', '$firebase',
         }
       } else {
         alert("You are already registered! Keep checking in!")
-      }
+      }*/
     }
     $scope.addSimple = function() {
       //ADD TO FIREBASE
@@ -40,16 +45,16 @@ contestApp.controller('MyController', ['$scope', '$firebase',
       new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone).once('value', function(snap) {
         console.log('I fetched a user!', snap.val());
         //var obj=JSON.parse(snap.val());
-        if (snap.val()) {
+        /*if (snap.val()) {
           console.log("true");
           flag = 1;
         } else {
           console.log("You are already registered");
 
-        }
+        }*/
         //    alert(obj.dob);
       });
-      if (flag == 0) {
+      //if (flag == 0) {
         var ref2 = new Firebase("https://twyst-contest.firebaseio.com/users/" + $scope.phone);
         //var msg = {};
         msg = {
@@ -60,18 +65,18 @@ contestApp.controller('MyController', ['$scope', '$firebase',
 
         //$scope.messages.$add(msg);
         ref2.set(msg);
-      }
+      //}
       $scope.msg = "";
     }
     $scope.addFB = function() {
       //     var firebaseRef = new Firebase("https://twyst-contest.firebaseio.com/");
 
       var flag = 0;
-      new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone).once('value', function(snap) {
-        console.log('I fetched a user!', snap.val());
+      new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone+"/accessToken").once('value', function(snap) {
+        console.log('I fetched access token!', snap.val());
         //var obj=JSON.parse(snap.val());
         if (snap.val()) {
-          console.log("true");
+          console.log("facebook is already registered");
           flag = 1;
         } else {
           console.log("You are already registered");
