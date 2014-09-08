@@ -269,21 +269,25 @@
             <div class="form-group margin-bottom-30">
                  <input type="text" name="dob" class="form-control" placeholder="Date of Birth(dd/mm/yyyy)" ng-model="dob" >
             </div>
-            <div class="form-group margin-bottom-20" ng-show="submitted">
-                <!-- <span class="input-group-addon"><i class="fa fa-facebook"></i></span> -->
-                <input class="btn btn-primary btn-lg btn-block" ng-click="addFB()" type="button" value="Connect with facebook">
-            </div> 
-            <hr>
-            <label class="checkbox">
+            
+            <hr ng-hide="hideThis">
+            <label class="checkbox" ng-hide="hideThis">
                 <input type="checkbox" name="checkbox" ng-model="checkbox" required> 
                 <p>I have read and agreed to abide by <a href="T&C.html">Terms & Conditions</a></p>
             </label>
             <div ng-show="!userForm.$pristine && userForm.checkbox.$invalid" class="alert alert-danger" >Please accept Terms and Conditions.</div>
+            <div class="alert alert-success" ng-show="hideThis && !fbConnect">Thanks for registering for the contest.</div>
                                  
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-lg btn-block btn-warning" ng-click="register()" ng-disabled="userForm.$invalid">Submit</button>                
+                    <button type="submit" class="btn btn-lg btn-block btn-warning margin-bottom-10" ng-click="register()" ng-disabled="userForm.$invalid" ng-hide="hideThis">Submit</button>                
                 </div>
+                <div class="clearfix"></div>
+                <div class="form-group margin-bottom-20" ng-show="submitted">
+                <!-- <span class="input-group-addon"><i class="fa fa-facebook"></i></span> -->
+                <input class="btn btn-primary btn-lg btn-block" ng-click="addFB()" type="button" value="Connect with facebook" ng-hide="fbConnect">
+                <div class="alert alert-success" ng-show="fbConnect">Your facebook is now connected</div>
+            </div> 
             </div>
             </form>
             <br>
