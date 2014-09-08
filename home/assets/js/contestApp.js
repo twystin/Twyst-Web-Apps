@@ -10,6 +10,7 @@ contestApp.controller('MyController', ['$scope', '$firebase',
     var msg = {}
       //ADD MESSAGE METHOD
     $scope.register = function() {
+       $scope.submitted = true;
       var flag = 0;
       new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone).once('value', function(snap) {
         console.log('I fetched a user!', snap.val());
@@ -115,3 +116,12 @@ contestApp.controller('MyController', ['$scope', '$firebase',
     }
   }
 ]);
+contestApp.directive('wrapOwlcarousel', function () {  
+    return {  
+        restrict: 'E',  
+        link: function (scope, element, attrs) {  
+            var options = scope.$eval($(element).attr('data-options'));  
+            $(element).owlCarousel(options);  
+        }  
+    };  
+}); 
