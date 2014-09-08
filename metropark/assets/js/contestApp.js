@@ -1,7 +1,7 @@
 var contestApp = angular.module("contestApp", ["firebase"]);
 
-contestApp.controller('MyController', ['$scope', '$firebase',
-  function($scope, $firebase) {
+contestApp.controller('MyController', ['$scope', '$firebase', '$window',
+  function($scope, $firebase, $window) {
     //CREATE A FIREBASE REFERENCE
     var ref = new Firebase("https://twyst-contest.firebaseio.com/users");
     // GET MESSAGES AS AN ARRAY
@@ -18,6 +18,7 @@ contestApp.controller('MyController', ['$scope', '$firebase',
         if (snap.val()) {
           console.log("inside if");
           console.log("User is already registered");
+          $window.alert("You are already registered, keep checking in");
           flag = 1;
         } else {
           console.log("inside else");
@@ -57,10 +58,15 @@ contestApp.controller('MyController', ['$scope', '$firebase',
       //if (flag == 0) {
         var ref2 = new Firebase("https://twyst-contest.firebaseio.com/users/" + $scope.phone);
         //var msg = {};
+        var dob = $scope.dob;
+        if (!$scope.dob) {
+          dob = 'null';
+        }
+
         msg = {
           username: $scope.username,
           email: $scope.email,
-          dob: $scope.dob
+          dob: dob
         };
 
         //$scope.messages.$add(msg);
@@ -77,9 +83,10 @@ contestApp.controller('MyController', ['$scope', '$firebase',
         //var obj=JSON.parse(snap.val());
         if (snap.val()) {
           console.log("facebook is already registered");
+          $window.alert("Your facebook is already connected, keep checking in");
           flag = 1;
         } else {
-          console.log("You are already registered");
+          console.log("Your facebook is not registered");
 
         }
         //    alert(obj.dob);
@@ -96,10 +103,14 @@ contestApp.controller('MyController', ['$scope', '$firebase',
             // user authenticated with Firebase
             console.log('logged in:');
             console.log(user);
+            var dob = $scope.dob;
+              if (!$scope.dob) {
+                dob = 'null';
+              }
             msg = {
               username: $scope.username,
               email: $scope.email,
-              dob: $scope.dob,
+              dob: dob,
               accessToken: user.accessToken,
               id: user.id
             };
