@@ -19,6 +19,25 @@ i.fa.fa-institution.icons_fa_styled:hover {
 .owl-item {
 	width: 140px;
 }
+#merchant_icon {
+	background-image: url(../../img/migrey.svg);
+	height: 48px;
+	width: 48px;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: inline-block;
+	vertical-align: middle;
+
+}
+#merchant_icon:hover {
+	background-image: url(../../img/mired.svg);
+	height: 48px;
+	width: 48px;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: inline-block;
+	vertical-align: middle;
+}
 /*Colored Content Boxes
 ------------------------------------*/
 .servive-block {
@@ -83,13 +102,14 @@ i.fa.fa-institution.icons_fa_styled:hover {
 .faq-breadcrumb {
 	text-align: center;
 	position: relative;
-	background: url(../../img/BG.jpg) no-repeat center;
+	background: url(../../img/BG.png) no-repeat center;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 
 }
+/*background: rgba(0,0,0,0.3);*/
 
 .faq-breadcrumb:before {
 	left: 0;
@@ -97,7 +117,6 @@ i.fa.fa-institution.icons_fa_styled:hover {
 	height: 100%;
 	content: " ";
 	position: absolute;
-	background: rgba(0,0,0,0.3);
 }
 
 .faq-page .tab-v1 {
@@ -137,7 +156,7 @@ i.fa.fa-institution.icons_fa_styled:hover {
 	.faq-breadcrumb {
 	text-align: center;
 	position: relative;
-	background: url(../../img/BGsmall.jpg) no-repeat center;
+	background: url(../../img/BGsmall.png) no-repeat center;
 	-webkit-background-size: cover;
 	  -moz-background-size: cover;
 	  -o-background-size: cover;
