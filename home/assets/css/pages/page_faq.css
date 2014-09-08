@@ -1,0 +1,175 @@
+/*FAQ-page
+------------------------------------*/
+/*custom css */
+#left_container_contest_page {
+	width: 100%;
+}
+.prizes_contest > h3 {
+	line-height: 2.5;
+}
+i.fa.fa-qrcode.icons_fa_styled:hover {
+	color: #f59221;
+}
+i.fa.fa-gift.icons_fa_styled:hover {
+	color: #397bbf;
+}
+i.fa.fa-institution.icons_fa_styled:hover {
+	color: #eb2227;
+}
+
+/*Colored Content Boxes
+------------------------------------*/
+.servive-block {
+  padding: 20px 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.servive-block p,
+.servive-block h2 {
+  color: #fff;
+}
+
+.servive-block h2 a:hover{
+  text-decoration: none;
+}
+
+.servive-block-light,
+.servive-block-default {
+  background: #fafafa;
+  border: solid 1px #eee; 
+}
+
+.servive-block-default:hover {
+  box-shadow: 0 0 8px #eee;
+}
+
+.servive-block-light p,
+.servive-block-light h2,
+.servive-block-default p,
+.servive-block-default h2 {
+  color: #555;
+}
+.servive-block-u {
+  background: #72c02c;
+}.servive-block-blue {
+  background: #3498db;
+}
+.servive-block-red {
+  background: #e74c3c;
+}
+.servive-block-sea {
+  background: #1abc9c;
+}
+.servive-block-grey {
+  background: #95a5a6;
+}
+.servive-block-yellow {
+  background: #f1c40f;
+}
+.servive-block-orange {
+  background: #e67e22;
+}
+.servive-block-green {
+  background: #2ecc71;
+}/*
+-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
+
+.faq-breadcrumb {
+	text-align: center;
+	position: relative;
+	background: url(../../img/BG.png) no-repeat center;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+.faq-breadcrumb:before {
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	position: absolute;
+	background: rgba(0,0,0,0.3);
+}
+
+.faq-page .tab-v1 {
+	margin-top: 19px;
+}
+
+.faq-page .tab-v1  .panel-title {
+	text-transform: uppercase;
+}
+
+/*Check-style*/
+.faq-page .check-style {
+	margin-bottom: 0;
+}
+
+.faq-page .check-style li {
+	margin-bottom: 10px;
+}
+.faq-page .check-style li:last-child {
+	margin-bottom: 0;
+}
+
+.faq-page .check-style i {
+	font-size: 18px;
+	font-weight: 600;
+	vertical-align: middle;
+}
+
+/*Check-style in Responsive*/
+@media (max-width: 450px) {
+	.faq-page .main-check .col-xs-6 {
+		width: 100%;
+	}
+	.faq-breadcrumb {
+	text-align: center;
+	position: relative;
+	background: url(../../img/BGsmall.png) no-repeat center;
+	-webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+	}
+
+}
+
+/*Faq-add*/
+.faq-page .faq-add {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 2px solid #eee;
+}
+
+.faq-page .top-part i {
+	float: left;
+	color: #777;
+	font-size: 20px;
+	padding-top: 3px;
+	margin-right: 10px;
+}
+
+.faq-page .new-title {
+	color: #72c02c;
+	font-size: 18px;
+	margin-bottom: 5px;
+}
+
+.faq-page .faq-add p {
+	line-height: 1.5;
+}
+
+/*ParallaxBg6
+------------------------------------*/
+/*Title-Box*/
+.faq-bg .title-box-v2 h2,
+.faq-bg .title-box-v2 p {
+	color: #fff;
+}

@@ -455,7 +455,7 @@ a.thumbnail {
 	background: #1abc9c;
 }
 .servive-block .servive-block-blue {
-	background: #3498db;
+	background: #3498db !important;
 }
 .servive-block .servive-block-grey {
 	background: #95a5a6;

@@ -627,8 +627,8 @@ a.read-more:hover {
 .flexslider.home {
     border: 0;
     overflow: hidden;
-    margin-top: 10px;      
-    margin-bottom: 30px;      
+    margin-top: 10px !important;      
+    margin-bottom: 10px !important;      
 }
 
 .flexslider { 
@@ -881,4 +881,16 @@ i.style-switcher-btn-option:hover {
 }
 .style-switcher li.theme-light {
    background: #ecf0f1;
+}
+/* custom code */
+#change_pointer:hover {
+   cursor: default;
+}
+#get_twyst_purchase:hover {
+   background: #e67e22;
+   box-shadow: none;
+   cursor: default;
+}
+#get_twyst_purchase {
+   padding: 12px 10px 10px;
 }
