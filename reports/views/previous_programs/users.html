@@ -1,1 +1,13 @@
-Users
+<div>
+	Programs: 
+	<span class="ui-select">
+		<select ng-model="selected_program" ng-options="program.name for program in programs"></select>
+	</span>
+	Outlets: 
+	<span class="ui-select">
+		<select ng-model="selected_outlet" ng-options="(outlet.basics.name +', '+ outlet.contact.location.locality_1[0]) for outlet in outlets"></select>
+	</span>
+</div>
+<div>
+	<progressbar max="max" value="dynamic"><span>{{dynamic}} / {{max}}</span></progressbar>
+</div>

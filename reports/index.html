@@ -37,7 +37,7 @@
                  data-ng-intro-method="startIntro"
                  data-ng-intro-autostart="false"></section>
 
-        <div class="main-container">
+        <div class="main-container" data-ng-controller="StatusCtrl">
             <aside data-ng-include=" 'views/nav.html' "
                    id="nav-container"
                    class="nav-container"
@@ -46,7 +46,7 @@
 
             <section data-ng-view
                      id="content"
-                     class="content-container animate-fade-up"></section>
+                     class="content-container animate-fade-up" data-ng-controller="DataCtrl"></section>
         </div>
 
 
@@ -99,6 +99,8 @@
         <script src="scripts/shared/directives.js"></script>
         <script src="scripts/shared/localize.js"></script>
         <script src="scripts/shared/Nav.js"></script>
+       
+        <script src="scripts/shared/dataApp.js"></script>
         <script src="scripts/UI/UICtrl.js"></script>
         <script src="scripts/UI/UIDirective.js"></script>
         <script src="scripts/UI/UIService.js"></script>
