@@ -172,7 +172,45 @@ i.fa.fa-institution.icons_fa_styled:hover {
 	hr{
 		display: none;
 	}
+	#logo-header {
+		margin-top: -0.3em;
+	}
 
+}
+@media (max-width: 600px) {
+		.faq-page .main-check .col-xs-6 {
+		width: 100%;
+	}
+	.col-sm-pull-6 {
+		margin-top: -7em;
+	}
+	.faq-breadcrumb {
+	text-align: center;
+	position: relative;
+	background: url(../../img/BGsmall.png) no-repeat center;
+	-webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+	}
+	.reg-block {
+		width: 100% !important;
+		padding: 0.6em !important;
+	}
+	 h3, h4, h2 {
+		font-size: 1.2em !important;
+	}
+	hr{
+		display: none;
+	}
+	#logo-header {
+		margin-top: -0.3em;
+	}
+}
+@media (max-width: 992px) {
+	#logo-header {
+		margin-top: -0.3em;
+	}
 }
 
 /*Faq-add*/
