@@ -1,0 +1,30 @@
+/* #4A6072 */
+.content_container {
+	background-color: #fff;
+	
+}
+.heading_page_contest {
+
+	text-align: center;
+	margin: 2em;
+	border-bottom: 2px solid #e67e22;
+}
+.footer {
+	margin-top: 0px;
+}
+.success {
+	color: #000;
+}
+.week_header {
+	background-color: #4A6072;
+	color: #fff;
+	padding: 20px;
+
+}
+.panel {
+	background-color: #587287;
+}
+.panel-group .panel-heading+.panel-collapse>.panel-body {
+	border-top: 0px solid #eee;
+	background-color: #fff;
+}

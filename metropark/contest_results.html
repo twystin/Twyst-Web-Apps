@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" ng-app="contestApp">
+<!--<![endif]-->
+
+<head>
+    <title>MetroPark Foodie Challenge | Contest Results</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/headers/header1.css">
+    <!-- <link rel="stylesheet" href="assets/css/otherstyles.css"> -->
+    <link rel="stylesheet" type="text/css" href="assets/css/plugin.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/contestresult.css">
+    
+    <!-- CSS Implementing Plugins -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Theme -->
+    <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color">
+    <link rel="stylesheet" href="assets/css/themes/orange.css" id="style_color">   
+    <!-- firebase -->   
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.19/angular.min.js"></script>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+
+
+</head>
+<body>
+     <div class="top">
+        <div class="container">
+            <ul class="loginbar pull-right">
+            </ul>
+        </div>
+    </div>
+    <!--/top-->
+    <!--=== End Top ===-->
+
+    <!--=== Header ===-->
+    <div class="header">
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html" style="top: 0px;">
+                        <img id="logo-header" src="assets/img/twyst_logo_2.png" alt="Logo" height="50px" width="auto">
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/home/index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/home/careers.html">
+                                Careers
+                            </a> 
+                        </li>
+                        <li >
+                            <a href="index.html">
+                                Contest
+                            </a> 
+                        </li>
+                        <li class="active">
+                            <a href="index.html">
+                                Contest Results
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="search-open">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <span class="input-group-btn">
+                                <button class="btn-u" type="button">Go</button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                </div>
+                <!-- /navbar-collapse -->
+            </div>
+        </div>
+    </div>
+    <!--/header-->
+
+    <!--=== End Header ===-->
+<!--=== Begin Content Part ===-->
+    <div class="row content_container">
+        <div class="col-md-12">
+            <div class="heading_page_contest center-block">
+               <h1> Foodie Challenge Leaderboard </h1>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="container">
+            <div class="panel-group col-md-12" id="accordion">
+              <div class="panel">
+                <div class="panel-heading week_header">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#weekOne">
+                      Week 1: 08 September- 14 September,2014 
+                    </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                  </h4>
+                </div>
+                <div id="weekOne" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                        <div class="col-md-12">
+                        <div class="col-md-4">
+                            <h4>Most Checkins for the week</h4>
+                            <div>
+                                <table class="table table-condensed table-responsive">
+                                    <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                    </tr>
+                                </thead>
+                                </tr>
+                                <tr class="success">
+                                  <td>
+                                    4)
+                                  </td>
+                                  <td>
+                                    Jayram Singh
+                                  </td>
+                                  <td>
+                                   xxxxxxx890
+                                  </td>
+                                  
+                                </tr>
+                                 <tr>
+                                  <td>
+                                    3)
+                                  </td>
+                                  <td >
+                                    Arun
+                                  </td>
+                                  <td>
+                                   xxxxxxx890
+                                  </td>
+                                  
+                                </tr>
+                                 <tr>
+                                  <td>
+                                    3)
+                                  </td>
+                                  <td>
+                                    Abhimanyu
+                                  </td>
+                                  <td>
+                                   xxxxxxx890
+                                  </td>
+                                  
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Most Redemptions for the week</h4>
+                            <div>
+                                <table class="table table-condensed table-responsive">
+                                    <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                    </tr>
+                                </thead>
+                                </tr>
+                                <tr class="success">
+                                  <td>
+                                    4)
+                                  </td>
+                                  <td>
+                                    Rishi
+                                  </td>
+                                  <td>
+                                   xxxxxxx890
+                                  </td>
+                                  
+                                </tr>
+                                 <tr>
+                                  <td>
+                                    3)
+                                  </td>
+                                  <td>
+                                    Rahul
+                                  </td>
+                                  <td>
+                                   xxxxxxx890
+                                  </td>
+                                  
+                                </tr>
+                                 <tr>
+                                  <td>
+                                    2)
+                                  </td>
+                                  <td >
+                                    Devesh
+                                  </td>
+                                  <td>
+                                   xxxxxxx890
+                                  </td>
+                                  
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Checkins to most outlets</h4>
+                            <div>
+                                <table class="table table-condensed table-responsive">
+                                    <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                    </tr>
+                                </thead>
+                                </tr>
+                                <tr class="success">
+                                  <td>
+                                    4)
+                                  </td>
+                                  <td >
+                                    Sameer
+                                  </td>
+                                  <td>
+                                   xxxxxxx890
+                                  </td>
+                                  
+                                </tr>
+                                 <tr>
+                                  <td>
+                                    3)
+                                  </td>
+                                  <td >
+                                    Mayank
+                                  </td>
+                                  <td>
+                                   xxxxxxx890
+                                  </td>
+                                  
+                                </tr>
+                                 <tr>
+                                  <td>
+                                    2)
+                                  </td>
+                                  <td >
+                                    Sanjay
+                                  </td>
+                                  <td>
+                                   xxxxxxx890
+                                  </td>
+                                  
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-heading week_header">
+                  <h4 class="panel-title ">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#weekTwo">
+                        Week 2: 15 September- 21 September,2014 
+                    </a><i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
+                  </h4>
+                </div>
+                <div id="weekTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Check back here on September 21
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-heading week_header">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#weekThree">
+                      Week 3: 22 September- 28 September,2014 
+                    </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                  </h4>
+                </div>
+                <div id="weekThree" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Check back here on September 28
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-heading week_header">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#weekFour">
+                      Week 4: 29 September- 5 October,2014 
+                    </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                  </h4>
+                </div>
+                <div id="weekFour" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Check back here on October 5
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-heading week_header">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#weekFive">
+                      Week 5: 6 October- 12 October,2014 
+                    </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                  </h4>
+                </div>
+                <div id="weekFive" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Check back here on October 12
+                  </div>
+                </div>
+              </div>
+            
+            <div class="panel">
+                <div class="panel-heading week_header">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#weekSix">
+                      Week 6: 13 October- 19 Ocotber,2014 
+                    </a><i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                  </h4>
+                </div>
+                <div id="weekSix" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Check back here on October 19
+                  </div>
+                </div>
+              </div>
+        </div>
+        
+    </div>
+<!--=== End Content Part ===-->
+
+<!--=== Footer ===-->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 md-margin-bottom-40">
+                <!-- About -->
+                <div class="headline">
+                    <h2>About</h2>
+                </div>
+                <p class="margin-bottom-25 md-margin-bottom-40">Twyst is a start-up based out of Gurgaon, started by a team with a combined experience of 40 years across product, strategy, operations and marketing. <a href="/home/about.html">More</a></p>
+
+                <!-- Monthly Newsletter -->
+                    <!--                <div class="headline"><h2>Monthly Newsletter</h2></div> 
+                <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
+                <form class="footer-subsribe">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Email Address">                            
+                        <span class="input-group-btn">
+                            <button class="btn-u" type="button">Subscribe</button>
+                        </span>
+                    </div>
+                </form>   -->
+            </div>
+            <!--/col-md-4-->
+
+            <div class="col-md-4 md-margin-bottom-40">
+                <div class="posts">
+                    <div class="headline">
+                        <h2>Recent Blog Entries</h2>
+                    </div>
+                    <dl class="dl-horizontal">
+                        <a href="http://blog.twyst.in/?p=85">
+                            <dt><img src="assets/img/rss.png" alt="" /></dt>
+                            <dd>
+                                <p>Customer Engagement for Everyone
+                                </p>
+                            </dd>
+                        </a>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <a href="http://blog.twyst.in/?p=69">
+                            <dt><img src="assets/img/rss.png" alt="" /></dt>
+                            <dd>
+                                <p>The Tech Behind Twyst
+                                </p>
+                            </dd>
+                        </a>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <a href="http://blog.twyst.in/?p=55">
+                            <dt><img src="assets/img/rss.png" alt="" /></dt>
+                            <dd>
+                                <p>Ready to Twyst?
+                                </p>
+                            </dd>
+                        </a>
+                    </dl>
+                </div>
+            </div>
+            <!--/col-md-4-->
+
+
+            <div class="col-md-4">
+
+                <!-- Stay Connected -->
+                <div class="headline">
+                    <h2>Connect With Us</h2>
+                </div>
+                <ul class="social-icons">
+                    <li>
+                        <a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a>
+                    </li>
+                </ul>
+                &nbsp;&nbsp;&nbsp;<a class="btn btn-warning" href="/home/contact.html" style="color: white;line-height: 1;">Get in touch</a>
+            </div>
+            <!--/col-md-4-->
+        </div>
+        <!--/row-->
+    </div>
+    <!--/container-->
+</div>
+<!--/footer-->
+<!--=== End Footer ===-->
+
+<!--=== Copyright ===-->
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="copyright-space">
+                    2013 &copy; Twyst Technologies Pvt. Ltd.
+                    <a href="http://twyst.in/legal/Privacy_Policy.pdf">Privacy Policy</a> | <a href="http://twyst.in/legal/terms_of_use.pdf">Terms of Service</a>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <a href="index.html">
+                    <img id="logo-footer" src="assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
+                </a>
+            </div>
+        </div>
+        <!--/row-->
+    </div>
+    <!--/copyright-->
+    <!--=== End Copyright ===-->
+    <!--JS -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+function toggleChevron(e) {
+     $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+}
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
+    </script>
+</body>
