@@ -1,7 +1,8 @@
-var contestApp = angular.module("contestApp", ["firebase"]);
+var contestApp = angular.module("contestApp", ["firebase", 'ui.bootstrap']);
 
 contestApp.controller('MyController', ['$scope', '$firebase', '$window',
   function($scope, $firebase, $window) {
+
     //CREATE A FIREBASE REFERENCE
     var ref = new Firebase("https://twyst-contest.firebaseio.com/users");
     // GET MESSAGES AS AN ARRAY
@@ -10,6 +11,7 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
     var msg = {}
       //ADD MESSAGE METHOD
     $scope.register = function() {
+
        $scope.submitted = true;
       var flag = 0;
       new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone).once('value', function(snap) {
@@ -41,6 +43,8 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
       }*/
     }
     $scope.addSimple = function() {
+      $scope.hideThis = false;
+      $scope.fbConnect = false;
       //ADD TO FIREBASE
       var flag = 0;
       new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone).once('value', function(snap) {
@@ -73,6 +77,7 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
         ref2.set(msg);
       //}
       $scope.msg = "";
+      $scope.hideThis = true;
     }
     $scope.addFB = function() {
       //     var firebaseRef = new Firebase("https://twyst-contest.firebaseio.com/");
@@ -80,6 +85,7 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
       var flag = 0;
       new Firebase('https://twyst-contest.firebaseio.com/users/' + $scope.phone+"/accessToken").once('value', function(snap) {
         console.log('I fetched access token!', snap.val());
+        
         //var obj=JSON.parse(snap.val());
         if (snap.val()) {
           console.log("facebook is already registered");
@@ -117,7 +123,7 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
 
             //$scope.messages.$add(msg);
             ref2.set(msg);
-
+            $scope.fbConnect = true;
           } else {
             // user is logged out
             console.log('logged out');
@@ -141,3 +147,37 @@ contestApp.directive('wrapOwlcarousel', function () {
         }  
     };  
 }); 
+contestApp.controller('DatePickerCtrl', function ($scope, $timeout) {
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.showWeeks = true;
+    $scope.toggleWeeks = function () {
+        $scope.showWeeks = ! $scope.showWeeks;
+    };
+
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
+
+    $scope.toggleMin = function() {
+        $scope.minDate = new Date (1914-01-01);
+    };
+    $scope.toggleMin();
+
+    $scope.open = function() {
+        $timeout(function() {
+            $scope.opened = true;
+        });
+    };
+
+    $scope.dateOptions = {
+        'year-format': "'yy'",
+        'starting-day': 1
+    };
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+    $scope.format = $scope.formats[0];
+});

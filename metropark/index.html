@@ -6,7 +6,7 @@
 <!--<![endif]-->
 
 <head>
-    <title>Twyst | Contests</title>
+    <title>Twyst | MetroPark Foodie Challenge</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -37,9 +37,21 @@
 
     <!-- Firebase -->
     <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
 
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-51763503-1', 'twyst.in');
+      ga('send', 'pageview');
+
+  </script>   
 
 </head>
 
@@ -78,11 +90,6 @@
                             <a href="/home/index.html">
                                 Home
                             </a>
-                        </li>
-                        <li>
-                            <a href="/home/index.html#how">
-                                How it works
-                            </a> 
                         </li>
                         <li>
                             <a href="/home/careers.html">
@@ -158,16 +165,17 @@
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12" style="padding: 10px;">
 
-            <h5 class="heading-md"><a href="#"><i class="fa fa-institution icons_fa_styled" style="font-size: 36px;"></i></a><span style="vertical-align: super;">&nbsp;Check-ins at most <span style="text-decoration: underline;">outlets</span> for the week</span></h5>
+            <h5 class="heading-md"><i class="fa fa-institution icons_fa_styled" style="font-size: 36px;"></i><span>&nbsp;Check-ins at most <span style="text-decoration: underline;">outlets</span> for the week</span></h5>
         </div>
+        <div class="clearfix"></div>
     </div>
-    <p style="font-size: 14px;">Each week the winner in each of these categories will win a meal voucher worth Rs. 500/- from Twyst</p>
+    <p style="font-size: 14px;">Grand Prize winner (for most check-ins over the contest duration) wins meal vouchers worth Rs. 5000/-! </p>
     <div class="clearfix"></div>
     <!-- Participating outlets block -->
     <div class="row">
         <div class="col-sm-12 col-md-12 col-xs-12">
             <div class="headline"><h2>Outlets You Can Twyst At</h2></div>
-            <wrap-owlcarousel class="owl-carousel" data-options="{autoPlay: 5000, stopOnHover: true,  slideSpeed : 300, paginationSpeed : 400, items : 4, itemsDesktop : [1199,3], itemsDesktopSmall : [979,3], itemsTablet : [768,2], itemsMobile : [479, 2], itemsScaleUp : false, responsive : true}">  
+            <wrap-owlcarousel class="owl-carousel" data-options="{autoPlay: 2000, stopOnHover: true,  slideSpeed : 500, paginationSpeed : 800, items : 4, itemsDesktop : [1199,3], itemsDesktopSmall : [979,3], itemsTablet : [768,2], itemsMobile : [479, 2], itemsScaleUp : false, responsive : true, loop : true}">  
                 <div>  
                     <img class="img-responsive" src="assets/img/merchant/Kung Fu.png"/>  
                 </div>  
@@ -258,32 +266,39 @@
            <!--      <span class="input-group-addon"><i class="fa fa-envelope"></i></span> -->
                 <!-- <span class="label label-danger" data-ng-show="submitted && email.$error.required">Required!</span>
                 <span class="label label-danger" data-ng-show="submitted && error.email">Invalid email!</span> -->
-                <input type="email" name="email" class="form-control" placeholder="Email*[abc@mail.com]" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" ng-model="email" required novalidate />
+                <input type="email" name="email" class="form-control" placeholder="Email* [name@mail.com]" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" ng-model="email" required novalidate />
                 <span ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="text-danger">A valid email is required.</span>
             </div>
             <div class="form-group margin-bottom-20" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
              <!--    <span class="input-group-addon"><i class="fa fa-mobile"></i></span> -->
-                <input name="phone" type="text" class="form-control" placeholder="Mobile Number*[Ten digit mobile number]" ng-minlength=10 ng-maxlength=10 ng-model="phone" required novalidate >
+                <input name="phone" type="text" class="form-control" placeholder="Mobile Number* [Ten digit mobile number]" ng-minlength=10 ng-maxlength=10 ng-model="phone" required novalidate >
                 <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Enter a ten digit phone number</p>
             </div>
-            <div class="form-group margin-bottom-30">
-                 <input type="text" name="dob" class="form-control" placeholder="Date of Birth(dd/mm/yyyy)" ng-model="dob" >
+            <div class="form-group input-group margin-bottom-30" ng-controller="DatePickerCtrl">
+                 <input id="appendedInput" type="text" datepicker-popup="{{format}}" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" type="date" name="dob" class="form-control" placeholder="Date of Birth [yyyy-mm-dd]" datepicker-popup="yyyy-mm-dd" ng-model="dt"   />
+                 <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
             </div>
-            <div class="form-group margin-bottom-20" ng-show="submitted">
-                <!-- <span class="input-group-addon"><i class="fa fa-facebook"></i></span> -->
-                <input class="btn btn-primary btn-lg btn-block" ng-click="addFB()" type="button" value="Connect with facebook">
-            </div> 
-            <hr>
-            <label class="checkbox">
+            
+            <hr ng-hide="hideThis">
+            <label class="checkbox" ng-hide="hideThis">
                 <input type="checkbox" name="checkbox" ng-model="checkbox" required> 
-                <p>I have read and agreed to abide by <a href="T&C.html">Terms & Conditions</a></p>
+                <p>I have read and agreed to abide by <a target='_blank' href="T&C.html">Terms & Conditions</a></p>
             </label>
             <div ng-show="!userForm.$pristine && userForm.checkbox.$invalid" class="alert alert-danger" >Please accept Terms and Conditions.</div>
+            <div class="alert alert-success" ng-show="hideThis && !fbConnect">Thanks for registering for the contest.</div>
                                  
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-lg btn-block btn-warning" ng-click="register()" ng-disabled="userForm.$invalid">Submit</button>                
+                    <button type="submit" class="btn btn-lg btn-block btn-warning margin-bottom-10" ng-click="register()" ng-disabled="userForm.$invalid" ng-hide="hideThis || submitted">Submit</button>                
                 </div>
+                <div class="clearfix"></div>
+                <div class="form-group margin-bottom-20" ng-show="submitted">
+                <!-- <span class="input-group-addon"><i class="fa fa-facebook"></i></span> -->
+                <input class="btn btn-primary btn-lg btn-block" ng-click="addFB()" type="button" value="Connect with Facebook" ng-hide="fbConnect">
+                <div class="alert alert-success" ng-show="fbConnect">Your Facebook is now connected</div>
+            </div> 
             </div>
             </form>
             <br>
@@ -377,8 +392,8 @@
     <!--=== Parallax Background ===-->
     <div class="parallax-bg parallaxBg1 faq-bg margin-bottom-20">            
         <div class="container content">
-            <div class="headline margin-bottom-20 terms_and_conditions" style="text-align: center;">
-                <a href="T&C.html"><h2>Click to read Terms & Conditions</h2></a>
+            <div class="headline margin-bottom-20 terms_and_conditions">
+                <h2>Terms & Conditions</h2> &nbsp; <a target='_blank' href="T&C.html"><h4> Click to read</h4></a>
             </div>
 
             
