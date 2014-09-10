@@ -1,16 +1,37 @@
-<div>
-	Programs: 
-	<span class="ui-select">
-		<select ng-model="selected.program" ng-options="program.name for program in programs"></select>
-	</span>
-	Outlets: 
-	<span class="ui-select">
-		<select ng-model="selected.outlet" ng-options="(outlet.basics.name +', '+ outlet.contact.location.locality_1[0]) for outlet in outlets"></select>
-	</span>
+<div class="container" style="margin-top: 2em; ">
+	<div class="col-md-12">
+		<div class="col-md-10">
+			<div class="col-md-4">
+				<h5><b>Programs:</b> </h5>
+				<span class="ui-select">
+					<select ng-init="selected.program = programs[0]" ng-model="selected.program" ng-options="program.name for program in programs"></select>
+				</span>
+			</div>
+			<div class="col-md-4">
+				<h5><b>Outlets: </b></h5>
+				<span class="ui-select">
+					<select ng-model="selected.outlet" ng-options="(outlet.basics.name +', '+ outlet.contact.location.locality_1[0]) for outlet in outlets"></select>
+				</span>
+			</div>
+			
+		</div>
+	</div>
 </div>
-<div class="col-md-6">
-	<progressbar animate="false" value="percent" type="success"><b>{{percent}} %</b></progressbar>
+<div class="container">
+	<div class="col-md-12" style="margin: 2em;">
+		<div class="col-md-1"></div>
+		<div class="col-md-8">
+			<section class="panel">
+            <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Completed Status</div>
+            <div class="panel-body">
+                	<progressbar animate="false" value="percent" type="success"><b>{{percent}} %</b></progressbar>
+            </div>
+        </section>      
+			
+		</div>
+	</div>
 </div>
+
 <div class="col-md-12">
 	<div class="col-md-4">
 	    <section class="panel panel-box info-box">
