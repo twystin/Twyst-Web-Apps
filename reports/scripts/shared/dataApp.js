@@ -254,31 +254,61 @@
         function donutDataForCheckinType(data) {
             data.forEach(function (d) {
                 d.label = d._id;
-                d.value = d.count;
+                d.data = d.count;
             });
-            $scope.checkin_by_type = {
-                data: data,
-                type: 'donut',
-                options: {
-                    xkey: "year",
-                    colors: donutColor
+            $scope.checkin_by_type = {};
+              $scope.checkin_by_type.data = data;
+              $scope.checkin_by_type.options = {
+                series: {
+                  pie: {
+                    show: true,
+                    innerRadius: 0.5
+                  }
+                },
+                legend: {
+                  show: true
+                },
+                grid: {
+                  hoverable: true,
+                  clickable: true
+                },
+                colors: [$scope.color.success, $scope.color.info, $scope.color.warning, $scope.color.danger],
+                tooltip: true,
+                tooltipOpts: {
+                  content: "%p.0%, %s",
+                  defaultTheme: false
                 }
-            };
+              };
         }
 
         function donutDataForCheckinLocation(data) {
             data.forEach(function (d) {
                 d.label = d._id;
-                d.value = d.count;
+                d.data = d.count;
             });
-            $scope.checkin_by_location = {
-                data: data,
-                type: 'donut',
-                options: {
-                    xkey: "year",
-                    colors: donutColor
+            $scope.checkin_by_location = {};
+              $scope.checkin_by_location.data = data;
+              $scope.checkin_by_location.options = {
+                series: {
+                  pie: {
+                    show: true,
+                    innerRadius: 0.5
+                  }
+                },
+                legend: {
+                  show: true
+                },
+                grid: {
+                  hoverable: true,
+                  clickable: true
+                },
+                colors: [$scope.color.success, $scope.color.info, $scope.color.warning, $scope.color.danger],
+                tooltip: true,
+                tooltipOpts: {
+                  content: "%p.0%, %s",
+                  defaultTheme: false
                 }
-            };
+              };
         }
 
         function parseRoute(complete_path) {
