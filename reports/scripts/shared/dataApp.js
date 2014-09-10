@@ -139,11 +139,14 @@
         });
 
         function getData(program, outlet, flag) {
+            getCheckinData(program, outlet);
             getUserData(program, outlet);
+            getRedeemData(program, outlet);
         }
 
         function getUserData(program, outlet) {
             if(program) {
+                $scope.user_data = null;
                 var program_id = program._id;
                 var outlet_id = outlet ? outlet._id : 'ALL';
                 dataService.getUserData(program_id, outlet_id).then(function(data) {
@@ -151,6 +154,131 @@
                     getBarChartData(data.USER_BY_CHECKIN_NUMBER_METRIC);
                 });
             }
+        }
+
+        function getRedeemData(program, outlet) {
+            if(program) {
+                $scope.redeem_data = null;
+                var program_id = program._id;
+                var outlet_id = outlet ? outlet._id : 'ALL';
+                dataService.getRedeemData(program_id, outlet_id).then(function(data) {
+                    $scope.redeem_data = data;
+                    areaChartDataForRedeemsByDate(data.REDEEMS_BY_DATE);
+                    barChartDataForRedeemsByDayOfWeek(data.REDEEMS_BY_DAY_OF_WEEK);
+                });
+            }
+        }
+
+        function getCheckinData(program, outlet) {
+            if(program) {
+                $scope.checkin_data = null;
+                var program_id = program._id;
+                var outlet_id = outlet ? outlet._id : 'ALL';
+                dataService.getCheckinData(program_id, outlet_id).then(function(data) {
+                    $scope.checkin_data = data;
+                    areaChartDataForCheckinsByDate(data.CHECKINS_BY_DATE);
+                    barChartDataForCheckinsByDayOfWeek(data.CHECKINS_BY_DAY_OF_WEEK);
+                    donutDataForCheckinType(data.CHECKINS_BY_MODE);
+                    donutDataForCheckinLocation(data.CHECKINS_BY_LOCATION);
+                });
+            }
+        }
+
+        function areaChartDataForRedeemsByDate (data) {
+            $scope.redeem_trend = {
+                data: data,
+                type: "area",
+                options: {
+                    xkey: "actual_date",
+                    ykeys: ["count"],
+                    labels: ["Redeems"],
+                    xLabels: ["day"],
+                    lineWidth: "2",
+                    lineColors: $scope.color.primary
+                }
+            };
+        }
+
+        function barChartDataForRedeemsByDayOfWeek(data) {
+            var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            var barColor = [$scope.color.infoAlt];
+            data.forEach(function(d) {
+                d._id = days[d._id-1];
+            })
+            $scope.redeems_by_day_of_week = {
+                data: data,
+                type: "bar",
+                options: {
+                  xkey: "_id",
+                  ykeys: ["count"],
+                  labels: ["Redeems"],
+                  barColors: barColor
+                }
+            };
+        }
+
+        function areaChartDataForCheckinsByDate (data) {
+            $scope.checkin_trend = {
+                data: data,
+                type: "area",
+                options: {
+                    xkey: "actual_date",
+                    ykeys: ["count"],
+                    labels: ["Checkins"],
+                    xLabels: ["day"],
+                    lineWidth: "2",
+                    lineColors: $scope.color.primary
+                }
+            };
+        }
+
+        function barChartDataForCheckinsByDayOfWeek(data) {
+            var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            var barColor = [$scope.color.infoAlt];
+            data.forEach(function(d) {
+                d._id = days[d._id-1];
+            })
+            $scope.checkin_by_day_of_week = {
+                data: data,
+                type: "bar",
+                options: {
+                  xkey: "_id",
+                  ykeys: ["count"],
+                  labels: ["Checkins"],
+                  barColors: barColor
+                }
+            };
+        }
+
+        var donutColor = [$scope.color.success, $scope.color.info, $scope.color.warning, $scope.color.danger];
+        function donutDataForCheckinType(data) {
+            data.forEach(function (d) {
+                d.label = d._id;
+                d.value = d.count;
+            });
+            $scope.checkin_by_type = {
+                data: data,
+                type: 'donut',
+                options: {
+                    xkey: "year",
+                    colors: donutColor
+                }
+            };
+        }
+
+        function donutDataForCheckinLocation(data) {
+            data.forEach(function (d) {
+                d.label = d._id;
+                d.value = d.count;
+            });
+            $scope.checkin_by_location = {
+                data: data,
+                type: 'donut',
+                options: {
+                    xkey: "year",
+                    colors: donutColor
+                }
+            };
         }
 
         function parseRoute(complete_path) {

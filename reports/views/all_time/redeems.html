@@ -1,1 +1,65 @@
-Jayram
+<div>
+	Programs: 
+	<span class="ui-select">
+		<select ng-model="selected.program" ng-options="program.name for program in programs"></select>
+	</span>
+	Outlets: 
+	<span class="ui-select">
+		<select ng-model="selected.outlet" ng-options="(outlet.basics.name +', '+ outlet.contact.location.locality_1[0]) for outlet in outlets"></select>
+	</span>
+</div>
+<div class="col-md-6">
+	<progressbar animate="false" value="percent" type="success"><b>{{percent}} %</b></progressbar>
+</div>
+<div class="col-md-12">
+	<div class="col-xs-5">
+	    <section class="panel panel-box info-box">
+	        <div class="panel-left panel-item bg-info">
+	            <i class="fa fa-users text-large stat-icon"></i>
+	        </div>
+	        <div class="panel-right panel-item bg-reverse">
+	            <p class="size-h1 no-margin">{{redeem_data.TOTAL_REDEEMS}}</p>
+	            <p class="text-muted no-margin"><span data-i18n="Total redeems"></span></p>
+	        </div>
+	    </section>
+	</div>
+	<div class="col-xs-5">
+        <section class="panel panel-box info-box">
+            <div class="panel-left panel-item bg-success">
+                <i class="fa fa-rocket text-large stat-icon"></i>
+            </div>
+            <div class="panel-right panel-item bg-reverse">
+                <p class="size-h1 no-margin">{{Math.round(redeem_data.TOTAL_REDEEMS / dynamic)}}<span class="size-h3"></span></p>
+                <p class="text-muted no-margin"><span data-i18n="Avg. daily redeems"></span></p>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="col-md-12" ng-if="redeem_data">
+	<div class="col-md-12">
+        <section class="panel panel-default">
+            <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Redeems Trend</div>
+            <div class="panel-body">
+                <div morris-chart
+                     data-data="redeem_trend.data"
+                     data-type="redeem_trend.type"
+                     data-options="redeem_trend.options"
+                     ></div>
+            </div>
+        </section>              
+    </div>
+</div>
+<div class="col-md-12" ng-if="redeem_data">
+	<div class="col-md-12">
+        <section class="panel panel-default">
+            <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Redeems by day of week</div>
+            <div class="panel-body">
+                <div morris-chart
+                     data-data="redeems_by_day_of_week.data"
+                     data-type="redeems_by_day_of_week.type"
+                     data-options="redeems_by_day_of_week.options"
+                     ></div>
+            </div>
+        </section>            
+    </div>
+</div>
