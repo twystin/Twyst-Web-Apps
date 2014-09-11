@@ -7,7 +7,9 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
     var ref = new Firebase("https://twyst-contest.firebaseio.com/users");
     // GET MESSAGES AS AN ARRAY
     $scope.messages = $firebase(ref).$asArray();
-
+    $scope.dob = {
+      date: null
+    };
     var msg = {}
       //ADD MESSAGE METHOD
     $scope.register = function() {
@@ -61,16 +63,12 @@ contestApp.controller('MyController', ['$scope', '$firebase', '$window',
       });
       //if (flag == 0) {
         var ref2 = new Firebase("https://twyst-contest.firebaseio.com/users/" + $scope.phone);
-        //var msg = {};
-        var dob = $scope.dob;
-        if (!$scope.dob) {
-          dob = 'null';
-        }
+        //var msg = {}
 
         msg = {
           username: $scope.username,
           email: $scope.email,
-          dob: dob
+          dob: $scope.dob.date.toString()
         };
 
         //$scope.messages.$add(msg);
