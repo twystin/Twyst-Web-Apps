@@ -21,6 +21,9 @@
                         Name
                     </th>
                     <th>
+                        ID
+                    </th>
+                    <th>
                         Location
                     </th>
                     <th>
@@ -35,6 +38,9 @@
                 <tr ng-repeat="c in outlets">
                     <td>
                         {{c.basics.name}}
+                    </td>
+                    <td>
+                        {{c._id}}
                     </td>
                     <td>
                         {{c.contact.location.locality_1.toString()}}
