@@ -271,7 +271,7 @@ div.panel-heading > h4 > a > span {
     text-align: center;
     color: white !important;
     height: 27em;
-    margin: 4em 0em 0em 0em;
+    /*margin: 1em;*/
     opacity: 0.95;
 }
 .outlet_info > h1 {
