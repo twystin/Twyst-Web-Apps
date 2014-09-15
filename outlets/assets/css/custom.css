@@ -1,0 +1,31 @@
+/* Add here all your css styles (customizations) */
+.footer {
+	margin-top: 0px;
+}
+.header .navbar-default {
+	background-color: #fff;
+}
+#facebook_like_box{
+	margin-left: 0em;
+}
+.outlet_info {
+	height: 25em;
+}
+/*#zomato {
+	background-image: url(../../images/zomato.jpg);
+	background-size: cover;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 230px;
+}
+#foodpanda {
+	background-image: url(../../images/foodpanda.png);
+	background-size: cover;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 230px;
+}*/
