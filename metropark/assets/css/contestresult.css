@@ -5,9 +5,17 @@
 }
 .heading_page_contest {
 
-	text-align: center;
-	margin: 2em;
+	display: block;
+	margin: 10px 0 25px 0;
+	border-bottom: 1px dotted #e4e9f0;
+}
+.heading_page_contest h2 {
 	border-bottom: 2px solid #e67e22;
+	font-size: 23px;
+	color: #585f69;
+	margin: 0 0 -2px 0;
+	padding-bottom: 5px;
+	display: inline-block;
 }
 .footer {
 	margin-top: 0px;
@@ -27,4 +35,46 @@
 .panel-group .panel-heading+.panel-collapse>.panel-body {
 	border-top: 0px solid #eee;
 	background-color: #fff;
+}
+.faq-breadcrumb {
+	text-align: center;
+	position: relative;
+	background: url(../img/BG.png) no-repeat center;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+/*background: rgba(0,0,0,0.3);*/
+
+.faq-breadcrumb:before {
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	position: absolute;
+}
+@media (max-width: 450px) {
+	.faq-breadcrumb {
+	text-align: center;
+	position: relative;
+	background: url(../img/BGsmall.png) no-repeat center;
+	-webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+	}
+}
+
+@media (max-width: 600px) {
+	.faq-breadcrumb {
+	text-align: center;
+	position: relative;
+	background: url(../img/BGsmall.png) no-repeat center;
+	-webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+	}
 }
