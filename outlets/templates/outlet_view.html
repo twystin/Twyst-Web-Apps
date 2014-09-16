@@ -1,4 +1,4 @@
-<!--  About Section -->
+ About Section -->
 <section id="about" class="about-section section-first">
   <div class="about-image" id="image_background">
     <div class="container">
@@ -39,90 +39,143 @@
 
                <div class="container content-lg">
                 <div class="title-v1" style="text-align: left;" id="check_in_title">
-                  <h2 id="check_in_heading">Check-in. Unlock <span class="color-reddish">rewards</span></h2>
+                  <h2 id="check_in_heading">Check-in. Unlock <span class="label-buy-color">rewards</span><span>!</span></h2>
                   </div>
 
                   <div class="row">
                     <div class="col-md-7 content-boxes-v3 margin-bottom-40">
                       <div class="clearfix margin-bottom-10 heading-sm">
-                        <span >
-                          <h4 class="color-reddish">
-                            <span>On check in no.</span> 
-                            <span id="check_in_unlock_heading">Unlock</span>
+                        <span>
+                          <h4>
+                            <span class="label label-danger label-buy" style="font-size: 0.8em; text-align: center;margin: 0em;">On Check-in no.</span>
+                            
+                            <span class="label label-danger label-buy" id="check_in_unlock_heading" style="font-size: 0.8em; margin: 0em 0em 0em 13em;">Unlock</span>
                           </h4>
                         </span>
+                        
                       </div>
                       
                       <ul ng-repeat="offer in rewards|limitTo:3" class="timeline">
                             <li class="timeline-inverted">
-                                <div class="timeline-badge success"><p style="line-height: 2.6;" class="color_white">{{offer.count}}</p></div>
+                                <div class="timeline-badge label-buy"><p style="line-height: 2.6;" class="color_white">{{offer.count}}</p></div>
                                 <div class="timeline-panel">
                                   <div class="timeline-heading">
-                                      <h4 class="timeline-title"><p><b>{{offer.title}}</b></p></h4>
+                                      <h5 class="timeline-title"><p style="font-size: 1em;">{{offer.title}}</p></h5>
                                   </div>
                                 
                                 </div>
                              </li>
                        </ul> 
                        <div class="clearfix"></div>
-                       <h3 style="text-align: center;">Use the <strong class="color-reddish">Twyst</strong> app to check-in everytime you visit us.<br> And win amazing rewards on your next visit.Download the app today.</h3>
+                       <h5 class="margin-bottom-20" style="text-align: center;">Unlock exclusive rewards for being a regular! Check in on <strong class="label-buy-color">Twyst</strong> every time you visit us or order.</h5>
+                       <p class="margin-bottom-20 font-size-thirteen" style="text-align: center;">Get the Twyst app today.</p>
                     <div class="col-md-12 margin-bottom-20">
-                      <span class="col-md-6">
-                        <a href=""><img src="images/appstore.png" style="height: 60px; width: 200px;"></a>
-                      </span>
-                      <span class="col-md-6">
-                        <a href=""><img src="images/googleplay.png" style="height: 60px; width: 200px;"></a>
+                      <span class="col-md-3"></span>
+                      <span class="col-md-8">
+                        <a href=""><img src="images/appstore.png" style="height: 50px; width: auto;"></a>
+                        <a href=""><img src="images/googleplay.png" style="height: 50px; width: auto;"></a>
                       </span>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="col-md-12" style="padding-top: 1em;">
-                      <div class="page-header">
-                        <h1>We are also on</h1>
+                    <div class="panel panel-default margin-bottom-20">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Photos</h3>
                       </div>
-                      <div class="col-md-4"></div>
-                      <span class="col-md-6">
-                        <a href=""><img src="images/zomato.jpg" style="height: 60px; width: 60px; "></a>
-                        <a href=""><img src="images/foodpanda.png" style="height: 60px; width: 60px;"></a>
-                      </span>
-                      
-                    </div>
+                      <div class="panel-body">
 
+                <div class="col-md-3 col-sm-6">
+                    <a class="thumbnail fancybox-button zoomer" data-rel="fancybox-button" title="Project Title" href="">
+                        <span class="overlay-zoom">  
+                            <img alt="" src="images/BB-IMAGE.png" class="img-responsive">
+                            <span class="zoom-icon"></span>
+                        </span>                                              
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a class="thumbnail fancybox-button zoomer" data-rel="fancybox-button" title="Project Title" href="">
+                        <span class="overlay-zoom">  
+                            <img alt="" src="images/BB-IMAGE.png" class="img-responsive">
+                            <span class="zoom-icon"></span>
+                        </span>                                              
+                    </a>                                                                                    
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a class="thumbnail fancybox-button zoomer" data-rel="fancybox-button" title="Project Title" href="images/BB Food 5.jpg">
+                        <span class="overlay-zoom">  
+                            <img alt="" src="images/BB Food 5.jpg" class="img-responsive">
+                            
+                            <span class="zoom-icon"></span>
+                        </span>                                              
+                    </a>                                                                                    
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a class="thumbnail fancybox-button zoomer" data-rel="fancybox-button" title="Project Title" href="">
+                        <span class="overlay-zoom">  
+                            <img alt="" src="images/BB-IMAGE.png" class="img-responsive">
+                            <span class="zoom-icon"></span>
+                        </span>                                              
+                    </a>                                                                                    
+                </div>
+
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="panel panel-default margin-bottom-20">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">We are also on</h3>
+                      </div>
+                      <div class="panel-body">
+                        <span class="col-md-3 col-sm-6" style="text-align: center;">
+                          <a href=""><img src="images/zomato.jpg" class="img-responsive" style="height: 90px; width: 120px; "></a>
+                          <p>Review Us</p>
+                        </span>
+                        <span class="col-md-3 col-sm-6" style="text-align: center;">
+                          <a href=""><img src="images/foodpanda.png" class="img-responsive" style="height: 90px; width: 120px;"></a>
+                          <p>Order Online</p>
+                        </span>
+                      </div>
+                      </div>
+                   <!--  <div style="padding-top: 1em;">
+                      <div class="page-header margin-bottom-40">
+                        <h1 class="label label-default label-buy" style="font-size: 1em">We are also on</h1>
+                      </div>
+                      
+                      
+                      <div class="clearfix margin-bottom-40"></div>
+                    </div> -->
+                    
                     </div>
                     <!-- Right column starts -->
                     <div class="col-md-5" >
-                    <div class="col-md-12">
+                    <div class="col-md-12 margin-bottom-10">
                     <div class="panel panel-default" ng-show="outlet.links.facebook_url" id="facebook_like_box">
                     <div class="panel-heading panel_heading_callout" style="text-align: left;"><h4>From Facebook</h4></div>
                     <div class="fb-like-box panel-body" ng-href="https://{{outlet.links.facebook_url}}" data-colorscheme="light" data-force-wall="true" data-show-faces="true" data-header="false" data-stream="true" data-show-border="true" data-height="440px" data-width="400">
                     </div>
                     </div>
                   </div>
-                      <div class="clearfix"></div>
+                      
                       <br>
-                       <div class="col-md-12 col-xs-12">
+                       <div class="col-md-12 col-xs-12 margin-top-none">
               <div class="panel panel-default">
                 <div class="panel-heading panel_heading_callout">
                     <h4>Outlet Info</h4> 
-                    <img class="outlet_heading_images" src="../common/images/transparent/{{outlet.basics.is_a}}.png">
+                    
                   </div>
                     <div class="panel-body">
-                    <div class="col-md-12 padding_class">
+                    <div class="col-md-12 no_padding_class">
                       <div class="col-md-4 col-sm-4 col-xs-4">
-                        Cuisines: <p>{{outlet.attributes.cuisines.toString()}} </p>
+                        <span class="label label-warning label-buy">Cuisines:</span> <p class="font-size-eleven">{{outlet.attributes.cuisines.toString()}} </p>
                       </div>
                       <div class="col-md-4 col-sm-4 col-xs-4">
-                        <span>Cost For Two: <p></span><i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[0]}}</span></i> <span>to</span> <i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[1]}}</span></i><p>
+                        <span class="label label-warning label-buy">Cost For Two: </span><p class="font-size-eleven"><i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[0]}}</span></i> <span>to</span> <i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[1]}}</span></i><p>
                       </div>
                       <div class="col-md-4 col-sm-4 col-xs-4">
-                        Open From:  <p>{{outlet.attributes.timings}}</p>
+                       <span class="label label-danger label-buy">Open From: </span> <p class="font-size-eleven">{{outlet.attributes.timings}}</p>
                       </div>
                     
                     </div>
                     <div class="clearfix"></div>
-                    <hr>
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                         <b>QUICK INFO </b>    
-                    </div>
                     <hr>
                     <div class="clearfix"></div>
                     <div class="col-md-12 col-xs-12 col-sm-12">
@@ -130,13 +183,13 @@
                        <div class="col-md-6 col-sm-6 col-xs-6">
                        <div ng-show="outlet.attributes.dine_in">
                          <img src="images/Dine-in.png" class="image_overview_column_attribute margin_negative_one">
-                         <span class="overflow-h padding-top">
+                         <span class="overflow-h padding-top font-size-eleven">
                           Dine In Available
                         </span>
                       </div>
                       <div  ng-show="!outlet.attributes.dine_in">
                        <img src="images/No Dine-in.png" class="image_overview_column_attribute margin_negative_one">
-                       <span class="overflow-h padding-top">
+                       <span class="overflow-h padding-top font-size-eleven">
                         No Dine In
                       </span>
                     </div>
@@ -144,13 +197,13 @@
                   <div class="col-md-6 col-sm-6 col-xs-6" >
                    <div ng-show="outlet.attributes.home_delivery">
                     <img src="images/Home Delivery.png" class="image_overview_column_attribute">
-                    <span class="overflow-h padding-top">
+                    <span class="overflow-h padding-top font-size-eleven">
                       Home Delivery
                     </div>     
                   </div>
                   <div ng-show="!outlet.attributes.home_delivery">
                     <img src="images/No Home Delivery.png" class="image_overview_column_attribute">
-                    <span class="overflow-h padding-top">
+                    <span class="overflow-h padding-top font-size-eleven">
                       No Home Delivery
                     </span>
                   </div>
@@ -161,13 +214,13 @@
                   <div class="col-md-6 col-sm-6 col-xs-6">
                     <div  ng-show="outlet.attributes.veg">
                       <img src="images/Veg.png" class="image_overview_column_attribute">
-                      <span class="overflow-h padding-top">
+                      <span class="overflow-h padding-top font-size-eleven">
                         Vegetarian Only
                       </span>
                     </div>
                     <div ng-show="!outlet.attributes.veg">
                       <img src="images/Non Veg.png" class="image_overview_column_attribute">
-                      <span class="overflow-h padding-top">
+                      <span class="overflow-h padding-top font-size-eleven">
                        Serves non veg
                      </span>
                    </div>
@@ -175,13 +228,13 @@
                  <div class="col-md-6 col-sm-6 col-xs-6">
                   <div ng-show="outlet.attributes.alcohol">
                     <img src="images/Yes to Alcohol.png" class="image_overview_column_attribute">
-                    <span class="overflow-h padding-top">
+                    <span class="overflow-h padding-top font-size-eleven">
                       Serves Alcohol
                     </span>
                   </div>
                   <div ng-show="!outlet.attributes.alcohol">
                     <img src="images/No Alcohol.png" class="image_overview_column_attribute">
-                    <span class="overflow-h padding-top">
+                    <span class="overflow-h padding-top font-size-eleven">
                      No Alcohol
                    </span>  
                  </div>
@@ -191,23 +244,23 @@
               <div class="clearfix"></div>
               <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
                 <div class="col-md-6 col-sm-6 col-xs-6">
-                  <div ng-show="outlet.attributes.smoking">
+                  <div ng-show="outlet.attributes.smoking" class="padding_class">
                     <img src="images/Smoking.png" class="image_overview_column_attribute">
-                    <span class="overflow-h padding-top">
+                    <span class="overflow-h padding-top font-size-eleven">
                       Smoking Area Available
                     </span>
                   </div>
-                  <div ng-show="!outlet.attributes.smoking">
+                  <div ng-show="!outlet.attributes.smoking" class="padding_class">
                     <img src="images/No Smoking.png" class="image_overview_column_attribute">
-                    <span class="overflow-h padding-top">
+                    <span class="overflow-h padding-top font-size-eleven">
                      No Smoking
                    </span>  
                  </div>
                </div>
-               <div class="col-md-6 col-sm-6 col-xs-6">
+               <div class="col-md-6 col-sm-6 col-xs-6" class="padding_class">
                 <div ng-show="outlet.attributes.outdoor">
                   <img src="images/Outdoor Seating.png" class="image_overview_column_attribute">
-                  <div class="overflow-h padding-top">
+                  <div class="overflow-h padding-top font-size-eleven">
                     Outdoor Seating Available
                   </div>  
                 </div>
@@ -220,7 +273,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <div ng-show="outlet.attributes.foodcourt">
                    <img src="images/Food Court.png" class="image_overview_column_attribute">
-                   <div class="overflow-h padding-top">
+                   <div class="overflow-h padding-top font-size-eleven">
                     Part of a food court
 
                   </div>   
@@ -228,11 +281,6 @@
                 </div>
                 <div class="clearfix"></div> 
                 <hr>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <b>MORE DETAILS </b>
-              </div>
-              <hr>
-
               <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one style="padding-bottom: 10px;" ">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                      
@@ -244,20 +292,20 @@
               <div class="clearfix"></div>
                       
               <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
-                <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="col-md-6 col-sm-6 col-xs-6 font-size-eleven">
                   Air conditioning: {{outlet.attributes.air_conditioning}}          
               </div>
-              <div class="col-md-6 col-sm-6 col-xs-6">
+              <div class="col-md-6 col-sm-6 col-xs-6 font-size-eleven">
                   Parking: {{outlet.attributes.parking}}
               </div>
               </div>
               <div class="clearfix"></div>
              
               <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
-                <div class="col-md-6 col-sm-6 col-xs-6 ">
+                <div class="col-md-6 col-sm-6 col-xs-6 font-size-eleven">
                   Reservation: {{outlet.attributes.reservation}}
               </div>
-              <div class="col-md-6 col-sm-6 col-xs-6">
+              <div class="col-md-6 col-sm-6 col-xs-6 font-size-eleven">
                   Wi-fi: {{outlet.attributes.wifi}}
               </div>
         </div>
@@ -275,27 +323,23 @@
                   
                 </div>
               </div>        
-
-              <div class="parallax-quote parallaxBg" id="get-app-today" ng-if="outlet">
-                <div class="container">
-                  <div class="parallax-quote-in">
-                    <p>Locate Us</p>
-                    <small>
-                      <!-- <a href=""><img src="images/appstore.png"></a>
-                      <a href=""><img src="images/googleplay.png"></a> -->
-                       <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:260px;">
+              <div class="parallax-counter parallaxBg" style="background-position: 50% -310px;" id="get-app-today" ng-if="outlet">
+            <div class="container">
+               <h4 class="label-buy-color" style="text-align: center;">Locate Us</h4>
+                <div class="row">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6">
+                   <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
                             <gm-markers gm-objects="outlets"
                             gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
                             gm-get-marker-options="getOutletOpts(object)"
                             gm-on-click="selectOutlet(object, marker)">
                             </gm-markers>
-                      </gm-map>
-                    </small>
-                  </div>
-                </div>
-              </div>        
-
-
+                      </gm-map> 
+                      </div>
+                </div>            
+            </div>
+        </div>
             </div>        
           </section>
           <!--  About Section -->
@@ -303,8 +347,8 @@
           <!-- Services Section -->
           <section id="services">
             <div class="container content-lg">
-              <div class="title-v1">
-                <h2>Check other outlets on <span class="color-reddish">Twyst</span></h2>            
+              <div class="title-v1" style="margin-bottom: 0px;">
+                <h2>other outlets on <span class="label-buy-color">Twyst.</span>Check out.Check-in.</h2>            
               </div>            
 
              
@@ -318,7 +362,7 @@
                         </em>    
                         <span >
                             <strong class="col-md-12">Biryani Blues</strong>
-                            <i class="col-md-12">Indian</i>
+                            <i class="col-md-12">Ninex Mart</i>
                         </span>
                     </a>    
                 </div> 
@@ -329,7 +373,7 @@
                         </em>    
                         <span>
                             <strong class="col-md-12">Biryani Blues</strong>
-                            <i class="col-md-12">Indian</i>
+                            <i class="col-md-12">Ninex Mart</i>
                         </span>
                     </a>    
                 </div>
@@ -340,7 +384,7 @@
                         </em>    
                         <span>
                            <strong class="col-md-12">Biryani Blues</strong>
-                            <i class="col-md-12">Indian</i>
+                            <i class="col-md-12">Ninex Mart</i>
                         </span>
                     </a>    
                 </div>
@@ -351,7 +395,7 @@
                         </em>    
                         <span>
                             <strong class="col-md-12">Biryani Blues</strong>
-                            <i class="col-md-12">Indian</i>
+                            <i class="col-md-12">Ninex Mart</i>
                         </span>
                     </a>    
                 </div>
@@ -362,7 +406,7 @@
                         </em>    
                         <span>
                             <strong class="col-md-12">Biryani Blues</strong>
-                            <i class="col-md-12">Indian</i>
+                            <i class="col-md-12">Ninex Mart</i>
                         </span>
                     </a>    
                 </div>
@@ -373,7 +417,7 @@
                         </em>    
                         <span>
                             <strong class="col-md-12">Biryani Blues</strong>
-                            <i class="col-md-12">Indian</i>
+                            <i class="col-md-12">Ninex Mart</i>
                         </span>
                     </a>    
                 </div>
@@ -384,7 +428,7 @@
                         </em>    
                         <span>
                             <strong class="col-md-12">Biryani Blues</strong>
-                            <i class="col-md-12">Indian</i>
+                            <i class="col-md-12">Ninex Mart</i>
                         </span>
                     </a>    
                 </div>
@@ -395,7 +439,7 @@
                         </em>    
                         <span>
                             <strong class="col-md-12">Biryani Blues</strong>
-                            <i class="col-md-12">Indian</i>
+                            <i class="col-md-12">Ninex Mart</i>
                         </span>
                     </a>    
                 </div>
@@ -406,7 +450,7 @@
                         </em>    
                         <span>
                            <strong class="col-md-12">Biryani Blues</strong>
-                            <i class="col-md-12">Indian</i>
+                            <i class="col-md-12">Ninex Mart</i>
                         </span>
                     </a>    
                 </div>
@@ -421,4 +465,4 @@
           <!-- End Services Section -->
 
       
-          <!-- End Contact Section -->
+          <!-- End Contact Section
