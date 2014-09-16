@@ -3,7 +3,7 @@
   angular.module('app.data.app', []).factory('dataService', [
     '$http', '$rootScope', '$q', function($http, $rootScope, $q) {
         var dataSvc = {};
-
+        
         dataSvc.getPrograms = function (status) {
 
             var deferred = $q.defer();
@@ -38,12 +38,12 @@
             return deferred.promise;
         };
 
-        dataSvc.getUserData = function (program, outlet) {
+        dataSvc.getUserMetric = function (program, outlet) {
 
             var deferred = $q.defer();
 
             $http({
-                url: '/api/v2/analytics/users/' + program + '/' + outlet,
+                url: '/api/v2/analytics_summary/users/' + program + '/' + outlet,
                 method: "GET",
                 data: ''
             }).success(function (data) {
@@ -55,12 +55,12 @@
             return deferred.promise;
         };
 
-        dataSvc.getCheckinData = function (program, outlet) {
+        dataSvc.getCheckinMetric = function (program, outlet) {
 
             var deferred = $q.defer();
 
             $http({
-                url: '/api/v2/analytics/checkins/' + program + '/' + outlet,
+                url: '/api/v2/analytics_summary/checkins/' + program + '/' + outlet,
                 method: "GET",
                 data: ''
             }).success(function (data) {
@@ -72,12 +72,11 @@
             return deferred.promise;
         };
 
-        dataSvc.getRedeemData = function (program, outlet) {
+        dataSvc.getRedeemMetric = function (program, outlet) {
 
             var deferred = $q.defer();
-
             $http({
-                url: '/api/v2/analytics/redeems/' + program + '/' + outlet,
+                url: '/api/v2/analytics_summary/redeems/' + program + '/' + outlet,
                 method: "GET",
                 data: ''
             }).success(function (data) {
@@ -88,6 +87,54 @@
             
             return deferred.promise;
         };
+
+        dataSvc.getUserData = function (query) {
+            var deferred = $q.defer();
+            $http({
+                url: '/api/v2/analytics_data/users/',
+                method: "POST",
+                data: {
+                    programs: ['537b648fc1844b7c5400000f'],
+                    date: 1407868200000
+                }
+            }).success(function (data) {
+                deferred.resolve(data.info);
+            }).error(function (data) {
+                deferred.resolve(data.info);
+            });
+        }
+
+        dataSvc.getCheckinData = function (query) {
+            var deferred = $q.defer();
+            $http({
+                url: '/api/v2/analytics_data/checkins/',
+                method: "POST",
+                data: {
+                    programs: ['537b648fc1844b7c5400000f'],
+                    date: 1407868200000
+                }
+            }).success(function (data) {
+                deferred.resolve(data.info);
+            }).error(function (data) {
+                deferred.resolve(data.info);
+            });
+        }
+
+        dataSvc.getRedeemData = function (query) {
+            var deferred = $q.defer();
+            $http({
+                url: '/api/v2/analytics_data/redeems/',
+                method: "POST",
+                data: {
+                    programs: ['537b648fc1844b7c5400000f'],
+                    date: 1407868200000
+                }
+            }).success(function (data) {
+                deferred.resolve(data.info);
+            }).error(function (data) {
+                deferred.resolve(data.info);
+            });
+        }
 
         return dataSvc;
     }
@@ -139,9 +186,49 @@
         });
 
         function getData(program, outlet, flag) {
-            getCheckinData(program, outlet);
-            getUserData(program, outlet);
-            getRedeemData(program, outlet);
+            getCheckinMetric(program, outlet);
+            getUserMetric(program, outlet);
+            getRedeemMetric(program, outlet);
+        }
+
+        function getUserMetric(program, outlet) {
+            if(program) {
+                $scope.user_data = null;
+                var program_id = program._id;
+                var outlet_id = outlet ? outlet._id : 'ALL';
+                dataService.getUserMetric(program_id, outlet_id).then(function(data) {
+                    $scope.user_data = data;
+                    getBarChartData(data.USER_BY_CHECKIN_NUMBER_METRIC);
+                });
+            }
+        }
+
+        function getRedeemMetric(program, outlet) {
+            if(program) {
+                $scope.redeem_data = null;
+                var program_id = program._id;
+                var outlet_id = outlet ? outlet._id : 'ALL';
+                dataService.getRedeemMetric(program_id, outlet_id).then(function(data) {
+                    $scope.redeem_data = data;
+                    areaChartDataForRedeemsByDate(data.REDEEMS_BY_DATE);
+                    barChartDataForRedeemsByDayOfWeek(data.REDEEMS_BY_DAY_OF_WEEK);
+                });
+            }
+        }
+
+        function getCheckinMetric(program, outlet) {
+            if(program) {
+                $scope.checkin_data = null;
+                var program_id = program._id;
+                var outlet_id = outlet ? outlet._id : 'ALL';
+                dataService.getCheckinMetric(program_id, outlet_id).then(function(data) {
+                    $scope.checkin_data = data;
+                    areaChartDataForCheckinsByDate(data.CHECKINS_BY_DATE);
+                    barChartDataForCheckinsByDayOfWeek(data.CHECKINS_BY_DAY_OF_WEEK);
+                    donutDataForCheckinType(data.CHECKINS_BY_MODE);
+                    donutDataForCheckinLocation(data.CHECKINS_BY_LOCATION);
+                });
+            }
         }
 
         function getUserData(program, outlet) {
@@ -150,8 +237,7 @@
                 var program_id = program._id;
                 var outlet_id = outlet ? outlet._id : 'ALL';
                 dataService.getUserData(program_id, outlet_id).then(function(data) {
-                    $scope.user_data = data;
-                    getBarChartData(data.USER_BY_CHECKIN_NUMBER_METRIC);
+                    console.log(data)
                 });
             }
         }
@@ -162,9 +248,7 @@
                 var program_id = program._id;
                 var outlet_id = outlet ? outlet._id : 'ALL';
                 dataService.getRedeemData(program_id, outlet_id).then(function(data) {
-                    $scope.redeem_data = data;
-                    areaChartDataForRedeemsByDate(data.REDEEMS_BY_DATE);
-                    barChartDataForRedeemsByDayOfWeek(data.REDEEMS_BY_DAY_OF_WEEK);
+                    console.log(data)
                 });
             }
         }
@@ -175,11 +259,7 @@
                 var program_id = program._id;
                 var outlet_id = outlet ? outlet._id : 'ALL';
                 dataService.getCheckinData(program_id, outlet_id).then(function(data) {
-                    $scope.checkin_data = data;
-                    areaChartDataForCheckinsByDate(data.CHECKINS_BY_DATE);
-                    barChartDataForCheckinsByDayOfWeek(data.CHECKINS_BY_DAY_OF_WEEK);
-                    donutDataForCheckinType(data.CHECKINS_BY_MODE);
-                    donutDataForCheckinLocation(data.CHECKINS_BY_LOCATION);
+                    console.log(data)
                 });
             }
         }
