@@ -40,15 +40,14 @@
     <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
     <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">    
     <link rel="stylesheet" href="assets/plugins/pace/pace-flash.css">
-    <link rel="stylesheet" href="assets/plugins/YTPlayer/css/YTPlayer.css">
     <link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">    
     <link rel="stylesheet" href="assets/plugins/revolution-slider/examples-sources/rs-plugin/css/settings.css" type="text/css" media="screen">
-
     <!-- load css for cubeportfolio -->
     <link rel="stylesheet" type="text/css" href="assets/plugins/cbp-plugin/cubeportfolio/css/cubeportfolio.min.css">
 
     <!-- load main css for this page -->
     <link rel="stylesheet" type="text/css" href="assets/plugins/cbp-plugin/templates/lightbox-gallery/css/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/feature_timeline2.css">
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom.css">
@@ -155,7 +154,7 @@
             <div class="col-md-4 md-margin-bottom-40">
                 <!-- About -->
                 <div class="headline"><h2>About</h2></div>  
-                <p class="margin-bottom-25 md-margin-bottom-40">Twyst is a start-up based out of Gurgaon, and started by Abhimanyu Lal (IIM Ahmedabad, ex-EBay), Rahul Chakraborti (IIM Bangalore, ex-Yahoo!) and Arun Rajappa (Indian School of Business, ex-Microsoft).</p>    
+               <p class="margin-bottom-25 md-margin-bottom-40">Twyst is a start-up based out of Gurgaon, started by a team with a combined experience of 40 years across product, strategy, operations and marketing. <a href="/home/about.html">More</a></p>    
 
 <!--
                 <div class="headline"><h2>Monthly Newsletter</h2></div> 
@@ -177,19 +176,14 @@
 
             <div class="col-md-4">
                 <!-- Monthly Newsletter -->
-                <div class="headline"><h2>Contact Us</h2></div> 
-                    <address class="md-margin-bottom-40">
-                    #3, Navkriti Arcade, <br />
-                    Sector 55, Guragaon, 122003 <br />
-                    <p><a href="contact.html">Get in touch</a></p>
-                </address>
 
                 <!-- Stay Connected -->
                 <div class="headline"><h2>Stay Connected</h2></div> 
                 <ul class="social-icons">
                     <li><a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a></li>
                     <li><a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a></li>
-                    <li><a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a></li>                    
+                    <li><a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a></li> 
+                     &nbsp;&nbsp;&nbsp;<a class="btn btn-warning" href="/home/contact.html" style="color: white;line-height: 1;">Get in touch</a>                   
                 </ul>
             </div><!--/col-md-4-->
         </div><!--/row-->   
@@ -233,16 +227,19 @@
     <script type="text/javascript" src="assets/plugins/cbp-plugin/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
     <!-- load main js -->
     <script type="text/javascript" src="assets/plugins/cbp-plugin/templates/lightbox-gallery/js/main.js"></script>
+    <script type="text/javascript" src="assets/plugins/bxslider/jquery.bxslider.js"></script>
 
     <!-- JS Page Level-->
     <script type="text/javascript" src="assets/js/app.js"></script>
-    <script type="text/javascript" src="assets/js/plugins/owl-carousel.js"></script>    
+    <script type="text/javascript" src="assets/js/plugins/owl-carousel.js"></script> 
+       
     <script type="text/javascript">
         jQuery(document).ready(function() {
             App.init();
             App.initCounter();
             App.initParallaxBg();
-            OwlCarousel.initOwlCarousel();            
+            OwlCarousel.initOwlCarousel();   
+            App.initBxSlider();         
         });
     </script>
 
