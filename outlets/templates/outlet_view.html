@@ -1,6 +1,6 @@
  About Section -->
 <section id="about" class="about-section section-first">
-  <div class="about-image" id="image_background">
+  <div class="about-image" id="image_background" ng-if="outlet.basics.name" background="https://s3-us-west-2.amazonaws.com/twystmerchantpages/{{outlet.basics.name}}.png">
     <div class="container">
                <!--  <div class="title-v1">
                     <h1>We are Unify Agency</h1>
@@ -77,6 +77,16 @@
                        <h5 class="margin-bottom-20 " style="text-align: center;">Get the Twyst app today.</h5>
                     <div class="col-md-12 margin-bottom-20">
                       <span class="col-md-3"></span>
+                      <div >
+                        <div class="col-md-3 col-sm-6">
+                            <a href ng-click="open_fancybox()"> <img alt="" src="images/BB-IMAGE.png" class="img-responsive"></a>
+                            <div class="wrapper" fancybox>
+                            <div class="future_fancybox_content">
+                               <img alt="" src="images/BB-IMAGE.png" class="img-responsive">
+                            </div>
+                            </div>
+                      </div>
+                      </div>
                       <span class="col-md-8">
                         <a href=""><img src="images/appstore.png" style="height: 50px; width: auto;"></a>
                         <a href=""><img src="images/googleplay.png" style="height: 50px; width: auto;"></a>
@@ -287,7 +297,7 @@
                 </div>
                 <div class="clearfix"></div> 
                 <hr>
-              <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one style="padding-bottom: 10px;" ">
+              <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one" style="padding-bottom: 10px;">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                      
               </div> 
@@ -471,4 +481,41 @@
           <!-- End Services Section -->
 
       
-          <!-- End Contact Section
+          <!-- End Contact Section-->
+<script>
+  /* copy loaded thumbnails into carousel */
+$('.row .thumbnail').on('load', function() {
+  
+}).each(function(i) {
+  if(this.complete) {
+    var item = $('<div class="item"></div>');
+    var itemDiv = $(this).parents('div');
+    var title = $(this).parent('a').attr("title");
+    
+    item.attr("title",title);
+    $(itemDiv.html()).appendTo(item);
+    item.appendTo('.carousel-inner'); 
+    if (i==0){ // set first item active
+     item.addClass('active');
+    }
+  }
+});
+
+/* activate the carousel */
+$('#modalCarousel').carousel({interval:false});
+
+/* change modal title when slide changes */
+$('#modalCarousel').on('slid.bs.carousel', function () {
+  $('.modal-title').html($(this).find('.active').attr("title"));
+})
+
+/* when clicking a thumbnail */
+$('.row .thumbnail').click(function(){
+    var idx = $(this).parents('div').index();
+    var id = parseInt(idx);
+    $('#myModal').modal('show'); // show the modal
+    $('#modalCarousel').carousel(id); // slide carousel to selected
+    
+});
+
+</script>
