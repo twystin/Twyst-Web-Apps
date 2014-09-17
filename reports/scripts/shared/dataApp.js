@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('app.data.app', ['ngCsv']).factory('dataService', [
+  angular.module('app.data.app', ['ngCsv','multi-select']).factory('dataService', [
     '$http', '$rootScope', '$q', function($http, $rootScope, $q) {
         var dataSvc = {};
         
