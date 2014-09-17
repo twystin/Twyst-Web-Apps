@@ -1,0 +1,28 @@
+<div class="modal-header">
+	<h3>User data</h3>
+</div>
+<div class="modal-body">
+	<div class="modal-body-scroll">
+	<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<table class="table table-striped">
+		        <thead>
+		            <tr>
+		                <th>#</th>
+		                <th>Users phone</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr ng-repeat="d in users">
+		            	<td>{{$index+1}}</td>
+		                <td>{{d._id}}</td>
+		            </tr>
+		        </tbody>
+		    </table>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+  	<button type="button" class="btn btn-success" ng-csv="users" filename="users.csv" csv-header="['Phone']" >Export to excel</button>
+  	<button type="button btn-danger" ng-click="cancel()" class="btn">Cancel</button>
+</div>

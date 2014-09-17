@@ -1,0 +1,29 @@
+<div class="modal-header">
+	<h3>Redemptions data</h3>
+</div>
+<div class="modal-body">
+	<div class="modal-body-scroll">
+		<div>
+			<table class="table table-bordered">
+		        <thead>
+		            <tr>
+		                <th>Users phone</th>
+		                <th>Voucher code(s)</th>
+		                <th>Reward(s)</th>
+		            </tr>
+		        </thead>
+		        <tbody ng-repeat="d in redeems">
+		            <tr ng-repeat="a in d.vouchers">
+		                <td rowspan="{{d.vouchers.length}}" ng-show="$index === 0">{{d.phone}}</td>
+		                <td>{{d.vouchers[$index]}}</td>
+		                <td>{{d.rewards[$index]}}</td>
+		            </tr>
+		        </tbody>
+		    </table>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+  	<button type="button" class="btn btn-success" ng-csv="redeem_csv" filename="vouchers.csv">Export to excel</button>
+  	<button type="button btn-danger" ng-click="cancel()" class="btn">Cancel</button>
+</div>s

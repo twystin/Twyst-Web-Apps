@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('app.data.app', []).factory('dataService', [
+  angular.module('app.data.app', ['ngCsv']).factory('dataService', [
     '$http', '$rootScope', '$q', function($http, $rootScope, $q) {
         var dataSvc = {};
         
@@ -139,7 +139,7 @@
             outlet: null
         }
     }]).controller('DataCtrl', [
-    '$scope', '$location', 'dataService', function($scope, $location, dataService) {
+    '$scope', '$location', '$modal', 'dataService', function($scope, $location, $modal, dataService) {
         
         $scope.Math = window.Math;
         var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -238,49 +238,87 @@
 
         function getUserData(query) {
             dataService.getUserData(query).then(function(data) {
-                console.log(data)
+                openUserDataModal(data);
             });
         }
         
         function getRedeemData(query) {
             dataService.getRedeemData(query).then(function(data) {
-                console.log(data)
+                openRedeemDataModal(data)
             });
         }
 
         function getCheckinData(query) {
             dataService.getCheckinData(query).then(function(data) {
-                console.log(data)
+                openUserDataModal(data);
             });
         }
 
+        function openRedeemDataModal(data) {
+            if(data && data.length > 0) {
+                var modalInstance = $modal.open({
+                    templateUrl : './views/modals/analytics_redeem_data_modal.html',
+                    controller  : 'AnalyticsRedeemModalDataCtrl',
+                    backdrop    : 'static',
+                    resolve: {
+                        data: function () {
+                            return data;
+                        }
+                    }
+                });
+            }
+        }
+
+        function openUserDataModal(data) {
+            if(data && data.length > 0) {
+                var modalInstance = $modal.open({
+                    templateUrl : './views/modals/analytics_user_data_modal.html',
+                    controller  : 'AnalyticsUserModalDataCtrl',
+                    backdrop    : 'static',
+                    resolve: {
+                        data: function () {
+                            return data;
+                        }
+                    }
+                });
+            }
+        }
+
         $scope.getCrossVisitingUsers = function() {
+            var programs = [];
+            programs.push($scope.selected.program._id);
             var query = {
-                'programs': ['537b648fc1844b7c5400000f'],
+                'programs': programs,
                 'data_type': 'cross'
             };
             getData('user', query);
         }
 
         $scope.getUsersWithGtOneCheckins = function () {
+            var programs = [];
+            programs.push($scope.selected.program._id);
             var query = {
-                'programs': ['537b648fc1844b7c5400000f'],
+                'programs': programs,
                 'data_type': 'multiple'
             };
             getData('user', query);
         }
 
         $scope.getAllUniqueUsers = function () {
+            var programs = [];
+            programs.push($scope.selected.program._id);
             var query = {
-                'programs': ['537b648fc1844b7c5400000f'],
+                'programs': programs,
                 'data_type': 'unique'
             };
             getData('user', query);
         }
 
         $scope.getAllUsersWithRedeems = function () {
+            var programs = [];
+            programs.push($scope.selected.program._id);
             var query = {
-                'programs': ['537b648fc1844b7c5400000f'],
+                'programs': programs,
                 'data_type': 'total'
             };
             getData('redeem', query);
@@ -298,8 +336,10 @@
                     lineWidth: "2",
                     lineColors: $scope.color.primary,
                     clickCallback: function (index, options, src) {
+                        var programs = [];
+                        programs.push($scope.selected.program._id);
                         var query = {
-                            'programs': ['537b648fc1844b7c5400000f'],
+                            'programs': programs,
                             'date': new Date(src.actual_date).getTime(),
                             'data_type': 'date'
                         };
@@ -323,8 +363,10 @@
                   labels: ["Redeems"],
                   barColors: barColor,
                   clickCallback: function (index, options, src) {
+                        var programs = [];
+                        programs.push($scope.selected.program._id);
                         var query = {
-                            'programs': ['537b648fc1844b7c5400000f'],
+                            'programs': programs,
                             'day': days.indexOf(src._id) + 1,
                             'data_type': 'week'
                         };
@@ -346,8 +388,10 @@
                     lineWidth: "2",
                     lineColors: $scope.color.primary,
                     clickCallback: function (index, options, src) {
+                        var programs = [];
+                        programs.push($scope.selected.program._id);
                         var query = {
-                            'programs': ['537b648fc1844b7c5400000f'],
+                            'programs': programs,
                             'date': new Date(src.actual_date).getTime(),
                             'data_type': 'date'
                         };
@@ -372,8 +416,10 @@
                   labels: ["Checkins"],
                   barColors: barColor,
                   clickCallback: function (index, options, src) {
+                        var programs = [];
+                        programs.push($scope.selected.program._id);
                         var query = {
-                            'programs': ['537b648fc1844b7c5400000f'],
+                            'programs': programs,
                             'day': days.indexOf(src._id) + 1,
                             'data_type': 'week'
                         };
@@ -471,10 +517,52 @@
               xkey: "_id",
               ykeys: ["num"],
               labels: ["Users"],
-              barColors: barColor
+              barColors: barColor,
+              clickCallback: function (index, options, src) {
+                    var programs = [];
+                    programs.push($scope.selected.program._id);
+                    var query = {
+                        'programs': programs,
+                        'checkin_count': src._id,
+                        'data_type': 'checkin_number'
+                    };
+                    getData('user', query);
+                }
             }
           };
         }
-    }]);
+    }]).controller('AnalyticsUserModalDataCtrl', function ($scope, $modalInstance, data) {
+        $scope.users = data;
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+
+        $scope.exportToExcel = function () {
+            
+        };
+    }).controller('AnalyticsRedeemModalDataCtrl', function ($scope, $modalInstance, data) {
+        $scope.redeems = data;
+        getCsvForRedeems(data);
+        function getCsvForRedeems(data) {
+            $scope.redeem_csv = [];
+            $scope.redeems.forEach(function (r) {
+                for(var i = 0; i < r.vouchers.length; i++) {
+                    var obj = {
+                        'phone': r.phone,
+                        'voucher': r.vouchers[i],
+                        'reward': r.rewards[i]
+                    };
+                    $scope.redeem_csv.push(obj);
+                }
+            });
+        };
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+
+        $scope.exportToExcel = function () {
+            
+        };
+    });
 
 }).call(this);
