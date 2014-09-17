@@ -32,31 +32,31 @@
     </div>
 </div>
 <div class="col-md-12">
-	<div class="col-md-5">
-	    <section class="panel panel-box info-box">
-	        <div class="panel-left panel-item bg-info">
-	            <i class="fa fa-users text-large stat-icon"></i>
-	        </div>
-	        <div class="panel-right panel-item bg-reverse">
-	            <p class="size-h1 no-margin">{{checkin_data.TOTAL_CHECKINS}}</p>
-	            <p class="text-muted no-margin"><span data-i18n="Total checkins"></span></p>
-	        </div>
-	    </section>
-	</div>
-	<div class="col-md-5">
+    <div class="col-md-5">
         <section class="panel panel-box info-box">
-            <div class="panel-left panel-item bg-success">
-                <i class="fa fa-rocket text-large stat-icon"></i>
+            <div class="panel-left panel-item bg-info">
+                <i class="fa fa-users text-large stat-icon"></i>
             </div>
             <div class="panel-right panel-item bg-reverse">
-                <p class="size-h1 no-margin">{{Math.round(checkin_data.TOTAL_CHECKINS / dynamic)}}<span class="size-h3"></span></p>
-                <p class="text-muted no-margin"><span data-i18n="Avg. daily checkins"></span></p>
+                <p class="size-h1 no-margin">{{checkin_data.TOTAL_CHECKINS}}</p>
+                <p class="text-muted no-margin"><span data-i18n="Total checkins"></span></p>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-5">
+        <section class="panel panel-box info-box">
+            <div class="panel-left panel-item bg-success">
+                <img src="./views/current_programs/twyst_icon_120.png" height="50%">
+            </div>
+            <div class="panel-right panel-item bg-reverse">
+                <p class="size-h1 no-margin">{{Math.round(checkin_data.TOTAL_CHECKINS / (dynamic / 7))}}<span class="size-h3"></span></p>
+                <p class="text-muted no-margin"><span data-i18n="Avg. weekly checkins"></span></p>
             </div>
         </section>
     </div>
 </div>
 <div class="col-md-12" ng-if="checkin_data">
-	<div class="col-md-12">
+    <div class="col-md-12">
         <section class="panel panel-default">
             <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Check-in Trend</div>
             <div class="panel-body">
@@ -70,7 +70,7 @@
     </div>
 </div>
 <div class="col-md-12" ng-if="checkin_data">
-	<div class="col-md-12">
+    <div class="col-md-12">
         <section class="panel panel-default">
             <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Check-ins by day of week</div>
             <div class="panel-body">
@@ -84,7 +84,7 @@
     </div>
 </div>
 <div class="col-md-12" ng-if="checkin_data">
-	<div class="col-md-6">
+    <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Checkin by type</h3>

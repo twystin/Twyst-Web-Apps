@@ -93,15 +93,13 @@
             $http({
                 url: '/api/v2/analytics_data/users/',
                 method: "POST",
-                data: {
-                    programs: ['537b648fc1844b7c5400000f'],
-                    date: 1407868200000
-                }
+                data: query
             }).success(function (data) {
                 deferred.resolve(data.info);
             }).error(function (data) {
                 deferred.resolve(data.info);
             });
+            return deferred.promise;
         }
 
         dataSvc.getCheckinData = function (query) {
@@ -109,15 +107,13 @@
             $http({
                 url: '/api/v2/analytics_data/checkins/',
                 method: "POST",
-                data: {
-                    programs: ['537b648fc1844b7c5400000f'],
-                    date: 1407868200000
-                }
+                data: query
             }).success(function (data) {
                 deferred.resolve(data.info);
             }).error(function (data) {
                 deferred.resolve(data.info);
             });
+            return deferred.promise;
         }
 
         dataSvc.getRedeemData = function (query) {
@@ -125,17 +121,15 @@
             $http({
                 url: '/api/v2/analytics_data/redeems/',
                 method: "POST",
-                data: {
-                    programs: ['537b648fc1844b7c5400000f'],
-                    date: 1407868200000
-                }
+                data: query
             }).success(function (data) {
                 deferred.resolve(data.info);
             }).error(function (data) {
                 deferred.resolve(data.info);
             });
+            return deferred.promise;
         }
-
+        
         return dataSvc;
     }
   ]).controller('StatusCtrl', [
@@ -148,6 +142,7 @@
     '$scope', '$location', 'dataService', function($scope, $location, dataService) {
         
         $scope.Math = window.Math;
+        var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         var all_status = {
             'all_time': 'ALL',
             'previous_programs': 'archived',
@@ -177,15 +172,15 @@
                     $scope.dynamic = Math.round((new Date() - earn_start) / 86400000);
                 }
                 $scope.percent = Math.round($scope.dynamic / $scope.max * 100);
-                getData($scope.selected.program, $scope.selected.outlet);
+                getMetric($scope.selected.program, $scope.selected.outlet);
             }
         }, true);
 
         $scope.$watch('selected.outlet', function () {
-            getData($scope.selected.program, $scope.selected.outlet);
+            getMetric($scope.selected.program, $scope.selected.outlet);
         });
 
-        function getData(program, outlet, flag) {
+        function getMetric(program, outlet, flag) {
             getCheckinMetric(program, outlet);
             getUserMetric(program, outlet);
             getRedeemMetric(program, outlet);
@@ -231,38 +226,65 @@
             }
         }
 
-        function getUserData(program, outlet) {
-            if(program) {
-                $scope.user_data = null;
-                var program_id = program._id;
-                var outlet_id = outlet ? outlet._id : 'ALL';
-                dataService.getUserData(program_id, outlet_id).then(function(data) {
-                    console.log(data)
-                });
-            }
+        function getData (data_type, query) {
+            var functions = {
+                'checkin': getCheckinData,
+                'redeem': getRedeemData,
+                'user': getUserData
+            };
+
+            functions[data_type](query);
         }
 
-        function getRedeemData(program, outlet) {
-            if(program) {
-                $scope.redeem_data = null;
-                var program_id = program._id;
-                var outlet_id = outlet ? outlet._id : 'ALL';
-                dataService.getRedeemData(program_id, outlet_id).then(function(data) {
-                    console.log(data)
-                });
-            }
+        function getUserData(query) {
+            dataService.getUserData(query).then(function(data) {
+                console.log(data)
+            });
+        }
+        
+        function getRedeemData(query) {
+            dataService.getRedeemData(query).then(function(data) {
+                console.log(data)
+            });
         }
 
-        function getCheckinData(program, outlet) {
-            if(program) {
-                $scope.checkin_data = null;
-                var program_id = program._id;
-                var outlet_id = outlet ? outlet._id : 'ALL';
-                dataService.getCheckinData(program_id, outlet_id).then(function(data) {
-                    console.log(data)
-                });
-            }
+        function getCheckinData(query) {
+            dataService.getCheckinData(query).then(function(data) {
+                console.log(data)
+            });
         }
+
+        $scope.getCrossVisitingUsers = function() {
+            var query = {
+                'programs': ['537b648fc1844b7c5400000f'],
+                'data_type': 'cross'
+            };
+            getData('user', query);
+        }
+
+        $scope.getUsersWithGtOneCheckins = function () {
+            var query = {
+                'programs': ['537b648fc1844b7c5400000f'],
+                'data_type': 'multiple'
+            };
+            getData('user', query);
+        }
+
+        $scope.getAllUniqueUsers = function () {
+            var query = {
+                'programs': ['537b648fc1844b7c5400000f'],
+                'data_type': 'unique'
+            };
+            getData('user', query);
+        }
+
+        $scope.getAllUsersWithRedeems = function () {
+            var query = {
+                'programs': ['537b648fc1844b7c5400000f'],
+                'data_type': 'total'
+            };
+            getData('redeem', query);
+        };
 
         function areaChartDataForRedeemsByDate (data) {
             $scope.redeem_trend = {
@@ -274,13 +296,20 @@
                     labels: ["Redeems"],
                     xLabels: ["day"],
                     lineWidth: "2",
-                    lineColors: $scope.color.primary
+                    lineColors: $scope.color.primary,
+                    clickCallback: function (index, options, src) {
+                        var query = {
+                            'programs': ['537b648fc1844b7c5400000f'],
+                            'date': new Date(src.actual_date).getTime(),
+                            'data_type': 'date'
+                        };
+                        getData('redeem', query);
+                    }
                 }
             };
         }
 
         function barChartDataForRedeemsByDayOfWeek(data) {
-            var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             var barColor = [$scope.color.infoAlt];
             data.forEach(function(d) {
                 d._id = days[d._id-1];
@@ -292,7 +321,15 @@
                   xkey: "_id",
                   ykeys: ["count"],
                   labels: ["Redeems"],
-                  barColors: barColor
+                  barColors: barColor,
+                  clickCallback: function (index, options, src) {
+                        var query = {
+                            'programs': ['537b648fc1844b7c5400000f'],
+                            'day': days.indexOf(src._id) + 1,
+                            'data_type': 'week'
+                        };
+                        getData('redeem', query);
+                    }
                 }
             };
         }
@@ -307,7 +344,15 @@
                     labels: ["Checkins"],
                     xLabels: ["day"],
                     lineWidth: "2",
-                    lineColors: $scope.color.primary
+                    lineColors: $scope.color.primary,
+                    clickCallback: function (index, options, src) {
+                        var query = {
+                            'programs': ['537b648fc1844b7c5400000f'],
+                            'date': new Date(src.actual_date).getTime(),
+                            'data_type': 'date'
+                        };
+                        getData('checkin', query);
+                    }
                 }
             };
         }
@@ -325,7 +370,15 @@
                   xkey: "_id",
                   ykeys: ["count"],
                   labels: ["Checkins"],
-                  barColors: barColor
+                  barColors: barColor,
+                  clickCallback: function (index, options, src) {
+                        var query = {
+                            'programs': ['537b648fc1844b7c5400000f'],
+                            'day': days.indexOf(src._id) + 1,
+                            'data_type': 'week'
+                        };
+                        getData('checkin', query);
+                    }
                 }
             };
         }

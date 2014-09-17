@@ -33,7 +33,7 @@
 </div>
 
 <div class="col-md-12">
-	<div class="col-md-5">
+	<div class="col-md-5" ng-click="getAllUsersWithRedeems()">
 	    <section class="panel panel-box info-box">
 	        <div class="panel-left panel-item bg-info">
 	            <i class="fa fa-gift text-large stat-icon"></i>
@@ -50,8 +50,8 @@
                 <i class="fa fa-gift text-large stat-icon"></i>
             </div>
             <div class="panel-right panel-item bg-reverse">
-                <p class="size-h1 no-margin">{{Math.round(redeem_data.TOTAL_REDEEMS / dynamic)}}<span class="size-h3"></span></p>
-                <p class="text-muted no-margin"><span data-i18n="Avg. daily redeems"></span></p>
+                <p class="size-h1 no-margin">{{Math.round(redeem_data.TOTAL_REDEEMS / (dynamic / 7))}}<span class="size-h3"></span></p>
+                <p class="text-muted no-margin"><span data-i18n="Avg. weekly redeems"></span></p>
             </div>
         </section>
     </div>
