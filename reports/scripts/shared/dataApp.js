@@ -498,6 +498,15 @@
         function getPrograms() {
             dataService.getPrograms(status).then(function(data) {
                 $scope.programs = data;
+                if($scope.programs && $scope.programs.length > 0) {
+                    $scope.programs.forEach(function (p) {
+                        if(p.status === 'active') {
+                            p.icon = '<i class="fa fa-lightbulb-o icon-green"></i>';
+                        } else {
+                            p.icon = '<i class="fa fa-lightbulb-o icon-red"></i>';
+                        }                        
+                    })
+                }
             })
         }
 
