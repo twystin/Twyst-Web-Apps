@@ -54,13 +54,13 @@
 <div class="container" ng-if="show_data.checkin">
     <div class="col-md-12" style="margin-top: 2em;">
         <div class="col-md-5">
-            <section class="panel panel-box info-box">
-                <div class="panel-left panel-item bg-info">
+            <section class="panel panel-box">
+                <div class="panel-left panel-item bg-gray">
                     <img src="./views/current_programs/twyst_icon_120.png" height="50%">
                 </div>
                 <div class="panel-right panel-item bg-reverse">
                     <p class="size-h1 no-margin">{{checkin_data.TOTAL_CHECKINS}}</p>
-                    <p class="text-muted no-margin"><span data-i18n="Total checkins"></span></p>
+                    <p class="text-muted no-margin"><span data-i18n="Total Check-ins"></span></p>
                 </div>
             </section>
         </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="panel-right panel-item bg-reverse">
                     <p class="size-h1 no-margin">{{Math.round(checkin_data.TOTAL_CHECKINS / weeks)}}<span class="size-h3"></span></p>
-                    <p class="text-muted no-margin"><span data-i18n="Avg. weekly checkins"></span></p>
+                    <p class="text-muted no-margin"><span data-i18n="Avg. Weekly Check-ins"></span></p>
                 </div>
             </section>
         </div>
@@ -112,7 +112,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Checkin by type</h3>
+                    <h3 class="panel-title">Check-ins by Source</h3>
                 </div>
                 <div class="panel-body">
                     <div data-flot-chart
@@ -126,7 +126,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Checkin by location</h3>
+                    <h3 class="panel-title">Check-ins by Location</h3>
                 </div>
                 <div class="panel-body">
                     <div data-flot-chart

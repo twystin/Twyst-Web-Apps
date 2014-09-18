@@ -415,7 +415,7 @@
                 options: {
                     xkey: "actual_date",
                     ykeys: ["count"],
-                    labels: ["Checkins"],
+                    labels: ["Check-ins"],
                     xLabels: ["day"],
                     lineWidth: "2",
                     lineColors: $scope.color.primary,
@@ -444,7 +444,7 @@
                 options: {
                   xkey: "_id",
                   ykeys: ["count"],
-                  labels: ["Checkins"],
+                  labels: ["Check-ins"],
                   barColors: barColor,
                   clickCallback: function (index, options, src) {
                         var programs = getProgramIds($scope.selected.programs);
@@ -528,6 +528,7 @@
         function getPrograms() {
             dataService.getPrograms(status).then(function(data) {
                 $scope.programs = data;
+                initSelectedProgram(status);
                 if($scope.programs && $scope.programs.length > 0) {
                     $scope.programs.forEach(function (p) {
                         if(p.status === 'active') {
@@ -543,6 +544,7 @@
         function getOutlets() {
             dataService.getOutlets('active').then(function(data) {
                 $scope.outlets = data;
+                initSelectedOutlet(status);
                 if($scope.outlets && $scope.outlets.length > 0) {
                     $scope.outlets.forEach(function (p) {
                         p.name = p.basics.name;
@@ -550,6 +552,28 @@
                     })
                 }
             })
+        }
+
+        function initSelectedOutlet(status) {
+            if(status === 'ALL') {
+                $scope.selected.outlets = $scope.outlets;
+            }
+            $scope.selected.outlets.forEach(function (p) {
+                p.ticked = true;
+            });
+        }
+
+        function initSelectedProgram(status) {
+            if(status === 'ALL') {
+                $scope.selected.programs = $scope.programs;
+            }
+            else {
+                $scope.selected.programs = [];
+                $scope.selected.programs.push($scope.programs[0]);
+            }
+            $scope.selected.programs.forEach(function (p) {
+                p.ticked = true;
+            });
         }
         
         function getBarChartData(data) {

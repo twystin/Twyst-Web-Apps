@@ -56,11 +56,11 @@
         <div class="col-md-5" ng-click="getAllUsersWithRedeems()">
             <section class="panel panel-box info-box">
                 <div class="panel-left panel-item bg-info">
-                    <i class="fa fa-gift text-large stat-icon"></i>
+                    <i class="fa fa-gift fa-5x stat-icon"></i>
                 </div>
                 <div class="panel-right panel-item bg-reverse">
                     <p class="size-h1 no-margin">{{redeem_data.TOTAL_REDEEMS}}</p>
-                    <p class="text-muted no-margin"><span data-i18n="Total redeems"></span></p>
+                    <p class="text-muted no-margin"><span data-i18n="Total Redemptions"></span></p>
                 </div>
             </section>
         </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="panel-right panel-item bg-reverse">
                     <p class="size-h1 no-margin">{{Math.round(redeem_data.TOTAL_REDEEMS / weeks)}}<span class="size-h3"></span></p>
-                    <p class="text-muted no-margin"><span data-i18n="Avg. weekly redeems"></span></p>
+                    <p class="text-muted no-margin"><span data-i18n="Avg. Weekly Redemptions"></span></p>
                 </div>
             </section>
         </div>
@@ -79,7 +79,7 @@
     <div class="col-md-12">
         <div class="col-md-12">
             <section class="panel panel-default">
-                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Redeems Trend</div>
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Redemptions Trend</div>
                 <div class="panel-body">
                     <div morris-chart
                          data-data="redeem_trend.data"
@@ -93,7 +93,7 @@
     <div class="col-md-12">
         <div class="col-md-12">
             <section class="panel panel-default">
-                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Redeems by day of week</div>
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Redemptions by day of week</div>
                 <div class="panel-body">
                     <div morris-chart
                          data-data="redeems_by_day_of_week.data"
