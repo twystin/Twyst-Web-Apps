@@ -3,21 +3,33 @@
         <div class="col-md-10">
             <div class="col-md-4">
                 <h5><b>Programs:</b> </h5>
-                <span class="ui-select">
-                    <select ng-init="selected.program = programs[0]" ng-model="selected.program" ng-options="program.name for program in programs"></select>
-                </span>
+                <div  
+                    multi-select
+                    input-model="programs"
+                    output-model="selected.programs"
+                    button-label="name"
+                    item-label="icon name"
+                    tick-property="ticked"
+                    max-labels="0" >
+                </div>
             </div>
             <div class="col-md-4">
                 <h5><b>Outlets: </b></h5>
-                <span class="ui-select">
-                    <select ng-model="selected.outlet" ng-options="(outlet.basics.name +', '+ outlet.contact.location.locality_1[0]) for outlet in outlets"></select>
-                </span>
+                <div  
+                    multi-select
+                    input-model="outlets"
+                    output-model="selected.outlets"
+                    button-label="name loc"
+                    item-label="name loc"
+                    tick-property="ticked"
+                    max-labels="0" >
+                </div>
             </div>
             
         </div>
     </div>
 </div>
-<div class="container">
+<!-- <div class="container" ng-if="show_data.redeem">
     <div class="col-md-12" style="margin-top: 2em;">
         <div class="col-md-10">
             <section class="panel panel-default">
@@ -37,10 +49,10 @@
             
         </div>
     </div>
-</div>
-
-<div class="container">
-    <div class="col-md-12">
+</div> -->
+<div class="container" ng-if="!show_data.redeem" style="height: 500px;"></div>
+<div class="container" ng-if="show_data.redeem">
+    <div class="col-md-12" style="margin-top: 2em;">
         <div class="col-md-5" ng-click="getAllUsersWithRedeems()">
             <section class="panel panel-box info-box">
                 <div class="panel-left panel-item bg-info">
@@ -55,16 +67,16 @@
         <div class="col-md-5">
             <section class="panel panel-box info-box">
                 <div class="panel-left panel-item bg-success">
-                    <i class="fa fa-gift text-large stat-icon"></i>
+                    <i class="fa fa-calendar-o text-large stat-icon"></i>
                 </div>
                 <div class="panel-right panel-item bg-reverse">
-                    <p class="size-h1 no-margin">{{Math.round(redeem_data.TOTAL_REDEEMS / (dynamic / 7))}}<span class="size-h3"></span></p>
+                    <p class="size-h1 no-margin">{{Math.round(redeem_data.TOTAL_REDEEMS / weeks)}}<span class="size-h3"></span></p>
                     <p class="text-muted no-margin"><span data-i18n="Avg. weekly redeems"></span></p>
                 </div>
             </section>
         </div>
     </div>
-    <div class="col-md-12" ng-if="redeem_data">
+    <div class="col-md-12">
         <div class="col-md-12">
             <section class="panel panel-default">
                 <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Redeems Trend</div>
@@ -78,7 +90,7 @@
             </section>              
         </div>
     </div>
-    <div class="col-md-12" ng-if="redeem_data">
+    <div class="col-md-12">
         <div class="col-md-12">
             <section class="panel panel-default">
                 <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Redeems by day of week</div>

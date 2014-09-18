@@ -5,3 +5,8 @@
 .icon-red {
     color: red;
 }
+
+.fixed-aside {
+	position: fixed !important;
+	height: 100% !important;
+}

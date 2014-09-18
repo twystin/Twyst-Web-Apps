@@ -38,14 +38,14 @@
             return deferred.promise;
         };
 
-        dataSvc.getUserMetric = function (program, outlet) {
+        dataSvc.getUserMetric = function (query) {
 
             var deferred = $q.defer();
 
             $http({
-                url: '/api/v2/analytics_summary/users/' + program + '/' + outlet,
-                method: "GET",
-                data: ''
+                url: '/api/v2/analytics_summary/users/',
+                method: "POST",
+                data: query
             }).success(function (data) {
                 deferred.resolve(data.info);
             }).error(function (data) {
@@ -55,14 +55,14 @@
             return deferred.promise;
         };
 
-        dataSvc.getCheckinMetric = function (program, outlet) {
+        dataSvc.getCheckinMetric = function (query) {
 
             var deferred = $q.defer();
 
             $http({
-                url: '/api/v2/analytics_summary/checkins/' + program + '/' + outlet,
-                method: "GET",
-                data: ''
+                url: '/api/v2/analytics_summary/checkins/',
+                method: "POST",
+                data: query
             }).success(function (data) {
                 deferred.resolve(data.info);
             }).error(function (data) {
@@ -72,13 +72,13 @@
             return deferred.promise;
         };
 
-        dataSvc.getRedeemMetric = function (program, outlet) {
+        dataSvc.getRedeemMetric = function (query) {
 
             var deferred = $q.defer();
             $http({
-                url: '/api/v2/analytics_summary/redeems/' + program + '/' + outlet,
-                method: "GET",
-                data: ''
+                url: '/api/v2/analytics_summary/redeems/',
+                method: "POST",
+                data: query
             }).success(function (data) {
                 deferred.resolve(data.info);
             }).error(function (data) {
@@ -135,12 +135,11 @@
   ]).controller('StatusCtrl', [
     '$scope', '$location', 'dataService', function($scope, $location, dataService) {
         $scope.selected = {
-            program: null,
-            outlet: null
+            'programs': [],
+            'outlets': []
         }
     }]).controller('DataCtrl', [
     '$scope', '$location', '$modal', 'dataService', function($scope, $location, $modal, dataService) {
-        
         $scope.Math = window.Math;
         var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         var all_status = {
@@ -153,6 +152,11 @@
         $scope.outlets = [];
         $scope.type = "success";
         $scope.max = 100;
+        $scope.show_data = {
+            'user': false,
+            'checkin': false,
+            'redeem': false
+        };
 
         $scope.$on("$locationChangeStart", function () {
             parseRoute($location.$$path);
@@ -160,70 +164,108 @@
             getOutlets();
         });
 
-        $scope.$watch('selected.program', function () {
-            if($scope.selected.program){
-                var earn_start = new Date($scope.selected.program.validity.earn_start);
-                var earn_end = new Date($scope.selected.program.validity.earn_end);
-                $scope.max = Math.round((earn_end - earn_start) / 86400000);
-                if(earn_end < new Date()) {
-                    $scope.dynamic = $scope.max;
-                }
-                else {
-                    $scope.dynamic = Math.round((new Date() - earn_start) / 86400000);
-                }
-                $scope.percent = Math.round($scope.dynamic / $scope.max * 100);
-                getMetric($scope.selected.program, $scope.selected.outlet);
+        $scope.$watch('selected.programs', function () {
+            if($scope.selected.programs && $scope.selected.programs.length > 0){
+                getNumberOfWeeks($scope.selected.programs);
+                getMetric(getProgramIds($scope.selected.programs), getOutletIds($scope.selected.outlets));
             }
         }, true);
 
-        $scope.$watch('selected.outlet', function () {
-            getMetric($scope.selected.program, $scope.selected.outlet);
-        });
+        $scope.$watch('selected.outlets', function () {
+            if($scope.selected.outlets) {
+                getMetric(getProgramIds($scope.selected.programs), getOutletIds($scope.selected.outlets));
+            }
+        }, true);
 
-        function getMetric(program, outlet, flag) {
-            getCheckinMetric(program, outlet);
-            getUserMetric(program, outlet);
-            getRedeemMetric(program, outlet);
+        function getProgramIds(programs) {
+            var ids = [];
+            programs.forEach(function (p) {
+                ids.push(p._id);
+            })
+            return ids;
         }
 
-        function getUserMetric(program, outlet) {
-            if(program) {
-                $scope.user_data = null;
-                var program_id = program._id;
-                var outlet_id = outlet ? outlet._id : 'ALL';
-                dataService.getUserMetric(program_id, outlet_id).then(function(data) {
-                    $scope.user_data = data;
-                    getBarChartData(data.USER_BY_CHECKIN_NUMBER_METRIC);
-                });
+        function getOutletIds(outlets) {
+            var ids = [];
+            outlets.forEach(function (p) {
+                ids.push(p._id);
+            })
+            return ids;
+        }
+
+        function getNumberOfWeeks (programs) {
+            $scope.weeks = 0;
+            programs.forEach(function (p) {
+                var earn_start = new Date(p.validity.earn_start);
+                var earn_end = new Date(p.validity.earn_end);
+                var week = Math.round((earn_end - earn_start) / (86400000*7));
+                $scope.weeks += week;
+            })
+        }
+
+        // $scope.$watch('selected.program', function () {
+        //     if($scope.selected.program){
+        //         var earn_start = new Date($scope.selected.program.validity.earn_start);
+        //         var earn_end = new Date($scope.selected.program.validity.earn_end);
+        //         $scope.max = Math.round((earn_end - earn_start) / 86400000);
+        //         if(earn_end < new Date()) {
+        //             $scope.dynamic = $scope.max;
+        //         }
+        //         else {
+        //             $scope.dynamic = Math.round((new Date() - earn_start) / 86400000);
+        //         }
+        //         $scope.percent = Math.round($scope.dynamic / $scope.max * 100);
+        //         getMetric($scope.selected.program, $scope.selected.outlet);
+        //     }
+        // }, true);
+
+        // $scope.$watch('selected.outlet', function () {
+        //     getMetric($scope.selected.program, $scope.selected.outlet);
+        // });
+
+        function getMetric(program_ids, outlet_ids, flag) {
+            var q = {
+                programs: program_ids,
+            };
+            if(outlet_ids && outlet_ids.length > 0) {
+                q.outlets = outlet_ids;
+            }
+            if(program_ids && program_ids.length > 0) {
+                getUserMetric(q);
+                getCheckinMetric(q);
+                getRedeemMetric(q);
             }
         }
 
-        function getRedeemMetric(program, outlet) {
-            if(program) {
-                $scope.redeem_data = null;
-                var program_id = program._id;
-                var outlet_id = outlet ? outlet._id : 'ALL';
-                dataService.getRedeemMetric(program_id, outlet_id).then(function(data) {
-                    $scope.redeem_data = data;
-                    areaChartDataForRedeemsByDate(data.REDEEMS_BY_DATE);
-                    barChartDataForRedeemsByDayOfWeek(data.REDEEMS_BY_DAY_OF_WEEK);
-                });
-            }
+        function getUserMetric(q) {
+            $scope.show_data.user = false;
+            dataService.getUserMetric(q).then(function(data) {
+                $scope.user_data = data;
+                getBarChartData(data.USER_BY_CHECKIN_NUMBER_METRIC);
+                $scope.show_data.user = true;
+            });
         }
 
-        function getCheckinMetric(program, outlet) {
-            if(program) {
-                $scope.checkin_data = null;
-                var program_id = program._id;
-                var outlet_id = outlet ? outlet._id : 'ALL';
-                dataService.getCheckinMetric(program_id, outlet_id).then(function(data) {
-                    $scope.checkin_data = data;
-                    areaChartDataForCheckinsByDate(data.CHECKINS_BY_DATE);
-                    barChartDataForCheckinsByDayOfWeek(data.CHECKINS_BY_DAY_OF_WEEK);
-                    donutDataForCheckinType(data.CHECKINS_BY_MODE);
-                    donutDataForCheckinLocation(data.CHECKINS_BY_LOCATION);
-                });
-            }
+        function getRedeemMetric(q) {
+            $scope.show_data.redeem = false;
+            dataService.getRedeemMetric(q).then(function(data) {
+                $scope.redeem_data = data;
+                areaChartDataForRedeemsByDate(data.REDEEMS_BY_DATE);
+                barChartDataForRedeemsByDayOfWeek(data.REDEEMS_BY_DAY_OF_WEEK);
+                $scope.show_data.redeem = true;
+            });
+        }
+
+        function getCheckinMetric(q) {
+            $scope.show_data.checkin = false;
+            dataService.getCheckinMetric(q).then(function(data) {
+                $scope.checkin_data = data;
+                areaChartDataForCheckinsByDate(data.CHECKINS_BY_DATE);
+                barChartDataForCheckinsByDayOfWeek(data.CHECKINS_BY_DAY_OF_WEEK);
+                donutDataForCheckinType(data.CHECKINS_BY_MODE);
+                donutDataForCheckinLocation(data.CHECKINS_BY_LOCATION);
+                $scope.show_data.checkin = true;
+            });
         }
 
         function getData (data_type, query) {
@@ -285,40 +327,32 @@
         }
 
         $scope.getCrossVisitingUsers = function() {
-            var programs = [];
-            programs.push($scope.selected.program._id);
             var query = {
-                'programs': programs,
+                'programs': getProgramIds($scope.selected.programs),
                 'data_type': 'cross'
             };
             getData('user', query);
         }
 
         $scope.getUsersWithGtOneCheckins = function () {
-            var programs = [];
-            programs.push($scope.selected.program._id);
             var query = {
-                'programs': programs,
+                'programs': getProgramIds($scope.selected.programs),
                 'data_type': 'multiple'
             };
             getData('user', query);
         }
 
         $scope.getAllUniqueUsers = function () {
-            var programs = [];
-            programs.push($scope.selected.program._id);
             var query = {
-                'programs': programs,
+                'programs': getProgramIds($scope.selected.programs),
                 'data_type': 'unique'
             };
             getData('user', query);
         }
 
         $scope.getAllUsersWithRedeems = function () {
-            var programs = [];
-            programs.push($scope.selected.program._id);
             var query = {
-                'programs': programs,
+                'programs': getProgramIds($scope.selected.programs),
                 'data_type': 'total'
             };
             getData('redeem', query);
@@ -336,8 +370,7 @@
                     lineWidth: "2",
                     lineColors: $scope.color.primary,
                     clickCallback: function (index, options, src) {
-                        var programs = [];
-                        programs.push($scope.selected.program._id);
+                        var programs = getProgramIds($scope.selected.programs);
                         var query = {
                             'programs': programs,
                             'date': new Date(src.actual_date).getTime(),
@@ -363,8 +396,7 @@
                   labels: ["Redeems"],
                   barColors: barColor,
                   clickCallback: function (index, options, src) {
-                        var programs = [];
-                        programs.push($scope.selected.program._id);
+                        var programs = getProgramIds($scope.selected.programs);
                         var query = {
                             'programs': programs,
                             'day': days.indexOf(src._id) + 1,
@@ -388,8 +420,7 @@
                     lineWidth: "2",
                     lineColors: $scope.color.primary,
                     clickCallback: function (index, options, src) {
-                        var programs = [];
-                        programs.push($scope.selected.program._id);
+                        var programs = getProgramIds($scope.selected.programs);
                         var query = {
                             'programs': programs,
                             'date': new Date(src.actual_date).getTime(),
@@ -416,8 +447,7 @@
                   labels: ["Checkins"],
                   barColors: barColor,
                   clickCallback: function (index, options, src) {
-                        var programs = [];
-                        programs.push($scope.selected.program._id);
+                        var programs = getProgramIds($scope.selected.programs);
                         var query = {
                             'programs': programs,
                             'day': days.indexOf(src._id) + 1,
@@ -513,6 +543,12 @@
         function getOutlets() {
             dataService.getOutlets('active').then(function(data) {
                 $scope.outlets = data;
+                if($scope.outlets && $scope.outlets.length > 0) {
+                    $scope.outlets.forEach(function (p) {
+                        p.name = p.basics.name;
+                        p.loc = '(' + p.contact.location.locality_1[0] + ' )';
+                    })
+                }
             })
         }
         
@@ -528,8 +564,7 @@
               labels: ["Users"],
               barColors: barColor,
               clickCallback: function (index, options, src) {
-                    var programs = [];
-                    programs.push($scope.selected.program._id);
+                    var programs = getProgramIds($scope.selected.programs);
                     var query = {
                         'programs': programs,
                         'checkin_count': src._id,
