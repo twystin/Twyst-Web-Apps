@@ -14,3 +14,7 @@
 .bg-gray {
 	background-color: lightgray;
 }
+
+.hover-pointer {
+	cursor: pointer;
+}
