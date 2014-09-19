@@ -8,11 +8,26 @@
 	box-shadow: none;
 	border: 0px solid #e1e1e1;
 }
-/*header image box-shadow */
-.header_image_badge {
-	-webkit-box-shadow: 0px 2px 14px -1px rgba(255,255,255,1);
-	-moz-box-shadow: 0px 2px 14px -1px rgba(255,255,255,1);
-	box-shadow: 0px 2px 14px -1px rgba(255,255,255,1);
+/*header image */
+.header_badges_sprite {
+	display: inline-flex;
+	float: left;
+	margin-right: 15em;
+}
+a.android_button {
+	width: 128px;
+ 	height: 45px;
+ 	display: block;
+	background: url(../../images/Badges.png);
+	background-position: 0px -135px;
+	margin-right: 1.3em;
+}
+a.ios_button {
+	width: 128px;
+ 	height: 45px;
+ 	display: block;
+	background: url(../../images/Badges.png);
+	background-position: -128px -270px;
 }
 /* slick slider */
 .slick-prev:before, .slick-next:before {

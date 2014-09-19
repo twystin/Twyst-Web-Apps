@@ -12,7 +12,7 @@
                   <div class="img-center outlet_info col-md-7 col-sm-7 col-xs-12" >
                     <!-- <img class="img-responsive" src="assets/img/mockup/mockup.png" alt=""> -->
                     <div class="col-md-4" style="margin-top: 3em;">
-                      <img class="merchant_logo" src="images/BBLogo.png">
+                      <img class="merchant_logo" ng-src="{{outlet.photos.image}}">
                     </div>
                     <div class="col-md-8" style="margin-top:3em;">
                       <h1 class="col-md-12 col-sm-12 col-xs-12"><b class="color_white knockout50" id="outlet_name">{{outlet.basics.name}}</b></h1>
@@ -93,7 +93,7 @@
                       </div>
                       <div class="panel-body">
                       <div class="col-md-12" id="outlet_images_slider">
-                        <div slider-slick="{ draggable: false, slidesToShow:3, infinite:false}">
+                        <div slider-slick="{ draggable: false, slidesToShow:3, infinite:true}">
                           <div class="outlet-slide">
                             <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
                           </div>

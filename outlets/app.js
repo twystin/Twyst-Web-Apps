@@ -87,7 +87,7 @@ outletApp.directive('sliderSingle',function($timeout){
         var options = scope.$eval(attrs.sliderSlick);
          $(element).slick({
           centerPadding: '50px',
-          infinite: true,
+          infinite: false,
           slidesToShow: 1,
           rtl: true,
           autoplay: false, 
@@ -152,7 +152,6 @@ $scope.mapOpen = function (size) {
   var outlet_id = $routeParams.outlet_id;
   outletService.getOutlet(outlet_id).then(function(data) {
     $scope.outlet = data.OUTLET;
-
     $scope.options = {
       map: {
         center: new google.maps.LatLng($scope.outlet.contact.location.coords.latitude, $scope.outlet.contact.location.coords.longitude),
