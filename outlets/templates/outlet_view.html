@@ -95,25 +95,25 @@
                       <div class="col-md-12" id="outlet_images_slider">
                         <div slider-slick="{ draggable: false, slidesToShow:3, infinite:false}">
                           <div class="outlet-slide">
-                            <a ng-click="open()"><img ng-src="images/BB-IMAGE.png" alt="" ng-click="open()"></a>
+                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
                           </div>
                           <div class="outlet-slide">
-                            <a ng-click="open()"><img ng-src="images/BB-IMAGE.png" alt="" ng-click="open()"></a>
+                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
                           </div>
                           <div class="outlet-slide">
-                            <a ng-click="open()"><img ng-src="images/BB-IMAGE.png" alt="" ng-click="open()"></a>
+                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
                           </div>
                           <div class="outlet-slide">
-                            <a ><img ng-src="images/BB-IMAGE.png" alt="" ng-click="open()"></a>
+                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
                           </div>
                           <div class="outlet-slide">
-                            <a ng-click="open()"><img ng-src="images/BB-IMAGE.png" alt="" ng-click="open()"></a>
+                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
                           </div>
                           <div class="outlet-slide">
-                            <a ng-click="open()"><img ng-src="images/BB-IMAGE.png" alt="" ng-click="open()"></a>
+                           <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
                           </div>
                           <div class="outlet-slide">
-                            <a ng-click="open()"><img ng-src="images/BB-IMAGE.png" alt="" ng-click="open()"></a>
+                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
                           </div>
                         </div>
                       </div>
@@ -313,7 +313,7 @@
         <div class="clearfix"></div>
         
         <div class="" ng-if="outlet">
-          <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
+          <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;" ng-click="mapOpen('lg')">
                             <gm-markers gm-objects="outlets"
                             gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
                             gm-get-marker-options="getOutletOpts(object)"

@@ -1,4 +1,13 @@
 /* Add here all your css styles (customizations) */
+/* modal slider */
+#modal-slider > img {
+	padding: 2em;
+}
+.modal-content {
+	background-color: transparent;
+	box-shadow: none;
+	border: 0px solid #e1e1e1;
+}
 /*header image box-shadow */
 .header_image_badge {
 	-webkit-box-shadow: 0px 2px 14px -1px rgba(255,255,255,1);
@@ -167,7 +176,7 @@ hr {
 }
 .modal-dialog {}
 .thumbnail {margin-bottom:6px;}
-.outlet-slide > a > img {
+.outlet-slide > img {
 	height: 120px;
 	width: 180px;
 	padding: 1em;

@@ -1,19 +1,23 @@
- <div ng-controller="outletController"></div>
- <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
+ <div ng-controller="OutletCtrl">
+   <div class="modal-body">
+         <div slider-single="{infinite:false}">
+          <div class="slide" id="modal-slider">
+          <img ng-src="images/BB-IMAGE.png" alt="">
+         </div>
+         <div class="slide" id="modal-slider">
+          <img ng-src="images/BB-IMAGE.png" alt="">
         </div>
-        <div class="modal-body">
-            <ul>
-                <li>
-                    <a>one</a>
-                </li>
-            </ul>
-            Selected: <b>Item A</b>
+        <div class="slide" id="modal-slider">
+          <img ng-src="images/BB-IMAGE.png" alt="">
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        <div class="slide" id="modal-slider">
+          <img ng-src="images/BB-IMAGE.png" alt="">
         </div>
+
+      </div>     
+    </div>
+ </div>
+       
 
 
      

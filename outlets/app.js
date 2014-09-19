@@ -79,6 +79,25 @@ outletApp.directive('sliderSlick',function($timeout){
    }
  }
 }); 
+outletApp.directive('sliderSingle',function($timeout){
+ return {
+   restrict: 'A',
+   link: function(scope,element,attrs) {
+     $timeout(function() {
+        var options = scope.$eval(attrs.sliderSlick);
+         $(element).slick({
+          centerPadding: '50px',
+          infinite: true,
+          slidesToShow: 1,
+          rtl: true,
+          autoplay: false, 
+          arrows: true
+
+         });
+     });
+   }
+ }
+}); 
 
 outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal) {
 
@@ -88,15 +107,21 @@ outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService
      $scope.options.outlets
      );
  };
-$scope.open = function () {
+$scope.open = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: '_partials/slider_modal.html'
-      // resolve: {
-      //   items: function () {
-      //     return $scope.items;
-      //   }
-      // }
+      templateUrl: 'templates/_partials/slider_modal.html',
+      size: size,
+      scope: $scope
+    })
+  };
+
+$scope.mapOpen = function (size) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'templates/_partials/modal_map.html',
+      size: size,
+      scope: $scope
     })
   };
  // $scope.$watch('outlet.basics.name', function () {
