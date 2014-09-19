@@ -1,5 +1,5 @@
 
-var outletApp = angular.module('outletApp', ["ngRoute", 'ui.bootstrap', 'ngCookies', 'd3onut', 'AngularGM']);
+var outletApp = angular.module('outletApp', ["ngRoute", 'ui.bootstrap', 'ngCookies', 'd3onut', 'AngularGM', 'slick']);
 
 outletApp.directive('wrapOwlcarousel', function () {
   return {
@@ -29,19 +29,58 @@ outletApp.directive('fancybox', function ($compile) {
     }
   };
 });
-outletApp.directive('background', function(){
+outletApp.directive('backgroundImage', function() {
   return function(scope, element, attrs){
-    restrict: 'A',
-    attrs.$observe('background', function(value) {
-      element.css({
-        'background': 'url(' + value + ')'
+      attrs.$observe('backgroundImage', function(value) {
+          if(value) {
+            var url = 'http://s3-us-west-2.amazonaws.com/twystmerchantpages/' + value + '.png';
+            element.css({'background': "url('"+ url +"')"});
+          }
       });
-    });
   };
 });
+outletApp.directive('slickSlider',function($timeout){
+ return {
+   restrict: 'A',
+   link: function(scope,element,attrs) {
+     $timeout(function() {
+        var options = scope.$eval(attrs.slickSlider);
+         $(element).slick({
+          infinite: true,
+          slidesToShow: 4,
+          slidesToScroll: 3,
+          rtl: true,
+          autoplay: true,
+          autoplaySpeed: 2000,
 
-outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService) {
+         });
+     });
+   }
+ }
+}); 
+outletApp.directive('sliderSlick',function($timeout){
+ return {
+   restrict: 'A',
+   link: function(scope,element,attrs) {
+     $timeout(function() {
+        var options = scope.$eval(attrs.sliderSlick);
+         $(element).slick({
+          infinite: true,
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          rtl: true,
+          autoplay: false,
+          accessibility: true,  
+          arrows: true,
+          focusOnSelect: true
 
+         });
+     });
+   }
+ }
+}); 
+
+outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal) {
 
   $scope.getOutletOpts = function (outlet) {
    return angular.extend(
@@ -49,6 +88,31 @@ outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService
      $scope.options.outlets
      );
  };
+$scope.open = function () {
+
+    var modalInstance = $modal.open({
+      templateUrl: '_partials/slider_modal.html'
+      // resolve: {
+      //   items: function () {
+      //     return $scope.items;
+      //   }
+      // }
+    })
+  };
+ // $scope.$watch('outlet.basics.name', function () {
+ //  if($scope.outlet) {
+ //    var url = 'http://s3-us-west-2.amazonaws.com/twystmerchantpages/' + $scope.outlet.basics.name + '.png';
+ //    // console.log("url('"+ url +"')")
+ //    $('#image_background').css('background', "url('"+ url +"')");
+ //  }
+ // })
+
+ // $scope.getBackImage = function (name) {
+ //  var name = outlet.basics.name
+ //  $scope.bck_image = {
+ //    'background': 'url(https://s3-us-west-2.amazonaws.com/twystmerchantpages/'+ name +'.png)'
+ //  }
+ // }
 
  $scope.selectOutlet = function (outlet, marker) {
   if ($scope.prev) {
@@ -59,6 +123,7 @@ outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService
 };
 
 ($scope.getOutlet = function () {
+
   var outlet_id = $routeParams.outlet_id;
   outletService.getOutlet(outlet_id).then(function(data) {
     $scope.outlet = data.OUTLET;

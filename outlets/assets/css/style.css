@@ -889,7 +889,7 @@ h1, h2, h3, h4, h5, h6 {
 	content: " ";
 	margin-left: -35px;
 	position: absolute;
-	background: #72c02c;	
+	/*background: #72c02c;*/	
 }
 
 .title-v1 p {
