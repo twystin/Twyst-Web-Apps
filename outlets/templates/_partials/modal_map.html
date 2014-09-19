@@ -1,0 +1,14 @@
+ <div ng-controller="OutletCtrl">
+   <div class="modal-body">
+         <div class="" ng-if="outlet">
+          <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:500px;">
+            <gm-markers gm-objects="outlets"
+              gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
+              gm-get-marker-options="getOutletOpts(object)"
+              gm-on-click="selectOutlet(object, marker)">
+            </gm-markers>
+           </gm-map> 
+        </div>   
+    </div>
+ </div>
+       
