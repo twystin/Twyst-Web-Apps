@@ -481,9 +481,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-section .about-image {
 	padding: 3em;
-	background: #fafafa;
+	background: #ffff;
     border-top: solid 1px #eee;
-    border-bottom: solid 1px #eee;
+    /*border-bottom: solid 1px #eee;*/
 }
 
 /*Team Section
@@ -889,7 +889,7 @@ h1, h2, h3, h4, h5, h6 {
 	content: " ";
 	margin-left: -35px;
 	position: absolute;
-	background: #72c02c;	
+	/*background: #72c02c;*/	
 }
 
 .title-v1 p {
