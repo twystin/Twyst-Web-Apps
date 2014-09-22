@@ -11,11 +11,13 @@
                   <div class="col-md-2 col-sm-2 col-xs-hidden" style="margin-left:3em;"></div>
                   <div class="img-center outlet_info col-md-7 col-sm-7 col-xs-12" >
                     <!-- <img class="img-responsive" src="assets/img/mockup/mockup.png" alt=""> -->
-                    <div class="col-md-4" style="margin-top: 3em;">
+                    <div class="col-md-4 hidden-xs" style="margin-top: 3em;">
                       <img class="merchant_logo" ng-src="{{outlet.photos.image}}">
                     </div>
                     <div class="col-md-8" style="margin-top:3em;">
-                      <h1 class="col-md-12 col-sm-12 col-xs-12"><b class="color_white knockout50" id="outlet_name">{{outlet.basics.name}}</b></h1>
+                      <h1 class="col-md-12 col-sm-12 hidden-xs"><b class="color_white knockout50" id="outlet_name">{{outlet.basics.name}}</b></h1>
+                      <h6 class="col-xs-12 hidden-sm hidden-md hidden-lg"><b class="color_white" id="outlet_name">{{outlet.basics.name}}</b></h6>
+
                       <h2 class=""><small><b class="color_white font_fixed_sapient"><i class="fa fa-phone"></i>
                       <a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a></b> <i class="fa fa-mobile-phone color_white"></i><a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a></small></h2>
 
@@ -120,7 +122,7 @@
                       </div>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="panel panel-default margin-bottom-20">
+                    <div class="panel panel-default margin-bottom-20 hidden-xs">
                       <div class="panel-heading">
                         <h3 class="panel-title">We are also on</h3>
                       </div>
@@ -147,7 +149,7 @@
                     </div>
                     <!-- Right column starts -->
                     <div class="col-md-5" >
-                    <div class="col-md-12 margin-bottom-10">
+                    <div class="col-md-12 margin-bottom-10 hidden-xs">
                     <div class="panel panel-default" ng-show="outlet.links.facebook_url" id="facebook_like_box">
                     <div class="panel-heading panel_heading_callout" style="text-align: left;"><h4>From Facebook</h4></div>
                     <div class="fb-like-box panel-body" ng-href="https://{{outlet.links.facebook_url}}" data-colorscheme="light" data-force-wall="true" data-show-faces="true" data-header="false" data-stream="true" data-show-border="true" data-height="440px" data-width="400">
@@ -156,7 +158,7 @@
                   </div>
                       
                       <br>
-                       <div class="col-md-12 col-xs-12 margin-top-none">
+                       <div class="col-md-12 col-sm-12 col-xs-12 margin-top-none">
               <div class="panel panel-default">
                 <div class="panel-heading panel_heading_callout">
                     <h4>Overview</h4> 
@@ -182,13 +184,13 @@
                     <div class="col-md-12 col-xs-12 col-sm-12 margin_negative_one padding_class">
                        <div class="col-md-6 col-sm-6 col-xs-6">
                        <div ng-show="outlet.attributes.dine_in">
-                         <img src="images/Dine-in.png" class="image_overview_column_attribute margin_negative_one">
+                         <img src="images/Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
                          <span class="overflow-h padding-top font-size-eleven">
                           Dine In Available
                         </span>
                       </div>
                       <div  ng-show="!outlet.attributes.dine_in">
-                       <img src="images/No Dine-in.png" class="image_overview_column_attribute margin_negative_one">
+                       <img src="images/No Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
                        <span class="overflow-h padding-top font-size-eleven">
                         No Dine In
                       </span>
@@ -196,13 +198,13 @@
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-6" >
                    <div ng-show="outlet.attributes.home_delivery">
-                    <img src="images/Home Delivery.png" class="image_overview_column_attribute">
+                    <img src="images/Home Delivery.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
                       Home Delivery
                     </div>     
                   </div>
                   <div ng-show="!outlet.attributes.home_delivery">
-                    <img src="images/No Home Delivery.png" class="image_overview_column_attribute">
+                    <img src="images/No Home Delivery.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
                       No Home Delivery
                     </span>
@@ -213,13 +215,13 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
                   <div class="col-md-6 col-sm-6 col-xs-6">
                     <div  ng-show="outlet.attributes.veg">
-                      <img src="images/Veg.png" class="image_overview_column_attribute">
+                      <img src="images/Veg.png" class="image_overview_column_attribute hidden-xs">
                       <span class="overflow-h padding-top font-size-eleven">
                         Vegetarian Only
                       </span>
                     </div>
                     <div ng-show="!outlet.attributes.veg">
-                      <img src="images/Non Veg.png" class="image_overview_column_attribute">
+                      <img src="images/Non Veg.png" class="image_overview_column_attribute hidden-xs">
                       <span class="overflow-h padding-top font-size-eleven">
                        Serves non veg
                      </span>
@@ -227,13 +229,13 @@
                  </div>
                  <div class="col-md-6 col-sm-6 col-xs-6">
                   <div ng-show="outlet.attributes.alcohol">
-                    <img src="images/Yes to Alcohol.png" class="image_overview_column_attribute">
+                    <img src="images/Yes to Alcohol.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
                       Serves Alcohol
                     </span>
                   </div>
                   <div ng-show="!outlet.attributes.alcohol">
-                    <img src="images/No Alcohol.png" class="image_overview_column_attribute">
+                    <img src="images/No Alcohol.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
                      No Alcohol
                    </span>  
@@ -245,13 +247,13 @@
               <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                   <div ng-show="outlet.attributes.smoking" class="padding_class">
-                    <img src="images/Smoking.png" class="image_overview_column_attribute">
+                    <img src="images/Smoking.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
                       Smoking Area Available
                     </span>
                   </div>
                   <div ng-show="!outlet.attributes.smoking" class="padding_class">
-                    <img src="images/No Smoking.png" class="image_overview_column_attribute">
+                    <img src="images/No Smoking.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
                      No Smoking
                    </span>  
@@ -259,7 +261,7 @@
                </div>
                <div class="col-md-6 col-sm-6 col-xs-6" class="padding_class">
                 <div ng-show="outlet.attributes.outdoor">
-                  <img src="images/Outdoor Seating.png" class="image_overview_column_attribute">
+                  <img src="images/Outdoor Seating.png" class="image_overview_column_attribute hidden-xs">
                   <div class="overflow-h padding-top font-size-eleven">
                     Outdoor Seating Available
                   </div>  
@@ -272,7 +274,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <div ng-show="outlet.attributes.foodcourt">
-                   <img src="images/Food Court.png" class="image_overview_column_attribute">
+                   <img src="images/Food Court.png" class="image_overview_column_attribute hidden-xs">
                    <div class="overflow-h padding-top font-size-eleven">
                     Part of a food court
 
@@ -312,7 +314,7 @@
         
         <div class="clearfix"></div>
         
-        <div class="" ng-if="outlet">
+        <div class="col-xs-12" ng-if="outlet">
           <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;" ng-click="mapOpen('lg')">
                             <gm-markers gm-objects="outlets"
                             gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
@@ -368,7 +370,7 @@
                       <figure>
                         <img ng-src="images/BB-IMAGE.png" alt="">
                         <figcaption>
-                            <h3>Biryani Blues</h3>
+                           <a ng-href="#"> <h3>Biryani Blues</h3></a>
                             <span>Ninex City Mart</span>
                             <a href="#" class="close-caption hidden">x</a>
                         </figcaption>

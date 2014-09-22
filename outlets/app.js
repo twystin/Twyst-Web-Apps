@@ -52,7 +52,33 @@ outletApp.directive('slickSlider',function($timeout){
           rtl: true,
           autoplay: true,
           autoplaySpeed: 2000,
-
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                dots: true
+              }
+            }
+  ]
          });
      });
    }
@@ -66,14 +92,40 @@ outletApp.directive('sliderSlick',function($timeout){
         var options = scope.$eval(attrs.sliderSlick);
          $(element).slick({
           infinite: true,
-          slidesToShow: 3,
-          slidesToScroll: 2,
+          // slidesToShow: 3,
+          // slidesToScroll: 2,
           rtl: true,
           autoplay: false,
           accessibility: true,  
           arrows: true,
-          focusOnSelect: true
-
+          focusOnSelect: true,
+          responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              dots: true
+            }
+          }
+  ]
          });
      });
    }
@@ -92,7 +144,6 @@ outletApp.directive('sliderSingle',function($timeout){
           rtl: true,
           autoplay: false, 
           arrows: true
-
          });
      });
    }
