@@ -158,6 +158,7 @@ outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService
      $scope.options.outlets
      );
  };
+ $scope.isCollapsed = true;
 $scope.open = function (size) {
 
     var modalInstance = $modal.open({
