@@ -47,8 +47,8 @@ outletApp.directive('slickSlider',function($timeout){
         var options = scope.$eval(attrs.slickSlider);
          $(element).slick({
           infinite: true,
-          slidesToShow: 4,
-          slidesToScroll: 3,
+          slidesToShow: 7,
+          slidesToScroll: 7,
           rtl: true,
           autoplay: true,
           autoplaySpeed: 2000,
@@ -56,8 +56,8 @@ outletApp.directive('slickSlider',function($timeout){
             {
               breakpoint: 1024,
               settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
+                slidesToShow: 7,
+                slidesToScroll: 7,
                 infinite: true,
                 dots: true
               }
@@ -166,7 +166,6 @@ $scope.open = function (size) {
       scope: $scope
     })
   };
-
 $scope.mapOpen = function (size) {
 
     var modalInstance = $modal.open({

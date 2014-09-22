@@ -4,6 +4,9 @@
     background-color: white;
     color: #000;
 }*/
+.title_offer_callout{
+    line-height: ;
+}
 /* modal slider */
 #modal-slider > img {
 	padding: 2em;
@@ -33,6 +36,10 @@ a.ios_button {
  	display: block;
 	background: url(../../images/Badges.png);
 	background-position: -128px -270px;
+}
+/*footer color */
+.copyright {
+    background-color: #000;
 }
 /* slick slider */
 .slick-prev:before, .slick-next:before {
@@ -140,7 +147,7 @@ figure figcaption {
     transition: all 0.5s;
 }
 figure figcaption h3 {
-    margin-top: 150px;
+    margin-top: 50px;
 }
 figure img {
     -webkit-backface-visibility: hidden;
@@ -402,7 +409,7 @@ hr {
         }
 
         .timeline > li > .timeline-panel {
-            width: 80%;
+            width: 90%;
             margin-left: 4em;
             float: left;
             border: 1px solid #d4d4d4;
