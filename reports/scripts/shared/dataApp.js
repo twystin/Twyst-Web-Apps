@@ -129,7 +129,33 @@
             });
             return deferred.promise;
         }
+
+        dataSvc.getLoggedInUser = function () {
+            var deferred = $q.defer();
+            $http({
+                url: '/api/v1/auth/get_logged_in_user',
+                method: "GET"
+            }).success(function (data) {
+                deferred.resolve(data.user);
+            }).error(function (data) {
+                deferred.resolve(data);
+            });
+            return deferred.promise;
+        }
         
+        dataSvc.logout = function () {
+            var deferred = $q.defer();
+            $http({
+                url: '/api/v1/auth/logout',
+                method: "GET"
+            }).success(function (data) {
+                deferred.resolve(data.info);
+            }).error(function (data) {
+                deferred.resolve(data.info);
+            });
+            return deferred.promise;
+        }
+
         return dataSvc;
     }
   ]).controller('StatusCtrl', [
@@ -139,7 +165,7 @@
             'outlets': []
         }
     }]).controller('DataCtrl', [
-    '$scope', '$location', '$modal', 'dataService', function($scope, $location, $modal, dataService) {
+    '$scope', '$window', '$rootScope', '$location', '$modal', 'dataService', function($scope, $window, $rootScope, $location, $modal, dataService) {
         $scope.Math = window.Math;
         var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         var all_status = {
@@ -176,6 +202,18 @@
                 getMetric(getProgramIds($scope.selected.programs), getOutletIds($scope.selected.outlets));
             }
         }, true);
+
+        $rootScope.getUser = function () {
+            dataService.getLoggedInUser().then(function (data) {
+                $rootScope.logged_in_user = data;
+            });
+        }
+
+        $rootScope.logout = function () {
+            dataService.logout().then(function (data) {
+                $window.location.href = '/merchant';
+            });
+        }
 
         function getProgramIds(programs) {
             var ids = [];

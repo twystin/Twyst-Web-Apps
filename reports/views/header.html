@@ -268,6 +268,33 @@
                 </a>
             </li>
         </ul> -->
+        <ul class="pull-right list-unstyled" style="padding-right: 1em">
+            <li class="dropdown text-normal nav-profile" ng-init="getUser()">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="fa-stack fa-lg">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-user fa-stack-1x fa-inverse" style="color: gray;"></i>
+                    </span>
+                    <span class="hidden-xs">
+                        <span data-i18n="{{logged_in_user.username}}"></span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu with-arrow">
+                    <li>
+                        <a href="../merchant">
+                            <i class="fa fa-home"></i>
+                            <span data-i18n="Home"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" ng-click="logout()">
+                            <i class="fa fa-sign-out"></i>
+                            <span data-i18n="Log Out"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 
 </header>
