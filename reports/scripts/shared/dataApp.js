@@ -147,7 +147,7 @@
             'previous_programs': 'archived',
             'current_programs': 'active'
         };
-        var status;
+        var status, current_tab;
         $scope.programs = [];
         $scope.outlets = [];
         $scope.type = "success";
@@ -227,13 +227,18 @@
             var q = {
                 programs: program_ids,
             };
+            var functions = {
+                'checkins': getCheckinMetric,
+                'redeems': getRedeemMetric,
+                'users': getUserMetric
+            };
             if(outlet_ids && outlet_ids.length > 0) {
                 q.outlets = outlet_ids;
             }
             if(program_ids && program_ids.length > 0) {
-                getUserMetric(q);
-                getCheckinMetric(q);
-                getRedeemMetric(q);
+                if(current_tab) {
+                    functions[current_tab](q);
+                }
             }
         }
 
@@ -274,9 +279,10 @@
                 'redeem': getRedeemData,
                 'user': getUserData
             };
-
+            
             functions[data_type](query);
-        }
+        };
+
 
         function getUserData(query) {
             dataService.getUserData(query).then(function(data) {
@@ -523,54 +529,61 @@
         function parseRoute(complete_path) {
             var splitted_path = complete_path.split('/');
             status = all_status[splitted_path[1]];
+            current_tab = splitted_path[2];
         }
 
         function getPrograms() {
-            dataService.getPrograms(status).then(function(data) {
-                $scope.programs = data;
-                initSelectedProgram(status);
-                if($scope.programs && $scope.programs.length > 0) {
-                    $scope.programs.forEach(function (p) {
-                        if(p.status === 'active') {
-                            p.icon = '<i class="fa fa-lightbulb-o icon-green"></i>';
-                        } else {
-                            p.icon = '<i class="fa fa-lightbulb-o icon-red"></i>';
-                        }                        
-                    })
-                }
-            })
+            if(status) {
+                dataService.getPrograms(status).then(function(data) {
+                    $scope.programs = data;
+                    initSelectedProgram(status);
+                    if($scope.programs && $scope.programs.length > 0) {
+                        $scope.programs.forEach(function (p) {
+                            if(p.status === 'active') {
+                                p.icon = '<i class="fa fa-lightbulb-o icon-green"></i>';
+                            } else {
+                                p.icon = '<i class="fa fa-lightbulb-o icon-red"></i>';
+                            }                        
+                        })
+                    }
+                })
+            }
         }
 
         function getOutlets() {
-            dataService.getOutlets('active').then(function(data) {
-                $scope.outlets = data;
-                initSelectedOutlet(status);
-                if($scope.outlets && $scope.outlets.length > 0) {
-                    $scope.outlets.forEach(function (p) {
-                        p.name = p.basics.name;
-                        p.loc = '(' + p.contact.location.locality_1[0] + ' )';
-                    })
-                }
-            })
+            if(status) {
+                dataService.getOutlets('active').then(function(data) {
+                    $scope.outlets = data;
+                    initSelectedOutlet(status);
+                    if($scope.outlets && $scope.outlets.length > 0) {
+                        $scope.outlets.forEach(function (p) {
+                            p.name = p.basics.name;
+                            p.loc = '(' + p.contact.location.locality_1[0] + ' )';
+                        })
+                    }
+                })
+            }
         }
 
         function initSelectedOutlet(status) {
-            if(status === 'ALL') {
-                $scope.selected.outlets = $scope.outlets;
-            }
+            // if(status === 'ALL') {
+            //     $scope.selected.outlets = $scope.outlets;
+            // }
+            $scope.selected.outlets = $scope.outlets;
             $scope.selected.outlets.forEach(function (p) {
                 p.ticked = true;
             });
         }
 
         function initSelectedProgram(status) {
-            if(status === 'ALL') {
-                $scope.selected.programs = $scope.programs;
-            }
-            else {
-                $scope.selected.programs = [];
-                $scope.selected.programs.push($scope.programs[0]);
-            }
+            // if(status === 'ALL') {
+            //     $scope.selected.programs = $scope.programs;
+            // }
+            // else {
+            //     $scope.selected.programs = [];
+            //     $scope.selected.programs.push($scope.programs[0]);
+            // }
+            $scope.selected.programs = $scope.programs;
             $scope.selected.programs.forEach(function (p) {
                 p.ticked = true;
             });

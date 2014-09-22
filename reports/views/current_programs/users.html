@@ -81,7 +81,8 @@
                     <i class="fa fa-arrows-alt text-large stat-icon"></i>
                 </div>
                 <div class="panel-right panel-item bg-reverse">
-                    <p class="size-h1 no-margin">{{user_data.USER_METRIC.cross}}</p>
+                    <p class="size-h1 no-margin" ng-show="selected.outlets.length > 1">{{user_data.USER_METRIC.cross}}</p>
+                    <p class="size-h1 no-margin" ng-show="selected.outlets.length <= 1">N/A</p>
                     <p class="text-muted no-margin"><span data-i18n="Cross visiting"></span></p>
                 </div>
             </section>
