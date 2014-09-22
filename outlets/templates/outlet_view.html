@@ -46,7 +46,7 @@
 
                   <div class="row">
                     <div class="col-md-7 content-boxes-v3 margin-bottom-40">
-                      <div class="clearfix margin-bottom-10 heading-sm">
+                     <!--  <div class="clearfix margin-bottom-10 heading-sm">
                         <span>
                           <h4>
                             <span class="label label-danger label-buy" style="font-size: 0.8em; text-align: center;margin: 0em 0em 0.3em 0em;">On Check-in no.</span>
@@ -61,10 +61,23 @@
                           
                         </span>
                         
-                      </div>
+                      </div> -->
                       
-                      <ul ng-repeat="offer in rewards|limitTo:3" class="timeline">
-                            <li class="timeline-inverted">
+                      <div ng-repeat="offer in rewards|limitTo:3">
+                        <div class="panel margin-bottom-30 panel_offer_callout" style="background-color: #00979d; padding: 1em;">
+                          <div class="panel-body" style="text-align: center;">
+                            <figure>
+                            <i class="fa fa-lock"></i>
+                            <h2 class="color_white">On visit no. {{offer.count}} unlock </h2>
+                            <figcaption>
+                              <i class="fa fa-unlock"></i>
+                              <h2 class="color_white">{{offer.title}}</h2>
+                            </figcaption>
+                            <i class="fa fa-info-circle tooltip-button col-md-1" data-toggle="tooltip" tooltip-html-unsafe="{{offer.terms}}" tooltip-placement="right"></i>
+                            </figure>
+                          </div>
+                        </div>
+                           <!--  <li class="timeline-inverted">
                                 <div class="timeline-badge label-buy"><p style="line-height: 2.6;" class="color_white">{{offer.count}}</p></div>
                                 <div class="timeline-panel" id="chrome">
                                   <div class="timeline-heading">
@@ -75,8 +88,8 @@
                                   </div>
                                 
                                 </div>
-                             </li>
-                       </ul> 
+                             </li> -->
+                       </div> 
                        <div class="clearfix"></div>
                        <h5 class="margin-bottom-20" style="text-align: center;">Unlock exclusive rewards for being a regular! Check in on <strong class="label-buy-color">Twyst</strong> every time you visit us or order.</h5>
                        <h5 class="margin-bottom-40 " style="text-align: center;">Get the Twyst app today.</h5>

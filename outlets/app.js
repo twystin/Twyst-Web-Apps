@@ -92,8 +92,8 @@ outletApp.directive('sliderSlick',function($timeout){
         var options = scope.$eval(attrs.sliderSlick);
          $(element).slick({
           infinite: true,
-          // slidesToShow: 3,
-          // slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 2,
           rtl: true,
           autoplay: false,
           accessibility: true,  
