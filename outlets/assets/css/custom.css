@@ -1,4 +1,14 @@
 /* Add here all your css styles (customizations) */
+/* slick slider */
+#images_single_modal > button.slick-next:before, #images_single_modal > button.slick-prev:before{
+    color: #fff;
+}
+#images_single_modal > button.slick-prev {
+    left: 60px;
+}
+#images_single_modal > button.slick-next {
+    right: 85px;
+}
 /* offer panel */
 /*.panel_offer_callout :hover {
     background-color: white;

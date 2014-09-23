@@ -48,10 +48,9 @@ outletApp.directive('slickSlider',function($timeout){
          $(element).slick({
           infinite: true,
           slidesToShow: 7,
-          slidesToScroll: 7,
+          slidesToScroll: 2,
           rtl: true,
-          autoplay: true,
-          autoplaySpeed: 2000,
+          autoplay: false,
           responsive: [
             {
               breakpoint: 1024,
@@ -138,7 +137,6 @@ outletApp.directive('sliderSingle',function($timeout){
      $timeout(function() {
         var options = scope.$eval(attrs.sliderSlick);
          $(element).slick({
-          centerPadding: '50px',
           infinite: false,
           slidesToShow: 1,
           rtl: true,
