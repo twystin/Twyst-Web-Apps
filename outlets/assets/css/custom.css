@@ -1,4 +1,8 @@
 /* Add here all your css styles (customizations) */
+/*popover */
+.popover.top{
+    width: 50%;
+}
 /* slick slider */
 #images_single_modal > button.slick-next:before, #images_single_modal > button.slick-prev:before{
     color: #fff;
@@ -375,7 +379,7 @@ hr {
     /* Dummy CSS */
     .timeline {
     list-style: none;
-    padding: 20px 0 20px;
+    padding: 4px 0 4px;
     position: relative;
     margin-left: 2em;
 }
@@ -391,7 +395,7 @@ hr {
     }
 
     .timeline > li {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         position: relative;
     }
     .timeline-heading{
