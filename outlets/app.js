@@ -47,12 +47,38 @@ outletApp.directive('slickSlider',function($timeout){
         var options = scope.$eval(attrs.slickSlider);
          $(element).slick({
           infinite: true,
-          slidesToShow: 4,
-          slidesToScroll: 3,
+          slidesToShow: 7,
+          slidesToScroll: 7,
           rtl: true,
           autoplay: true,
           autoplaySpeed: 2000,
-
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 7,
+                slidesToScroll: 7,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                dots: true
+              }
+            }
+  ]
          });
      });
    }
@@ -72,8 +98,34 @@ outletApp.directive('sliderSlick',function($timeout){
           autoplay: false,
           accessibility: true,  
           arrows: true,
-          focusOnSelect: true
-
+          focusOnSelect: true,
+          responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              dots: true
+            }
+          }
+  ]
          });
      });
    }
@@ -87,12 +139,11 @@ outletApp.directive('sliderSingle',function($timeout){
         var options = scope.$eval(attrs.sliderSlick);
          $(element).slick({
           centerPadding: '50px',
-          infinite: true,
+          infinite: false,
           slidesToShow: 1,
           rtl: true,
           autoplay: false, 
           arrows: true
-
          });
      });
    }
@@ -107,6 +158,7 @@ outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService
      $scope.options.outlets
      );
  };
+ $scope.isCollapsed = true;
 $scope.open = function (size) {
 
     var modalInstance = $modal.open({
@@ -115,7 +167,6 @@ $scope.open = function (size) {
       scope: $scope
     })
   };
-
 $scope.mapOpen = function (size) {
 
     var modalInstance = $modal.open({
@@ -152,7 +203,6 @@ $scope.mapOpen = function (size) {
   var outlet_id = $routeParams.outlet_id;
   outletService.getOutlet(outlet_id).then(function(data) {
     $scope.outlet = data.OUTLET;
-
     $scope.options = {
       map: {
         center: new google.maps.LatLng($scope.outlet.contact.location.coords.latitude, $scope.outlet.contact.location.coords.longitude),
