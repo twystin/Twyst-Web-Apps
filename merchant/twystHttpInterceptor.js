@@ -52,7 +52,7 @@ angular.module('twystHttp', [])
 				        $location.path('/');
 					}
 					else {
-						rootScope.errorMessage = 'We got an Authentication Faliure. Try logging in again.';
+						rootScope.errorMessage = 'We got an Authentication failure. Try logging in again.';
 					}
 				} else {
 					rootScope.errorMessage = response.data.message;
