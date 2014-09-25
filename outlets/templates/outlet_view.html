@@ -1,6 +1,6 @@
  About Section -->
  <section id="about" class="about-section section-first">
-  <div class="about-image" id="image_background"  background-image="{{outlet.basics.name}}">
+  <div class="about-image" id="image_background"  background-image="{{outlet.basics.slug}}">
     <div class="container">
                <!--  <div class="title-v1">
                     <h1>We are Unify Agency</h1>
@@ -10,9 +10,8 @@
                   <!-- style="margin-right:4em;" -->
                   <div class="col-md-2 col-sm-2 col-xs-hidden" style="margin-left:3em;"></div>
                   <div class="img-center outlet_info col-md-7 col-sm-7 col-xs-12" >
-                    <!-- <img class="img-responsive" src="assets/img/mockup/mockup.png" alt=""> -->
                     <div class="col-md-4 hidden-xs" style="margin-top: 3em;">
-                      <img class="merchant_logo" ng-src="{{outlet.photos.image}}">
+                      <img class="merchant_logo" ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/logo.png">
                     </div>
                     <div class="col-md-8" style="margin-top:3em;">
                       <h1 class="col-md-12 col-sm-12 hidden-xs"><b class="color_white knockout50" id="outlet_name">{{outlet.basics.name}}</b></h1>
@@ -54,18 +53,17 @@
                         </div>
                       </div>
                       <div class="panel-body">
-                        <h5 class="margin-bottom-20" style="text-align: center;">Unlock exclusive rewards for being a regular! Check in on <strong class="label-buy-color">Twyst</strong> every time you visit us or order.</h5>
+                        <h5 class="margin-bottom-20">Unlock exclusive rewards for being a regular! Check in on <strong class="label-buy-color">Twyst</strong> every time you visit us or order.</h5>
                         <span>
                           <h4>
-                            <span class="label label-danger label-buy" style="font-size: 0.8em; text-align: center;margin: 0em 0em 0.3em 0em;">On Check-in no.</span>
-                            
-                            <span class="label label-danger label-buy" id="check_in_unlock_heading" style="font-size: 0.8em; margin: 0em 0em 0em 5em;">Unlock</span>
+                            <span class="label label-danger label-buy" style="font-size: 0.8em; text-align: center;margin: 0em 0em -0.1em 0em;">On Check-in no.</span>
+                          
                           </h4>
                           <div class="clearfix"></div>
-                          <h4>
+                          <h6>
                             <span class="arrow-down" style="margin: 30px 0px 0px 5px;"></span>
-                            <span class="arrow-down" style="margin: 0px 0px 0px 9em;"></span>
-                          </h4>
+                          
+                          </h6>
                           
                         </span>
                         <ul ng-repeat="offer in rewards|limitTo:3" class="timeline">
@@ -75,7 +73,7 @@
                               <div class="timeline-heading">
                                 <span class="col-md-12">
                                   <h5 class="timeline-title col-md-11"><p style="font-size: 1.5em; color: #fff;">{{offer.title}} </p></h5>
-                                  <i class="fa fa-info-circle tooltip-button col-md-1" data-toggle="tooltip" tooltip-html-unsafe="{{offer.terms}}" tooltip-placement="right"></i></span>
+                                  <i class="fa fa-info-circle tooltip-button col-md-1" popover="{{offer.terms}}" Popover-animation="true" popover-trigger="mouseenter" popover-placement="top"></i></span>
                                   <div class="clearfix"></div>
                                 </div>
                                 
@@ -85,19 +83,19 @@
                           <div class="col-md-12 col-xs-12 col-sm-12 margin-bottom-20">
                             <div class="col-md-5 col-sm-5"></div>
                             <div class="col-md-4 col-sm-4 col-xs-12 ">
-                              <button class="btn btn-default"  ng-click="isCollapsed = !isCollapsed">View More</button>
+                              <button class="btn btn-default"  ng-click="isCollapsed = !isCollapsed" ng-hide="!isCollapsed">View More</button>
                             </div>
                           </div>
                           <div class="clearfix"></div>
                             <div collapse="isCollapsed">
-                             <ul ng-repeat="offer in rewards| limitTo: 10 | limitTo:-3" class="timeline">
+                             <ul ng-repeat="offer in rewards| limitTo: 10 | limitTo:-2" class="timeline">
                               <li class="timeline-inverted">
                                 <div class="timeline-badge label-buy"><p style="line-height: 2.6;" class="color_white">{{offer.count}}</p></div>
                                 <div class="timeline-panel" id="chrome">
                                   <div class="timeline-heading">
                                     <span class="col-md-12">
                                       <h5 class="timeline-title col-md-11"><p style="font-size: 1.5em; color: #fff;">{{offer.title}} </p></h5>
-                                      <i class="fa fa-info-circle tooltip-button col-md-1" data-toggle="tooltip" tooltip-html-unsafe="{{offer.terms}}" tooltip-placement="right"></i></span>
+                                      <i class="fa fa-info-circle tooltip-button col-md-1" popover="{{offer.terms}}" Popover-animation="true" popover-trigger="mouseenter" popover-placement="right"></i></span>
                                       <div class="clearfix"></div>
                                     </div>
 
@@ -116,16 +114,7 @@
 
                     <div class="clearfix"></div>
 
-                    <h5 class="margin-bottom-40 " style="text-align: center;">Get the Twyst app today.</h5>
-                    <!-- <div class="col-md-12 margin-bottom-20">
-                      <span class="col-md-3"></span>
-                      
-                      <span class="col-md-8">
-                        <a href=""><img src="images/appstore.png" style="height: 50px; width: auto;"></a>
-                        <a href=""><img src="images/googleplay.png" style="height: 50px; width: auto;"></a>
-                      </span>
-                    </div>
-                  -->                    <div class="clearfix"></div>
+                  <div class="clearfix"></div>
                   <div class="panel panel-default margin-bottom-20">
                     <div class="panel-heading">
                       <h3 class="panel-title">Photos</h3>
@@ -133,27 +122,9 @@
                     <div class="panel-body">
                       <div class="col-md-12" id="outlet_images_slider">
                         <div slider-slick="{ draggable: false, slidesToShow:3, infinite:true}">
-                          <div class="outlet-slide">
-                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
+                          <div class="outlet-slide" ng-repeat="x in [1,2,3,4,5]">
+                            <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}{{x}}.png" alt="" ng-click="open('lg')">
                           </div>
-                          <div class="outlet-slide">
-                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
-                          </div>
-                          <div class="outlet-slide">
-                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
-                          </div>
-                          <div class="outlet-slide">
-                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
-                          </div>
-                          <div class="outlet-slide">
-                            <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
-                          </div>
-                          <div class="outlet-slide">
-                           <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
-                         </div>
-                         <div class="outlet-slide">
-                          <img ng-src="images/BB-IMAGE.png" alt="" ng-click="open('lg')">
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -164,24 +135,16 @@
                     <h3 class="panel-title">We are also on</h3>
                   </div>
                   <div class="panel-body">
-                    <span class="col-md-3 col-sm-6" style="text-align: center;">
-                      <a href=""><img src="images/zomato.jpg" class="img-responsive" style="height: auto; width: 120px; "></a>
+                    <span class="col-md-3 col-sm-6" >
+                      <a href=""><img src="images/zomato.png" class="img-responsive" ></a>
                       <a href=""><p>Review Us</p></a>
                     </span>
-                    <span class="col-md-3 col-sm-6" style="text-align: center;">
-                      <a href=""><img src="images/foodpanda.png" class="img-responsive" style="height: auto; width: 120px;"></a>
+                    <span class="col-md-3 col-sm-6">
+                      <a href=""><img src="images/foodpanda.png" class="img-responsive"></a>
                       <a href=""><p>Order Online</p></a>
                     </span>
                   </div>
                 </div>
-                   <!--  <div style="padding-top: 1em;">
-                      <div class="page-header margin-bottom-40">
-                        <h1 class="label label-default label-buy" style="font-size: 1em">We are also on</h1>
-                      </div>
-                      
-                      
-                      <div class="clearfix margin-bottom-40"></div>
-                    </div> -->
                     
                   </div>
                   <!-- Right column starts -->
@@ -455,6 +418,26 @@
       </div>
       <div class="my-slide">
        <figure>
+        <img ng-src="images/BB-IMAGE.png" alt="">
+        <figcaption>
+          <h3>Biryani Blues</h3>
+          <span>Ninex City Mart</span>
+          <a href="#" class="close-caption hidden">x</a>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="my-slide">
+      <figure>
+        <img ng-src="images/BB-IMAGE.png" alt="">
+        <figcaption>
+          <h3>Biryani Blues</h3>
+          <span>Ninex City Mart</span>
+          <a href="#" class="close-caption hidden">x</a>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="my-slide">
+      <figure>
         <img ng-src="images/BB-IMAGE.png" alt="">
         <figcaption>
           <h3>Biryani Blues</h3>

@@ -33,7 +33,7 @@ outletApp.directive('backgroundImage', function() {
   return function(scope, element, attrs){
       attrs.$observe('backgroundImage', function(value) {
           if(value) {
-            var url = 'http://s3-us-west-2.amazonaws.com/twystmerchantpages/' + value + '.png';
+            var url = 'http://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/' + value + '/background.png';
             element.css({'background': "url('"+ url +"')"});
           }
       });
@@ -46,12 +46,11 @@ outletApp.directive('slickSlider',function($timeout){
      $timeout(function() {
         var options = scope.$eval(attrs.slickSlider);
          $(element).slick({
-          infinite: true,
+          infinite: false,
           slidesToShow: 7,
-          slidesToScroll: 7,
+          slidesToScroll: 2,
           rtl: true,
           autoplay: true,
-          autoplaySpeed: 2000,
           responsive: [
             {
               breakpoint: 1024,
@@ -138,7 +137,6 @@ outletApp.directive('sliderSingle',function($timeout){
      $timeout(function() {
         var options = scope.$eval(attrs.sliderSlick);
          $(element).slick({
-          centerPadding: '50px',
           infinite: false,
           slidesToShow: 1,
           rtl: true,
