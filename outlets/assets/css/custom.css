@@ -356,6 +356,12 @@ hr {
    .fancybox-overlay {
       background: none !important;
    }
+   .outlet-slide > img {
+    height: 120px;
+    width: 200px;
+    padding: 0.5em;
+    margin-left: 1.6em;
+   }
 }
 
 /*#zomato {
