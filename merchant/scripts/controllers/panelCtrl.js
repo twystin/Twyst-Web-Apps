@@ -360,11 +360,9 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     }
 
     function goForCheckin() {
-        console.log("1");
         if ($scope.outlet._id && $scope.checkin.phone_no) {
 
             $scope.loading = true;
-            console.log("2");
             $http.post('/api/v2/checkins', {
                 phone: $scope.checkin.phone_no,
                 outlet: $scope.outlet._id,
@@ -399,16 +397,12 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         }
         if(!$scope.checkin.location) {
             $scope.checkin_select_dirty = true;
-            console.log("checkin location", $scope.checkin.location);
-            console.log("here");
         }
         else if(isMobileNumber($scope.checkin.phone_no)) {
-            console.log("checkin location", $scope.checkin.location);
             goForCheckin();
         }
         else {
             $scope.checkin_phone_no_dirty = true;
-            console.log("or here");
         }
     };
     $scope.createRedeem = function () {
