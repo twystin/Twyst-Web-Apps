@@ -185,6 +185,12 @@
         };
 
         $scope.$on("$locationChangeStart", function () {
+            $scope.selected = {
+                'programs': [],
+                'outlets': []
+            }
+            $scope.programs = [];
+            $scope.outlets = []
             parseRoute($location.$$path);
             getPrograms();
             getOutlets();
