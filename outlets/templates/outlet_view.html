@@ -95,7 +95,7 @@
                                   <div class="timeline-heading">
                                     <span class="col-md-12">
                                       <h5 class="timeline-title col-md-11"><p style="font-size: 1.5em; color: #fff;">{{offer.title}} </p></h5>
-                                      <i class="fa fa-info-circle tooltip-button col-md-1" popover="{{offer.terms}}" Popover-animation="true" popover-trigger="mouseenter" popover-placement="right"></i></span>
+                                      <i class="fa fa-info-circle tooltip-button col-md-1" popover="{{offer.terms}}" Popover-animation="true" popover-trigger="mouseenter" popover-placement="top"></i></span>
                                       <div class="clearfix"></div>
                                     </div>
 
@@ -130,17 +130,17 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="panel panel-default margin-bottom-20 hidden-xs">
+                <div class="panel panel-default margin-bottom-20 hidden-xs" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
                   <div class="panel-heading">
                     <h3 class="panel-title">We are also on</h3>
                   </div>
                   <div class="panel-body">
-                    <span class="col-md-3 col-sm-6" >
-                      <a href=""><img src="images/zomato.png" class="img-responsive" ></a>
+                    <span class="col-md-3 col-sm-6" ng-show="outlet.links.zomato_url">
+                      <a href=""><img src="images/zomato.png" class="img-responsive" ng-href="outlet.links.zomato_url" target="_blank"></a>
                       <a href=""><p>Review Us</p></a>
                     </span>
-                    <span class="col-md-3 col-sm-6">
-                      <a href=""><img src="images/foodpanda.png" class="img-responsive"></a>
+                    <span class="col-md-3 col-sm-6" ng-show="outlet.links.foodpanda_url">
+                      <a href=""><img src="images/foodpanda.png" class="img-responsive" ng-href="outlet.links.foodpanda_url" target="_blank"></a>
                       <a href=""><p>Order Online</p></a>
                     </span>
                   </div>
