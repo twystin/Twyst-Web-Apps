@@ -136,11 +136,11 @@
                   </div>
                   <div class="panel-body">
                     <span class="col-md-3 col-sm-6" ng-show="outlet.links.zomato_url">
-                      <a href=""><img src="images/zomato.png" class="img-responsive" ng-href="outlet.links.zomato_url" target="_blank"></a>
+                      <a  ng-href="{{outlet.links.zomato_url}}"  target="_blank"><img src="images/zomato.png" class="img-responsive"></a>
                       <a href=""><p>Review Us</p></a>
                     </span>
                     <span class="col-md-3 col-sm-6" ng-show="outlet.links.foodpanda_url">
-                      <a href=""><img src="images/foodpanda.png" class="img-responsive" ng-href="outlet.links.foodpanda_url" target="_blank"></a>
+                      <a ng-href="{{outlet.links.foodpanda_url}}"  target="_blank"><img src="images/foodpanda.png" class="img-responsive"></a>
                       <a href=""><p>Order Online</p></a>
                     </span>
                   </div>
