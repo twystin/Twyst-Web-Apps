@@ -127,9 +127,8 @@ figure figcaption {
     position: absolute;
     z-index: 5;
 }
-figure h3 {
+figure h5 {
     color: #fff;
-    font-size: 22px;
     line-height: 1.2;
     font-weight: 700;
     margin-bottom: 10px;
@@ -180,8 +179,8 @@ figure figcaption {
     -o-transition: all 0.5s;
     transition: all 0.5s;
 }
-figure figcaption h3 {
-    margin-top: 50px;
+figure figcaption h5 {
+    margin-top: 20px;
 }
 figure img {
     -webkit-backface-visibility: hidden;
@@ -555,7 +554,8 @@ hr {
     }
 
 @media (max-width: 767px) {
-    figure figcaption h3 {
+
+    figure figcaption h5 {
         margin-top: 0.4em;
     }
     .col-xs-12, .col-xs-4 {
