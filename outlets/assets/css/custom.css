@@ -1,4 +1,24 @@
 /* Add here all your css styles (customizations) */
+/* Badges small screen */
+.badges_small_screen {
+    margin: 2em 0em 1em -1em;
+}
+/*accordion */
+.small-screen-accordion > .panel-heading {
+    background-color: #f59221 !important;
+    font-size: 12px !important;
+    border-color: transparent;
+}
+.small-screen-accordion {
+    border-color: transparent;
+}
+.small-screen-accordion > .panel-heading > .panel-title > a {
+    font-size: 12px !important;
+}
+.small-screen-accordion > .panel-heading > .panel-title > a:hover {
+    color: #fff;
+    text-decoration: none;
+}
 /*popover */
 .popover.top{
     width: 50%;
@@ -192,7 +212,7 @@ figure.hover figcaption {
 }
 
 .about-image {
-	background: none;
+	background: url(images/cnd.png);
 }
 .page-header {
 	padding-bottom: 0px;
@@ -253,7 +273,7 @@ hr {
 	padding-right: 0px;
 }
 #image_background {
-	/*background: url(../../images/BiryaniBlues.png);*/
+	/*background: url(../../images/cnd.png);*/
 	background-repeat: no-repeat;
 	background-size: cover!important;
 }
@@ -262,7 +282,7 @@ hr {
 }
 .outlet_info {
 	height: 18em;
-	margin-top: 40px;
+	margin-top: 60px;
 }
 .map_location{
 	margin-top: 3em;
@@ -362,6 +382,14 @@ hr {
     padding: 0.5em;
     margin-left: 1.6em;
    }
+   .title-v1 > h2 {
+    font-size: 20px !important;
+   }
+}
+@media (max-width: 1200px) {
+    .header_badges_sprite{
+        margin-right: 6em;
+    }
 }
 
 /*#zomato {

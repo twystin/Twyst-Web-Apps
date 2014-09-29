@@ -62,19 +62,33 @@ outletApp.directive('slickSlider',function($timeout){
               }
             },
             {
+              breakpoint: 700,
+              settings: {
+                slidesToShow: 5,
+                slidesToScroll: 5
+              }
+            },
+            {
               breakpoint: 600,
               settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                dots: true
+                slidesToShow: 4,
+                slidesToScroll: 4,
+                dots: false
+              }
+            },
+            {
+              breakpoint: 539,
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 4
               }
             },
             {
               breakpoint: 480,
               settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                dots: true
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                dots: false
               }
             }
   ]
@@ -109,9 +123,9 @@ outletApp.directive('sliderSlick',function($timeout){
             }
           },
           {
-            breakpoint: 600,
+            breakpoint: 670,
             settings: {
-              slidesToShow: 1,
+              slidesToShow: 2,
               slidesToScroll: 1,
               dots: true
             }
@@ -196,6 +210,12 @@ $scope.mapOpen = function (size) {
   marker.setOptions($scope.options.selected);
 };
 
+$scope.getSlugs = function () {
+  outletService.getSlugs().then(function (data) {
+    $scope.slugs = data;
+  });
+};
+
 ($scope.getOutlet = function () {
 
   var outlet_id = $routeParams.outlet_id;
@@ -247,6 +267,7 @@ $scope.mapOpen = function (size) {
             $scope.rewards = data.REWARDS;
           })
 })();
+// g
 
 $scope.getUrI = function (outlet) {
   if (outlet && outlet.links) {
@@ -303,6 +324,21 @@ $scope.getCostForTwoText = function (outlet) {
     }).error(function (data) {
      console.log(data);
    });                                                                                         
+  };
+  outletService.getSlugs = function () {
+
+    var deferred = $q.defer();
+
+    $http({
+      url: '/api/v2/outlets/slugs',
+      method: 'GET'
+    }).success(function (data) {
+      deferred.resolve(data.info);
+    }).error(function (data) {
+      deferred.resolve(data);
+    });
+
+    return deferred.promise;                                                                                         
   };
   return outletService;
 }).config(function ($routeProvider, $httpProvider){
