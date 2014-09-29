@@ -272,7 +272,7 @@ div.panel-heading > h4 > a > span {
     color: white !important;
     height: 27em;
     /*margin: 1em;*/
-    opacity: 0.95;
+    opacity: 0.80;
 }
 .outlet_info > h1 {
     margin: 0.4em 0 0.3em 0;
@@ -287,7 +287,7 @@ div.panel-heading > h4 > a > span {
     color: white !important;
     height: 27em;
     margin: 4em 0em 0em 0em;
-    opacity: 0.95;
+    opacity: 0.80;
 }
 .image_outlet_card{
     background-image:
