@@ -24,15 +24,15 @@
                     </div>
 
                     <div class="col-md-8" style="margin-top:3em;">
-                      <h1 class="col-md-12 col-sm-12 hidden-xs hidden-sm"><b class="color_white knockout50" id="outlet_name" ng-click="getotherOutlet(outlet)">{{outlet.basics.name}}</b></h1>
+                      <h3 class="col-md-12 col-sm-12 hidden-xs hidden-sm"><b class="color_white knockout50" id="outlet_name" ng-click="getotherOutlet(outlet)">{{outlet.basics.name}}</b></h3>
                       <h6 class="col-xs-12 hidden-md hidden-lg"><b class="color_white" id="outlet_name">{{outlet.basics.name}}</b></h6>
 
-                      <h2 class=""><small><b class="color_white font_fixed_sapient"><i class="fa fa-phone"></i>
-                        <a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a></b> <i class="fa fa-mobile-phone color_white"></i><a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a></small></h2>
+                      <h2 class="" ><small><b class="color_white font_fixed_sapient"><i class="fa fa-phone" ng-hide="!outlet.contact.phones.landline"></i>
+                        <a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a></b> <i class="fa fa-mobile-phone color_white" ng-hide="!outlet.contact.phones.mobile"></i><a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a></small></h2>
 
 
-                        <p class="color_white font_fixed_sapient"><b class="color_white font_fixed_sapient"><img src="images/Address.png" id="image_address_icon"> </b>{{outlet.contact.location.address}}</p>
-                        <p class="color_white"><i class="fa fa-globe"></i>&nbsp;<span class="font_fixed_sapient"><a ng-href="http://{{outlet.links.website_url }}" class="color_white font_fixed_sapient">{{outlet.links.website_url }}</a></span></p>
+                        <p class="color_white font_fixed_sapient"><b class="color_white font_fixed_sapient"><img src="images/Address.png" id="image_address_icon" ng-hide="!outlet.contact.location.address"> </b>{{outlet.contact.location.address}}</p>
+                        <p class="color_white"><i class="fa fa-globe" ng-hide="!outlet.links.website_url"></i>&nbsp;<span class="font_fixed_sapient"><a ng-href="http://{{outlet.links.website_url }}" class="color_white font_fixed_sapient">{{outlet.links.website_url }}</a></span></p>
                       </div>
 
                       <div class="col-md-12">
@@ -385,13 +385,13 @@
            <div class="clearfix"></div>
            <div class="col-sm-12 col-md-12 col-xs-12">
              <div slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:3, slidesToScroll: 3,}" >
-              <div class="my-slide" ng-repeat="slug in slugs track by $index" ng-hide="slug === outlet.basics.slug">
+              <div class="my-slide" ng-repeat="s in slugs track by $index" ng-hide="slug === outlet.basics.slug">
                 <figure>
-                  <a ng-href="#"> <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{slug}}/logo.png" alt=""></a>
+                  <a ng-href="#/{{s.publicUrl.0}}"> <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{s.slug}}/logo.png" alt=""></a>
                   <figcaption>
-                   <a ng-href="#"> <h3>{{outlet.basics.name}}</h3></a>
-                   <span>{{outlet.contact.landmarks}}</span>
-                   <a href="#" class="close-caption hidden">x</a>
+                   <a ng-href="#/{{s.publicUrl.0}}"> <h5>{{s.name}}</h5></a>
+                   <span>{{s.location}}</span>
+                   <a href="#/{{s.publicUrl.0}}" class="close-caption hidden">x</a>
                  </figcaption>
                </figure>
              </div>
