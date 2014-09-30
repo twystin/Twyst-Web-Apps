@@ -27,12 +27,34 @@
                       <h3 class="col-md-12 col-sm-12 hidden-xs hidden-sm"><b class="color_white knockout50" id="outlet_name" ng-click="getotherOutlet(outlet)">{{outlet.basics.name}}</b></h3>
                       <h6 class="col-xs-12 hidden-md hidden-lg"><b class="color_white" id="outlet_name">{{outlet.basics.name}}</b></h6>
 
-                      <h2 class="" ><small><b class="color_white font_fixed_sapient"><i class="fa fa-phone" ng-hide="!outlet.contact.phones.landline"></i>
-                        <a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a></b> <i class="fa fa-mobile-phone color_white" ng-hide="!outlet.contact.phones.mobile"></i><a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a></small></h2>
+                      <h2 class="" >
+                        <small>
+                        <b class="color_white font_fixed_sapient">
+                        <i class="fa fa-phone" ng-hide="!outlet.contact.phones.landline"></i>
+                        </b>
+                        <a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a>
+                        <b class="color_white font_fixed_sapient" ng-hide="!outlet.contact.phones.mobile">
+                        <i class="fa fa-mobile-phone color_white"></i>
+                        </b>
+                        <a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a>
+                        </small>
+                      </h2>
 
 
-                        <p class="color_white font_fixed_sapient"><b class="color_white font_fixed_sapient"><img src="images/Address.png" id="image_address_icon" ng-hide="!outlet.contact.location.address"> </b>{{outlet.contact.location.address}}</p>
-                        <p class="color_white"><i class="fa fa-globe" ng-hide="!outlet.links.website_url"></i>&nbsp;<span class="font_fixed_sapient"><a ng-href="http://{{outlet.links.website_url }}" class="color_white font_fixed_sapient">{{outlet.links.website_url }}</a></span></p>
+                        <p class="color_white font_fixed_sapient">
+                          <b class="color_white font_fixed_sapient">
+                           <img src="images/Address.png" id="image_address_icon" ng-hide="!outlet.contact.location.address"> 
+                          </b>
+                          {{outlet.contact.location.address}}
+                        </p>
+                        <p class="color_white">
+                          <i class="fa fa-globe" ng-hide="!outlet.links.website_url"></i>&nbsp;
+                          <span class="font_fixed_sapient">
+                            <a ng-href="http://{{outlet.links.website_url }}" class="color_white font_fixed_sapient">
+                            {{outlet.links.website_url }}
+                            </a>
+                          </span>
+                        </p>
                       </div>
 
                       <div class="col-md-12">
@@ -134,7 +156,7 @@
                       </div>
                     </div>
                   <div class="clearfix"></div>
-                  <div class="panel panel-default margin-bottom-20">
+                  <div class="panel panel-default margin-bottom-20" ng-hide="expression">
                     <div class="panel-heading">
                       <h3 class="panel-title">Photos</h3>
                     </div>
@@ -168,8 +190,8 @@
                   </div>
                   <!-- Right column starts -->
                   <div class="col-md-5 col-xs-12" >
-                    <div class="col-md-12 margin-bottom-10 hidden-xs">
-                      <div class="panel panel-default" ng-show="outlet.links.facebook_url" id="facebook_like_box">
+                    <div class="col-md-12 margin-bottom-10" ng-if="outlet.links.facebook_url">
+                      <div class="panel panel-default" id="facebook_like_box">
                         <div class="panel-heading panel_heading_callout" style="text-align: left;"><h4>From Facebook</h4></div>
                         <div class="fb-like-box panel-body" ng-href="https://{{outlet.links.facebook_url}}" data-colorscheme="light" data-force-wall="true" data-show-faces="true" data-header="false" data-stream="true" data-show-border="true" data-height="440px" data-width="400">
                         </div>
@@ -216,7 +238,7 @@
                           </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6" >
-                         <div ng-show="outlet.attributes.home_delivery">
+                         <div ng-show="outlet.attributes.home_delivery" class="margin_negative_one">
                           <img src="images/Home Delivery.png" class="image_overview_column_attribute hidden-xs">
                           <span class="overflow-h padding-top font-size-eleven">
                             Home Delivery
@@ -253,7 +275,7 @@
                           Serves Alcohol
                         </span>
                       </div>
-                      <div ng-show="!outlet.attributes.alcohol">
+                      <div ng-show="!outlet.attributes.alcohol" class="margin_negative_one">
                         <img src="images/No Alcohol.png" class="image_overview_column_attribute hidden-xs">
                         <span class="overflow-h padding-top font-size-eleven">
                          No Alcohol
@@ -279,11 +301,11 @@
                    </div>
                  </div>
                  <div class="col-md-6 col-sm-6 col-xs-6" class="padding_class">
-                  <div ng-show="outlet.attributes.outdoor">
+                  <div ng-show="outlet.attributes.outdoor" class="margin_negative_one margin_top_half">
                     <img src="images/Outdoor Seating.png" class="image_overview_column_attribute hidden-xs">
-                    <div class="overflow-h padding-top font-size-eleven">
+                    <span class="overflow-h padding-top font-size-eleven">
                       Outdoor Seating Available
-                    </div>  
+                    </span>  
                   </div>
                 </div>
               </div>
@@ -294,10 +316,10 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <div ng-show="outlet.attributes.foodcourt">
                    <img src="images/Food Court.png" class="image_overview_column_attribute hidden-xs">
-                   <div class="overflow-h padding-top font-size-eleven">
+                   <span class="overflow-h padding-top font-size-eleven">
                     Part of a food court
 
-                  </div>   
+                  </spam>   
                 </div>
               </div>
               <div class="clearfix"></div> 
@@ -383,7 +405,7 @@
 
           <div class="row" ng-init="getSlugs()" >
            <div class="clearfix"></div>
-           <div class="col-sm-12 col-md-12 col-xs-12">
+           <div class="col-sm-12 col-md-12 col-xs-12" ng-if="slugs">
              <div slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:3, slidesToScroll: 3,}" >
               <div class="my-slide" ng-repeat="s in slugs track by $index" ng-hide="slug === outlet.basics.slug">
                 <figure>
