@@ -59,29 +59,23 @@
     <!-- scripts -->
     <div id="fb-root">
     <script>
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "https://connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=763534923659747&version=v2.0";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '763534923659747',
+          xfbml      : true,
+          version    : 'v2.1'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
     </script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
-    
-    <script type="text/javascript" src="../home/assets/js/pages/contact.js"></script>
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-51763503-1', 'twyst.in');
-      ga('send', 'pageview');
-
-    </script>     
     <style type="text/css">
     .navbar-default .navbar-nav > li > a:before, .top-nav-collapse .navbar-brand, .top-nav-collapse .navbar-nav > li > a, .top-nav-collapse.navbar-default .navbar-nav > li > a:before{
         color: #000;
@@ -191,7 +185,9 @@
 <!--=== End Copyright ===-->
 
 <!-- end unify -->
-<!-- JS Global Compulsory -->           
+<!-- JS Global Compulsory --> 
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>    
     <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -263,6 +259,19 @@
     <script type="text/javascript" src="donutdirective.js"></script>
     <script type="text/javascript" src="d3Svc.js"></script>
     <script type="text/javascript" src="app.js" ></script> 
+
+    <script type="text/javascript" src="../home/assets/js/pages/contact.js"></script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-51763503-1', 'twyst.in');
+      ga('send', 'pageview');
+
+    </script>
 
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
