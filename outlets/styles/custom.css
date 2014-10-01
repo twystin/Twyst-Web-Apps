@@ -64,6 +64,9 @@ hr {
 	margin-left: 0.6em;
 }
 /* margin */
+.margin_top_half {
+	margin-top: 0.6em;
+}
 .margin_top_one {
 	margin-top: 1em;
 }
