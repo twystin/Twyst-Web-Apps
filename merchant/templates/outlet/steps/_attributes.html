@@ -222,6 +222,36 @@
                 </div>
 			</div>
 		</div>
+		<div class="row-fluid pushTop10px">
+			<div class="row-fluid span4">
+				<small>SMS off hours</small>
+			</div>
+			<div class="row-fluid span8">
+				<input type="checkbox" ng-model="outlet.sms_off.value"><br>
+			</div>
+			<div class="row-fluid span8 offset4" ng-show="outlet.sms_off.value">
+				<div class="span6">
+					<div class="span4">
+						Start
+					</div>
+					<div class="span8">
+						<select name="airConditioning" class="span6" ng-model="outlet.sms_off.time.start">
+							<option ng-repeat="a in getRange(0, 23, 1)" value="{{a}}">{{a}}</option>
+						</select> hr
+					</div>
+				</div>
+				<div class="span6">
+					<div class="span4">
+						End
+					</div>
+					<div class="span8">
+						<select name="airConditioning" class="span6" ng-model="outlet.sms_off.time.end">
+							<option ng-repeat="a in getRange(0, 23, 1)" value="{{a}}">{{a}}</option>
+						</select> hr
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="span5 preview-detail" ng-include="'/merchant/templates/outlet/preview.html'"></div>
 </div>
