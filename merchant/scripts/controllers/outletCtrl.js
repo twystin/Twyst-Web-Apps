@@ -1,8 +1,8 @@
 'use strict';
 
 twystApp.controller('OutletCtrl', 
-    ['$scope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', 'typeaheadService', '$log',
-    function ($scope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, typeaheadService, $log) {
+    ['$scope', '$rootScope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', 'typeaheadService', '$log',
+    function ($scope, $rootScope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, typeaheadService, $log) {
 
     if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -62,6 +62,35 @@ twystApp.controller('OutletCtrl',
         $scope.dessert_icons = ['desserts']
     };
     $scope.init();
+    $scope.hours = $rootScope.getRange(0, 23, 1);
+    $scope.minutes = $rootScope.getRange(0, 59, 5);
+
+    function setSmsOff (data) {
+        if(data && data.value) {
+            $scope.sms_off = {
+                value: data.value,
+                start: {
+                    hr: Math.floor(data.time.start / 60),
+                    min: data.time.start % 60
+                },
+                end: {
+                    hr: Math.floor(data.time.end / 60),
+                    min: data.time.end % 60
+                }
+            }
+        }
+    }
+
+    function getSmsOff () {
+        var sms_off = {
+            value:  $scope.sms_off.value,
+            time: {
+                start: Number($scope.sms_off.start.hr * 60) + Number($scope.sms_off.start.min),
+                end: Number($scope.sms_off.end.hr * 60) + Number($scope.sms_off.end.min)
+            }
+        }
+        return sms_off;
+    }
 
     // Service initialization
     outletService.setOutletSvcMessages(200, null);
@@ -157,6 +186,7 @@ twystApp.controller('OutletCtrl',
 
     $scope.viewOutlet = function(outlet) {
         $scope.outlet = outlet;
+        setSmsOff(outlet.sms_off);
     };
 
     $scope.query = function () {
@@ -177,6 +207,7 @@ twystApp.controller('OutletCtrl',
         return request.then(function (response) {
             var outlet = JSON.parse(response.data.info)[0];
             $scope.outlet = outlet;
+            setSmsOff(outlet.sms_off);
         }, function (response) {
             $log.warn(response);
         });
@@ -187,11 +218,13 @@ twystApp.controller('OutletCtrl',
         $scope.outlet.outlet_meta.accounts = [];
         $scope.auth = authService.getAuthStatus();
         var user_id = $scope.auth._id;
+        $scope.outlet.sms_off = getSmsOff();
         $scope.outlet.outlet_meta.accounts.push(user_id);
         outletService.create($scope, $http, $location);
     };
 
     $scope.update = function (outlet_id) {
+        $scope.outlet.sms_off = getSmsOff();
         outletService.update($scope, $http, $location, outlet_id);
     };
 
