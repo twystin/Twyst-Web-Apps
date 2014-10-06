@@ -156,6 +156,7 @@
                       </div>
                     </div>
                   <div class="clearfix"></div>
+                  <div class="images">
                   <div class="panel panel-default margin-bottom-20" ng-hide="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}2.png">
                     <div class="panel-heading">
                       <h3 class="panel-title">Photos</h3>
@@ -164,11 +165,12 @@
                       <div class="col-md-12" id="outlet_images_slider">
                         <div slider-slick="{ draggable: false, slidesToShow:3, infinite:true}">
                           <div class="outlet-slide" ng-repeat="x in [1,2,3,4]">
-                            <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}{{x}}.png" alt="" ng-click="open('lg')">
+                            <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}{{x}}.png" alt="" ng-click="open('lg')" onerror=" $(this).parentsUntil('.images').hide();">
                           </div>
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="panel panel-default margin-bottom-20" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
@@ -189,15 +191,17 @@
                     
                   </div>
                   <!-- Right column starts -->
-                  <div class="col-md-5 col-xs-12" ng-if="outlet.links.facebook_url">
-                      <div class="col-md-12 margin-bottom-10 hidden-xs">
+                  <div class="col-md-5 col-xs-12" >
+
+
+                    <div class="col-md-12 margin-bottom-10 hidden-xs facebook-panel" ng-if="outlet.links.facebook_url">
                       <div class="panel panel-default" id="facebook_like_box">
                         <div class="panel-heading panel_heading_callout" style="text-align: left;"><h4>From Facebook</h4></div>
-                        <div class="panel-body">
-                        <div class="fb-like-box" href="https://{{outlet.links.facebook_url}}" data-colorscheme="light" data-force-wall="true" data-show-faces="true" data-header="false" data-stream="true" data-show-border="true" data-height="440px" data-width="400">
+                        <div class="panel-body" >
+                          <div class="fb-like-box" href="{{outlet.links.facebook_url}}" data-colorscheme="light" data-force-wall="true" data-show-faces="true" data-header="false" data-stream="true" data-show-border="true" data-height="440px" data-width="400">
+                          </div>
                         </div>
-                        </div>
-                    </div>
+                      </div>
                     </div>
 
                     <br>

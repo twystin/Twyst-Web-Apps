@@ -162,7 +162,7 @@ outletApp.directive('sliderSingle',function($timeout){
  }
 }); 
 
-outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal) {
+outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal, $http) {
 
   $scope.getOutletOpts = function (outlet) {
    return angular.extend(
@@ -213,7 +213,7 @@ $scope.mapOpen = function (size) {
 $scope.getSlugs = function () {
   outletService.getSlugs().then(function (data) {
     $scope.slugs = data;
-  });
+  })
 };
 
 ($scope.getOutlet = function () {
