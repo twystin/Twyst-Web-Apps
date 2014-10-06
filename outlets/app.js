@@ -1,5 +1,5 @@
 
-var outletApp = angular.module('outletApp', ["ngRoute", 'ui.bootstrap', 'ngCookies', 'd3onut', 'AngularGM', 'slick']);
+var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'd3onut', 'AngularGM', 'slick']);
 
 outletApp.directive('wrapOwlcarousel', function () {
   return {
@@ -341,7 +341,11 @@ $scope.getCostForTwoText = function (outlet) {
     return deferred.promise;                                                                                         
   };
   return outletService;
-}).config(function ($routeProvider, $httpProvider){
+}).config(function (ezfbProvider, $routeProvider, $httpProvider){
+  ezfbProvider.setInitParams({
+    appId: '763534923659747'
+  });
+
   $routeProvider.
   when('/:outlet_id',{
     templateUrl: './templates/outlet_view.html',

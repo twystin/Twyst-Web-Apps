@@ -58,23 +58,6 @@
         </intent-filter>
     <!-- scripts -->
     <div id="fb-root">
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '763534923659747',
-          xfbml      : true,
-          version    : 'v2.1'
-        });
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
 
     <style type="text/css">
     .navbar-default .navbar-nav > li > a:before, .top-nav-collapse .navbar-brand, .top-nav-collapse .navbar-nav > li > a, .top-nav-collapse.navbar-default .navbar-nav > li > a:before{
@@ -272,6 +255,7 @@
       ga('send', 'pageview');
 
     </script>
+    <script src="http://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
 
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
