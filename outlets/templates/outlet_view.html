@@ -358,14 +358,14 @@
 
               <div class="clearfix"></div>
 
-              <div class="col-xs-12" ng-if="outlet">
-                <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;" ng-click="mapOpen('lg')">
-                <gm-markers gm-objects="outlets"
-                gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
-                gm-get-marker-options="getOutletOpts(object)"
-                gm-on-click="selectOutlet(object, marker)">
-              </gm-markers>
-            </gm-map> 
+              <div class="col-xs-12" ng-if="outlet" ng-click="mapOpen('lg')">
+                <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
+                    <gm-markers gm-objects="outlets"
+                    gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
+                    gm-get-marker-options="getOutletOpts(object)"
+                    gm-on-click="selectOutlet(object, marker)">
+                  </gm-markers>
+                </gm-map> 
           </div>
 
         </div></div></div>
