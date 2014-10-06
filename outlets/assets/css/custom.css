@@ -1,4 +1,8 @@
 /* Add here all your css styles (customizations) */
+/* reset style */
+.header {
+    overflow: visible !important;
+}
 /* Badges small screen */
 .badges_small_screen {
     margin: 2em 0em 1em -1em;

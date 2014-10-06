@@ -245,3 +245,6 @@ tr:hover{
 .panel-body > .padding_class > div > p {
 	word-wrap: break-word;
 }
+.lets_wrap {
+	word-wrap: break-word;
+}

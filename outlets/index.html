@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="outletApp"> 
 <head>
-    <title>Twyst | Get in touch</title>
+    <title>Twyst</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -47,17 +47,9 @@
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom.css">
-    <!--unify-->
-
-    <intent-filter>
-          <action android:name="android.intent.action.VIEW" />
-          <category android:name="android.intent.category.DEFAULT" />
-          <category android:name="android.intent.category.BROWSABLE" />
-          <data android:scheme="http" android:host="twyst.android.com"
-                android:path="/search" />
-        </intent-filter>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.18.min.js"></script>
     <!-- scripts -->
-    <div id="fb-root">
+    <div id="fb-root"></div>
 
     <style type="text/css">
     .navbar-default .navbar-nav > li > a:before, .top-nav-collapse .navbar-brand, .top-nav-collapse .navbar-nav > li > a, .top-nav-collapse.navbar-default .navbar-nav > li > a:before{
@@ -197,6 +189,7 @@
     <script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/tooltip.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.14/js/ngDialog.min.js"></script>
+
 
     <script type="text/javascript">
         jQuery(document).ready(function() {
