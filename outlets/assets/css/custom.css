@@ -6,6 +6,7 @@
 /* Badges small screen */
 .badges_small_screen {
     margin: 2em 0em 1em -1em;
+    display: inline-flex;
 }
 /*accordion */
 .small-screen-accordion > .panel-heading {
@@ -375,6 +376,17 @@ hr {
    transform: scale(0);
 }
 
+
+@media (max-width: 1200px) {
+   .badges_small_screen {
+    margin: 4em 0em -1em 0em;
+   }
+}
+@media (max-width: 990px) {
+    .header_badges_sprite{
+        margin-right: 6em;
+    }
+}
 @media (max-width: 768px) {
    .fancybox-overlay {
       background: none !important;
@@ -389,9 +401,12 @@ hr {
     font-size: 20px !important;
    }
 }
-@media (max-width: 1200px) {
+@media (max-width: 583px) {
+    .badges_screen{
+        display: none;
+    }
     .header_badges_sprite{
-        margin-right: 6em;
+       margin-left: 6em;
     }
 }
 
