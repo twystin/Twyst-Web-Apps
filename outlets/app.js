@@ -1,6 +1,12 @@
 
 var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'd3onut', 'AngularGM', 'slick']);
 
+outletApp.filter('replaceComma', function () {
+  return function (item) {
+      return item ? item.replace(/,/g,', ') : '';
+  };
+});
+
 outletApp.directive('wrapOwlcarousel', function () {
   return {
     restrict: 'E',
@@ -187,20 +193,7 @@ $scope.mapOpen = function (size) {
       scope: $scope
     })
   };
- // $scope.$watch('outlet.basics.name', function () {
- //  if($scope.outlet) {
- //    var url = 'http://s3-us-west-2.amazonaws.com/twystmerchantpages/' + $scope.outlet.basics.name + '.png';
- //    // console.log("url('"+ url +"')")
- //    $('#image_background').css('background', "url('"+ url +"')");
- //  }
- // })
 
- // $scope.getBackImage = function (name) {
- //  var name = outlet.basics.name
- //  $scope.bck_image = {
- //    'background': 'url(https://s3-us-west-2.amazonaws.com/twystmerchantpages/'+ name +'.png)'
- //  }
- // }
 
  $scope.selectOutlet = function (outlet, marker) {
   if ($scope.prev) {
@@ -213,10 +206,18 @@ $scope.mapOpen = function (size) {
 $scope.getSlugs = function () {
   outletService.getSlugs().then(function (data) {
     $scope.slugs = data;
-  })
-};
 
-($scope.getOutlet = function () {
+  });
+}
+$scope.hidePanel = function () {
+   var key = $scope.outlet.basics.slug;
+    $http.get('https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/' + key + '/' + key + '1.png').success(function (data){
+      $scope.hide_image_panel = false;
+    }).error(function (data) {
+      $scope.hide_image_panel = true;
+    });
+}
+$scope.getOutlet = function () {
 
   var outlet_id = $routeParams.outlet_id;
   outletService.getOutlet(outlet_id).then(function(data) {
@@ -246,28 +247,12 @@ $scope.getSlugs = function () {
       }
     }
     ];
-//scope.center = new google.maps.LatLng($scope.outlet.contact.location.coords.latitude, $scope.outlet.contact.location.coords.longitude);
-             //$scope.volcanoes[0].location.lat = $scope.outlet.contact.location.coords.latitude;
-             //$scope.volcanoes[0].location.lng = $scope.outlet.contact.location.coords.longitude;
-            // $scope.zoom = 14;
-            //  $scope.options = {
-            //   volcanoes: {
-            //      icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png',
-            //     }
-            // };
-            // $scope.volcanoes = [
-            //     {
-            //       id: 0,
-            //       name: 'Mount Rainier',
-            //       location: {
-            //         lat: $scope.outlet.contact.location.coords.latitude, 
-            //         lng: $scope.outlet.contact.location.coords.longitude
-            //     }
-            // }];
-            $scope.rewards = data.REWARDS;
-          })
-})();
-// g
+     $scope.rewards = data.REWARDS;
+    })
+};
+
+$scope.getOutlet();
+
 
 $scope.getUrI = function (outlet) {
   if (outlet && outlet.links) {

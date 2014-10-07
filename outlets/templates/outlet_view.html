@@ -15,15 +15,19 @@
                     Focused on helping our clients to build a <strong>successful</strong> business on web and mobile.</p>                
                   </div> -->
                   <!-- style="margin-right:4em;" -->
-
+                  <div class="col-md-12 merchant_logo_absolute">
+                    <div class="col-md-2 col-sm-2 col-xs-hidden" style="margin-left:3em;"></div>
+                    <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;">
+                      <img class="merchant_logo" ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/logo.png">
+                    </div>
+                  </div>
+               
                   <div class="col-md-2 col-sm-2 col-xs-hidden" style="margin-left:3em;"></div>
                   <div class="img-center outlet_info col-md-7 col-sm-7 col-xs-12" >
                       <div class="clearfix"></div>
-                    <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;">
-                      <img class="merchant_logo" ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/logo.png">
+                      <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;">
                       
                     </div>
-
                     <div class="col-md-8" style="margin-top:3em;">
                       <h3 class="col-md-12 col-sm-12 hidden-xs hidden-sm"><b class="color_white knockout50" id="outlet_name" ng-click="getotherOutlet(outlet)">{{outlet.basics.name}}</b></h3>
                       <h6 class="col-xs-12 hidden-md hidden-lg"><b class="color_white" id="outlet_name">{{outlet.basics.name}}</b></h6>
@@ -86,7 +90,7 @@
                         </div>
                       </div>
                       <div class="panel-body">
-                        <h5 class="margin-bottom-20">Unlock exclusive rewards for being a regular! Check in on <strong class="label-buy-color">Twyst</strong> every time you visit us or order.</h5>
+                        <h6 class="margin-bottom-20">Unlock exclusive rewards for being a regular! Check in on <strong class="label-buy-color">Twyst</strong> every time you visit us or order.</h6>
                         <span>
                           <h4 class="hidden-xs">
                             <span class="label label-danger label-buy" style="font-size: 0.8em; text-align: center;margin: 0em 0em -0.1em 0em;">On Check-in no.</span>
@@ -157,8 +161,8 @@
                       </div>
                     </div>
                   <div class="clearfix"></div>
-                  <div class="images">
-                  <div class="panel panel-default margin-bottom-20" ng-hide="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}2.png">
+                  <div class="images" ng-hide="hide_image_panel">
+                  <div class="panel panel-default margin-bottom-20" ng-if="outlet" ng-init="hidePanel()">
                     <div class="panel-heading">
                       <h3 class="panel-title">Photos</h3>
                     </div>
@@ -212,7 +216,7 @@
                         <div class="panel-body">
                           <div class="col-md-12 col-xs-12 no_padding_class">
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                              <span class="label label-warning label-buy">Cuisines:</span> <p class="font-size-eleven lets_wrap">{{outlet.attributes.cuisines.toString()}}</p>
+                              <span class="label label-warning label-buy">Cuisines:</span> <p class="font-size-eleven lets_wrap">{{outlet.attributes.cuisines.toString() | replaceComma }}</p>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
                               <span class="label label-warning label-buy">Cost For Two: </span><p class="font-size-eleven"><i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[0]}}</span></i> <span>to</span> <i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[1]}}</span></i><p>
@@ -290,7 +294,7 @@
                  </div>
                  <div class="clearfix"></div>
                  <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
-                  <div class="col-md-6 col-sm-6 col-xs-6">
+                  <div class="col-md-6 col-sm-6 col-xs-6 smoking_avail">
                     <div ng-show="outlet.attributes.smoking" class="padding_class">
                       <img src="images/Smoking.png" class="image_overview_column_attribute hidden-xs">
                       <span class="overflow-h padding-top font-size-eleven">
@@ -304,7 +308,7 @@
                      </span>  
                    </div>
                  </div>
-                 <div class="col-md-6 col-sm-6 col-xs-6" class="padding_class">
+                 <div class="col-md-6 col-sm-6 col-xs-6 smoking_avail" class="padding_class">
                   <div ng-show="outlet.attributes.outdoor" class="margin_negative_one margin_top_half">
                     <img src="images/Outdoor Seating.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
@@ -357,7 +361,9 @@
                 </div>
               </div>
 
-              <div class="clearfix"></div>
+              <div class="clearfix"></div> 
+              <h5 style="margin-left: 1em;">Map</h5>
+              <hr>
 
               <div class="col-xs-12" ng-if="outlet" ng-click="mapOpen('lg')">
                 <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
@@ -402,7 +408,7 @@
       <section id="services">
         <div class="container content-lg">
           <div class="title-v1" style="margin-bottom: 0px;">
-            <h2>other outlets on <span class="label-buy-color">Twyst.</span> Check out. Check-in.</h2>            
+            <h2 class="color_black">other outlets on <span class="label-buy-color">Twyst.</span> Check out. Check-in.</h2>            
           </div>            
 
 
