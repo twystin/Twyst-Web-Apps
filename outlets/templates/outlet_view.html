@@ -222,7 +222,7 @@
                               <span class="label label-warning label-buy">Cost For Two: </span><p class="font-size-eleven"><i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[0]}}</span></i> <span>to</span> <i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[1]}}</span></i><p>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                             <span class="label label-danger label-buy">Open From: </span> <p class="font-size-eleven">{{outlet.attributes.timings}}</p>
+                             <span class="label label-danger label-buy">Open From: </span> <p class="font-size-eleven">{{outlet.attributes.timings | replaceComma }}</p>
                            </div>
 
                          </div>
