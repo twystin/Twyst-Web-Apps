@@ -1,4 +1,13 @@
 /* Add here all your css styles (customizations) */
+.smoking_avail {
+    padding-right: 0px;
+}
+/* merchant logo */
+.merchant_logo_absolute {
+    position: absolute;
+    z-index: 999;
+    padding-top: 5em;
+}
 /* reset style */
 .header {
     overflow: visible !important;
@@ -29,6 +38,10 @@
     width: 50%;
 }
 /* slick slider */
+#bottom_slider_logos > .slick-list {
+    background: #fff;
+    padding: 2em;
+}
 #images_single_modal > button.slick-next:before, #images_single_modal > button.slick-prev:before{
     color: #fff;
 }
@@ -38,6 +51,7 @@
 #images_single_modal > button.slick-next {
     right: 70px;
 }
+
 /* offer panel */
 /*.panel_offer_callout :hover {
     background-color: white;
@@ -103,10 +117,11 @@ a.ios_button {
 	margin-left: 0em;	
 }
 #services {
-	background-color: #585f69;
+/*	background-color: #585f69;*/
+background-color: #fff;
 }
 #services > div > div > h2 {
-	color: #fff;
+	color: #b2b2b2;
 }
 .content-lg {
 	padding-top: 20px;
@@ -119,6 +134,7 @@ a.ios_button {
 figure {
     margin: 0;
     position: relative;
+    padding: 0em 1em 0em 1em;
 }
 figure img {
     display: block;
@@ -133,7 +149,7 @@ figure figcaption {
     z-index: 5;
 }
 figure h5 {
-    color: #fff;
+    color: #000;
     line-height: 1.2;
     font-weight: 700;
     margin-bottom: 10px;
@@ -167,7 +183,8 @@ figure figcaption {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #00979d;
+  /*  background-color: #00979d;*/
+    background: #fff;
     text-align: center;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
@@ -222,7 +239,7 @@ figure.hover figcaption {
 	padding-bottom: 0px;
 }
 .font-size-eleven {
-	font-size: 11px !important;
+	font-size: 12px !important;
 }
 .font-size-thirteen {
 	font-size: 13px !important;
