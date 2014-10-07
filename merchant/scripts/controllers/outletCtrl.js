@@ -64,6 +64,7 @@ twystApp.controller('OutletCtrl',
     $scope.init();
     $scope.hours = $rootScope.getRange(0, 23, 1);
     $scope.minutes = $rootScope.getRange(0, 59, 5);
+    $scope.sms_off = {};
 
     function setSmsOff (data) {
         if(data && data.value) {
