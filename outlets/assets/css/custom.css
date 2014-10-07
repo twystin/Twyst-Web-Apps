@@ -5,7 +5,7 @@
 /* merchant logo */
 .merchant_logo_absolute {
     position: absolute;
-    z-index: 999;
+    z-index: 99;
     padding-top: 5em;
 }
 /* reset style */
