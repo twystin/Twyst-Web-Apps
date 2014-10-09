@@ -1,7 +1,7 @@
 /* Custom Fonts */
 @font-face {
-	font-family: 'sapientnormal';
-	src: url('../fonts/sapient sans/SAPISM.TTF');
+    font-family: 'sapientnormal';
+    src: url('../fonts/sapient sans/SAPISM.TTF');
 }
 @font-face {
     font-family: 'knockout50';
@@ -19,10 +19,10 @@
 /*Job-Description
 ------------------------------------*/
 .job-description {
-	padding-bottom: 30px;
-	position: relative;
-	background-color: #fff !important;
-	border-top: 1px solid #eee;
+    padding-bottom: 30px;
+    position: relative;
+    background-color: #fff !important;
+    border-top: 1px solid #eee;
     background-size: cover;
     background-repeat: no-repeat;
     font-family: "sapientnormal";
@@ -30,173 +30,173 @@
 
 /*Visit*/
 .job-description .visit {
-	text-align: center;
-	margin-bottom: 30px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .job-description .visit h2 {
-	font-size: 25px;
-	text-transform: uppercase;
+    font-size: 25px;
+    text-transform: uppercase;
 }
 
 /*Left-Inner*/
 
 .job-description .left-inner {
-	padding: 20px;
-	background: none;
-	position: relative;
+    padding: 20px;
+    background: none;
+    position: relative;
 }
 
 .job-description i.position-top {
-	color: #777;
-	top: 10px;
-	right: 10px;
-	font-size: 18px;
-	min-width: 28px;
-	padding: 5px 4px;
-	position: absolute;
-	text-align: center;
+    color: #777;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    min-width: 28px;
+    padding: 5px 4px;
+    position: absolute;
+    text-align: center;
 }
 
 .job-description i.position-top:hover {
-	color: #fff;
-	background: #585f69;
+    color: #fff;
+    background: #585f69;
 }
 
 .job-description .left-inner img {
-	float: left;
-	width: 200px;
-	height: 70px;
-	padding: 3px;
-	margin: 0 10px 10px 0;
+    float: left;
+    width: 200px;
+    height: 70px;
+    padding: 3px;
+    margin: 0 10px 10px 0;
 }
 
 .job-description .left-inner h3 {
-	margin: 0 0 5px;
+    margin: 0 0 5px;
 }
 
 .job-description .left-inner p.hex {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .job-description .star-vote {
-	float: left;
-	margin-right: 10px;
+    float: left;
+    margin-right: 10px;
 }
 
 .job-description .star-vote li {
-	padding: 0;
+    padding: 0;
 }
 
 /*Progresses*/
 .job-description .progression span {
-	float: left;
-	width: 150px;
-	margin: -8px 15px 0 0;
+    float: left;
+    width: 150px;
+    margin: -8px 15px 0 0;
 }
 
 /*Right-Inner*/
 .job-description .right-inner {
-	padding: 20px;
-	background: none;
+    padding: 20px;
+    background: none;
 }
 
 .job-description .right-inner img {
-	float: left;
-	width: 40px;
-	height: auto;
-	margin-right: 10px;
+    float: left;
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
 }
 
 .job-description .right-inner .font-s {
-	font-size: 18px;
+    font-size: 18px;
 }
 
 .job-description .right-inner hr {
-	margin: 15px 0;
+    margin: 15px 0;
 }
 
 /*P-chart-v2*/
 .job-description .p-chart {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .job-description .p-chart h3 {
-	font-size: 16px;
+    font-size: 16px;
 }
 
 .job-description .p-chart .circle {
-	float: left;
-	margin-right: 10px;
+    float: left;
+    margin-right: 10px;
 }
 
 .job-description .p-chart .overflow-h li i,
 .job-description .p-chart .overflow-h li a {
-	color: #72c02c;
+    color: #72c02c;
 }
 
 .job-description .p-chart .overflow-h li a {
-	font-size: 11px;
+    font-size: 11px;
 }
 /*Circle in Responsive*/
 @media (max-width: 450px) {
-	.job-description .p-chart.col-xs-6 {
-		width: 100%;
-	}
+    .job-description .p-chart.col-xs-6 {
+        width: 100%;
+    }
 }
 
 /*Save-Job*/
 .job-description .save-job li {
-	padding: 2px 0;
+    padding: 2px 0;
 }
 
 .job-description .save-job i {
-	color: #999;
-	min-width: 25px;
-	text-align: center;
+    color: #999;
+    min-width: 25px;
+    text-align: center;
 }
 
 .job-description .save-job a {
-	color: #999;
+    color: #999;
 }
 
 .job-description .save-job a:hover {
-	color: #72c02c;
+    color: #72c02c;
 }
 
 /*Overview*/
 .job-description .overview i {
-	color: #fff;
-	float: left;
-	min-width: 38px;
-	font-size: 20px;
-	padding: 10px 3px;
-	text-align: center;
-	margin-right: 10px;
-	background: #1d9b72;
-	border-radius: 50% !important;
+    color: #fff;
+    float: left;
+    min-width: 38px;
+    font-size: 20px;
+    padding: 10px 3px;
+    text-align: center;
+    margin-right: 10px;
+    background: #1d9b72;
+    border-radius: 50% !important;
 }
 
 /*People-Say*/
 .job-description .people-say img {
-	float: left;
-	width: 40px;
-	height: auto;
-	margin: 6px 10px 0 0;
+    float: left;
+    width: 40px;
+    height: auto;
+    margin: 6px 10px 0 0;
 }
 
 .job-description .people-say .overflow-h span {
-	font-weight: 700;
+    font-weight: 700;
 }
 
 .job-description .people-say .overflow-h p {
-	font-style: italic;
-	line-height: 1.2;
+    font-style: italic;
+    line-height: 1.2;
 }
 
 .job-description .people-say .overflow-h small {
-	text-align: right;
-	font-style: italic;
+    text-align: right;
+    font-style: italic;
 }
 
 /* Custom CSS */
@@ -212,13 +212,13 @@
     clip: rect(0 120px 38px 0);
     margin-left: -5em;
 }
- .z_background_image {
-        width: 100%;
-        height: 35em;
-        z-index: 0;
-        position: absolute;
-        top: 0;
-    }
+.z_background_image {
+    width: 100%;
+    height: 35em;
+    z-index: 0;
+    position: absolute;
+    top: 0;
+}
 #image_address_icon {
     height: 15px;
     margin-top: -0.3em;
@@ -300,12 +300,12 @@ div.panel-heading > h4 > a > span {
     margin-right: 6%;
 }
 .heading-padded-blocks {
-	margin: 1em 0em 1em 1em !important;
-	padding: 0.5em 1em 0.5em 1em !important;
-	background: #f59221;
-	width: 50%;
-	z-index: 99;
-	line-height: 24px;
+    margin: 1em 0em 1em 1em !important;
+    padding: 0.5em 1em 0.5em 1em !important;
+    background: #f59221;
+    width: 50%;
+    z-index: 99;
+    line-height: 24px;
 
 }
 .heading-padded-blocks-auto {
@@ -324,16 +324,16 @@ div.panel-heading > h4 > a > span {
     line-height: 24px;
 }
 .inner_row_begins{
-	margin-top: 0em;
+    margin-top: 0em;
 
 }
 .right-inner-img{
-	float: right !important;
-	margin: 0em;
+    float: right !important;
+    margin: 0em;
 }
 /* moving highlights to left */
 .left-inner-highlights{
-	margin-left: -1em;
+    margin-left: -1em;
     margin-top: 0.5em;
     font-family: "sapientregular";
 }
@@ -341,161 +341,156 @@ div.panel-heading > h4 > a > span {
 /* Carousel */
 /* changing background color of inner images to #b1b1b1 */
 .carousel-inner>.item {
-	background: black;
+    background: black;
 }
 /* changing backgrounds of both left and right arrows */
 .carousel-control.left, .carousel-control.right {
-	background: beige;
-	width: 1em;
+    background: beige;
+    width: 1em;
 }
 
 .carousel-inner{
-	height: 20em;
+    height: 20em;
 }
 .carousel-inner > .item > img, .carousel-inner >.item> a >img {
     display: inline;
     float: center;
     height: 20em;
- }
- .carousel img {
- 	top: 0;
- 	left: 0;
- 	min-width: 100%;
- 	max-width: none;
- }
+}
+.carousel img {
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    max-width: none;
+}
 
 #outlet_name, .font_fixed_sapient{
-	font-family: "sapientregular";
-	font-weight: 200;
+    font-family: "sapientregular";
+    font-weight: 200;
 }
 .font_fixed_sapient {
     font-size: 14px;
 }
 .social-icons li a {
-	border-radius: 50% !important;
+    border-radius: 50% !important;
 }
 #appstore_image {
-	width: 30%;
+    width: 30%;
 }
 .download_app_call_to_action {
-	text-align: center;
+    text-align: center;
 }
 .download_app_call_to_action > p {
-	margin-left: 2em;
+    margin-left: 2em;
 }
 .left-inner-parent{
-	border-top-left-radius: 5px !important;
-	border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
 }
 
 #social_share_icons {
-	margin-left: 10em;
+    margin-left: 10em;
 }
 .social_share_url {
-	float: left;
-	margin-top: 1em;
+    float: left;
+    margin-top: 1em;
 }
 .inner_row {
-	margin-top: 1em;
+    margin-top: 1em;
 }
 #right_inner_block {
-	margin-top: 3.9em;
+    margin-top: 3.9em;
 }
 
 
 /* moving CSS from top of outlet_view */
 
-    .center{
-        text-align: center;
-    }
-    .right{
-    	text-align: right;
-    }
-    .color_black{
-        color: black;        
-    }
-    .merchant_logo{
-        width: 125px;
-        height: auto;
-    }
-   /* background-image: url("../images/Twyst_blur.jpg");
-   background-image: url("../images/b3.jpg"); */
-    .bg{
-        background-repeat: no-repeat;
-        z-index: -9999;
-        background-size: contain;
+.center{
+    text-align: center;
+}
+.right{
+    text-align: right;
+}
+.color_black{
+    color: black;        
+}
+.merchant_logo{
+    width: auto;
+    height: auto;
+}
 
-    }
-    .padding-top{
-        padding-top: 10px;
-    }
-    .padding-top-5{
-        padding-top: 5px;
-    }
-    /*
-    .header{
-        padding:8px 0px 8px 0px;
-    } */
-    .color_white {
-    	color: #fff;
-    }
-    .right_container_carousel {
-    	width: 100%;
-    }
-   
-    #outlet_image_carousel > img {
-    	height: 20em;
-    }
-    #scrolling_carousal > img{
-    	height: 160px;
-    	width: 160px;
-    }
-    .job-description .overview_unavailable i{
-    	color: #fff;
-		float: left;
-		min-width: 38px;
-		font-size: 20px;
-		padding: 10px 3px;
-		text-align: center;
-		margin-right: 10px;
-		background: #fff;
-		border-radius: 50% !important;
-    }
-     .job-description .overview_grey i{
-    	color: #fff;
-		float: left;
-		min-width: 38px;
-		font-size: 20px;
-		padding: 10px 3px;
-		text-align: center;
-		margin-right: 10px;
-		background: #bfbebd;
-		border-radius: 50% !important;
-    }
-    .left_margin_icon {
-    	margin-left: 0.76em;
-    }
-    #share_image > img{
-        width: 28px;
-        height: 28px;
-        float: left;
-    }
-    #share_image {
-        border: solid 1px #f59221;
-        padding: 0.3em;
-        margin: -0.5em -1em 0em 0em;
-        display: none;
-    }
-    #share_text {
-        line-height: 2;
-    }
-    #foodpanda_zomato_links > img {
-        margin: 0.5em 2em 0em 0em;
-    }
-    #heading_left_aligned {
-        margin-left: 0em !important;
-    }
-    /* Responsive */
+.bg{
+    background-repeat: no-repeat;
+    z-index: -9999;
+    background-size: contain;
+
+}
+.padding-top{
+    padding-top: 10px;
+}
+.padding-top-5{
+    padding-top: 5px;
+}
+.color_white {
+    color: #fff;
+}
+.right_container_carousel {
+    width: 100%;
+}
+
+#outlet_image_carousel > img {
+    height: 20em;
+}
+#scrolling_carousal > img{
+    height: 160px;
+    width: 160px;
+}
+.job-description .overview_unavailable i{
+    color: #fff;
+    float: left;
+    min-width: 38px;
+    font-size: 20px;
+    padding: 10px 3px;
+    text-align: center;
+    margin-right: 10px;
+    background: #fff;
+    border-radius: 50% !important;
+}
+.job-description .overview_grey i{
+    color: #fff;
+    float: left;
+    min-width: 38px;
+    font-size: 20px;
+    padding: 10px 3px;
+    text-align: center;
+    margin-right: 10px;
+    background: #bfbebd;
+    border-radius: 50% !important;
+}
+.left_margin_icon {
+    margin-left: 0.76em;
+}
+#share_image > img{
+    width: 28px;
+    height: 28px;
+    float: left;
+}
+#share_image {
+    border: solid 1px #f59221;
+    padding: 0.3em;
+    margin: -0.5em -1em 0em 0em;
+    display: none;
+}
+#share_text {
+    line-height: 2;
+}
+#foodpanda_zomato_links > img {
+    margin: 0.5em 2em 0em 0em;
+}
+#heading_left_aligned {
+    margin-left: 0em !important;
+}
+/* Responsive */
 @media (max-width: 999px) {
     .heading-padded-blocks {
         width: 100%;
@@ -516,8 +511,8 @@ div.panel-heading > h4 > a > span {
         color: #fff;
         line-height: 1em;
     }
-   
+    
 }
- 
+
 }
 
