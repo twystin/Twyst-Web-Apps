@@ -13,18 +13,33 @@
     overflow: visible !important;
 }
 /*discover tab css */
+#distance_discover_tab {
+    float: right;
+    font-size: 11px;
+}
+/*.popover {
+    background-color: #e1e1e1;
+    position: absolute !important;
+    z-index: 9999!important;
+}*/
+#distance_discover_no_location {
+    z-index: 9999;
+    position: absolute;
+    margin: -14em 0em 0em 18em;
+}
 .wrap_discover {
     padding-top: 4em;
 }
 .outlet_image_discover {
     /*border: 1px solid #fff;*/
     overflow: hidden;
-    padding-right: 0px;
-    padding-left: 0px;
+    padding: 2em;
+    height: 30em;
+
 }
 .outlet_image_discover > img {
-    height: 400px;
-    width: auto;
+    height: 200px;
+    width: 100%;
     opacity: 0.6;
     -webkit-transition: opacity 0.35s, 
     transform 0.35s;
@@ -34,12 +49,12 @@
     transform: translate3d(-10px,0,0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    border-radius: 6px !important;
 }
 .effect-discover > figcaption {
-    z-index: 99;
-    margin-top: -10em;
+    /*margin-top: -10em;*/
     background: transparent;
-    position: absolute;
+    position: relative;
 }
 .hidden_text{
     position: relative;
@@ -52,7 +67,7 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: #fff;
+    background: #b1b1b1;
     content: '';
     -webkit-transition: -webkit-transform 0.35s;
     transition: transform 0.35s;
