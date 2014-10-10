@@ -26,7 +26,7 @@ factory('dataSvc', function($http, $q) {
 	dataSvc.getUserDataInfo = function(latitude, longitude) {
 		var deferred = $q.defer();
         //console.log("URL REQUEST" + 'http://twyst.in/api/v2/data/' + latitude + '/' + longitude)
-        $http.get('http://localhost:3000/api/v2/data/' + latitude + '/' + longitude + '/', {
+        $http.get('/api/v2/data/' + latitude + '/' + longitude + '/', {
             timeout: 60000,
             cache: false,
             headers: {
