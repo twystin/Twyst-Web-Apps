@@ -1,5 +1,5 @@
 
-var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'd3onut', 'AngularGM', 'slick']);
+var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'd3onut', 'AngularGM', 'slick', 'twyst.data']);
 
 outletApp.filter('replaceComma', function () {
   return function (item) {
@@ -167,7 +167,41 @@ outletApp.directive('sliderSingle',function ($timeout){
    }
  }
 }); 
+outletApp.controller('DiscoverCtrl', function ($scope, $http, dataSvc, $window) {
+    $scope.userlocation = false;
+    var lat = 28.47178,
+        lon = 77.1016;
+    getUserData(lat, lon);
+    $scope.getLocation = function () {
+            $window.navigator.geolocation.getCurrentPosition(function(position) {
+              console.log(position)
+              $scope.$apply(function() {
+                  $scope.location = position;
+                  if(position && position.coords && position.coords.latitude && position.coords.longitude) {
+                    lat = position.coords.latitude;
+                    lon = position.coords.longitude;
+                    $scope.userlocation = true;
+                  }
+                  getUserData(lat, lon);
+                  // console.log($scope.location.coords.longitude);
+              });
+              }, function(error) {
+                  $scope.message="Error getting location automatically. Please enter co-ordinates manually.";
+                  console.log(error);
+          });
 
+    }
+
+    function getUserData(latitude, longitude) {
+      dataSvc.getUserDataInfo(latitude, longitude).then(function (data) {
+          $scope.data = data.data;
+     });
+    }
+
+        $scope.getLocation();
+        
+       
+});
 outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal, $http) {
 
   $scope.getOutletOpts = function (outlet) {
@@ -259,11 +293,7 @@ function setMapData() {
 
 $scope.getOutlet();
 
-$scope.getLocation = function () {
-  outletService.getLocation().then(function (data) {
-    $scope.outlets_data = data;
-  });
-}
+
 
 $scope.getUrI = function (outlet) {
   if (outlet && outlet.links) {
@@ -321,18 +351,18 @@ $scope.getCostForTwoText = function (outlet) {
      console.log(data);
    });                                                                                         
   };
-  outletService.getLocation = function () {
-    var deferred = $q.defer();
-    $http({
-      url: '/api/v2/data/28/77',
-      method: 'GET'
-    }).success(function (data) {
-      deferred.resolve (data.info);
-    }).error(function (data) {
-      deferred.resolve(data);
-    });
-    return deferred.promise;
-  };
+  // outletService.getLocation = function () {
+  //   var deferred = $q.defer();
+  //   $http({
+  //     url: '/api/v2/data/28/77',
+  //     method: 'GET'
+  //   }).success(function (data) {
+  //     deferred.resolve (data.info);
+  //   }).error(function (data) {
+  //     deferred.resolve(data);
+  //   });
+  //   return deferred.promise;
+  // };
   outletService.getSlugs = function () {
 
     var deferred = $q.defer();
