@@ -1,158 +1,130 @@
 <!DOCTYPE html>
 <html ng-app="outletApp"> 
 <head>
-    <title>Twyst | Get in touch</title>
+  <title>Twyst</title>
 
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <!-- CSS Global Compulsory-->
-    <link rel="stylesheet" type="text/css" href="styles/custom.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../home/assets/css/style.css">
-    <link rel="stylesheet" href="../home/assets/css/headers/header1.css">
-    <link rel="stylesheet" href="../home/assets/css/responsive.css">
-    <link rel="icon" href="images/twyst.ico">   
-    <link rel="stylesheet" type="text/css" href="styles/page_job_inner1.css"> 
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">    
-    <!-- CSS Implementing Plugins -->    
-    <!-- CSS Page Style -->    
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.6/slick.css"/>
-    <link rel="stylesheet" href="../home/assets/css/pages/page_contact.css">
-    <!-- CSS Theme -->    
-    <link rel="stylesheet" href="../home/assets/css/themes/default.css" id="style_color">
-    <link rel="stylesheet" href="../home/assets/css/themes/headers/default.css" id="style_color-header-1"> 
-    
-    
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.theme.min.css">
-    <!--unify -->
+  <!-- CSS Global Compulsory-->
+  <link rel="stylesheet" type="text/css" href="styles/custom.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../home/assets/css/style.css">
+  <link rel="stylesheet" href="../home/assets/css/headers/header1.css">
+  <link rel="stylesheet" href="../home/assets/css/responsive.css">
+  <link rel="icon" href="images/twyst.ico">   
+  <link rel="stylesheet" type="text/css" href="styles/page_job_inner1.css"> 
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">    
+  <!-- CSS Implementing Plugins -->    
+  <!-- CSS Page Style -->    
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.6/slick.css"/>
+  <link rel="stylesheet" href="../home/assets/css/pages/page_contact.css">
+  <!-- CSS Theme -->    
+  <link rel="stylesheet" href="../home/assets/css/themes/default.css" id="style_color">
+  <link rel="stylesheet" href="../home/assets/css/themes/headers/default.css" id="style_color-header-1"> 
 
+  <!-- CSS Global Compulsory -->
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+  <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">    
+  <link rel="stylesheet" href="assets/plugins/pace/pace-flash.css">  
+  <link rel="stylesheet" href="assets/plugins/revolution-slider/examples-sources/rs-plugin/css/settings.css" type="text/css" media="screen">
+  <!-- load css for cubeportfolio -->
+  <link rel="stylesheet" type="text/css" href="assets/plugins/cbp-plugin/cubeportfolio/css/cubeportfolio.min.css">
 
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">    
-    <link rel="stylesheet" href="assets/plugins/pace/pace-flash.css">
-    <link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">    
-    <link rel="stylesheet" href="assets/plugins/revolution-slider/examples-sources/rs-plugin/css/settings.css" type="text/css" media="screen">
-    <!-- load css for cubeportfolio -->
-    <link rel="stylesheet" type="text/css" href="assets/plugins/cbp-plugin/cubeportfolio/css/cubeportfolio.min.css">
+  <!-- load main css for this page -->
+  <link rel="stylesheet" type="text/css" href="assets/plugins/cbp-plugin/templates/lightbox-gallery/css/main.css">
+  <link rel="stylesheet" type="text/css" href="styles/feature_timeline2.css">
 
-    <!-- load main css for this page -->
-    <link rel="stylesheet" type="text/css" href="assets/plugins/cbp-plugin/templates/lightbox-gallery/css/main.css">
-    <link rel="stylesheet" type="text/css" href="styles/feature_timeline2.css">
+  <!-- CSS Customization -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.18.min.js"></script>
+  <!-- scripts -->
+  <div id="fb-root"></div>
 
-    <!-- CSS Customization -->
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <!--unify-->
-
-
-    <!-- scripts -->
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
-    
-    <script type="text/javascript" src="../home/assets/js/pages/contact.js"></script>
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-51763503-1', 'twyst.in');
-      ga('send', 'pageview');
-
-    </script>     
-    <style type="text/css">
+  <style type="text/css">
     .navbar-default .navbar-nav > li > a:before, .top-nav-collapse .navbar-brand, .top-nav-collapse .navbar-nav > li > a, .top-nav-collapse.navbar-default .navbar-nav > li > a:before{
-        color: #000;
+      color: #000;
     }
 
-    </style>  
+  </style>  
 
 </head> 
 
 <body id="body" data-spy="scroll" data-target=".navbar-fixed-top" class="demo-lightbox-gallery">
 
-<!--=== Top ===-->    
-<div class="top">
+  <!--=== Top ===-->    
+  <div class="top">
     <div class="container">         
-        <ul class="loginbar pull-right">
-        </ul>
+      <ul class="loginbar pull-right">
+      </ul>
     </div>      
-</div><!--/top-->
-<!--=== End Top ===-->   
+  </div><!--/top-->
+  <!--=== End Top ===-->   
 
-<!--=== Header ===-->    
-<div class="header">
+  <!--=== Header ===-->    
+  <div class="header">
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <img id="logo-header" src="../home/assets/img/twyst_logo_2.png" alt="Logo" height="50px" width="auto">                
-                </a>
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">
+            <img id="logo-header" src="../home/assets/img/twyst_logo_2.png" alt="Logo" height="50px" width="auto">                
+          </a>
+        </div>
 
-            </div>
-            
-           
-            <!-- Collect the nav links, forms, and other content for toggling -->
-         
-                <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
-                   <!--  <li style="margin-top: -1em;">
-                        
-                    </li>
-                      <li >
-                         
-                      </li> -->
-                    <li style="margin-top: -0.6em">
-                    <span style="height: 45px; width: 290px;" class="header_badges_sprite">
-                    <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android" class="android_button"></a>
-                    <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store" class="ios_button"></a>
-                    </span>
-                    </li>
-                    <li>
-                        <a href="index.html">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html#how">
-                            How it works
-                        </a>                       
-                    </li>
-                  
-                    <li>
-                        <a href="http://twyst.in/merchant/">
-                            For merchants
-                        </a>
-                    </li>               
-<!--                    <li class="hidden-sm"><a class="search"><i class="icon-search search-btn"></i></a></li> -->
-                </ul>
-                <div class="search-open">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button class="btn-u" type="button">Go</button>
-                        </span>
-                    </div><!-- /input-group -->
-                </div>                
-            </div><!-- /navbar-collapse -->
-        </div>    
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
+          <li style="margin-top: -0.6em" class="hidden-xs hidden-sm">
+            <span style="height: 45px; width: 290px;" class="header_badges_sprite">
+              <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android" class="android_button"></a>
+              <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store" class="ios_button"></a>
+            </span>
+          </li>
+          <li> 
+            <a href="/home">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/home/#how">
+              How it works
+            </a>                       
+          </li>
+
+          <li>
+            <a href="http://twyst.in/merchant/">
+              For merchants
+            </a>
+          </li>               
+
+        </ul>
+        <div class="search-open">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-btn">
+              <button class="btn-u" type="button">Go</button>
+            </span>
+          </div><!-- /input-group -->
+        </div>                
+      </div><!-- /navbar-collapse -->
     </div>    
+  </div>    
+
 </div><!--/header-->
 <!--=== End Header ===-->
 <div ng-view ></div>
@@ -160,84 +132,68 @@
 
 <!--=== Copyright ===-->
 <div class="copyright">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">                      
-                <p class="copyright-space">
-                    2013 &copy; Twyst Technologies Pvt. Ltd. 
-                    <a href="http://twyst.in/legal/Privacy_Policy.pdf">Privacy Policy</a> | <a href="http://twyst.in/legal/terms_of_use.pdf">Terms of Service</a>
-                </p>
-            </div>
-            <div class="col-md-6">  
-                <a href="index.html">
-                    <img id="logo-footer" src="../home/assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
-                </a>
-            </div>
-        </div><!--/row-->
-    </div><!--/container--> 
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">                      
+        <p class="copyright-space">
+          2013 &copy; Twyst Technologies Pvt. Ltd. 
+          <a href="http://twyst.in/legal/Privacy_Policy.pdf">Privacy Policy</a> | <a href="http://twyst.in/legal/terms_of_use.pdf">Terms of Service</a>
+        </p>
+      </div>
+      <div class="col-md-6">  
+        <a href="index.html">
+          <img id="logo-footer" src="../home/assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
+        </a>
+      </div>
+    </div><!--/row-->
+  </div><!--/container--> 
 </div><!--/copyright--> 
 <!--=== End Copyright ===-->
 
-<!-- end unify -->
-<!-- JS Global Compulsory -->           
+<!-- JS Global Compulsory --> 
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>    
-    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- JS Implementing Plugins -->
-    <script type="text/javascript" src="assets/plugins/jquery.easing.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/pace/pace.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery.parallax.js"></script>
-    <script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script>
-      
+<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="assets/plugins/jquery.easing.min.js"></script>
+<script type="text/javascript" src="assets/plugins/pace/pace.min.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery.parallax.js"></script>
+<script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
+<script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script>
+
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script> 
 <!-- JS Implementing Plugins -->           
 
 <!-- JS Page Level -->  
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-file-upload/0.5.6/angular-file-upload.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-cookies.min.js"></script>
-    <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script> 
-    <script src="//angulargm.herokuapp.com/angular-gm-0.2.0.min.js"></script>
-    <!-- Angular Bootstrap CDN 0.10.0 -->
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/tooltip.min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.14/js/ngDialog.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-file-upload/0.5.6/angular-file-upload.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-cookies.min.js"></script>
+<script src="//maps.googleapis.com/maps/api/js?sensor=false"></script> 
+<script src="//angulargm.herokuapp.com/angular-gm-0.2.0.min.js"></script>
+<!-- Angular Bootstrap CDN 0.10.0 -->
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/tooltip.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.14/js/ngDialog.min.js"></script>
 
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            App.init();
-            App.initCounter();
-            App.initParallaxBg();
-            OwlCarousel.initOwlCarousel();  
-            $(".fa-cog").tooltip({placement : 'top'});
-        });
-    </script>
-    <script type="text/javascript" src="assets/js/app.js"></script>
 
-    <script type="text/javascript">
-        var revapi;
-        jQuery(document).ready(function() {
-           revapi = jQuery('.fullscreenbanner').revolution(
-            {
-                delay:15000,
-                startwidth:1170,
-                startheight:500,
-                hideThumbs:10,
-                fullWidth:"on",
-                fullScreen:"on",
-                dottedOverlay:"twoxtwo",
-                fullScreenOffsetContainer: "",
-            });
-        });
-        
-    </script>
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    App.init();
+    App.initCounter();
+    App.initParallaxBg();
+    $(".fa-cog").tooltip({placement : 'top'});
+  });
+</script>
+<script type="text/javascript" src="assets/js/app.js"></script>
 
-    <script type="text/javascript">
-        paceOptions = {
+
+<script type="text/javascript">
+  paceOptions = {
           // Disable the 'elements' source
           elements: false,
 
@@ -245,28 +201,28 @@
           // not every request
           restartOnRequestAfter: false
         }
-    </script>
-    <!-- -->
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.6/slick.min.js"></script>
-    <script type="text/javascript" src="slick.js"></script>
-    <script type="text/javascript" src="donutdirective.js"></script>
-    <script type="text/javascript" src="d3Svc.js"></script>
-    <script type="text/javascript" src="app.js" ></script>
+      </script>
+      <!-- -->
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.6/slick.min.js"></script>
+      <script type="text/javascript" src="slick.js"></script>
+      <script type="text/javascript" src="donutdirective.js"></script>
+      <script type="text/javascript" src="d3Svc.js"></script>
+      <script type="text/javascript" src="app.js" ></script> 
 
-<div id="fb-root"></div>
-            <script>
-            (function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "https://connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=763534923659747&version=v2.0";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script> 
+      <script type="text/javascript" src="../home/assets/js/pages/contact.js"></script>
 
-<!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-<![endif]-->
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-</body>
-</html> 
+        ga('create', 'UA-51763503-1', 'twyst.in');
+        ga('send', 'pageview');
+
+      </script>
+      <script src="http://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
+
+
+    </body>
+    </html> 

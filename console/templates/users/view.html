@@ -30,7 +30,10 @@
                         Phone
                     </th>
                     <th>
-                        Created at
+                        Joined
+                    </th>
+                    <th>
+                        Last seen
                     </th>
                 </tr>
             </thead>
@@ -47,6 +50,9 @@
                     </td>
                     <td>
                         {{c.created_at | date: 'medium'}}
+                    </td>
+                    <td>
+                        {{c.last_seen | date: 'medium'}}
                     </td>
                 </tr>
             </tbody>

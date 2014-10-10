@@ -1,9 +1,109 @@
 /* Add here all your css styles (customizations) */
+.smoking_avail {
+    padding-right: 0px;
+}
+/* merchant logo */
+.merchant_logo_absolute {
+    position: absolute;
+    z-index: 99;
+    padding-top: 5em;
+}
+/* reset style */
+.header {
+    overflow: visible !important;
+}
+/*discover tab css */
+.wrap_discover {
+    padding-top: 4em;
+}
+.outlet_image_discover {
+    /*border: 1px solid #fff;*/
+    overflow: hidden;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.outlet_image_discover > img {
+    height: 400px;
+    width: auto;
+    opacity: 0.6;
+    -webkit-transition: opacity 0.35s, 
+    transform 0.35s;
+    -webkit-transform 0.35s;
+    transition: opacity 0.35s, 
+    -webkit-transform: translate3d(-10px,0,0);
+    transform: translate3d(-10px,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.effect-discover > figcaption {
+    z-index: 99;
+    margin-top: -10em;
+    background: transparent;
+    position: absolute;
+}
+.hidden_text{
+    position: relative;
+    overflow: hidden;
+    /*padding: 0.5em 0;*/
+}
+.hidden_text::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    content: '';
+    -webkit-transition: -webkit-transform 0.35s;
+    transition: transform 0.35s;
+    -webkit-transform: translate3d(-100%,0,0);
+    transform: translate3d(-100%,0,0);
+}
+.effect-discover:hover img {
+    opacity: 0.4 !important;
+    -webkit-transform: translate3d(0,0,0)!important;
+    transform: translate3d(0,0,0)!important;
+}
+.effect-discover:hover {
+    /*background: #42b078 !important;*/
+    color: #fff !important;
+}
+.effect-discover:hover .hidden_text::after {
+    -webkit-transform: translate3d(0,0,0)!important;
+    transform: translate3d(0,0,0)!important;
+}
+/* Badges small screen */
+.badges_small_screen {
+    margin: 2em 0em 1em -1em;
+    display: inline-flex;
+}
+
+
+/*accordion */
+.small-screen-accordion > .panel-heading {
+    background-color: #f59221 !important;
+    font-size: 12px !important;
+    border-color: transparent;
+}
+.small-screen-accordion {
+    border-color: transparent;
+}
+.small-screen-accordion > .panel-heading > .panel-title > a {
+    font-size: 12px !important;
+}
+.small-screen-accordion > .panel-heading > .panel-title > a:hover {
+    color: #fff;
+    text-decoration: none;
+}
 /*popover */
 .popover.top{
     width: 50%;
 }
 /* slick slider */
+#bottom_slider_logos > .slick-list {
+    background: #fff;
+    padding: 2em;
+}
 #images_single_modal > button.slick-next:before, #images_single_modal > button.slick-prev:before{
     color: #fff;
 }
@@ -11,8 +111,9 @@
     left: 60px;
 }
 #images_single_modal > button.slick-next {
-    right: 85px;
+    right: 70px;
 }
+
 /* offer panel */
 /*.panel_offer_callout :hover {
     background-color: white;
@@ -78,10 +179,11 @@ a.ios_button {
 	margin-left: 0em;	
 }
 #services {
-	background-color: #585f69;
+/*	background-color: #585f69;*/
+background-color: #fff;
 }
 #services > div > div > h2 {
-	color: #fff;
+	color: #b2b2b2;
 }
 .content-lg {
 	padding-top: 20px;
@@ -91,35 +193,35 @@ a.ios_button {
 	margin-left: -2.4em;
 }
 /* slider new style */
-figure {
+.figure_bottom_carousel {
     margin: 0;
     position: relative;
+    padding: 0em 1em 0em 1em;
 }
-figure img {
+.figure_bottom_carousel img {
     display: block;
     position: relative;
     z-index: 10;
     max-width: 100%;
     height: auto;
 }
-figure figcaption {
+.figure_bottom_carousel figcaption {
     display: block;
     position: absolute;
     z-index: 5;
 }
-figure h3 {
-    color: #fff;
-    font-size: 22px;
+.figure_bottom_carousel h5 {
+    color: #000;
     line-height: 1.2;
     font-weight: 700;
     margin-bottom: 10px;
 }
-figure span {
+.figure_bottom_carousel span {
     color: #b2cce1;
     display: block;
     line-height: 1.2;
 }
-figure a.close-caption {
+.figure_bottom_carousel a.close-caption {
     display: block;
     position: absolute;
     width: 44px;
@@ -130,7 +232,7 @@ figure a.close-caption {
     font-weight: 700;
     color: #315a7d;
 }
-figure a.close-caption.hidden {
+.figure_bottom_carousel a.close-caption.hidden {
     display: none
 }
 /* effect */
@@ -138,12 +240,13 @@ a.close-caption {
     top: 10px;
     right: 10px;
 }
-figure figcaption {
+.figure_bottom_carousel figcaption {
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #00979d;
+  /*  background-color: #00979d;*/
+    background: #fff;
     text-align: center;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
@@ -160,10 +263,10 @@ figure figcaption {
     -o-transition: all 0.5s;
     transition: all 0.5s;
 }
-figure figcaption h3 {
-    margin-top: 50px;
+.figure_bottom_carousel figcaption h5 {
+    margin-top: 20px;
 }
-figure img {
+.figure_bottom_carousel img {
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -ms-backface-visibility: hidden;
@@ -174,16 +277,16 @@ figure img {
     -o-transition: all 0.5s;
     transition: all 0.5s;
 }
-figure:hover img,
-figure.hover img {
+.figure_bottom_carousel:hover img,
+.figure_bottom_carousel.hover img {
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     -ms-transform: rotateY(180deg);
     -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
-figure:hover figcaption,
-figure.hover figcaption {
+.figure_bottom_carousel:hover figcaption,
+.figure_bottom_carousel.hover figcaption {
     -webkit-transform: rotateY(0);
     -moz-transform: rotateY(0);
     -ms-transform: rotateY(0);
@@ -192,7 +295,7 @@ figure.hover figcaption {
 }
 
 .about-image {
-	background: none;
+	background: url(images/cnd.png);
 }
 .page-header {
 	padding-bottom: 0px;
@@ -253,7 +356,7 @@ hr {
 	padding-right: 0px;
 }
 #image_background {
-	/*background: url(../../images/BiryaniBlues.png);*/
+	/*background: url(../../images/cnd.png);*/
 	background-repeat: no-repeat;
 	background-size: cover!important;
 }
@@ -262,7 +365,7 @@ hr {
 }
 .outlet_info {
 	height: 18em;
-	margin-top: 40px;
+	margin-top: 60px;
 }
 .map_location{
 	margin-top: 3em;
@@ -352,10 +455,38 @@ hr {
    transform: scale(0);
 }
 
+
+@media (max-width: 1200px) {
+   .badges_small_screen {
+    margin: 4em 0em -1em 0em;
+   }
+}
+@media (max-width: 990px) {
+    .header_badges_sprite{
+        margin-right: 6em;
+    }
+}
 @media (max-width: 768px) {
    .fancybox-overlay {
       background: none !important;
    }
+   .outlet-slide > img {
+    height: 120px;
+    width: 200px;
+    padding: 0.5em;
+    margin-left: 1.6em;
+   }
+   .title-v1 > h2 {
+    font-size: 20px !important;
+   }
+}
+@media (max-width: 583px) {
+    .badges_screen{
+        display: none;
+    }
+    .header_badges_sprite{
+       margin-left: 6em;
+    }
 }
 
 /*#zomato {
@@ -521,7 +652,8 @@ hr {
     }
 
 @media (max-width: 767px) {
-    figure figcaption h3 {
+
+    figure figcaption h5 {
         margin-top: 0.4em;
     }
     .col-xs-12, .col-xs-4 {

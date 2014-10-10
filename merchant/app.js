@@ -133,4 +133,12 @@ twystApp.config(function ($routeProvider, $httpProvider) {
         });
 
     $httpProvider.interceptors.push('twystHttpInterceptor');
+}).run(function ($rootScope) {
+    $rootScope.getRange = function(start, end, skip) {
+        var nums = [];
+        for(var i = start; i <= end; i += skip) {
+            nums.push(i);
+        }
+        return nums;
+    }
 });

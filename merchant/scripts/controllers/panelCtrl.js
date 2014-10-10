@@ -137,7 +137,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                 $scope.vouchers.forEach(function (voucher) {
                     if((voucher.basics.status === 'active'
                         || voucher.basics.status === 'user redeemed')
-                        && (new Date(voucher.issue_details.program.validity.burn_end) > new Date())) {
+                        && (new Date(voucher.issue_details.program.validity.burn_end) > new Date())
+                        && (new Date(new Date(voucher.basics.created_at).getTime() + 3 * 60 * 60 * 1000) < new Date())) {
                         $scope.filtered_vouchers.push(voucher);
                     }
                 })
@@ -158,7 +159,11 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                 })
             } 
             else if(value === 'All') {
-                $scope.filtered_vouchers = $scope.vouchers;
+                $scope.vouchers.forEach(function (voucher) {
+                    if((new Date(new Date(voucher.basics.created_at).getTime() + 3 * 60 * 60 * 1000) < new Date())) {
+                        $scope.filtered_vouchers.push(voucher);
+                    }
+                })
             } 
         }
     }

@@ -11,6 +11,9 @@
       </div>
       <div class="span6">
         <div class="span12" style="margin:0px;">
+            <i class="fa fa-lightbulb-o icon-green fa-3x" ng-show="program.status === 'active'" tooltip="Active prgram"></i>
+            <i class="fa fa-lightbulb-o icon-red fa-3x" ng-show="program.status === 'archived'" tooltip="Expired prgram"></i>
+            <i class="fa fa-lightbulb-o icon-yellow fa-3x" ng-show="program.status === 'draft'" tooltip="Saved prgram"></i>
             <h2>{{program.name}}</h2>
         </div>
         <div ng-if="program.outlets">

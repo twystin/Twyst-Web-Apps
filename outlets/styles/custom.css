@@ -64,6 +64,9 @@ hr {
 	margin-left: 0.6em;
 }
 /* margin */
+.margin_top_half {
+	margin-top: 0.6em;
+}
 .margin_top_one {
 	margin-top: 1em;
 }
@@ -240,5 +243,8 @@ tr:hover{
 }
 
 .panel-body > .padding_class > div > p {
+	word-wrap: break-word;
+}
+.lets_wrap {
 	word-wrap: break-word;
 }
