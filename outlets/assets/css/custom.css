@@ -12,11 +12,73 @@
 .header {
     overflow: visible !important;
 }
+/*discover tab css */
+.wrap_discover {
+    padding-top: 4em;
+}
+.outlet_image_discover {
+    /*border: 1px solid #fff;*/
+    overflow: hidden;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.outlet_image_discover > img {
+    height: 400px;
+    width: auto;
+    opacity: 0.6;
+    -webkit-transition: opacity 0.35s, 
+    transform 0.35s;
+    -webkit-transform 0.35s;
+    transition: opacity 0.35s, 
+    -webkit-transform: translate3d(-10px,0,0);
+    transform: translate3d(-10px,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.effect-discover > figcaption {
+    z-index: 99;
+    margin-top: -10em;
+    background: transparent;
+    position: absolute;
+}
+.hidden_text{
+    position: relative;
+    overflow: hidden;
+    /*padding: 0.5em 0;*/
+}
+.hidden_text::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    content: '';
+    -webkit-transition: -webkit-transform 0.35s;
+    transition: transform 0.35s;
+    -webkit-transform: translate3d(-100%,0,0);
+    transform: translate3d(-100%,0,0);
+}
+.effect-discover:hover img {
+    opacity: 0.4 !important;
+    -webkit-transform: translate3d(0,0,0)!important;
+    transform: translate3d(0,0,0)!important;
+}
+.effect-discover:hover {
+    /*background: #42b078 !important;*/
+    color: #fff !important;
+}
+.effect-discover:hover .hidden_text::after {
+    -webkit-transform: translate3d(0,0,0)!important;
+    transform: translate3d(0,0,0)!important;
+}
 /* Badges small screen */
 .badges_small_screen {
     margin: 2em 0em 1em -1em;
     display: inline-flex;
 }
+
+
 /*accordion */
 .small-screen-accordion > .panel-heading {
     background-color: #f59221 !important;
@@ -131,35 +193,35 @@ background-color: #fff;
 	margin-left: -2.4em;
 }
 /* slider new style */
-figure {
+.figure_bottom_carousel {
     margin: 0;
     position: relative;
     padding: 0em 1em 0em 1em;
 }
-figure img {
+.figure_bottom_carousel img {
     display: block;
     position: relative;
     z-index: 10;
     max-width: 100%;
     height: auto;
 }
-figure figcaption {
+.figure_bottom_carousel figcaption {
     display: block;
     position: absolute;
     z-index: 5;
 }
-figure h5 {
+.figure_bottom_carousel h5 {
     color: #000;
     line-height: 1.2;
     font-weight: 700;
     margin-bottom: 10px;
 }
-figure span {
+.figure_bottom_carousel span {
     color: #b2cce1;
     display: block;
     line-height: 1.2;
 }
-figure a.close-caption {
+.figure_bottom_carousel a.close-caption {
     display: block;
     position: absolute;
     width: 44px;
@@ -170,7 +232,7 @@ figure a.close-caption {
     font-weight: 700;
     color: #315a7d;
 }
-figure a.close-caption.hidden {
+.figure_bottom_carousel a.close-caption.hidden {
     display: none
 }
 /* effect */
@@ -178,7 +240,7 @@ a.close-caption {
     top: 10px;
     right: 10px;
 }
-figure figcaption {
+.figure_bottom_carousel figcaption {
     top: 0;
     left: 0;
     width: 100%;
@@ -201,10 +263,10 @@ figure figcaption {
     -o-transition: all 0.5s;
     transition: all 0.5s;
 }
-figure figcaption h5 {
+.figure_bottom_carousel figcaption h5 {
     margin-top: 20px;
 }
-figure img {
+.figure_bottom_carousel img {
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -ms-backface-visibility: hidden;
@@ -215,16 +277,16 @@ figure img {
     -o-transition: all 0.5s;
     transition: all 0.5s;
 }
-figure:hover img,
-figure.hover img {
+.figure_bottom_carousel:hover img,
+.figure_bottom_carousel.hover img {
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     -ms-transform: rotateY(180deg);
     -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
-figure:hover figcaption,
-figure.hover figcaption {
+.figure_bottom_carousel:hover figcaption,
+.figure_bottom_carousel.hover figcaption {
     -webkit-transform: rotateY(0);
     -moz-transform: rotateY(0);
     -ms-transform: rotateY(0);
