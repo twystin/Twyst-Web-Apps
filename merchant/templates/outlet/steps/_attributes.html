@@ -1,222 +1,314 @@
 <div class="row">
-	<div class="span7 info-header lead">
-	  <strong>Input Card</strong>
-	</div>
-	<div class="span5 preview-header lead">
-	  <strong>Preview Card</strong>
-	</div>
+    <div class="span7 info-header lead">
+        <strong>Input Card</strong>
+    </div>
+    <div class="span5 preview-header lead">
+        <strong>Preview Card</strong>
+    </div>
 </div>
 <div class="row">
-	<div class="span7 info-detail">
-		<div class="row-fluid">
-			<div class="row-fluid span4">
-				<small>Attributes</small>
-			</div>
-			<div id="attributes" class="row-fluid span8">
-				<div class="row-fluid">
-					<div class="row-fluid span6">
-						<input type="checkbox" ng-model="outlet.attributes.alcohol"><small>Alcohol</small><br>
-						<input type="checkbox" value="smoking" ng-model="outlet.attributes.smoking"><small>Smoking Area</small><br>
-						<input type="checkbox" value="chain" ng-model="outlet.attributes.chain"><small>Part of a Chain</small><br>
-						<input type="checkbox" value="homedelivery" ng-model="outlet.attributes.home_delivery"><small>Home Delivery</small><br>
-					</div>
-					<div class="row-fluid span6">
-						<input type="checkbox" value="dinein" ng-model="outlet.attributes.dine_in"><small>Dine in</small><br>
-						<input type="checkbox" value="veg" ng-model="outlet.attributes.veg"><small>Only vegetarian</small><br>
-						<input type="checkbox" value="outdoor" ng-model="outlet.attributes.outdoor"><small>Outdoor Seating</small><br>
-						<input type="checkbox" value="foodcourt" ng-model="outlet.attributes.foodcourt"><small>Part of a Food Court</small><br>				
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
-			<div class="row-fluid span4">
-				<small>Outlet Type</small>
-			</div>
-			<div class="row-fluid span8">
-				<select id="outlet_type" name="outlet_type" class="span5" ng-model="outlet.basics.is_a">
-					<option value="bakery">Bakery</option>
-					<option value="cafe">Cafe</option>
-					<option value="desserts">Desserts</option>
-					<option value="fast_food">Fast Food / QSR</option>
-					<option value="pub">Pub / Lounge</option>
-					<option value="restaurant">Restaurant</option>
-					<option value="takeaway">Takeaway</option>
-					<option value="other">Other (pls specify)</option>      	
-				</select>
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px" ng-show="outlet.basics.is_a">
-			<div class="row-fluid">
-				<div class="span4">
-					&nbsp;
-				</div>
-				<div class="span3 iconset-border">
-					<div>
-						Pick an icon
-					</div>
-					<div ng-show="outlet.basics.is_a === 'bakery'">
-						<div ng-repeat="icon in bakery_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
-							<img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
-						</div>
-					</div>
-					<div ng-show="outlet.basics.is_a === 'cafe'">
-						<div ng-repeat="icon in cafe_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
-							<img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
-						</div>
-					</div>
-					<div ng-show="outlet.basics.is_a === 'desserts'">
-						<div ng-repeat="icon in dessert_icons" class="span2 icon-div" ng-click="selectIcon(icon)">					
-							<img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
-						</div>
-					</div>
-					<div ng-show="outlet.basics.is_a === 'fast_food'">
-						<div ng-repeat="icon in fast_food_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
-							<img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
-						</div>
-					</div>
-					<div ng-show="outlet.basics.is_a === 'pub'">
-						<div ng-repeat="icon in pub_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
-							<img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
-						</div>
-					</div>
-					<div ng-show="outlet.basics.is_a === 'restaurant'">
-						<div ng-repeat="icon in restaurant_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
-							<img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
-						</div>
-					</div>
-					<div ng-show="outlet.basics.is_a === 'takeaway'">
-						<div ng-repeat="icon in takeaway_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
-							<img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
-						</div>
-					</div>
-					<div ng-show="outlet.basics.is_a === 'other'">
-						<div ng-repeat="icon in other_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
-							<img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
-			<div class="row-fluid span4">
-				<small>Air Conditioning</small>
-			</div>
-			<div class="row-fluid span8">
-				<select name="airConditioning" class="span5" ng-model="outlet.attributes.air_conditioning">
-				<option value="Available">Available</option>
-				<option value="Not Available">Not Available</option>
-				<option value="Partial">Partial</option>   	
-				</select>
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
-			<div class="row-fluid span4">
-				<small>Parking</small>
-			</div>
-			<div class="row-fluid span8">
-				<select id="outlet_type" name="outlet_type" class="span5" ng-model="outlet.attributes.parking">
-				<option value="Available">Available</option>
-				<option value="Not Available">Not Available</option>
-				<option value="Valet">Valet</option>     	
-				</select>
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
-			<div class="row-fluid span4">
-				<small>Reservation</small>
-			</div>
-			<div class="row-fluid span8">
-				<select id="outlet_type" name="outlet_type" class="span5" ng-model="outlet.attributes.reservation">
-				<option value="Recommended">Recommended</option>
-				<option value="Not Required">Not required</option>    	
-				</select>
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
-			<div class="row-fluid span4">
-				<small>Wi Fi</small>
-			</div>
-			<div class="row-fluid span8">
-				<select id="wi_fi" class="span5" ng-model="outlet.attributes.wifi">
-				<option value="Not Available">Not Available</option>
-				<option value="Free">Free</option>
-				<option value="Paid">Paid</option>    	
-				</select>
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
-			<div class="row-fluid span4">
-				<small>Cost for two</small>
-			</div>
-			<div class="row-fluid span8">
-				<div class="row-fluid span5">             
-					<select class="span12" ng-model="outlet.attributes.cost_for_two.min">
-					<option value="1"><label>100</label></option>
-					<option value="2"><label>300</label></option>
-					<option value="3"><label>500</label></option>
-					<option value="4"><label>1000</label></option>
-					<option value="5"><label>1500</label></option>
-					<option value="6"><label>2000</label></option>
-					<option value="7"><label>2500</label></option>
-					<option value="8"><label>3000</label></option>
-					</select>
-				</div>
-				<div class="row-fluid span1" style="text-align:center; margin-top:4px;">
-					<small>To</small>
-				</div>
-				<div class="row-fluid span5">
-					<select class="span12" ng-model="outlet.attributes.cost_for_two.max">
-					<option value="2"><label>300</label></option>
-					<option value="3"><label>500</label></option>
-					<option value="4"><label>1000</label></option>
-					<option value="5"><label>1500</label></option>
-					<option value="6"><label>2000</label></option>
-					<option value="7"><label>2500</label></option>
-					<option value="8"><label>3000</label></option>
-					<option value="9"><label>More than 3000</label></option>
-					</select>
-				</div>
-				<div class="row-fluid span1"></div>
-			</div>
-			<div class="offset4">
-				<div ng-if="outlet.attributes.cost_for_two.max<=outlet.attributes.cost_for_two.min" class="error">Min value can not be greater than Max value</div>
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
+    <div class="span7 info-detail">
+        <div class="row-fluid">
+            <div class="row-fluid span4">
+                <small>Attributes</small>
+            </div>
+            <div id="attributes" class="row-fluid span8">
+                <div class="row-fluid">
+                    <div class="row-fluid span6">
+                        <input type="checkbox" ng-model="outlet.attributes.alcohol"><small>Alcohol</small>
+                        <br>
+                        <input type="checkbox" value="smoking" ng-model="outlet.attributes.smoking"><small>Smoking Area</small>
+                        <br>
+                        <input type="checkbox" value="chain" ng-model="outlet.attributes.chain"><small>Part of a Chain</small>
+                        <br>
+                        <input type="checkbox" value="homedelivery" ng-model="outlet.attributes.home_delivery"><small>Home Delivery</small>
+                        <br>
+                    </div>
+                    <div class="row-fluid span6">
+                        <input type="checkbox" value="dinein" ng-model="outlet.attributes.dine_in"><small>Dine in</small>
+                        <br>
+                        <input type="checkbox" value="veg" ng-model="outlet.attributes.veg"><small>Only vegetarian</small>
+                        <br>
+                        <input type="checkbox" value="outdoor" ng-model="outlet.attributes.outdoor"><small>Outdoor Seating</small>
+                        <br>
+                        <input type="checkbox" value="foodcourt" ng-model="outlet.attributes.foodcourt"><small>Part of a Food Court</small>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid pushTop10px">
+            <div class="row-fluid span4">
+                <small>Outlet Type</small>
+            </div>
+            <div class="row-fluid span8">
+                <select id="outlet_type" name="outlet_type" class="span5" ng-model="outlet.basics.is_a">
+                    <option value="bakery">Bakery</option>
+                    <option value="cafe">Cafe</option>
+                    <option value="desserts">Desserts</option>
+                    <option value="fast_food">Fast Food / QSR</option>
+                    <option value="pub">Pub / Lounge</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="takeaway">Takeaway</option>
+                    <option value="other">Other (pls specify)</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-fluid pushTop10px" ng-show="outlet.basics.is_a">
+            <div class="row-fluid">
+                <div class="span4">
+                    &nbsp;
+                </div>
+                <div class="span3 iconset-border">
+                    <div>
+                        Pick an icon
+                    </div>
+                    <div ng-show="outlet.basics.is_a === 'bakery'">
+                        <div ng-repeat="icon in bakery_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
+                            <img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
+                        </div>
+                    </div>
+                    <div ng-show="outlet.basics.is_a === 'cafe'">
+                        <div ng-repeat="icon in cafe_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
+                            <img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
+                        </div>
+                    </div>
+                    <div ng-show="outlet.basics.is_a === 'desserts'">
+                        <div ng-repeat="icon in dessert_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
+                            <img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
+                        </div>
+                    </div>
+                    <div ng-show="outlet.basics.is_a === 'fast_food'">
+                        <div ng-repeat="icon in fast_food_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
+                            <img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
+                        </div>
+                    </div>
+                    <div ng-show="outlet.basics.is_a === 'pub'">
+                        <div ng-repeat="icon in pub_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
+                            <img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
+                        </div>
+                    </div>
+                    <div ng-show="outlet.basics.is_a === 'restaurant'">
+                        <div ng-repeat="icon in restaurant_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
+                            <img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
+                        </div>
+                    </div>
+                    <div ng-show="outlet.basics.is_a === 'takeaway'">
+                        <div ng-repeat="icon in takeaway_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
+                            <img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
+                        </div>
+                    </div>
+                    <div ng-show="outlet.basics.is_a === 'other'">
+                        <div ng-repeat="icon in other_icons" class="span2 icon-div" ng-click="selectIcon(icon)">
+                            <img ng-src="../../../../common/images/transparent/{{icon}}.png" ng-class="{'selected-icon': (outlet.basics.icon === icon)}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid pushTop10px">
+            <div class="row-fluid span4">
+                <small>Air Conditioning</small>
+            </div>
+            <div class="row-fluid span8">
+                <select name="airConditioning" class="span5" ng-model="outlet.attributes.air_conditioning">
+                    <option value="Available">Available</option>
+                    <option value="Not Available">Not Available</option>
+                    <option value="Partial">Partial</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-fluid pushTop10px">
+            <div class="row-fluid span4">
+                <small>Parking</small>
+            </div>
+            <div class="row-fluid span8">
+                <select id="outlet_type" name="outlet_type" class="span5" ng-model="outlet.attributes.parking">
+                    <option value="Available">Available</option>
+                    <option value="Not Available">Not Available</option>
+                    <option value="Valet">Valet</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-fluid pushTop10px">
+            <div class="row-fluid span4">
+                <small>Reservation</small>
+            </div>
+            <div class="row-fluid span8">
+                <select id="outlet_type" name="outlet_type" class="span5" ng-model="outlet.attributes.reservation">
+                    <option value="Recommended">Recommended</option>
+                    <option value="Not Required">Not required</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-fluid pushTop10px">
+            <div class="row-fluid span4">
+                <small>Wi Fi</small>
+            </div>
+            <div class="row-fluid span8">
+                <select id="wi_fi" class="span5" ng-model="outlet.attributes.wifi">
+                    <option value="Not Available">Not Available</option>
+                    <option value="Free">Free</option>
+                    <option value="Paid">Paid</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-fluid pushTop10px">
+            <div class="row-fluid span4">
+                <small>Cost for two</small>
+            </div>
+            <div class="row-fluid span8">
+                <div class="row-fluid span5">
+                    <select class="span12" ng-model="outlet.attributes.cost_for_two.min">
+                        <option value="1">
+                            <label>100</label>
+                        </option>
+                        <option value="2">
+                            <label>300</label>
+                        </option>
+                        <option value="3">
+                            <label>500</label>
+                        </option>
+                        <option value="4">
+                            <label>1000</label>
+                        </option>
+                        <option value="5">
+                            <label>1500</label>
+                        </option>
+                        <option value="6">
+                            <label>2000</label>
+                        </option>
+                        <option value="7">
+                            <label>2500</label>
+                        </option>
+                        <option value="8">
+                            <label>3000</label>
+                        </option>
+                    </select>
+                </div>
+                <div class="row-fluid span1" style="text-align:center; margin-top:4px;">
+                    <small>To</small>
+                </div>
+                <div class="row-fluid span5">
+                    <select class="span12" ng-model="outlet.attributes.cost_for_two.max">
+                        <option value="2">
+                            <label>300</label>
+                        </option>
+                        <option value="3">
+                            <label>500</label>
+                        </option>
+                        <option value="4">
+                            <label>1000</label>
+                        </option>
+                        <option value="5">
+                            <label>1500</label>
+                        </option>
+                        <option value="6">
+                            <label>2000</label>
+                        </option>
+                        <option value="7">
+                            <label>2500</label>
+                        </option>
+                        <option value="8">
+                            <label>3000</label>
+                        </option>
+                        <option value="9">
+                            <label>More than 3000</label>
+                        </option>
+                    </select>
+                </div>
+                <div class="row-fluid span1"></div>
+            </div>
+            <div class="offset4">
+                <div ng-if="outlet.attributes.cost_for_two.max<=outlet.attributes.cost_for_two.min" class="error">Min value can not be greater than Max value</div>
+            </div>
+        </div>
+        <div class="row-fluid span12">
+            <small>Timings</small>
+        </div>
+        <div ng-repeat="w in week">
+            <div class="row-fluid pushTop10px">
+                <div class="row-fluid span2">
+                    <small>{{w}}</small>
+                </div>
+                <div class="row-fluid span2">
+                    <small><input type="checkbox" ng-model="outlet.business_hours[w].closed">Closed {{outlet.business_hours[w].closed}}</small>
+                </div>
+                <div ng-repeat="t in outlet.business_hours[w].timings track by $index" ng-class="{'span8': $index===0, 'span8 offset3 mobile-padding': $index > 0}" >
+                    <div class="row-fluid span2" style="text-align:center; margin-top:4px;">
+                        <small>Open {{$index}},{{$parent.$index}}</small>
+                    </div>
+                    <div class="row-fluid span2">
+                        <select ng-init="t.open.hour=outlet.business_hours[sunday].timings.open.hour" class="span12" ng-model="t.open.hour" ng-disabled="outlet.business_hours[w].closed">
+                            <option ng-repeat="a in getRange(0, 23, 1)" ng-value="{{a}}">{{a}}</option>
+                        </select>
+                    </div>
+
+                    <div class="row-fluid span2">
+                        <select class="span12" ng-model="t.open.minute" ng-disabled="outlet.business_hours[w].closed">
+                            <option ng-repeat="a in getRange(0, 56, 5)" ng-value="{{a}}">{{a}}</option>
+                        </select>
+                    </div>
+                    <div class="row-fluid span2" style="text-align:center; margin-top:4px;">
+                        <small>Close</small>
+                    </div>
+                    <div class="row-fluid span2">
+                        <select class="span12" ng-model="t.close.hour" ng-disabled="outlet.business_hours[w].closed">
+                            <option ng-repeat="a in getRange(0, 23, 1)" ng-value="{{a}}">{{a}}</option>
+                        </select>
+                    </div>
+
+                    <div class="row-fluid span2">
+                        <select class="span12" ng-model="t.close.minute" ng-disabled="outlet.business_hours[w].closed">
+                            <option ng-repeat="a in getRange(0, 56, 5)" ng-value="{{a}}">{{a}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid pushTop10px">
+                <div class="row-fluid span4">
+                    <small></small>
+                </div>
+
+                <div class="row-fluid">
+                    <button class="btn btn-success btn-small" ng-click="newTimings($event, $index)" ng-disabled="outlet.business_hours[w].closed">Add More Timings</button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row-fluid pushTop10px">
 			<div class="row-fluid span4">
 				<small>Timings</small>
 			</div>
 			<div class="row-fluid span8">
 				<input ng-model="outlet.attributes.timings" class="span8" type="text">
 			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
-			<div class="row-fluid span4">
-				<small>Cuisines</small>
-			</div>
-			<div class="row-fluid span8">
-			    <input id="cuisines" name="cuisines" class="span8" ng-list ng-model="outlet.attributes.cuisines" placeholder="Eg. Thai, American"  type="text">
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
-			<div class="row-fluid span4">
-				<small>Payment options</small>
-			</div>
-			<div class="row-fluid span8">
-				<div class="row-fluid">
-					<div id="outletPayment" class="row-fluid span4" style="margin:0px" ng-repeat="payment in payments">
-	  				<small><input style="margin:0px" type='checkbox' ng-checked="outlet.attributes.payment_options.indexOf(payment) != -1" ng-click="toggleCheckPayment(payment)"> {{payment}}</small>
-	  				</div>
-				</div>
-			</div>
-		</div>
-		<div class="row-fluid pushTop10px">
-			<div class="row-fluid span4">
-				<small>Tags</small>
-			</div>
-			<div class="row-fluid span8">
-				<input class="span8" typeahead-min-length="0" typeahead="tag for tag in getTags($viewValue)" ng-model="tag_list.tags" ng-list placeholder="Fun, Bright" type="text" ng-enter="fixupTags()">
+		</div> -->
+        <div class="row-fluid pushTop10px">
+            <div class="row-fluid span4">
+                <small>Cuisines</small>
+            </div>
+            <div class="row-fluid span8">
+                <input id="cuisines" name="cuisines" class="span8" ng-list ng-model="outlet.attributes.cuisines" placeholder="Eg. Thai, American" type="text">
+            </div>
+        </div>
+        <div class="row-fluid pushTop10px">
+            <div class="row-fluid span4">
+                <small>Payment options</small>
+            </div>
+            <div class="row-fluid span8">
+                <div class="row-fluid">
+                    <div id="outletPayment" class="row-fluid span4" style="margin:0px" ng-repeat="payment in payments">
+                        <small><input style="margin:0px" type='checkbox' ng-checked="outlet.attributes.payment_options.indexOf(payment) != -1" ng-click="toggleCheckPayment(payment)"> {{payment}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid pushTop10px">
+            <div class="row-fluid span4">
+                <small>Tags</small>
+            </div>
+            <div class="row-fluid span8">
+                <input class="span8" typeahead-min-length="0" typeahead="tag for tag in getTags($viewValue)" ng-model="tag_list.tags" ng-list placeholder="Fun, Bright" type="text" ng-enter="fixupTags()">
                 <div>
                     <span ng-repeat="t in outlet.attributes.tags"><button class="btn btn-small btn-warning" ng-click="outlet.attributes.tags.splice($index,1)">{{t}}<i class=" icon-remove icon-white"></i></button>&nbsp;</span>
                 </div>

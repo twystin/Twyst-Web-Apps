@@ -365,11 +365,9 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     }
 
     function goForCheckin() {
-
         if ($scope.outlet._id && $scope.checkin.phone_no) {
 
             $scope.loading = true;
-
             $http.post('/api/v2/checkins', {
                 phone: $scope.checkin.phone_no,
                 outlet: $scope.outlet._id,
@@ -396,6 +394,12 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     };
 
     $scope.createCheckin = function () {
+        if($scope.outlet.attributes.dine_in == true && $scope.outlet.attributes.home_delivery == false){
+            $scope.checkin.location = "DINE_IN";
+        }
+        else if($scope.outlet.attributes.dine_in == false && $scope.outlet.attributes.home_delivery == true){
+            $scope.checkin.location = "HOME_DELIVERY";
+        }
         if(!$scope.checkin.location) {
             $scope.checkin_select_dirty = true;
         }
