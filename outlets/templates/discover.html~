@@ -1,0 +1,27 @@
+<div class="clearfix"></div>
+<div class="row wrap_discover" ng-controller="DiscoverCtrl">
+<div class="col-xs-12" style="padding: 4em;font-weight:400;background: #536d76;">
+	<div class="col-xs-3"></div>
+	<div class="col-xs-9">
+		<h1 style="color: #fff;font-size: 4em;font-weight:800">Discover outlets near you</h1>
+	</div>
+</div>
+<hr>
+<div class="clearfix"></div>
+<div class="col-xs-12">
+<div class="col-xs-12" >
+	<figure class="col-xs-3 effect-discover outlet_image_discover" ng-repeat="d in data.reccos">
+		<img src="{{d.program.images[0]}}" />
+		<!-- <a id="distance_discover_no_location" style="color: #000 !important;" ng-show="!userlocation" Popover-animation="true" popover="Unable to get your location!" popover-trigger="hover" popover-placement="bottom">
+		    <i class="fa fa-info-circle" style="color: #e1e1e1"  id="info-tooltip-discover"></i>
+		  </a> -->
+		<figcaption class="col-xs-12">
+		<h3 class="hidden_text color_green">{{d.outlet.basics.name}} <span id="distance_discover_tab" ng-show="userlocation">({{d.distance}}km)</span>
+		 </h3>
+		<p class="color_green font-size-eleven">{{d.outlet.contact.location.address }}</p>
+		<a ng-href="/#/{{d.outlet.publicUrl[0]}}" class="color_green">View more</a>
+		</figcaption>
+	</figure>
+</div>
+</div>
+</div>
