@@ -117,17 +117,18 @@
                                 </div>
                             </div>
                             <form name="checkinForm">
-                                <div class="row-fluid" style="line-height: 30px;">
+                                <div class="row-fluid" style="line-height: 30px;"  ng-show="outlet.attributes.home_delivery && outlet.attributes.dine_in">
                                     <div class="span2">
                                         Location:
                                     </div> 
-                                    <div class="span3" ng-show= "outlet.attributes.dine_in">
-                                        <input type="radio" id="r1" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false" ng-checked="outlet.attributes.dine_in == true && outlet.attributes.home_delivery == false" class=""> Dine-In 
+                                    <div class="span3">
+                                        <input type="radio" id="r1" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false" class=""> Dine-In 
                                     </div>
-                                    <div class="span7" ng-show= "outlet.attributes.home_delivery">
-                                        <input type="radio" id="r2" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false" ng-checked="outlet.attributes.dine_in == false && outlet.attributes.home_delivery == true"> Home Delivery / Take-away
+                                    <div class="span7">
+                                        <input type="radio" id="r2" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false"> Home Delivery / Take-away
                                     </div>
                                 </div>
+                                <div class="row-fluid" style="line-height: 30px;"  ng-show="!outlet.attributes.home_delivery || !outlet.attributes.dine_in">&nbsp;</div>
                                 <div class="row-fluid">
                                     <small class="text-error" ng-show="checkin_select_dirty && outlet.attributes.dine_in == true && outlet.attributes.home_delivery == true">* Please select Dine-in / Home delivery / Take-away.</small>
                                 </div>                      
