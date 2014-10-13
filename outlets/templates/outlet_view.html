@@ -4,7 +4,7 @@
     <div class="container">
       <div class="hidden-md hidden-lg col-xs-12 badges_small_screen">
         <span class="col-xs-4 badges_screen"></span>
-        <span style="height: 45px; width: auto;" class="header_badges_sprite">
+        <span style="height: 45px; width: auto;" class="header_badges_sprite_two">
           <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android" class="android_button"></a>
           <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store" class="ios_button"></a>
         </span>
@@ -20,9 +20,7 @@
                   <div class="col-md-2 col-sm-2 col-xs-hidden" style="margin-left:3em;"></div>
                   <div class="img-center outlet_info col-md-7 col-sm-7 col-xs-12" >
                     <div class="clearfix"></div>
-                    <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;">
-
-                    </div>
+                    <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;"></div>
                     <div class="col-md-8" style="margin-top:3em;">
                       <h3 class="col-md-12 col-sm-12 hidden-xs hidden-sm"><b class="color_white knockout50" id="outlet_name" ng-click="getotherOutlet(outlet)">{{outlet.basics.name}}</b></h3>
                       <h6 class="col-xs-12 hidden-md hidden-lg"><b class="color_white" id="outlet_name">{{outlet.basics.name}}</b></h6>
@@ -53,8 +51,17 @@
                         <a ng-href="http://{{outlet.links.website_url }}" class="color_white font_fixed_sapient">
                           {{outlet.links.website_url }}
                         </a>
+                        <div class="col-xs-12">
+                          <div class="col-xs-4"></div>
+                          <div class="col-xs-5">
+                            <div class="fb-share-button" data-href="http://staging.twyst.in/outlets/#/{{outlet.publicUrl[0]}}" data-type="button_count"></div>
+                          </div>
+                        </div>
+                        
                       </span>
+
                     </p>
+
                   </div>
 
                   <div class="col-md-12">
@@ -192,7 +199,6 @@
                 </div>
                 <!-- Right column starts -->
                 <div class="col-md-5 col-xs-12" >
-
 
                   <div class="col-md-12 margin-bottom-10 hidden-xs facebook-panel" ng-if="outlet.links.facebook_url">
                     <div class="panel panel-default" id="facebook_like_box">
