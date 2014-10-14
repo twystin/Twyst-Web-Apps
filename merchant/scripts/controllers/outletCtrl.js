@@ -8,7 +8,7 @@ twystApp.controller('OutletCtrl',
         $location.path('/');
     }
 
-    $scope.week = ['sunday','monday' ,'tuesday' ,'wednesday' ,'thursday' ,'friday', 'saturday'];
+    $scope.week = ['monday' ,'tuesday' ,'wednesday' ,'thursday' ,'friday', 'saturday', 'sunday'];
 
     if (authService.isLoggedIn() && authService.getAuthStatus().role > 4) {
         $location.path('/panel');
@@ -37,52 +37,94 @@ twystApp.controller('OutletCtrl',
         }*/
         $scope.outlet.business_hours = {
             sunday: {
-                closed: '',
+                closed: false,
                 timings: [{
-                    open: '',
-                    close: ''
+                    open: {
+                        hr: '',
+                        min: ''
+                    },
+                    close: {
+                        hr: '',
+                        min: ''
+                    }
                 }]
             },
             monday: {
-                closed: '',
+                closed: false,
                 timings: [{
-                    open: '',
-                    close: ''
+                    open: {
+                        hr: '',
+                        min: ''
+                    },
+                    close: {
+                        hr: '',
+                        min: ''
+                    }
                 }]
             },
             tuesday: {
-                closed: '',
+                closed: false,
                 timings: [{
-                    open: '',
-                    close: ''
+                    open: {
+                        hr: '',
+                        min: ''
+                    },
+                    close: {
+                        hr: '',
+                        min: ''
+                    }
                 }]
             },
             wednesday: {
-                closed: '',
+                closed: false,
                 timings: [{
-                    open: '',
-                    close: ''
+                    open: {
+                        hr: '',
+                        min: ''
+                    },
+                    close: {
+                        hr: '',
+                        min: ''
+                    }
                 }]
             },
             thursday: {
-                closed: '',
+                closed: false,
                 timings: [{
-                    open: '',
-                    close: ''
+                    open: {
+                        hr: '',
+                        min: ''
+                    },
+                    close: {
+                        hr: '',
+                        min: ''
+                    }
                 }]
             },
             friday: {
-                closed: '',
+                closed: false,
                 timings: [{
-                    open: '',
-                    close: ''
+                    open: {
+                        hr: '',
+                        min: ''
+                    },
+                    close: {
+                        hr: '',
+                        min: ''
+                    }
                 }]
             },
             saturday: {
-                closed: '',
+                closed: false,
                 timings: [{
-                    open: '',
-                    close: ''
+                    open: {
+                        hr: '',
+                        min: ''
+                    },
+                    close: {
+                        hr: '',
+                        min: ''
+                    }
                 }]
             }
         };
@@ -148,9 +190,15 @@ twystApp.controller('OutletCtrl',
         var sms_off = {
             value:  $scope.sms_off.value,
             time: {
-                start: Number($scope.sms_off.start.hr * 60) + Number($scope.sms_off.start.min),
-                end: Number($scope.sms_off.end.hr * 60) + Number($scope.sms_off.end.min)
+                start: '',
+                end: ''
             }
+        }
+        if($scope.sms_off && $scope.sms_off.start && $scope.sms_off.start.hr && $scope.sms_off.start.min) {
+            sms_off.time.start = Number($scope.sms_off.start.hr * 60) + Number($scope.sms_off.start.min)
+        }
+        if($scope.sms_off && $scope.sms_off.end && $scope.sms_off.end.hr && $scope.sms_off.end.min) {
+            sms_off.time.end = Number($scope.sms_off.end.hr * 60) + Number($scope.sms_off.end.min)
         }
         return sms_off;
     }
@@ -165,6 +213,47 @@ twystApp.controller('OutletCtrl',
             $log.warn($scope.outlet);
         }
     });
+
+    $scope.newTimings = function($event, index){
+        if($scope.outlet.business_hours[index].timings.length < 5) {
+            $scope.outlet.business_hours[index].timings.push({
+                    open: {
+                        hr: '',
+                        min: ''
+                    },
+                    close: {
+                        hr: '',
+                        min: ''
+                    }
+            });        
+            $event.preventDefault();    
+        }
+    };
+
+    $scope.removeTimings = function (day, index) {
+        $scope.outlet.business_hours[day].timings.splice(index, 1);
+    }
+
+    $scope.applyToAllDays = function(time) {
+        for(var i = 0; i < $scope.week.length; i++) {
+            $scope.outlet.business_hours[$scope.week[i]].closed = time.closed;
+            var timings = [];
+            for(var j = 0; j < time.timings.length; j++) {
+                var t = {
+                    open: {
+                        hr: time.timings[j].open.hr,
+                        min: time.timings[j].open.min
+                    },
+                    close: {
+                        hr: time.timings[j].close.hr,
+                        min: time.timings[j].close.min
+                    }
+                };
+                timings.push(t);
+            }
+            $scope.outlet.business_hours[$scope.week[i]].timings = timings;
+        }
+    }
 
     $scope.selectIcon = function (icon) {
         if(!($scope.outlet.basics.is_a === icon)) {
