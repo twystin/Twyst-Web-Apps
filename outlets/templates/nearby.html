@@ -5,7 +5,9 @@
 	<div class="col-xs-10" > <!-- ng-if="location.coords.latitude" -->
 		<h1>Map view</h1>
 		 <div gm-info-window="infoWindow">
-        <h4>{{selectedoutlet.basics.name}}</h4>
+		<img ng-src="{{selectedobject.program.images[0]}}" height="100" width="200" />
+        <h4 >{{selectedobject.outlet.basics.name}}</h4>
+        <h6>{{selectedobject.outlet.contact.location.address}}</h6>
         <a href="/outlets/#/{{selectedoutlet.publicUrl[0]}}">view details</a>
       </div>
 		<section class="nearby_outlets">
@@ -15,7 +17,7 @@
 		                    gm-get-lat-lng="{ lat: object.outlet.contact.location.coords.latitude, lng: object.outlet.contact.location.coords.longitude}"
 		                    gm-marker-options="{ title: {{object.outlet.basics.name}}, clickable: true }"
 		                    gm-events="markerEvents"
-		                    gm-on-openinfowindow="selectedoutlet = object.outlet; infoWindow.open(marker.getMap(), marker);"
+		                    gm-on-openinfowindow="selectedobject = object; infoWindow.open(marker.getMap(), marker);"
 		                    gm-on-click="openInfoWindow(object.outlet)">
 		        </gm-markers>
 			</gm-map>
