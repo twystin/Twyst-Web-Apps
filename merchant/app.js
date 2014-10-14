@@ -117,6 +117,10 @@ twystApp.config(function ($routeProvider, $httpProvider) {
             controller  : 'programUpdateCtrl',
             templateUrl : '/merchant/templates/offer/update.html'
         }).
+        when('/winback/create', {
+            controller  : 'WinbackCtrl',
+            templateUrl : '/merchant/templates/winback/create.html'
+        }).
         when('/panel', {
             controller  : 'PanelCtrl',
             templateUrl : '/merchant/templates/panel/dashboard.html'
