@@ -1,4 +1,12 @@
 /* Add here all your css styles (customizations) */
+.discover_search {
+    border-top-left-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+}
+/* fb share button */
+.fb_iframe_widget {
+    display: block !important;
+}
 .smoking_avail {
     padding-right: 0px;
 }
@@ -13,19 +21,39 @@
     overflow: visible !important;
 }
 /*discover tab css */
+#distance_discover_tab {
+    float: right;
+    font-size: 11px;
+}
+/*.popover {
+    background-color: #e1e1e1;
+    position: absolute !important;
+    z-index: 9999!important;
+}*/
+#distance_discover_no_location {
+    z-index: 9999;
+    position: absolute;
+    margin: -14em 0em 0em 18em;
+}
 .wrap_discover {
     padding-top: 4em;
 }
 .outlet_image_discover {
     /*border: 1px solid #fff;*/
     overflow: hidden;
-    padding-right: 0px;
-    padding-left: 0px;
-}
+    padding: 2em;
+    height: 30em;
+    background: #fff;
+/*    -webkit-box-shadow: 0px 2px 61px -5px rgba(0,0,0,0.65);
+    -moz-box-shadow: 0px 2px 61px -5px rgba(0,0,0,0.65);
+    box-shadow: 0px 2px 61px -5px rgba(0,0,0,0.65);*/
+/*    -webkit-box-shadow: -1px -1px 10px 4px rgba(255,255,255,0.90);
+    -moz-box-shadow: -1px -1px 10px 4px rgba(255,255,255,0.90);
+    box-shadow: -1px -1px 10px 4px rgba(255,255,255,0.90);
+*/}
 .outlet_image_discover > img {
-    height: 400px;
-    width: auto;
-    opacity: 0.6;
+    height: 200px;
+    width: 100%;
     -webkit-transition: opacity 0.35s, 
     transform 0.35s;
     -webkit-transform 0.35s;
@@ -34,12 +62,12 @@
     transform: translate3d(-10px,0,0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    border-radius: 6px !important;
 }
 .effect-discover > figcaption {
-    z-index: 99;
-    margin-top: -10em;
+    /*margin-top: -10em;*/
     background: transparent;
-    position: absolute;
+    position: relative;
 }
 .hidden_text{
     position: relative;
@@ -52,7 +80,7 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: #fff;
+    background: #b1b1b1;
     content: '';
     -webkit-transition: -webkit-transform 0.35s;
     transition: transform 0.35s;
@@ -136,6 +164,16 @@
 	display: inline-flex;
 	float: left;
 	margin-right: 15em;
+}
+.header_badges_sprite_two {
+    display: inline-flex;
+    text-align: center;
+}
+.header_badges_sprite_two > a.android_button:before {
+    float: left;
+}
+.header_badges_sprite_two > a.ios_button:before {
+    float: right;
 }
 a.android_button {
 	width: 128px;
@@ -462,7 +500,7 @@ hr {
    }
 }
 @media (max-width: 990px) {
-    .header_badges_sprite{
+    .header_badges_sprite_two{
         margin-right: 6em;
     }
 }
@@ -484,11 +522,43 @@ hr {
     .badges_screen{
         display: none;
     }
-    .header_badges_sprite{
-       margin-left: 6em;
+    .header_badges_sprite_two{
+       margin: 0em 0em 0em 5em;
     }
 }
 
+@media (max-width: 390px) {
+    .badges_screen{
+        display: none;
+    }
+  /*  .header_badges_sprite_two{
+       margin: 0em -3em 0em -1em;
+    }*/
+    .header_badges_sprite_two {
+        margin: 0em 0em 0em 3em;
+    }
+}
+
+@media (max-width: 370px) {
+     .badges_screen{
+        display: none;
+    }
+    .header_badges_sprite_two{
+       margin: 0em -3em 0em -1em;
+    }
+}
+@media (max-width: 357px) and (-webkit-min-device-pixel-ratio: 3),
+       (max-width: 357px) and ( min--moz-device-pixel-ratio: 3),
+       (max-width: 357px) and ( -o-min-device-pixel-ratio: 3/1),
+       (max-width: 357px) and ( min-device-pixel-ratio: 3)
+ {
+        .badges_screen{
+        display: none;
+    }
+    .header_badges_sprite_two{
+       margin: 0em 0em 0em 1em;
+    }
+}
 /*#zomato {
 	background-image: url(../../images/zomato.jpg);
 	background-size: cover;

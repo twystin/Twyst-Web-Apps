@@ -394,10 +394,10 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     };
 
     $scope.createCheckin = function () {
-        if($scope.outlet.attributes.dine_in == true && $scope.outlet.attributes.home_delivery == false){
+        if($scope.outlet.attributes.dine_in && !$scope.outlet.attributes.home_delivery){
             $scope.checkin.location = "DINE_IN";
         }
-        else if($scope.outlet.attributes.dine_in == false && $scope.outlet.attributes.home_delivery == true){
+        else if(!$scope.outlet.attributes.dine_in && $scope.outlet.attributes.home_delivery){
             $scope.checkin.location = "HOME_DELIVERY";
         }
         if(!$scope.checkin.location) {
