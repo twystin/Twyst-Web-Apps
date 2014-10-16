@@ -167,14 +167,21 @@ outletApp.directive('sliderSingle',function ($timeout){
    }
  }
 }); 
-outletApp.controller('DiscoverCtrl', function ($scope, $http, dataSvc, $window) {
+// outletApp.controller('MapCtrl', ['$scope', function ($scope) {
+//     $scope.mapOptions = {
+//       center: new google.maps.LatLng(35.784, -78.670),
+//       zoom: 15,
+//       mapTypeId: google.maps.MapTypeId.ROADMAP
+//     };
+//   }]);
+outletApp.controller('DiscoverCtrl', function ($scope, $http, dataSvc, $window, angulargmUtils) {
     $scope.userlocation = false;
     var lat = 28.47178,
         lon = 77.1016;
     getUserData(lat, lon);
+    setMapData(lat, lon);
     $scope.getLocation = function () {
             $window.navigator.geolocation.getCurrentPosition(function(position) {
-              console.log(position)
               $scope.$apply(function() {
                   $scope.location = position;
                   if(position && position.coords && position.coords.latitude && position.coords.longitude) {
@@ -183,7 +190,7 @@ outletApp.controller('DiscoverCtrl', function ($scope, $http, dataSvc, $window) 
                     $scope.userlocation = true;
                   }
                   getUserData(lat, lon);
-                  // console.log($scope.location.coords.longitude);
+                  
               });
               }, function(error) {
                   $scope.message="Error getting location automatically. Please enter co-ordinates manually.";
@@ -198,9 +205,44 @@ outletApp.controller('DiscoverCtrl', function ($scope, $http, dataSvc, $window) 
      });
     }
 
-        $scope.getLocation();
-        
-       
+     $scope.getLocation();
+    function setMapData(lat, lon) {
+      $scope.options = {
+        map: {
+          center: new google.maps.LatLng(lat, lon),
+          zoom: 13,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        },
+        outlets: {
+          icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png',
+        },
+      };
+    console.log($scope.options.map.center)
+
+   
+    $scope.outlets = [
+    {
+      name: 'nearby outlets',
+      elevationMeters: 4392,
+      location: {
+        lat: lat, 
+        lng: lon
+      }
+    }
+    ];
+  }
+  $scope.openInfoWindow = function(data) {
+    var d = {
+      lat: data.contact.location.coords.latitude,
+      lng: data.contact.location.coords.longitude
+    }
+    $scope.markerEvents = [
+      {
+        event: 'openinfowindow',
+        locations: [angulargmUtils.objToLatLng(d)]
+      },
+    ];
+  }
 });
 outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal, $http) {
 
@@ -387,6 +429,10 @@ $scope.getCostForTwoText = function (outlet) {
   $routeProvider.
   when('/discover',{
     templateUrl: './templates/discover.html',
+    controller: 'OutletCtrl'
+  }).
+  when('/nearby',{
+    templateUrl: './templates/nearby.html',
     controller: 'OutletCtrl'
   }).
   when('/:outlet_id',{
