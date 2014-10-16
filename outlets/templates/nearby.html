@@ -1,18 +1,30 @@
 <div class="clearfix"></div>
 <div class="row" style="padding:3em;"></div>
 <div class="row" ng-controller="DiscoverCtrl">
+<div class="col-xs-12 discover_outlet_controller_heading" id="nearby_outlet_heading">
+	<div class="col-xs-3"></div>
+	<div class="col-xs-6">
+		<h1 class="discover_outlet_heading" id="map_view_heading">View on map</h1>
+		<div class="input-group discover_search">
+           <input type="search" id="search" class="form-control" ng-model="filterOutlet">
+           <div class="input-group-addon"><i class="fa fa-search"></i></div> 
+      	 </div>
+	</div>
+			
+		</div>
 	<div class="col-xs-1"></div>
 	<div class="col-xs-10" > <!-- ng-if="location.coords.latitude" -->
-		<h1>Map view</h1>
-		 <div gm-info-window="infoWindow">
-		<img ng-src="{{selectedobject.program.images[0]}}" height="100" width="200" />
-        <h4 >{{selectedobject.outlet.basics.name}}</h4>
-        <h6>{{selectedobject.outlet.contact.location.address}}</h6>
-        <a href="/outlets/#/{{selectedoutlet.publicUrl[0]}}">view details</a>
+		
+		 <div class="col-xs-12 infowindow" gm-info-window="infoWindow">
+		 <a ng-href="#/{{selectedobject.outlet.publicUrl[0]}}" target="_blank">
+		 	<img ng-src="{{selectedobject.program.images[0]}}" height="150" width="250" />
+	        <h4 >{{selectedobject.outlet.basics.name}}</h4>
+	        <h6>{{selectedobject.outlet.contact.location.address}}</h6>
+		 </a>
       </div>
 		<section class="nearby_outlets">
 			<gm-map  gm-center="center" ng-init="setMapData()" gm-zoom="zoom" gm-bounds="bounds" gm-map-id="'infoWindows'" gm-map-options="options.map" class="map"  style="height:800px;">
-				<gm-markers gm-objects="data.reccos"
+				<gm-markers gm-objects="data.reccos | filter:filterOutlet"
 		                    gm-id="object.outlet.basics.id"
 		                    gm-get-lat-lng="{ lat: object.outlet.contact.location.coords.latitude, lng: object.outlet.contact.location.coords.longitude}"
 		                    gm-marker-options="{ title: {{object.outlet.basics.name}}, clickable: true }"

@@ -1,4 +1,23 @@
 /* Add here all your css styles (customizations) */
+.discover_outlet_controller_heading {
+    padding: 4em;
+    font-weight:400;
+    background: #536d76;
+}
+#nearby_outlet_heading {
+    margin: -2em 0em 2em 0em;
+}
+.discover_outlet_heading {
+    color: #fff;font-size: 4em;font-weight:800;
+}
+#map_view_heading {
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+.infowindow {
+    padding: 1em;
+    text-align: center;
+}
 /*nearby outlets map view */
 .nearby_outlets {
     background: #000;
