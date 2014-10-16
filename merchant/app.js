@@ -117,6 +117,18 @@ twystApp.config(function ($routeProvider, $httpProvider) {
             controller  : 'programUpdateCtrl',
             templateUrl : '/merchant/templates/offer/update.html'
         }).
+        when('/winback/create', {
+            controller  : 'WinbackCtrl',
+            templateUrl : '/merchant/templates/winback/create.html'
+        }).
+        when('/winback', {
+            controller  : 'WinbackCtrl',
+            templateUrl : '/merchant/templates/winback/view.html'
+        }).
+        when('/winback/update/:winback_id', {
+            controller  : 'WinbackCtrl',
+            templateUrl : '/merchant/templates/winback/update.html'
+        }).
         when('/panel', {
             controller  : 'PanelCtrl',
             templateUrl : '/merchant/templates/panel/dashboard.html'
@@ -140,5 +152,48 @@ twystApp.config(function ($routeProvider, $httpProvider) {
             nums.push(i);
         }
         return nums;
+    }
+
+    $rootScope.rewardify = function (input) {
+        if (input.reward.custom && input.reward.custom.text) {
+            return input.reward.custom.text;
+        } else if (input.reward.flat && (input.reward.flat.off || input.reward.flat.spend)) {
+            if(input.reward.flat.off && input.reward.flat.spend) {
+                return "Get Rs. " + ifEmpty(input.reward.flat.off) + " off on a minimum spend of Rs." + ifEmpty(input.reward.flat.spend);
+            }
+            if(input.reward.flat.off) {
+                return "Get Rs. " + ifEmpty(input.reward.flat.off) + " off on your bill";
+            }
+        } else if (input.reward.free && (input.reward.free.title || input.reward.free._with)) {
+            if(input.reward.free.title && input.reward.free._with) {
+                return "Get a free " + ifEmpty(input.reward.free.title) + " with " + ifEmpty(input.reward.free._with);
+            }
+            if(input.reward.free.title) {
+                return "Get a free " + ifEmpty(input.reward.free.title);
+            }
+        } else if (input.reward.buy_one_get_one && input.reward.buy_one_get_one.title) {
+            return "Buy one get one " + ifEmpty(input.reward.buy_one_get_one.title);
+        } else if (input.reward.reduced && (input.reward.reduced.what || input.reward.reduced.worth || input.reward.reduced.for_what)) {
+            if(input.reward.reduced.what && input.reward.reduced.worth) {
+               return "Get " + ifEmpty(input.reward.reduced.what) + " worth Rs. " + ifEmpty(input.reward.reduced.worth) + " for Rs. " + ifEmpty(input.reward.reduced.for_what);
+            }
+        } else if (input.reward.happyhours && input.reward.happyhours.extension) {
+            return "Extended happy hours by " + ifEmpty(input.reward.happyhours.extension);
+        } else if (input.reward.discount) {
+            if (input.reward.discount.max) {
+                return "Get " + ifEmpty(input.reward.discount.percentage) + " off, subject to a maximum discount of Rs." + ifEmpty(input.reward.discount.max);
+            } else {
+                return "Get " + ifEmpty(input.reward.discount.percentage) + " off on your bill";
+            }
+        } else {
+            return ifEmpty(input.basics.description);
+        }
+
+        function ifEmpty(input) {
+            if(input) {
+                return input;
+            }
+            return '';
+        }
     }
 });

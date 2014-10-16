@@ -27,8 +27,8 @@ twystApp.factory('programService', function ($rootScope, $log) {
         $scope.participating_outlets = [];
         $http.get('/api/v1/programs/view/' + program_id)
         .success(function(data) {
-            if(data.info) {
-                $scope.program = data.info;
+            if(data.info.length > 0) {
+                $scope.program = data.info[0];
                 if($scope.program.outlets.length > 0) {
                     for (var i = 0; i < $scope.program.outlets.length; i++) {
                         $scope.participating_outlets.push($scope.program.outlets[i]._id);

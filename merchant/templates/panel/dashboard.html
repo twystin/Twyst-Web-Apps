@@ -99,7 +99,7 @@
         </div>
         <div class="row-fluid">
             <div class="row-fluid span5">
-                <div class="row-fluid" tooltip="Your check-in is disabled. You do not have any active program running." tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[program.status !== 'active']}}">
+                <div class="row-fluid">
                     <div class="card-checkin">
                         <div class="outlethead">
                             <h3 class="card-padding1">Check-in a User</h3>
@@ -117,23 +117,24 @@
                                 </div>
                             </div>
                             <form name="checkinForm">
-                                <div class="row-fluid" style="line-height: 30px;">
+                                <div class="row-fluid" style="line-height: 30px;"  ng-show="outlet.attributes.home_delivery && outlet.attributes.dine_in">
                                     <div class="span2">
                                         Location:
                                     </div> 
-                                    <div class="span3" ng-show= "outlet.attributes.dine_in">
-                                        <input type="radio" id="r1" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false" ng-checked="outlet.attributes.dine_in == true && outlet.attributes.home_delivery == false" class=""> Dine-In 
+                                    <div class="span3">
+                                        <input type="radio" id="r1" ng-model="checkin.location" value="DINE_IN" ng-change="checkin_select_dirty = false" class=""> Dine-In 
                                     </div>
-                                    <div class="span7" ng-show= "outlet.attributes.home_delivery">
-                                        <input type="radio" id="r2" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false" ng-checked="outlet.attributes.dine_in == false && outlet.attributes.home_delivery == true"> Home Delivery / Take-away
+                                    <div class="span7">
+                                        <input type="radio" id="r2" ng-model="checkin.location" value="HOME_DELIVERY" ng-change="checkin_select_dirty = false"> Home Delivery / Take-away
                                     </div>
                                 </div>
+                                <div class="row-fluid" style="line-height: 10px;"  ng-show="!outlet.attributes.home_delivery || !outlet.attributes.dine_in">&nbsp;</div>
                                 <div class="row-fluid">
                                     <small class="text-error" ng-show="checkin_select_dirty && outlet.attributes.dine_in == true && outlet.attributes.home_delivery == true">* Please select Dine-in / Home delivery / Take-away.</small>
                                 </div>                      
                                 <div class="row-fluid">
-                                    <input type="text" placeholder="10 digit mobile number" id="phone_no" name="phone_no" required="true" ng-model="checkin.phone_no" ng-change="checkin_phone_no_dirty = false"   ng-disabled="program.status !== 'active'">
-                                    <button type="submit" class="btn btn-custom btn-warning" ng-click="createCheckin()" ng-disabled="loading || program.status !== 'active'">Check-in</button>
+                                    <input type="text" placeholder="10 digit mobile number" id="phone_no" name="phone_no" required="true" ng-model="checkin.phone_no" ng-change="checkin_phone_no_dirty = false">
+                                    <button type="submit" class="btn btn-custom btn-warning" ng-click="createCheckin()">Check-in</button>
                                 </div>
                                 <div class="row-fluid">
                                     <small class="text-error" ng-show="checkin_phone_no_dirty">* Please enter a 10 digit mobile number.</small>
