@@ -1,4 +1,9 @@
 /* Add here all your css styles (customizations) */
+/*nearby outlets map view */
+.nearby_outlets {
+    background: #000;
+    border-radius: 50%;
+}
 .discover_search {
     border-top-left-radius: 6px !important;
     border-bottom-left-radius: 6px !important;
@@ -6,6 +11,9 @@
 /* fb share button */
 .fb_iframe_widget {
     display: block !important;
+}
+.fb-share-button {
+    margin-top: 1em;
 }
 .smoking_avail {
     padding-right: 0px;
@@ -134,13 +142,24 @@
 }
 #images_single_modal > button.slick-next:before, #images_single_modal > button.slick-prev:before{
     color: #fff;
+    width: 2em;
 }
-#images_single_modal > button.slick-prev {
+.modal_slider_images_header {
+    background: #000;
+    color: #fff;
+}
+.modal-backdrop.in {
+    opacity: 0.9 !important;
+}
+.modal-dialog {
+    width: 100%;
+}
+/*#images_single_modal > button.slick-prev {
     left: 60px;
 }
 #images_single_modal > button.slick-next {
     right: 70px;
-}
+}*/
 
 /* offer panel */
 /*.panel_offer_callout :hover {
@@ -151,13 +170,36 @@
     line-height: ;
 }
 /* modal slider */
+#images_single_modal > .col-md-10 > button.slick-prev:before, #images_single_modal > .col-md-10 > button.slick-prev:before, .slick-prev:before, .slick-next:before{
+    font-size: 25px;
+}
+#modal-slider {
+    height: 50em;
+}
+.slick-prev {
+    left: -20px;
+}
+.slick-next {
+    right: -10px;
+}
+.modal-header {
+    border-bottom: 0px solid #000;
+}
 #modal-slider > img {
-	padding: 2em;
+	/*padding: 2em;*/
+    top: 0; left: 0; bottom: 0; right: 0;
+    height: 50%;
+    width: 50%;
+    overflow: auto;
+    position: absolute;
+    margin: auto;
+    margin-top: 2em;
 }
 .modal-content {
 	background-color: transparent;
 	box-shadow: none;
 	border: 0px solid #e1e1e1;
+    max-height: 60em;
 }
 /*header image */
 .header_badges_sprite {
@@ -197,6 +239,9 @@ a.ios_button {
 /* slick slider */
 .slick-prev:before, .slick-next:before {
 	color: #000;
+}
+#images_single_modal > .slick-prev:before, #images_single_modal > .slick-next:before {
+    color: #fff;
 }
 .bg_color-reddish {
 	background-color: #f1686c;
