@@ -210,7 +210,7 @@ outletApp.controller('DiscoverCtrl', function ($scope, $http, dataSvc, $window, 
       $scope.options = {
         map: {
           center: new google.maps.LatLng(lat, lon),
-          zoom: 11,
+          zoom: 13,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         },
         outlets: {
