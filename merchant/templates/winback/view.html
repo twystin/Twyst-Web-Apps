@@ -1,0 +1,30 @@
+<div class="row-fluid" style="min-height:580px;" ng-init="read()">	
+	<div class="lead row-fluid offset1 span11" style="padding-top:30px;">
+		<h2>Winback program</h2>
+	</div>
+	<div class="row-fluid">
+		<div ng-repeat="w in winbacks" class="row-fluid offset1 span10">
+			<div class="well span5">
+				<div class="row-fluid">
+					<h2>{{w.name}}</h2>
+					<h4>Minimum historical checkins: {{w.min_historical_checkins}}</h4>
+					<h4>Minimum historical checkins: {{w.min_historical_checkins}}</h4>
+					<h4>Days since last visit: {{w.days_since_last_visit}}</h4>
+					<h4>Program validity: {{w.validity.earn_start | date: 'longDate'}} to {{w.validity.earn_end | date: 'longDate'}}</h4>
+					<h4>Voucher valid for: {{w.validity.voucher_valid_days}}</h4>
+				</div>
+				<div class="row-fluid">
+					<div ng-repeat="o in w.offers">
+						<h4>Reward: {{rewardify(o)}}</h4>
+						<h4>Reward valid on: {{o.reward_applicability.time_of_day.toString()}}</h4>
+						<h4>Reward can be used on: {{o.reward_applicability.day_of_week.toString()}}</h4>
+						<h4>Terms and conditions: {{o.terms}}</h4>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<a href="#/winback/update/{{w._id}}" class="btn btn-primary btn-large">Update</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

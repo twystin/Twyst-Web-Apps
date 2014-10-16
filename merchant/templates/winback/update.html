@@ -1,6 +1,6 @@
-<div class="row-fluid" style="min-height:580px;">	
+<div class="row-fluid" style="min-height:580px;" ng-init="readOne()">	
 	<div class="lead row-fluid offset1 span10" style="padding-top:30px;">
-		<h2>Create a winback program</h2>
+		<h2>Update winback program</h2>
 	</div>
 	<div class="row-fluid">
 		<div class="row-fluid offset1 span10">
@@ -81,11 +81,11 @@
 	                <div class="row-fluid span10">
 	                    <div class="row-fluid span3">
 	                        <label ng-repeat="n in reward_check">
-	                            <input type="radio" ng-model="$parent.selected_reward" ng-value="n" />&nbsp;&nbsp;{{n.text}}
+	                            <input type="radio" ng-model="$parent.selected_reward" ng-value="n" ng-change="correctReward($parent.selected_reward)"/>&nbsp;&nbsp;{{n.text}}
 	                        </label>
 	                    </div>
 	                    <div class="row-fluid span6">
-	                        <div id="percentageDiscount" ng-if="selected_reward.value === 'discount'" ng-init="o.reward = ''">
+	                        <div id="percentageDiscount" ng-if="selected_reward.value === 'discount'">
 	                            <div class="row-fluid span12" style="margin:0px">
 	                                <div class="row-fluid span4">Percentage discount</div>
 	                                <div class="row-fluid span8">
@@ -101,7 +101,7 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <div id="flatOff" ng-if="selected_reward.value === 'flat'" ng-init="o.reward = ''">
+	                        <div id="flatOff" ng-if="selected_reward.value === 'flat'">
 	                            <div class="row-fluid span12" style="margin:0px">
 	                                <div class="row-fluid span5">Amount off</div>
 	                                <div class="row-fluid span7">
@@ -115,7 +115,7 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <div id="free" ng-if="selected_reward.value === 'free'" ng-init="o.reward = ''">
+	                        <div id="free" ng-if="selected_reward.value === 'free'">
 	                            <div class="row-fluid span12" style="margin:0px">
 	                                <div class="row-fluid span3">Get a free</div>
 	                                <div class="row-fluid span9">
@@ -129,7 +129,7 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <div id="buy_one_get_one" ng-if="selected_reward.value === 'buy_one_get_one'" ng-init="o.reward = ''">
+	                        <div id="buy_one_get_one" ng-if="selected_reward.value === 'buy_one_get_one'">
 	                            <div class="row-fluid span12" style="margin:0px">
 	                                <div class="row-fluid span3">Buy one Get one</div>
 	                                <div class="row-fluid span9">
@@ -137,7 +137,7 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <div id="happyHours" ng-if="selected_reward.value === 'happy'" ng-init="o.reward = ''">
+	                        <div id="happyHours" ng-if="selected_reward.value === 'happyhours'">
 	                            <div class="row-fluid span12" style="margin:0px">
 	                                <div class="row-fluid span5">Extension happy hours by</div>
 	                                <div class="row-fluid span7">
@@ -152,7 +152,7 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <div id="reducedPrice" ng-if="selected_reward.value === 'reduced'" ng-init="o.reward = ''">
+	                        <div id="reducedPrice" ng-if="selected_reward.value === 'reduced'">
 	                            <div class="row-fluid span12" style="margin:0px">
 	                                <div class="row-fluid span2">Get</div>
 	                                <div class="row-fluid span10">
@@ -170,7 +170,7 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <div id="reducedPrice" ng-if="selected_reward.value === 'custom'" ng-init="o.reward = ''">
+	                        <div id="reducedPrice" ng-if="selected_reward.value === 'custom'">
 	                            <div class="row-fluid span12" style="margin:0px">
 	                                <div class="row-fluid span4">Customized reward</div>
 	                                <div class="row-fluid span8">
@@ -216,6 +216,6 @@
 		</div>
 	</div>
 	<div class="row-fluid offset1 span10">
-		<button ng-click="create()" class="btn btn-success">Create</button>
+		<button ng-click="update()" class="btn btn-success">Update</button>
 	</div>
 </div>
