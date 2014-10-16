@@ -28,7 +28,7 @@ outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService
 $scope.open = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'templates/_partials/slider_modal.html',
+      templateUrl: 'state/_partials/slider_modal.html',
       size: size,
       scope: $scope
     })
@@ -36,7 +36,7 @@ $scope.open = function (size) {
 $scope.mapOpen = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'templates/_partials/modal_map.html',
+      templateUrl: 'state/_partials/modal_map.html',
       size: size,
       scope: $scope
     })
@@ -204,6 +204,10 @@ $scope.getCostForTwoText = function (outlet) {
   when('/nearby',{
     templateUrl: 'state/nearby/nearby.html',
     controller: 'NearbyCtrl'
+  }).
+  when('/login',{
+    templateUrl: 'state/login/login.html',
+    controller: 'OutletCtrl'
   }).
   when('/:outlet_id',{
     templateUrl: 'state/outlet_view/outlet_view.html',
