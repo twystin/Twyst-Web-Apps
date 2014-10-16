@@ -26,7 +26,6 @@ twystApp.controller('OutletCtrl',
                 var _id = $scope.outlet._id;
                 $scope.outlet = {};
                 $scope.outlet._id = _id;
-                console.log($scope.outlet);
             }
         }
         else {
@@ -279,13 +278,10 @@ twystApp.controller('OutletCtrl',
 
 
     $scope.newTimings = function($event, index){
-        console.log($scope.outlet.business_hours[$scope.week[index]].timings.length)
         if($scope.outlet.business_hours[$scope.week[index]].timings.length < 5) {
-            console.log("here ", $scope.week[index]);
             $scope.outlet.business_hours[$scope.week[index]].timings.push({open: '', close: ''});        
             $event.preventDefault();    
         }
-        console.log($scope.outlet.business_hours[$scope.week[index]].timings.length)
     };
 
     $scope.getCostForTwoText = function (outlet) {
@@ -362,6 +358,46 @@ twystApp.controller('OutletCtrl',
         outletService.read($scope, $http, $location, outlet_title);
         $location.path('/outlets/update/' + outlet_title);
     };
+
+    $scope.validationArray = [true, true, true, true, true, true, true, true];
+    
+    $scope.timingsValidation = function () {
+        var flag = 0;
+        for (var i = 0; i < 7; i++){
+            flag = 0;
+            if ($scope.outlet.business_hours[$scope.week[i]].closed == false && 
+                $scope.outlet.business_hours[$scope.week[i]].timings.length > 1){
+                for (var j = 0; j < $scope.outlet.business_hours[$scope.week[i]].timings.length-1; j++){
+                    for (var k = j + 1 ; k < $scope.outlet.business_hours[$scope.week[i]].timings.length; k++){
+                        if ((sendTime(1, i, j) < sendTime(0, i, k)) && (sendTime(0, i, j) > sendTime(1, i, k))){
+                            
+                            flag=1;
+                        }
+                    }
+                }
+            }
+        if (flag==1){
+            $scope.validationArray[i] = false;
+        }
+        else{
+            $scope.validationArray[i] = true;
+        }
+        }
+
+    }
+
+    function sendTime(i, w, t){
+        //1 for open
+        if (i==1){
+            return ($scope.outlet.business_hours[$scope.week[w]].timings[t].open.hr * 60 *1 +
+            $scope.outlet.business_hours[$scope.week[w]].timings[t].open.min * 1);
+        }
+        //0 for close
+        else if (i==0){
+            return ($scope.outlet.business_hours[$scope.week[w]].timings[t].close.hr * 60 *1 +
+            $scope.outlet.business_hours[$scope.week[w]].timings[t].close.min * 1);
+        }
+    }
 
     $scope.view = function () {
         var outlet_id = $routeParams.outlet_id,
