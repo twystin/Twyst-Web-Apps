@@ -41,7 +41,7 @@
 
                       <p class="color_white font_fixed_sapient">
                         <b class="color_white font_fixed_sapient">
-                         <img src="images/Address.png" id="image_address_icon" ng-hide="!outlet.contact.location.address"> 
+                         <img src="assets/img/images/Address.png" id="image_address_icon" ng-hide="!outlet.contact.location.address"> 
                        </b>
                        {{outlet.contact.location.address}}
                      </p>
@@ -67,7 +67,7 @@
                   <div class="col-md-12">
                    <div class="col-md-8 col-sm-8 col-xs-4 margin_right_one"></div>
                    <div class="col-md-4 col-sm-4 col-xs-4" id="share_image">
-                     <img src="images/Share.png"><b class="font_fixed_sapient brand_yellow" id="share_text">SHARE</b>
+                     <img src="assets/img/images/Share.png"><b class="font_fixed_sapient brand_yellow" id="share_text">SHARE</b>
                    </div>
                  </div>
                </div>
@@ -186,11 +186,11 @@
                     </div>
                     <div class="panel-body">
                       <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.zomato_url">
-                        <a  ng-href="{{outlet.links.zomato_url}}"  target="_blank"><img src="images/zomato.png" class="img-responsive"></a>
+                        <a  ng-href="{{outlet.links.zomato_url}}"  target="_blank"><img src="assets/img/images/zomato.png" class="img-responsive"></a>
                         <a href=""><p>Review Us</p></a>
                       </span>
                       <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.foodpanda_url">
-                        <a ng-href="{{outlet.links.foodpanda_url}}"  target="_blank"><img src="images/foodpanda.png" class="img-responsive"></a>
+                        <a ng-href="{{outlet.links.foodpanda_url}}"  target="_blank"><img src="assets/img/images/foodpanda.png" class="img-responsive"></a>
                         <a href=""><p>Order Online</p></a>
                       </span>
                     </div>
@@ -234,13 +234,13 @@
                         <div class="col-md-12 col-xs-12 col-sm-12 margin_negative_one padding_class">
                          <div class="col-md-6 col-sm-6 col-xs-6">
                            <div ng-show="outlet.attributes.dine_in">
-                             <img src="images/Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
+                             <img src="assets/img/images/Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
                              <span class="overflow-h padding-top font-size-eleven">
                               Dine In Available
                             </span>
                           </div>
                           <div  ng-show="!outlet.attributes.dine_in">
-                           <img src="images/No Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
+                           <img src="assets/img/images/No Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
                            <span class="overflow-h padding-top font-size-eleven">
                             No Dine In
                           </span>
@@ -248,13 +248,13 @@
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-6" >
                        <div ng-show="outlet.attributes.home_delivery" class="margin_negative_one">
-                        <img src="images/Home Delivery.png" class="image_overview_column_attribute hidden-xs">
+                        <img src="assets/img/images/Home Delivery.png" class="image_overview_column_attribute hidden-xs">
                         <span class="overflow-h padding-top font-size-eleven">
                           Home Delivery
                         </div>     
                       </div>
                       <div ng-show="!outlet.attributes.home_delivery">
-                        <img src="images/No Home Delivery.png" class="image_overview_column_attribute hidden-xs">
+                        <img src="assets/img/images/No Home Delivery.png" class="image_overview_column_attribute hidden-xs">
                         <span class="overflow-h padding-top font-size-eleven">
                           No Home Delivery
                         </span>
@@ -265,13 +265,13 @@
                   <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
                     <div class="col-md-6 col-sm-6 col-xs-6">
                       <div  ng-show="outlet.attributes.veg">
-                        <img src="images/Veg.png" class="image_overview_column_attribute hidden-xs">
+                        <img src="assets/img/images/Veg.png" class="image_overview_column_attribute hidden-xs">
                         <span class="overflow-h padding-top font-size-eleven">
                           Vegetarian Only
                         </span>
                       </div>
                       <div ng-show="!outlet.attributes.veg">
-                        <img src="images/Non Veg.png" class="image_overview_column_attribute hidden-xs">
+                        <img src="assets/img/images/Non Veg.png" class="image_overview_column_attribute hidden-xs">
                         <span class="overflow-h padding-top font-size-eleven">
                          Serves non veg
                        </span>
@@ -279,13 +279,13 @@
                    </div>
                    <div class="col-md-6 col-sm-6 col-xs-6">
                     <div ng-show="outlet.attributes.alcohol" class="margin_negative_one">
-                      <img src="images/Yes to Alcohol.png" class="image_overview_column_attribute hidden-xs">
+                      <img src="assets/img/images/Yes to Alcohol.png" class="image_overview_column_attribute hidden-xs">
                       <span class="overflow-h padding-top font-size-eleven">
                         Serves Alcohol
                       </span>
                     </div>
                     <div ng-show="!outlet.attributes.alcohol" class="margin_negative_one">
-                      <img src="images/No Alcohol.png" class="image_overview_column_attribute hidden-xs">
+                      <img src="assets/img/images/No Alcohol.png" class="image_overview_column_attribute hidden-xs">
                       <span class="overflow-h padding-top font-size-eleven">
                        No Alcohol
                      </span>  
@@ -297,13 +297,13 @@
                <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
                 <div class="col-md-6 col-sm-6 col-xs-6 smoking_avail">
                   <div ng-show="outlet.attributes.smoking" class="padding_class">
-                    <img src="images/Smoking.png" class="image_overview_column_attribute hidden-xs">
+                    <img src="assets/img/images/Smoking.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
                       Smoking Area Available
                     </span>
                   </div>
                   <div ng-show="!outlet.attributes.smoking" class="padding_class">
-                    <img src="images/No Smoking.png" class="image_overview_column_attribute hidden-xs">
+                    <img src="assets/img/images/No Smoking.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
                      No Smoking
                    </span>  
@@ -311,7 +311,7 @@
                </div>
                <div class="col-md-6 col-sm-6 col-xs-6 smoking_avail" class="padding_class">
                 <div ng-show="outlet.attributes.outdoor" class="margin_negative_one margin_top_half">
-                  <img src="images/Outdoor Seating.png" class="image_overview_column_attribute hidden-xs">
+                  <img src="assets/img/images/Outdoor Seating.png" class="image_overview_column_attribute hidden-xs">
                   <span class="overflow-h padding-top font-size-eleven">
                     Outdoor Seating Available
                   </span>  
@@ -324,7 +324,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div ng-show="outlet.attributes.foodcourt">
-                 <img src="images/Food Court.png" class="image_overview_column_attribute hidden-xs">
+                 <img src="assets/img/images/Food Court.png" class="image_overview_column_attribute hidden-xs">
                  <span class="overflow-h padding-top font-size-eleven">
                   Part of a food court
 

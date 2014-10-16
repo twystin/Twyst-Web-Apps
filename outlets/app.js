@@ -1,5 +1,5 @@
 
-var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'd3onut', 'AngularGM', 'slick', 'twyst.data']);
+var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'AngularGM', 'slick', 'twyst.data']);
 
 outletApp.filter('replaceComma', function () {
   return function (item) {
@@ -7,166 +7,7 @@ outletApp.filter('replaceComma', function () {
   };
 });
 
-outletApp.directive('wrapOwlcarousel', function () {
-  return {
-    restrict: 'E',
-    link: function (scope, element) {
-      var options = scope.$eval($(element).attr('data-options'));
-      $(element).owlCarousel(options);
-    }
-  };
-});
-outletApp.directive('fancybox', function ($compile) {
-  return {
-    restrict: 'A',
-    replace: false,
-    link: function ($scope, element) {
 
-      $scope.open_fancybox = function () {
-
-        var el = angular.element(element.html()),
-
-          compiled = $compile(el);
-        $.fancybox.open(el);
-
-        compiled($scope);
-
-      };
-    }
-  };
-});
-outletApp.directive('backgroundImage', function () {
-  return function (scope, element, attrs) {
-    attrs.$observe('backgroundImage', function (value) {
-      if (value) {
-        var url = 'http://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/' + value + '/Background.png';
-        element.css({'background': "url('" + url + "')"});
-      }
-    });
-  };
-});
-outletApp.directive('slickSlider', function ($timeout) {
-  return {
-    restrict: 'A',
-    link: function (scope, element, attrs) {
-      $timeout(function () {
-        var options = scope.$eval(attrs.slickSlider);
-        $(element).slick({
-          infinite: true,
-          slidesToShow: 7,
-          slidesToScroll: 2,
-          rtl: true,
-          autoplay: true,
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 7,
-                slidesToScroll: 7,
-                infinite: true,
-                dots: true
-              }
-            },
-            {
-              breakpoint: 700,
-              settings: {
-                slidesToShow: 5,
-                slidesToScroll: 5
-              }
-            },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                dots: false
-              }
-            },
-            {
-              breakpoint: 539,
-              settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                dots: false
-              }
-            }
-          ]
-        });
-      });
-    }
-  };
-});
-outletApp.directive('sliderSlick', function ($timeout) {
-  return {
-    restrict: 'A',
-    link: function (scope, element, attrs) {
-      $timeout(function () {
-        var options = scope.$eval(attrs.sliderSlick);
-        $(element).slick({
-          infinite: true,
-          slidesToShow: 3,
-          slidesToScroll: 2,
-          rtl: true,
-          autoplay: false,
-          accessibility: true,
-          arrows: true,
-          focusOnSelect: true,
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-                dots: true
-              }
-            },
-            {
-              breakpoint: 670,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                dots: true
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                dots: true
-              }
-          }
-  ]
-         });
-     });
-   }
- }
-}); 
-outletApp.directive('sliderSingle',function ($timeout){
- return {
-   restrict: 'A',
-   link: function (scope,element,attrs) {
-     $timeout(function () {
-        var options = scope.$eval(attrs.sliderSlick);
-         $(element).slick({
-          infinite: false,
-          slidesToShow: 1,
-          rtl: true,
-          autoplay: false, 
-          arrows: true
-         });
-     });
-   }
- }
-}); 
 // outletApp.controller('MapCtrl', ['$scope', function ($scope) {
 //     $scope.mapOptions = {
 //       center: new google.maps.LatLng(35.784, -78.670),
@@ -174,76 +15,7 @@ outletApp.directive('sliderSingle',function ($timeout){
 //       mapTypeId: google.maps.MapTypeId.ROADMAP
 //     };
 //   }]);
-outletApp.controller('DiscoverCtrl', function ($scope, $http, dataSvc, $window, angulargmUtils) {
-    $scope.userlocation = false;
-    var lat = 28.47178,
-        lon = 77.1016;
-    getUserData(lat, lon);
-    setMapData(lat, lon);
-    $scope.getLocation = function () {
-            $window.navigator.geolocation.getCurrentPosition(function(position) {
-              $scope.$apply(function() {
-                  $scope.location = position;
-                  if(position && position.coords && position.coords.latitude && position.coords.longitude) {
-                    lat = position.coords.latitude;
-                    lon = position.coords.longitude;
-                    $scope.userlocation = true;
-                  }
-                  getUserData(lat, lon);
-                  
-              });
-              }, function(error) {
-                  $scope.message="Error getting location automatically. Please enter co-ordinates manually.";
-                  console.log(error);
-          });
 
-    }
-
-    function getUserData(latitude, longitude) {
-      dataSvc.getUserDataInfo(latitude, longitude).then(function (data) {
-          $scope.data = data.data;
-     });
-    }
-
-     $scope.getLocation();
-    function setMapData(lat, lon) {
-      $scope.options = {
-        map: {
-          center: new google.maps.LatLng(lat, lon),
-          zoom: 13,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        },
-        outlets: {
-          icon: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png',
-        },
-      };
-    console.log($scope.options.map.center)
-
-   
-    $scope.outlets = [
-    {
-      name: 'nearby outlets',
-      elevationMeters: 4392,
-      location: {
-        lat: lat, 
-        lng: lon
-      }
-    }
-    ];
-  }
-  $scope.openInfoWindow = function(data) {
-    var d = {
-      lat: data.contact.location.coords.latitude,
-      lng: data.contact.location.coords.longitude
-    }
-    $scope.markerEvents = [
-      {
-        event: 'openinfowindow',
-        locations: [angulargmUtils.objToLatLng(d)]
-      },
-    ];
-  }
-});
 outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal, $http) {
 
   $scope.getOutletOpts = function (outlet) {
@@ -334,8 +106,6 @@ function setMapData() {
 }
 
 $scope.getOutlet();
-
-
 
 $scope.getUrI = function (outlet) {
   if (outlet && outlet.links) {
@@ -428,15 +198,15 @@ $scope.getCostForTwoText = function (outlet) {
 
   $routeProvider.
   when('/discover',{
-    templateUrl: './templates/discover.html',
-    controller: 'OutletCtrl'
+    templateUrl: 'state/discover/discover.html',
+    controller: 'DiscoverCtrl'
   }).
   when('/nearby',{
-    templateUrl: './templates/nearby.html',
-    controller: 'OutletCtrl'
+    templateUrl: 'state/nearby/nearby.html',
+    controller: 'NearbyCtrl'
   }).
   when('/:outlet_id',{
-    templateUrl: './templates/outlet_view.html',
+    templateUrl: 'state/outlet_view/outlet_view.html',
     controller: 'OutletCtrl'
   })
 

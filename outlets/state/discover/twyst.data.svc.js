@@ -4,7 +4,7 @@
 * Description
 */
 angular.module('twyst.data', []).
-factory('dataSvc', function($http, $q) {
+factory('dataSvc', function($http, $q, $window, $rootScope) {
 	var dataSvc = {};
 
 	var prepareData = function(data) {
@@ -22,8 +22,31 @@ factory('dataSvc', function($http, $q) {
         dataSvc.data = d.data; 
 		return d;
 	};
+    
+    dataSvc.getUserLocation = function () {
+        var deferred = $q.defer();
 
+        if (!$window.navigator) {
+            $rootScope.$apply(function() {
+                deferred.reject(new Error("Geolocation is not supported"));
+            });
+        } else {
+            $window.navigator.geolocation.getCurrentPosition(function (position) {
+                $rootScope.$apply(function() {
+                    deferred.resolve(position);
+                });
+            }, function (error) {
+                $rootScope.$apply(function() {
+                    deferred.reject(error);
+                });
+            });
+        }
+
+        return deferred.promise;
+    };
 	dataSvc.getUserDataInfo = function(latitude, longitude) {
+        var lat_user = latitude,
+            lon_user = longitude;
 		var deferred = $q.defer();
         //console.log("URL REQUEST" + 'http://twyst.in/api/v2/data/' + latitude + '/' + longitude)
         $http.get('/api/v2/data/' + latitude + '/' + longitude + '/', {
