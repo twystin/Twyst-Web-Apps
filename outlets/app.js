@@ -1,5 +1,5 @@
 
-var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'AngularGM', 'slick', 'twyst.data','login', 'flash']);
+var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'AngularGM', 'slick', 'twyst.data', 'login', 'flash']);
 
 outletApp.filter('replaceComma', function () {
   return function (item) {
