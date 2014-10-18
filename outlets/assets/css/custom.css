@@ -594,6 +594,10 @@ hr {
     .header_badges_sprite_two{
         margin-right: 6em;
     }
+    #modal-slider {
+    margin-left: -2.5em;
+    margin-top: 12em;
+}
 }
 @media (max-width: 768px) {
    .fancybox-overlay {
