@@ -4,7 +4,7 @@ outletApp.controller('DiscoverCtrl', function ($scope, $http, dataSvc, $window, 
         lon = 77.1016;
     getUserData(lat, lon);
     $scope.getLocation = function () {
-      dataSvc.getUserLocation().then( function () {
+      dataSvc.getUserLocation().then( function (position) {
         $scope.position = position;
       });
     }

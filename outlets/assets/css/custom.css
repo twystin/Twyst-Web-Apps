@@ -1,4 +1,22 @@
 /* Add here all your css styles (customizations) */
+
+.flash-message-alert-login {
+    text-align: center;
+}
+/*login form*/
+.login_form > form > .form-group > input {
+    margin: 0.5em 0em 0em 0em;
+    padding: 0.5em;
+}
+.login_form > form > button {
+    margin-top: 1.5em;
+}
+.loginform_background {
+    background: url('../img/bg/bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* discover and nearby */
 .discover_outlet_controller_heading {
     padding: 4em;
     font-weight:400;
@@ -155,6 +173,13 @@
     width: 50%;
 }
 /* slick slider */
+#images_single_modal\20 col-md-10 > .slick-prev:before, #images_single_modal\20 col-md-10 > .slick-next:before {
+    color: #fff;
+}
+#modal-slider {
+    margin-left: -2.5em;
+    margin-top: 3em;
+}
 #bottom_slider_logos > .slick-list {
     background: #fff;
     padding: 2em;
@@ -240,7 +265,7 @@ a.android_button {
 	width: 128px;
  	height: 45px;
  	display: block;
-	background: url(../../images/Badges.png);
+	background: url(../img/images/Badges.png);
 	background-position: 0px -135px;
 	margin-right: 1.3em;
 }
@@ -248,7 +273,7 @@ a.ios_button {
 	width: 128px;
  	height: 45px;
  	display: block;
-	background: url(../../images/Badges.png);
+	background: url(../img/images/Badges.png);
 	background-position: -128px -270px;
 }
 /*footer color */
@@ -426,6 +451,8 @@ hr {
 	height: 120px;
 	width: 180px;
 	padding: 1em;
+    cursor: pointer; 
+    cursor: hand;
 }
 #outlet_images_slider{
 	padding: 1em 1em 0em 1em;
