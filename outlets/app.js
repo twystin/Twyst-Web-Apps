@@ -19,7 +19,7 @@ outletApp.filter('replaceComma', function () {
 outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal, $http, $window, $location) {
 
   $scope.checkMobile = function () {
-    if ($window.innerWidth > 850) {
+    if ($window.innerWidth < 850) {
       return true;
     }
     return false;
