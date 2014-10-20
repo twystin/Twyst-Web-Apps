@@ -1,4 +1,16 @@
 /* Add here all your css styles (customizations) */
+#animated_user > i:hover{
+    transform: rotate(20deg);
+}
+.registerme {
+    text-align: center; 
+    padding:1em;
+    margin-top: 1em;
+    
+}
+.registerme > h6:hover {
+    color: #eb2227;
+}
 
 .flash-message-alert-login {
     text-align: center;
@@ -595,7 +607,7 @@ hr {
         margin-right: 6em;
     }
     #modal-slider > img {
-        width: 80%;
+        width: 90%;
     }
     #modal-slider {
     margin-left: 0em;

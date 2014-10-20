@@ -9,17 +9,17 @@ angular.module('login', [])
 	var loginSvc = {};
 
 	loginSvc.login = function (phone) {
-		console.log("phone" + phone);
+		// console.log("phone" + phone);
 		var deferred = $q.defer();
 		var query = "/api/v1/auth/login";
 		$http.post(query, {
       username: phone,
       password: phone
     }).success(function(success) {
-      console.log('SUCCESS ' + success);
+      // console.log('SUCCESS ' + success);
       deferred.resolve(success);
     }).error(function(error) {
-      console.log('ERROR ' + error);
+      // console.log('ERROR ' + error);
       deferred.reject(error);
     });
     return deferred.promise;
@@ -38,10 +38,10 @@ angular.module('login', [])
         'Pragma': 'no-cache'
       }
     }).success(function(success) {
-      console.log("SUCCESS " + success);
+      // console.log("SUCCESS " + success);
       deferred.resolve(success);
     }).error(function(error) {
-      console.log("ERROR " + error);
+      // console.log("ERROR " + error);
       deferred.reject(error);
     });
 
@@ -49,17 +49,17 @@ angular.module('login', [])
   };
 
   loginSvc.verify = function (otp, phone) {
-    console.log('VERIFYING ' + otp + ' ' + phone);
+    // console.log('VERIFYING ' + otp + ' ' + phone);
     var deferred = $q.defer();
     $http.post('/api/v2/otp', {
       otp: otp,
       phone: phone,
       device_id: phone
     }).success(function(success) {
-      console.log("SUCCESS " + success);
+      // console.log("SUCCESS " + success);
       deferred.resolve(success);
     }).error(function(error) {
-      console.log("ERROR " + error);
+      // console.log("ERROR " + error);
       deferred.reject(error);
     });
     return deferred.promise;

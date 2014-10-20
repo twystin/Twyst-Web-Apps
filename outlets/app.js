@@ -224,6 +224,10 @@ $scope.getCostForTwoText = function (outlet) {
     templateUrl: 'state/login/login.html',
     controller: 'OutletCtrl'
   }).
+  when('/otp',{
+    templateUrl: 'state/login/otp.html',
+    controller: 'OutletCtrl'
+  }).
   when('/carousel/:outlet_slug',{
     templateUrl: 'state/_partials/slider_mobile.html',
     controller: 'OutletCtrl'

@@ -18,22 +18,27 @@ outletApp.controller('loginCtrl', function ($scope, $timeout, $rootScope, loginS
   });
  };
 
- $scope.otp = function () {
+ $scope.getotp = function () {
+  console.log($scope.phone);
+  var verification = false
   var promise = loginSvc.getOTP($scope.phone);
    promise.then(function(success) {
-      flash("You should receive an OTP code soon.", false);
-      $location.path('/otp');
+      flash("You should receive an OTP code soon.");
+      // $location.path('/otp');
+      $scope.verification = true;
     }, function(error) {
-      flash("We could not get an OTP code. Please try again.", true);
+      flash("We could not get an OTP code. Please try again.");
     });
  };
 
-  $scope.verify = function() {
+  $scope.verify = function(data) {
+    $scope.otp = $scope.vercode;
     var promise = loginSvc.verify($scope.otp, $scope.phone);
     promise.then(function(success) {
       $scope.login();
     }, function(error) {
-      flash("Incorrect OTP entered. Please try again.", true);
+      flash("Incorrect OTP entered. Please try again.");
+      console.log(error.message);
     });
   };
 
