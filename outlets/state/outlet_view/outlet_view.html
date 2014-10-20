@@ -23,8 +23,11 @@
                     <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;"></div>
                     <div class="col-md-8" style="margin-top:3em;">
                       <h3 class="col-md-12 col-sm-12 hidden-xs hidden-sm"><b class="color_white knockout50" id="outlet_name" ng-click="getotherOutlet(outlet)">{{outlet.basics.name}}</b></h3>
-                      <h6 class="col-xs-12 hidden-md hidden-lg"><b class="color_white" id="outlet_name">{{outlet.basics.name}}</b></h6>
-
+                      <h6 class="col-xs-12 hidden-md hidden-lg">
+                    
+                      <b class="color_white col-xs-12" id="outlet_name">{{outlet.basics.name}}</b>
+                      </h6>
+                        
                       <h2 class="" >
                         <small>
                           <b class="color_white font_fixed_sapient">
@@ -45,8 +48,8 @@
                        </b>
                        {{outlet.contact.location.address}}
                      </p>
-                     <p class="color_white">
-                      <i class="fa fa-globe" ng-hide="!outlet.links.website_url"></i>&nbsp;
+                     <p class="color_white" ng-if="outlet.links.website_url">
+                      <i class="fa fa-globe" ng-if="outlet.links.website_url"></i>&nbsp;
                       <span class="font_fixed_sapient">
                         <a ng-href="http://{{outlet.links.website_url }}" class="color_white font_fixed_sapient">
                           {{outlet.links.website_url }}
@@ -61,7 +64,11 @@
                       </span>
 
                     </p>
-
+                    <div class="col-xs-12 hidden-md hidden-lg" style="display: inline-flex;">
+                      <div class="col-xs-5"></div>
+                    <div class="fb-share-button col-xs-2 hidden-md hidden-lg" data-href="http://staging.twyst.in/outlets/#/{{outlet.publicUrl[0]}}" data-type="button_count"></div>
+                    </div>
+                    
                   </div>
 
                   <div class="col-md-12">
@@ -172,7 +179,7 @@
                         <div class="col-md-12" id="outlet_images_slider">
                           <div slider-slick="{ draggable: false, slidesToShow:3, infinite:true}">
                             <div class="outlet-slide" ng-repeat="x in [1,2,3,4]">
-                              <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}{{x}}.png" alt="" ng-click="open('lg')" onerror=" $(this).hide();">
+                              <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}{{x}}.png" alt="" ng-click="checkMobile() ? mobileImages() : open('lg')" onerror=" $(this).hide();">
                             </div>
                           </div>
                         </div>

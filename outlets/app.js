@@ -1,5 +1,5 @@
 
-var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'AngularGM', 'slick', 'twyst.data']);
+var outletApp = angular.module('outletApp', ["ezfb", "ngRoute", 'ui.bootstrap', 'ngCookies', 'AngularGM', 'slick', 'twyst.data', 'login', 'flash']);
 
 outletApp.filter('replaceComma', function () {
   return function (item) {
@@ -16,7 +16,23 @@ outletApp.filter('replaceComma', function () {
 //     };
 //   }]);
 
-outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal, $http) {
+outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal, $http, $window, $location) {
+
+  $scope.checkMobile = function () {
+    if ($window.innerWidth < 850) {
+      return true;
+    }
+    return false;
+  };
+
+  $scope.getSlugForImages = function () {
+    $scope.slug = $routeParams.outlet_slug;
+  }
+
+  $scope.mobileImages = function (outlet) {
+    var outlet_slug = $scope.outlet.basics.slug;
+    $location.path('/carousel/'+ outlet_slug);    
+  };
 
   $scope.getOutletOpts = function (outlet) {
    return angular.extend(
@@ -26,9 +42,8 @@ outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService
  };
  $scope.isCollapsed = true;
 $scope.open = function (size) {
-
-    var modalInstance = $modal.open({
-      templateUrl: 'templates/_partials/slider_modal.html',
+     var modalInstance = $modal.open({
+      templateUrl: 'state/_partials/slider_modal.html',
       size: size,
       scope: $scope
     })
@@ -36,7 +51,7 @@ $scope.open = function (size) {
 $scope.mapOpen = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'templates/_partials/modal_map.html',
+      templateUrl: 'state/_partials/modal_map.html',
       size: size,
       scope: $scope
     })
@@ -54,7 +69,6 @@ $scope.mapOpen = function (size) {
 $scope.getSlugs = function () {
   outletService.getSlugs().then(function (data) {
     $scope.slugs = data;
-
   });
 }
 $scope.hidePanel = function () {
@@ -76,6 +90,7 @@ $scope.getOutlet = function () {
      }
     })
 };
+
 
 function setMapData() {
   $scope.options = {
@@ -204,6 +219,14 @@ $scope.getCostForTwoText = function (outlet) {
   when('/nearby',{
     templateUrl: 'state/nearby/nearby.html',
     controller: 'NearbyCtrl'
+  }).
+  when('/login',{
+    templateUrl: 'state/login/login.html',
+    controller: 'OutletCtrl'
+  }).
+  when('/carousel/:outlet_slug',{
+    templateUrl: 'state/_partials/slider_mobile.html',
+    controller: 'OutletCtrl'
   }).
   when('/:outlet_id',{
     templateUrl: 'state/outlet_view/outlet_view.html',
