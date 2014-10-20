@@ -594,9 +594,12 @@ hr {
     .header_badges_sprite_two{
         margin-right: 6em;
     }
+    #modal-slider > img {
+        width: 80%;
+    }
     #modal-slider {
-    margin-left: -2.5em;
-    margin-top: 12em;
+    margin-left: 0em;
+    margin-top: 6em;
 }
 }
 @media (max-width: 768px) {
