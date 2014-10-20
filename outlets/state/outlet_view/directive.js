@@ -152,7 +152,8 @@ outletApp.directive('sliderSingle',function ($timeout){
           slidesToShow: 1,
           rtl: true,
           autoplay: false, 
-          arrows: true
+          arrows: true,
+          dots: true
          });
      });
    }

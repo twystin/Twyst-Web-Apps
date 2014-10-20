@@ -1,4 +1,16 @@
 /* Add here all your css styles (customizations) */
+#animated_user > i:hover{
+    transform: rotate(20deg);
+}
+.registerme {
+    text-align: center; 
+    padding:1em;
+    margin-top: 1em;
+    
+}
+.registerme > h6:hover {
+    color: #eb2227;
+}
 
 .flash-message-alert-login {
     text-align: center;
@@ -485,7 +497,7 @@ hr {
 	padding-right: 0px;
 }
 #image_background {
-	/*background: url(../../images/cnd.png);*/
+	/*background: url(../../assets/img/images/Background5.png);*/
 	background-repeat: no-repeat;
 	background-size: cover!important;
 }
@@ -594,9 +606,12 @@ hr {
     .header_badges_sprite_two{
         margin-right: 6em;
     }
+    #modal-slider > img {
+        width: 90%;
+    }
     #modal-slider {
-    margin-left: -2.5em;
-    margin-top: 12em;
+    margin-left: 0em;
+    margin-top: 6em;
 }
 }
 @media (max-width: 768px) {
