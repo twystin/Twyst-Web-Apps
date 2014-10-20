@@ -52,6 +52,7 @@
               <button class="btn btn-success" ng-click="viewProgram(program._id)">View details</button>
               <a class="btn btn-success" ng-href="#/offers/update/{{program._id}}">Update</a>
               <button class="btn btn-danger" ng-click="deleteProgram(program)">Delete</button>
+              <button class="btn btn-primary" ng-click="getRewards(program._id)"><i class="fa fa-table"></i> Rewards</button>
           </div>
           </div>       
           <div class="alert alert-error" ng-show="programs.length===0">No offers have been created yet. Click <a ng-href="#/offers/create/loyalty">here</a> to create one</div>

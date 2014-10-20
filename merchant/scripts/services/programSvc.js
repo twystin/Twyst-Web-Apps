@@ -1,5 +1,5 @@
 'use strict';
-twystApp.factory('programService', function ($rootScope, $log) {
+twystApp.factory('programService', function ($rootScope, $log, $q, $http) {
     var programSvc = {},
         _programSvcMessages = {
             status: null,
@@ -13,6 +13,20 @@ twystApp.factory('programService', function ($rootScope, $log) {
     programSvc.getProgramSvcMessages = function () {
         return _programSvcMessages;
     };
+
+    programSvc.getRewards = function (program_id) {
+        var defer = $q.defer();
+        $http({
+            url: '/api/v3/reward_details/' + program_id,
+            method: "GET"
+        }).success(function (data) {
+            defer.resolve(data);
+        }).error(function (data) {
+            defer.resolve(data);
+        });
+        return defer.promise;
+    };
+
     programSvc.query = function ($scope, $http, $location, user_id) {
         $http.get('/api/v1/programs/' + user_id).success(function (data) {
             $scope.programs = JSON.parse(data.info);
