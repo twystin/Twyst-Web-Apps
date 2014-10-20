@@ -419,11 +419,21 @@ twystApp.controller('OutletCtrl',
         var user_id = $scope.auth._id;
         $scope.outlet.sms_off = getSmsOff();
         $scope.outlet.outlet_meta.accounts.push(user_id);
+        if(outlet.shortUrl) {
+            var shortUrl = [];
+            shortUrl.push(outlet.shortUrl);
+            outlet.shortUrl = shortUrl;
+        }
         outletService.create($scope, $http, $location);
     };
 
     $scope.update = function (outlet_id) {
         $scope.outlet.sms_off = getSmsOff();
+        if(outlet.shortUrl) {
+            var shortUrl = [];
+            shortUrl.push(outlet.shortUrl);
+            outlet.shortUrl = shortUrl;
+        }
         outletService.update($scope, $http, $location, outlet_id);
     };
 
