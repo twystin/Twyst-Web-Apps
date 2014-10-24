@@ -16,7 +16,7 @@ outletApp.filter('replaceComma', function () {
 //     };
 //   }]);
 
-outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal, $http, $window, $location) {
+outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, outletService, $modal, $http, $window, $location) {
 
   $scope.counter = 3;
   $scope.count_limit = 3;
@@ -109,6 +109,7 @@ $scope.getOutlet = function () {
   var outlet_id = $routeParams.outlet_id;
   outletService.getOutlet(outlet_id).then(function (data) {
     $scope.outlet = data.OUTLET;
+    $rootScope.o = data.OUTLET;
      $scope.rewards = data.REWARDS;
      if($scope.outlet) {
       setMapData();
@@ -233,7 +234,8 @@ $scope.getCostForTwoText = function (outlet) {
   return outletService;
 }).config(function (ezfbProvider, $routeProvider, $httpProvider){
   ezfbProvider.setInitParams({
-    appId: '763534923659747'
+    appId: '763534923659747',
+    version    : 'v2.1'
   });
 
   $routeProvider.
