@@ -26,13 +26,15 @@ outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService
   }
 
   $scope.checkMobile = function () {
-    $scope.counter = 5;
-    $scope.count_limit = 5;
     if ($window.innerWidth < 850) {
+      $scope.counter = 5;
+      $scope.count_limit = 5;
       return true;
     }
     return false;
   };
+
+  $scope.checkMobile();
 
   $scope.getSlugForImages = function () {
     $scope.slug = $routeParams.outlet_slug;
