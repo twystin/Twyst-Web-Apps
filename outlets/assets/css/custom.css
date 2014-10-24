@@ -244,7 +244,7 @@
 #modal-slider > img {
 	/*padding: 2em;*/
     top: 0; left: 0; bottom: 0; right: 0;
-    height: 75%;
+    height: 50%;
     width: 50%;
     overflow: auto;
     position: absolute;
