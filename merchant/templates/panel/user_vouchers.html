@@ -11,6 +11,9 @@
 							Status
 						</th>
 						<th>
+							Reward
+						</th>
+						<th>
 							Action
 						</th>
 					</tr>
@@ -24,7 +27,10 @@
 							{{getStatus(voucher)}}
 						</td>
 						<td>
-							<button class="btn btn-xs btn-success" ng-click="getDetails(voucher)">Get details</button>
+							{{voucher.issue_details.issued_for.basics.title}}
+						</td>
+						<td>
+							<button class="btn btn-xs btn-success" ng-click="getDetails(voucher)">Details</button>
 						</td>
 					</tr>
 				</tbody>
