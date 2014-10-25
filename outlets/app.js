@@ -73,7 +73,7 @@ $scope.mapOpen = function (size) {
         app_id: '1437891089774348',
         method: 'feed',
         name: $scope.outlet.basics.name,
-        picture: "https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/" + outlet.basics.slug + "/logo.png",
+        picture: "https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/" + $scope.outlet.basics.slug + "/logo.png",
         redirect_uri: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
         link: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
         caption: $scope.outlet.contact.location.locality_1[0] + ', ' + $scope.outlet.contact.location.locality_2[0] + ', ' + $scope.outlet.contact.location.city,
