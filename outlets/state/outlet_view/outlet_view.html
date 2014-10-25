@@ -13,8 +13,10 @@
                     <div class="col-md-2 col-sm-2 col-xs-hidden" style="margin-left:3em;"></div>
                     <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;">
                       <img class="merchant_logo" ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/logo.png">
-                       <div class="col-md-12 padding-top-share">
-                         <button ng-click="share()"><i class="fa fa-facebook"></i> Share</button>
+                       <div class="col-md-12 padding-top-share" ng-click="share()">
+                         <a class="btn btn-social btn-facebook btn-xs">
+                          <i class="fa fa-facebook"></i> Share
+                        </a>
                        </div>
                     </div>
                   </div>

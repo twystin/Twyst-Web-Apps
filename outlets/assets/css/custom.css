@@ -1,6 +1,7 @@
 /* Add here all your css styles (customizations) */
 .padding-top-share {
     top: 1em;
+    left: -0.5em;
 }
 
 #animated_user > i:hover{
