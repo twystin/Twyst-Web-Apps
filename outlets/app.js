@@ -70,10 +70,11 @@ $scope.mapOpen = function (size) {
 
   $scope.share = function () {
     FB.ui({
-        app_id: '763534923659747',
+        app_id: '1437891089774348',
         method: 'feed',
         name: $scope.outlet.basics.name,
-        link: 'http://twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
+        redirect_uri: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
+        link: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
         caption: $scope.outlet.basics.name + ',' + $scope.outlet.contact.location.locality_1[0],
         description: 'Sharing an outlet test.'
     }, function (response) {
@@ -233,7 +234,7 @@ $scope.getCostForTwoText = function (outlet) {
   return outletService;
 }).config(function (ezfbProvider, $routeProvider, $httpProvider){
   ezfbProvider.setInitParams({
-    appId: '763534923659747',
+    appId: '1397475420510454',
     version    : 'v2.1'
   });
 
