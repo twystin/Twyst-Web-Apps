@@ -16,14 +16,25 @@ outletApp.filter('replaceComma', function () {
 //     };
 //   }]);
 
-outletApp.controller('OutletCtrl', function ($scope, $routeParams, outletService, $modal, $http, $window, $location) {
+outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, outletService, $modal, $http, $window, $location) {
+
+  $scope.counter = 3;
+  $scope.count_limit = 3;
+
+  $scope.updateCounter = function (count) {
+    $scope.counter += count;
+  }
 
   $scope.checkMobile = function () {
     if ($window.innerWidth < 850) {
+      $scope.counter = 5;
+      $scope.count_limit = 5;
       return true;
     }
     return false;
   };
+
+  $scope.checkMobile();
 
   $scope.getSlugForImages = function () {
     $scope.slug = $routeParams.outlet_slug;
@@ -57,6 +68,21 @@ $scope.mapOpen = function (size) {
     })
   };
 
+  $scope.share = function () {
+    FB.ui({
+        app_id: '1437891089774348',
+        method: 'feed',
+        name: $scope.outlet.basics.name,
+        picture: "https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/" + $scope.outlet.basics.slug + "/logo.png",
+        redirect_uri: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
+        link: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
+        caption: $scope.outlet.contact.location.locality_1[0] + ', ' + $scope.outlet.contact.location.locality_2[0] + ', ' + $scope.outlet.contact.location.city,
+        description: $scope.rewards[$scope.rewards.length - 1].title + ' and much more.'
+    }, function (response) {
+      console.log(response)
+    });
+  }
+
 
  $scope.selectOutlet = function (outlet, marker) {
   if ($scope.prev) {
@@ -84,6 +110,7 @@ $scope.getOutlet = function () {
   var outlet_id = $routeParams.outlet_id;
   outletService.getOutlet(outlet_id).then(function (data) {
     $scope.outlet = data.OUTLET;
+    $rootScope.o = data.OUTLET;
      $scope.rewards = data.REWARDS;
      if($scope.outlet) {
       setMapData();
@@ -208,7 +235,8 @@ $scope.getCostForTwoText = function (outlet) {
   return outletService;
 }).config(function (ezfbProvider, $routeProvider, $httpProvider){
   ezfbProvider.setInitParams({
-    appId: '763534923659747'
+    appId: '1397475420510454',
+    version    : 'v2.1'
   });
 
   $routeProvider.
