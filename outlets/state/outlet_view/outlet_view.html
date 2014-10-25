@@ -69,18 +69,15 @@
 
                     </p>
                     <div class="col-xs-12 hidden-md hidden-lg" style="display: inline-flex;">
-                      <div class="col-xs-5"></div>
-                    <div class="fb-share-button col-xs-2 hidden-md hidden-lg" data-href="http://staging.twyst.in/outlets/#/{{outlet.publicUrl[0]}}" data-type="button_count"></div>
+                      <div class="col-xs-3">&nbsp;</div>
+                      <div class="col-xs-6">
+                        <a class="btn btn-social btn-facebook btn-xs" ng-click="share()">
+                          <i class="fa fa-facebook"></i> Share
+                        </a>
+                      </div>
                     </div>
                     
                   </div>
-
-                  <div class="col-md-12">
-                   <div class="col-md-8 col-sm-8 col-xs-4 margin_right_one"></div>
-                   <div class="col-md-4 col-sm-4 col-xs-4" id="share_image">
-                     <img src="assets/img/images/Share.png"><b class="font_fixed_sapient brand_yellow" id="share_text">SHARE</b>
-                   </div>
-                 </div>
                </div>
                <div class="col-md-1"></div>
 
@@ -136,7 +133,7 @@
                            </div> -->
                            <div class="col-xs-12">
                             <accordion class="hidden-md hidden-sm hidden-lg col-xs-12">
-                              <accordion-group class="small-screen-accordion" heading= "On visit {{offer.count}}:{{offer.title}}" ng-repeat="offer in rewards|limitTo:counter">
+                              <accordion-group class="small-screen-accordion" heading= "On visit {{offer.count}}: &nbsp;{{offer.title}}" ng-repeat="offer in rewards|limitTo:counter">
                                <!--  <accordion-heading class="brand_bg_yellow">
                                 <p class="col-xs-12 color_black"><b>On visit {{offer.count}}</b> <span>{{offer.title}}</span></p>
                               </accordion-heading> -->
