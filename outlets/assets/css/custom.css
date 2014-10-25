@@ -196,6 +196,11 @@
     margin-left: -2.5em;
     margin-top: 3em;
 }
+/* margin-right to a different class because it is affecting the slider on mobile.We need it to add a margin only to web single-slider */
+.modal-slider_large {
+    margin-right: 2em;
+}
+
 #bottom_slider_logos > .slick-list {
     background: #fff;
     padding: 2em;
@@ -230,11 +235,17 @@
     line-height: ;
 }
 /* modal slider */
+.back_button_slider {
+    margin: 2em;;
+}
 #images_single_modal > .col-md-10 > button.slick-prev:before, #images_single_modal > .col-md-10 > button.slick-prev:before, .slick-prev:before, .slick-next:before{
     font-size: 25px;
 }
 #modal-slider {
     height: 33em;
+}
+.modal-slider_mobile {
+    height: 20em !important;
 }
 .slick-prev {
     left: -20px;
@@ -248,12 +259,14 @@
 #modal-slider > img {
 	/*padding: 2em;*/
     top: 0; left: 0; bottom: 0; right: 0;
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: auto;
     overflow: auto;
     position: absolute;
     margin: auto;
     margin-top: 2em;
+    max-height: 800px;
+    max-width: 1200px;
 }
 .modal-content {
 	background-color: transparent;
@@ -614,7 +627,8 @@ hr {
         margin-right: 6em;
     }
     #modal-slider > img {
-        width: 90%;
+        width: 80%;
+        margin-top: 0em;
     }
     #modal-slider {
     margin-left: 0em;
