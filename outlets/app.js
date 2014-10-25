@@ -75,8 +75,8 @@ $scope.mapOpen = function (size) {
         name: $scope.outlet.basics.name,
         redirect_uri: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
         link: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
-        caption: $scope.outlet.basics.name + ',' + $scope.outlet.contact.location.locality_1[0],
-        description: 'Sharing an outlet test.'
+        caption: $scope.outlet.contact.location.locality_1[0] + ', ' + $scope.outlet.contact.location.locality_2[0] + ', ' + $scope.outlet.contact.location.city,
+        description: $scope.rewards[$scope.rewards.length - 1] + ' and much more.'
     }, function (response) {
       console.log(response)
     });
