@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="outletApp"> 
 <head>
-  <title>{{o.basics.name}}, {{o.contact.location.locality_1[0]}} - Twyst</title>
+  <title ng-if="o.basics.name">{{o.basics.name}}, {{o.contact.location.locality_1[0]}} - Twyst</title>
+  <title ng-if="!o.basics.name">Twyst</title>
 
   <!-- Meta -->
   <meta charset="utf-8">
