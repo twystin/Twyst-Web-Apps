@@ -29,12 +29,22 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
     if ($window.innerWidth < 850) {
       $scope.counter = 5;
       $scope.count_limit = 5;
+      $rootScope.locations = $rootScope.locations || [];
+      $rootScope.locations.push($location.url());
+      //console.log("LOCATON IS" + JSON.stringify($location.url()));
+      //$rootScope.location = $location;
+      //console.log($rootScope.location);
       return true;
+
     }
     return false;
   };
 
   $scope.checkMobile();
+  $scope.closemodalMobile = function (slug) {
+    // console.log($rootScope.locations);
+    $location.url($rootScope.locations[0]);
+  };
 
   $scope.getSlugForImages = function () {
     $scope.slug = $routeParams.outlet_slug;
