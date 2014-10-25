@@ -73,8 +73,7 @@ $scope.mapOpen = function (size) {
         app_id: '763534923659747',
         method: 'feed',
         name: $scope.outlet.basics.name,
-        link: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
-        picture: 'https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/' + $scope.outlet.basics.slug+'/logo.png',
+        link: 'http://twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
         caption: $scope.outlet.basics.name + ',' + $scope.outlet.contact.location.locality_1[0],
         description: 'Sharing an outlet test.'
     }, function (response) {
