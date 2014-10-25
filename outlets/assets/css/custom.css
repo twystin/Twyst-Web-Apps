@@ -477,11 +477,17 @@ hr {
 .modal-dialog {}
 .thumbnail {margin-bottom:6px;}
 .outlet-slide > img {
-	height: 120px;
-	width: 180px;
+	max-height: 120px;
 	padding: 1em;
     cursor: pointer; 
     cursor: hand;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    margin: auto;
+    
 }
 #outlet_images_slider{
 	padding: 1em 1em 0em 1em;
@@ -645,8 +651,7 @@ hr {
       background: none !important;
    }
    .outlet-slide > img {
-    height: 120px;
-    width: 200px;
+    max-height: 120px;
     padding: 2%;
     margin-left: 1.6em;
    }
