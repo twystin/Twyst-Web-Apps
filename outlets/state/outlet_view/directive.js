@@ -46,6 +46,7 @@ outletApp.directive('slickSlider', function ($timeout) {
           infinite: true,
           slidesToShow: 7,
           slidesToScroll: 2,
+          lazyLoad: 'ondemand',
           rtl: true,
           autoplay: true,
           responsive: [
@@ -105,6 +106,7 @@ outletApp.directive('sliderSlick', function ($timeout) {
           slidesToShow: 3,
           slidesToScroll: 2,
           rtl: true,
+          lazyLoad: 'ondemand',
           autoplay: false,
           accessibility: true,
           arrows: true,
@@ -142,7 +144,7 @@ outletApp.directive('sliderSlick', function ($timeout) {
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 centerMode: true,
-                centerPadding: '40px',
+                centerPadding: '60px',
                 dots: true
               }
 
@@ -170,6 +172,7 @@ outletApp.directive('sliderSingle',function ($timeout){
          $(element).slick({
           infinite: false,
           slidesToShow: 1,
+          lazyLoad: 'ondemand',
           rtl: true,
           autoplay: false, 
           arrows: true,

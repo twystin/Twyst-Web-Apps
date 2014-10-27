@@ -86,11 +86,6 @@
     float: right;
     font-size: 11px;
 }
-/*.popover {
-    background-color: #e1e1e1;
-    position: absolute !important;
-    z-index: 9999!important;
-}*/
 #distance_discover_no_location {
     z-index: 9999;
     position: absolute;
@@ -100,18 +95,11 @@
     padding-top: 4em;
 }
 .outlet_image_discover {
-    /*border: 1px solid #fff;*/
     overflow: hidden;
     padding: 2em;
     height: 30em;
     background: #fff;
-/*    -webkit-box-shadow: 0px 2px 61px -5px rgba(0,0,0,0.65);
-    -moz-box-shadow: 0px 2px 61px -5px rgba(0,0,0,0.65);
-    box-shadow: 0px 2px 61px -5px rgba(0,0,0,0.65);*/
-/*    -webkit-box-shadow: -1px -1px 10px 4px rgba(255,255,255,0.90);
-    -moz-box-shadow: -1px -1px 10px 4px rgba(255,255,255,0.90);
-    box-shadow: -1px -1px 10px 4px rgba(255,255,255,0.90);
-*/}
+}
 .outlet_image_discover > img {
     height: 200px;
     width: 100%;
@@ -126,14 +114,12 @@
     border-radius: 6px !important;
 }
 .effect-discover > figcaption {
-    /*margin-top: -10em;*/
     background: transparent;
     position: relative;
 }
 .hidden_text{
     position: relative;
     overflow: hidden;
-    /*padding: 0.5em 0;*/
 }
 .hidden_text::after {
     position: absolute;
@@ -219,18 +205,6 @@
 .modal-dialog {
     width: 100%;
 }
-/*#images_single_modal > button.slick-prev {
-    left: 60px;
-}
-#images_single_modal > button.slick-next {
-    right: 70px;
-}*/
-
-/* offer panel */
-/*.panel_offer_callout :hover {
-    background-color: white;
-    color: #000;
-}*/
 .title_offer_callout{
     line-height: ;
 }
@@ -281,14 +255,14 @@
 	margin-right: 15em;
 }
 .header_badges_sprite_two {
-    display: inline-flex;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 .header_badges_sprite_two > a.android_button:before {
-    float: left;
+  /*  float: left;*/
 }
 .header_badges_sprite_two > a.ios_button:before {
-    float: right;
+   /* float: right;*/
 }
 a.android_button {
 	width: 128px;
@@ -622,16 +596,16 @@ hr {
 
 @media (max-width: 1200px) {
    .badges_small_screen {
-    margin: 4em 0em -1em 0em;
+    margin-top: 4em;
+    display: flex;
+    justify-content: center;
+    float: right;
    }
    #header_sprite_badges_right_margin {
     margin-right: -8em;
    }
 }
 @media (max-width: 990px) {
-    .header_badges_sprite_two{
-        margin-right: 6em;
-    }
     #modal-slider > img {
         width: 80%;
         margin-top: 0em;
@@ -641,61 +615,39 @@ hr {
     margin-top: 6em;
 }
 }
-@media (max-width: 800px) {
-     .header_badges_sprite_two{
-        margin: 0em 0em 0em -2em;
-    }
-}
+
 @media (max-width: 768px) {
    .fancybox-overlay {
       background: none !important;
    }
    .outlet-slide > img {
     max-height: 120px;
-    padding: 2%;
-    margin-left: 1.6em;
+ /*   padding: 2%;
+    margin-left: 1.6em;*/
    }
    .title-v1 > h2 {
     font-size: 20px !important;
    }
 }
-@media (max-width: 583px) {
-    .badges_screen{
-        display: none;
-    }
-    .header_badges_sprite_two{
-       margin: 0em 0em 0em 8em;
-    }
-}
+
 @media (max-width: 511px) {
-    .header_badges_sprite_two {
-        margin: 0em 0em 0em 5em;
+   .badges_small_screen > span > a.android_button {
+    margin-right: 1px;
     }
 }
-@media (max-width: 450px) {
-    .header_badges_sprite_two {
-        margin: 0em 0em 0em 3em;
-    }
-}
+
 @media (max-width: 390px) {
     .badges_screen{
         display: none;
     }
-  /*  .header_badges_sprite_two{
-       margin: 0em -3em 0em -1em;
-    }*/
-    .header_badges_sprite_two {
-        margin: 0em 0em 0em 3em;
-    }
+
 }
 
 @media (max-width: 370px) {
      .badges_screen{
         display: none;
     }
-    .header_badges_sprite_two{
-       margin: 0em -3em 0em -1em;
-    }
+
 }
 
 @media (max-width: 357px) and (-webkit-min-device-pixel-ratio: 3),
@@ -706,28 +658,7 @@ hr {
         .badges_screen{
         display: none;
     }
-    .header_badges_sprite_two{
-       margin: 0em 0em 0em 1em;
-    }
 }
-/*#zomato {
-	background-image: url(../../images/zomato.jpg);
-	background-size: cover;
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	height: 230px;
-}
-#foodpanda {
-	background-image: url(../../images/foodpanda.png);
-	background-size: cover;
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	height: 230px;
-}*/
     /* Dummy CSS */
     .timeline {
     list-style: none;
@@ -789,8 +720,6 @@ hr {
         	background: #fff;
     border-radius: 1px 1px 1px 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    /*float: left;
-	margin: 0 14px 15px 20px;*/
     padding: 5px;
         }
 
