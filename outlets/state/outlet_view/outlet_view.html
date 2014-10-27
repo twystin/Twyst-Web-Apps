@@ -77,13 +77,25 @@
 </div>
 </div>
 <div class="container content-lg">
-<div class="title-v1" style="text-align: left;" id="check_in_title">
+<div class="title-v1" style="text-align: left;" id="check_in_title" ng-if="expression">
   <h2 id="check_in_heading">Check-in. Unlock <span class="label-buy-color">rewards</span><span>!</span></h2>
 </div>
+
 <div class="row">
   <div class="col-md-7 col-xs-12 content-boxes-v3 margin-bottom-40">
     <div class="clearfix margin-bottom-10 heading-sm">
-      <div class="panel panel-default">
+      <div class="panel panel-default" ng-if="!rewards && !rewards.length">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <h3>Our Program on Twyst</h3>
+          </div>
+        </div>
+        <div class="panel-body" id="no_program_view" >
+          <h5>WE ARE NOT OFFERING ANY REWARDS AT PRESENT!</h5>
+          <H6>Check Back Soon For Updates.</H6>
+        </div>
+      </div>
+      <div class="panel panel-default" ng-if="rewards && rewards.length">
         <div class="panel-heading">
           <div class="panel-title">
             <h3>Our Program on Twyst</h3>
