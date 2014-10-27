@@ -87,7 +87,7 @@ $scope.mapOpen = function (size) {
         redirect_uri: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
         link: 'http://staging.twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
         caption: $scope.outlet.contact.location.locality_1[0] + ', ' + $scope.outlet.contact.location.locality_2[0] + ', ' + $scope.outlet.contact.location.city,
-        description: $scope.rewards[$scope.rewards.length - 1].title + ' and much more.'
+        description: ($scope.rewards && $scope.rewards.length) ? $scope.rewards[$scope.rewards.length - 1].title + ' and much more.' : ''
     }, function (response) {
       console.log(response)
     });
@@ -207,26 +207,6 @@ $scope.getCostForTwoText = function (outlet) {
 
     return deferred.promise;
   };
-  outletService.getPosts = function (outlet_fb_url) {
-
-    $http.jsonp('https://graph.facebook.com/' + outlet_fb_url + '/feed?access_token=' +  "CAACEdEose0cBAJjoP2sZCrZBZBCWzGcobdwLQUgR3FqXi7D97CZB2dpCTwZBhOFMwqjnefVpJcK6SqfVZBpw6vTRy9KnpxYlS3jtrYmxp4ifMiD4ZCxSbB98C4kZApTmGxfPtmO1cZApWOreasYiZA3rQ5AFoZCkGo5PLuzcOYrqUsGgILIvg7SOPdQhPzretP0ey2Xc1OZAmPXa2sGSHk6HgOTZC?callback=JSON_CALLBACK").success(function (data) {
-      console.log(data);
-    }).error(function (data) {
-     console.log(data);
-   });                                                                                         
-  };
-  // outletService.getLocation = function () {
-  //   var deferred = $q.defer();
-  //   $http({
-  //     url: '/api/v2/data/28/77',
-  //     method: 'GET'
-  //   }).success(function (data) {
-  //     deferred.resolve (data.info);
-  //   }).error(function (data) {
-  //     deferred.resolve(data);
-  //   });
-  //   return deferred.promise;
-  // };
   outletService.getSlugs = function () {
 
     var deferred = $q.defer();
