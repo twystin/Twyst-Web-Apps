@@ -82,7 +82,8 @@ hr {
 /* fonts */
 
 .knockout50 {
-	font-family: "knockout50" !important;
+	/*font-family: "knockout50" !important;*/
+	font-family: 'Open Sans', sans-serif;
 	font-size: 200;
 }
 .left_top {
@@ -96,7 +97,8 @@ hr {
 #letterpress {
 	text-shadow: 0px 1px 1px #4d4d4d;
 	color: #585f69;
-	font: 50px "knockout50" !important;
+	/*font: 50px "knockout50" !important;*/
+	font-family: 'Open Sans', sans-serif;
 	line-height: 0;
 	text-align: center;
 }
@@ -119,14 +121,16 @@ hr {
 	margin-top: 5px; 
    text-shadow: none; 
    font-weight: normal !important; 
-   font-family: 'sapientregular'; 
+   /*font-family: 'sapientregular'; */
+   font-family: 'Open Sans', sans-serif;
 }
 .hero_highlight_column{
 	float: left;
 }
 .offer_title, .offer_count {
 	font-size: 13px;
-	font-family: 'sapientregular';
+	/*font-family: 'sapientregular';*/
+	font-family: 'Open Sans', sans-serif;
 
 }
 .hero_header_offers{
@@ -137,7 +141,8 @@ hr {
 	text-align: justify;
 	padding: 0.6em 0.6em 0.6em 0.6em;
 	font-size:  1.2em;
-	font-family: 'sapientregular';
+	/*font-family: 'sapientregular';*/
+	font-family: 'Open Sans', sans-serif;
 }
 tr:hover{
 	background: #fff;
@@ -149,7 +154,8 @@ tr:hover{
 	color: #fff;
 	padding: 1.6em;
 	text-align: center;
-	font-family: 'sapientbold';
+	/*font-family: 'sapientbold';*/
+	font-family: 'Open Sans', sans-serif;
 	font-size: 1em;
 }
 .table_offer {
@@ -157,7 +163,8 @@ tr:hover{
 	padding: 0em;
 	color: #fff;
 	text-align: center;
-	font-family: 'sapientbold';
+	/*font-family: 'sapientbold';*/
+	font-family: 'Open Sans', sans-serif;
 	font-size: 1em;
 }
 .table_offer_details > td {
@@ -165,11 +172,13 @@ tr:hover{
 	text-align: center;
 }
 .table_checkin_and_offer_details {
-	font-family: "sapientregular";
+	/*font-family: "sapientregular";*/
+	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 }
 .offer_count {
-	font-family: "sapientbold";
+	/*font-family: "sapientbold";*/
+	font-family: 'Open Sans', sans-serif;
 }
 .table-responsive {
 	border: 0px solid #ccc !important;

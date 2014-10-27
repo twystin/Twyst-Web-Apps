@@ -1,5 +1,5 @@
 /* Custom Fonts */
-@font-face {
+/*@font-face {
     font-family: 'sapientnormal';
     src: url('../fonts/sapient sans/SAPISM.TTF');
 }
@@ -15,7 +15,7 @@
     font-family: 'sapientbold';
     src: url('../fonts/sapient sans/SAPISB.TTF');
 }
-
+*/
 /*Job-Description
 ------------------------------------*/
 .job-description {
@@ -25,7 +25,8 @@
     border-top: 1px solid #eee;
     background-size: cover;
     background-repeat: no-repeat;
-    font-family: "sapientnormal";
+    /*font-family: "sapientnormal";*/
+    font-family: 'Open Sans', sans-serif;
 }
 
 /*Visit*/
@@ -335,7 +336,8 @@ div.panel-heading > h4 > a > span {
 .left-inner-highlights{
     margin-left: -1em;
     margin-top: 0.5em;
-    font-family: "sapientregular";
+    /*font-family: "sapientregular";*/
+    font-family: 'Open Sans', sans-serif;
 }
 
 /* Carousel */
@@ -365,7 +367,8 @@ div.panel-heading > h4 > a > span {
 }
 
 #outlet_name, .font_fixed_sapient{
-    font-family: "sapientregular";
+    /*font-family: "sapientregular";*/
+    font-family: 'Open Sans', sans-serif;
     font-weight: 200;
 }
 .font_fixed_sapient {
