@@ -1,4 +1,7 @@
 /* Add here all your css styles (customizations) */
+html {
+    overflow-x: hidden;
+}
 #lets_remove_horizontal_scroll {
     width: 90%;
 }
