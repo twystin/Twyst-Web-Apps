@@ -80,7 +80,7 @@ $scope.mapOpen = function (size) {
 
   $scope.share = function () {
     FB.ui({
-        app_id: '1437891089774348',
+        app_id: '763534923659747',
         method: 'feed',
         name: $scope.outlet.basics.name,
         picture: "https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/" + $scope.outlet.basics.slug + "/logo.png",
