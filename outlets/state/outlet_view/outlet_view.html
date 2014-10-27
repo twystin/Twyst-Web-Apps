@@ -24,14 +24,14 @@
                   <div class="img-center outlet_info col-md-7 col-sm-7 col-xs-12" >
                     <div class="clearfix"></div>
                     <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;"></div>
-                    <div class="col-md-8" style="margin-top:3em;">
+                    <div class="col-md-8" style="margin-top:2.5em;">
                       <h3 class="col-md-12 col-sm-12 hidden-xs hidden-sm"><b class="color_white knockout50" id="outlet_name" ng-click="getotherOutlet(outlet)">{{outlet.basics.name}}</b></h3>
                       <h6 class="col-xs-12 hidden-md hidden-lg">
                     
                       <b class="color_white col-xs-12" id="outlet_name">{{outlet.basics.name}}</b>
                       </h6>
                         
-                      <h2 class="" >
+                      <p class="" >
                         <small>
                           <b class="color_white font_fixed_sapient">
                             <i class="fa fa-phone" ng-hide="!outlet.contact.phones.landline"></i>
@@ -42,7 +42,7 @@
                           </b>
                           <a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a>
                         </small>
-                      </h2>
+                      </p>
 
 
                       <p class="color_white font_fixed_sapient">
