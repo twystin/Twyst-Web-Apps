@@ -1,455 +1,457 @@
 <!-- About Section -->
-<section id="about" class="about-section section-first">
-  <div class="about-image" id="image_background"  background-image="{{outlet.basics.slug}}">
-    <div class="container">
-      <div class="hidden-md hidden-lg col-xs-12 badges_small_screen">
-        <span style="height: 45px; width: auto;" class="header_badges_sprite_two">
-          <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android" class="android_button"></a>
-          <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store" class="ios_button"></a>
-        </span>
+<section id="about" class="about-section section-first row">
+<div class="about-image" id="image_background" background-image="{{outlet.basics.slug}}">
+  <div class="container">
+    <div class="hidden-md hidden-lg col-xs-12 badges_small_screen">
+      <span style="height: 45px; width: auto;" class="header_badges_sprite_two">
+      <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android" class="android_button"></a>
+      <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store" class="ios_button"></a>
+      </span>
+    </div>
+    <div class="col-md-10 merchant_logo_absolute">
+      <div class="col-md-3 col-sm-3 hidden-xs" style="margin-left:3em;">
       </div>
-                  <div class="col-md-12 merchant_logo_absolute">
-                    <div class="col-md-2 col-sm-2 col-xs-hidden" style="margin-left:3em;"></div>
-                    <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;">
-                      <img class="merchant_logo" ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/logo.png">
-                       <div class="col-md-12 padding-top-share" ng-click="share()">
-                         <a class="btn btn-social btn-facebook btn-xs">
-                          <i class="fa fa-facebook"></i> Share
-                        </a>
-                       </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-2 col-sm-2 col-xs-hidden" style="margin-left:3em;"></div>
-                  <div class="img-center outlet_info col-md-7 col-sm-7 col-xs-12" >
-                    <div class="clearfix"></div>
-                    <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;"></div>
-                    <div class="col-md-8" style="margin-top:2.5em;">
-                      <h3 class="col-md-12 col-sm-12 hidden-xs hidden-sm"><b class="color_white knockout50" id="outlet_name" ng-click="getotherOutlet(outlet)">{{outlet.basics.name}}</b></h3>
-                      <h6 class="col-xs-12 hidden-md hidden-lg">
-                    
-                      <b class="color_white col-xs-12" id="outlet_name">{{outlet.basics.name}}</b>
-                      </h6>
-                        
-                      <p class="" >
-                        <small>
-                          <b class="color_white font_fixed_sapient">
-                            <i class="fa fa-phone" ng-hide="!outlet.contact.phones.landline"></i>
-                          </b>
-                          <a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a>
-                          <b class="color_white font_fixed_sapient" ng-hide="!outlet.contact.phones.mobile.0.num">
-                            <i class="fa fa-mobile-phone color_white"></i>
-                          </b>
-                          <a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a>
-                        </small>
-                      </p>
-
-
-                      <p class="color_white font_fixed_sapient">
-                        <b class="color_white font_fixed_sapient hidden-xs">
-                         <img src="assets/img/images/Address.png" id="image_address_icon" ng-hide="!outlet.contact.location.address"> 
-                       </b>
-                       {{outlet.contact.location.address}}
-                     </p>
-                     <p class="color_white" ng-if="outlet.links.website_url">
-                      <i class="fa fa-globe hidden-xs" ng-if="outlet.links.website_url"></i>&nbsp;
-                      <span class="font_fixed_sapient">
-                        <a ng-href="http://{{outlet.links.website_url }}" class="color_white font_fixed_sapient">
-                          {{outlet.links.website_url }}
-                        </a>
-                        <!-- <div class="col-xs-12">
+      <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;">
+        <img class="merchant_logo" ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/logo.png">
+        <div class="col-md-10 padding-top-share" ng-click="share()">
+          <a class="btn btn-social btn-facebook btn-xs">
+          <i class="fa fa-facebook"></i> Share </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-hidden" style="margin-left:3em;">
+    </div>
+    <div class="img-center outlet_info col-md-7 col-sm-7 col-xs-12">
+      <div class="clearfix">
+      </div>
+      <div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;">
+      </div>
+      <div class="col-md-8" style="margin-top:3em;">
+        <h3 class="col-md-12 col-sm-12 hidden-xs hidden-sm"><b class="color_white knockout50" id="outlet_name" ng-click="getotherOutlet(outlet)">{{outlet.basics.name}}</b></h3>
+        <h6 class="col-xs-12 hidden-md hidden-lg">
+        <b class="color_white col-xs-12" id="outlet_name">{{outlet.basics.name}}</b>
+        </h6>
+        <p class="">
+          <small>
+          <b class="color_white font_fixed_sapient">
+          <i class="fa fa-phone" ng-hide="!outlet.contact.phones.landline"></i>
+          </b>
+          <a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a>
+          <b class="color_white font_fixed_sapient" ng-hide="!outlet.contact.phones.mobile.0.num">
+          <i class="fa fa-mobile-phone color_white"></i>
+          </b>
+          <a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a>
+          </small>
+        </p>
+        <p class="color_white font_fixed_sapient">
+          <b class="color_white font_fixed_sapient hidden-xs">
+          <img src="assets/img/images/Address.png" id="image_address_icon" ng-hide="!outlet.contact.location.address">
+          </b>
+          {{outlet.contact.location.address}}
+        </p>
+        <p class="color_white" ng-if="outlet.links.website_url">
+          <i class="fa fa-globe hidden-xs" ng-if="outlet.links.website_url"></i>&nbsp; <span class="font_fixed_sapient">
+          <a ng-href="http://{{outlet.links.website_url }}" class="color_white font_fixed_sapient">
+          {{outlet.links.website_url }} </a>
+          <!-- <div class="col-xs-12">
                           <div class="col-xs-4"></div>
                           <div class="col-xs-5">
-                           
                           </div>
                         </div> -->
-                        
-                      </span>
-
-                    </p>
-                    <div class="col-xs-12 hidden-md hidden-lg" style="display: inline-flex;">
-                      <div class="col-xs-3">&nbsp;</div>
-                      <div class="col-xs-6">
-                        <a class="btn btn-social btn-facebook btn-xs" ng-click="share()">
-                          <i class="fa fa-facebook"></i> Share
-                        </a>
-                      </div>
-                    </div>
-                    
-                  </div>
-               </div>
-               <div class="col-md-1"></div>
-
-             </div>
-           </div>
-         </div>        
-
-         <div class="container content-lg">
-          <div class="title-v1" style="text-align: left;" id="check_in_title">
-            <h2 id="check_in_heading">Check-in. Unlock <span class="label-buy-color">rewards</span><span>!</span></h2>
+          </span>
+        </p>
+        <div class="col-xs-12 hidden-md hidden-lg" style="display: inline-flex;">
+          <div class="col-xs-3">
+            &nbsp;
           </div>
-
-          <div class="row">
-            <div class="col-md-7  col-xs-12 content-boxes-v3 margin-bottom-40">
-              <div class="clearfix margin-bottom-10 heading-sm">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <div class="panel-title">
-                      <h3>Our Program on Twyst</h3>
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                    <h6 class="margin-bottom-20">Unlock exclusive rewards for being a regular! Check in on <strong class="label-buy-color">Twyst</strong> every time you visit us or order.</h6>
-                    <span>
-                      <h4 class="hidden-xs">
-                        <span class="label label-danger label-buy" style="font-size: 0.8em; text-align: center;margin: 0em 0em -0.1em 0em;">On Check-in no.</span>
-
-                      </h4>
-                      <div class="clearfix"></div>
-                      <h6 class="hidden-xs">
-                        <span class="arrow-down" style="margin: 30px 0px 0px 5px;"></span>
-
-                      </h6>
-
-                    </span>
-                    <ul ng-repeat="offer in rewards|limitTo:counter" class="timeline hidden-xs">
-                      <li class="timeline-inverted">
-                        <div class="timeline-badge label-buy"><p style="line-height: 2.6;" class="color_white">{{offer.count}}</p></div>
-                        <div class="timeline-panel" id="chrome">
-                          <div class="timeline-heading">
-                            <span class="col-md-12">
-                              <h5 class="timeline-title col-md-11"><p style="font-size: 1.5em; color: #fff;">{{offer.title}} </p></h5>
-                              <i class="fa fa-info-circle tooltip-button col-md-1" popover="{{offer.terms}}" Popover-animation="true" popover-trigger="mouseenter" popover-placement="top"></i></span>
-                              <div class="clearfix"></div>
-                            </div>
-
-                          </div>
-                        </li>
-                      </ul> 
-                         <!--  <div ng-repeat="offer in rewards" class="hidden-sm hidden-md hidden-lg">
+          <div class="col-xs-6">
+            <a class="btn btn-social btn-facebook btn-xs" ng-click="share()">
+            <i class="fa fa-facebook"></i> Share </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>
+</div>
+</div>
+<div class="container content-lg">
+<div class="title-v1" style="text-align: left;" id="check_in_title">
+  <h2 id="check_in_heading">Check-in. Unlock <span class="label-buy-color">rewards</span><span>!</span></h2>
+</div>
+<div class="row">
+  <div class="col-md-7 col-xs-12 content-boxes-v3 margin-bottom-40">
+    <div class="clearfix margin-bottom-10 heading-sm">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <h3>Our Program on Twyst</h3>
+          </div>
+        </div>
+        <div class="panel-body">
+          <h6 class="margin-bottom-20">Unlock exclusive rewards for being a regular! Check in on <strong class="label-buy-color">Twyst</strong> every time you visit us or order.</h6>
+          <span>
+          <h4 class="hidden-xs">
+          <span class="label label-danger label-buy" style="font-size: 0.8em; text-align: center;margin: 0em 0em -0.1em 0em;">On Check-in no.</span>
+          </h4>
+          <div class="clearfix">
+          </div>
+          <h6 class="hidden-xs">
+          <span class="arrow-down" style="margin: 30px 0px 0px 5px;"></span>
+          </h6>
+          </span>
+          <ul ng-repeat="offer in rewards|limitTo:counter" class="timeline hidden-xs">
+            <li class="timeline-inverted">
+            <div class="timeline-badge label-buy">
+              <p style="line-height: 2.6;" class="color_white">
+                {{offer.count}}
+              </p>
+            </div>
+            <div class="timeline-panel" id="chrome">
+              <div class="timeline-heading">
+                <span class="col-md-12">
+                <h5 class="timeline-title col-md-11">
+                <p style="font-size: 1.5em; color: #fff;">
+                  {{offer.title}}
+                </p>
+                </h5>
+                <i class="fa fa-info-circle tooltip-button col-md-1" popover="{{offer.terms}}" popover-animation="true" popover-trigger="mouseenter" popover-placement="top"></i></span>
+                <div class="clearfix">
+                </div>
+              </div>
+            </div>
+            </li>
+          </ul>
+          <!--  <div ng-repeat="offer in rewards" class="hidden-sm hidden-md hidden-lg">
                             <div class="col-xs-12">
                              <span class="label label-warning col-xs-3">On visit{{offer.count}}:</span> <span class="col-xs-9">{{offer.title}}</span>
                            </div> -->
-                           <div class="col-xs-12">
-                            <accordion class="hidden-md hidden-sm hidden-lg col-xs-12">
-                              <accordion-group class="small-screen-accordion" heading= "On visit {{offer.count}}: &nbsp;{{offer.title}}" ng-repeat="offer in rewards|limitTo:counter">
-                               <!--  <accordion-heading class="brand_bg_yellow">
+          <div class="col-xs-12">
+            <accordion class="hidden-md hidden-sm hidden-lg col-xs-12">
+            <accordion-group class="small-screen-accordion" heading "on n visit {{offer.count}}: &nbsp;{{offer.title}}" ng-repeat="offer in rewards|limitTo:counter">
+            <!--  <accordion-heading class="brand_bg_yellow">
                                 <p class="col-xs-12 color_black"><b>On visit {{offer.count}}</b> <span>{{offer.title}}</span></p>
                               </accordion-heading> -->
-                              <p class="col-xs-12 color_black">{{offer.title}}</p>
-                              <p class="col-xs-12 color_black">{{offer.terms}}</p>
-                            </accordion-group>
-                          </accordion>
-                          <div class="clearfix"></div>
-                        </div>
-
-                        <center>
-                          <div class="col-md-12 col-xs-12 col-sm-12 margin-bottom-20">
-                          <div class="col-md-5 col-sm-5"></div>
-                          <div class="col-md-4 col-sm-4 col-xs-12 ">
-                            <button class="btn btn-default"  ng-click="updateCounter(count_limit)" ng-hide="(counter >= rewards.length)">View More</button>
-                          </div>
-                        </div>
-                        </center>
-                        <div class="clearfix"></div>
-                        <div collapse="isCollapsed">
-                         <ul ng-repeat="offer in rewards| limitTo: counter" class="timeline">
-                          <li class="timeline-inverted">
-                            <div class="timeline-badge label-buy"><p style="line-height: 2.6;" class="color_white">{{offer.count}}</p></div>
-                            <div class="timeline-panel" id="chrome">
-                              <div class="timeline-heading">
-                                <span class="col-md-12">
-                                  <h5 class="timeline-title col-md-11"><p style="font-size: 1.5em; color: #fff;">{{offer.title}} </p></h5>
-                                  <i class="fa fa-info-circle tooltip-button col-md-1" popover="{{offer.terms}}" Popover-animation="true" popover-trigger="mouseenter" popover-placement="top"></i></span>
-                                  <div class="clearfix"></div>
-                                </div>
-
-                              </div>
-                            </li>
-                          </ul> 
-                        </div>
-                      </div>
-                    </div>
+            <p class="col-xs-12 color_black">
+              {{offer.title}}
+            </p>
+            <p class="col-xs-12 color_black">
+              {{offer.terms}}
+            </p>
+            </accordion-group>
+            </accordion>
+            <div class="clearfix">
+            </div>
+          </div>
+          <center>
+          <div class="col-md-12 col-xs-12 col-sm-12 margin-bottom-20">
+            <div class="col-md-5 col-sm-5">
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12 ">
+              <button class="btn btn-default" ng-click="updateCounter(count_limit)" ng-hide="(counter>= rewards.length)">View More</button>
+            </div>
+          </div>
+          </center>
+          <div class="clearfix">
+          </div>
+          <div collapse="isCollapsed">
+            <ul ng-repeat="offer in rewards| limitTo: counter" class="timeline">
+              <li class="timeline-inverted">
+              <div class="timeline-badge label-buy">
+                <p style="line-height: 2.6;" class="color_white">
+                  {{offer.count}}
+                </p>
+              </div>
+              <div class="timeline-panel" id="chrome">
+                <div class="timeline-heading">
+                  <span class="col-md-12">
+                  <h5 class="timeline-title col-md-11">
+                  <p style="font-size: 1.5em; color: #fff;">
+                    {{offer.title}}
+                  </p>
+                  </h5>
+                  <i class="fa fa-info-circle tooltip-button col-md-1" popover="{{offer.terms}}" popover-animation="true" popover-trigger="mouseenter" popover-placement="top"></i></span>
+                  <div class="clearfix">
                   </div>
-                  <div class="clearfix"></div>
-                  <div class="images" ng-hide="hide_image_panel">
-                    <div class="panel panel-default margin-bottom-20" ng-if="outlet" ng-init="hidePanel()">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Photos</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="col-md-12" id="outlet_images_slider">
-                          <div lazy-load="ondemand" slider-slick="{ draggable: false, slidesToShow:3, infinite:true}">
-                            <div class="outlet-slide" ng-repeat="x in [1,2,3,4]">
-                              <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}{{x}}.png" alt="" ng-click="checkMobile() ? mobileImages() : open('lg')" onerror=" $(this).hide();">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="panel panel-default margin-bottom-20" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">We are also on</h3>
-                    </div>
-                    <div class="panel-body">
-                      <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.zomato_url">
-                        <a  ng-href="{{outlet.links.zomato_url}}"  target="_blank"><img src="assets/img/images/zomato.png" class="img-responsive"></a>
-                        <a href=""><p>Review Us</p></a>
-                      </span>
-                      <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.foodpanda_url">
-                        <a ng-href="{{outlet.links.foodpanda_url}}"  target="_blank"><img src="assets/img/images/foodpanda.png" class="img-responsive"></a>
-                        <a href=""><p>Order Online</p></a>
-                      </span>
-                    </div>
-                  </div>
-
                 </div>
-                <!-- Right column starts -->
-                <div class="col-md-5 col-xs-12" >
-
-                  <div class="col-md-12 margin-bottom-10 hidden-xs facebook-panel" ng-if="outlet.links.facebook_url">
-                    <div class="panel panel-default" id="facebook_like_box">
-                      <div class="panel-heading panel_heading_callout" style="text-align: left;"><h4>From Facebook</h4></div>
-                      <div class="fb-like-box" data-href="{{outlet.links.facebook_url}}" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="true" data-show-border="false"></div>
+              </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+    </div>
+    <div class="images" ng-hide="hide_image_panel">
+      <div class="panel panel-default margin-bottom-20" ng-if="outlet" ng-init="hidePanel()">
+        <div class="panel-heading">
+          <h3 class="panel-title">Photos</h3>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-12" id="outlet_images_slider">
+            <div lazy-load="ondemand" slider-slick="{ draggable: false, slidesToShow:3, infinite:true}">
+              <div class="outlet-slide" ng-repeat="x in [1,2,3,4]">
+                <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}{{x}}.png" alt="" ng-click="checkMobile() ? mobileImages() : open('lg')" onerror=" $(this).hide();">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+    </div>
+    <div class="panel panel-default margin-bottom-20" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
+      <div class="panel-heading">
+        <h3 class="panel-title">We are also on</h3>
+      </div>
+      <div class="panel-body">
+        <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.zomato_url">
+        <a ng-href="{{outlet.links.zomato_url}}" target="_blank"><img src="assets/img/images/zomato.png" class="img-responsive"></a>
+        <a href="">
+        <p>
+          Review Us
+        </p>
+        </a>
+        </span>
+        <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.foodpanda_url">
+        <a ng-href="{{outlet.links.foodpanda_url}}" target="_blank"><img src="assets/img/images/foodpanda.png" class="img-responsive"></a>
+        <a href="">
+        <p>
+          Order Online
+        </p>
+        </a>
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- Right column starts -->
+  <div class="col-md-5 col-xs-12">
+    <div class="col-md-12 margin-bottom-10 hidden-xs facebook-panel" ng-if="outlet.links.facebook_url">
+      <div class="panel panel-default" id="facebook_like_box">
+        <div class="panel-heading panel_heading_callout" style="text-align: left;">
+          <h4>From Facebook</h4>
+        </div>
+        <div class="fb-like-box" data-href="{{outlet.links.facebook_url}}" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="true" data-show-border="false">
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-12 col-sm-12 col-xs-12" id="callout_heading_panel_overview">
+      <div class="panel panel-default">
+        <div class="panel-heading panel_heading_callout">
+          <h4>Overview</h4>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-12 col-xs-12 no_padding_class">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+              <span class="label label-warning label-buy">Cuisines:</span>
+              <p class="font-size-eleven lets_wrap">
+                {{outlet.attributes.cuisines.toString() | replaceComma }}
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+              <span class="label label-warning label-buy">Cost For Two: </span>
+              <p class="font-size-eleven">
+                <i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[0]}}</span></i><span>to</span><i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[1]}}</span></i>
+                <p>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                  <span class="label label-danger label-buy">Open From: </span>
+                  <p class="font-size-eleven">
+                    {{outlet.attributes.timings | replaceComma }}
+                  </p>
+                </div>
+              </div>
+              <div class="clearfix">
+              </div>
+              <hr>
+              <div class="clearfix">
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12">
+                <div class="col-md-12 col-xs-12 col-sm-12 margin_negative_one padding_class">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div ng-show="outlet.attributes.dine_in">
+                      <img src="assets/img/images/Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
+                      <span class="overflow-h padding-top font-size-eleven">
+                      Dine In Available </span>
+                    </div>
+                    <div ng-show="!outlet.attributes.dine_in">
+                      <img src="assets/img/images/No Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
+                      <span class="overflow-h padding-top font-size-eleven">
+                      No Dine In </span>
                     </div>
                   </div>
-
-                  <br>
-                  <div class="col-md-12 col-sm-12 col-xs-12" id="callout_heading_panel_overview">
-                    <div class="panel panel-default">
-                      <div class="panel-heading panel_heading_callout">
-                        <h4>Overview</h4> 
-
-                      </div>
-                      <div class="panel-body">
-                        <div class="col-md-12 col-xs-12 no_padding_class">
-                          <div class="col-md-4 col-sm-4 col-xs-4">
-                            <span class="label label-warning label-buy">Cuisines:</span> <p class="font-size-eleven lets_wrap">{{outlet.attributes.cuisines.toString() | replaceComma }}</p>
-                          </div>
-                          <div class="col-md-4 col-sm-4 col-xs-4">
-                            <span class="label label-warning label-buy">Cost For Two: </span><p class="font-size-eleven"><i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[0]}}</span></i> <span>to</span> <i class="fa fa-inr"> <span>{{getCostForTwoText(outlet)[1]}}</span></i><p>
-                          </div>
-                          <div class="col-md-4 col-sm-4 col-xs-4">
-                           <span class="label label-danger label-buy">Open From: </span> <p class="font-size-eleven">{{outlet.attributes.timings | replaceComma }}</p>
-                         </div>
-
-                       </div>
-                       <div class="clearfix"></div>
-                       <hr>
-                       <div class="clearfix"></div>
-                       <div class="col-md-12 col-xs-12 col-sm-12">
-                        <div class="col-md-12 col-xs-12 col-sm-12 margin_negative_one padding_class">
-                         <div class="col-md-6 col-sm-6 col-xs-6">
-                           <div ng-show="outlet.attributes.dine_in">
-                             <img src="assets/img/images/Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
-                             <span class="overflow-h padding-top font-size-eleven">
-                              Dine In Available
-                            </span>
-                          </div>
-                          <div  ng-show="!outlet.attributes.dine_in">
-                           <img src="assets/img/images/No Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
-                           <span class="overflow-h padding-top font-size-eleven">
-                            No Dine In
-                          </span>
-                        </div>
-                      </div>
-                      <div class="col-md-6 col-sm-6 col-xs-6" >
-                       <div ng-show="outlet.attributes.home_delivery" class="margin_negative_one">
-                        <img src="assets/img/images/Home Delivery.png" class="image_overview_column_attribute hidden-xs">
-                        <span class="overflow-h padding-top font-size-eleven">
-                          Home Delivery
-                        </div>     
-                      </div>
-                      <div ng-show="!outlet.attributes.home_delivery">
-                        <img src="assets/img/images/No Home Delivery.png" class="image_overview_column_attribute hidden-xs">
-                        <span class="overflow-h padding-top font-size-eleven">
-                          No Home Delivery
-                        </span>
-                      </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div ng-show="outlet.attributes.home_delivery" class="margin_negative_one">
+                      <img src="assets/img/images/Home Delivery.png" class="image_overview_column_attribute hidden-xs">
+                      <span class="overflow-h padding-top font-size-eleven">
+                      Home Delivery
                     </div>
                   </div>
-                  <div class="clearfix"></div>
-                  <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                      <div  ng-show="outlet.attributes.veg">
-                        <img src="assets/img/images/Veg.png" class="image_overview_column_attribute hidden-xs">
-                        <span class="overflow-h padding-top font-size-eleven">
-                          Vegetarian Only
-                        </span>
-                      </div>
-                      <div ng-show="!outlet.attributes.veg">
-                        <img src="assets/img/images/Non Veg.png" class="image_overview_column_attribute hidden-xs">
-                        <span class="overflow-h padding-top font-size-eleven">
-                         Serves non veg
-                       </span>
-                     </div>
-                   </div>
-                   <div class="col-md-6 col-sm-6 col-xs-6">
-                    <div ng-show="outlet.attributes.alcohol" class="margin_negative_one">
-                      <img src="assets/img/images/Yes to Alcohol.png" class="image_overview_column_attribute hidden-xs">
-                      <span class="overflow-h padding-top font-size-eleven">
-                        Serves Alcohol
-                      </span>
-                    </div>
-                    <div ng-show="!outlet.attributes.alcohol" class="margin_negative_one">
-                      <img src="assets/img/images/No Alcohol.png" class="image_overview_column_attribute hidden-xs">
-                      <span class="overflow-h padding-top font-size-eleven">
-                       No Alcohol
-                     </span>  
-                   </div>
-
-                 </div>  
-               </div>
-               <div class="clearfix"></div>
-               <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
+                  <div ng-show="!outlet.attributes.home_delivery">
+                    <img src="assets/img/images/No Home Delivery.png" class="image_overview_column_attribute hidden-xs">
+                    <span class="overflow-h padding-top font-size-eleven">
+                    No Home Delivery </span>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix">
+              </div>
+              <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <div ng-show="outlet.attributes.veg">
+                    <img src="assets/img/images/Veg.png" class="image_overview_column_attribute hidden-xs">
+                    <span class="overflow-h padding-top font-size-eleven">
+                    Vegetarian Only </span>
+                  </div>
+                  <div ng-show="!outlet.attributes.veg">
+                    <img src="assets/img/images/Non Veg.png" class="image_overview_column_attribute hidden-xs">
+                    <span class="overflow-h padding-top font-size-eleven">
+                    Serves non veg </span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <div ng-show="outlet.attributes.alcohol" class="margin_negative_one">
+                    <img src="assets/img/images/Yes to Alcohol.png" class="image_overview_column_attribute hidden-xs">
+                    <span class="overflow-h padding-top font-size-eleven">
+                    Serves Alcohol </span>
+                  </div>
+                  <div ng-show="!outlet.attributes.alcohol" class="margin_negative_one">
+                    <img src="assets/img/images/No Alcohol.png" class="image_overview_column_attribute hidden-xs">
+                    <span class="overflow-h padding-top font-size-eleven">
+                    No Alcohol </span>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix">
+              </div>
+              <div class="col-md-12 col-sm-12 col-xs-12 margin_top_one margin_negative_one">
                 <div class="col-md-6 col-sm-6 col-xs-6 smoking_avail">
                   <div ng-show="outlet.attributes.smoking" class="padding_class">
                     <img src="assets/img/images/Smoking.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
-                      Smoking Area Available
-                    </span>
+                    Smoking Area Available </span>
                   </div>
                   <div ng-show="!outlet.attributes.smoking" class="padding_class">
                     <img src="assets/img/images/No Smoking.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
-                     No Smoking
-                   </span>  
-                 </div>
-               </div>
-               <div class="col-md-6 col-sm-6 col-xs-6 smoking_avail" class="padding_class">
-                <div ng-show="outlet.attributes.outdoor" class="margin_negative_one margin_top_half">
-                  <img src="assets/img/images/Outdoor Seating.png" class="image_overview_column_attribute hidden-xs">
-                  <span class="overflow-h padding-top font-size-eleven">
-                    Outdoor Seating Available
-                  </span>  
+                    No Smoking </span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 smoking_avail" class="padding_class">
+                  <div ng-show="outlet.attributes.outdoor" class="margin_negative_one margin_top_half">
+                    <img src="assets/img/images/Outdoor Seating.png" class="image_overview_column_attribute hidden-xs">
+                    <span class="overflow-h padding-top font-size-eleven">
+                    Outdoor Seating Available </span>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix">
+              </div>
+              <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div ng-show="outlet.attributes.foodcourt">
+                    <img src="assets/img/images/Food Court.png" class="image_overview_column_attribute hidden-xs">
+                    <span class="overflow-h padding-top font-size-eleven">
+                    Part of a food court </spam>
+                  </div>
+                </div>
+                <div class="clearfix">
+                </div>
+                <hr>
+                <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one" style="padding-bottom: 10px;">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                  </div>
+                </div>
+                <div class="clearfix">
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
+                  <div class="col-md-6 col-sm-6 col-xs-6 font-size-eleven">
+                     Air conditioning: {{outlet.attributes.air_conditioning}}
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6 font-size-eleven">
+                     Parking: {{outlet.attributes.parking}}
+                  </div>
+                </div>
+                <div class="clearfix">
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
+                  <div class="col-md-7 col-sm-7 col-xs-7 font-size-eleven">
+                     Reservation: {{outlet.attributes.reservation}}
+                  </div>
+                  <div class="col-md-5 col-sm-5 col-xs-5 font-size-eleven" id="wifi_attribute">
+                     Wi-fi: {{outlet.attributes.wifi}}
+                  </div>
+                </div>
+                <div class="clearfix">
+                </div>
+                <h5 style="margin-left: 1em;">Map</h5>
+                <hr>
+                <div class="col-xs-12" ng-if="outlet" ng-click="mapOpen('lg')">
+                  <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
+                  <gm-markers gm-objects="outlets" gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }" gm-get-marker-options="getOutletOpts(object)" gm-on-click="selectOutlet(object, marker)">
+                  </gm-markers>
+                  </gm-map>
                 </div>
               </div>
             </div>
-
-            <div class="clearfix"></div>
-
-            <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div ng-show="outlet.attributes.foodcourt">
-                 <img src="assets/img/images/Food Court.png" class="image_overview_column_attribute hidden-xs">
-                 <span class="overflow-h padding-top font-size-eleven">
-                  Part of a food court
-
-                </spam>   
-              </div>
-            </div>
-            <div class="clearfix"></div> 
-            <hr>
-            <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one" style="padding-bottom: 10px;">
-              <div class="col-md-6 col-sm-6 col-xs-6">
-
-              </div> 
-              <div class="col-md-6 col-sm-6 col-xs-6">
-
-              </div>
-            </div>
-            <div class="clearfix"></div>
-
-            <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
-              <div class="col-md-6 col-sm-6 col-xs-6 font-size-eleven">
-                Air conditioning: {{outlet.attributes.air_conditioning}}          
-              </div>
-              <div class="col-md-6 col-sm-6 col-xs-6 font-size-eleven">
-                Parking: {{outlet.attributes.parking}}
-              </div>
-            </div>
-            <div class="clearfix"></div>
-
-            <div class="col-md-12 col-sm-12 col-xs-12 margin_negative_one padding_class">
-              <div class="col-md-7 col-sm-7 col-xs-7 font-size-eleven">
-                Reservation: {{outlet.attributes.reservation}}
-              </div>
-              <div class="col-md-5 col-sm-5 col-xs-5 font-size-eleven" id="wifi_attribute">
-                Wi-fi: {{outlet.attributes.wifi}}
-              </div>
-            </div>
-
-            <div class="clearfix"></div> 
-            <h5 style="margin-left: 1em;">Map</h5>
-            <hr>
-
-            <div class="col-xs-12" ng-if="outlet" ng-click="mapOpen('lg')">
-              <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
-              <gm-markers gm-objects="outlets"
-              gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }"
-              gm-get-marker-options="getOutletOpts(object)"
-              gm-on-click="selectOutlet(object, marker)">
-            </gm-markers>
-          </gm-map> 
+          </div>
         </div>
-
-      </div></div></div>
+      </div>
+      <div class="clearfix">
+      </div>
     </div>
-
   </div>
-  <div class="clearfix"></div>
-
 </div>
-</div>        
-        </div>        
-      </section>
-      <!--  About Section -->
-<div class="row" ng-init="getLocation()" >
+</section>
+<!--  About Section -->
+<div class="row" ng-init="getLocation()">
 <div class="col-xs-12" ng-if="outletLocation">
-<div class="col-xs-12" ng-repeat="o in outletLocation track by $index">
-  <h3>{{o.basics.name.0}}</h3>
+  <div class="col-xs-12" ng-repeat="o in outletLocation track by $index">
+    <h3>{{o.basics.name.0}}</h3>
+  </div>
 </div>
-  
+<!-- Services Section -->
+<section id="services">
+<div class="container content-lg" id="lets_remove_horizontal_scroll">
+  <div class="title-v1" style="margin-bottom: 0px;">
+    <h2 class="color_black">other outlets on <span class="label-buy-color">Twyst.</span> Check out. Check-in.</h2>
+  </div>
+  <div class="row" ng-init="getSlugs()">
+    <div class="clearfix"></div>
+    <div class="col-sm-12 col-md-12 col-xs-12" ng-if="slugs">
+      <div slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:3, slidesToScroll: 3,}">
+        <div class="my-slide" ng-repeat="s in slugs track by $index" ng-hide="slug === outlet.basics.slug">
+          <figure class="figure_bottom_carousel" onerror=" $(this).hide();">
+          <a ng-href="#/{{s.publicUrl.0}}"><img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{s.slug}}/logo1.png" alt="" /></a>
+          <figcaption class="figurecaption_bottom_carousel">
+          <a ng-href="#/{{s.publicUrl.0}}">
+          <h5>{{s.name}}</h5>
+          </a>
+          <span>{{s.location}}</span>
+          <a href="#/{{s.publicUrl.0}}" class="close-caption hidden">x</a>
+          </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-      <!-- Services Section -->
-      <section id="services">
-        <div class="container content-lg">
-          <div class="title-v1" style="margin-bottom: 0px;">
-            <h2 class="color_black">other outlets on <span class="label-buy-color">Twyst.</span> Check out. Check-in.</h2>            
-          </div>            
-
-
-          <div class="row" ng-init="getSlugs()" >
-           <div class="clearfix"></div>
-           <div class="col-sm-12 col-md-12 col-xs-12" ng-if="slugs">
-             <div slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:3, slidesToScroll: 3,}" >
-              <div class="my-slide" ng-repeat="s in slugs track by $index" ng-hide="slug === outlet.basics.slug">
-                <figure class="figure_bottom_carousel" onerror=" $(this).hide();">
-                  <a ng-href="#/{{s.publicUrl.0}}"> <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{s.slug}}/logo1.png" alt=""></a>
-                  <figcaption class="figurecaption_bottom_carousel">
-                   <a ng-href="#/{{s.publicUrl.0}}"> <h5>{{s.name}}</h5></a>
-                   <span>{{s.location}}</span>
-                   <a href="#/{{s.publicUrl.0}}" class="close-caption hidden">x</a>
-                 </figcaption>
-               </figure>
-             </div>
-
-
-           </div>
-
-         </div>
-       </div>
-
-     </div>
-   </div>
-
- </section>
- <!-- End Services Section -->
-
-
- <!-- End Contact Section-->
- <script>
+</section>
+<!-- End Services Section -->
+<!-- End Contact Section-->
+<script>
   /* copy loaded thumbnails into carousel */
   $('.row .thumbnail').on('load', function() {
-
   }).each(function(i) {
     if(this.complete) {
       var item = $('<div class="item"></div>');
       var itemDiv = $(this).parents('div');
       var title = $(this).parent('a').attr("title");
-
       item.attr("title",title);
       $(itemDiv.html()).appendTo(item);
       item.appendTo('.carousel-inner'); 
@@ -458,22 +460,18 @@
    }
  }
 });
-
   /* activate the carousel */
   $('#modalCarousel').carousel({interval:false});
-
   /* change modal title when slide changes */
   $('#modalCarousel').on('slid.bs.carousel', function () {
     $('.modal-title').html($(this).find('.active').attr("title"));
   })
-
   /* when clicking a thumbnail */
   $('.row .thumbnail').click(function(){
     var idx = $(this).parents('div').index();
     var id = parseInt(idx);
     $('#myModal').modal('show'); // show the modal
     $('#modalCarousel').carousel(id); // slide carousel to selected
-    
   });
-  $()
+  $();
 </script>
