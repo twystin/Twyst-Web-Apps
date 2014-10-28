@@ -265,11 +265,15 @@ html {
 /*header image */
 .header_badges_sprite {
 	display: inline-flex;
+    display: -webkit-flex;
+    display:-ms-flexbox;
 	float: left;
 	margin-right: 15em;
 }
 .header_badges_sprite_two {
     display: flex;
+    display: -webkit-flex;
+    display:-ms-flexbox;
     justify-content: center;
 }
 .header_badges_sprite_two > a.android_button:before {

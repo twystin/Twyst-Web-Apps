@@ -20,13 +20,15 @@
 <div class="clearfix"></div>
 <div class="container-fluid">
 <div class="col-xs-12">
-		<figure class="col-xs-3 effect-discover outlet_image_discover" ng-repeat="d in data.reccos | filter:searchText">
+		<figure class="col-xs-3 effect-discover outlet_image_discover" ng-repeat="d in data.reccos | filter:searchText" ng-mouseover="show = true;" ng-mouseleave="show = false;" >
 		<img src="{{d.program.images[0]}}" />
 		<figcaption class="col-xs-12">
 		<h3 class="hidden_text color_green">{{d.outlet.basics.name}} <span id="distance_discover_tab" ng-show="userlocation">({{d.distance}}km)</span>
 		 </h3>
 		<p class="color_green font-size-eleven">{{d.outlet.contact.location.address }}</p>
-		<a ng-href="/outlets/#/{{d.outlet.publicUrl[0]}}" class="color_green btn btn-info">View Details</a>
+			<a ng-href="/outlets/#/{{d.outlet.publicUrl[0]}}" class="color_green btn btn-info">{{hoverButton}}View Details</a>
+			<a ng-href="/outlets/#/{{d.outlet.publicUrl[0]}}" class="color_green btn btn-info" ng-show="show">{{hoverButton}}View on Map</a>
+		
 		</figcaption>
 	</figure>
 </div>
@@ -43,6 +45,7 @@
 		<a ng-href="/outlets/#/{{d.outlet.publicUrl[0]}}" class="color_green btn btn-info">View Details</a>
 		</figcaption>
 	</figure>
+
 </div>
 </div>
 </div>
