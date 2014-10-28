@@ -8,6 +8,14 @@ outletApp.controller('DiscoverCtrl', function ($scope, $http, dataSvc, $window, 
         $scope.position = position;
       });
     }
+    $scope.hoverShow = function () {
+      $scope.hoverButton = true;
+      console.log($scope.hoverButton);
+    };
+    $scope.hoverhide = function () {
+      $scope.hoverButton = false;
+      console.log($scope.hoverButton);
+    };
 
     function getUserData(latitude, longitude) {
       dataSvc.getUserDataInfo(latitude, longitude).then(function (data) {
