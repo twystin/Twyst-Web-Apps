@@ -80,11 +80,10 @@ $scope.mapOpen = function (size) {
 
   $scope.share = function () {
     FB.ui({
-        app_id: '1437891089774348',
+        app_id: '763534923659747',
         method: 'feed',
         name: $scope.outlet.basics.name,
-        picture: "https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/" + $scope.outlet.basics.slug + "/logo.png",
-        redirect_uri: 'http://twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
+        picture: "https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/" + $scope.outlet.basics.slug + "/logo1.png",
         link: 'http://twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
         caption: $scope.outlet.contact.location.locality_1[0] + ', ' + $scope.outlet.contact.location.locality_2[0] + ', ' + $scope.outlet.contact.location.city,
         description: ($scope.rewards && $scope.rewards.length) ? $scope.rewards[$scope.rewards.length - 1].title + ' and much more.' : ''
