@@ -2,6 +2,10 @@
 html {
     overflow-x: hidden;
 }
+.close {
+    opacity: 1;
+    color: #fff !important;
+}
 #no_program_view > h5, #no_program_view > h6 {
     display: flex;
     justify-content: center;
@@ -622,6 +626,7 @@ hr {
    #header_sprite_badges_right_margin {
     margin-right: -8em;
    }
+
 }
 @media (max-width: 990px) {
     #modal-slider > img {
@@ -632,12 +637,32 @@ hr {
     margin-left: 0em;
     margin-top: 6em;
 }
+   #badge_outlet_info_container{
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+   #badge_outlet_info_container > div.hidden-md.hidden-lg.col-xs-12.badges_small_screen {
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+   #badge_outlet_info_container > div.img-center.outlet_info.col-md-7.col-sm-7.col-xs-12 {
+    padding-left: 0px;
+    padding-right: 0px;
+   }
 }
 
 @media (max-width: 768px) {
    .fancybox-overlay {
       background: none !important;
    }
+   #callout_heading_panel_overview > div > div.panel-body > div:nth-child(5) > div > div:nth-child(1) {
+    padding-left: 0px;
+    padding-right: 0px;
+   }
+   #callout_heading_panel_overview > div > div.panel-body > div:nth-child(5) > div > div:nth-child(1) > div:nth-child(1) > span {
+    line-height: 2;
+   }
+
    .outlet-slide > img {
     max-height: 120px;
  /*   padding: 2%;
@@ -824,9 +849,9 @@ hr {
     figure figcaption h5 {
         margin-top: 0.4em;
     }
-    .col-xs-12, .col-xs-4 {
+    /*.col-xs-12, .col-xs-4 {
         padding: 0px;
-    }
+    }*/
     ul.timeline:before {
         left: 40px;
     }

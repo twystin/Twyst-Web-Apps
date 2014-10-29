@@ -1,7 +1,7 @@
 <!-- About Section -->
 <section id="about" class="about-section section-first row">
 <div class="about-image" id="image_background" background-image="{{outlet.basics.slug}}">
-  <div class="container">
+  <div class="container" id="badge_outlet_info_container">
     <div class="hidden-md hidden-lg col-xs-12 badges_small_screen">
       <span style="height: 45px; width: auto;" class="header_badges_sprite_two">
       <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android" class="android_button"></a>
@@ -141,7 +141,7 @@
                            </div> -->
           <div class="col-xs-12">
             <accordion class="hidden-md hidden-sm hidden-lg col-xs-12">
-            <accordion-group class="small-screen-accordion" heading "on n visit {{offer.count}}: &nbsp;{{offer.title}}" ng-repeat="offer in rewards|limitTo:counter">
+            <accordion-group class="small-screen-accordion" heading="on n visit {{offer.count}}: &nbsp;{{offer.title}}" ng-repeat="offer in rewards|limitTo:counter">
             <!--  <accordion-heading class="brand_bg_yellow">
                                 <p class="col-xs-12 color_black"><b>On visit {{offer.count}}</b> <span>{{offer.title}}</span></p>
                               </accordion-heading> -->
@@ -287,12 +287,12 @@
                     <div ng-show="outlet.attributes.dine_in">
                       <img src="assets/img/images/Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
                       <span class="overflow-h padding-top font-size-eleven">
-                      Dine In Available </span>
+                      Dine-in Available </span>
                     </div>
                     <div ng-show="!outlet.attributes.dine_in">
                       <img src="assets/img/images/No Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
                       <span class="overflow-h padding-top font-size-eleven">
-                      No Dine In </span>
+                      No Dine-in </span>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-6">
@@ -321,7 +321,7 @@
                   <div ng-show="!outlet.attributes.veg">
                     <img src="assets/img/images/Non Veg.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
-                    Serves non veg </span>
+                    Serves non-veg </span>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">
@@ -395,13 +395,13 @@
                   <div class="col-md-7 col-sm-7 col-xs-7 font-size-eleven">
                      Reservation: {{outlet.attributes.reservation}}
                   </div>
-                  <div class="col-md-5 col-sm-5 col-xs-5 font-size-eleven" id="wifi_attribute">
+                  <div class="col-md-5 col-sm-5 col-xs-5 font-size-eleven" id="wifi_attribute" ng-hide="!outlet.attributes.wifi">
                      Wi-fi: {{outlet.attributes.wifi}}
                   </div>
                 </div>
                 <div class="clearfix">
                 </div>
-                <h5 style="margin-left: 1em;">Map</h5>
+                <h5 style="margin-left: 1em;" class="label label-warning label-buy">Map</h5>
                 <hr>
                 <div class="col-xs-12" ng-if="outlet" ng-click="mapOpen('lg')">
                   <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
