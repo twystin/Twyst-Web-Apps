@@ -120,7 +120,23 @@ twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $mo
         }
 
     };
+    // Opens rewards modal on view offers tab; listing different rewards
 
+    $scope.getRewards = function (program_id) {
+        programService.getRewards(program_id).then(function (reward) {
+            $scope.reward = reward.info;
+            rewardOpen('lg');
+        });
+    }
+    function rewardOpen(size) {
+      var modalInstance = $modal.open({
+          templateUrl: './templates/offer/offermodal_view.html',
+          controller  : 'RewardCtrl',
+          size: size,
+          scope: $scope
+        });
+
+    };
     $scope.programType = function () {
         $scope.tmpo = {};
         $scope.tmpo.tier = {};
@@ -455,6 +471,14 @@ twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $mo
         }
         return true;
     }  
+});
+
+twystApp.controller('RewardCtrl', 
+    function ($scope, $modalInstance) {
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };      
 });
 
 twystApp.controller('ProgramDeleteCtrl', 

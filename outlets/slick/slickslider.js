@@ -1,4 +1,4 @@
-outletApp.directive('slickSlider',['slick',function($timeout){
+outletApp.directive('slickSlider',['$timeout', function($timeout){
  return {
    restrict: 'A',
    link: function(scope,element,attrs) {

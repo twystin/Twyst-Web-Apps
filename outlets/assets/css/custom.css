@@ -1,4 +1,52 @@
 /* Add here all your css styles (customizations) */
+html {
+    overflow-x: hidden;
+}
+#no_program_view > h5, #no_program_view > h6 {
+    display: flex;
+    justify-content: center;
+}
+#lets_remove_horizontal_scroll {
+    width: 90%;
+}
+/*overview panel */
+#callout_heading_panel_overview {
+    margin-top: -1.4em;
+}
+.padding-top-share {
+    top: 1em;
+}
+
+#animated_user > i:hover{
+    transform: rotate(20deg);
+}
+.registerme {
+    text-align: center; 
+    padding:1em;
+    margin-top: 1em;
+    
+}
+.registerme > h6:hover {
+    color: #eb2227;
+}
+
+.flash-message-alert-login {
+    text-align: center;
+}
+/*login form*/
+.login_form > form > .form-group > input {
+    margin: 0.5em 0em 0em 0em;
+    padding: 0.5em;
+}
+.login_form > form > button {
+    margin-top: 1.5em;
+}
+.loginform_background {
+    background: url('../img/bg/bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* discover and nearby */
 .discover_outlet_controller_heading {
     padding: 4em;
     font-weight:400;
@@ -32,7 +80,7 @@
     display: block !important;
 }
 .fb-share-button {
-    margin-top: 1em;
+    margin: 1em 0em 0em 2em;
 }
 .smoking_avail {
     padding-right: 0px;
@@ -52,11 +100,6 @@
     float: right;
     font-size: 11px;
 }
-/*.popover {
-    background-color: #e1e1e1;
-    position: absolute !important;
-    z-index: 9999!important;
-}*/
 #distance_discover_no_location {
     z-index: 9999;
     position: absolute;
@@ -66,18 +109,11 @@
     padding-top: 4em;
 }
 .outlet_image_discover {
-    /*border: 1px solid #fff;*/
     overflow: hidden;
     padding: 2em;
     height: 30em;
     background: #fff;
-/*    -webkit-box-shadow: 0px 2px 61px -5px rgba(0,0,0,0.65);
-    -moz-box-shadow: 0px 2px 61px -5px rgba(0,0,0,0.65);
-    box-shadow: 0px 2px 61px -5px rgba(0,0,0,0.65);*/
-/*    -webkit-box-shadow: -1px -1px 10px 4px rgba(255,255,255,0.90);
-    -moz-box-shadow: -1px -1px 10px 4px rgba(255,255,255,0.90);
-    box-shadow: -1px -1px 10px 4px rgba(255,255,255,0.90);
-*/}
+}
 .outlet_image_discover > img {
     height: 200px;
     width: 100%;
@@ -92,14 +128,12 @@
     border-radius: 6px !important;
 }
 .effect-discover > figcaption {
-    /*margin-top: -10em;*/
     background: transparent;
     position: relative;
 }
 .hidden_text{
     position: relative;
     overflow: hidden;
-    /*padding: 0.5em 0;*/
 }
 .hidden_text::after {
     position: absolute;
@@ -155,6 +189,18 @@
     width: 50%;
 }
 /* slick slider */
+#images_single_modal\20 col-md-10 > .slick-prev:before, #images_single_modal\20 col-md-10 > .slick-next:before {
+    color: #fff;
+}
+#modal-slider {
+    margin-left: -2.5em;
+    margin-top: 3em;
+}
+/* margin-right to a different class because it is affecting the slider on mobile.We need it to add a margin only to web single-slider */
+.modal-slider_large {
+    margin-right: 2em;
+}
+
 #bottom_slider_logos > .slick-list {
     background: #fff;
     padding: 2em;
@@ -173,27 +219,21 @@
 .modal-dialog {
     width: 100%;
 }
-/*#images_single_modal > button.slick-prev {
-    left: 60px;
-}
-#images_single_modal > button.slick-next {
-    right: 70px;
-}*/
-
-/* offer panel */
-/*.panel_offer_callout :hover {
-    background-color: white;
-    color: #000;
-}*/
 .title_offer_callout{
     line-height: ;
 }
 /* modal slider */
+.back_button_slider {
+    margin: 2em;;
+}
 #images_single_modal > .col-md-10 > button.slick-prev:before, #images_single_modal > .col-md-10 > button.slick-prev:before, .slick-prev:before, .slick-next:before{
     font-size: 25px;
 }
 #modal-slider {
-    height: 50em;
+    height: 33em;
+}
+.modal-slider_mobile {
+    height: 20em !important;
 }
 .slick-prev {
     left: -20px;
@@ -207,12 +247,14 @@
 #modal-slider > img {
 	/*padding: 2em;*/
     top: 0; left: 0; bottom: 0; right: 0;
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: auto;
     overflow: auto;
     position: absolute;
     margin: auto;
     margin-top: 2em;
+    max-height: 800px;
+    max-width: 1200px;
 }
 .modal-content {
 	background-color: transparent;
@@ -223,24 +265,28 @@
 /*header image */
 .header_badges_sprite {
 	display: inline-flex;
+    display: -webkit-flex;
+    display:-ms-flexbox;
 	float: left;
 	margin-right: 15em;
 }
 .header_badges_sprite_two {
-    display: inline-flex;
-    text-align: center;
+    display: flex;
+    display: -webkit-flex;
+    display:-ms-flexbox;
+    justify-content: center;
 }
 .header_badges_sprite_two > a.android_button:before {
-    float: left;
+  /*  float: left;*/
 }
 .header_badges_sprite_two > a.ios_button:before {
-    float: right;
+   /* float: right;*/
 }
 a.android_button {
 	width: 128px;
  	height: 45px;
  	display: block;
-	background: url(../../images/Badges.png);
+	background: url(../img/images/Badges.png);
 	background-position: 0px -135px;
 	margin-right: 1.3em;
 }
@@ -248,7 +294,7 @@ a.ios_button {
 	width: 128px;
  	height: 45px;
  	display: block;
-	background: url(../../images/Badges.png);
+	background: url(../img/images/Badges.png);
 	background-position: -128px -270px;
 }
 /*footer color */
@@ -423,9 +469,17 @@ hr {
 .modal-dialog {}
 .thumbnail {margin-bottom:6px;}
 .outlet-slide > img {
-	height: 120px;
-	width: 180px;
+	max-height: 120px;
 	padding: 1em;
+    cursor: pointer; 
+    cursor: hand;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    margin: auto;
+    
 }
 #outlet_images_slider{
 	padding: 1em 1em 0em 1em;
@@ -458,7 +512,7 @@ hr {
 	padding-right: 0px;
 }
 #image_background {
-	/*background: url(../../images/cnd.png);*/
+	/*background: url(../../assets/img/images/Background5.png);*/
 	background-repeat: no-repeat;
 	background-size: cover!important;
 }
@@ -501,9 +555,9 @@ hr {
 	padding-bottom: 0px;
 	margin-bottom: 0px;
 }
-.about-section .about-image {
+/*.about-section .about-image {
 	padding: 1.5em;
-}
+}*/
 #outlet_name {
 	font-size: 2em !important;
 }
@@ -560,34 +614,43 @@ hr {
 
 @media (max-width: 1200px) {
    .badges_small_screen {
-    margin: 4em 0em -1em 0em;
+    margin-top: 4em;
+    display: flex;
+    justify-content: center;
+    float: right;
+   }
+   #header_sprite_badges_right_margin {
+    margin-right: -8em;
    }
 }
 @media (max-width: 990px) {
-    .header_badges_sprite_two{
-        margin-right: 6em;
+    #modal-slider > img {
+        width: 80%;
+        margin-top: 0em;
     }
+    #modal-slider {
+    margin-left: 0em;
+    margin-top: 6em;
 }
+}
+
 @media (max-width: 768px) {
    .fancybox-overlay {
       background: none !important;
    }
    .outlet-slide > img {
-    height: 120px;
-    width: 200px;
-    padding: 0.5em;
-    margin-left: 1.6em;
+    max-height: 120px;
+ /*   padding: 2%;
+    margin-left: 1.6em;*/
    }
    .title-v1 > h2 {
     font-size: 20px !important;
    }
 }
-@media (max-width: 583px) {
-    .badges_screen{
-        display: none;
-    }
-    .header_badges_sprite_two{
-       margin: 0em 0em 0em 5em;
+
+@media (max-width: 511px) {
+   .badges_small_screen > span > a.android_button {
+    margin-right: 1px;
     }
 }
 
@@ -595,22 +658,16 @@ hr {
     .badges_screen{
         display: none;
     }
-  /*  .header_badges_sprite_two{
-       margin: 0em -3em 0em -1em;
-    }*/
-    .header_badges_sprite_two {
-        margin: 0em 0em 0em 3em;
-    }
+
 }
 
 @media (max-width: 370px) {
      .badges_screen{
         display: none;
     }
-    .header_badges_sprite_two{
-       margin: 0em -3em 0em -1em;
-    }
+
 }
+
 @media (max-width: 357px) and (-webkit-min-device-pixel-ratio: 3),
        (max-width: 357px) and ( min--moz-device-pixel-ratio: 3),
        (max-width: 357px) and ( -o-min-device-pixel-ratio: 3/1),
@@ -619,28 +676,7 @@ hr {
         .badges_screen{
         display: none;
     }
-    .header_badges_sprite_two{
-       margin: 0em 0em 0em 1em;
-    }
 }
-/*#zomato {
-	background-image: url(../../images/zomato.jpg);
-	background-size: cover;
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	height: 230px;
-}
-#foodpanda {
-	background-image: url(../../images/foodpanda.png);
-	background-size: cover;
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	height: 230px;
-}*/
     /* Dummy CSS */
     .timeline {
     list-style: none;
@@ -702,8 +738,6 @@ hr {
         	background: #fff;
     border-radius: 1px 1px 1px 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    /*float: left;
-	margin: 0 14px 15px 20px;*/
     padding: 5px;
         }
 
