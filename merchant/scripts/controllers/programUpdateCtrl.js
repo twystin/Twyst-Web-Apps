@@ -1,5 +1,5 @@
 twystApp.controller('programUpdateCtrl', 
-	function ($scope, $routeParams, $timeout, $http, $modal, $parse, $route, $location, authService, outletService, programService, proSupService, imageService, typeaheadService) {
+	function ($scope, $routeParams, $timeout, $http, $modal, $parse, $route, $location, authService, outletService, programService, proSupService, imageService, typeaheadService, OPERATE_HOURS) {
 			
 		if (!authService.isLoggedIn()) {
 	        $location.path('/');
@@ -53,6 +53,102 @@ twystApp.controller('programUpdateCtrl',
 	    $scope.checkinCheckedTime = [];
 	    $scope.participating_outlets = [];
 	    $scope.basicVal=true;
+
+	    $scope.validationArray = [true, true, true, true, true, true, true, true];
+	    $scope.week = ['monday' ,'tuesday' ,'wednesday' ,'thursday' ,'friday', 'saturday', 'sunday'];
+
+	    $scope.rewardToggleCheckDay = function (fruit) {
+	        if(fruit === 'all days') {
+	            if($scope.rewardCheckedDays.indexOf(fruit) >= 0) {
+	                $scope.rewardCheckedDays.splice($scope.rewardCheckedDays.indexOf(fruit), 1);
+	            }
+	            else {
+	                $scope.rewardCheckedDays = ['all days'];
+	            }
+	        }
+	        else {
+	            if($scope.rewardCheckedDays.indexOf('all days') >= 0) {
+	                $scope.rewardCheckedDays.splice($scope.rewardCheckedDays.indexOf('all days'), 1);
+	            }
+	            if ($scope.rewardCheckedDays.indexOf(fruit) === -1) {
+	                $scope.rewardCheckedDays.push(fruit);
+	            } else {
+	                $scope.rewardCheckedDays.splice($scope.rewardCheckedDays.indexOf(fruit), 1);
+	            }
+	        }
+	    };
+
+	    $scope.avail_hours = OPERATE_HOURS;
+
+	    $scope.newTimings = function($event, index){
+	        if($scope.avail_hours[$scope.week[index]].timings.length < 5) {
+	            $scope.avail_hours[$scope.week[index]].timings.push({open: '', close: ''});        
+	            $event.preventDefault();    
+	        }
+	    };
+
+	    $scope.removeTimings = function (day, index) {
+	        $scope.avail_hours[day].timings.splice(index, 1);
+	    }
+
+	    $scope.timingsValidation = function () {
+	        var flag = 0;
+	        for (var i = 0; i < 7; i++){
+	            flag = 0;
+	            if ($scope.avail_hours[$scope.week[i]].closed == false && 
+	                $scope.avail_hours[$scope.week[i]].timings.length > 1){
+	                for (var j = 0; j < $scope.avail_hours[$scope.week[i]].timings.length-1; j++){
+	                    for (var k = j + 1 ; k < $scope.avail_hours[$scope.week[i]].timings.length; k++){
+	                        if ((sendTime(1, i, j) < sendTime(0, i, k)) && (sendTime(0, i, j) > sendTime(1, i, k))){
+	                            
+	                            flag=1;
+	                        }
+	                    }
+	                }
+	            }
+	        if (flag==1){
+	            $scope.validationArray[i] = false;
+	        }
+	        else{
+	            $scope.validationArray[i] = true;
+	        }
+	        }
+
+	    }
+
+	    function sendTime(i, w, t){
+	        //1 for open
+	        if (i==1){
+	            return ($scope.avail_hours[$scope.week[w]].timings[t].open.hr * 60 *1 +
+	            $scope.avail_hours[$scope.week[w]].timings[t].open.min * 1);
+	        }
+	        //0 for close
+	        else if (i==0){
+	            return ($scope.avail_hours[$scope.week[w]].timings[t].close.hr * 60 *1 +
+	            $scope.avail_hours[$scope.week[w]].timings[t].close.min * 1);
+	        }
+	    }
+
+	    $scope.applyToAllDays = function(time) {
+	        for(var i = 0; i < $scope.week.length; i++) {
+	            $scope.avail_hours[$scope.week[i]].closed = time.closed;
+	            var timings = [];
+	            for(var j = 0; j < time.timings.length; j++) {
+	                var t = {
+	                    open: {
+	                        hr: time.timings[j].open.hr,
+	                        min: time.timings[j].open.min
+	                    },
+	                    close: {
+	                        hr: time.timings[j].close.hr,
+	                        min: time.timings[j].close.min
+	                    }
+	                };
+	                timings.push(t);
+	            }
+	            $scope.avail_hours[$scope.week[i]].timings = timings;
+	        }
+	    }
 
 	    $scope.rewardToggleCheckDay = function (fruit) {
 	        if(fruit === 'all days') {
@@ -290,7 +386,7 @@ twystApp.controller('programUpdateCtrl',
 			        $scope.offer.reward_applicability.time_of_day = $scope.rewardCheckedTime;
 			        $scope.offer.reward_applicability.day_of_week = $scope.rewardCheckedDays;
 			        $scope.offer.checkin_applicability.day_of_week = $scope.checkinCheckedDays;
-
+			        $scope.offer.avail_hours = $scope.avail_hours;
 
 			   		proSupService.saveOffer($scope, marked_tier, $route);
 	   			}
@@ -323,6 +419,7 @@ twystApp.controller('programUpdateCtrl',
 			}
 			$scope.rewardCheckedDays = offer.reward_applicability.day_of_week;
 			$scope.rewardCheckedTime = offer.reward_applicability.time_of_day;
+			$scope.avail_hours = offer.avail_hours;
 			$scope.tag_list.tags=offer.tags;
 			$scope.update_tabs[1].active=true;
 		};
@@ -365,6 +462,7 @@ twystApp.controller('programUpdateCtrl',
 	        $scope.offer.reward_applicability.time_of_day = $scope.rewardCheckedTime;
 	        $scope.offer.reward_applicability.day_of_week = $scope.rewardCheckedDays;
 	        $scope.offer.checkin_applicability.day_of_week = $scope.checkinCheckedDays;
+	   		$scope.offer.avail_hours = $scope.avail_hours;
 	   		proSupService.updateOffer($scope, $scope.offer._id, $route);
 	   }
 

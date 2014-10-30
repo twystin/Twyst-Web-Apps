@@ -1,8 +1,8 @@
 'use strict';
 
 twystApp.controller('OutletCtrl', 
-    ['$scope', '$rootScope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', 'typeaheadService', '$log',
-    function ($scope, $rootScope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, typeaheadService, $log) {
+    ['$scope', '$rootScope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', 'typeaheadService', '$log', 'OPERATE_HOURS',
+    function ($scope, $rootScope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, typeaheadService, $log, OPERATE_HOURS) {
 
     if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -31,108 +31,9 @@ twystApp.controller('OutletCtrl',
         else {
             $scope.outlet = {};
         }
-/*        for (int i =0; i<7; i++){
-            $scope.business_hours.
-        }*/
-        $scope.outlet.business_hours = {
-            sunday: {
-                closed: false,
-                timings: [{
-                    open: {
-                        hr: '',
-                        min: ''
-                    },
-                    close: {
-                        hr: '',
-                        min: ''
-                    }
-                }]
-            },
-            monday: {
-                closed: false,
-                timings: [{
-                    open: {
-                        hr: '',
-                        min: ''
-                    },
-                    close: {
-                        hr: '',
-                        min: ''
-                    }
-                }]
-            },
-            tuesday: {
-                closed: false,
-                timings: [{
-                    open: {
-                        hr: '',
-                        min: ''
-                    },
-                    close: {
-                        hr: '',
-                        min: ''
-                    }
-                }]
-            },
-            wednesday: {
-                closed: false,
-                timings: [{
-                    open: {
-                        hr: '',
-                        min: ''
-                    },
-                    close: {
-                        hr: '',
-                        min: ''
-                    }
-                }]
-            },
-            thursday: {
-                closed: false,
-                timings: [{
-                    open: {
-                        hr: '',
-                        min: ''
-                    },
-                    close: {
-                        hr: '',
-                        min: ''
-                    }
-                }]
-            },
-            friday: {
-                closed: false,
-                timings: [{
-                    open: {
-                        hr: '',
-                        min: ''
-                    },
-                    close: {
-                        hr: '',
-                        min: ''
-                    }
-                }]
-            },
-            saturday: {
-                closed: false,
-                timings: [{
-                    open: {
-                        hr: '',
-                        min: ''
-                    },
-                    close: {
-                        hr: '',
-                        min: ''
-                    }
-                }]
-            }
-        };
 
-       // $scope.business_hours.sunday.timings = {};
-        //$scope.business_hours.monday.closed = {};
-        //$scope.business_hours.monday.timings = {};
-        //$scope.outlet.business_hours.sunday = {closed:'',timings:{open: '', close: ''}};
-        $scope.outlet.attributes = {};
+        $scope.outlet.business_hours = OPERATE_HOURS;
+
         $scope.outlet.attributes.cost_for_two = {};
         $scope.outlet.contact = {};
         $scope.outlet.basics = {};
