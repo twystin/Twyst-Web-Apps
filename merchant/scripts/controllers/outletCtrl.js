@@ -33,7 +33,7 @@ twystApp.controller('OutletCtrl',
         }
 
         $scope.outlet.business_hours = OPERATE_HOURS;
-
+        $scope.outlet.attributes = {};
         $scope.outlet.attributes.cost_for_two = {};
         $scope.outlet.contact = {};
         $scope.outlet.basics = {};

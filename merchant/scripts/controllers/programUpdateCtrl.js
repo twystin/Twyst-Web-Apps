@@ -150,6 +150,16 @@ twystApp.controller('programUpdateCtrl',
 	        }
 	    }
 
+	    $scope.outlet_for = {};
+	    $scope.$watch('outlet_for._timings', function () {
+	        if(!$scope.outlet_for._timings || $scope.outlet_for._timings === "NONE") {
+	            $scope.avail_hours = OPERATE_HOURS;
+	        }
+	        else {
+	            $scope.avail_hours = $scope.outlet_for._timings.business_hours;
+	        }
+	    }, true);
+
 	    $scope.rewardToggleCheckDay = function (fruit) {
 	        if(fruit === 'all days') {
 	            if($scope.rewardCheckedDays.indexOf(fruit) >= 0) {

@@ -441,6 +441,15 @@ twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $mo
         }
         $scope.tmpo.offer = offer;
     };
+    $scope.outlet_for = {};
+    $scope.$watch('outlet_for._timings', function () {
+        if(!$scope.outlet_for._timings || $scope.outlet_for._timings === "NONE") {
+            $scope.avail_hours = OPERATE_HOURS;
+        }
+        else {
+            $scope.avail_hours = $scope.outlet_for._timings.business_hours;
+        }
+    }, true);
 
     $scope.removeOffer = function(offer) {
         $scope.program.offers = _($scope.program.offers).reject(function(el) {return el === offer });

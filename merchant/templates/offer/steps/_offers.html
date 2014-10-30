@@ -232,6 +232,16 @@
                 <div class="row-fluid">
                     <small>Timings</small>
                 </div>
+                <div class="row-fluid">
+                    <div class="row-fluid span4">
+                        <h4>Select outlet to replicate</h4>
+                    </div>
+                    <div class="span8">
+                        <select ng-options="o.basics.name +', '+ o.contact.location.locality_1.toString() for o in all_outlets" ng-model="outlet_for._timings" class="span6">
+                            <option value="NONE">NONE</option>
+                        </select>
+                    </div>
+                </div>
                 <div ng-repeat="w in week" class="row-fluid">
                     <div class="row-fluid pushTop10px">
                         <div class="row-fluid">
