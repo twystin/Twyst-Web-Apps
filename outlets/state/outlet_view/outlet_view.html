@@ -162,6 +162,7 @@
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 ">
               <button class="btn btn-default" ng-click="updateCounter(count_limit)" ng-hide="(counter>= rewards.length)">View More</button>
+              <!-- <p class="">Valid till: {{}}</p> -->
             </div>
           </div>
           </center>
@@ -196,7 +197,7 @@
     </div>
     <div class="clearfix">
     </div>
-    <div class="images" ng-hide="hide_image_panel">
+    <div class="images hidden-xs" ng-hide="hide_image_panel">
       <div class="panel panel-default margin-bottom-20" ng-if="outlet" ng-init="hidePanel()">
         <div class="panel-heading">
           <h3 class="panel-title">Photos</h3>
@@ -214,7 +215,7 @@
     </div>
     <div class="clearfix">
     </div>
-    <div class="panel panel-default margin-bottom-20" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
+    <div class="panel panel-default margin-bottom-20 hidden-xs" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
       <div class="panel-heading">
         <h3 class="panel-title">We are also on</h3>
       </div>
@@ -240,7 +241,7 @@
   </div>
   <!-- Right column starts -->
   <div class="col-md-5 col-xs-12">
-    <div class="col-md-12 margin-bottom-10 facebook-panel" ng-if="outlet.links.facebook_url">
+    <div class="col-md-12 col-xs-12 col-lg-12 margin-bottom-10 facebook-panel hidden-xs" id="facebook_panel_right" ng-if="outlet.links.facebook_url">
       <div class="panel panel-default" id="facebook_like_box">
         <div class="panel-heading panel_heading_callout" style="text-align: left;">
           <h4>From Facebook</h4>
@@ -250,7 +251,7 @@
       </div>
     </div>
     <br>
-    <div class="col-md-12 col-sm-12 col-xs-12" id="callout_heading_panel_overview">
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" id="callout_heading_panel_overview">
       <div class="panel panel-default">
         <div class="panel-heading panel_heading_callout">
           <h4>Overview</h4>
@@ -418,6 +419,56 @@
       </div>
     </div>
   </div>
+   <div class="col-xs-12 margin-bottom-10 facebook-panel hidden-sm hidden-md hidden-lg " id="facebook_panel_right" ng-if="outlet.links.facebook_url">
+      <div class="panel panel-default" id="facebook_like_box">
+        <div class="panel-heading panel_heading_callout" style="text-align: left;">
+          <h4>From Facebook</h4>
+        </div>
+        <div class="fb-like-box" data-href="{{outlet.links.facebook_url}}" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="true" data-show-border="false">
+        </div>
+      </div>
+    </div>
+        <div class="images hidden-md hidden-lg hidden-sm col-xs-12" ng-hide="hide_image_panel">
+      <div class="panel panel-default margin-bottom-20" ng-if="outlet" ng-init="hidePanel()">
+        <div class="panel-heading">
+          <h3 class="panel-title">Photos</h3>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-12" id="outlet_images_slider">
+            <div lazy-load="ondemand" slider-slick="{ draggable: false, slidesToShow:3, infinite:true}">
+              <div class="outlet-slide" ng-repeat="x in [1,2,3,4]">
+                <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}{{x}}.png" alt="" ng-click="checkMobile() ? mobileImages() : open('lg')" onerror=" $(this).hide();">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+    </div>
+    <div class="panel panel-default margin-bottom-20 hidden-md hidden-lg hidden-sm" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
+      <div class="panel-heading">
+        <h3 class="panel-title">We are also on</h3>
+      </div>
+      <div class="panel-body">
+        <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.zomato_url">
+        <a ng-href="{{outlet.links.zomato_url}}" target="_blank"><img src="assets/img/images/zomato.png" class="img-responsive"></a>
+        <a href="">
+        <p>
+          Review Us
+        </p>
+        </a>
+        </span>
+        <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.foodpanda_url">
+        <a ng-href="{{outlet.links.foodpanda_url}}" target="_blank"><img src="assets/img/images/foodpanda.png" class="img-responsive"></a>
+        <a href="">
+        <p>
+          Order Online
+        </p>
+        </a>
+        </span>
+      </div>
+    </div>
 </div>
 </section>
 <!--  About Section -->
