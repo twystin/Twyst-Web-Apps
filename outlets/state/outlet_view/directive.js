@@ -154,7 +154,9 @@ outletApp.directive('sliderSlick', function ($timeout) {
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
-              dots: true
+              dots: true,
+              centerMode: true,
+              centerPadding: '20px'
             }
           }
   ]
