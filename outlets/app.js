@@ -88,7 +88,7 @@ $scope.mapOpen = function (size) {
 
   $scope.share = function () {
     FB.ui({
-        app_id: '763534923659747',
+        app_id: '1397475420510454',
         method: 'feed',
         name: $scope.outlet.basics.name,
         picture: "https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/" + $scope.outlet.basics.slug + "/logo1.png",
@@ -232,7 +232,7 @@ $scope.getCostForTwoText = function (outlet) {
   return outletService;
 }).config(function (ezfbProvider, $routeProvider, $httpProvider){
   ezfbProvider.setInitParams({
-    appId: '763534923659747',
+    appId: '1397475420510454',
     version    : 'v1.0'
   });
 
