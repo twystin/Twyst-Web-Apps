@@ -34,13 +34,21 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
       //console.log("LOCATON IS" + JSON.stringify($location.url()));
       //$rootScope.location = $location;
       //console.log($rootScope.location);
+
       return true;
 
     }
     return false;
   };
+  // $scope.appendDivs  = function () {
+  //   if ($window.innerWidth < 850) {
+  //     $("#facebook_panel_right").insertAfter("#callout_heading_panel_overview");
+  //     console.log("hey there");
+  //   };
+  // }
 
   $scope.checkMobile();
+  // $scope.appendDivs();
   $scope.closemodalMobile = function (slug) {
     // console.log($rootScope.locations);
     $location.url($rootScope.locations[0]);
