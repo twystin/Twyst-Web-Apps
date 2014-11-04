@@ -137,6 +137,18 @@ twystApp.config(function ($routeProvider, $httpProvider) {
             controller  : 'SettingCtrl',
             templateUrl : '/merchant/templates/settings/settings.html'
         }).
+        when('/group_program', {
+            controller  : 'GroupProgramCtrl',
+            templateUrl : '/merchant/templates/group_program/view.html'
+        }).
+        when('/group_program/create', {
+            controller  : 'GroupProgramCtrl',
+            templateUrl : '/merchant/templates/group_program/create.html'
+        }).
+        when('/group_program/update/:group_program_id', {
+            controller  : 'groupProgramUpdateCtrl',
+            templateUrl : '/merchant/templates/group_program/update.html'
+        }).
         when('/error', {
             templateUrl : '/merchant/templates/anon/error.html'
         }).
@@ -145,7 +157,7 @@ twystApp.config(function ($routeProvider, $httpProvider) {
         });
 
     $httpProvider.interceptors.push('twystHttpInterceptor');
-}).run(function ($rootScope) {
+    }).run(function ($rootScope) {
     $rootScope.getRange = function(start, end, skip) {
         var nums = [];
         for(var i = start; i <= end; i += skip) {

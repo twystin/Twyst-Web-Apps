@@ -31,7 +31,7 @@ twystApp.controller('OutletCtrl',
         else {
             $scope.outlet = {};
         }
-/*        for (int i =0; i<7; i++){
+        /*for (int i =0; i<7; i++){
             $scope.business_hours.
         }*/
         $scope.outlet.business_hours = {
