@@ -232,7 +232,7 @@ $scope.getCostForTwoText = function (outlet) {
   return outletService;
 }).config(function (ezfbProvider, $routeProvider, $httpProvider){
   ezfbProvider.setInitParams({
-    appId: '1397475420510454',
+    appId: '763534923659747',
     version    : 'v1.0'
   });
 
