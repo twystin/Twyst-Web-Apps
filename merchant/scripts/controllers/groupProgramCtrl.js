@@ -36,6 +36,10 @@ twystApp.controller('GroupProgramCtrl', ['$http','$scope', 'authService','groupP
         }
     }
 
+    $scope.removeCD = function (index) {
+        $scope.group_program.checkin_discount.splice(index, 1);
+    }
+
     $scope.create = function() {
         groupProgService.create($scope.group_program).then(function (data){
 
@@ -45,7 +49,7 @@ twystApp.controller('GroupProgramCtrl', ['$http','$scope', 'authService','groupP
 
     $scope.update = function(){
         groupProgService.update($scope.group_program).then(function (data){
-            
+
         });
     }
 

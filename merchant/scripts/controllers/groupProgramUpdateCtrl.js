@@ -22,10 +22,9 @@ twystApp.controller('groupProgramUpdateCtrl',
 	    }
 
 	    $scope.update = function (){
-	    	$scope.group_program
 	        var group_program_id = $routeParams.group_program_id;
 	        groupProgService.update($scope.group_program).then(function (data){
-	        	
+
 	        });
 	    };
 
@@ -36,4 +35,17 @@ twystApp.controller('groupProgramUpdateCtrl',
 	            $scope.group_program.outlets.splice($scope.group_program.outlets.indexOf(fruit), 1);
 	        }
 	    };
+
+	    $scope.removeCD = function (index) {
+        	$scope.group_program.checkin_discount.splice(index, 1);
+    	};
+
+    	$scope.newCheckinDiscount = function($event, index){
+	        if($scope.group_program.checkin_discount.length < 5){
+	            $scope.group_program.checkin_discount.push({
+	                checkin_count:'',
+	                discount:''
+	            })
+	        }
+	    }
 });
