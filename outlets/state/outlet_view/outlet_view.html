@@ -35,9 +35,8 @@
     				</h6>
     				<div>
     					<span class="label label-warning label-buy" ng-show="!closed_now">Open now</span>
-    					<span class="label label-red" ng-show="closed_now">Closed now </span>
     				</div>
-    				<div>
+    				<div style="margin-top: 0.3em">
     					<b class="color_white font_fixed_sapient">
 							<i class="fa fa-phone" ng-hide="!outlet.contact.phones.landline"></i>
 						</b>
@@ -47,7 +46,7 @@
 						</b>
 						<a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a>
     				</div>
-    				<div class="color_white font_fixed_sapient">
+    				<div class="color_white font_fixed_sapient" >
           				<b class="color_white font_fixed_sapient hidden-xs">
           					<img src="assets/img/images/Address.png" id="image_address_icon" ng-hide="!outlet.contact.location.address">
           				</b>
