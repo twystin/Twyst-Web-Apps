@@ -1,5 +1,5 @@
 twystApp.controller('groupProgramUpdateCtrl', 
-	function ($scope, $routeParams, $timeout, $http, $modal, $parse, $route, $location, authService, outletService, groupProgramService, proSupService, imageService, typeaheadService) {
+	function ($scope, $routeParams, $timeout, $http, $modal, $parse, $route, $location, authService, outletService, groupProgService, proSupService, imageService, typeaheadService) {
 			
 		if (!authService.isLoggedIn()) {
 	        $location.path('/');
@@ -9,17 +9,24 @@ twystApp.controller('groupProgramUpdateCtrl',
 	        $location.path('/panel');
 	    }
 	    $scope.group_program = {};
+	    $scope.outlets = {};
 
 	    $scope.init = function(){
 	    	var group_program_id = $routeParams.group_program_id;
-	    	groupProgramService.fetchGroupProgram($scope, $http, $location, group_program_id);
-	    	groupProgramService.fetchOutlets($scope, $http);
+	    	groupProgService.fetchGroupProgram(group_program_id).then(function (data){
+	    		$scope.group_program = data;
+	    	});
+	    	groupProgService.fetchOutlets().then(function (data){
+	    		$scope.outlets = data;
+	    	});
 	    }
 
 	    $scope.update = function (){
 	    	$scope.group_program
 	        var group_program_id = $routeParams.group_program_id;
-	        groupProgramService.update($scope, $http, $location, group_program_id);
+	        groupProgService.update($scope.group_program).then(function (data){
+	        	
+	        });
 	    };
 
 		$scope.toggleOutlets = function (fruit) {

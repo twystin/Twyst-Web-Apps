@@ -1,49 +1,54 @@
 'use strict';
-twystApp.factory('groupProgramService', function ($rootScope, $log, $q, $http) {
-    var groupProgramSvc = {};
-
-    groupProgramSvc.create = function ($scope, $http) {
+twystApp.factory('groupProgService', function ($http, $q) {
+  var groupProgService = {};
+  groupProgService.create = function (group_program) {
+        var deferred = $q.defer();
         $http({
             url: '/api/v1/group_program/',
             method: "POST",
-            data: $scope.group_program
+            data: group_program
         }).success(function (data, status) {
-            console.log("group program saved");
+            deferred.resolve(data.info);
         }).error(function (data, status) {
-            console.log("error");
+            deferred.resolve(data);
         });
+        return deferred.promise;
     };
 
-    groupProgramSvc.fetchOutlets = function($scope, $http){
+    groupProgService.fetchOutlets = function(){
+        var deferred = $q.defer();
         $http.get('/api/v3/outlets').success(function(data, status){
-            $scope.outlets = data.info;
-            console.log("outlets fetched");
+            deferred.resolve(data.info);
         }).error(function(data, status){
-            console.log("error");
-        })
+            deferred.resolve(data);
+        });
+        return deferred.promise;
     }
 
-    groupProgramSvc.fetchGroupProgram = function($scope, $http, $location, group_program_id){
+    groupProgService.fetchGroupProgram = function(group_program_id){
+        var deferred = $q.defer();
         $http({
             url: '/api/v2/group_program/' + group_program_id,
             method: "GET"
         }).success(function(data, status){
-            $scope.group_program = data.info;
-            console.log("Group Program Fetched");
+            deferred.resolve(data.info);
         }).error(function(data, status){
-            console.log("error");
-        })
+            deferred.resolve(data);
+        });
+        return deferred.promise;
     }    
-    groupProgramSvc.update = function($scope, $http){
+    groupProgService.update = function(group_program){
+        var deferred = $q.defer();
         $http({
             url: '/api/v1/group_program/update/',
             method: "PUT",
-            data: $scope.group_program
+            data: group_program
         }).success(function (data, status) {
-            console.log("group program edited");
+            deferred.resolve(data.info);
         }).error(function (data, status) {
-            console.log("error");
+            deferred.resolve(data);
         });
+        return deferred.promise;
     }
-    return groupProgramSvc;
+  return groupProgService;
 });

@@ -1,6 +1,6 @@
 'use strict';
-twystApp.controller('GroupProgramCtrl', ['$http','$scope', 'authService','groupProgramService',
-    function ($http, $scope, authService, groupProgramService) {
+twystApp.controller('GroupProgramCtrl', ['$http','$scope', 'authService','groupProgService',
+    function ($http, $scope, authService, groupProgService) {
     if (!authService.isLoggedIn()) {
         $location.path('/');
     }
@@ -22,7 +22,9 @@ twystApp.controller('GroupProgramCtrl', ['$http','$scope', 'authService','groupP
         }];
         $scope.outlets = {            
         };
-        groupProgramService.fetchOutlets($scope, $http);
+        groupProgService.fetchOutlets().then(function (data) {
+            $scope.outlets = data;
+        });
     }
 
     $scope.newCheckinDiscount = function($event, index){
@@ -35,12 +37,16 @@ twystApp.controller('GroupProgramCtrl', ['$http','$scope', 'authService','groupP
     }
 
     $scope.create = function() {
-        groupProgramService.create($scope, $http);
+        groupProgService.create($scope.group_program).then(function (data){
+
+        });
         //groupProgramService.fetchOutlets($scope, $http);
     }
 
     $scope.update = function(){
-        groupProgramService.update($scope, $http);
+        groupProgService.update($scope.group_program).then(function (data){
+            
+        });
     }
 
     $scope.toggleOutlets = function (fruit) {
