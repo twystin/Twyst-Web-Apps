@@ -1,7 +1,7 @@
 <!-- About Section -->
 <section id="about" class="about-section section-first row">
 <div class="about-image" id="image_background" background-image="{{outlet.basics.slug}}">
-  <div class="container">
+  <div class="container" id="badge_outlet_info_container">
     <div class="hidden-md hidden-lg col-xs-12 badges_small_screen">
       <span style="height: 45px; width: auto;" class="header_badges_sprite_two">
       <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android" class="android_button"></a>
@@ -141,7 +141,7 @@
                            </div> -->
           <div class="col-xs-12">
             <accordion class="hidden-md hidden-sm hidden-lg col-xs-12">
-            <accordion-group class="small-screen-accordion" heading "on n visit {{offer.count}}: &nbsp;{{offer.title}}" ng-repeat="offer in rewards|limitTo:counter">
+            <accordion-group class="small-screen-accordion" heading="On visit {{offer.count}}: &nbsp;{{offer.title}}" ng-repeat="offer in rewards|limitTo:counter">
             <!--  <accordion-heading class="brand_bg_yellow">
                                 <p class="col-xs-12 color_black"><b>On visit {{offer.count}}</b> <span>{{offer.title}}</span></p>
                               </accordion-heading> -->
@@ -162,6 +162,7 @@
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 ">
               <button class="btn btn-default" ng-click="updateCounter(count_limit)" ng-hide="(counter>= rewards.length)">View More</button>
+              <!-- <p class="">Valid till: {{}}</p> -->
             </div>
           </div>
           </center>
@@ -196,7 +197,7 @@
     </div>
     <div class="clearfix">
     </div>
-    <div class="images" ng-hide="hide_image_panel">
+    <div class="images hidden-xs" ng-hide="hide_image_panel">
       <div class="panel panel-default margin-bottom-20" ng-if="outlet" ng-init="hidePanel()">
         <div class="panel-heading">
           <h3 class="panel-title">Photos</h3>
@@ -214,7 +215,7 @@
     </div>
     <div class="clearfix">
     </div>
-    <div class="panel panel-default margin-bottom-20" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
+    <div class="panel panel-default margin-bottom-20 hidden-xs" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
       <div class="panel-heading">
         <h3 class="panel-title">We are also on</h3>
       </div>
@@ -240,7 +241,7 @@
   </div>
   <!-- Right column starts -->
   <div class="col-md-5 col-xs-12">
-    <div class="col-md-12 margin-bottom-10 hidden-xs facebook-panel" ng-if="outlet.links.facebook_url">
+    <div class="col-md-12 col-xs-12 col-lg-12 margin-bottom-10 facebook-panel hidden-xs" id="facebook_panel_right" ng-if="outlet.links.facebook_url">
       <div class="panel panel-default" id="facebook_like_box">
         <div class="panel-heading panel_heading_callout" style="text-align: left;">
           <h4>From Facebook</h4>
@@ -250,7 +251,7 @@
       </div>
     </div>
     <br>
-    <div class="col-md-12 col-sm-12 col-xs-12" id="callout_heading_panel_overview">
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" id="callout_heading_panel_overview">
       <div class="panel panel-default">
         <div class="panel-heading panel_heading_callout">
           <h4>Overview</h4>
@@ -267,15 +268,18 @@
               <span class="label label-warning label-buy">Cost For Two: </span>
               <p class="font-size-eleven">
                 <i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[0] }}</span></i>&nbsp;<span>to</span>&nbsp;<i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[1] }}</span></i>
-                <p>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-4">
-                  <span class="label label-danger label-buy">Open From: </span>
-                  <p class="font-size-eleven">
-                    {{outlet.attributes.timings | replaceComma }}
-                  </p>
-                </div>
+              <p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+              <span class="label label-danger label-buy">Open From: </span>
+              <div ng-show="closed_now"  style="color: red">
+                Closed Now
               </div>
+              <div ng-show="!closed_now" style="color: green">
+                Open Now
+              </div>
+            </div>
+          </div>
               <div class="clearfix">
               </div>
               <hr>
@@ -287,12 +291,12 @@
                     <div ng-show="outlet.attributes.dine_in">
                       <img src="assets/img/images/Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
                       <span class="overflow-h padding-top font-size-eleven">
-                      Dine In Available </span>
+                      Dine-in Available </span>
                     </div>
                     <div ng-show="!outlet.attributes.dine_in">
                       <img src="assets/img/images/No Dine-in.png" class="image_overview_column_attribute margin_negative_one hidden-xs">
                       <span class="overflow-h padding-top font-size-eleven">
-                      No Dine In </span>
+                      No Dine-in </span>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-6">
@@ -321,7 +325,7 @@
                   <div ng-show="!outlet.attributes.veg">
                     <img src="assets/img/images/Non Veg.png" class="image_overview_column_attribute hidden-xs">
                     <span class="overflow-h padding-top font-size-eleven">
-                    Serves non veg </span>
+                    Serves non-veg </span>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">
@@ -395,13 +399,13 @@
                   <div class="col-md-7 col-sm-7 col-xs-7 font-size-eleven">
                      Reservation: {{outlet.attributes.reservation}}
                   </div>
-                  <div class="col-md-5 col-sm-5 col-xs-5 font-size-eleven" id="wifi_attribute">
+                  <div class="col-md-5 col-sm-5 col-xs-5 font-size-eleven" id="wifi_attribute" ng-hide="!outlet.attributes.wifi">
                      Wi-fi: {{outlet.attributes.wifi}}
                   </div>
                 </div>
                 <div class="clearfix">
                 </div>
-                <h5 style="margin-left: 1em;">Map</h5>
+                <h5 style="margin-left: 1em;" class="label label-warning label-buy">Map</h5>
                 <hr>
                 <div class="col-xs-12" ng-if="outlet" ng-click="mapOpen('lg')">
                   <gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
@@ -418,6 +422,56 @@
       </div>
     </div>
   </div>
+   <div class="col-xs-12 margin-bottom-10 facebook-panel hidden-sm hidden-md hidden-lg " id="facebook_panel_right" ng-if="outlet.links.facebook_url">
+      <div class="panel panel-default" id="facebook_like_box">
+        <div class="panel-heading panel_heading_callout" style="text-align: left;">
+          <h4>From Facebook</h4>
+        </div>
+        <div class="fb-like-box" data-href="{{outlet.links.facebook_url}}" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="true" data-show-border="false">
+        </div>
+      </div>
+    </div>
+        <div class="images hidden-md hidden-lg hidden-sm col-xs-12" ng-hide="hide_image_panel">
+      <div class="panel panel-default margin-bottom-20" ng-if="outlet" ng-init="hidePanel()">
+        <div class="panel-heading">
+          <h3 class="panel-title">Photos</h3>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-12" id="outlet_images_slider">
+            <div lazy-load="ondemand" slider-slick="{ draggable: false, slidesToShow:3, infinite:true}">
+              <div class="outlet-slide" ng-repeat="x in [1,2,3,4]">
+                <img ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/{{outlet.basics.slug}}{{x}}.png" alt="" ng-click="checkMobile() ? mobileImages() : open('lg')" onerror=" $(this).hide();">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+    </div>
+    <div class="panel panel-default margin-bottom-20 hidden-md hidden-lg hidden-sm" ng-show="outlet.links.zomato_url || outlet.links.foodpanda_url">
+      <div class="panel-heading">
+        <h3 class="panel-title">We are also on</h3>
+      </div>
+      <div class="panel-body">
+        <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.zomato_url">
+        <a ng-href="{{outlet.links.zomato_url}}" target="_blank"><img src="assets/img/images/zomato.png" class="img-responsive"></a>
+        <a href="">
+        <p>
+          Review Us
+        </p>
+        </a>
+        </span>
+        <span class="col-md-3 col-sm-6 col-xs-6" ng-show="outlet.links.foodpanda_url">
+        <a ng-href="{{outlet.links.foodpanda_url}}" target="_blank"><img src="assets/img/images/foodpanda.png" class="img-responsive"></a>
+        <a href="">
+        <p>
+          Order Online
+        </p>
+        </a>
+        </span>
+      </div>
+    </div>
 </div>
 </section>
 <!--  About Section -->
@@ -431,7 +485,7 @@
 <section id="services">
 <div class="container content-lg" id="lets_remove_horizontal_scroll">
   <div class="title-v1" style="margin-bottom: 0px;">
-    <h2 class="color_black">other outlets on <span class="label-buy-color">Twyst.</span> Check out. Check-in.</h2>
+    <h2 class="color_black">Other outlets on <span class="label-buy-color">Twyst.</span> Check out. Check-in.</h2>
   </div>
   <div class="row" ng-init="getSlugs()">
     <div class="clearfix"></div>
