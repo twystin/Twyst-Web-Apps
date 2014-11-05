@@ -1,5 +1,5 @@
 twystApp.controller('groupProgramUpdateCtrl', 
-	function ($scope, $routeParams, $timeout, $http, $modal, $parse, $route, $location, authService, outletService, groupProgService, proSupService, imageService, typeaheadService) {
+	function ($scope, $routeParams, authService, outletService, groupProgService) {
 			
 		if (!authService.isLoggedIn()) {
 	        $location.path('/');
@@ -8,6 +8,7 @@ twystApp.controller('groupProgramUpdateCtrl',
 	    if (authService.isLoggedIn() && authService.getAuthStatus().role > 4) {
 	        $location.path('/panel');
 	    }
+	    
 	    $scope.group_program = {};
 	    $scope.outlets = {};
 
