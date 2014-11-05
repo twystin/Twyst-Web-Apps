@@ -64,20 +64,20 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
   };
 
   $scope.getOutletOpts = function (outlet) {
-   return angular.extend(
+     return angular.extend(
      { title: outlet.name },
      $scope.options.outlets
      );
- };
- $scope.isCollapsed = true;
-$scope.open = function (size) {
+  };
+  $scope.isCollapsed = true;
+  $scope.open = function (size) {
      var modalInstance = $modal.open({
       templateUrl: 'state/_partials/slider_modal.html',
       size: size,
       scope: $scope
     })
   };
-$scope.mapOpen = function (size) {
+  $scope.mapOpen = function (size) {
 
     var modalInstance = $modal.open({
       templateUrl: 'state/_partials/modal_map.html',
@@ -101,7 +101,7 @@ $scope.mapOpen = function (size) {
   }
 
 
- $scope.selectOutlet = function (outlet, marker) {
+$scope.selectOutlet = function (outlet, marker) {
   if ($scope.prev) {
     $scope.prev.setOptions($scope.options.outlets);
   }
@@ -261,5 +261,4 @@ $scope.getCostForTwoText = function (outlet) {
     templateUrl: 'state/outlet_view/outlet_view.html',
     controller: 'OutletCtrl'
   })
-
 })
