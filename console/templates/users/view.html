@@ -20,19 +20,19 @@
         <table class="table table-bordered table-striped" ng-show="users.length > 0">
             <thead>
                 <tr> 
-                    <th>
+                    <th ng-click = getSorted("username") style="cursor: pointer;">
                         Name
                     </th>
-                    <th>
+                    <th ng-click = getSorted("role") style="cursor: pointer;">
                         Role
                     </th>
-                    <th>
+                    <th ng-click = getSorted("phone") style="cursor: pointer;">
                         Phone
                     </th>
-                    <th>
+                    <th ng-click = getSorted("created_at") style="cursor: pointer;">
                         Joined
-                    </th>
-                    <th>
+                    </th >
+                    <th ng-click = getSorted("last_seen") style="cursor: pointer;">
                         Last seen
                     </th>
                 </tr>

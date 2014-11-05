@@ -17,16 +17,16 @@
         <table class="table table-bordered table-striped" ng-show="programs.length > 0">
             <thead>
                 <tr> 
-                    <th>
+                    <th ng-click = getSorted("name") style="cursor: pointer;">
                         Name
                     </th>
-                    <th>
+                    <th ng-click = getSorted("validity.burn_start") style="cursor: pointer;">
                         Validity start
                     </th>
-                    <th>
+                    <th ng-click = getSorted("validity.earn_end") style="cursor: pointer;">
                         Validity end
                     </th>
-                    <th>
+                    <th ng-click = getSorted("status") style="cursor: pointer;">
                         Status
                     </th>
                 </tr>

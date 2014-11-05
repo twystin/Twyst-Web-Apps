@@ -2,6 +2,8 @@ function AdminUserCtrl($scope, $http, $location, authService, adminUserService) 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
+    var sort_order = 1;
+    var sort_param = "phone";
 
     $scope.roles = ['1', '2', '3', '4', '5', '6', '7', 'All'];
 
@@ -33,10 +35,18 @@ function AdminUserCtrl($scope, $http, $location, authService, adminUserService) 
             $scope.searchTerm,
             $scope.userRole,
             $scope.currentPage,
-            $scope.totalCountPerPage).then(function (data) {
+            $scope.totalCountPerPage,
+            sort_param,
+            sort_order).then(function (data) {
 
             $scope.users = data.info.USERS || [];
             $scope.totalUsers = data.info.totalCount;
         })
+    }
+
+    $scope.getSorted = function (sortParam) {
+        sort_param = sortParam;
+        sort_order === 1 ? (sort_order = -1) : (sort_order = 1);
+        $scope.getUsers();
     }
 }
