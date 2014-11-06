@@ -93,7 +93,7 @@ html {
 .merchant_logo_absolute {
     position: absolute;
     z-index: 99;
-    padding-top: 5em;
+    padding-top: 4em;
 }
 /* reset style */
 .header {
@@ -501,6 +501,9 @@ hr {
   background-image:none;
   margin-top:10%;
   width:5%;
+}
+.label-red {
+    background: red !important;
 }
 .label-buy {
 	background: #e67e22 !important;
