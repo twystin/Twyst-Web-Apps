@@ -127,6 +127,7 @@ $scope.getOutlet = function () {
   var outlet_id = $routeParams.outlet_id;
   outletService.getOutlet(outlet_id).then(function (data) {
     $scope.outlet = data.OUTLET;
+    $scope.closed_now = data.closed_now;
     $rootScope.o = data.OUTLET;
      $scope.rewards = data.REWARDS;
      if($scope.outlet) {

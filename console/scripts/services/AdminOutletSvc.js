@@ -2,12 +2,11 @@
 twystConsole.factory('adminOutletService', function ($http, $q) {
 
     var adminOutletSvc = {};
-
     adminOutletSvc.getOutlets = function (q, pageNumber, totalCountPerPage) {
         q = q || '';
         var deferred = $q.defer();
         $http.get(
-            '/api/v2/alloutlets?q=' + q + '&pageNumber=' + pageNumber + '&totalCountPerPage=' + totalCountPerPage
+            '/api/v2/alloutlets?q=' + q + '&pageNumber=' + pageNumber + '&totalCountPerPage=' + totalCountPerPage 
         ).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
