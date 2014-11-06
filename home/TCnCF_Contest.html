@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="twystContest"> 
 <head>
-    <title>Twyst | CUPnCAKE Factory's FIFA World Cup 2014 Contest!</title>
+    <title>Twyst | CUPnCAKE Factory's Indian Super League 2014 Contest!</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -79,37 +79,51 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/home/index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/home/careers.html">
+                                Careers
+                            </a> 
+                        </li>
+                        <li class="active">
+                            <a href="/home/TCnCF_Contest.html">
+                                Contest
+                            </a> 
+                        </li>
+                        <li>
+                            <a href="/home/TCnCF_Results.html">
+                                Contest Results
+                            </a>
+                        </li>
+
+                    </ul>
+
+                <!-- <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="index.html">
-                            Home
+                            HOME
                         </a>
-                    </li>
-                    <li>
-                        <a href="index.html#how">
-                            How it works
-                        </a>                       
-                    </li>
-                    <li>
-                        <a href="about.html">
-                            About us
-                        </a>                     
                     </li>
                     <li>
                         <a href="careers.html">
-                            Careers
+                            CAREERS
                         </a>                     
                     </li>                    
                     <li>
-                        <a href="contact.html">
-                            Contact us
+                        <a class="active">
+                            CONTEST
                         </a>
                     </li>
                     <li>
-                        <a href="http://twyst.in/merchant/">
-                            For merchants
+                        <a href="contact.html">
+                            Contest Results
                         </a>
                     </li>
-                </ul>
+                </ul> -->
                 <div class="search-open">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search">
@@ -128,13 +142,8 @@
 
 <div class="breadcrumbs">
     <div class="container">
-        <h1 class="pull-left">This contest has ended. Thank you for your interest. Winners will be announced on the 15th of July 2014.</h1>
-        <!-- <ul class="pull-right breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="">Pages</a></li>
-            <li><a href="contact.html">Contacts</a></li>
-            <li class="active">Contest</li>
-        </ul> --> 
+        <h1 class="pull-left">The CUPnCAKE Factory Predict & Win Contest</h1>
+        
     </div>
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
@@ -144,12 +153,12 @@
         <div class="col-md-6">
             <div ng-show="user.thank_you">
                 <h3>
-                    Thank you for participating. We will contact the lucky winners after the results are declared on 15th July 2014.
+                    Thank you for participating. We will contact the lucky winners after the results are declared on 25th December 2014.
                 </h3>
             </div>
             <div ng-show="user.error">
                 <h3>
-                    You have already participated in the contest. Results will be declared on 15th July 2014.
+                    You have already participated in the contest. Results will be declared on 25th December 2014.
                 </h3>
             </div>
             <div class="headline">
@@ -157,7 +166,7 @@
                 </h4>
             </div>
             <div class="">
-                The CUPnCAKE Factory is running a special contest for its valued customers. Simply predict the winner of the FIFA World Cup 2014 and you could win some delicious treats! 3 lucky winners will be chosen at random from all the correct entries we receive.
+                The CUPnCAKE Factory is running a special contest for its valued customers. Simply predict the winner of Indian Super League 2014 and you could win some delicious treats! 3 lucky winners will be chosen at random from all the correct entries we receive.
             </div>
             <br>
             <form ng-hide="user.error || user.thank_you" role="form">
@@ -185,32 +194,35 @@
                 <div class="form-group">
                     <label>My predicted winner for this year is:</label><br>
                     <div class="col-md-11">
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="BRA">&nbsp;BRA&nbsp;<img class="flag" src="../common/images/Flags/bra.jpg" alt="" />
+                        <div class="col-md-6">
+                            <input type="radio" name="country" ng-model="user.message" value="Atlético de Kolkata">&nbsp;Atlético de Kolkata&nbsp;
                         </div>
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="COL">&nbsp;COL&nbsp;<img class="flag" src="../common/images/Flags/col.jpg" alt="" />
-                        </div>
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="FRA">&nbsp;FRA&nbsp;<img class="flag" src="../common/images/Flags/france.gif" alt="" />
-                        </div>
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="GER">&nbsp;GER&nbsp;<img class="flag" src="../common/images/Flags/germany.jpg" alt="" />
+                        <div class="col-md-6">
+                            <input type="radio" name="country" ng-model="user.message" value="Chennaiyin FC">&nbsp;Chennaiyin FC&nbsp;
                         </div>
                     </div>
-                    <br>
+                    <div class="col-md-11">
+                        <div class="col-md-6">
+                            <input type="radio" name="country" ng-model="user.message" value="Mumbai City FC">&nbsp;Mumbai City FC&nbsp;
+                        </div>                        
+                        <div class="col-md-6">
+                            <input type="radio" name="country" ng-model="user.message" value="NorthEast United FC">&nbsp;NorthEast United FC&nbsp;
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="col-md-6">
+                            <input type="radio" name="country" ng-model="user.message" value="FC Pune City">&nbsp;FC Pune City&nbsp;
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio" name="country" ng-model="user.message" value="Delhi Dynamos FC">&nbsp;Delhi Dynamos FC&nbsp;
+                        </div>
+                    </div>
                     <div class="col-md-11"> 
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="ARG">&nbsp;ARG&nbsp;<img class="flag" src="../common/images/Flags/argentina.gif" alt="" />
+                        <div class="col-md-6">
+                            <input type="radio" name="country" ng-model="user.message" value="Kerala Blasters FC">&nbsp;Kerala Blasters FC&nbsp;
                         </div>
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="BEL">&nbsp;BEL&nbsp;<img class="flag" src="../common/images/Flags/belgium.jpg" alt="" />
-                        </div>
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="CRC">&nbsp;CRC&nbsp;<img class="flag" src="../common/images/Flags/costa-rica.gif" alt="" />
-                        </div>
-                        <div class="col-md-3">
-                            <input type="radio" name="country" ng-model="user.message" value="NED">&nbsp;NED&nbsp;<img class="flag" src="../common/images/Flags/Netherlands.jpg" alt="" />
+                        <div class="col-md-6">
+                            <input type="radio" name="country" ng-model="user.message" value="FC Goa">&nbsp;FC Goa&nbsp;
                         </div>
                     </div>
                     <br>
@@ -232,13 +244,13 @@
                     <input type="checkbox" name="agree" value="true" checked> I wish to join The CUPnCAKE Factory loyalty program on Twyst.
                 </div>
                 <div>
-                    <button type="button" class="btn btn-success btn-lg spacing" ng-click="enterContest()" ng-disabled="true">Submit</button>
+                    <button type="button" class="btn btn-success btn-lg spacing" ng-click="enterContest()">Submit</button>
                 </div>
             </form>
         </div>
         <div class="padding-img">
             <div class="col-md-5">
-                <img class="prog" src="./assets/img/contest.jpg" alt="" />
+                <img class="prog" src="../common/images/bannerContest.png" alt="" />
             </div>
         </div>
     </div>
