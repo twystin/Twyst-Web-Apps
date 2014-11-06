@@ -35,6 +35,7 @@
     				</h6>
     				<div>
     					<span class="label label-warning label-buy" ng-show="!closed_now">Open now</span>
+    					<span class="label label-warning label-red" ng-show="closed_now && opensAt.time">Opens at {{opensAt.day ? opensAt.day + ' ' : ''}} {{opensAt.time}}</span>
     				</div>
     				<div style="margin-top: 0.3em">
     					<b class="color_white font_fixed_sapient">
