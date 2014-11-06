@@ -2,6 +2,24 @@
 <html lang="en" ng-app="twystConsole">
 	<title>Twyst</title>
 	<head>
+	    <link rel="stylesheet" href="../common/libs/bootstrap/css/bootstrap.css"></link>
+	    <link rel="stylesheet" href="../common/styles/bootstrap-cosmo-2.3.2.css">
+		<link rel="stylesheet" href="./styles/app.css"></link>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+	</head>
+	<body>
+	<div class="container-fluid">
+		<div class="row-fluid offset2 padding-logout" ng-controller="AuthController">
+	        <div class="span8" ng-show="isLoggedIn()">
+	            <button class="btn btn-medium pull-right" ng-click="logout()">Logout</button>
+	        </div>
+	    </div>
+		
+		<div class="row-fluid offset2 padding-logout">		
+			<div class="span8">
+				<div ng-view></div>
+    		</div>
+    	</div>
 	    <script src="../common/libs/angular/angular.js"></script>		
 	    <script src="../common/libs/angular/angular-route.js"></script>
 	    <script src="../common/libs/angular/angular-cookies.js"></script>
@@ -21,24 +39,5 @@
 		<script src="./scripts/services/AdminProgramSvc.js"></script>
 		<script src="./scripts/services/AdminUserSvc.js"></script>
 		<script src="./scripts/services/AdminQrSvc.js"></script>
-
-	    <link rel="stylesheet" href="../common/libs/bootstrap/css/bootstrap.css"></link>
-	    <link rel="stylesheet" href="../common/styles/bootstrap-cosmo-2.3.2.css">
-		<link rel="stylesheet" href="./styles/app.css"></link>
-	</head>
-	<body>
-	<div class="container-fluid">
-		<div class="row-fluid offset2 padding-logout" ng-controller="AuthController">
-	        <div class="span8" ng-show="isLoggedIn()">
-	            <button class="btn btn-medium pull-right" ng-click="logout()">Logout</button>
-	        </div>
-	    </div>
-		
-		<div class="row-fluid offset2 padding-logout">		
-			<div class="span8">
-				<div ng-view></div>
-    		</div>
-    	</div>
-	    
 	</body>
 </html>		

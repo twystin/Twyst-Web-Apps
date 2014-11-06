@@ -2,14 +2,15 @@ function AdminProgramCtrl($scope, $http, $location, $modal, authService, adminPr
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
-    var sort_order = 1;
-    var sort_param = "name";
+    
     function init () {
         $scope.currentPage = 1;
         $scope.totalCountPerPage = 10;
         $scope.totalPrograms = 10;
         $scope.maxSize = 10;
         $scope.programs = [];
+        $scope.sort_order = -1;
+        $scope.sort_param = "validity.earn_end";
     }
 
     init();
@@ -28,8 +29,8 @@ function AdminProgramCtrl($scope, $http, $location, $modal, authService, adminPr
             $scope.searchTerm,
             $scope.currentPage,
             $scope.totalCountPerPage,
-            sort_param,
-            sort_order).then(function (data) {
+            $scope.sort_param,
+            $scope.sort_order).then(function (data) {
 
             $scope.programs = data.info.PROGRAMS || [];
             $scope.totalPrograms = data.info.totalCount;
@@ -38,8 +39,8 @@ function AdminProgramCtrl($scope, $http, $location, $modal, authService, adminPr
 
     
     $scope.getSorted = function (sortParam) {
-        sort_param = sortParam;
-        sort_order === 1 ? (sort_order = -1) : (sort_order = 1);
+        $scope.sort_param = sortParam;
+        $scope.sort_order === 1 ? ($scope.sort_order = -1) : ($scope.sort_order = 1);;
         $scope.getPrograms();
     }
 

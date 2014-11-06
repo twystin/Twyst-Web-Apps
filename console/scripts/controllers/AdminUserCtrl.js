@@ -2,8 +2,6 @@ function AdminUserCtrl($scope, $http, $location, authService, adminUserService) 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
-    var sort_order = 1;
-    var sort_param = "phone";
 
     $scope.roles = ['1', '2', '3', '4', '5', '6', '7', 'All'];
 
@@ -13,6 +11,8 @@ function AdminUserCtrl($scope, $http, $location, authService, adminUserService) 
         $scope.totalUsers = 10;
         $scope.maxSize = 10;
         $scope.users = [];
+        $scope.sort_order = -1;
+        $scope.sort_param = "created_at";
     }
 
     init();
@@ -36,8 +36,8 @@ function AdminUserCtrl($scope, $http, $location, authService, adminUserService) 
             $scope.userRole,
             $scope.currentPage,
             $scope.totalCountPerPage,
-            sort_param,
-            sort_order).then(function (data) {
+            $scope.sort_param,
+            $scope.sort_order).then(function (data) {
 
             $scope.users = data.info.USERS || [];
             $scope.totalUsers = data.info.totalCount;
@@ -45,8 +45,8 @@ function AdminUserCtrl($scope, $http, $location, authService, adminUserService) 
     }
 
     $scope.getSorted = function (sortParam) {
-        sort_param = sortParam;
-        sort_order === 1 ? (sort_order = -1) : (sort_order = 1);
+        $scope.sort_param = sortParam;
+        $scope.sort_order === 1 ? ($scope.sort_order = -1) : ($scope.sort_order = 1);
         $scope.getUsers();
     }
 }

@@ -17,17 +17,17 @@
         <table class="table table-bordered table-striped" ng-show="programs.length > 0">
             <thead>
                 <tr> 
-                    <th ng-click = getSorted("name") style="cursor: pointer;">
-                        Name
+                    <th ng-click = getSorted("name") style="cursor: pointer;" title="Click to sort">
+                        Name <i class="fa fa-arrow-down" ng-show="sort_param === 'name' && sort_order === -1"></i> <i class="fa fa-arrow-up" ng-show="sort_param === 'name' && sort_order === 1"></i>
                     </th>
-                    <th ng-click = getSorted("validity.burn_start") style="cursor: pointer;">
-                        Validity start
+                    <th ng-click = getSorted("validity.earn_start") style="cursor: pointer;" title="Click to sort">
+                        Validity start <i class="fa fa-arrow-down" ng-show="sort_param === 'validity.earn_start' && sort_order === -1"></i> <i class="fa fa-arrow-up" ng-show="sort_param === 'validity.earn_start' && sort_order === 1"></i>
                     </th>
-                    <th ng-click = getSorted("validity.earn_end") style="cursor: pointer;">
-                        Validity end
+                    <th ng-click = getSorted("validity.earn_end") style="cursor: pointer;" title="Click to sort">
+                        Validity end <i class="fa fa-arrow-down" ng-show="sort_param === 'validity.earn_end' && sort_order === -1"></i> <i class="fa fa-arrow-up" ng-show="sort_param === 'validity.earn_end' && sort_order === 1"></i>
                     </th>
-                    <th ng-click = getSorted("status") style="cursor: pointer;">
-                        Status
+                    <th ng-click = getSorted("status") style="cursor: pointer;" title="Click to sort">
+                        Status <i class="fa fa-arrow-down" ng-show="sort_param === 'status' && sort_order === -1"></i> <i class="fa fa-arrow-up" ng-show="sort_param === 'status' && sort_order === 1"></i>
                     </th>
                 </tr>
             </thead>
