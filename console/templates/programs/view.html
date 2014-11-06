@@ -39,7 +39,7 @@
                     <td>
                         {{c.validity.earn_start | date: 'medium'}}
                     </td>
-                    <td>
+                    <td ng-class="{'validity-end': isValidityEnding(c)}">
                         {{c.validity.earn_end | date: 'medium'}}
                     </td>
                     <td>

@@ -24,6 +24,11 @@ function AdminProgramCtrl($scope, $http, $location, $modal, authService, adminPr
         $scope.getPrograms();
     });
 
+    $scope.isValidityEnding = function (program) {
+        return program.status === 'active' && 
+        new Date(Date.now() + 864000000) > (new Date(program.validity.earn_end)) ? true : false;
+    }
+
     $scope.getPrograms = function () {
     	adminProgramService.getPrograms(
             $scope.searchTerm,
