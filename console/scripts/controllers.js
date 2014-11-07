@@ -185,6 +185,29 @@ function DashboardController($scope, $http, $location, authService) {
 
 }
 
+function AppController($scope, $http, dataService) {
+	$scope.date = {};
+	
+	$scope.getDownloads = function () {
+		$scope.data = null;
+		var outlet_id = $scope.for_outlet,
+			start_date = $scope.date.start,
+			end_date = $scope.date.end;
+		dataService.getDownloads(outlet_id, start_date, end_date).then(function (data) {
+			$scope.data = data;
+		})
+	}
+
+	$scope.outletQuery = function() {
+		var request = $http.get('/api/v1/outlet/console/');
+		return request.then(function(response) {
+			$scope.outlets = eval(eval(response).data.info);
+		}, function(response) {
+
+		});
+	}
+}
+
 function UsersController($scope, $http, $location, $routeParams, authService) {
 	
 	if (!authService.isLoggedIn()) {
@@ -203,7 +226,7 @@ function UsersController($scope, $http, $location, $routeParams, authService) {
 		}, function(response) {
 
 		});
-	}	
+	}
 
 	$scope.edit = function() {
 		var username = $routeParams.username;
