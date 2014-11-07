@@ -3,6 +3,21 @@ twystConsole.factory('dataService', function ($http, $q) {
 
     var dataSvc = {};
 
+    dataSvc.getDownloads = function (outlet_id, start_date, end_date) {
+
+        var deferred = $q.defer();
+ 
+        $http.get(
+            '/api/v3/app_downloads?outlet=' + outlet_id + '&start_date=' + start_date + '&end_date=' + end_date 
+        ).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.resolve(data);
+        });
+        
+        return deferred.promise;
+    };
+
     dataSvc.getMerchants = function (cities) {
 
         var deferred = $q.defer();

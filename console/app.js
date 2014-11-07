@@ -22,6 +22,10 @@ twystConsole.config(function ($routeProvider) {
 		controller: ReccoController,
 		templateUrl: '/console/templates/recco/config.html'
 	}).
+	when('/apps', {
+		controller: AppController,
+		templateUrl: '/console/templates/users/app_downloads.html'
+	}).
 	when('/users/', {
 		controller: AdminUserCtrl,
 		templateUrl: '/console/templates/users/view.html',
