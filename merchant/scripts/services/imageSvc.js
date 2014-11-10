@@ -14,9 +14,37 @@ twystApp.factory('imageService', function ($http, $q, $upload) {
         }).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
-            deferred.resolve(data);
+            deferred.reject(data);
         });
         
+        return deferred.promise;
+    };
+
+    imageSvc.uploadImageV3 = function (image_file, imageObject) {
+        var deferred = $q.defer();
+        $upload.upload({
+            url: '/api/v3/images',
+            method: 'PUT',
+            file: image_file,
+            data: imageObject
+        }).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.reject(data);
+        });        
+        return deferred.promise;
+    };
+
+    imageSvc.deleteImage = function (image_id) {
+        var deferred = $q.defer();
+        $http({
+            url: '/api/v3/images' + image_id,
+            method: 'DELETE'
+        }).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.reject(data);
+        });        
         return deferred.promise;
     };
 

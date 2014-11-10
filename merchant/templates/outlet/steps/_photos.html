@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="span7 info-header lead">
+        <strong>Input Card</strong>
+    </div>
+    <div class="span5 preview-header lead">
+        <strong>Preview Card</strong>
+    </div>
+</div>
+<div class="row">
+    <div class="span7 info-detail">
+        <div class="row-fluid">        
+            <div class="span10">
+                <div>
+                    <div>
+                        <h4>Logo</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="span4">
+                        Select image
+                    </div>
+                    <div class="span8">
+                        <span class="btn btn-primary btn-file">
+                            Browse <input type="file" ng-file-select="uploadImageV3($files, 'logo', -1)">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div  class="span2">
+                <div style="padding-bottom: 1em;padding-right: 0.2em;">
+                    <img src="https://s3-us-west-2.amazonaws.com/{{outlet.photos.logo}}" class="img-polaroid img-rounded">
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row-fluid">        
+            <div class="span10">
+                <div>
+                    <div>
+                        <h4>Logo gray</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="span4">
+                        Select image
+                    </div>
+                    <div class="span8">
+                        <span class="btn btn-primary btn-file">
+                            Browse <input type="file" ng-file-select="uploadImageV3($files, 'logo_gray', -1)">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div  class="span2">
+                <div style="padding-bottom: 1em;padding-right: 0.2em;">
+                    <img src="https://s3-us-west-2.amazonaws.com/{{outlet.photos.logo_gray}}" class="img-polaroid img-rounded">
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row-fluid">        
+            <div class="span10">
+                <div>
+                    <div>
+                        <h4>Background</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="span4">
+                        Select image
+                    </div>
+                    <div class="span8">
+                        <span class="btn btn-primary btn-file">
+                            Browse <input type="file" ng-file-select="uploadImageV3($files, 'background', -1)">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div  class="span2">
+                <div style="padding-bottom: 1em;padding-right: 0.2em;">
+                    <img src="https://s3-us-west-2.amazonaws.com/{{outlet.photos.background}}" class="img-polaroid img-rounded">
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <h4>Other images</h4>
+        <div class="row-fluid" ng-repeat="p in outlet.photos.others">        
+            <div class="span10">
+                <div>
+                    <div class="span4">
+                        Select image
+                    </div>
+                    <div class="span8">
+                        <span class="btn btn-primary btn-file">
+                            Browse <input type="file" ng-file-select="uploadImageV3($files, 'others', $index)">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div  class="span2">
+                <div style="padding-bottom: 1em;padding-right: 0.2em;">
+                    <img src="https://s3-us-west-2.amazonaws.com/{{p.image}}" class="img-polaroid img-rounded">
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+    <div class="span5 preview-detail" ng-include="'/merchant/templates/outlet/preview.html'"></div>
+</div>
+<div class="row well">
+    <button class="btn btn-inverse" ng-click="tabs[2].active=true">< Back </button>
+    <button class="btn btn-inverse" ng-click="fixupTags();tabs[4].active=true">Next ></button>
+    <button ng-click="init()" class="btn btn-warning">Clear form</button>
+</div>

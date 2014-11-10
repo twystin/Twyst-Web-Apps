@@ -46,12 +46,14 @@ twystApp.controller('OutletCtrl',
         $scope.outlet.attributes.payment_options = [];
         $scope.outlet_created = false;
         $scope.payments = ['cash', 'visa', 'master', 'amex', 'sodexho'];
-
+        $scope.outlet.photos = {};
+        $scope.outlet.photos.others = [{image: null, title: null}];
 
         $scope.tabs = [
             {active: true, name: 'outlet_basics', title: '1. Name your outlet', content: '_basics'},
             {active: false, name: 'outlet_info', title: '2. Add contact information', content: '_address'},
             {active: false, name: 'outlet_details', title: '3. Add outlet details', content: '_attributes'},
+            {active: false, name: 'outlet_photos', title: '3. Add photos', content: '_photos'},
             {active: false, name: 'outlet_review', title: '4. Review and Save!', content: '_review'}
         ];
 
@@ -232,7 +234,6 @@ twystApp.controller('OutletCtrl',
 
     $scope.getCurrentLocation = function () {
         $window.navigator.geolocation.getCurrentPosition(function(position) {
-            console.log(position);
             $scope.$apply(function() {
                 $scope.outlet.contact.location.coords.latitude = position.coords.latitude;
                 $scope.outlet.contact.location.coords.longitude = position.coords.longitude;
@@ -337,6 +338,48 @@ twystApp.controller('OutletCtrl',
         }
         outletService.update($scope, $http, $location, outlet_id);
     };
+
+    $scope.uploadImageV3 = function ($files, type, index) {
+        if(!$scope.outlet.basics.name || !$scope.outlet.contact.location.locality_1) {
+            return;
+        }
+        else {
+            var image_file = $files[0],
+                imageObject = getImageObject(type);
+
+            imageService.uploadImageV3(image_file, imageObject).then(function (data) {
+                setImage(data.info.key, type, index);
+            }, function (err) {
+                console.log(err);
+            })
+        }
+    } 
+
+    function setImage(image_key, type, index) {
+        if(Array.isArray($scope.outlet.photos)) {
+            delete $scope.outlet.photos;
+            $scope.outlet.photos = {};
+        }
+        $scope.outlet.photos.others = $scope.outlet.photos.others || [{image: null, title: null}]
+        index = index || 0;
+        if(!type) {
+            return;
+        }
+        (type === 'others') ? (
+           $scope.outlet.photos.others[index].image = image_key 
+        ) : ($scope.outlet.photos[type] = image_key);
+    }
+
+    function getImageObject(type) {
+        var imageObject = {
+            bucketName : "twyst-outlets/"+ $scope.outlet.basics.name+' ' + $scope.outlet.contact.location.locality_1[0],
+            imageName : (type === 'others') ? (
+               $rootScope.getUuid()
+            ) : type
+        };
+        imageObject.bucketName = imageObject.bucketName.replace(/[^a-zA-Z0-9-\/]/g,'-')
+        return imageObject;
+    }
 
     $scope.deleteOutlet = function (outlet) {
         var modalInstance = $modal.open({
