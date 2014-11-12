@@ -424,9 +424,9 @@ twystApp.controller('OutletCtrl',
 
     function getImageObject(type) {
         var imageObject = {
-            bucketName : "twyst-outlets/"+ $scope.outlet.basics.name+' ' + $scope.outlet.contact.location.locality_1[0],
+            bucketName : "twyst-outlets/"+ $scope.outlet._id,
             imageName : (type === 'others') ? (
-               $rootScope.getUuid()
+               Date.now()
             ) : type
         };
         imageObject.bucketName = imageObject.bucketName.replace(/[^a-zA-Z0-9-\/]/g,'-')
