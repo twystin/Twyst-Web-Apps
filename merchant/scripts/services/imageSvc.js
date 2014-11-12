@@ -35,12 +35,11 @@ twystApp.factory('imageService', function ($http, $q, $upload) {
         return deferred.promise;
     };
 
-    imageSvc.deleteImage = function (image_id) {
+    imageSvc.deleteImage = function (imageObject) {
         var deferred = $q.defer();
         $http({
-            url: '/api/v3/images/' + image_id,
-            method: 'DELETE',
-            data: {key: image_id}
+            url: '/api/v3/images?key=' + imageObject.key + '&bucket=' +imageObject.bucket,
+            method: 'DELETE'
         }).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {

@@ -338,7 +338,11 @@ twystApp.controller('OutletCtrl',
             $scope.outlet.photos.others.splice(index, 1);
         }
         else {
-            imageService.deleteImage(image_id).then(function (data) {
+            var image_object = {
+                key: image_id,
+                bucket: 'twyst-outlets/' + $scope.outlet._id
+            }
+            imageService.deleteImage(image_object).then(function (data) {
                 $scope.outlet.photos.others.splice(index, 1);
             }, function (data) {
                 // Handle image delete error case
