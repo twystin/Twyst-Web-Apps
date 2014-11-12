@@ -7,7 +7,8 @@ twystContact.controller('ContestCtrl', function($scope, $http) {
         'name': true,
         'message': true,
         'email': true,
-        'phone': true
+        'phone': true,
+        'dob': true
     };
 
     $scope.enterContest = function () {
@@ -20,6 +21,10 @@ twystContact.controller('ContestCtrl', function($scope, $http) {
     function validateData () {
         if(!$scope.user.name) {
             $scope.filled.name = false;
+            return false;
+        }
+        if(!$scope.user.dob) {
+            $scope.filled.dob = false;
             return false;
         }
         if(!isValidPhone()) {
@@ -56,12 +61,13 @@ twystContact.controller('ContestCtrl', function($scope, $http) {
             'name': true,
             'message': true,
             'email': true,
-            'phone': true
+            'phone': true,
+            'dob': true
         };
     }
 
-    function postData() {        
-
+    function postData() { 
+        $scope.user.name = $scope.user.name + ' (dob: ' + $scope.user.dob + ')'
         $http.post('/api/v1/beta/users', {   
             name  : $scope.user.name,
             message         : $scope.user.message,

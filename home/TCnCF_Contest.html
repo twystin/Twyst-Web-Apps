@@ -161,11 +161,11 @@
                     You have already participated in the contest. Results will be declared on 25th December 2014.
                 </h3>
             </div>
-            <div class="headline">
+            <div class="headline" ng-hide="user.error || user.thank_you">
                 <h4>To enter the contest, fill out the details below:
                 </h4>
             </div>
-            <div class="">
+            <div ng-hide="user.error || user.thank_you">
                 The CUPnCAKE Factory is running a special contest for its valued customers. Simply predict the winner of Indian Super League 2014 and you could win some delicious treats! 3 lucky winners will be chosen at random from all the correct entries we receive.
             </div>
             <br>
@@ -189,6 +189,13 @@
                     <input name="email" class="input-xlarge form-control" type="email" ng-model="user.email" required="true"></input>
                     <div ng-hide="filled.email">
                         <small style="color:red;">Please enter a valid email address.</small>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label>DOB*</label>
+                    <input name="dob" class="input-xlarge form-control" type="dob" ng-model="user.dob" required="true"></input>
+                    <div ng-hide="filled.dob">
+                        <small style="color:red;">Please enter a valid dob.</small>
                     </div>
                 </div>                
                 <div class="form-group">
