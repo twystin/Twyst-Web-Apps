@@ -47,7 +47,12 @@ twystApp.controller('OutletCtrl',
         $scope.outlet_created = false;
         $scope.payments = ['cash', 'visa', 'master', 'amex', 'sodexho'];
         $scope.outlet.photos = {};
-        $scope.outlet.photos.others = [{image: null, title: null}];
+        $scope.outlet.photos.others = [{image: null, title: null, approved: true, uploading: false}];
+        $scope.uploading = {
+            'logo': false,
+            'logo_gray': false,
+            'background': false
+        }
 
         $scope.tabs = [
             {active: true, name: 'outlet_basics', title: '1. Name your outlet', content: '_basics'},
@@ -323,8 +328,22 @@ twystApp.controller('OutletCtrl',
     };
 
     $scope.addImage = function ($event) {
-        $scope.outlet.photos.others.push({image: null, title: null});
+        $scope.outlet.photos.others.push({image: null, title: null, approved: true, uploading: false});
         $event.preventDefault();
+    }
+
+    $scope.removeImage = function (index) {
+        var image_id = $scope.outlet.photos.others[index].image;
+        if(!image_id) {
+            $scope.outlet.photos.others.splice(index, 1);
+        }
+        else {
+            imageService.deleteImage(image_id).then(function (data) {
+                $scope.outlet.photos.others.splice(index, 1);
+            }, function (data) {
+                // Handle image delete error case
+            })
+        }
     }
 
     function checkPhotos() {
@@ -336,7 +355,7 @@ twystApp.controller('OutletCtrl',
             $scope.outlet.photos = {};
         }
         $scope.outlet.photos = $scope.outlet.photos || {};
-        $scope.outlet.photos.others = $scope.outlet.photos.others || [{image: null, title: null}]
+        $scope.outlet.photos.others = $scope.outlet.photos.others || [{image: null, title: null, approved: true, uploading: false}]
     }
 
     $scope.create = function () {
@@ -371,11 +390,16 @@ twystApp.controller('OutletCtrl',
         else {
             var image_file = $files[0],
                 imageObject = getImageObject(type);
+            (type === 'others') ? (
+               ($scope.outlet.photos.others[index].uploading = true) 
+            ) : ($scope.uploading[type] = true);
 
             imageService.uploadImageV3(image_file, imageObject).then(function (data) {
                 setImage(data.info.key, type, index);
             }, function (err) {
-                console.log(err);
+                (type === 'others') ? (
+                   ($scope.outlet.photos.others[index].uploading = false) 
+                ) : ($scope.uploading[type] = false);
             })
         }
     } 
@@ -391,8 +415,11 @@ twystApp.controller('OutletCtrl',
             return;
         }
         (type === 'others') ? (
-           $scope.outlet.photos.others[index].image = image_key 
+           ($scope.outlet.photos.others[index].image = image_key) 
         ) : ($scope.outlet.photos[type] = image_key);
+        (type === 'others') ? (
+           ($scope.outlet.photos.others[index].uploading = false) 
+        ) : ($scope.uploading[type] = false);
     }
 
     function getImageObject(type) {

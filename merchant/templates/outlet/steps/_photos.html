@@ -19,9 +19,14 @@
                     <div class="span4">
                         Select image
                     </div>
-                    <div class="span8">
+                    <div class="span8" ng-if="!uploading.logo">
                         <span class="btn btn-primary btn-file">
                             Browse <input type="file" ng-file-select="uploadImageV3($files, 'logo', -1)">
+                        </span>
+                    </div>
+                    <div class="span8" ng-if="uploading.logo">
+                        <span>
+                            <i class="fa fa-repeat fa-3x fa-spin fa-orange"></i>
                         </span>
                     </div>
                 </div>
@@ -44,9 +49,14 @@
                     <div class="span4">
                         Select image
                     </div>
-                    <div class="span8">
+                    <div class="span8" ng-if="!uploading.logo_gray">
                         <span class="btn btn-primary btn-file">
                             Browse <input type="file" ng-file-select="uploadImageV3($files, 'logo_gray', -1)">
+                        </span>
+                    </div>
+                    <div class="span8" ng-if="uploading.logo_gray">
+                        <span>
+                            <i class="fa fa-repeat fa-3x fa-spin fa-orange"></i>
                         </span>
                     </div>
                 </div>
@@ -69,9 +79,14 @@
                     <div class="span4">
                         Select image
                     </div>
-                    <div class="span8">
+                    <div class="span8" ng-if="!uploading.background">
                         <span class="btn btn-primary btn-file">
                             Browse <input type="file" ng-file-select="uploadImageV3($files, 'background', -1)">
+                        </span>
+                    </div>
+                    <div class="span8" ng-if="uploading.background">
+                        <span>
+                            <i class="fa fa-repeat fa-3x fa-spin fa-orange"></i>
                         </span>
                     </div>
                 </div>
@@ -101,9 +116,27 @@
                         <div class="span4">
                             Select image
                         </div>
-                        <div class="span8">
+                        <div class="span8" ng-if="!p.uploading">
                             <span class="btn btn-primary btn-file">
                                 Browse <input type="file" ng-file-select="uploadImageV3($files, 'others', $index)">
+                            </span>
+                        </div>
+                        <div class="span8" ng-if="p.uploading">
+                            <span>
+                                <i class="fa fa-repeat fa-3x fa-spin fa-orange"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="span4">
+                            Approved 
+                            <small>
+                                (The image will appear on public page)
+                            </small>
+                        </div>
+                        <div class="span8">
+                            <span>
+                                <input ng-model="p.approved" type="checkbox">
                             </span>
                         </div>
                     </div>
@@ -115,7 +148,12 @@
                 </div>
             </div>
             <div class="row-fluid">
-                <hr/>
+                <div ng-if="outlet.photos.others.length > 1">
+                    <button class="btn btn-danger btn-mini" ng-click="removeImage($index)">Remove</button>
+                </div>
+                <div>
+                    <hr/>
+                </div>
             </div>
         </div>
         <div class="row-fluid">
