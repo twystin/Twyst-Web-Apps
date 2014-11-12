@@ -53,6 +53,13 @@ twystApp.controller('OutletCtrl',
             {active: true, name: 'outlet_basics', title: '1. Name your outlet', content: '_basics'},
             {active: false, name: 'outlet_info', title: '2. Add contact information', content: '_address'},
             {active: false, name: 'outlet_details', title: '3. Add outlet details', content: '_attributes'},
+            {active: false, name: 'outlet_review', title: '4. Review and Save!', content: '_review'}
+        ];
+
+        $scope.update_tabs = [
+            {active: true, name: 'outlet_basics', title: '1. Name your outlet', content: '_basics'},
+            {active: false, name: 'outlet_info', title: '2. Add contact information', content: '_address'},
+            {active: false, name: 'outlet_details', title: '3. Add outlet details', content: '_attributes'},
             {active: false, name: 'outlet_photos', title: '3. Add photos', content: '_photos'},
             {active: false, name: 'outlet_review', title: '4. Review and Save!', content: '_review'}
         ];
@@ -308,11 +315,24 @@ twystApp.controller('OutletCtrl',
         return request.then(function (response) {
             var outlet = JSON.parse(response.data.info)[0];
             $scope.outlet = outlet;
+            checkPhotos();
             setSmsOff(outlet.sms_off);
         }, function (response) {
             $log.warn(response);
         });
     };
+
+    function checkPhotos() {
+        if(!$scope.outlet) {
+            return;
+        }
+        if(Array.isArray($scope.outlet.photos)) {
+            delete $scope.outlet.photos;
+            $scope.outlet.photos = {};
+        }
+        $scope.outlet.photos = $scope.outlet.photos || {};
+        $scope.outlet.photos.others = $scope.outlet.photos.others || [{image: null, title: null}]
+    }
 
     $scope.create = function () {
         $scope.outlet.outlet_meta = {};

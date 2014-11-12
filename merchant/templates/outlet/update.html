@@ -6,7 +6,7 @@
 		<div class="row-fluid offset1 span10">
 			<div>
 				<tabset vertical="false" type="'pills'">		   
-				    <tab class="well" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+				    <tab class="well" ng-repeat="tab in update_tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
 	  					<div class="container-fluid" ng-include="'/merchant/templates/outlet/steps/' + tab.content + '.html'"></div>
 					</tab>
 				</tabset>

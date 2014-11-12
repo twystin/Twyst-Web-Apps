@@ -57,7 +57,7 @@
     <div class="span5 preview-detail" ng-include="'/merchant/templates/outlet/preview.html'"></div>
   </div>
   <div class="row well">
-    <button class="btn btn-inverse" ng-disabled="!outlet.basics.name || outlet_basics.outlet_name.$dirty && outlet_basics.outlet_name.$invalid" ng-click="tabs[1].active=true">Next ></button>
+    <button class="btn btn-inverse" ng-disabled="!outlet.basics.name || outlet_basics.outlet_name.$dirty && outlet_basics.outlet_name.$invalid" ng-click="tabs[$index + 1].active=true;update_tabs[$index + 1].active=true">Next ></button>
     <button ng-click="init()" class="btn btn-warning">Clear all</button>
   </div>  
 </form>
