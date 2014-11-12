@@ -322,6 +322,11 @@ twystApp.controller('OutletCtrl',
         });
     };
 
+    $scope.addImage = function ($event) {
+        $scope.outlet.photos.others.push({image: null, title: null});
+        $event.preventDefault();
+    }
+
     function checkPhotos() {
         if(!$scope.outlet) {
             return;

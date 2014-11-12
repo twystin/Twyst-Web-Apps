@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div  class="span2">
-                <div style="padding-bottom: 1em;padding-right: 0.2em;" ng-show="outlet.photos.logo">
+                <div style="padding-bottom: 1em;padding-right: 0.2em;" ng-if="outlet.photos.logo">
                     <img src="https://s3-us-west-2.amazonaws.com/{{outlet.photos.logo}}" class="img-polaroid img-rounded">
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div  class="span2">
-                <div style="padding-bottom: 1em;padding-right: 0.2em;" ng-show="outlet.photos.logo_gray">
+                <div style="padding-bottom: 1em;padding-right: 0.2em;" ng-if="outlet.photos.logo_gray">
                     <img src="https://s3-us-west-2.amazonaws.com/{{outlet.photos.logo_gray}}" class="img-polaroid img-rounded">
                 </div>
             </div>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div  class="span2">
-                <div style="padding-bottom: 1em;padding-right: 0.2em;" ng-show="outlet.photos.background">
+                <div style="padding-bottom: 1em;padding-right: 0.2em;" ng-if="outlet.photos.background">
                     <img src="https://s3-us-west-2.amazonaws.com/{{outlet.photos.background}}" class="img-polaroid img-rounded">
                 </div>
             </div>
@@ -85,35 +85,42 @@
         <hr/>
         <h4>Other images</h4>
         <div class="row-fluid" ng-repeat="p in outlet.photos.others">        
-            <div class="span10">
-                <div>
-                    <div class="span4">
-                        Image title
+            <div class="row-fluid">
+                <div class="span10">
+                    <div>
+                        <div class="span4">
+                            Image title
+                        </div>
+                        <div class="span8">
+                            <span>
+                                <input ng-model="p.title" type="text">
+                            </span>
+                        </div>
                     </div>
-                    <div class="span8">
-                        <span>
-                            <input ng-model="p.title" type="text">
-                        </span>
+                    <div>
+                        <div class="span4">
+                            Select image
+                        </div>
+                        <div class="span8">
+                            <span class="btn btn-primary btn-file">
+                                Browse <input type="file" ng-file-select="uploadImageV3($files, 'others', $index)">
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div class="span4">
-                        Select image
-                    </div>
-                    <div class="span8">
-                        <span class="btn btn-primary btn-file">
-                            Browse <input type="file" ng-file-select="uploadImageV3($files, 'others', $index)">
-                        </span>
+                <div  class="span2">
+                    <div style="padding-bottom: 1em;padding-right: 0.2em;" ng-if="p.image">
+                        <img src="https://s3-us-west-2.amazonaws.com/{{p.image}}" class="img-polaroid img-rounded">
                     </div>
                 </div>
             </div>
-            <div  class="span2">
-                <div style="padding-bottom: 1em;padding-right: 0.2em;" ng-show="p.image">
-                    <img src="https://s3-us-west-2.amazonaws.com/{{p.image}}" class="img-polaroid img-rounded">
-                </div>
+            <div class="row-fluid">
+                <hr/>
             </div>
         </div>
-        <hr/>
+        <div class="row-fluid">
+            <button class="btn btn-info" ng-click="addImage($event)">Add another image</button>
+        </div>
     </div>
     <div class="span5 preview-detail" ng-include="'/merchant/templates/outlet/preview.html'"></div>
 </div>
