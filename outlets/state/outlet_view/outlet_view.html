@@ -1,17 +1,17 @@
 <section id="about" class="about-section section-first row">
-	<div class="about-image" id="image_background" background-image="{{outlet.basics.slug}}">
+	<div class="about-image" id="image_background" background-image="{{outlet._id + '/' + 'background'}}">
 		<div class="container" id="badge_outlet_info_container">
 			<div class="hidden-md hidden-lg col-xs-12 badges_small_screen">
 				<span style="height: 45px; width: auto;" class="header_badges_sprite_two">
 					<a href="https://play.google.com/store/apps/details?id=com.twyst.app.android" class="android_button"></a>
 					<a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store" class="ios_button"></a>
 				</span>
-			</div>
+			</div> 
 			<div class="col-md-10 merchant_logo_absolute">
       			<div class="col-md-2 col-sm-2 hidden-xs" style="margin-left:5em;">
       			</div>
       			<div class="col-md-4 hidden-xs hidden-sm" style="margin-top: 3em;">
-        			<img class="merchant_logo" ng-src="https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/{{outlet.basics.slug}}/logo.png">
+        			<img class="merchant_logo" ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{outlet._id + '/' + 'logo'}}">
         			<div class="col-md-10 padding-top-share" ng-click="share()">
           				<a class="btn btn-social btn-facebook btn-xs">
           					<i class="fa fa-facebook"></i> Share 

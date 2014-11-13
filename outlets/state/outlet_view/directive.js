@@ -30,7 +30,7 @@ outletApp.directive('backgroundImage', function () {
   return function (scope, element, attrs) {
     attrs.$observe('backgroundImage', function (value) {
       if (value) {
-        var url = 'http://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/' + value + '/Background.png';
+        var url = 'http://s3-us-west-2.amazonaws.com/twyst-outlets/' + value;
         element.css({'background': "url('" + url + "')"});
       }
     });
