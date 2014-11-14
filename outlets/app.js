@@ -34,7 +34,7 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
   }
 
   $scope.checkMobile = function () {
-    if ($window.innerWidth > 850) {
+    if ($window.innerWidth < 850) {
       $scope.counter = 5;
       $scope.count_limit = 5;
       $rootScope.locations = $rootScope.locations || [];
