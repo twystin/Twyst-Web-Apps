@@ -223,8 +223,8 @@
       <div class="span5 preview-detail" ng-include="'/merchant/templates/outlet/preview.html'"></div>
    </div>
    <div class="row well">
-      <button class="btn btn-inverse" ng-click="tabs[0].active=true">< Back </button>
-      <button class="btn btn-inverse" ng-click="tabs[2].active=true">Next ></button>
+      <button class="btn btn-inverse" ng-click="tabs[$index - 1].active=true;update_tabs[$index - 1].active=true">< Back </button>
+      <button class="btn btn-inverse" ng-click="tabs[$index + 1].active=true;update_tabs[$index + 1].active=true">Next ></button>
       <button ng-click="init()" class="btn btn-warning">Clear form</button>
    </div>
 </form>

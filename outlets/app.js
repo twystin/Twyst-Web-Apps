@@ -25,6 +25,14 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
     $scope.counter += count;
   }
 
+  $scope.getRange = function(start, end, skip) {
+      var nums = [];
+      for(var i = start; i < end; i += skip) {
+          nums.push(i);
+      }
+      return nums;
+  }
+
   $scope.checkMobile = function () {
     if ($window.innerWidth < 850) {
       $scope.counter = 5;
@@ -91,7 +99,7 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
         app_id: '1397475420510454',
         method: 'feed',
         name: $scope.outlet.basics.name,
-        picture: "https://s3-us-west-2.amazonaws.com/twystmerchantpages/merchants/" + $scope.outlet.basics.slug + "/logo1.png",
+        picture: "https://s3-us-west-2.amazonaws.com/twyst-outlets/" + $scope.outlet._id + "/logo_gray",
         link: 'http://twyst.in/outlets/#/' + $scope.outlet.publicUrl[0],
         caption: $scope.outlet.contact.location.locality_1[0] + ', ' + $scope.outlet.contact.location.locality_2[0] + ', ' + $scope.outlet.contact.location.city,
         description: ($scope.rewards && $scope.rewards.length) ? $scope.rewards[$scope.rewards.length - 1].title + ' and much more.' : ''
