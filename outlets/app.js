@@ -25,8 +25,16 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
     $scope.counter += count;
   }
 
+  $scope.getRange = function(start, end, skip) {
+      var nums = [];
+      for(var i = start; i < end; i += skip) {
+          nums.push(i);
+      }
+      return nums;
+  }
+
   $scope.checkMobile = function () {
-    if ($window.innerWidth < 850) {
+    if ($window.innerWidth > 850) {
       $scope.counter = 5;
       $scope.count_limit = 5;
       $rootScope.locations = $rootScope.locations || [];
