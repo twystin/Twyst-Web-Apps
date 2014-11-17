@@ -446,7 +446,7 @@ twystApp.controller('OutletCtrl',
 
     function getImageObject(type) {
         var imageObject = {
-            bucketName : 'twyst-outlets',
+            bucketName : 'twyst-test',
             folder_name: $scope.outlet._id,
             image_for: 'outlet',
             image_class: type
