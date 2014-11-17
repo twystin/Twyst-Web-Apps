@@ -80,7 +80,7 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
   $scope.isCollapsed = true;
   $scope.open = function (size) {
      var modalInstance = $modal.open({
-      templateUrl: 'state/_partials/slider_modal.html',
+      templateUrl: '/outlets/state/_partials/slider_modal.html',
       size: size,
       scope: $scope
     })
@@ -88,7 +88,7 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
   $scope.mapOpen = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'state/_partials/modal_map.html',
+      templateUrl: '/outlets/state/_partials/modal_map.html',
       size: size,
       scope: $scope
     })
@@ -130,9 +130,7 @@ $scope.hidePanel = function () {
       $scope.hide_image_panel = true;
     });
 }
-$scope.getOutlet = function () {
-
-  var outlet_id = $routeParams.outlet_id;
+$scope.getOutlet = function (outlet_id) {
   outletService.getOutlet(outlet_id).then(function (data) {
     $scope.outlet = data.OUTLET;
     $scope.closed_now = data.closed_now;
@@ -248,27 +246,26 @@ $scope.getCostForTwoText = function (outlet) {
 
   $routeProvider.
   when('/discover',{
-    templateUrl: 'state/discover/discover.html',
+    templateUrl: '/outlets/state/discover/discover.html',
     controller: 'DiscoverCtrl'
   }).
   when('/nearby',{
-    templateUrl: 'state/nearby/nearby.html',
+    templateUrl: '/outlets/state/nearby/nearby.html',
     controller: 'NearbyCtrl'
   }).
   when('/login',{
-    templateUrl: 'state/login/login.html',
+    templateUrl: '/outlets/state/login/login.html',
     controller: 'OutletCtrl'
   }).
   when('/otp',{
-    templateUrl: 'state/login/otp.html',
+    templateUrl: '/outlets/state/login/otp.html',
     controller: 'OutletCtrl'
   }).
   when('/carousel/:outlet_slug',{
-    templateUrl: 'state/_partials/slider_mobile.html',
+    templateUrl: '/outlets/state/_partials/slider_mobile.html',
     controller: 'OutletCtrl'
   }).
-  when('/:outlet_id',{
-    templateUrl: 'state/outlet_view/outlet_view.html',
-    controller: 'OutletCtrl'
+  when('/',{
+    templateUrl: '/outlets/state/outlet_view/outlet_view.html'
   })
 })
