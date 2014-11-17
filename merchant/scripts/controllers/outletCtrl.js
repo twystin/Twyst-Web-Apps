@@ -52,6 +52,11 @@ twystApp.controller('OutletCtrl',
             'logo': false,
             'logo_gray': false,
             'background': false
+        };
+        $scope.error = {
+            'logo': false,
+            'logo_gray': false,
+            'background': false
         }
 
         $scope.tabs = [
@@ -392,18 +397,29 @@ twystApp.controller('OutletCtrl',
             return;
         }
         else {
+            if(type === 'others') {
+                $scope.outlet.photos.others[index].uploading = true;
+                $scope.outlet.photos.others[index].err = null;
+            }
+            else {
+                $scope.uploading[type] = true;
+                $scope.error[type] = null;
+            }
+
             var image_file = $files[0],
                 imageObject = getImageObject(type);
-            (type === 'others') ? (
-               ($scope.outlet.photos.others[index].uploading = true) 
-            ) : ($scope.uploading[type] = true);
 
             imageService.uploadImageV3(image_file, imageObject).then(function (data) {
                 setImage(data.info.key, type, index);
             }, function (err) {
-                (type === 'others') ? (
-                   ($scope.outlet.photos.others[index].uploading = false) 
-                ) : ($scope.uploading[type] = false);
+                if (type === 'others') {
+                    $scope.outlet.photos.others[index].uploading = false;
+                    $scope.outlet.photos.others[index].err = err.message;
+                }
+                else {
+                    $scope.uploading[type] = false;
+                    $scope.error[type] = err.message;
+                }
             })
         }
     } 
@@ -418,20 +434,22 @@ twystApp.controller('OutletCtrl',
         if(!type) {
             return;
         }
-        (type === 'others') ? (
-           ($scope.outlet.photos.others[index].image = image_key) 
-        ) : ($scope.outlet.photos[type] = image_key);
-        (type === 'others') ? (
-           ($scope.outlet.photos.others[index].uploading = false) 
-        ) : ($scope.uploading[type] = false);
+        if(type === 'others') {
+            $scope.outlet.photos.others[index].image = image_key;
+            $scope.outlet.photos.others[index].uploading = false;
+        }
+        else {
+            $scope.outlet.photos[type] = image_key;
+            $scope.uploading[type] = false;
+        }
     }
 
     function getImageObject(type) {
         var imageObject = {
-            bucketName : "twyst-outlets/"+ $scope.outlet._id,
-            imageName : (type === 'others') ? (
-               Date.now()
-            ) : type
+            bucketName : 'twyst-outlets',
+            folder_name: $scope.outlet._id,
+            image_for: 'outlet',
+            image_class: type
         };
         imageObject.bucketName = imageObject.bucketName.replace(/[^a-zA-Z0-9-\/]/g,'-')
         return imageObject;
