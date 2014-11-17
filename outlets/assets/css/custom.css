@@ -446,9 +446,6 @@ a.close-caption {
     transform: rotateY(0);
 }
 
-.about-image {
-	background: url(images/cnd.png);
-}
 .page-header {
 	padding-bottom: 0px;
 }
