@@ -1,4 +1,10 @@
  <div>
+  <div class="modal-header modal_slider_images_header color_white" style="margin-top: -2em">
+  <span  ng-click="$dismiss()">
+      <button class="btn btn-warning pull-right" data-dismiss="modal"><span aria-hidden="true"  class="color_white">&times;</span></button>
+  </span>
+  <!-- <h4 class="modal-title color_white">{{outlet.basics.name}} Images</h4> -->
+  </div>
    <div class="modal-body">
          <div ng-if="outlet">
           <gm-map gm-map-id="'mapWithMarkersModal'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:500px;">
@@ -7,17 +13,8 @@
               gm-get-marker-options="getOutletOpts(object)"
               gm-on-click="selectOutlet(object, marker)">
             </gm-markers>
-           </gm-map> 
-            <div class="col-md-12">
-            <div class="col-md-5"></div>
-              <div class="col-md-4">
-                <button class="btn btn-warning" ng-click="$dismiss()">Close</button>
-              </div>
-            </div>
-        </div>   
-
-
+           </gm-map>
+        </div>
     </div>
-
- </div>
+</div>
        
