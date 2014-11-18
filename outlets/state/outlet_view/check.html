@@ -216,7 +216,7 @@
                 	<div class="margin-left-pt7">
                 		<span class="label label-warning label-buy">Map:</span>
                 	</div>
-                	<div class="col-xs-12 padding-top-1" ng-if="outlet" ng-click="mapOpen('sm')">
+                	<div class="col-xs-12 padding-top-1" ng-if="outlet" ng-click="mapOpen('xs')">
       					<gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
       						<gm-markers gm-objects="outlets" gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }" gm-get-marker-options="getOutletOpts(object)" gm-on-click="selectOutlet(object, marker)">
       						</gm-markers>
@@ -245,7 +245,7 @@
 			<div class="panel-body">
 				<div lazy-load="ondemand" slider-slick="{ draggable: false, slidesToShow:1, infinite:true}">
   					<div class="outlet-slide" ng-repeat="x in outlet.photos.others">
-    					<img ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{outlet._id}}/{{x.image._th}}" alt="" ng-click="open('sm')" class="img-xs">
+    					<img ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{outlet._id}}/{{x.image._th}}" alt="" ng-click="open('xs')" class="img-xs">
   					</div>
 				</div>
 			</div>

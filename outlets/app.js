@@ -78,8 +78,8 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
      );
   };
   $scope.isCollapsed = true;
+  $scope.size = '_sm';
   $scope.open = function (size) {
-    $scope.size = '_' + size;
      var modalInstance = $modal.open({
       templateUrl: '/outlets/state/_partials/slider_modal.html',
       size: size,
