@@ -338,15 +338,22 @@ twystApp.controller('OutletCtrl',
     }
 
     $scope.removeImage = function (index) {
-        var image_id = $scope.outlet.photos.others[index].image;
-        if(!image_id) {
+        var images = $scope.outlet.photos.others[index].image;
+        if(!images) {
             $scope.outlet.photos.others.splice(index, 1);
         }
         else {
             var image_object = {
-                key: image_id,
-                bucket: 'twyst-outlets/' + $scope.outlet._id
-            }
+                keys: [],
+                bucketName: 'twyst-outlets',
+                image_for: 'outlet',
+                image_class: 'others',
+                folder_name: $scope.outlet._id
+            };
+            image_object.keys.push(images._th);
+            image_object.keys.push(images._sm);
+            image_object.keys.push(images._md);
+            image_object.keys.push(images._lg);
             imageService.deleteImage(image_object).then(function (data) {
                 $scope.outlet.photos.others.splice(index, 1);
             }, function (data) {
