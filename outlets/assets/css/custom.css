@@ -1,17 +1,4 @@
 /* Add here all your css styles (customizations) */
-.outlet-slide-xs > img {
-    max-height: 200px;
-    padding: 1em;
-    cursor: pointer; 
-    cursor: hand;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    overflow: auto;
-    margin: auto;
-    
-}
 
 .margin-left-pt7 {
     margin-left: 1em;
