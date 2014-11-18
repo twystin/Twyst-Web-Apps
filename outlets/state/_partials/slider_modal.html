@@ -7,7 +7,7 @@
         <div class="col-md-1"></div>
         <div id="images_single_modal col-md-10" slider-single="{infinite:false}" >
           <div class="slide modal-slider_large" id="modal-slider"  ng-repeat="x in getRange(0, outlet.photos.others.length, 1)" > 
-            <img ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{outlet._id}}/{{outlet.photos.others[$index].image._md}}" alt="">
+            <img ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{outlet._id}}/{{outlet.photos.others[$index].image[size]}}" alt="">
           </div>
         </div>   
     </div>

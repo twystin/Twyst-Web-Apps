@@ -1,0 +1,308 @@
+<section id="about" class="about-section section-first row">
+	<div ng-if="outlet" class="about-image" id="image_background" background-image="{{outlet._id + '/' + 'background'}}">
+		<div class="container" id="badge_outlet_info_container"> 
+    		<div class="img-center outlet_info_xs col-xs-12">
+    			<div class="padding-top-1">
+    				<div>
+    					<img ng-if="outlet && outlet.photos.logo" class="merchant_logo" ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{outlet._id + '/' + 'logo'}}">
+    				</div>
+    				<div>
+    					<h6>
+	    					<b class="color_white" id="outlet_name">{{outlet.basics.name}}</b>
+	    				</h6>
+    				</div>
+    				<div>
+    					<span class="label label-warning label-buy" ng-if="!closed_now">Open now</span>
+    					<span class="label label-warning label-red" ng-if="closed_now && opensAt.time">Opens at {{opensAt.day ? opensAt.day + ' ' : ''}} {{opensAt.time}}</span>
+    				</div>
+    				<div class="padding-top-pt5">
+    					<b class="color_white font_fixed_sapient">
+							<i class="fa fa-phone" ng-hide="!outlet.contact.phones.landline"></i>
+						</b>
+						<small >
+							<a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a>
+							<b class="color_white font_fixed_sapient" ng-hide="!outlet.contact.phones.mobile.0.num">
+								<i class="fa fa-mobile-phone color_white"></i>
+							</b>
+							<a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a>
+						</small>
+    				</div>
+    				<div>
+    					<b class="color_white font_fixed_sapient">
+          					<img src="/outlets/assets/img/images/Address.png"  id="image_address_icon" ng-hide="!outlet.contact.location.address">
+          				</b>
+          				<small>
+          					{{outlet.contact.location.address}}
+          				</small>
+    				</div>
+    				<div>
+    					<i class="fa fa-globe" ng-if="outlet.links.website_url"></i>&nbsp; 
+          				<small>
+          					<a ng-href="{{outlet.links.website_url}}" class="color_white font_fixed_sapient">{{outlet.links.website_url }} </a>
+          				</small>
+    				</div>
+    				<div class="padding-top-pt5">
+    					<a class="btn btn-social btn-facebook btn-xs" ng-click="share()">
+            				<i class="fa fa-facebook"></i> share
+            			</a>
+    				</div>
+    				<div class="padding-top-pt5">
+    					&nbsp;
+    				</div>
+    			</div>
+    		</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Our program on Twyst</h4>
+			</div>
+			<div class="panel-body">
+				<div ng-if="!rewards && !rewards.length">
+    				<h5>WE ARE NOT OFFERING ANY REWARDS AT PRESENT.</h5>
+      				<H6>Check Back Soon For Updates!</H6>
+  				</div>
+  				<div>
+  					<div>
+  						<h6 class="margin-bottom-20">Unlock exclusive rewards for being a regular! Check in on 
+							<strong class="label-buy-color">Twyst</strong> every time you visit us or order.
+						</h6>
+  					</div>
+  					<div class="col-xs-12">
+    					<accordion>
+    						<accordion-group class="small-screen-accordion" heading="On visit {{offer.count}}: &nbsp;{{offer.title}}" ng-repeat="offer in rewards | limitTo:counter">
+    							<p class="col-xs-12 color_black">
+      								{{offer.title}}
+    							</p>
+    							<p class="col-xs-12 color_black">
+      								{{offer.terms}}
+    							</p>
+    						</accordion-group>
+    					</accordion>
+  					</div>
+  					<center>
+  						<button class="btn btn-default" ng-click="updateCounter(count_limit)" ng-hide="(counter>= rewards.length)">View More</button>
+  					</center>
+  				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Overview</h4>
+			</div>
+			<div class="panel-body">
+				<div>
+					<div class="col-xs-6">
+  						<span class="label label-warning label-buy">Cuisines:</span>
+  						<p class="font-size-eleven lets_wrap">
+    						{{outlet.attributes.cuisines.toString() | replaceComma }}
+  						</p>
+					</div>
+					<div class="col-xs-6">
+  						<span class="label label-warning label-buy">Cost For Two: </span>
+  						<p class="font-size-eleven">
+    						<i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[0] }}</span></i>&nbsp;<span>to</span>&nbsp;<i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[1] }}</span></i>
+  						<p>
+					</div>
+				</div>
+				<div>
+					<div class="col-xs-6">
+						<div ng-if="outlet.attributes.dine_in">
+	  						<img src="/outlets/assets/img/images/Dine-in.png" class="image_overview_column_attribute ">
+	  						<span class="overflow-h padding-top font-size-eleven">
+	  							Dine-in Available 
+	  						</span>
+						</div>
+						<div ng-if="!outlet.attributes.dine_in">
+	  						<img src="/outlets/assets/img/images/No Dine-in.png" class="image_overview_column_attribute ">
+	  						<span class="overflow-h padding-top font-size-eleven">
+	  							No Dine-in 
+	  						</span>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div ng-if="outlet.attributes.home_delivery" class="">
+          					<img src="/outlets/assets/img/images/Home Delivery.png" class="image_overview_column_attribute ">
+          					<span class="overflow-h padding-top font-size-eleven">
+          						Home Delivery
+          					</span>
+        				</div>
+        				<div ng-if="!outlet.attributes.home_delivery">
+            				<img src="/outlets/assets/img/images/No Home Delivery.png" class="image_overview_column_attribute ">
+            				<span class="overflow-h padding-top font-size-eleven">
+            					No Home Delivery 
+            				</span>
+          				</div>
+					</div>
+					<div class="col-xs-6 padding-top-pt5">
+						<div ng-if="outlet.attributes.veg">
+            				<img src="/outlets/assets/img/images/Veg.png" class="image_overview_column_attribute ">
+            				<span class="overflow-h padding-top font-size-eleven">
+            					Vegetarian Only 
+            				</span>
+          				</div>
+          				<div ng-if="!outlet.attributes.veg">
+            				<img src="/outlets/assets/img/images/Non Veg.png" class="image_overview_column_attribute ">
+            				<span class="overflow-h padding-top font-size-eleven">
+            					Serves non-veg 
+            				</span>
+          				</div>
+					</div>
+					<div class="col-xs-6 padding-top-pt5">
+						<div ng-if="outlet.attributes.alcohol" class="">
+        					<img src="/outlets/assets/img/images/Yes to Alcohol.png" class="image_overview_column_attribute">
+        					<span class="overflow-h padding-top font-size-eleven">
+        						Serves Alcohol 
+        					</span>
+      					</div>
+      					<div ng-if="!outlet.attributes.alcohol" class="">
+        					<img src="/outlets/assets/img/images/No Alcohol.png" class="image_overview_column_attribute">
+        					<span class="overflow-h padding-top font-size-eleven">
+        						No Alcohol 
+        					</span>
+      					</div>
+					</div>
+					<div class="col-xs-6 padding-top-pt5">
+						<div ng-if="outlet.attributes.smoking" class="">
+        					<img src="/outlets/assets/img/images/Smoking.png" class="image_overview_column_attribute">
+        					<span class="overflow-h padding-top font-size-eleven">
+        						Smoking Area Available 
+        					</span>
+      					</div>
+      					<div ng-if="!outlet.attributes.smoking" class="">
+        					<img src="/outlets/assets/img/images/No Smoking.png" class="image_overview_column_attribute">
+        					<span class="overflow-h padding-top font-size-eleven">
+        						No Smoking 
+        					</span>
+      					</div>
+					</div>
+					<div class="col-xs-6 padding-top-pt5">
+						<div ng-if="outlet.attributes.outdoor" class="">
+        					<img src="/outlets/assets/img/images/Outdoor Seating.png" class="image_overview_column_attribute">
+        					<span class="overflow-h padding-top font-size-eleven">
+        						Outdoor Seating Available 
+        					</span>
+      					</div>
+					</div>
+					<div class="col-xs-6 padding-top-pt5">
+						<div ng-if="outlet.attributes.foodcourt" class="">
+        					<img src="/outlets/assets/img/images/Food Court.png" class="image_overview_column_attribute hidden-xs">
+        					<span class="overflow-h padding-top font-size-eleven">
+        						Part of a food court 
+        					</spam>
+      					</div>
+					</div>
+				</div>
+				<div class="clearfix">
+                </div>
+                <div>
+                	<div class="col-xs-6 padding-top-pt5  font-size-eleven">
+                		Air conditioning: {{outlet.attributes.air_conditioning}}
+                	</div>
+                	<div class="col-xs-6 padding-top-pt5  font-size-eleven">
+                		Parking: {{outlet.attributes.parking}}
+                	</div>
+                	<div class="col-xs-6 padding-top-pt5  font-size-eleven">
+                		Reservation: {{outlet.attributes.reservation}}
+                	</div>
+                	<div class="col-xs-6 padding-top-pt5  font-size-eleven">
+                		Wi-fi: {{outlet.attributes.wifi}}
+                	</div>
+                </div>
+                <div class="padding-top-5">
+                	<div class="margin-left-pt7">
+                		<span class="label label-warning label-buy">Map:</span>
+                	</div>
+                	<div class="col-xs-12 padding-top-1" ng-if="outlet" ng-click="mapOpen('sm')">
+      					<gm-map gm-map-id="'mapWithMarkers'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
+      						<gm-markers gm-objects="outlets" gm-get-lat-lng="{ lat: object.location.lat, lng: object.location.lng }" gm-get-marker-options="getOutletOpts(object)" gm-on-click="selectOutlet(object, marker)">
+      						</gm-markers>
+      					</gm-map>
+    				</div>
+                </div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="panel panel-default" id="facebook_like_box">
+			<div class="panel-heading panel_heading_callout" style="text-align: left;">
+					<h4>From Facebook</h4>
+			</div>
+			<div class="panel-body">
+				<div class="fb-like-box" data-href="{{outlet.links.facebook_url}}" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="true" data-show-border="false">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading panel_heading_callout" style="text-align: left;">
+				<h4>Photos</h4>
+			</div>
+			<div class="panel-body">
+				<div lazy-load="ondemand" slider-slick="{ draggable: false, slidesToShow:1, infinite:true}">
+  					<div class="outlet-slide" ng-repeat="x in outlet.photos.others">
+    					<img ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{outlet._id}}/{{x.image._th}}" alt="" ng-click="open('sm')" class="img-xs">
+  					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading panel_heading_callout" style="text-align: left;">
+				<h4>We are also on</h4>
+			</div>
+			<div class="panel-body">
+				<div class="col-xs-4">
+					<a ng-href="{{outlet.links.zomato_url}}" target="_blank">
+						<img src="/outlets/assets/img/images/zomato.png" class="img-responsive">
+					</a>
+    				<a href="">
+        				<p>
+				          	Review Us
+				        </p>
+			        </a>
+				</div>
+				<div class="col-xs-4">
+					<a ng-href="{{outlet.links.foodpanda_url}}" target="_blank"><img src="/outlets/assets/img/images/foodpanda.png" class="img-responsive"></a>
+			        <a href="">
+				        <p>
+				          	Order Online
+				        </p>
+			        </a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="services">
+	<div class="container content-lg">
+  		<div class="title-v1" style="margin-bottom: 0px;">
+    		<h2 class="color_black">Other outlets on 
+    			<span class="label-buy-color">Twyst.</span> Check out. Check-in.
+    		</h2>
+  		</div>
+  		<div class="col-xs-12" ng-init="getSlugs()">
+			<div ng-if="slugs">
+  				<div slick-slider="{dots: false, arrows: true, draggable: false, slidesToShow:3, slidesToScroll: 3}">
+    				<div class="my-slide" ng-repeat="s in slugs track by $index" ng-hide="s.name === outlet.basics.name">
+      					<figure class="figure_bottom_carousel">
+      						<a ng-href="/{{s.shortUrl.0}}"><img ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{s._id}}/logo_gray" alt="" /></a>
+      						<figcaption class="figurecaption_bottom_carousel">
+      							<a ng-href="/{{s.shortUrl.0}}">
+      								<h5>{{s.name}}</h5>
+      							</a>
+      							<span>{{s.location}}</span>
+      							<a href="/{{s.shortUrl.0}}" class="close-caption hidden">x</a>
+      						</figcaption>
+      					</figure>
+    				</div>
+  				</div>
+			</div>
+		</div>
+	</div>
+</section>

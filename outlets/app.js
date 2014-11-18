@@ -79,6 +79,7 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
   };
   $scope.isCollapsed = true;
   $scope.open = function (size) {
+    $scope.size = '_' + size;
      var modalInstance = $modal.open({
       templateUrl: '/outlets/state/_partials/slider_modal.html',
       size: size,
@@ -266,6 +267,6 @@ $scope.getCostForTwoText = function (outlet) {
     controller: 'OutletCtrl'
   }).
   when('/',{
-    templateUrl: '/outlets/state/outlet_view/outlet_view.html'
+    templateUrl: '/outlets/state/outlet_view/check.html'
   })
 })

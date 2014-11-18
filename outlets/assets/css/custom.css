@@ -1,4 +1,43 @@
 /* Add here all your css styles (customizations) */
+.outlet-slide-xs > img {
+    max-height: 200px;
+    padding: 1em;
+    cursor: pointer; 
+    cursor: hand;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    margin: auto;
+    
+}
+
+.margin-left-pt7 {
+    margin-left: 1em;
+}
+.padding-top-1 {
+    padding-top: 1em;
+}
+.padding-top-3 {
+    padding-top: 3em;
+}
+.padding-top-5 {
+    padding-top: 5em;
+}
+
+.padding-top-pt5 {
+    padding-top: 0.5em; 
+}
+
+.outlet_info_xs {
+    background: #262626;
+    text-align: center;
+    color: white !important;
+    margin: 4em 0em 0em 0em;
+    opacity: 0.80;
+    margin-top: 30px;
+}
 html {
     overflow-x: hidden;
 }
@@ -470,7 +509,7 @@ hr {
 .modal-dialog {}
 .thumbnail {margin-bottom:6px;}
 .outlet-slide > img {
-	max-height: 120px;
+	max-height: 200px;
 	padding: 1em;
     cursor: pointer; 
     cursor: hand;
