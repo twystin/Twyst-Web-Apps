@@ -275,8 +275,23 @@ html {
 #modal-slider {
     height: 33em;
 }
+#modal-slider-mobile {
+    height: 33em;
+}
 .modal-slider_mobile {
     height: 20em !important;
+}
+#modal-slider-mobile > img {
+    /*padding: 2em;*/
+    top: 0; left: 0; bottom: 0; right: 0;
+    height: 100%;
+    width: auto;
+    overflow: auto;
+    position: absolute;
+    margin: auto;
+    margin-top: 2em;
+    max-height: 480px;
+    max-width: 480px;
 }
 .slick-prev {
     left: -20px;
