@@ -67,16 +67,24 @@
 			<div class="col-xs-12">
 				<table class="table table-responsive">
                 <thead>
-                    <th><center>On Check-in #</center></th>
+                    <th width="90"><center>Check-in #</center></th>
                     <th><span>Reward</span></th>
+                    <th></th>
                 </thead>
                 <tr ng-repeat="offer in rewards | limitTo:counter" ng-click="offer.show = !offer.show">
                     <td><span><center>{{offer.count}}</center></span></td>
                     <td>
-                        <span class="text-muted"><a href="">{{offer.title}}</a></span><br/>
+                        <span class="text-muted">{{offer.title}}
+                        </span>
                         <span ng-show="offer.show">
                         {{offer.title}}<br/>
                         <small class="text-muted">Terms: {{offer.terms}}</small>
+                        </span>
+                    </td>
+                    <td>
+                    	<span>
+                        	<i ng-hide="offer.show" class="fa fa-chevron-down"></i>
+                        	<i ng-show="offer.show" class="fa fa-chevron-up"></i>
                         </span>
                     </td>
                 </tr>
