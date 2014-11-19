@@ -1,4 +1,9 @@
 /* Add here all your css styles (customizations) */
+ .image_overview_column_attribute_xs{
+    height:2em;
+    width: 2em;
+ }
+
 body { 
     overflow-x: hidden;
 }
