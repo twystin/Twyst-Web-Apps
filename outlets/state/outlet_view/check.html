@@ -88,8 +88,8 @@
                 <tr ng-repeat="offer in rewards | limitTo:counter" ng-click="offer.show = !offer.show">
                     <td class="text-center"><span>{{offer.count}}</span></td>
                     <td>
-                        <h6 class="text-muted">{{offer.title}}
-                        </h6>
+                        <div class="text-muted">{{offer.title}}
+                        </div>
                         <span ng-show="offer.show">
                         {{offer.desc}}<br/>
                         <small class="text-muted">Terms: {{offer.terms}}</small>
