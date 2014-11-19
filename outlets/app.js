@@ -286,6 +286,6 @@ $scope.getCostForTwoText = function (outlet) {
     controller: 'OutletCtrl'
   }).
   when('/',{
-    templateUrl: '/outlets/state/outlet_view/check.html'
+    templateUrl: '/outlets/state/outlet_view/outlet_view.html'
   })
 })
