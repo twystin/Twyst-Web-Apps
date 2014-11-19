@@ -1,7 +1,19 @@
 /* Add here all your css styles (customizations) */
+.zomato_image {
+    height: 5em;
+}
+.color_black {
+    font-color: black;
+}
+.font-size-120-xs {
+    font-size: 120%;
+}
+.font-size-150-xs {
+    font-size: 150%;
+}
 .google-play-xs {
     height: 3em;
-    margin: 0.2em;
+    margin: 0.4em;
 }
 .android-button-xs {
     background-color: #f6921e;
