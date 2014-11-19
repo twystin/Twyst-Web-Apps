@@ -1,5 +1,13 @@
 /* Add here all your css styles (customizations) */
- .image_overview_column_attribute_xs{
+.google-play-xs {
+    height: 4em;
+    margin: 0.2em;
+}
+.android-button-xs {
+    background-color: #f6921e;
+    padding: 0 !important;
+}
+.image_overview_column_attribute_xs{
     height:2em;
     width: 2em;
  }
