@@ -1,5 +1,8 @@
 /* Add here all your css styles (customizations) */
-
+.about-image-xs {
+    padding: 2em;
+    overflow: hidden !important; 
+}
 .margin-left-pt7 {
     margin-left: 1em;
 }
