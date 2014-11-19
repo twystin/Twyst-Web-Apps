@@ -100,7 +100,7 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
   $scope.size = '_sm';
   $scope.open = function (size) {
      var modalInstance = $modal.open({
-      templateUrl: '/outlets/state/_partials/slider_mobile.html',
+      templateUrl: '/outlets/state/_partials/slider_modal.html',
       size: size,
       scope: $scope
     })
@@ -108,7 +108,7 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
   $scope.mapOpen = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: '/outlets/state/_partials/map_mobile.html',
+      templateUrl: '/outlets/state/_partials/modal_map.html',
       size: size,
       scope: $scope
     })
