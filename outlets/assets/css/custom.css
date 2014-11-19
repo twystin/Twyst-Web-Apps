@@ -1,7 +1,13 @@
 /* Add here all your css styles (customizations) */
+body { 
+    overflow-x: hidden;
+}
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
 .about-section-xs .about-image-xs {
-    padding: 1em;
-    overflow: hidden !important;
+    padding: 2em;
     background: #ffff;
     border-top: solid 1px #eee;
     /*border-bottom: solid 1px #eee;*/
