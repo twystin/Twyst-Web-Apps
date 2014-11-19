@@ -102,13 +102,13 @@
 			</div>
 			<div class="panel-body">
 				<div class="col-xs-12">
-					<div class="col-xs-6">
+					<div class="col-xs-12">
   						<span class="label label-warning label-buy">Cuisines:</span>
   						<p class="font-size-eleven lets_wrap">
     						{{outlet.attributes.cuisines.toString() | replaceComma }}
   						</p>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-12">
   						<span class="label label-warning label-buy">Cost For Two: </span>
   						<p class="font-size-eleven">
     						<i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[0] }}</span></i>&nbsp;<span>to</span>&nbsp;<i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[1] }}</span></i>
@@ -204,7 +204,7 @@
 					</div>
 				</div>
                 <div class="col-xs-12">
-                	<div class="col-xs-12 padding-top-pt5  font-size-eleven">
+                	<div class="col-xs-12 font-size-eleven">
                 		Air conditioning: {{outlet.attributes.air_conditioning}}
                 	</div>
                 	<div class="col-xs-12 padding-top-pt5  font-size-eleven">
