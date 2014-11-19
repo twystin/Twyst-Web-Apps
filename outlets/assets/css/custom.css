@@ -1,7 +1,13 @@
 /* Add here all your css styles (customizations) */
+.about-section-xs .about-image-xs {
+    padding: 1em;
+    overflow: hidden !important;
+    background: #ffff;
+    border-top: solid 1px #eee;
+    /*border-bottom: solid 1px #eee;*/
+}
 .about-image-xs {
-    padding: 2em;
-    overflow: hidden !important; 
+    padding: 2em; 
 }
 .margin-left-pt7 {
     margin-left: 1em;
