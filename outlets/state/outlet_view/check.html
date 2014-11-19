@@ -62,7 +62,7 @@
     				<h5>WE ARE NOT OFFERING ANY REWARDS AT PRESENT.</h5>
       				<H6>Check Back Soon For Updates!</H6>
   				</div>
-  				<div>
+  				<div ng-if="rewards && rewards.length">
   					<div>
   						<h6 class="margin-bottom-20">Unlock exclusive rewards for being a regular! Check in on 
 							<strong class="label-buy-color">Twyst</strong> every time you visit us or order.
@@ -77,7 +77,7 @@
                             <tr ng-repeat="offer in rewards | limitTo:counter" ng-click="offer.show = !offer.show">
                                 <td><span><center>{{offer.count}}</center></span></td>
                                 <td>
-                                    <span class="text-muted">{{offer.title}}</span><br/>
+                                    <span class="text-muted"><a href="">{{offer.title}}</a></span><br/>
                                     <span ng-show="offer.show">
                                     {{offer.title}}<br/>
                                     <small class="text-muted">Terms: {{offer.terms}}</small>
