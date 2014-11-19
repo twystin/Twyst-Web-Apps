@@ -69,20 +69,28 @@
 						</h6>
   					</div>
   					<div class="col-xs-12">
-    					<accordion>
-    						<accordion-group class="small-screen-accordion" heading="On visit {{offer.count}}: &nbsp;{{offer.title}}" ng-repeat="offer in rewards | limitTo:counter">
-    							<p class="col-xs-12 color_black">
-      								{{offer.title}}
-    							</p>
-    							<p class="col-xs-12 color_black">
-      								{{offer.terms}}
-    							</p>
-    						</accordion-group>
-    					</accordion>
+  						<table class="table table-responsive">
+                            <thead>
+                                <th><span><center>Check-in no</center></span></th>
+                                <th><span>Reward</span></th>
+                            </thead>
+                            <tr ng-repeat="offer in rewards | limitTo:counter" ng-click="offer.show = !offer.show">
+                                <td><span><center>{{offer.count}}</center></span></td>
+                                <td>
+                                    <span class="text-muted">{{offer.title}}</span><br/>
+                                    <span ng-show="offer.show">
+                                    {{offer.title}}<br/>
+                                    <small class="text-muted">Terms: {{offer.terms}}</small>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
   					</div>
-  					<center>
-  						<button class="btn btn-default" ng-click="updateCounter(count_limit)" ng-hide="(counter>= rewards.length)">View More</button>
-  					</center>
+  					<div class="col-xs-12 padding-top-1">
+  						<center>
+	  						<button class="btn btn-default" ng-click="updateCounter(count_limit)" ng-hide="(counter>= rewards.length)">View More</button>
+	  					</center>
+  					</div>
   				</div>
 			</div>
 		</div>
