@@ -55,6 +55,25 @@ outletApp.controller('OutletCtrl', function ($scope, $rootScope, $routeParams, o
   //   };
   // }
 
+  $scope.getMobileOperatingSystem = function () {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) )
+    {
+      return 'iOS';
+
+    }
+    else if( userAgent.match( /Android/i ) )
+    {
+
+      return 'Android';
+    }
+    else
+    {
+      return 'unknown';
+    }
+  }
+
   $scope.checkMobile();
   // $scope.appendDivs();
   $scope.closemodalMobile = function (slug) {
