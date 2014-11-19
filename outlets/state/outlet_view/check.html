@@ -4,39 +4,39 @@
     		<div class="img-center outlet_info_xs col-xs-12">
     			<div class="padding-top-1">
     				<div>
-    					<h6 class="color_white" id="outlet_name">
+    					<h4 class="color_white">
 	    					{{outlet.basics.name}}
-	    				</h6>
+	    				</h4>
     				</div>
     				<div>
     					<span class="label label-warning label-buy" ng-if="!closed_now">Open now</span>
     					<span class="label label-warning label-red" ng-if="closed_now && opensAt.time">Opens at {{opensAt.day ? opensAt.day + ' ' : ''}} {{opensAt.time}}</span>
     				</div>
-    				<div class="padding-top-pt5">
-    					<b class="color_white font_fixed_sapient">
-							<i class="fa fa-phone" ng-hide="!outlet.contact.phones.landline"></i>
-						</b>
-						<small >
-							<a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white font_fixed_sapient">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a>
-							<b class="color_white font_fixed_sapient" ng-hide="!outlet.contact.phones.mobile.0.num">
-								<i class="fa fa-mobile-phone color_white"></i>
-							</b>
-							<a ng-href="tel:{{mobile.num}}" class="color_white font_fixed_sapient" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a>
+    				<div class="padding-top-pt5" ng-if="outlet.contact.phones.landline">
+						<span>
+							<small class="color_white">
+								<i class="fa fa-phone"></i>
+								<a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a>
+							</small>
+						</span>
+						<span ng-if=" outlet.contact.phones.mobile &&  outlet.contact.phones.mobile.length > 0">
+							<small class="color_white">
+								<i class="fa fa-mobile-phone"></i>
+								<a ng-href="tel:{{mobile.num}}" class="color_white" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a>
+							</small>
+						</span>
+    				</div>
+    				<div>
+    					<small class="color_white">
+							<i class="fa fa-home"></i>
+							{{outlet.contact.location.address}}
 						</small>
     				</div>
     				<div>
-    					<b class="color_white font_fixed_sapient">
-          					<img src="/outlets/assets/img/images/Address.png"  id="image_address_icon" ng-hide="!outlet.contact.location.address">
-          				</b>
-          				<small>
-          					{{outlet.contact.location.address}}
-          				</small>
-    				</div>
-    				<div>
-    					<i class="fa fa-globe" ng-if="outlet.links.website_url"></i>&nbsp; 
-          				<small>
-          					<a ng-href="{{outlet.links.website_url}}" class="color_white font_fixed_sapient">{{outlet.links.website_url }} </a>
-          				</small>
+    					<small class="color_white">
+							<i class="fa fa-globe"></i>
+							<a ng-href="{{outlet.links.website_url}}" class="color_white">{{outlet.links.website_url }} </a>
+						</small>
     				</div>
     				<div class="padding-top-pt5">
     					<div>
