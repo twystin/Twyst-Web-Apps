@@ -53,45 +53,39 @@
 		</div>
 	</div>
 	<div class="col-xs-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4>Our program on Twyst</h4>
+		<h4>Our program on Twyst</h4>
+		<div ng-if="!rewards && !rewards.length">
+			<h5>WE ARE NOT OFFERING ANY REWARDS AT PRESENT.</h5>
+			<H6>Check Back Soon For Updates!</H6>
+		</div>
+		<div ng-if="rewards && rewards.length">
+			<div>
+				<h6 class="margin-bottom-10">Unlock exclusive rewards for being a regular! Check in on 
+					<strong class="label-buy-color">Twyst</strong> every time you visit us or order.
+				</h6>
 			</div>
-			<div class="panel-body">
-				<div ng-if="!rewards && !rewards.length">
-    				<h5>WE ARE NOT OFFERING ANY REWARDS AT PRESENT.</h5>
-      				<H6>Check Back Soon For Updates!</H6>
-  				</div>
-  				<div ng-if="rewards && rewards.length">
-  					<div>
-  						<h6 class="margin-bottom-20">Unlock exclusive rewards for being a regular! Check in on 
-							<strong class="label-buy-color">Twyst</strong> every time you visit us or order.
-						</h6>
-  					</div>
-  					<div class="col-xs-12">
-  						<table class="table table-responsive">
-                            <thead>
-                                <th><span><center>Check-in no</center></span></th>
-                                <th><span>Reward</span></th>
-                            </thead>
-                            <tr ng-repeat="offer in rewards | limitTo:counter" ng-click="offer.show = !offer.show">
-                                <td><span><center>{{offer.count}}</center></span></td>
-                                <td>
-                                    <span class="text-muted"><a href="">{{offer.title}}</a></span><br/>
-                                    <span ng-show="offer.show">
-                                    {{offer.title}}<br/>
-                                    <small class="text-muted">Terms: {{offer.terms}}</small>
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-  					</div>
-  					<div class="col-xs-12 padding-top-1">
-  						<center>
-	  						<button class="btn btn-default" ng-click="updateCounter(count_limit)" ng-hide="(counter>= rewards.length)">View More</button>
-	  					</center>
-  					</div>
-  				</div>
+			<div class="col-xs-12">
+				<table class="table table-responsive">
+                <thead>
+                    <th><center>On Check-in #</center></th>
+                    <th><span>Reward</span></th>
+                </thead>
+                <tr ng-repeat="offer in rewards | limitTo:counter" ng-click="offer.show = !offer.show">
+                    <td><span><center>{{offer.count}}</center></span></td>
+                    <td>
+                        <span class="text-muted"><a href="">{{offer.title}}</a></span><br/>
+                        <span ng-show="offer.show">
+                        {{offer.title}}<br/>
+                        <small class="text-muted">Terms: {{offer.terms}}</small>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+			</div>
+			<div class="col-xs-12">
+				<center>
+					<button class="btn btn-default" ng-click="updateCounter(count_limit)" ng-hide="(counter>= rewards.length)">View More</button>
+				</center>
 			</div>
 		</div>
 	</div>
