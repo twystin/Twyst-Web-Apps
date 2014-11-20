@@ -113,11 +113,11 @@ twystApp.controller('OutletCtrl',
                 end: ''
             }
         }
-        if($scope.sms_off && $scope.sms_off.start && $scope.sms_off.start.hr && $scope.sms_off.start.min) {
-            sms_off.time.start = Number($scope.sms_off.start.hr * 60) + Number($scope.sms_off.start.min)
+        if($scope.sms_off && $scope.sms_off.start) {
+            sms_off.time.start = Number($scope.sms_off.start.hr * 60 || 0) + Number($scope.sms_off.start.min || 0)
         }
-        if($scope.sms_off && $scope.sms_off.end && $scope.sms_off.end.hr && $scope.sms_off.end.min) {
-            sms_off.time.end = Number($scope.sms_off.end.hr * 60) + Number($scope.sms_off.end.min)
+        if($scope.sms_off && $scope.sms_off.end) {
+            sms_off.time.end = Number($scope.sms_off.end.hr * 60 || 0) + Number($scope.sms_off.end.min || 0)
         }
         return sms_off;
     }
