@@ -1,4 +1,7 @@
 /* Add here all your css styles (customizations) */
+.color-orange {
+    color: #f6921e;
+}
 .font-size-30-xs {
     font-size: 30px;
 }
