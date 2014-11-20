@@ -1,12 +1,18 @@
 /* Add here all your css styles (customizations) */
+.font-size-30-xs {
+    font-size: 30px;
+}
 .zomato_image {
-    height: 5em;
+    height: 30px;
 }
 .color_black {
     font-color: black;
 }
 .font-size-120-xs {
     font-size: 120%;
+}
+.font-size-110-xs {
+    font-size: 110%;
 }
 .font-size-150-xs {
     font-size: 150%;

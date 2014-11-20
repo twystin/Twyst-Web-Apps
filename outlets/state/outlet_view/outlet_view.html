@@ -573,13 +573,13 @@
             </div>
             <div class="padding-top-pt5" ng-if="outlet.contact.phones.landline">
             <span>
-              <small class="color_white">
+              <small class="color_white font-size-110-xs">
                 <i class="fa fa-phone"></i>
                 <a ng-href="tel:{{outlet.contact.phones.landline}}" class="color_white">{{outlet.contact.phones.landline}}&nbsp;&nbsp;</a>
               </small>
             </span>
             <span ng-if=" outlet.contact.phones.mobile &&  outlet.contact.phones.mobile.length > 0">
-              <small class="color_white">
+              <small class="color_white font-size-110-xs">
                 <i class="fa fa-mobile-phone"></i>
                 <a ng-href="tel:{{mobile.num}}" class="color_white" ng-repeat="mobile in outlet.contact.phones.mobile">{{mobile.num}}&nbsp;&nbsp;</a>
               </small>
@@ -658,16 +658,16 @@
     <h4>Outlet Info</h4>
     <div class="col-xs-12">
       <div>
-          <span class="label label-warning label-buy">Cuisines:</span>
-          <p class="font-size-eleven lets_wrap">
+          <span><h6 class="label label-warning label-buy">Cuisines:</h6></span>
+          <h6>
           {{outlet.attributes.cuisines.toString() | replaceComma }}
-          </p>
+          </h6>
       </div>
       <div>
-          <span class="label label-warning label-buy">Cost For Two: </span>
-          <p class="font-size-eleven">
+          <span><h6 class="label label-warning label-buy">Cost For Two:</h6> </span>
+          <h6>
           <i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[0] }}</span></i>&nbsp;<span>to</span>&nbsp;<i class="fa fa-inr"><span>{{getCostForTwoText(outlet)[1] }}</span></i>
-          <p>
+          <h6>
       </div>
     </div>
     <div class="col-xs-12">
@@ -762,7 +762,7 @@
         </div>
     <div class="col-xs-12">
           <div>
-            <span class="label label-warning label-buy">Map:</span>
+            <span ><h6 class="label label-warning label-buy">Map:</h6></span>
           </div>
           <div class="padding-top-pt5" ng-if="outlet" ng-click="mapOpen('xs')">
           <gm-map gm-map-id="'mapWithMarkersxs'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map" style="width:auto;height:130px;">
@@ -805,7 +805,7 @@
     <h4>Find us on</h4>
     <div class="col-xs-4" ng-if="outlet.links.website_url">
       <a ng-href="{{outlet.links.website_url}}" target="_blank">
-        <i class="fa fa-globe fa-5x color-black"></i>
+        <i class="fa fa-globe color-black font-size-30-xs"></i>
         <p>
                 Web
             </p>
