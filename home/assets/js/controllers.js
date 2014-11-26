@@ -1,6 +1,41 @@
-var twystApp = angular.module('twystApp', []);
-
-twystApp.controller('ContactCtrl', function($scope, $http) {
+angular.module('twystApp', [])
+.directive('backgroundImage', function () {
+  return function (scope, element, attrs) {
+    attrs.$observe('backgroundImage', function (value) {
+      if (value) {
+        var url = 'http://s3-us-west-2.amazonaws.com/twyst-outlets/' + value;
+        element.css({
+            'background': "url('" + url + "')",
+            'background-size':   'cover',                     /* <------ */
+            'background-repeat': 'no-repeat',
+            'background-position': 'center center' 
+        });
+      }
+    });
+  };
+})
+.factory('featuredSvc', function($http, $q) {
+    var featuredSvc = {};
+    featuredSvc.getFeatured = function () {
+        var deferred = $q.defer();
+        $http.get('/api/v3/featured_outlets').success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.reject(data);
+        });
+        
+        return deferred.promise;
+    };
+    return featuredSvc;
+})
+.controller('FeaturedCtrl', function($scope, featuredSvc) {
+    $scope.getFeatured = function () {
+        featuredSvc.getFeatured().then(function (data) {
+            $scope.outlets = data.info;
+        })
+    }
+})
+.controller('ContactCtrl', function($scope, $http) {
     $scope.user = {};
     $scope.user.thank_you = false;
     $scope.user.error = false;
