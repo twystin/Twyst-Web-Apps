@@ -117,42 +117,52 @@
     <!--=== End Header ===-->
 
     <!--=== Slider ===-->
-    <div class="profile">
+    <div class="row profile">
         <!--Profile Body-->
         <div class="profile-body animated-icons">
             <div class="row text-center unlock-reward-text">
                 <b>EAT. DRINK. <span class="text-orange">REWARDS!</span></b>
             </div>
-            <div class="headline" id="popularHeadline">
-                <span class="headline-inline">
-                    <h2>Popular on Twyst</h2>
-                </span>
-            </div>
-            <!--Profile Blog--> 
-            <div class="row" ng-controller="FeaturedCtrl" ng-init="getFeatured()">
-                <div class="col-sm-4 padding-bottom-featured-outlets-grid" ng-repeat="o in outlets">
-                    <a href="/{{o.shortUrl[0]}}">
-                        <div class="profile-blog" background-image="{{o._id + '/' + 'background'}}">
-                            <div class="clearfix"></div>    
-                            <div class="outlet-featured-thumbnail">
-                                
-                            </div>
-                            <div class="name-location name-location-background">
-                                <strong class="margin-left-pt8 color-white">{{o.basics.name}}</strong>
-                                <span class="margin-left-pt8">
-                                    <i class="fa fa-map-marker"></i> 
-                                    <small>
-                                        {{o.contact.location.locality_1[0]}}, {{o.contact.location.city}}
-                                    </small>
-                                </span>
-                            </div>
+            <div class="row">
+                <div class="col-md-1">
+                
+                </div> 
+                <div class="col-md-10">
+                    <div class="headline" id="popularHeadline">
+                        <span class="headline-inline">
+                            <h2>Popular on Twyst</h2>
+                        </span>
+                    </div>
+                    <!--Profile Blog--> 
+                    <div class="row" ng-controller="FeaturedCtrl" ng-init="getFeatured()">
+                        <div class="col-sm-4 padding-bottom-featured-outlets-grid" ng-repeat="o in outlets">
+                            <a href="/{{o.shortUrl[0]}}">
+                                <div class="profile-blog" background-image="{{o._id + '/' + 'background'}}">
+                                    <div class="clearfix"></div>    
+                                    <div class="outlet-featured-thumbnail">
+                                        
+                                    </div>
+                                    <div class="name-location name-location-background">
+                                        <strong class="margin-left-pt8 color-white">{{o.basics.name}}</strong>
+                                        <span class="margin-left-pt8">
+                                            <i class="fa fa-map-marker"></i> 
+                                            <small>
+                                                {{o.contact.location.locality_1[0]}}, {{o.contact.location.city}}
+                                            </small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
+                    <div class="text-center">
+                        <a class="btn twyst-orange btn-md">SEE MORE! </a>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    
                 </div>
             </div>
-            <div class="text-center">
-                <a class="btn twyst-orange btn-md">SEE MORE! </a>
-            </div> 
         </div>
     </div>
     <!--End Third Slide-->
