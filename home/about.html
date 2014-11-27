@@ -45,83 +45,92 @@
 </div><!--/top-->
 <!--=== End Top ===-->    
 
-<!--=== Header ===-->    
 <div class="header">
-    <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <img id="logo-header" src="assets/img/twyst_logo_2.png" alt="Logo" height="50px" width="auto">                
-                </a>
-            </div>
+        <style type="text/css">
+            .padding-top-100 {
+                padding-top: 3.5em;
+            }
+            .header .navbar-default .navbar-nav > li > a {
+                color: #fff !important;
+            }
+            #logo-header {
+                margin-top: 0.4em;
+                height: 2.7em;
+                width: auto;
+            }
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-responsive-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="index.html">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html#how">
-                            How it works
-                        </a>                       
-                    </li>
-                    <li class="active">
-                        <a href="about.html">
-                            About us
-                        </a>                     
-                    </li>
-                    <li>
-                        <a href="careers.html">
-                            Careers
-                        </a>                     
-                    </li>                    
-                    <li>
-                        <a href="contact.html">
-                            Contact us
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://twyst.in/merchant/">
-                            For merchants
-                        </a>
-                    </li>               
-                </ul>
-                <div class="search-open">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button class="btn-u" type="button">Go</button>
-                        </span>
-                    </div><!-- /input-group -->
-                </div>                
-            </div><!-- /navbar-collapse -->
-        </div>    
-    </div>    
-</div><!--/header-->
-<!--=== End Header ===-->      
+            .app-button {
+                height: 2.5em;
+            }
+            .header .navbar {
+                background-color: #000 !important;
+            }
+            .margin-top-pt6em {
+                margin-top: -0.6em;
+                margin-left: -1em;
+            }
+            .margin-bottom-about {
+                margin-bottom: 5em; 
+            }
+        </style>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">
+            <img id="logo-header" src="assets/img/twyst_logo_2.png" alt="Logo">       
+          </a>
+        </div>
 
-<!--=== Breadcrumbs ===-->
-<div class="breadcrumbs margin-bottom-40">
-	<div class="container">
-        <h1 class="pull-left">About Us</h1>
-        <ul class="pull-right breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="">Pages</a></li>
-            <li class="active">About Us</li>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
+          <li class="margin-top-pt6em">
+            <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android"><img class="app-button" src="/outlets/assets/img/images/googleplay.png"></a>
+          </li>
+          <li class="margin-top-pt6em">
+              <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store"><img class="app-button" src="/outlets/assets/img/images/appstore.png"></a>
+          </li>
+          <li class="active"> 
+            <a href="/home">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/home/#how">
+              How it works
+            </a>                       
+          </li>
+
+          <li>
+            <a href="http://twyst.in/merchant/">
+              For merchants
+            </a>
+          </li>               
+
         </ul>
-    </div><!--/container-->
-</div><!--/breadcrumbs-->
-<!--=== End Breadcrumbs ===-->
+        <div class="search-open">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-btn">
+              <button class="btn-u" type="button">Go</button>
+            </span>
+          </div><!-- /input-group -->
+        </div>                
+      </div><!-- /navbar-collapse -->
+    </div>    
+</div>
+<!--=== End Header ===-->      
+<div class="margin-bottom-about">
+    &nbsp;
+</div>
 
 <!--=== Content Part ===-->
 <div class="container">		
@@ -201,87 +210,71 @@
 </div><!--/container-->     
 <!-- End Content Part -->
 
-<!--=== Footer ===-->
 <div class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 md-margin-bottom-40">
-                <!-- About -->
-                <div class="headline"><h2>About</h2></div>  
-                <p class="margin-bottom-25 md-margin-bottom-40">Twyst is a start-up based out of Gurgaon, and started by Abhimanyu Lal (IIM Ahmedabad, ex-EBay), Rahul Chakraborti (IIM Bangalore, ex-Yahoo!) and Arun Rajappa (Indian School of Business, ex-Microsoft).</p>    
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 md-margin-bottom-40">
+            <!-- About -->
+            <div class="headline">
+                <h2>About</h2>
+            </div>
+            <p class="margin-bottom-25 md-margin-bottom-40">Twyst is a start-up based out of Gurgaon, started by a team with a combined experience of 40 years across product, strategy, operations and marketing. <a href="about.html">More</a></p>
 
-                <!-- Monthly Newsletter -->
-<!--                <div class="headline"><h2>Monthly Newsletter</h2></div> 
+
+                <!-- <div class="headline">
+                    <h2>Monthly Newsletter</h2>
+                </div>
                 <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
                 <form class="footer-subsribe">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Email Address">                            
+                        <input type="text" class="form-control" placeholder="Email Address">
                         <span class="input-group-btn">
-                            <button class="btn-u" type="button">Subscribe</button>
-                        </span>
+                        <button class="btn-u" type="button">Subscribe</button>
+                    </span>
                     </div>
-                </form>   -->                      
-            </div><!--/col-md-4-->  
-
-                <div class="col-md-4 md-margin-bottom-40">
-                    <div class="posts">
-                        <div class="headline">
-                            <h2>Recent Blog Entries</h2>
-                        </div>
-                        <dl class="dl-horizontal">
-                            <a href="http://blog.twyst.in/?p=85">
-                                <dt><img src="assets/img/rss.png" alt="" /></dt>
-                                <dd>
-                                    <p>Customer Engagement for Everyone
-                                    </p>
-                                </dd>
-                            </a>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <a href="http://blog.twyst.in/?p=69">
-                                <dt><img src="assets/img/rss.png" alt="" /></dt>
-                                <dd>
-                                    <p>The Tech Behind Twyst
-                                    </p>
-                                </dd>
-                            </a>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <a href="http://blog.twyst.in/?p=55">
-                                <dt><img src="assets/img/rss.png" alt="" /></dt>
-                                <dd>
-                                    <p>Ready to Twyst?
-                                    </p>
-                                </dd>
-                            </a>
-                        </dl>
-                    </div>
-                </div>
-                <!--/col-md-4-->
-
+                </form> -->
+            </div>
+            <!--/col-md-4-->
 
             <div class="col-md-4">
                 <!-- Monthly Newsletter -->
-                    <div class="headline"><a href="contact.html"><h2>Contact Us</h2></a>
-                    </div>
-                    <address class="md-margin-bottom-40">
-                    #3, Navkriti Arcade, <br />
-                    Sector 55, Guragaon, 122003 <br />
-                    <p><a href="contact.html">Get in touch</a></p>
-                </address>
+                
 
                 <!-- Stay Connected -->
-                <div class="headline"><h2>Stay Connected</h2></div> 
+                <div class="headline">
+                    <h2>Follow Us</h2>
+                </div>
                 <ul class="social-icons">
-                    <li><a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a></li>
-                    <li><a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a></li>
-                    <li><a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a></li>                    
+                    <li>
+                        <a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a>
+                    </li>
                 </ul>
-            </div><!--/col-md-4-->
-        </div><!--/row-->   
-    </div><!--/container--> 
-</div><!--/footer-->    
-<!--=== End Footer ===-->
+            </div>
+            <!--/col-md-4-->
+
+            <div class="col-md-4">
+                <!-- Monthly Newsletter -->
+                
+
+                <!-- Stay Connected -->
+                <div class="headline">
+                    <h2>Connect With Us</h2>
+                </div>
+                <a class="btn btn-warning" href="contact.html" style="color: white;line-height: 1;">Get in touch</a>
+                <a class="btn btn-warning" href="careers.html" style="color: white;line-height: 1;">Work with Us</a>
+            </div>
+            <!--/col-md-4-->
+        </div>
+        <!--/row-->
+    </div>
+    <!--/container-->
+</div>
 
 <!--=== Copyright ===-->
 <div class="copyright">

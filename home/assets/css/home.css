@@ -1,5 +1,38 @@
 /*Profile
 ------------------------------------*/
+ #popularHeadline {
+	display: inline-block !important;
+}
+.margin-top-pt6em {
+	margin-top: -0.6em;
+	margin-left: -1em;
+}
+.margin-left-1pt2em {
+	margin-left: 1.2em;
+}
+.fadein,
+.fadeout {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+}
+
+.fadein.ng-hide-remove,
+.fadeout.ng-hide-add.ng-hide-add-active {
+  opacity: 0;
+  display: block !important;
+}
+
+.fadeout.ng-hide-add,
+.fadein.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+  display: block !important;
+}
+
+.profile .profile-body a:hover {
+	text-decoration: none;
+}
 .padding-bottom-featured-outlets-grid {
 	padding-bottom: 2em;
 }
@@ -11,24 +44,13 @@
     color: #fff !important;
 }
 #logo-header {
+	margin-top: 0.4em;
 	height: 2.7em;
 	width: auto;
 }
 
-a.android_button {
-    width: 128px;
-    height: 45px;
-    display: block;
-    background: url(/outlets/assets/img/images/Badges.png);
-    background-position: 0px -135px;
-    margin-right: 1.3em;
-}
-a.ios_button {
-    width: 128px;
-    height: 45px;
-    display: block;
-    background: url(/outlets/assets/img/images/Badges.png);
-    background-position: -128px -270px;
+.app-button {
+	height: 2.5em;
 }
 .header .navbar {
 	background-color: #000 !important;
@@ -55,8 +77,7 @@ html {
 	border-radius: 50% !important;
 }
 .unlock-reward-text {
-	font-size: 200%;
-	padding-bottom: 1px;
+	font-size: 3.5em;
 }
 
 .padding-bottom-20 {
@@ -73,7 +94,7 @@ html {
 }
 
 .profile .profile-body {
-	padding: 4.5em 1em 1em 1em;
+	padding: 5em 1em 1em 1em;
 	background: #fff;
 }
 
@@ -702,7 +723,7 @@ html {
 	background: #f6921e;
 	color: white;
 }
-.text_orange {
+.text-orange {
 	color: #f6921e;
 }
 .profile .blog-border {

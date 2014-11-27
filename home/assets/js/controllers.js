@@ -1,4 +1,4 @@
-angular.module('twystApp', [])
+angular.module('twystApp', ['ngAnimate'])
 .directive('backgroundImage', function () {
   return function (scope, element, attrs) {
     attrs.$observe('backgroundImage', function (value) {
