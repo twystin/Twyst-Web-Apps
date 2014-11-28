@@ -1,0 +1,145 @@
+/*Profile
+------------------------------------*/
+.ng-cloak { 
+	display:none; 
+}
+.twyst-orange {
+	background-color: #f6921e;
+	color: white;
+}
+.text-orange {
+	color: orange;
+}
+.outlet-featured-thumbnail-reward {
+	display:block;
+    height: 13em;
+}
+ #popularHeadline {
+	display: inline-block !important;
+}
+.margin-top-pt6em {
+	margin-top: -0.6em;
+	margin-left: -1em;
+}
+.margin-left-1pt2em {
+	margin-left: 1.2em;
+}
+.fadein,
+.fadeout {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
+}
+
+.fadein.ng-hide-remove,
+.fadeout.ng-hide-add.ng-hide-add-active {
+  opacity: 0;
+  display: block !important;
+}
+
+.fadeout.ng-hide-add,
+.fadein.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+  display: block !important;
+}
+
+.profile .profile-body a:hover {
+	text-decoration: none;
+}
+.padding-bottom-featured-outlets-grid {
+	padding-bottom: 2em;
+}
+
+.padding-top-100 {
+	padding-top: 3.5em;
+}
+.header .navbar-default .navbar-nav > li > a {
+    color: #fff !important;
+}
+#logo-header {
+	margin-top: 0.4em;
+	height: 2.7em;
+	width: auto;
+}
+
+.app-button {
+	height: 2.5em;
+}
+.header .navbar {
+	background-color: #000 !important;
+}
+.outlet-featured-thumbnail {
+	margin-top: 9em;
+}
+.outlet-featured-thumbnail2 {
+	margin-top: 7.5em;
+}
+html {
+    overflow-x: hidden;
+}
+.color-white {
+	color: white !important;
+}
+.margin-left-pt8 {
+	margin-left: 0.8em;
+}
+.name-location-background {
+    background: #262626;
+    color: white !important;
+    opacity: 0.75;
+    bottom: 2.7em;
+    width: 85%;
+    position:absolute;
+}
+
+.rounded-x {
+	border-radius: 50% !important;
+}
+
+.padding-bottom-20 {
+	padding-bottom: 20px;
+}
+
+/* xs */
+@media (max-width: 767px) {
+    /* CSS goes here */
+    .unlock-reward-text {
+		font-size: 1.7em;
+	}
+	.padding-top-1pt5em {
+		padding-top: 3.5em;
+	}
+	.featured-outlets-xs {
+		margin-left: 0.5em;
+		margin-right: 0.5em;
+	}
+}
+
+/* sm */
+@media (min-width: 768px) {
+    .unlock-reward-text {
+		font-size: 2.5em;
+	}
+	.padding-top-1pt5em {
+		padding-top: 2.4em;
+	}
+}
+/* md */
+@media (min-width: 992px) {
+    .unlock-reward-text {
+		font-size: 3.0em;
+	}
+	.padding-top-1pt5em {
+		padding-top: 2em;
+	}
+}
+/* lg */
+@media (min-width: 1200px) {
+    .unlock-reward-text {
+		font-size: 3.5em;
+	}
+	.padding-top-1pt5em {
+		padding-top: 1.6em;
+	}
+}
