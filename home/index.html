@@ -47,7 +47,7 @@
   </script>    
 </head>
 
-<body>
+<body ng-controller="FeaturedCtrl">
     <!--=== Top ===-->
     <div class="top">
         <div class="container">
@@ -118,7 +118,7 @@
     <!--=== End Header ===-->
 
     <!--=== Slider ===-->
-    <div class="row animated-icons ng-cloak" ng-controller="FeaturedCtrl" ng-init="getFeatured()">
+    <div class="row animated-icons ng-cloak" ng-init="getFeatured()">
         <!--Profile Body-->
         <div class="container featured-outlets-xs" ng-if="results">
             <div class="text-center unlock-reward-text padding-top-1pt5em">
@@ -358,7 +358,7 @@
             </div>
         </div>
     </div>
-    <div class="footer navbar-fixed-bottom" ng-if="getMobileOperatingSystem() === 'Android'">
+    <div class="footer navbar-fixed-bottom hidden-md hidden-lg" ng-if="getMobileOperatingSystem() === 'Android'">
         <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android">
             <div class="text-center download-footer">
               <span class="color_white">GET THE APP </span>              
