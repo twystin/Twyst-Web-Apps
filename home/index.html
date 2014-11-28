@@ -117,51 +117,44 @@
     <!--=== End Header ===-->
 
     <!--=== Slider ===-->
-    <div class="row profile">
+    <div class="row animated-icons">
         <!--Profile Body-->
-        <div class="row profile-body animated-icons">
-            <div class="row text-center unlock-reward-text">
+        <div class="container">
+            <div class="text-center unlock-reward-text padding-top-1pt5em">
                 <b>EAT. DRINK. <span class="text-orange">REWARDS!</span></b>
             </div>
-            <div class="row">
-                <div class="col-md-1">
-                
-                </div> 
-                <div class="col-md-10">
-                    <div class="headline" id="popularHeadline">
-                        <span class="headline-inline">
-                            <h2>Popular on Twyst</h2>
-                        </span>
-                    </div>
-                    <!--Profile Blog--> 
-                    <div class="row" ng-controller="FeaturedCtrl" ng-init="getFeatured()">
-                        <div class="col-sm-4 padding-bottom-featured-outlets-grid" ng-repeat="o in outlets">
-                            <a href="/{{o.shortUrl[0]}}">
-                                <div class="profile-blog" background-image="{{o._id + '/' + 'background'}}">
-                                    <div class="clearfix"></div>    
-                                    <div class="outlet-featured-thumbnail">
-                                        
-                                    </div>
-                                    <div class="name-location name-location-background">
-                                        <strong class="margin-left-pt8 color-white">{{o.basics.name}}</strong>
-                                        <span class="margin-left-pt8">
-                                            <i class="fa fa-map-marker"></i> 
-                                            <small>
-                                                {{o.contact.location.locality_1[0]}}, {{o.contact.location.city}}
-                                            </small>
-                                        </span>
-                                    </div>
+            <div class="headline" id="popularHeadline">
+                <span class="headline-inline">
+                    <h2>Popular on Twyst</h2>
+                </span>
+            </div>
+            <!--Profile Blog--> 
+            <div class="row" ng-controller="FeaturedCtrl" ng-init="getFeatured()">
+                <div class="col-sm-4 padding-bottom-featured-outlets-grid" ng-repeat="r in results" ng-mouseenter="r.show_reward = true" ng-mouseleave="r.show_reward = false">
+                    <a href="/{{r.outlet.shortUrl[0]}}">
+                        <div class="profile-blog outlet-featured-thumbnail-reward" background-image="{{r.outlet._id + '/' + 'background'}}">
+                            <div class="clearfix"></div>
+                            <div class="name-location name-location-background">
+                                <strong class="margin-left-pt8 color-white">{{r.outlet.basics.name}}</strong>
+                                <div class="margin-left-pt8">
+                                    <i class="fa fa-map-marker text-orange"></i> 
+                                    <small>
+                                        {{r.outlet.contact.location.locality_1[0]}}, {{r.outlet.contact.location.city}}
+                                    </small>
                                 </div>
-                            </a>
+                                <div class="margin-left-pt8"  ng-show="r.show_reward">
+                                    <i class="fa fa-gift text-orange"></i> 
+                                    <small>
+                                        {{r.reward.rewardified}}
+                                    </small>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="text-center">
-                        <a class="btn twyst-orange btn-md">SEE MORE! </a>
-                    </div>
+                    </a>
                 </div>
-                <div class="col-md-1">
-                    
-                </div>
+            </div>
+            <div class="text-center">
+                <a class="btn twyst-orange btn-md">SEE MORE </a>
             </div>
         </div>
     </div>
@@ -221,7 +214,7 @@
             </div>
         </div>
     </div> -->
-    <div class="col-md-12 text-orange">
+    <div class="text-orange">
         <h4>Twyst is available in Delhi NCR at present.</h4>
     </div>
     <div class="col-md-12">

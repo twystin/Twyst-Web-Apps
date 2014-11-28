@@ -31,7 +31,7 @@ angular.module('twystApp', ['ngAnimate'])
 .controller('FeaturedCtrl', function($scope, featuredSvc) {
     $scope.getFeatured = function () {
         featuredSvc.getFeatured().then(function (data) {
-            $scope.outlets = data.info;
+            $scope.results = data.info;
         })
     }
 })
