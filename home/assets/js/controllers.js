@@ -16,9 +16,11 @@ angular.module('twystApp', ['ngAnimate'])
 })
 .factory('featuredSvc', function($http, $q) {
     var featuredSvc = {};
-    featuredSvc.getFeatured = function () {
+    featuredSvc.getFeatured = function (number) {
         var deferred = $q.defer();
-        $http.get('/api/v3/featured_outlets').success(function (data) {
+        $http.get(
+            '/api/v3/featured_outlets?num=' + number 
+        ).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
             deferred.reject(data);
@@ -28,9 +30,22 @@ angular.module('twystApp', ['ngAnimate'])
     };
     return featuredSvc;
 })
-.controller('FeaturedCtrl', function($scope, featuredSvc) {
+.controller('FeaturedCtrl', function($scope, $window, featuredSvc) {
+    $scope.numOfFeatured = 6;
+
+    function isMobile() {
+        if($window.innerWidth < 768) {
+            return true;
+        }
+        return false;
+    }
+
+    if(isMobile()) {
+        $scope.numOfFeatured = 3;
+    }
+
     $scope.getFeatured = function () {
-        featuredSvc.getFeatured().then(function (data) {
+        featuredSvc.getFeatured($scope.numOfFeatured).then(function (data) {
             $scope.results = data.info;
         })
     }

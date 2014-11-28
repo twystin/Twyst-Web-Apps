@@ -78,10 +78,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
-              <li class="margin-top-pt6em">
+              <li class="margin-top-pt6em hidden-xs hidden-sm" >
                 <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android"><img class="app-button" src="/outlets/assets/img/images/googleplay.png"></a>
               </li>
-              <li class="margin-top-pt6em">
+              <li class="margin-top-pt6em hidden-xs hidden-sm">
                   <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store"><img class="app-button" src="/outlets/assets/img/images/appstore.png"></a>
               </li>
               <li class="active"> 
@@ -119,7 +119,7 @@
     <!--=== Slider ===-->
     <div class="row animated-icons">
         <!--Profile Body-->
-        <div class="container">
+        <div class="container featured-outlets-xs">
             <div class="text-center unlock-reward-text padding-top-1pt5em">
                 <b>EAT. DRINK. <span class="text-orange">REWARDS!</span></b>
             </div>
@@ -130,7 +130,7 @@
             </div>
             <!--Profile Blog--> 
             <div class="row" ng-controller="FeaturedCtrl" ng-init="getFeatured()">
-                <div class="col-sm-4 padding-bottom-featured-outlets-grid" ng-repeat="r in results" ng-mouseenter="r.show_reward = true" ng-mouseleave="r.show_reward = false">
+                <div class="col-md-4 col-lg-4 col-xs-12 col-sm-6 padding-bottom-featured-outlets-grid" ng-repeat="r in results" ng-mouseenter="r.show_reward = true" ng-mouseleave="r.show_reward = false">
                     <a href="/{{r.outlet.shortUrl[0]}}">
                         <div class="profile-blog outlet-featured-thumbnail-reward" background-image="{{r.outlet._id + '/' + 'background'}}">
                             <div class="clearfix"></div>
