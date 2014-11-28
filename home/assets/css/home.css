@@ -125,15 +125,8 @@ html {
 	.service .desc h4 {
 		font-size: 16px;
 	}
-}
-
-/* sm */
-@media (min-width: 991px) {
-    .unlock-reward-text {
-		font-size: 2.5em;
-	}
-	.padding-top-1pt5em {
-		padding-top: 2.4em;
+	.connect-margin {
+		margin-top: 5em;
 	}
 }
 /* md */
@@ -156,8 +149,14 @@ html {
 }
 
 /* sm */
-@media (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 992px) {
 	.connect-margin {
-		margin-top: 4em;
+		margin-top: 5em;
+	}
+	.unlock-reward-text {
+		font-size: 2.5em;
+	}
+	.padding-top-1pt5em {
+		padding-top: 2.4em;
 	}
 }
