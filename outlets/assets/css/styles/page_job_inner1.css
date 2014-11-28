@@ -417,8 +417,7 @@ div.panel-heading > h4 > a > span {
     color: black;        
 }
 .merchant_logo{
-    width: auto;
-    height: auto;
+    height: 8em;
 }
 
 .bg{
