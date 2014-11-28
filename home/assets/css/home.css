@@ -114,7 +114,7 @@ html {
 		margin-left: 0.5em;
 		margin-right: 0.5em;
 	}
-	html {
+	body {
 	   overflow-x: hidden;
 	}
 	.headline h2, 
@@ -158,5 +158,8 @@ html {
 	}
 	.padding-top-1pt5em {
 		padding-top: 2.4em;
+	}
+	body {
+	   overflow-x: hidden;
 	}
 }
