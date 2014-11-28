@@ -1,3 +1,12 @@
+#searchBox {
+    width: 70%; 
+}
+#map {
+    color: gray !important;
+}
+textarea:focus, input[type="text"] {   
+    border: 2px solid gray;
+}
 .headline h2, .headline h3, .headline h4 {
     border-bottom: 2px solid #f6921e;
 }
@@ -122,11 +131,14 @@ CSS for Header goes here
 @media (min-width: 992px) {
     .margin-search-bar {
         margin-top: .5em;
+        margin-right: 0em;
+        padding-left: 0.9em;
     }
 }
 /* lg */
 @media (min-width: 1200px) {
     .margin-search-bar {
         margin-top: .5em;
+        padding-left: 5em;
     }
 }
