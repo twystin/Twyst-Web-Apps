@@ -117,9 +117,9 @@
     <!--=== End Header ===-->
 
     <!--=== Slider ===-->
-    <div class="row animated-icons">
+    <div class="row animated-icons ng-cloak" ng-controller="FeaturedCtrl" ng-init="getFeatured()">
         <!--Profile Body-->
-        <div class="container featured-outlets-xs">
+        <div class="container featured-outlets-xs" ng-if="results">
             <div class="text-center unlock-reward-text padding-top-1pt5em">
                 <b>EAT. DRINK. <span class="text-orange">REWARDS!</span></b>
             </div>
@@ -129,7 +129,7 @@
                 </span>
             </div>
             <!--Profile Blog--> 
-            <div class="row" ng-controller="FeaturedCtrl" ng-init="getFeatured()">
+            <div class="row">
                 <div class="col-md-4 col-lg-4 col-xs-12 col-sm-6 padding-bottom-featured-outlets-grid" ng-repeat="r in results" ng-mouseenter="r.show_reward = true" ng-mouseleave="r.show_reward = false">
                     <a href="/{{r.outlet.shortUrl[0]}}">
                         <div class="profile-blog outlet-featured-thumbnail-reward" background-image="{{r.outlet._id + '/' + 'background'}}">

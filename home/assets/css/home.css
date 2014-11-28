@@ -1,5 +1,8 @@
 /*Profile
 ------------------------------------*/
+.ng-cloak { 
+	display:none; 
+}
 .twyst-orange {
 	background-color: #f6921e;
 	color: white;
