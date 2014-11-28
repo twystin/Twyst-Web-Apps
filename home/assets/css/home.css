@@ -162,4 +162,7 @@ html {
 	body {
 	   overflow-x: hidden;
 	}
+	.google-play-xs {
+		height: 3em;
+	}
 }

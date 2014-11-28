@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="loyalty programs, customer retention, foodies, customer relationship management, customer engagement, smartphone app, Android app, Restaurant deals,      Restaurant discounts, Restaurant offers, Cafe deals, Cafe offers, Cafe discounts, Pub deals,     Pub discounts, Pub offers, loyalty rewards, check-in, location-based service, personalization,   recommender system, recommendation algorithm, be loved at the places you love!, Restaurant in gurgaon, Cafes in gurgaon, Pubs in gurgaon, Pizza in gurgaon, Pizza offers, Pizza deals, Pizza discounts">
+    <meta name="apple-itunes-app" content="app-id=907877732, affiliate-data=myAffiliateData, app-argument=myURL">
     <!-- FAVICON -->
      <link rel="icon" href="assets/img/twyst.ico">
     <!-- CSS Global Compulsory-->
@@ -356,6 +357,32 @@
 
             </div>
         </div>
+    </div>
+    <div class="footer navbar-fixed-bottom" ng-if="getMobileOperatingSystem() === 'Android'">
+        <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android">
+            <div class="text-center download-footer">
+              <span class="color_white">GET THE APP </span>              
+                <img src="/outlets/assets/img/images/googleplay.png" class="google-play-xs">
+            </div>
+        </a>
+        <!-- <div class="text-center"  ng-if="getMobileOperatingSystem() === 'iOS'">
+          <span class="color_white padding-top-pt7">GET THE APP</span>
+          <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4">
+            <img src="/outlets/assets/img/images/appstore.png" class="google-play-xs">
+          </a>
+        </div> -->
+        <style type="text/css">
+            .color_white {
+                color: white;
+            }
+            .google-play-xs {
+                height: 2.7em;
+            }
+            .download-footer {
+                height: 0.3em;
+                margin-top: -0.9em;
+            }
+        </style>
     </div>
     <!--/copyright-->
     <!--=== End Copyright ===-->
