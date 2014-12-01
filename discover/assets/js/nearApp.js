@@ -44,7 +44,7 @@ angular.module('nearApp', ['uiGmapgoogle-maps'])
     $scope.getLocation = function () {
         var options = {
             enableHighAccuracy: true,
-            timeout: 5000,
+            timeout: 10000,
             maximumAge: 0
         };
         $window.navigator.geolocation.getCurrentPosition (
