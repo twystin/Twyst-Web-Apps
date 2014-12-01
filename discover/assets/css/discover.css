@@ -125,7 +125,7 @@ CSS for Header goes here
     }
     .map-image {
         height: 3.5em;
-        padding: 1.1em 0em 0em 0em;
+        padding-top: 1.1em;
     }
 }
 
