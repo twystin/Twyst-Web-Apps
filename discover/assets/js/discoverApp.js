@@ -32,16 +32,14 @@ angular.module('discoverApp', [])
 })
 .controller('DiscoverCtrl', function($scope, $window, discoverSvc) {
     function init(lim) {
+        if(isMobile()) {
+            $scope.lim = 6;
+        }
+        else {
+            $scope.lim = 9;
+        }
         $scope.start = 1;
-        $scope.end = $scope.start + lim;
-        $scope.lim = lim;
-    }
-
-    if(isMobile()) {
-        init(6);
-    }
-    else {
-        init(9);
+        $scope.end = $scope.start + $scope.lim;
     }
 
     function isMobile() {
@@ -66,11 +64,15 @@ angular.module('discoverApp', [])
     }
 
     $scope.getFeatured = function () {
+        $scope.searched = false;
         $scope.q = $scope.q || '';
         discoverSvc.getFeatured($scope.start, $scope.end, $scope.q).then(function (data) {
             $scope.results = data.info.results;
             $scope.total = data.info.total;
             scrollToTop();
+            if($scope.q) {
+                $scope.searched = true;
+            }
         })
     }
 

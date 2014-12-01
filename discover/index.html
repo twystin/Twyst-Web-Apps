@@ -131,6 +131,10 @@
                         <button class="btn btn-md twyst-orange search-button" ng-click="search()">Go</button>
                     </div>
                 </div>
+                <div ng-show="searched" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 search-results-text">
+                    Showing search results for "<b>{{q}}</b>".
+                    <a href ng-click="q = null;getFeatured()" id="searchClear">clear</a>
+                </div>
             </div>
             <!--Profile Blog--> 
             <div class="row">
