@@ -62,7 +62,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.html">
+              <a class="navbar-brand" href="/">
                 <img id="logo-header" src="assets/img/twyst_logo_2.png" alt="Logo">       
               </a>
             </div>
@@ -108,7 +108,7 @@
     </div>
     <!--/header-->
     <!--=== End Header ===-->
-    <div class="row animated-icons ng-cloak margin-top-5em" ng-init="getFeatured()">
+    <div class="row animated-icons ng-cloak margin-discover" ng-init="getFeatured()">
         <div class="container">
             <div class="row">
                 <div class="headline col-md-2 col-lg-2 col-sm-2" id="discover">
@@ -116,18 +116,13 @@
                         <h2>Discover</h2>
                     </span>
                 </div>
-                <div class="col-md-4 col-lg-4 col-sm-4 margin-search-bar">
-                    <span>
-                        <a id="map" href="javascriptvoid()" class="color-lightgray">
-                            <h3>Map</h3>
-                        </a>
-                    </span>
-                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 margin-search-bar">
                     <div class="col-md-10 col-lg-10 col-sm-10 col-xs-9">
                         <input class="form-control" type="text" ng-model="q" placeholder="Search for an outlet/location">
                     </div>
-                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-3">
+                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-3 margin-search-button">
                         <button class="btn btn-md twyst-orange" ng-click="search()">Search</button>
                     </div>
                 </div>
@@ -146,7 +141,13 @@
                                         {{r.outlet.contact.location.locality_1[0]}}, {{r.outlet.contact.location.city}}
                                     </small>
                                 </div>
-                                <div class="margin-left-pt8"  ng-show="r.show_reward">
+                                <div class="margin-left-pt8 hidden-xs hidden-sm"  ng-show="r.show_reward">
+                                    <i class="fa fa-gift text-orange"></i> 
+                                    <small>
+                                        {{r.reward.rewardified}}
+                                    </small>
+                                </div>
+                                <div class="margin-left-pt8 hidden-md hidden-lg">
                                     <i class="fa fa-gift text-orange"></i> 
                                     <small>
                                         {{r.reward.rewardified}}
@@ -205,8 +206,8 @@
                     <div class="headline">
                         <h2>Connect</h2>
                     </div>
-                    <a class="btn btn-warning" href="contact.html" style="color: white;line-height: 1;">Get in touch</a>
-                    <a class="btn btn-warning" href="careers.html" style="color: white;line-height: 1;">Work with Us</a>
+                    <a class="btn btn-warning" href="/home/contact.html" style="color: white;line-height: 1;">Get in touch</a>
+                    <a class="btn btn-warning" href="/home/careers.html" style="color: white;line-height: 1;">Work with Us</a>
                 </div>
                     <!--/col-md-4-->
             </div>
@@ -228,7 +229,7 @@
                     </p>
                 </div>
                 <div class="col-md-6">
-                    <a href="index.html">
+                    <a href="/">
                         <img id="logo-footer" src="assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
                     </a>
                 </div>

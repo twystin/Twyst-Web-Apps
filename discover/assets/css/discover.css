@@ -13,9 +13,6 @@ textarea:focus, input[type="text"] {
 #discover {
     display: inline-block !important;
 }
-.margin-top-5em {
-    margin-top: 5em;
-}
 .ng-cloak { 
     display:none; 
 }
@@ -111,34 +108,62 @@ CSS for Header goes here
 /* xs */
 @media (max-width: 767px) {
     /* CSS goes here */
-    html {
+    body {
        overflow-x: hidden;
     }
     .margin-search-bar {
-        margin-top: -0.5em;
-        margin-bottom: 0.8em;
-        margin-right: 1.8em;
+        margin: 0em 0em 1em -1.1em;
+    }
+    .margin-search-button {
+        margin-left: -0.8em;
+    }
+    .margin-discover {
+        margin: 4em .5em 0em .5em;
     }
 }
 
 /* sm */
 @media (min-width: 768px) {
+    body {
+       overflow-x: hidden;
+    }
     .margin-search-bar {
-        margin-top: .5em;
+        margin: 0em 0em 1em -1.1em;
+    }
+    .margin-search-button {
+        margin-left: -1.5em;
+    }
+    .margin-discover {
+        margin: 5em .5em 0em .5em;
     }
 }
 /* md */
 @media (min-width: 992px) {
+    body {
+       overflow-x: hidden;
+    }
     .margin-search-bar {
-        margin-top: .5em;
-        margin-right: 0em;
-        padding-left: 0.9em;
+        margin: 0em 0em 1em -1.1em;
+    }
+    .margin-search-button {
+        margin-left: -1.5em;
+    }
+    .margin-discover {
+        margin: 5em .5em 0em .5em;
     }
 }
 /* lg */
 @media (min-width: 1200px) {
+    body {
+       overflow-x: hidden;
+    }
     .margin-search-bar {
-        margin-top: .5em;
-        padding-left: 5em;
+        margin: 0em 0em 1em -1.1em;
+    }
+    .margin-search-button {
+        margin-left: -1.5em;
+    }
+    .margin-discover {
+        margin: 5em 0em 0em 0em;
     }
 }
