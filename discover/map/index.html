@@ -141,7 +141,7 @@
     <div class="row animated-icons ng-cloak margin-discover" ng-init="getFeatured()">
         <div class="container">
             <div class="row">
-                <div class="headline col-md-2 col-lg-2 col-sm-2 col-xs-6" id="discover">
+                <div class="headline col-md-3 col-lg-3 col-sm-4 col-xs-6" id="discover">
                     <span>
                         <h2>Discover on Map</h2>
                     </span>
@@ -160,7 +160,7 @@
                     Showing search results for "<b>{{q}}</b>".
                     <a href ng-click="q = null;getFeatured()" id="searchClear">clear</a>
                 </div>
-            </div>{{windowOptions}}
+            </div>
             <div ng-if="results.length">
                 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
                     <ui-gmap-marker ng-repeat="r in results" icon="r.icon" coords="r.outlet.contact.location.coords" options="marker.options" idkey="r.outlet._id" click="visible = true;">
