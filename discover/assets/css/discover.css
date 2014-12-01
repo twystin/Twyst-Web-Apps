@@ -117,8 +117,8 @@ CSS for Header goes here
     .margin-search-bar {
         margin: 0em 0em 1em -1.1em;
     }
-    .search-button {
-        width: 162%;
+    .margin-search-button {
+        padding-left: 0em;
     }
     .margin-discover {
         margin: 4em .5em 0em .5em;
