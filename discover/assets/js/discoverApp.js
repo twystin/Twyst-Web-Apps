@@ -31,12 +31,18 @@ angular.module('discoverApp', [])
     return discoverSvc;
 })
 .controller('DiscoverCtrl', function($scope, $window, discoverSvc) {
-    function init() {
+    function init(lim) {
         $scope.start = 1;
-        $scope.end = 10;
-        $scope.lim = 9;
+        $scope.end = $scope.start + lim;
+        $scope.lim = lim;
     }
-    init();
+
+    if(isMobile()) {
+        init(6);
+    }
+    else {
+        init(9);
+    }
 
     function isMobile() {
         if($window.innerWidth < 768) {
@@ -64,6 +70,7 @@ angular.module('discoverApp', [])
         discoverSvc.getFeatured($scope.start, $scope.end, $scope.q).then(function (data) {
             $scope.results = data.info.results;
             $scope.total = data.info.total;
+            scrollToTop();
         })
     }
 
@@ -82,5 +89,9 @@ angular.module('discoverApp', [])
         {
           return 'unknown';
         }
+    }
+
+    function scrollToTop() {
+        $window.scrollTo(0,0)
     }
 });
