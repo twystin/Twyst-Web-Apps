@@ -41,6 +41,7 @@ angular.module('discoverApp', [])
         $scope.start = 1;
         $scope.end = $scope.start + $scope.lim;
     }
+    init();
 
     function isMobile() {
         if($window.innerWidth < 768) {
