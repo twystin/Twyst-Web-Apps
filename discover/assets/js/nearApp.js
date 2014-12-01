@@ -47,7 +47,7 @@ angular.module('nearApp', ['uiGmapgoogle-maps'])
             timeout: 60000,
             maximumAge: 0
         };
-        $window.navigator.geolocation.getCurrentPosition (
+        navigator.geolocation.getCurrentPosition (
             locationSuccess, 
             locationError,
             options
