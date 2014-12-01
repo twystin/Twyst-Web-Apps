@@ -111,11 +111,14 @@ CSS for Header goes here
     body {
        overflow-x: hidden;
     }
+    html {
+       overflow-x: hidden;
+    }
     .margin-search-bar {
         margin: 0em 0em 1em -1.1em;
     }
-    .margin-search-button {
-        margin-left: -0.8em;
+    .search-button {
+        width: 162%;
     }
     .margin-discover {
         margin: 4em .5em 0em .5em;
