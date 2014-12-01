@@ -1,0 +1,99 @@
+
+
+.angular-google-map-container { 
+    height: 35em; 
+}
+.ng-cloak { 
+    display:none; 
+}
+.twyst-orange {
+    background-color: #f6921e;
+    color: white;
+}
+.text-orange {
+    color: orange;
+}
+.headline h2, .headline h3, .headline h4 {
+    border-bottom: 2px solid #f6921e;
+}
+/* xs */
+@media (max-width: 767px) {
+    /* CSS goes here */
+    body {
+       overflow-x: hidden;
+    }
+    html {
+       overflow-x: hidden;
+    }
+    .margin-search-bar {
+        margin: 0em 0em 1em -1.1em;
+    }
+    .margin-search-button {
+        padding-left: 0em;
+    }
+    .margin-discover {
+        margin: 4em .5em 0em .5em;
+    }
+    .map-image {
+        height: 3.5em;
+        padding-top: 1.1em;
+    }
+}
+
+/* sm */
+@media (min-width: 768px) {
+    body {
+       overflow-x: hidden;
+    }
+    .margin-search-bar {
+        margin: 0em 0em 1em -1.1em;
+    }
+    .margin-search-button {
+        margin-left: -1.5em;
+    }
+    .margin-discover {
+        margin: 5em .5em 0em .5em;
+    }
+    .map-image {
+        height: 3em;
+        padding: 1em 0em 0em 0em;
+    }
+}
+/* md */
+@media (min-width: 992px) {
+    body {
+       overflow-x: hidden;
+    }
+    .margin-search-bar {
+        margin: 0em 0em 1em -1.1em;
+    }
+    .margin-search-button {
+        margin-left: -1.5em;
+    }
+    .margin-discover {
+        margin: 5em .5em 0em .5em;
+    }
+    .map-image {
+        height: 4em;
+        padding: 1em 0em 0em 0.5em;
+    }
+}
+/* lg */
+@media (min-width: 1200px) {
+    body {
+       overflow-x: hidden;
+    }
+    .margin-search-bar {
+        margin: 0em 0em 1em -1.1em;
+    }
+    .margin-search-button {
+        margin-left: -1.5em;
+    }
+    .margin-discover {
+        margin: 5em 0em 0em 0em;
+    }
+    .map-image {
+        height: 5em;
+        padding: 1em 0em 0em 1em;
+    }
+}
