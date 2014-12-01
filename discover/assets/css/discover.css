@@ -123,6 +123,10 @@ CSS for Header goes here
     .margin-discover {
         margin: 4em .5em 0em .5em;
     }
+    .map-image {
+        height: 3.5em;
+        padding: 1.1em 0em 0em 0em;
+    }
 }
 
 /* sm */
@@ -139,6 +143,10 @@ CSS for Header goes here
     .margin-discover {
         margin: 5em .5em 0em .5em;
     }
+    .map-image {
+        height: 3em;
+        padding: 1em 0em 0em 0em;
+    }
 }
 /* md */
 @media (min-width: 992px) {
@@ -154,6 +162,10 @@ CSS for Header goes here
     .margin-discover {
         margin: 5em .5em 0em .5em;
     }
+    .map-image {
+        height: 4em;
+        padding: 1em 0em 0em 0.5em;
+    }
 }
 /* lg */
 @media (min-width: 1200px) {
@@ -168,5 +180,9 @@ CSS for Header goes here
     }
     .margin-discover {
         margin: 5em 0em 0em 0em;
+    }
+    .map-image {
+        height: 5em;
+        padding: 1em 0em 0em 1em;
     }
 }
