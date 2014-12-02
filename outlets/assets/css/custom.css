@@ -397,12 +397,6 @@ a.ios_button {
 .footer {
     margin-top: 0px;
 }
-.header .navbar-default {
-    background-color: #000;
-}
-.header .navbar-default .navbar-nav > li > a {
-    color: #fff;
-}
 #facebook_like_box{
     margin-left: 0em;   
 }
@@ -602,6 +596,7 @@ hr {
 .outlet_info {
     height: 18em;
     margin-top: 60px;
+    margin-bottom: 1em;
 }
 .map_location{
     margin-top: 3em;
