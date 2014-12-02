@@ -52,6 +52,16 @@ function AdminOutletCtrl($scope, $http, $modal, $location, authService, adminOut
         });
     }
 
+    $scope.initChangeFeature = function (id, featured) {
+        var data = {
+            'outlet_id': id,
+            'featured': featured
+        };
+        adminOutletService.changeFeatured(data).then(function (data){
+            console.log(data)
+        })
+    }
+
 }
 
 function OutletStatusChangeCtrl($scope, $route, $modalInstance, data, adminOutletService) {
