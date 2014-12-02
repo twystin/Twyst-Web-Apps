@@ -153,7 +153,7 @@ twystApp.config(function ($routeProvider, $httpProvider) {
             controller : 'BirthAnnivProgramCtrl',
             templateUrl : '/merchant/templates/birth_anniv_program/create.html'
         }).
-        when('/birth_anniv_program/update/:birth_anniv_program_id'{
+        when('/birth_anniv_program/update/:birth_anniv_program_id', {
             controller : 'BirthAnnivProgramUpdateCtrl',
             templateUrl: '/merchant/templates/birth_anniv_program/update.html'
         }).
