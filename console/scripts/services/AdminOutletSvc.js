@@ -31,5 +31,20 @@ twystConsole.factory('adminOutletService', function ($http, $q) {
         return deferred.promise;
     };
 
+    adminOutletSvc.changeFeatured = function (data) {
+        var deferred = $q.defer();
+        $http({
+            'method': 'post',
+            'url': '/api/v2/changefeatured/outlet',
+            'data': data
+        }).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.resolve(data);
+        });
+        
+        return deferred.promise;
+    };
+
     return adminOutletSvc;
 });
