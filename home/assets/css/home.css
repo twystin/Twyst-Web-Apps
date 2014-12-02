@@ -1,5 +1,9 @@
 /*Profile
 ------------------------------------*/
+.how-to-twyst-hover {
+	border-bottom: 1px solid #f6921e;
+	display: inline-block !important;
+}
 .ng-cloak { 
 	display:none; 
 }
@@ -122,8 +126,8 @@ html {
 	.headline h4 {
 		font-size: 1.3em;
 	}
-	.service .desc h4 {
-		font-size: 16px;
+	.how-to-twyst-text-xs h4 {
+		font-size: 1.3em;
 	}
 	.connect-margin {
 		margin-top: 5em;

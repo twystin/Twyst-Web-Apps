@@ -90,8 +90,13 @@
                   Home
                 </a>
               </li>
+              <li> 
+                <a href="/discover">
+                  Discover
+                </a>
+              </li>
               <li>
-                <a href="/home/#how">
+                <a href="/home/how">
                   How it works
                 </a>                       
               </li>
@@ -160,125 +165,51 @@
         </div>
     </div>
     <!--End Third Slide-->
-    <div class="col-md-12">
-        <hr/>
+    <div class="col-md-12" style="padding-bottom: 2.5em;">
+        
     </div>
 <!--=== Content Part ===-->
-    <div class="container">
+    <div class="row" style="background: black;color:white">
         <!-- Service Blocks -->
-        <div class="row">
-            <div class="headline margin-left-1pt2em">
-                <h2>How to Twyst</h2>
+        <div class="container featured-outlets-xs">
+            <div class="row">
+                &nbsp;
             </div>
-            <div class="col-md-4 service-alternative">
-                <div class="service">
-                    <i class="icon-food service-icon"></i>
-                    <div class="desc">
-                        <h4>Discover</h4>
-                        <p>Find some of the top restaurants, cafes and pubs in Gurgaon. We have more than 40 of the hottest and buzziest places in town, and are adding more all the time!</p>
-                    </div>
+            <div class="row" >
+                <div class="headline margin-left-1pt2em">
+                    <h2 style="background: black;color:white">How to Twyst</h2>
+                </div>
+                <div class="col-md-4 how-to-twyst-text-xs" ng-mouseenter="discover_underline = true;" ng-mouseleave="discover_underline = false;">
+                    <h4 ng-class="{'how-to-twyst-hover': discover_underline}">Discover</h4>
+                    <p style="background: black;color:white">
+                        Find exclusive #TwystRewards at the top restaurants, cafes and pubs around town. New rewards getting added every week to help you get more out eating out!
+                    </p>
+                </div>
+                <div class="col-md-4 how-to-twyst-text" ng-mouseenter="checkin_underline = true;" ng-mouseleave="checkin_underline = false;">
+                    <h4 ng-class="{'how-to-twyst-hover': checkin_underline}">Check-in</h4>
+                    <p style="background: black;color:white">
+                        Check-in whenever you visit a #TwystRewards location. It is easy – scan a QR code with the app, or just fill out a visit card when you are there. You can check-in when you order in as well!
+                    </p>
+                </div>
+                <div class="col-md-4 how-to-twyst-text" ng-mouseenter="unlock_underline = true;" ng-mouseleave="unlock_underline = false;">
+                    <h4 ng-class="{'how-to-twyst-hover': unlock_underline}">Unlock #TwystRewards</h4>
+                    <p style="background: black;color:white">
+                        ..And when you unlock a #TwystReward, we will send the vouchers right to your phone (if you don't have the app, you will get the voucher by SMS). Using the reward is easy - just show the server the voucher when you visit or order next!
+                    </p>
                 </div>
             </div>
-            <div class="col-md-4 service-alternative">
-                <div class="service">
-                    <i class="icon-qrcode service-icon"></i>
-                    <div class="desc">
-                        <h4>Check-in</h4>
-                        <p>Check-in to let us know when you visit a Twyst location. Checking-in is easy – scan a QR code with the app, or just fill out a visit card at the outlet when you are there. You can check-in when you order in as well!</p>
-                    </div>
+            <div class="row" style="padding-top: 0.4em">
+                <div class="col-md-10 how-to-twyst-text">
+                    <h4 class="text-orange">Twyst is available in Delhi NCR at present.</h4>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn twyst-orange btn-md" href="/home/how">LEARN MORE </a>
                 </div>
             </div>
-            <div class="col-md-4 service-alternative">
-                <div class="service">
-                    <i class="icon-gift service-icon"></i>
-                    <div class="desc">
-                        <h4>Earn rewards</h4>
-                        <p>..And we'll send you the reward vouchers when you qualify right to your phone (if you don't have the app, you will get the voucher by SMS). Using the reward is easy - just show the server the voucher when you visit next!</p>
-                    </div>
-                </div>
+            <div class="row">
+                &nbsp;
             </div>
         </div>
-
-        <!--/row-->
-        <!-- End Service Blokcs -->
-        <!-- <div class="row margin-bottom-10">
-            <div class="text-center">
-                <div class="margin-bottom-10"> 
-                    <button class="btn btn-primary btn-lg" ng-click="app_get = !app_get">Get the App Now!</button>
-                </div>
-                <div ng-show="app_get" class="fadein fadeout">
-                    <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android"><img class="app-button" src="/outlets/assets/img/images/googleplay.png"></a>
-                    <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store"><img class="app-button" src="/outlets/assets/img/images/appstore.png"></a>
-                </div>
-            </div>
-        </div> -->
-        <div class="text-orange">
-            <h4>Twyst is available in Delhi NCR at present.</h4>
-        </div>
-        <div class="col-md-12">
-            <hr/>
-        </div>
-        <!-- Info Blokcs -->
-        <div class="row margin-bottom-10">
-            <!-- Welcome Block -->
-            <div class="col-md-6">
-                <div class="headline">
-                    <h2>The Twyst FAQs</h2>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <blockquote class="hero-unify">
-                            <h5><strong>Why should I use Twyst?</strong></h5>
-                            <p>Wish you got a little bit more for frequenting your favourite joints? Want to get more out of eating out? Then Twyst is for you.</p>
-                            <p>On Twyst, you can now earn rewards at some of the coolest restaurants, cafes and pubs in town based on how often you visit, special invites and privileges for being a loyal customer, and overall getting the star treatment that you deserve!</p>
-                            <p>What, still wondering?</p>
-                        </blockquote>
-                            <!--
-                            <blockquote class="hero-unify">
-                                <h5><strong>How does it work?</strong></h5>
-                                <ul>
-                                    <li>Look up partner outlets on the Twyst app (get Twyst for Android).</li>
-                                    <li>Check-in when you visit a Twyst location by scanning the QR code at the outlet. You can check-in and qualify for rewards even when you order in!</li>
-                                    <li>Receive a voucher each time you qualify for a reward & redeem the voucher to enjoy your reward.</li>
-                                </ul>
-                                <p>There's quite a bit more to do on the app, get it and find out.</p>
-                            </blockquote>
-                        -->
-                        <blockquote class="hero-unify">
-                            <h5><strong> I don't have an iPhone or an Android phone. Does that mean no Twyst rewards for me?</strong></h5>
-                            <p>Of course not! You can fill out a visit card to check-in at outlets that are running reward programs on Twyst. You will receive your reward notifications by SMS. Just ask the outlet staff to help!</p>
-                            <p>It works better with the app of course, you can discover more locations and rewards, check-in and track rewards, receive timely notifications and stay connected much better.</p>
-                        </blockquote>
-                        <blockquote class="hero-unify">
-                            <h5><strong>Which locations have Twyst rewards?</strong></h5>
-                            <p>We have a select set of locations in Gurgaon (and a few in Delhi) on Twyst right now, and are adding more all the time. Get the app to find out where Twyst rewards are available.</p>
-                        </blockquote>
-                            <!--   
-                         <blockquote class="hero-unify">
-                                <h5><strong>When do I get to use Twyst outside Gurgaon?</strong></h5>
-                                <p>We are working hard to get Twyst in more locations and more cities soon do follow us on Facebook, Twitter, or let us have your e-mail to keep track. By the way, Gurgaon does have pretty nifty joints so you should drop in when you can!</p>
-                            </blockquote>
-                        -->
-                    </div>
-                </div>
-
-
-            </div>
-            <!--/col-md-8-->
-
-            <!-- Latest Shots -->
-            <div class="col-md-6" id="how">
-                <div class="headline">
-                    <h2>How Twyst Works</h2>
-                </div>
-                <div class="videowrapper">
-                    <iframe src="http://www.youtube.com/embed/gOI29Jfzlmw" width="530" height="400" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                </div>
-            </div>
-            <!--/col-md-4-->
-        </div>
-        <!--/row-->
-        <!-- End Info Blokcs -->
     </div>
 
     <div class="footer">

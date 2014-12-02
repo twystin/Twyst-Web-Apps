@@ -190,7 +190,7 @@ blockquote p {
 }
 
 blockquote:hover {
-	border-left-color: #72c02c; 
+	border-left-color: #f6921e; 
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
     -o-transition: all 0.4s ease-in-out;

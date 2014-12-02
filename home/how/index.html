@@ -17,16 +17,27 @@
     <meta name="description" content="">
     <meta name="keywords" content="loyalty programs, customer retention, foodies, customer relationship management, customer engagement, smartphone app, Android app, Restaurant deals,      Restaurant discounts, Restaurant offers, Cafe deals, Cafe offers, Cafe discounts, Pub deals,     Pub discounts, Pub offers, loyalty rewards, check-in, location-based service, personalization,   recommender system, recommendation algorithm, be loved at the places you love!, Restaurant in gurgaon, Cafes in gurgaon, Pubs in gurgaon, Pizza in gurgaon, Pizza offers, Pizza deals, Pizza discounts">
     <!-- FAVICON -->
-     <link rel="icon" href="assets/img/twyst.ico">
+     <link rel="icon" href="../assets/img/twyst.ico">
     <!-- CSS Global Compulsory-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/headers/header1.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/slider.css">
+    <link rel="stylesheet" href="../assets/css/headers/header1.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/slider.css">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="assets/css/discover.css">
+    <style type="text/css">
+        .margin-faq {
+            margin-top: 6em;
+        }
+        .headline h2, .headline h3, .headline h4 {
+            border-bottom: 2px solid #f6921e;
+        }
+        @media (max-width: 767px) {
+            .margin-faq {
+                margin: 4em .5em 0em .5em;
+            }
+        }
+    </style>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -39,7 +50,7 @@
   </script>    
 </head>
 
-<body ng-app="discoverApp" ng-controller="DiscoverCtrl">
+<body ng-app="nearApp" ng-controller="NearCtrl" ng-init="getLocation()">
     <!--=== Top ===-->
     <div class="top">
         <div class="container">
@@ -52,6 +63,36 @@
 
     <!--=== Header ===-->
     <div class="header">
+        <style type="text/css">
+            /*
+            CSS for Header goes here
+            */
+            .padding-top-100 {
+                padding-top: 3.5em;
+            }
+            .header .navbar-default .navbar-nav > li > a {
+                color: #fff !important;
+            }
+            #logo-header {
+                margin-top: 0.2em;
+                height: 2.7em;
+                width: auto;
+            }
+
+            .app-button {
+                height: 2.5em;
+            }
+            .header .navbar {
+                background-color: #000 !important;
+            }
+            .margin-top-pt6em {
+                margin-top: -0.8em;
+                margin-left: -1em;
+            }
+            .margin-bottom-about {
+                margin-bottom: 5em; 
+            }
+        </style>
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -63,7 +104,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="/">
-                <img id="logo-header" src="assets/img/twyst_logo_2.png" alt="Logo">       
+                <img id="logo-header" src="../assets/img/twyst_logo_2.png" alt="Logo">       
               </a>
             </div>
 
@@ -82,12 +123,12 @@
                   Home
                 </a>
               </li>
-              <li class="active"> 
+              <li> 
                 <a href="/discover">
-                  Discover
+                  Home
                 </a>
               </li>
-              <li>
+              <li class="active">
                 <a href="/home/how">
                   How it works
                 </a>                       
@@ -99,15 +140,7 @@
                 </a>
               </li>               
 
-            </ul>
-            <div class="search-open">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-btn">
-                  <button class="btn-u" type="button">Go</button>
-                </span>
-              </div><!-- /input-group -->
-            </div>                
+            </ul>               
           </div><!-- /navbar-collapse -->
         </div>    
     </div>
@@ -116,60 +149,55 @@
     <div class="row animated-icons ng-cloak margin-discover" ng-init="getFeatured()">
         <div class="container">
             <div class="row">
-                <div class="headline col-md-3 col-lg-3 col-sm-4 col-xs-10" id="discover">
-                    <span>
-                        <h2>Discover Twyst Rewards</h2>
-                    </span>
-                </div>
-                <div class="col-md-push-8 col-lg-push-8 col-sm-push-8 col-sm-push-1 col-md-9 col-lg-9 col-sm-8 col-xs-2">
-                    <a href="map">
-                        <img class="map-image" src="assets/img/mapviewfill.png" title="View on Map">
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 margin-search-bar">
-                    <form>
-                        <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10">
-                            <input class="form-control" type="text" ng-model="q" placeholder="Search for an outlet / location">
+                <div class="row margin-faq">
+                    <div class="col-md-6" id="how">
+                        <div class="headline">
+                            <h2>How Twyst Works</h2>
                         </div>
-                        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 margin-search-button">
-                            <button class="btn btn-md twyst-orange search-button" ng-click="search()">Go</button>
+                        <div class="videowrapper">
+                            <iframe src="http://www.youtube.com/embed/gOI29Jfzlmw" width="530" height="400" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                         </div>
-                    </form>
-                </div>
-                <div ng-show="searched" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 search-results-text">
-                    Showing search results for "<b>{{q}}</b>".
-                    <a href ng-click="q = null;getFeatured()" id="searchClear">clear</a>
-                </div>
-            </div>
-            <!--Profile Blog--> 
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-xs-12 col-sm-6 padding-bottom-featured-outlets-grid" ng-repeat="r in results">
-                    <a href="/{{r.outlet.shortUrl[0]}}">
-                        <div class="profile-blog outlet-featured-thumbnail-reward" background-image="{{r.outlet._id + '/' + 'background'}}">
-                            <div class="clearfix"></div>
-                            <div class="name-location name-location-background">
-                                <strong class="margin-left-pt8 color-white">{{r.outlet.basics.name}}</strong>
-                                <div class="margin-left-pt8">
-                                    <i class="fa fa-map-marker text-orange"></i> 
-                                    <small>
-                                        {{r.outlet.contact.location.locality_1[0]}}, {{r.outlet.contact.location.city}}
-                                    </small>
-                                </div>
-                                <div class="margin-left-pt8">
-                                    <i class="fa fa-gift text-orange"></i> 
-                                    <small>
-                                        {{r.reward.rewardified}}
-                                    </small>
-                                </div>
+                    </div>
+                    <!-- Welcome Block -->
+                    <div class="col-md-6">
+                        <div class="headline">
+                            <h2>The Twyst FAQs</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <blockquote class="hero-unify">
+                                    <h5><strong>Why should I use Twyst?</strong></h5>
+                                    <p>Wish you got a little bit more for frequenting your favourite joints? Want to get more out of eating out? Then Twyst is for you.</p>
+                                    <p>On Twyst, you can now earn rewards at some of the coolest restaurants, cafes and pubs in town based on how often you visit, special invites and privileges for being a loyal customer, and overall getting the star treatment that you deserve!</p>
+                                    <p>What, still wondering?</p>
+                                </blockquote>
+                                    <!--
+                                    <blockquote class="hero-unify">
+                                        <h5><strong>How does it work?</strong></h5>
+                                        <ul>
+                                            <li>Look up partner outlets on the Twyst app (get Twyst for Android).</li>
+                                            <li>Check-in when you visit a Twyst location by scanning the QR code at the outlet. You can check-in and qualify for rewards even when you order in!</li>
+                                            <li>Receive a voucher each time you qualify for a reward & redeem the voucher to enjoy your reward.</li>
+                                        </ul>
+                                        <p>There's quite a bit more to do on the app, get it and find out.</p>
+                                    </blockquote>
+                                -->
+                                <blockquote class="hero-unify">
+                                    <h5><strong> I don't have an iPhone or an Android phone. Does that mean no Twyst rewards for me?</strong></h5>
+                                    <p>Of course not! You can fill out a visit card to check-in at outlets that are running reward programs on Twyst. You will receive your reward notifications by SMS. Just ask the outlet staff to help!</p>
+                                    <p>It works better with the app of course, you can discover more locations and rewards, check-in and track rewards, receive timely notifications and stay connected much better.</p>
+                                </blockquote>
+                                <blockquote class="hero-unify">
+                                    <h5><strong>Which locations have Twyst rewards?</strong></h5>
+                                    <p>We have a select set of locations in Gurgaon (and a few in Delhi) on Twyst right now, and are adding more all the time. Get the app to find out where Twyst rewards are available.</p>
+                                </blockquote>
                             </div>
                         </div>
-                    </a>
+
+
+                    </div>
+                    <!--/col-md-4-->
                 </div>
-            </div>
-            <div class="row text-center">
-                <button class="btn btn-md twyst-orange" ng-click="loadMore()" ng-if="total > lim">More</button>
             </div>
         </div>
     </div>
@@ -240,57 +268,13 @@
                 </div>
                 <div class="col-md-6">
                     <a href="/">
-                        <img id="logo-footer" src="assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
+                        <img id="logo-footer" src="../assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
                     </a>
                 </div>
             </div>
             <!--/row-->
         </div>
-        <!--/container-->
-        <div class="get_the_app_module row">
-            <div class="col-md-12">
-
-            </div>
-        </div>
     </div>
-    <div class="footer navbar-fixed-bottom hidden-md hidden-lg twyst-background" ng-if="getMobileOperatingSystem() === 'Android'">
-        <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android">
-            <div class="text-center download-footer">
-              <span class="color_white">GET THE APP </span>              
-                <img src="/outlets/assets/img/images/googleplay.png" class="google-play-xs">
-            </div>
-        </a>
-        <!-- <div class="text-center"  ng-if="getMobileOperatingSystem() === 'iOS'">
-          <span class="color_white padding-top-pt7">GET THE APP</span>
-          <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4">
-            <img src="/outlets/assets/img/images/appstore.png" class="google-play-xs">
-          </a>
-        </div> -->
-        <style type="text/css">
-            .twyst-background {
-                background-color: #f6921e;
-            }
-            .color_white {
-                color: white;
-            }
-            .google-play-xs {
-                height: 2.7em;
-            }
-            .download-footer {
-                height: 0.3em;
-                margin-top: -0.9em;
-            }
-        </style>
-    </div>
-    <!--/copyright-->
-    <!--=== End Copyright ===-->
-
-    <!-- JS Global Compulsory -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
-    <script src="assets/js/discoverApp.js"></script>
 </body>
 
 </html>
