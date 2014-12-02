@@ -149,6 +149,14 @@ twystApp.config(function ($routeProvider, $httpProvider) {
             controller  : 'groupProgramUpdateCtrl',
             templateUrl : '/merchant/templates/group_program/update.html'
         }).
+        when('/birth_anniv_program/create/',{
+            controller : 'BirthAnnivProgramCtrl',
+            templateUrl : '/merchant/templates/birth_anniv_program/create.html'
+        }).
+        when('/birth_anniv_program/update/:birth_anniv_program_id'{
+            controller : 'BirthAnnivProgramUpdateCtrl',
+            templateUrl: '/merchant/templates/birth_anniv_program/update.html'
+        }).
         when('/error', {
             templateUrl : '/merchant/templates/anon/error.html'
         }).

@@ -32,6 +32,9 @@
                     <th>
                         Status
                     </th>
+                    <th>
+                        Featured
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +63,9 @@
                             Archived
                           </button>
                         </div>
+                    </td>
+                    <td>
+                        <input type="checkbox" ng-model="c.outlet_meta.featured" ng-change="initChangeFeature(c._id, c.outlet_meta.featured)">
                     </td>
                 </tr>
             </tbody>
