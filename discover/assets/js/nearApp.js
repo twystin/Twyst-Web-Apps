@@ -31,7 +31,7 @@ angular.module('nearApp', ['uiGmapgoogle-maps'])
     return nearSvc;
 })
 .controller('NearCtrl', function($scope, $window, nearSvc) {
-    $scope.map = { center: { latitude: null, longitude: null }, zoom: 12 };
+    $scope.map = { center: { latitude: null, longitude: null }, zoom: 13 };
     $scope.marker = {
         id: 0,
         coords: {
@@ -43,9 +43,9 @@ angular.module('nearApp', ['uiGmapgoogle-maps'])
 
     $scope.getLocation = function () {
         var options = {
-            enableHighAccuracy: true,
-            timeout: 60000,
-            maximumAge: 0
+            enableHighAccuracy: false,
+            timeout: 10000,
+            maximumAge: 90000
         };
         navigator.geolocation.getCurrentPosition (
             locationSuccess, 
@@ -55,6 +55,7 @@ angular.module('nearApp', ['uiGmapgoogle-maps'])
     }
 
     function locationSuccess(position) {
+        $scope.success = position;
         $scope.map.center = position.coords;
         $scope.marker.coords = position.coords;
         $scope.$apply(function () {
@@ -67,6 +68,8 @@ angular.module('nearApp', ['uiGmapgoogle-maps'])
     }
 
     function locationErrorHandler(error) {
+        $scope.error = error;
+        $scope.$apply();
         var error_message;
         switch(error.code) {
             case 1: 

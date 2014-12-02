@@ -138,7 +138,7 @@
             </div>
             <!--Profile Blog--> 
             <div class="row">
-                <div class="col-md-4 col-lg-4 col-xs-12 col-sm-6 padding-bottom-featured-outlets-grid" ng-repeat="r in results" ng-mouseenter="r.show_reward = true" ng-mouseleave="r.show_reward = false">
+                <div class="col-md-4 col-lg-4 col-xs-12 col-sm-6 padding-bottom-featured-outlets-grid" ng-repeat="r in results">
                     <a href="/{{r.outlet.shortUrl[0]}}">
                         <div class="profile-blog outlet-featured-thumbnail-reward" background-image="{{r.outlet._id + '/' + 'background'}}">
                             <div class="clearfix"></div>
@@ -150,13 +150,7 @@
                                         {{r.outlet.contact.location.locality_1[0]}}, {{r.outlet.contact.location.city}}
                                     </small>
                                 </div>
-                                <div class="margin-left-pt8 hidden-xs hidden-sm"  ng-show="r.show_reward">
-                                    <i class="fa fa-gift text-orange"></i> 
-                                    <small>
-                                        {{r.reward.rewardified}}
-                                    </small>
-                                </div>
-                                <div class="margin-left-pt8 hidden-md hidden-lg">
+                                <div class="margin-left-pt8">
                                     <i class="fa fa-gift text-orange"></i> 
                                     <small>
                                         {{r.reward.rewardified}}
@@ -285,7 +279,7 @@
     <!--=== End Copyright ===-->
 
     <!-- JS Global Compulsory -->
-    <script data-require="angular.js@*" data-semver="1.2.13" src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
