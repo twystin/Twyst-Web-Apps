@@ -168,7 +168,7 @@
                     <a href ng-click="q = null;getFeatured()" id="searchClear">clear</a>
                 </div>
             </div>
-            <div ng-if="results.length">
+            <div>
                 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
                     <ui-gmap-marker ng-repeat="r in results" icon="r.icon" coords="r.outlet.contact.location.coords" options="marker.options" idkey="r.outlet._id" click="visible = true;">
                         <ui-gmap-window options="windowOptions" closeClick="visible = false">
@@ -190,6 +190,13 @@
                                         </small>
                                     </div>
                                 </a>
+                            </div>
+                        </ui-gmap-window>
+                    <ui-gmap-marker/>
+                    <ui-gmap-marker coords="map.center" options="map.options" idkey="11" click="visible = true;" icon="map.icon">
+                        <ui-gmap-window options="windowOptions" closeClick="visible = false">
+                            <div style="width: 5em !important">
+                                <h4>You are here!</h4>
                             </div>
                         </ui-gmap-window>
                     <ui-gmap-marker/>

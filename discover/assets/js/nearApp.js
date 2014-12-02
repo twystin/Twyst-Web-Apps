@@ -31,7 +31,13 @@ angular.module('nearApp', ['uiGmapgoogle-maps'])
     return nearSvc;
 })
 .controller('NearCtrl', function($scope, $window, nearSvc) {
-    $scope.map = { center: { latitude: null, longitude: null }, zoom: 13 };
+    $scope.map = { 
+        center: { 
+            latitude: null, 
+            longitude: null 
+        }, 
+        zoom: 13
+    };
     $scope.marker = {
         id: 0,
         coords: {
