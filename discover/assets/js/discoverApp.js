@@ -50,6 +50,14 @@ angular.module('discoverApp', [])
         return false;
     }
 
+    $scope.isNew = function (outlet) {
+        var date = new Date(outlet.basics.created_at).getTime() + 1296000000;
+        if(date >= new Date().getTime()) {
+            return true;
+        }
+        return false;
+    }
+
     $scope.search = function () {
         init();
         $scope.getFeatured();
