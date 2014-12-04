@@ -13,13 +13,31 @@
 				<div class="alert alert-danger">No programs created yet!</div>
 				<a class="btn btn-large btn-info" href="#/offers/create/loyalty">Create a program</a>
 			</div>	
-			<div class="span10" ng-show="showAnalytics()">
-				<div class="span6">
+			<div class="span12" ng-show="showAnalytics()">
+				<div class="span4">
 					<div class="span12">       
 	                    <div class="lead well">
-	                        <center>Total Unique Customers: <b class="twyst-font">{{checkins_count}}</b></center>
+	                        <center>Total Unique Customers: </center></br><center><i class="fa fa-user fa-3x"></i><b class="twyst-font voffset">&nbsp;{{checkins_count}}</b></center>
 	                    </div>
 	                </div>
+				</div>
+				<div class="span4">
+					<div class="span12">       
+	                    <div class="lead well">
+	                        <center>Total Vouchers Redeemed: </center></br><center><i class="fa fa-gift fa-red fa-3x"></i><b class="twyst-font voffset">&nbsp;{{vouchers_count}}</b></center>
+	                    </div>
+	                </div>
+				</div>
+				<div class="span4">
+					<div class="span12">       
+	                    <div class="lead well">
+	                        <center>Incremental Revenue: </center></br><center><i class="fa fa-inr fa-orange fa-3x"></i><b class="twyst-font voffset">&nbsp;{{dashboard_info.roi}}</b></center>
+	                    </div>
+	                </div>
+				</div>
+			</div>
+			<div class="span12" ng-show="showAnalytics()">
+				<div class="span6">
 					<div class="span12">
 						<div class="lead">
 							Daily Checkins
@@ -30,11 +48,6 @@
 					</div>
 				</div>
 				<div class="span6">
-					<div class="span12">       
-	                    <div class="lead well">
-	                        <center>Total Vouchers Redeemed: <b class="twyst-font">{{vouchers_count}}</b></center>
-	                    </div>
-	                </div>
 					<div class="span12">		
 						<div class="lead">
 							Vouchers Generated
@@ -42,7 +55,7 @@
 					</div>				
 					<div class="span12">
 						<canvas barchart options="options" data="analytics_info.chart2" width="500" height="300"></canvas>
-					</div>				
+					</div>
 				</div>
 			</div>
 		</div>
