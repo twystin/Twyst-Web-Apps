@@ -27,6 +27,8 @@ twystApp.controller('DashboardCtrl', function ($scope, $location, $http, authSer
     };
 
     $scope.showAnalytics = function () {
-        return !!$scope.dashboard_info.offer_count && !!$scope.dashboard_info.outlet_count;
+        console.log($scope.dashboard_info);
+        return !!$scope.dashboard_info.offer_count && !!$scope.dashboard_info.outlet_count 
+        && !!$scope.dashboard_info.roi && !!$scope.dashboard_info.repeat_rate;
     };
 });
