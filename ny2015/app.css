@@ -2,7 +2,8 @@ body {
 	overflow-x: hidden;
 }
 .party-font {
-	font-size: 250%;
+	font-size: 150%;
+	line-height: 1.5em;
 }
 .y-image {
 	height: 1em;
