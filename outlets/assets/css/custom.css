@@ -336,9 +336,7 @@ html {
     overflow: auto;
     position: absolute;
     margin: auto;
-    margin-top: 2em;
-    max-height: 800px;
-    max-width: 1200px;
+    margin-top: 2em;;
 }
 .modal-content {
     background-color: transparent;
