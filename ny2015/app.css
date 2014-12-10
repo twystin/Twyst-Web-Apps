@@ -48,9 +48,15 @@ body {
 }
 
 @media (max-width: 667px) {
+	body {
+		overflow-x: hidden;
+	}
+	html {
+		overflow-x: hidden;
+	}
 	.featured-margin-xs {
-		margin-left: .8em;
-		margin-right: .8em;
+		margin-left: .5em;
+		margin-right: .5em;
 	}
 	.party-font {
 		font-size: 120%;
