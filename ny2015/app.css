@@ -1,0 +1,105 @@
+body {
+	overflow-x: hidden;
+}
+.party-font {
+	font-size: 250%;
+}
+.y-image {
+	height: 1em;
+}
+.text-orange {
+    color: orange;
+}
+.margin-left-pt8 {
+    margin-left: 0.8em;
+}
+.name-location-background {
+    background: #262626;
+    color: white !important;
+    opacity: 0.75;
+    bottom: 2.7em;
+    width: 85%;
+    position:absolute;
+}
+.outlet-featured-thumbnail-reward {
+    display:block;
+    height: 16em;
+}
+.padding-bottom-featured-outlets-grid {
+    padding-bottom: 2em;
+}
+.twyst-orange {
+	color: #f6921e;
+}
+.footer {
+	margin-top: 0em;
+}
+.body-div {
+	margin-top: 10em;
+	min-height: 30em;
+}
+.ng-cloak { 
+    display:none; 
+}
+.headline h2, .headline h3, .headline h4 {
+    border-bottom: 2px solid #f6921e;
+}
+
+@media (max-width: 667px) {
+	.featured-margin-xs {
+		margin-left: .8em;
+		margin-right: .8em;
+	}
+	.party-font {
+		font-size: 130%;
+	}
+	.share-button {
+		margin-top: 10.3em;
+	}
+	.background-top {
+		background: url('./NY2015_BG_xs.png');
+		height: 13em;
+		margin-top: 3em;
+		background-size: cover;
+		background-position: center;
+	}
+	.new-year-head-text {
+		margin-top: 0.2em;
+		margin-bottom: 0.2em;
+		font-size: 180%;
+		text-align: center;
+	}
+	.new-year-head {
+		background: gray;
+		margin-top: 8%;
+		margin-bottom: 2%;
+		opacity: 0.9;
+	    color: white !important;
+	}
+}
+@media (min-width: 668px) {
+	.share-button {
+		margin-top: 17.3em;
+	}
+	.background-top {
+		background: url('./NY2015_BG.png');
+		height: 20em;
+		margin-top: 3em;
+		background-size: cover;
+		background-position: center;
+	}
+	.new-year-head-text {
+		margin-top: 0.2em;
+		margin-bottom: 0.2em;
+		font-size: 300%;
+		line-height: 120%;
+		text-align: center;
+	}
+	.new-year-head {
+		background: gray;
+		margin-top: 6%;
+		margin-bottom: 1%;
+		opacity: 0.9;
+	    color: white !important;
+	}
+}
