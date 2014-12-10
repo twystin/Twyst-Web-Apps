@@ -4,6 +4,7 @@ body {
 .party-font {
 	font-size: 150%;
 	line-height: 1.5em;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 .y-image {
 	height: 1em;
@@ -52,7 +53,8 @@ body {
 		margin-right: .8em;
 	}
 	.party-font {
-		font-size: 130%;
+		font-size: 120%;
+		font-family: "Trebuchet MS", Helvetica, sans-serif;
 	}
 	.share-button {
 		margin-top: 10.3em;
