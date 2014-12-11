@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h3 class="modal-title">Submit your request!</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+    	<div class="col-md-2">
+    		Name
+    	</div>
+    	<div class="col-md-10">
+    		<input type="text" ng-model="user.name">
+    	</div>
+    </div>
+    <br/>
+    <div class="row">
+    	<div class="col-md-2">
+    		Email
+    	</div>
+    	<div class="col-md-10">
+    		<input type="text" ng-model="user.email">
+    	</div>
+    </div>
+    <br/>
+    <div class="row">
+    	<div class="col-md-2">
+    		Phone
+    	</div>
+    	<div class="col-md-10">
+    		<input type="text" ng-model="user.phone">
+    	</div>
+    </div>
+    <br/>
+    <div class="row">
+    	<div class="col-md-2">
+    		D.O.B
+    	</div>
+    	<div ng-controller="DatePickerCtrl" class="col-md-10">
+            <input id="appendedInput" type="text" datepicker-popup="{{format}}" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start date" type="date" style="margin:0px;" ng-model="program.validity.earn_start" ng-click="open()"/>
+            <button class="btn" ng-click="open()"><i class="fa fa-calendar"></i></button>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+    	<div class="col-md-12">
+    		We will get back to you via email/SMS with your confirmation.
+    	</div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="addEntry()">OK</button>
+    <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
+</div>
