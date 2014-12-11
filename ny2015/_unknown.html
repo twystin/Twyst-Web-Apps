@@ -55,7 +55,7 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="addEntry()" ng-show="!done" ng-enabled="user.name && user.email && user.phone && user.dob && user.unknown">OK</button>
+    <button class="btn btn-primary" ng-click="addEntry()" ng-show="!done" ng-disabled="!user.name || !user.email || !user.phone || !user.dob || !user.unknown">OK</button>
     <button class="btn btn-warning" ng-click="$dismiss();$close();" ng-show="!done">Cancel</button>
     <button class="btn btn-warning" ng-show="done" ng-click="fire();$dismiss();$close();">Close</button>
 </div>

@@ -1,3 +1,6 @@
+.modal-open .modal {
+	background-color: rgba(246, 146, 30, 0.7) !important;
+}
 .btn-twyst {
 	background: #f6921e;
 	color: white;
