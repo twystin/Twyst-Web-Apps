@@ -91,7 +91,9 @@ angular.module('newYearApp', ['ui.bootstrap'])
     }
 
     $scope.addEntry = function () {
-        $scope.user.outlet = $scope.outlet._id;
+        if(!$scope.user.unknown) {
+            $scope.user.outlet = $scope.outlet._id;
+        }
         newYearSvc.addEntry($scope.user).then(function (data) {
             $scope.user = {};
             $scope.done = true;
