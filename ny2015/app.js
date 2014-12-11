@@ -101,7 +101,6 @@ angular.module('newYearApp', ['ui.bootstrap'])
     }
 
     $scope.fire = function () {
-        $scope.user = {};
         $scope.done = false;
     }
 
