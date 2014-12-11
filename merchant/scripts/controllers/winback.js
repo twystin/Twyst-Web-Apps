@@ -49,103 +49,16 @@ twystApp.factory('winbackService', function ($http, $q) {
 
     return winSvc;
 }).
-controller('WinbackCtrl', function ($scope, $location, $routeParams, winbackService) {
-    $scope.winback = {};
-    $scope.winback.offers = [{
-        basics: {
-
-        },
-        reward_applicability: {
-
-        }
-    }];
-
-    $scope.reward_check = [
-        {"text": "Discount", value:"discount"},
-        {"text": "Flat off", value:"flat"},
-        {"text": "Free ", value:"free"},
-        {"text": "Buy one get one ", value:"buy_one_get_one"},
-        {"text": "Happy hours", value:"happyhours"},
-        {"text": "Reduced price ", value:"reduced"},
-        {"text": "Custom ", value:"custom"}
-    ];
-    $scope.preserve_reward = null;
-    $scope.selected_reward = $scope.reward_check[0];
-
-
-    $scope.day_of_week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday','all days'];
-
-    $scope.time_of_day = ['breakfast', 'brunch', 'lunch', 'evening', 'dinner', 'all day'];
+controller('WinbackCtrl', function ($http, outletService, authService, OPERATE_HOURS, $scope, $location, $routeParams, winbackService) {
+    $scope.winback = {
+        outlets: []
+    };
+    $scope.avail_hours = OPERATE_HOURS;
+    $scope.validationArray = [true, true, true, true, true, true, true, true];
+    $scope.week = ['monday' ,'tuesday' ,'wednesday' ,'thursday' ,'friday', 'saturday', 'sunday'];
     
-    $scope.rewardCheckedDays = ['all days'];
-    $scope.rewardCheckedTime = ['all day'];
-
-    $scope.checkinCheckedDays = [];
-    $scope.checkinCheckedTime = [];
-
-    $scope.rewardToggleCheckDay = function (fruit) {
-        if(fruit === 'all days') {
-            if($scope.rewardCheckedDays.indexOf(fruit) >= 0) {
-                $scope.rewardCheckedDays.splice($scope.rewardCheckedDays.indexOf(fruit), 1);
-            }
-            else {
-                $scope.rewardCheckedDays = ['all days'];
-            }
-        }
-        else {
-            if($scope.rewardCheckedDays.indexOf('all days') >= 0) {
-                $scope.rewardCheckedDays.splice($scope.rewardCheckedDays.indexOf('all days'), 1);
-            }
-            if ($scope.rewardCheckedDays.indexOf(fruit) === -1) {
-                $scope.rewardCheckedDays.push(fruit);
-            } else {
-                $scope.rewardCheckedDays.splice($scope.rewardCheckedDays.indexOf(fruit), 1);
-            }
-        }
-    };
-
-    $scope.rewardToggleCheckTime = function (fruit) {
-        if(fruit === 'all day') {
-            if($scope.rewardCheckedTime.indexOf(fruit) >= 0) {
-                $scope.rewardCheckedTime.splice($scope.rewardCheckedTime.indexOf(fruit), 1);
-            }
-            else {
-                $scope.rewardCheckedTime = ['all day'];
-            }
-        }
-        else {
-            if($scope.rewardCheckedTime.indexOf('all day') >= 0) {
-                $scope.rewardCheckedTime.splice($scope.rewardCheckedTime.indexOf('all day'), 1);
-            }
-            if ($scope.rewardCheckedTime.indexOf(fruit) === -1) {
-                $scope.rewardCheckedTime.push(fruit);
-            } else {
-                $scope.rewardCheckedTime.splice($scope.rewardCheckedTime.indexOf(fruit), 1);
-            }
-        }
-    };
-
-    $scope.correctReward = function (param) {
-        $scope.selected_reward = param;
-        if(!$scope.winback.offers[0]._id) {
-            $scope.offer.reward = {};
-        } else {
-            if($scope.winback.offers[0].reward) {
-                var key = Object.keys($scope.preserve_reward)[0];
-                if(param.value === key) {
-                    $scope.winback.offers[0].reward = $scope.preserve_reward;
-                }
-                else {
-                    $scope.winback.offers[0].reward = {};
-                }
-            } else {
-                $scope.winback.offers[0].reward = {};
-            }
-        }
-    }
-
     $scope.create = function () {
-        $scope.winback.offers = getOffer();
+        $scope.winback.avail_hours = $scope.avail_hours;
         winbackService.create($scope.winback).then(function(data) {
             if(data.status = "success"){
                 $location.path("/winback");
@@ -154,7 +67,7 @@ controller('WinbackCtrl', function ($scope, $location, $routeParams, winbackServ
     };
 
     $scope.update = function () {
-        $scope.winback.offers = getOffer();
+        $scope.winback.avail_hours = $scope.avail_hours;
         winbackService.update($scope.winback).then(function(data) {
             if(data.status = "success"){
                 $location.path("/winback");
@@ -172,39 +85,109 @@ controller('WinbackCtrl', function ($scope, $location, $routeParams, winbackServ
         var id = $routeParams.winback_id;
         winbackService.readOne(id).then(function(data) {
             $scope.winback = data.info;
-            setOfferAttr($scope.winback.offers);
+            $scope.avail_hours = $scope.winback.avail_hours;
+            $scope.winback.outlets = $scope.winback.outlets.map(function (o) {
+                return o._id;
+            })
         });  
     };
 
-    function setOfferAttr (offers) {
-        if(offers && offers.length > 0) {
-            var o = offers[0];
-            if(!o.reward) {
-                $scope.selected_reward = $scope.reward_check[0];
+    $scope.timingsValidation = function () {
+        var flag = 0;
+        for (var i = 0; i < 7; i++){
+            flag = 0;
+            if ($scope.avail_hours[$scope.week[i]].closed == false && 
+                $scope.avail_hours[$scope.week[i]].timings.length > 1){
+                for (var j = 0; j < $scope.avail_hours[$scope.week[i]].timings.length-1; j++){
+                    for (var k = j + 1 ; k < $scope.avail_hours[$scope.week[i]].timings.length; k++){
+                        if ((sendTime(1, i, j) < sendTime(0, i, k)) && (sendTime(0, i, j) > sendTime(1, i, k))){
+                            
+                            flag=1;
+                        }
+                    }
+                }
             }
-            else {
-                var l = Object.keys(o.reward)[0];
-                var ll = _.find($scope.reward_check, function (reward){return reward.value === l});
-                $scope.selected_reward = ll;
-                $scope.preserve_reward = o.reward;
-            }
-            $scope.rewardCheckedTime = o.reward_applicability.time_of_day;
-            $scope.rewardCheckedDays = o.reward_applicability.day_of_week;
+        if (flag==1){
+            $scope.validationArray[i] = false;
+        }
+        else{
+            $scope.validationArray[i] = true;
+        }
+        }
+
+    }
+
+    function sendTime(i, w, t){
+        //1 for open
+        if (i==1){
+            return ($scope.avail_hours[$scope.week[w]].timings[t].open.hr * 60 *1 +
+            $scope.avail_hours[$scope.week[w]].timings[t].open.min * 1);
+        }
+        //0 for close
+        else if (i==0){
+            return ($scope.avail_hours[$scope.week[w]].timings[t].close.hr * 60 *1 +
+            $scope.avail_hours[$scope.week[w]].timings[t].close.min * 1);
         }
     }
 
-    function getOffer() {
-        var offers = [],
-            o = $scope.winback.offers[0];
-        o.basics.title = $scope.winback.name;
-        o.basics.description = $scope.winback.description;
-        o.reward_applicability = {};
-        o.reward_applicability.time_of_day = $scope.rewardCheckedTime;
-        o.reward_applicability.day_of_week = $scope.rewardCheckedDays;
-        if($scope.preserve_reward && !o.reward) {
-            o.reward = $scope.preserve_reward;
+    $scope.applyToAllDays = function(time) {
+        for(var i = 0; i < $scope.week.length; i++) {
+            $scope.avail_hours[$scope.week[i]].closed = time.closed;
+            var timings = [];
+            for(var j = 0; j < time.timings.length; j++) {
+                var t = {
+                    open: {
+                        hr: time.timings[j].open.hr,
+                        min: time.timings[j].open.min
+                    },
+                    close: {
+                        hr: time.timings[j].close.hr,
+                        min: time.timings[j].close.min
+                    }
+                };
+                timings.push(t);
+            }
+            $scope.avail_hours[$scope.week[i]].timings = timings;
         }
-        offers.push(o);
-        return offers;
     }
+
+    $scope.toggleOutlets = function (fruit) {
+        if ($scope.program.outlets.indexOf(fruit) === -1) {
+            $scope.program.outlets.push(fruit);
+        } else {
+            $scope.program.outlets.splice($scope.program.outlets.indexOf(fruit), 1);
+        }
+
+    };
+
+    $scope.outletQuery = function() {
+        $scope.auth = authService.getAuthStatus();
+        var user_id = $scope.auth._id;
+        outletService.query($scope, $http, $location, user_id);
+    };
+
+    $scope.outletQuery = function() {
+        $scope.auth = authService.getAuthStatus();
+        var user_id = $scope.auth._id;
+        outletService.query($scope, $http, $location, user_id);
+    };
+
+    $scope.outlet_for = {};
+    $scope.$watch('outlet_for._timings', function () {
+        if(!$scope.outlet_for._timings || $scope.outlet_for._timings === "NONE") {
+            $scope.avail_hours = OPERATE_HOURS;
+        }
+        else {
+            $scope.avail_hours = $scope.outlet_for._timings.business_hours;
+        }
+    }, true);
+
+    $scope.toggleOutlets = function (fruit) {
+        if ($scope.winback.outlets.indexOf(fruit) === -1) {
+            $scope.winback.outlets.push(fruit);
+        } else {
+            $scope.winback.outlets.splice($scope.winback.outlets.indexOf(fruit), 1);
+        }
+
+    };
 });

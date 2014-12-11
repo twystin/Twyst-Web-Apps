@@ -10,7 +10,6 @@ twystApp.controller('RoleCtrl', function ($scope, $location, authService) {
 
     var auth = authService.getAuthStatus();
     var role;
-    console.log(auth);
     
     if(auth.role) {
         role = auth.role;

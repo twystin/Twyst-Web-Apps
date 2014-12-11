@@ -111,5 +111,4 @@ twystApp.controller('DeviceCtrl', function($scope, $window) {
     if($scope.info.od === 'iOS') {
         $scope.device = $scope.info.os;
     }
-    console.log($scope.device);
 });

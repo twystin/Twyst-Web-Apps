@@ -28,7 +28,7 @@ twystApp.controller('PublicCtrl', function ($scope, $http, $routeParams) {
         .success(function (data) {
             $scope.outlet = JSON.parse(data.info);
         }).error(function (data) {
-            console.log(data);;
+            console.log(data);
         });
 
         var offer_id = $routeParams.offer;
@@ -36,7 +36,7 @@ twystApp.controller('PublicCtrl', function ($scope, $http, $routeParams) {
         .success(function (data) {
             $scope.offer = JSON.parse(data.info);
         }).error(function (data) {
-            console.log(data);;
+            console.log(data);
         });        
     };
 });

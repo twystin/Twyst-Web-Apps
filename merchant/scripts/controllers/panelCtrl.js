@@ -577,7 +577,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             programs.forEach (function (program) {
                 if(program.status === 'active') {
                     var active_program_running = getProgramRunningOnThisOutlet(program, $scope.outlet);
-                    console.log(active_program_running)
+            
                     if(active_program_running) {
                         program_running_on_outlet = active_program_running;
                     }
@@ -605,7 +605,6 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         }
         var p = null;
         program.outlets.forEach(function (o) {
-            console.log(o._id.toString() === outlet._id.toString())
             if(o._id.toString() === outlet._id.toString()) {
                 p = program;
             }

@@ -258,7 +258,6 @@ twystApp.controller('OutletCtrl',
             });
             }, function(error) {
                 $scope.message="Error getting location automatically. Please enter co-ordinates manually.";
-                console.log(error);
         });
     };
 

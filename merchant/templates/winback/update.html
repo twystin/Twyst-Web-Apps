@@ -1,6 +1,6 @@
-<div class="row-fluid" style="min-height:580px;" ng-init="readOne()">	
+<div class="row-fluid" style="min-height:580px;" ng-init="readOne();outletQuery()">	
 	<div class="lead row-fluid offset1 span10" style="padding-top:30px;">
-		<h2>Update winback program</h2>
+		<h2>Update a winback program</h2>
 	</div>
 	<div class="row-fluid">
 		<div class="row-fluid offset1 span10">
@@ -13,13 +13,31 @@
 				</div>
 			</div>
 			<div class="row-fluid">
-	                <div class="row-fluid span2">
-	                    <label>Description</label>
-	                </div>
-	                <div class="row-fluid span10">
-	                    <textarea id="title" name="title" placeholder="Eg: ..." class="span4" type="text" ng-model="winback.description"></textarea>
-	                </div>
-	            </div>
+				<div>
+					Select Outlets
+				</div>
+				<div class="span10 offset2" ng-repeat="fruit in all_outlets">
+					<span>
+						<input id="checkbox" type='checkbox' ng-checked="winback.outlets.indexOf(fruit._id) != -1" ng-click="toggleOutlets(fruit._id)"> {{fruit.basics.name}}, {{fruit.contact.location.locality_1.toString()}}
+					</span> 
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
+					Program Status
+				</div>
+				<div class="span10">
+					 <select ng-options="o for o in ['active', 'archived']" ng-model="winback.status"></select>
+				</div>
+			</div>
+			<div class="row-fluid">
+                <div class="row-fluid span2">
+                    Description
+                </div>
+                <div class="row-fluid span10">
+                    <textarea id="title" name="title" placeholder="Eg: ..." class="span4" type="text" ng-model="winback.description"></textarea>
+                </div>
+            </div>
 			<div class="row-fluid">
 				<div class="span2">
 					Lifetime Check-ins
@@ -73,135 +91,13 @@
 					<input required type="text" ng-model="winback.validity.voucher_valid_days" class="span1"> 
 				</div>
 			</div>
-			<div class="row-fluid" ng-repeat="o in winback.offers">
+			<div class="row-fluid">
 				<div class="row-fluid">
 	                <div class="row-fluid span2">
-	                    Choose a Reward
+	                    Reward
 	                </div>
 	                <div class="row-fluid span10">
-	                    <div class="row-fluid span3">
-	                        <label ng-repeat="n in reward_check">
-	                            <input type="radio" ng-model="$parent.selected_reward" ng-value="n" ng-change="correctReward($parent.selected_reward)"/>&nbsp;&nbsp;{{n.text}}
-	                        </label>
-	                    </div>
-	                    <div class="row-fluid span6">
-	                        <div id="percentageDiscount" ng-if="selected_reward.value === 'discount'">
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span4">Percentage discount</div>
-	                                <div class="row-fluid span8">
-	                                    <select id="title" name="title" class="span8" ng-model="o.reward.discount.percentage">
-	                                        <option ng-repeat="a in getRange(5, 101, 5)" ng-value="{{a}}">{{a}}</option>
-	                                    </select>
-	                                </div>
-	                            </div>
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span4">Maximum discount</div>
-	                                <div class="row-fluid span8">
-	                                    <input id="title" name="title" placeholder="Eg: 1500" class="span8" type="text" ng-model="o.reward.discount.max">
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div id="flatOff" ng-if="selected_reward.value === 'flat'">
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span5">Amount off</div>
-	                                <div class="row-fluid span7">
-	                                    <input id="title" name="title" placeholder="Eg: 200" class="span8" type="text" ng-model="o.reward.flat.off">
-	                                </div>
-	                            </div>
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span5">On a minimum spend</div>
-	                                <div class="row-fluid span7">
-	                                    <input id="title" name="title" placeholder="Eg: 1500" class="span8" type="text" ng-model="o.reward.flat.spend">
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div id="free" ng-if="selected_reward.value === 'free'">
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span3">Get a free</div>
-	                                <div class="row-fluid span9">
-	                                    <input id="title" name="title" placeholder="e.g. Dessert" class="span8" type="text" ng-model="o.reward.free.title">
-	                                </div>
-	                            </div>
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span3">With</div>
-	                                <div class="row-fluid span9">
-	                                    <input id="title" name="title" placeholder="e.g. Dessert" class="span8" type="text" ng-model="o.reward.free._with">
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div id="buy_one_get_one" ng-if="selected_reward.value === 'buy_one_get_one'">
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span3">Buy one Get one</div>
-	                                <div class="row-fluid span9">
-	                                    <input id="title" name="title" placeholder="e.g. Dessert" class="span8" type="text" ng-model="o.reward.buy_one_get_one.title">
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div id="happyHours" ng-if="selected_reward.value === 'happyhours'">
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span5">Extension happy hours by</div>
-	                                <div class="row-fluid span7">
-	                                    <select id="title" name="title" class="span7" ng-model="o.reward.happyhours.extension">
-	                                        <option value="30 minutes">30 minutes</option>
-	                                        <option value="60 minutes">60 minuutes</option>
-	                                        <option value="90 minutes">90 minutes</option>
-	                                        <option value="2 hours">2 hours</option>
-	                                        <option value="3 hours">3 hours</option>
-	                                        <option value="All day">All day</option>
-	                                    </select>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div id="reducedPrice" ng-if="selected_reward.value === 'reduced'">
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span2">Get</div>
-	                                <div class="row-fluid span10">
-	                                    <input id="title" name="title" placeholder="Eg: buffet lunch" class="span8" type="text" ng-model="o.reward.reduced.what">
-	                                </div>
-	                            </div>
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span2">Worth Rs</div>
-	                                <div class="row-fluid span3">
-	                                    <input id="title" name="title" placeholder="Eg: 1500" class="span8" type="text" ng-model="o.reward.reduced.worth">
-	                                </div>
-	                                <div class="row-fluid span2" style="margin:0px">For Rs</div>
-	                                <div class="row-fluid span3" style="margin-left:4px">
-	                                    <input id="title" name="title" placeholder="Eg: 250." class="span8" type="text" ng-model="o.reward.reduced.for_what">
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div id="reducedPrice" ng-if="selected_reward.value === 'custom'">
-	                            <div class="row-fluid span12" style="margin:0px">
-	                                <div class="row-fluid span4">Customized reward</div>
-	                                <div class="row-fluid span8">
-	                                    <textarea id="title" name="title" placeholder="Eg: Mothers get 50% off on mothers day" class="span12" type="text" ng-model="o.reward.custom.text">
-	                                    </textarea>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="row-fluid">
-	            	<div class="row-fluid span2" style="margin:0px">
-	                    Reward valid on
-	                </div>
-	                <div class="row-fluid span10">
-	                    <div class="row-fluid span2" style="margin:0px" ng-repeat="fruit in time_of_day">
-	                        <input id="checkbox" type='checkbox' ng-checked="rewardCheckedTime.indexOf(fruit) != -1" ng-click="rewardToggleCheckTime(fruit)">{{fruit}}
-	                        <br>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="row-fluid">
-	            	<div class="row-fluid span2" style="margin:0px">
-	                    Reward can be used on
-	                </div>
-	                <div class="row-fluid span10">
-	                    <div class="row-fluid span2" style="margin:0px" ng-repeat="fruit in day_of_week">
-	                        <input id="checkbox" type='checkbox' ng-checked="rewardCheckedDays.indexOf(fruit) != -1" ng-click="rewardToggleCheckDay(fruit)">{{fruit}}
-	                        <br>
-	                    </div>
+	                	<textarea required ng-model="winback.reward"></textarea>
 	                </div>
 	            </div>
 	            <div class="row-fluid">
@@ -209,13 +105,100 @@
 	                    <label>Terms & Conditions</label>
 	                </div>
 	                <div class="row-fluid span10">
-	                    <textarea id="title" name="title" placeholder="Eg: (maximum of 1000 Rs.)" class="span4" type="text" ng-model="o.terms"></textarea>
+	                    <textarea id="title" name="title" placeholder="Eg: (maximum of 1000 Rs.)" class="span4" type="text" ng-model="winback.terms"></textarea>
+	                </div>
+	            </div>
+	            <div>
+	                <div class="row-fluid">
+	                    Timings
+	                </div>
+	                <div class="row-fluid">
+	                    <div class="span2">
+	                        <h4>Select outlet to replicate</h4>
+	                    </div>
+	                    <div class="span6">
+	                        <select ng-options="o.basics.name +', '+ o.contact.location.locality_1.toString() for o in all_outlets" ng-model="outlet_for._timings" class="span6">
+	                            <option value="NONE">NONE</option>
+	                        </select>
+	                    </div>
+	                </div>
+	                <div ng-repeat="w in week" class="row-fluid">
+	                    <div class="row-fluid pushTop10px">
+	                        <div class="row-fluid">
+	                            <div class="row-fluid span2">
+	                                <small>{{w}}</small>
+	                            </div>
+	                            <div class="row-fluid span2">
+	                                <small><input type="checkbox" ng-model="avail_hours[w].closed"> Closed</small>
+	                            </div>
+	                        </div>
+	                        <div class="row-fluid">
+	                            <div class="row-fluid span8 offset2" ng-repeat="t in avail_hours[w].timings track by $index">
+	                                <div class="span10" name="time">
+	                                    <div class="span2">
+	                                        <small>Open </small>
+	                                    </div>
+	                                    <div class="span2">
+	                                        <select ng-change="timingsValidation()" name="openhr" class="span12" ng-model="t.open.hr" ng-disabled="avail_hours[w].closed" required>
+	                                            <option ng-repeat="a in getRange(0, 23, 1)" ng-value="{{a}}">{{a}}</option>
+	                                        </select>
+	                                    </div>
+
+	                                    <div class="span2">
+	                                        <select ng-change="timingsValidation()";name="open.min" class="span12" ng-model="t.open.min" ng-disabled="avail_hours[w].closed" required>
+	                                            <option ng-repeat="a in getRange(0, 59, 1)" ng-value="{{a}}">{{a}}</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="span2" style="text-align:center; margin-top:4px;">
+	                                        <small>Close</small>
+	                                    </div>
+	                                    <div class="span2">
+	                                        <select ng-change="timingsValidation()" name="close.hr" class="span12" ng-model="t.close.hr" ng-disabled="avail_hours[w].closed" required>
+	                                            <option ng-repeat="a in getRange(0, 23, 1)" ng-value="{{a}}">{{a}}</option>
+	                                        </select>
+	                                    </div>
+
+	                                    <div class="span2">
+	                                        <select ng-change="timingsValidation()" name="close.min" class="span12" ng-model="t.close.min" ng-disabled="avail_hours[w].closed" required>
+	                                            <option ng-repeat="a in getRange(0, 59, 1)" ng-value="{{a}}">{{a}}</option>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                                <div class="span2">
+	                                    <i class="fa fa-trash icon-red" ng-click="removeTimings(w, $index);timingsValidation()" ng-show="avail_hours[w].timings.length > 1"></i>
+	                                </div>
+	                                <div class="row-fluid span10" ng-show="(avail_hours[w].timings[$index].open.hr * 60 + avail_hours[w].timings[$index].open.min * 1) >= (avail_hours[w].timings[$index].close.hr * 60 + avail_hours[w].timings[$index].close.min * 1)">
+	                                    <small style="color: red">*open time can not be greater than or equal to close time.</small>
+	                                </div>
+	                            </div>
+
+	                        <div class="row-fluid span10" ng-show="!validationArray[$index]">
+	                            <small style="color: red">*Multiple Timings cannot overlap for same day.</small>
+	                        </div>
+	                        </div>
+	                        <div class="row-fluid">
+	                            <div class="row-fluid pushTop10px">
+	                                <div class="span2">
+	                                    <small></small>
+	                                </div>
+
+	                                <div class="span8">
+	                                    <div class="span4">
+	                                        <button class="btn btn-success btn-small" ng-click="newTimings($event, $index)" ng-disabled="avail_hours[w].closed">Add More Timings</button>
+	                                    </div>
+	                                    <div class="span4" ng-show="!$index">
+	                                        <button class="btn btn-success btn-small" ng-click="applyToAllDays(avail_hours[w]);timingsValidation()"> Apply to all days</button>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
 	                </div>
 	            </div>
 			</div>
 		</div>
 	</div>
-	<div class="row-fluid offset1 span10">
+	<div class="row-fluid span10 offset1">
 		<button ng-click="update()" class="btn btn-success">Update</button>
 	</div>
 </div>

@@ -31,9 +31,7 @@ twystApp.factory('analyticsSvc', function ($rootScope, $http, $log) {
         getCheckinCount = function ($scope) {
             $http.get('/api/v1/analytics/checkin_count')
                 .success(function (data) {
-                    console.log(data);
                     $scope.checkins_count = data.info;
-                    console.log($scope.checkins_count);
                 }).error(function (data) {
                     $log.error(data);
                 });

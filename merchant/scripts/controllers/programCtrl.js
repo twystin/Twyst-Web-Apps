@@ -218,7 +218,6 @@ twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $mo
         $scope.tmpo.offer = {};
         $scope.tmpo.offer.basics = {};
         var program_type = $routeParams.program_type;
-        console.log(program_type);
         if (program_type === "standalone") {
             $scope.tier_disabled = true;
             $scope.offer_disabled = true;
@@ -351,8 +350,6 @@ twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $mo
     };
 
     $scope.addTier = function () {
-        console.log("called");
-        console.log($scope.tmpo.tier.basics.name);
         var tier = {
             basics:  {
                 name: $scope.tmpo.tier.basics.name,
@@ -363,7 +360,6 @@ twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $mo
         };
         if($scope.tier_edit_index == -1) {
             $scope.program.tiers.push(tier);
-            console.log($scope.program.tiers);
         }
         else {
             $scope.program.tiers[$scope.tier_edit_index] = tier;
@@ -635,11 +631,7 @@ twystApp.controller('TimepickerCtrl', function ($scope) {
     d.setMinutes( 0 );
     $scope.mytime = d;
   };
-
-  $scope.changed = function () {
-    console.log('Time changed to: ' + $scope.mytime);
-  };
-
+  
   $scope.clear = function() {
     $scope.mytime = null;
   };

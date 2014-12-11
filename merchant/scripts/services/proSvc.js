@@ -42,7 +42,6 @@ twystApp.factory('proSupService', function ($log, $http, $location) {
     };
 
     proSupSvc.updateTier = function ($scope, tier_id, $route) {
-        console.log($scope.tier);
         $http({
             url: '/api/v1/tiers/' + tier_id,
             method: "PUT",
@@ -70,7 +69,6 @@ twystApp.factory('proSupService', function ($log, $http, $location) {
     };
 
     proSupSvc.deleteTier = function ($scope, tier_id, $route, $modalInstance) {
-        console.log($scope.tier);
         $http({
             url: '/api/v1/delete/tier/' + tier_id,
             method: "DELETE"
