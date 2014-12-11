@@ -28,9 +28,25 @@ angular.module('newYearApp', ['ui.bootstrap'])
         
         return deferred.promise;
     };
+    newYearSvc.addEntry = function (user) {
+        var deferred = $q.defer();
+        $http({
+            url: '/api/v3/new_year',
+            method: 'POST',
+            data: user
+        }).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.reject(data);
+        });
+        
+        return deferred.promise;
+    };
     return newYearSvc;
 })
 .controller('NewYearCtrl', function($scope, $window, newYearSvc, $modal) {
+    $scope.user = {};
+    $scope.done = false;
 
     $scope.getFeatured = function () {
         $scope.searched = false;
@@ -72,6 +88,18 @@ angular.module('newYearApp', ['ui.bootstrap'])
 
     function scrollToTop() {
         $window.scrollTo(0,0)
+    }
+
+    $scope.addEntry = function () {
+        $scope.user.outlet = $scope.outlet._id;
+        newYearSvc.addEntry($scope.user).then(function (data) {
+            $scope.user = {};
+            $scope.done = true;
+        })
+    }
+
+    $scope.fire = function () {
+        $scope.done = false;
     }
 
     $scope.getDataModal = function (outlet) {

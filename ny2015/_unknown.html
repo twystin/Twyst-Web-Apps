@@ -2,53 +2,60 @@
     <h3 class="modal-title">Let us know where you want to celebrate NY2015 and we'll try to make it happen!</h3>
 </div>
 <div class="modal-body">
-    <div class="row">
-    	<div class="col-md-3">
-    		<h4>Name</h4>
-    	</div>
-    	<div class="col-md-9">
-    		<input type="text" ng-model="user.name">
-    	</div>
-    </div>
-    <br/>
-    <div class="row">
-    	<div class="col-md-3">
-    		<h4>Email</h4>
-    	</div>
-    	<div class="col-md-9">
-    		<input type="text" ng-model="user.email">
-    	</div>
-    </div>
-    <br/>
-    <div class="row">
-    	<div class="col-md-3">
-    		<h4>Phone</h4>
-    	</div>
-    	<div class="col-md-9">
-    		<input type="text" ng-model="user.phone">
-    	</div>
-    </div>
-    <br/>
-    <div class="row">
-    	<div class="col-md-3">
-    		<h4>D.O.B</h4>
-    	</div>
-    	<div ng-controller="DatePickerCtrl" class="col-md-9">
-            <input id="appendedInput" type="text" datepicker-popup="{{format}}" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start date" type="date" style="margin:0px;" ng-model="program.validity.earn_start" ng-click="open()"/>
-            <button class="btn" ng-click="open()"><i class="fa fa-calendar"></i></button>
+    <div ng-show="!done">
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Name</h4>
+            </div>
+            <div class="col-md-9">
+                <input type="text" ng-model="user.name">
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Email</h4>
+            </div>
+            <div class="col-md-9">
+                <input type="text" ng-model="user.email">
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Phone</h4>
+            </div>
+            <div class="col-md-9">
+                <input type="text" ng-model="user.phone">
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-3">
+                <h4>D.O.B</h4>
+            </div>
+            <div ng-controller="DatePickerCtrl" class="col-md-9">
+                <input id="appendedInput" type="text" datepicker-popup="{{format}}" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start date" type="date" style="margin:0px;" ng-model="user.dob" ng-click="open()"/>
+                <button class="btn" ng-click="open()"><i class="fa fa-calendar"></i></button>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-3">
+                On 31st Dec I want to Party at / order from: 
+            </div>
+            <div class="col-md-9">
+                <input type="text" ng-model="user.unknown">
+            </div>
         </div>
     </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-3">
-            On 31st Dec I want to Party at / order from: 
-        </div>
-        <div class="col-md-9">
-            <input type="text" ng-model="user.unknown">
-        </div>
+
+    <div ng-show="done" class="text-center text-orange+">
+        <h3>Thank you we will get back to you.</h3>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="addEntry()">OK</button>
-    <button class="btn btn-warning" ng-click="$dismiss()">Cancel</button>
+    <button class="btn btn-primary" ng-click="addEntry()" ng-show="!done">OK</button>
+    <button class="btn btn-warning" ng-click="$dismiss();$close();" ng-show="!done">Cancel</button>
+    <button class="btn btn-warning" ng-show="done" ng-click="fire();$dismiss();$close();">Close</button>
 </div>
