@@ -227,89 +227,93 @@
 	                </div>
 	            </div>
 	            <div>
-	                <div class="row-fluid">
+	                <div class="span2">
 	                    Reward available timings
 	                </div>
-	                <div class="row-fluid">
-	                    <div class="span2">
-	                        <h4>Select outlet to replicate</h4>
+	                <div class="span10">
+	                    <div class="row-fluid">
+	                    	<div class="span3">
+		                        <h4>Select outlet to replicate</h4>
+		                    </div>
+		                    <div class="span6">
+		                        <select ng-options="o.basics.name +', '+ o.contact.location.locality_1.toString() for o in all_outlets" ng-model="outlet_for._timings" class="span6">
+		                            <option value="NONE">NONE</option>
+		                        </select>
+		                    </div>
 	                    </div>
-	                    <div class="span6">
-	                        <select ng-options="o.basics.name +', '+ o.contact.location.locality_1.toString() for o in all_outlets" ng-model="outlet_for._timings" class="span6">
-	                            <option value="NONE">NONE</option>
-	                        </select>
-	                    </div>
-	                </div>
-	                <div ng-repeat="w in week" class="row-fluid">
-	                    <div class="row-fluid pushTop10px">
-	                        <div class="row-fluid">
-	                            <div class="row-fluid span2">
-	                                <small>{{w}}</small>
-	                            </div>
-	                            <div class="row-fluid span2">
-	                                <small><input type="checkbox" ng-model="avail_hours[w].closed"> Closed</small>
-	                            </div>
-	                        </div>
-	                        <div class="row-fluid">
-	                            <div class="row-fluid span8 offset2" ng-repeat="t in avail_hours[w].timings track by $index">
-	                                <div class="span10" name="time">
-	                                    <div class="span2">
-	                                        <small>Open </small>
-	                                    </div>
-	                                    <div class="span2">
-	                                        <select ng-change="timingsValidation()" name="openhr" class="span12" ng-model="t.open.hr" ng-disabled="avail_hours[w].closed" required>
-	                                            <option ng-repeat="a in getRange(0, 23, 1)" ng-value="{{a}}">{{a}}</option>
-	                                        </select>
-	                                    </div>
+	                    <div class="row-fluid">
+	                    	<div ng-repeat="w in week" class="row-fluid">
+			                    <div class="row-fluid pushTop10px">
+			                        <div class="row-fluid">
+			                            <div class="row-fluid span2">
+			                                <small>{{w}}</small>
+			                            </div>
+			                            <div class="row-fluid span2">
+			                                <small><input type="checkbox" ng-model="avail_hours[w].closed"> Closed</small>
+			                            </div>
+			                        </div>
+			                        <div class="row-fluid">
+			                            <div class="row-fluid span8 offset2" ng-repeat="t in avail_hours[w].timings track by $index">
+			                                <div class="span10" name="time">
+			                                    <div class="span2">
+			                                        <small>Open </small>
+			                                    </div>
+			                                    <div class="span2">
+			                                        <select ng-change="timingsValidation()" name="openhr" class="span12" ng-model="t.open.hr" ng-disabled="avail_hours[w].closed" required>
+			                                            <option ng-repeat="a in getRange(0, 23, 1)" ng-value="{{a}}">{{a}}</option>
+			                                        </select>
+			                                    </div>
 
-	                                    <div class="span2">
-	                                        <select ng-change="timingsValidation()";name="open.min" class="span12" ng-model="t.open.min" ng-disabled="avail_hours[w].closed" required>
-	                                            <option ng-repeat="a in getRange(0, 59, 1)" ng-value="{{a}}">{{a}}</option>
-	                                        </select>
-	                                    </div>
-	                                    <div class="span2" style="text-align:center; margin-top:4px;">
-	                                        <small>Close</small>
-	                                    </div>
-	                                    <div class="span2">
-	                                        <select ng-change="timingsValidation()" name="close.hr" class="span12" ng-model="t.close.hr" ng-disabled="avail_hours[w].closed" required>
-	                                            <option ng-repeat="a in getRange(0, 23, 1)" ng-value="{{a}}">{{a}}</option>
-	                                        </select>
-	                                    </div>
+			                                    <div class="span2">
+			                                        <select ng-change="timingsValidation()";name="open.min" class="span12" ng-model="t.open.min" ng-disabled="avail_hours[w].closed" required>
+			                                            <option ng-repeat="a in getRange(0, 59, 1)" ng-value="{{a}}">{{a}}</option>
+			                                        </select>
+			                                    </div>
+			                                    <div class="span2" style="text-align:center; margin-top:4px;">
+			                                        <small>Close</small>
+			                                    </div>
+			                                    <div class="span2">
+			                                        <select ng-change="timingsValidation()" name="close.hr" class="span12" ng-model="t.close.hr" ng-disabled="avail_hours[w].closed" required>
+			                                            <option ng-repeat="a in getRange(0, 23, 1)" ng-value="{{a}}">{{a}}</option>
+			                                        </select>
+			                                    </div>
 
-	                                    <div class="span2">
-	                                        <select ng-change="timingsValidation()" name="close.min" class="span12" ng-model="t.close.min" ng-disabled="avail_hours[w].closed" required>
-	                                            <option ng-repeat="a in getRange(0, 59, 1)" ng-value="{{a}}">{{a}}</option>
-	                                        </select>
-	                                    </div>
-	                                </div>
-	                                <div class="span2">
-	                                    <i class="fa fa-trash icon-red" ng-click="removeTimings(w, $index);timingsValidation()" ng-show="avail_hours[w].timings.length > 1"></i>
-	                                </div>
-	                                <div class="row-fluid span10" ng-show="(avail_hours[w].timings[$index].open.hr * 60 + avail_hours[w].timings[$index].open.min * 1) >= (avail_hours[w].timings[$index].close.hr * 60 + avail_hours[w].timings[$index].close.min * 1)">
-	                                    <small style="color: red">*open time can not be greater than or equal to close time.</small>
-	                                </div>
-	                            </div>
+			                                    <div class="span2">
+			                                        <select ng-change="timingsValidation()" name="close.min" class="span12" ng-model="t.close.min" ng-disabled="avail_hours[w].closed" required>
+			                                            <option ng-repeat="a in getRange(0, 59, 1)" ng-value="{{a}}">{{a}}</option>
+			                                        </select>
+			                                    </div>
+			                                </div>
+			                                <div class="span2">
+			                                    <i class="fa fa-trash icon-red" ng-click="removeTimings(w, $index);timingsValidation()" ng-show="avail_hours[w].timings.length > 1"></i>
+			                                </div>
+			                                <div class="row-fluid span10" ng-show="(avail_hours[w].timings[$index].open.hr * 60 + avail_hours[w].timings[$index].open.min * 1) >= (avail_hours[w].timings[$index].close.hr * 60 + avail_hours[w].timings[$index].close.min * 1)">
+			                                    <small style="color: red">*open time can not be greater than or equal to close time.</small>
+			                                </div>
+			                            </div>
 
-	                        <div class="row-fluid span10" ng-show="!validationArray[$index]">
-	                            <small style="color: red">*Multiple Timings cannot overlap for same day.</small>
-	                        </div>
-	                        </div>
-	                        <div class="row-fluid">
-	                            <div class="row-fluid pushTop10px">
-	                                <div class="span2">
-	                                    <small></small>
-	                                </div>
+			                        <div class="row-fluid span10" ng-show="!validationArray[$index]">
+			                            <small style="color: red">*Multiple Timings cannot overlap for same day.</small>
+			                        </div>
+			                        </div>
+			                        <div class="row-fluid">
+			                            <div class="row-fluid pushTop10px">
+			                                <div class="span2">
+			                                    <small></small>
+			                                </div>
 
-	                                <div class="span8">
-	                                    <div class="span4">
-	                                        <button class="btn btn-success btn-small" ng-click="newTimings($event, $index)" ng-disabled="avail_hours[w].closed">Add More Timings</button>
-	                                    </div>
-	                                    <div class="span4" ng-show="!$index">
-	                                        <button class="btn btn-success btn-small" ng-click="applyToAllDays(avail_hours[w]);timingsValidation()"> Apply to all days</button>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
+			                                <div class="span8">
+			                                    <div class="span4">
+			                                        <button class="btn btn-success btn-small" ng-click="newTimings($event, $index)" ng-disabled="avail_hours[w].closed">Add More Timings</button>
+			                                    </div>
+			                                    <div class="span4" ng-show="!$index">
+			                                        <button class="btn btn-success btn-small" ng-click="applyToAllDays(avail_hours[w]);timingsValidation()"> Apply to all days</button>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
 	                    </div>
 	                </div>
 	            </div>
