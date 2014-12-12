@@ -22,11 +22,10 @@
 						</div>
 	              	</div>
 					<h4>Minimum historical checkins: {{w.min_historical_checkins}}</h4>
-					<h4>Minimum historical checkins: {{w.min_historical_checkins}}</h4>
 					<h4>Weeks since last visit: {{w.weeks_since_last_visit}}</h4>
 					<h4>Program validity: {{w.validity.earn_start | date: 'longDate'}} to {{w.validity.earn_end | date: 'longDate'}}</h4>
 					<h4>Voucher valid for: {{w.validity.voucher_valid_days}}</h4>
-					<h4>Reward: {{w.reward}}</h4>
+					<h4>Reward: {{rewardify(w)}}</h4>
 					<h4>Terms and conditions: {{w.terms}}</h4>
 					<div>
 						<h4>Running on outlets:</h4>

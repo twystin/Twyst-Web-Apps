@@ -13,7 +13,7 @@
 				<div class="alert alert-danger">No programs created yet!</div>
 				<a class="btn btn-large btn-info" href="#/offers/create/loyalty">Create a program</a>
 			</div>	
-			<div class="span12" ng-show="showAnalytics()">
+			<div class="span12">
 				<div class="span4">
 					<div class="span12">       
 	                    <div class="lead well">
@@ -21,14 +21,14 @@
 	                    </div>
 	                </div>
 				</div>
-				<div class="span4">
+				<div class="span4" ng-if="vouchers_count">
 					<div class="span12">       
 	                    <div class="lead well">
 	                        <center>Total Vouchers Redeemed: </center></br><center><i class="fa fa-gift fa-red fa-3x"></i><b class="twyst-font voffset">&nbsp;{{vouchers_count}}</b></center>
 	                    </div>
 	                </div>
 				</div>
-				<div class="span4">
+				<div class="span4" ng-if="dashboard_info.roi">
 					<div class="span12">       
 	                    <div class="lead well">
 	                        <center>Incremental Revenue: </center></br><center><i class="fa fa-inr fa-orange fa-3x"></i><b class="twyst-font voffset">&nbsp;{{dashboard_info.roi}}</b></center>

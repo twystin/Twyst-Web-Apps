@@ -53,11 +53,22 @@ controller('WinbackCtrl', function ($http, outletService, authService, OPERATE_H
     $scope.winback = {
         outlets: []
     };
+    $scope.reward_check = [
+        {"text": "Discount", value:"discount"},
+        {"text": "Flat off", value:"flat"},
+        {"text": "Free ", value:"free"},
+        {"text": "Buy one get one ", value:"buy_one_get_one"},
+        {"text": "Happy hours", value:"happy"},
+        {"text": "Reduced price ", value:"reduced"},
+        {"text": "Custom ", value:"custom"}
+    ];
+    $scope.selected_reward = $scope.reward_check[0];
     $scope.avail_hours = OPERATE_HOURS;
     $scope.validationArray = [true, true, true, true, true, true, true, true];
     $scope.week = ['monday' ,'tuesday' ,'wednesday' ,'thursday' ,'friday', 'saturday', 'sunday'];
     
     $scope.create = function () {
+        console.log($scope.winback)
         $scope.winback.avail_hours = $scope.avail_hours;
         winbackService.create($scope.winback).then(function(data) {
             if(data.status = "success"){
