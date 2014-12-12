@@ -84,6 +84,15 @@
 				</div>
 			</div>
 			<div class="row-fluid">
+				<div class="span2">
+					Send voucher at
+				</div>
+				<div class="span10">
+					<select ng-options="o +' hr(s)' for o in getRange(0, 23, 1)" ng-model="winback.validity.send_voucher_at" class="span2">
+                    </select> 
+				</div>
+			</div>
+			<div class="row-fluid">
 				<div class="row-fluid">
 	                <div class="row-fluid span2">
                         <label>Choose a Reward</label>

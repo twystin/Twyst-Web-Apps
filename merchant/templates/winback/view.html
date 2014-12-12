@@ -15,24 +15,95 @@
 						<div class="span11">
 							<h2>{{w.name}}</h2>
 						</div>
-						<div class="span1">
-							<i class="fa fa-lightbulb-o icon-green fa-3x" ng-if="w.status === 'active'" tooltip="Active prgram"></i>
-							<i class="fa fa-lightbulb-o icon-red fa-3x" ng-if="w.status === 'archived'" tooltip="Expired prgram"></i>
-							<i class="fa fa-lightbulb-o icon-yellow fa-3x" ng-if="w.status === 'draft'" tooltip="Saved prgram"></i>
-						</div>
 	              	</div>
-					<h4>Minimum historical checkins: {{w.min_historical_checkins}}</h4>
-					<h4>Weeks since last visit: {{w.weeks_since_last_visit}}</h4>
-					<h4>Program validity: {{w.validity.earn_start | date: 'longDate'}} to {{w.validity.earn_end | date: 'longDate'}}</h4>
-					<h4>Voucher valid for: {{w.validity.voucher_valid_days}}</h4>
-					<h4>Reward: {{rewardify(w)}}</h4>
-					<h4>Terms and conditions: {{w.terms}}</h4>
-					<div>
-						<h4>Running on outlets:</h4>
-					</div>
-					<div ng-repeat="o in w.outlets" class="offset1" style="color: #f6921e;">
-						{{o.basics.name}}, {{o.contact.location.locality_1.toString()}}
-					</div>
+	              	<table class="table table-bordered table-hover">
+                        <thead>
+                            <th>
+                                Field
+                            </th>
+                            <th>
+                                Value
+                            </th>
+                        </thead> 
+                        <tbody>
+                        	<tr>
+                                <td>
+                                	Status
+                                </td>
+                                <td>
+                                	<i class="fa fa-lightbulb-o icon-green fa-2x" ng-if="w.status === 'active'" tooltip="Active prgram"></i>
+									<i class="fa fa-lightbulb-o icon-red fa-2x" ng-if="w.status === 'archived'" tooltip="Expired prgram"></i>
+									<i class="fa fa-lightbulb-o icon-yellow fa-2x" ng-if="w.status === 'draft'" tooltip="Saved prgram"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Minimum historical checkins
+                                </td>
+                                <td>
+                                	{{w.min_historical_checkins}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Weeks since last visit
+                                </td>
+                                <td>
+                                	{{w.weeks_since_last_visit}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Validity
+                                </td>
+                                <td>
+                                	{{w.validity.earn_start | date: 'longDate'}} to {{w.validity.earn_end | date: 'longDate'}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Voucher valid for
+                                </td>
+                                <td>
+                                	{{w.validity.voucher_valid_days}} day(s)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Send voucher at
+                                </td>
+                                <td>
+                                	{{w.validity.send_voucher_at}} hour(s)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Reward
+                                </td>
+                                <td>
+                                	{{rewardify(w)}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Terms and conditions
+                                </td>
+                                <td>
+                                	{{w.terms}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Running on outlets
+                                </td>
+                                <td>
+                                	<div ng-repeat="o in w.outlets" style="color: #f6921e;">
+									{{o.basics.name}}, {{o.contact.location.locality_1.toString()}}
+									</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>					
 					<br/>
 				</div>
 				<div class="row-fluid">

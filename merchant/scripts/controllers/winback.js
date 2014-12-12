@@ -68,7 +68,6 @@ controller('WinbackCtrl', function ($http, outletService, authService, OPERATE_H
     $scope.week = ['monday' ,'tuesday' ,'wednesday' ,'thursday' ,'friday', 'saturday', 'sunday'];
     
     $scope.create = function () {
-        console.log($scope.winback)
         $scope.winback.avail_hours = $scope.avail_hours;
         winbackService.create($scope.winback).then(function(data) {
             if(data.status = "success"){
@@ -78,6 +77,9 @@ controller('WinbackCtrl', function ($http, outletService, authService, OPERATE_H
     };
 
     $scope.update = function () {
+        if(_.isEmpty($scope.winback.reward)) {
+            $scope.winback.reward = $scope.preserve_reward;   
+        };
         $scope.winback.avail_hours = $scope.avail_hours;
         winbackService.update($scope.winback).then(function(data) {
             if(data.status = "success"){
@@ -95,13 +97,26 @@ controller('WinbackCtrl', function ($http, outletService, authService, OPERATE_H
     $scope.readOne = function () {
         var id = $routeParams.winback_id;
         winbackService.readOne(id).then(function(data) {
-            $scope.winback = data.info;
-            $scope.avail_hours = $scope.winback.avail_hours;
-            $scope.winback.outlets = $scope.winback.outlets.map(function (o) {
-                return o._id;
-            })
+            setWinbackForUpdate(data);
         });  
     };
+
+    function setWinbackForUpdate(data) {
+        $scope.winback = data.info;
+        $scope.avail_hours = $scope.winback.avail_hours;
+        $scope.winback.outlets = $scope.winback.outlets.map(function (o) {
+            return o._id;
+        });
+        if(!$scope.winback.reward) {
+            $scope.selected_reward = $scope.reward_check[0];
+        }
+        else {
+            var l = Object.keys($scope.winback.reward)[0];
+            var ll = _.find($scope.reward_check, function (reward){return reward.value === l});
+            $scope.selected_reward = ll;
+            $scope.preserve_reward = $scope.winback.reward;
+        }
+    }
 
     $scope.timingsValidation = function () {
         var flag = 0;
@@ -201,4 +216,20 @@ controller('WinbackCtrl', function ($http, outletService, authService, OPERATE_H
         }
 
     };
+
+    $scope.correctReward = function (param) {
+        $scope.selected_reward = param;
+        if($scope.winback.reward) {
+            var key = Object.keys($scope.preserve_reward)[0];
+            if(param.value === key) {
+                $scope.winback.reward = $scope.preserve_reward;
+            }
+            else {
+                $scope.winback.reward = {};
+            }
+        } else {
+            $scope.winback.reward = {};
+        }
+    }
+
 });
