@@ -139,13 +139,13 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                         || voucher.basics.status === 'user redeemed')) {
                         if(voucher.basics.type === 'WINBACK') {
                             if((new Date(voucher.validity.end_date) > new Date())
-                                && (new Date(new Date(voucher.basics.created_at).getTime()) < new Date())) {
+                                && (new Date(new Date(voucher.basics.created_at).getTime() + 10800000) < new Date())) {
                                 $scope.filtered_vouchers.push(voucher);
                             }
                         }
                         else {
                             if((new Date(voucher.issue_details.program.validity.burn_end) > new Date())
-                                && (new Date(new Date(voucher.basics.created_at).getTime()) < new Date())) {
+                                && (new Date(new Date(voucher.basics.created_at).getTime() + 10800000) < new Date())) {
                                 $scope.filtered_vouchers.push(voucher);
                             }
                         }
@@ -177,7 +177,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             } 
             else if(value === 'All') {
                 $scope.vouchers.forEach(function (voucher) {
-                    if((new Date(new Date(voucher.basics.created_at).getTime()) < new Date())) {
+                    if((new Date(new Date(voucher.basics.created_at).getTime() + 10800000) < new Date())) {
                         $scope.filtered_vouchers.push(voucher);
                     }
                 })
