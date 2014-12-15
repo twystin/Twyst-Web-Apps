@@ -27,7 +27,7 @@
 							{{getStatus(voucher)}}
 						</td>
 						<td>
-							{{voucher.issue_details.issued_for.basics.title}}
+							{{voucher.issue_details.issued_for ? rewardify(voucher.issue_details.issued_for) : rewardify(voucher.issue_details.winback)}}
 						</td>
 						<td>
 							<button class="btn btn-xs btn-success" ng-click="getDetails(voucher)">Details</button>

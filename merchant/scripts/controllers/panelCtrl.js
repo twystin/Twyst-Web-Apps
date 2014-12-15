@@ -5,7 +5,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     if (!authService.isLoggedIn()) {
         $location.path('/');
     }
-
+ 
     if (authService.isLoggedIn() && authService.getAuthStatus().role > 4) {
         $location.path('/panel');
     }
@@ -136,10 +136,19 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
 
                 $scope.vouchers.forEach(function (voucher) {
                     if((voucher.basics.status === 'active'
-                        || voucher.basics.status === 'user redeemed')
-                        && (new Date(voucher.issue_details.program.validity.burn_end) > new Date())
-                        && (new Date(new Date(voucher.basics.created_at).getTime() + 3 * 60 * 60 * 1000) < new Date())) {
-                        $scope.filtered_vouchers.push(voucher);
+                        || voucher.basics.status === 'user redeemed')) {
+                        if(voucher.basics.type === 'WINBACK') {
+                            if((new Date(voucher.validity.end_date) > new Date())
+                                && (new Date(new Date(voucher.basics.created_at).getTime()) < new Date())) {
+                                $scope.filtered_vouchers.push(voucher);
+                            }
+                        }
+                        else {
+                            if((new Date(voucher.issue_details.program.validity.burn_end) > new Date())
+                                && (new Date(new Date(voucher.basics.created_at).getTime()) < new Date())) {
+                                $scope.filtered_vouchers.push(voucher);
+                            }
+                        }
                     }
                 })
             } 
@@ -152,15 +161,23 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             } 
             else if(value === 'Expired') {
                 $scope.vouchers.forEach(function (voucher) {
-                    if(voucher.basics.status !== 'merchant redeemed'
-                        && new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
-                        $scope.filtered_vouchers.push(voucher);
+                    if(voucher.basics.status !== 'merchant redeemed') {
+                        if(voucher.basics.type === 'WINBACK') {
+                            if(new Date(voucher.validity.end_date) <= new Date()) {
+                                $scope.filtered_vouchers.push(voucher);
+                            }
+                        }
+                        else {
+                            if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+                                $scope.filtered_vouchers.push(voucher);
+                            }
+                        }
                     }
                 })
             } 
             else if(value === 'All') {
                 $scope.vouchers.forEach(function (voucher) {
-                    if((new Date(new Date(voucher.basics.created_at).getTime() + 3 * 60 * 60 * 1000) < new Date())) {
+                    if((new Date(new Date(voucher.basics.created_at).getTime()) < new Date())) {
                         $scope.filtered_vouchers.push(voucher);
                     }
                 })
@@ -188,25 +205,49 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         if(_.isEmpty(voucher)) {
             return;
         }
+        if(voucher.basics.type === 'WINBACK') {
+            if(new Date(voucher.validity.end_date) <= new Date()) {
+                return 'voucher-redeemed';
+            }
 
-        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
-            return 'voucher-redeemed';
+            if(voucher.basics.status === 'active') {
+                return 'voucher-active';
+            }
+
+            if(voucher.basics.status === 'merchant redeemed') {
+                return 'voucher-redeemed';
+            }
+
+            if(voucher.basics.status === 'user redeemed') {
+                return 'voucher-active';
+            }
         }
+        else {
+            if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+                return 'voucher-redeemed';
+            }
 
-        if(voucher.basics.status === 'active') {
-            return 'voucher-active';
-        }
+            if(voucher.basics.status === 'active') {
+                return 'voucher-active';
+            }
 
-        if(voucher.basics.status === 'merchant redeemed') {
-            return 'voucher-redeemed';
-        }
+            if(voucher.basics.status === 'merchant redeemed') {
+                return 'voucher-redeemed';
+            }
 
-        if(voucher.basics.status === 'user redeemed') {
-            return 'voucher-active';
+            if(voucher.basics.status === 'user redeemed') {
+                return 'voucher-active';
+            }
         }
     }
 
     $scope.isVoucherExpired = function (voucher) {
+        if(voucher.basics.type === 'WINBACK') {
+            if(new Date(voucher.validity.end_date) <= new Date()) {
+                return true;
+            }
+            return false;
+        }
         if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
             return true;
         }
@@ -223,15 +264,24 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             return 'has already been used.';
         }
 
-        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
-            return 'has Expired.';
-        }
-
-        if(checkApplicabilityDay(voucher) && checkApplicabilityTime(voucher)) {
-            return 'is ACTIVE and VALID at this time.'
+        if(voucher.basics.type === 'WINBACK') {
+            if(new Date(voucher.validity.end_date) <= new Date()) {
+                return 'has Expired.';
+            }
+            else {
+                return 'is ACTIVE and VALID at this time.'
+            }
         }
         else {
-            return 'is ACTIVE but NOT VALID at this time.'
+            if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+                return 'has Expired.';
+            }
+            if(checkApplicabilityDay(voucher) && checkApplicabilityTime(voucher)) {
+                return 'is ACTIVE and VALID at this time.'
+            }
+            else {
+                return 'is ACTIVE but NOT VALID at this time.'
+            }
         }
     }
 
@@ -245,8 +295,15 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             return 'Used';
         }
 
-        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
-            return 'Expired';
+        if(voucher.basics.type === 'WINBACK') {
+            if(new Date(voucher.validity.end_date) <= new Date()) {
+                return 'Expired';
+            }
+        }
+        else {
+            if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+                return 'Expired';
+            }
         }
 
         return 'Active';

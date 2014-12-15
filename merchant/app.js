@@ -182,6 +182,9 @@ twystApp.config(function ($routeProvider, $httpProvider) {
         }
 
         $rootScope.rewardify = function (input) {
+            if(!input) {
+                return '';
+            }
             if (input.reward.custom && input.reward.custom.text) {
                 return input.reward.custom.text;
             } else if (input.reward.flat && (input.reward.flat.off || input.reward.flat.spend)) {
