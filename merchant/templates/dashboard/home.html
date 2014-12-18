@@ -1,6 +1,6 @@
-<div id="" class="row-fluid" style="min-height:580px;" ng-if="data.checkin_count > -1">	
+<div id="" class="row-fluid" style="min-height:580px;">	
 	<div class="lead row-fluid offset1 span11" style="padding-top:15px;">
-		<h2>Welcome {{auth.name}}</h2>
+		<h2>Welcome {{auth.name || 'User'}}</h2>
 	</div>
 	<div class="row-fluid">
 		<center>
@@ -8,7 +8,7 @@
 		</center>
 	</div>
 	<br/>
-	<div class="row-fluid">
+	<div class="row-fluid" ng-if="data.checkin_count > -1">
 		<center>
 			<span style="font-size:250%">Incremental revenue</span>
 			<i class="fa fa-rupee fa-orange fa-3x"></i>
@@ -18,12 +18,12 @@
 		</center>
 	</div>
 	<br/>
-	<div class="row-fluid">
+	<div class="row-fluid" ng-if="data.checkin_count > -1">
 		<div class="row-fluid offset1 span10">	
 			<div>
 				<div class="row-fluid">
 					<div class="span4 dashboard-boxes">
-						<a href="/reports/#/current_programs/users">
+						<a href="/reports/#/current_programs/users" target="_blank">
 							<div>
 								<center class="totally-center">
 									<h3>Total Unique Customers</h3>
@@ -37,7 +37,7 @@
 						</a>
 					</div>
 					<div class="span4 dashboard-boxes">
-						<a href="/reports/#/current_programs/checkins">
+						<a href="/reports/#/current_programs/checkins" target="_blank">
 							<div>
 								<center class="totally-center">
 									<h3>Total Checkins</h3>
@@ -51,7 +51,7 @@
 						</a>
 					</div>
 					<div class="span4 dashboard-boxes">
-						<a href="/reports/#/current_programs/redeems">
+						<a href="/reports/#/current_programs/redeems" target="_blank">
 							<div>
 								<center class="totally-center">
 									<h3>Total Redemptions</h3>
