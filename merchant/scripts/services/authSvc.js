@@ -6,6 +6,7 @@ twystApp.factory('authService', function ($rootScope, $cookieStore, $log) {
             errors: false,
             messages: null,
             user: null,
+            name: null,
             role: null,
             _id: null,
             remember_me: false
@@ -17,6 +18,7 @@ twystApp.factory('authService', function ($rootScope, $cookieStore, $log) {
     if ($cookieStore.get('logged_in') === true) {
         _authStatus.logged_in = true;
         _authStatus.user = $cookieStore.get('user');
+        _authStatus.name = $cookieStore.get('name');
         _authStatus._id = $cookieStore.get('_id');
         _authStatus.role = $cookieStore.get('role');
     }
@@ -50,6 +52,13 @@ twystApp.factory('authService', function ($rootScope, $cookieStore, $log) {
                 $cookieStore.put('_id', data.info._id);
                 $cookieStore.put('role', data.info.role);
                 authSvc.broadcastChange();
+
+                if(data.info.contact_person) {
+                    var name = data.info.contact_person.split(" ");
+                    name = name[0];
+                    $cookieStore.put('name', name);
+                    _authStatus.name = name;
+                }
                 
                 if(data.info.role > 4) {
                     $location.path('/panel');
@@ -65,6 +74,7 @@ twystApp.factory('authService', function ($rootScope, $cookieStore, $log) {
     authSvc.logout = function ($scope, $http, $location) {
         $cookieStore.remove('logged_in');
         $cookieStore.remove('user');
+        $cookieStore.remove('name');
         $cookieStore.remove('_id');
         $cookieStore.remove('role');
         authSvc.setAuthStatus(false, null, null, null);

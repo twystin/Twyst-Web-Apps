@@ -1,3 +1,13 @@
+.dashboard-boxes {
+    height: 15em;
+    background: #dfdfdf;
+}
+.dashboard-boxes a:hover {
+    text-decoration: none;
+}
+.totally-center {
+    padding-top: 2.5em;
+}
 .fa-red {
     color: red;
 }

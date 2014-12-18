@@ -1,61 +1,73 @@
-<div id="" class="row-fluid" style="min-height:580px;">	
-	<div class="lead row-fluid offset1 span11" style="padding-top:30px;">
-		<h2>Welcome {{auth.user}}</h2>
+<div id="" class="row-fluid" style="min-height:580px;" ng-if="data.checkin_count > -1">	
+	<div class="lead row-fluid offset1 span11" style="padding-top:15px;">
+		<h2>Welcome {{auth.name}}</h2>
 	</div>
 	<div class="row-fluid">
-		<div class="row-fluid offset1 span10">
-			<div ng-show="showCreateOutlet()">
-				<div class="alert alert-warning">No outlets created yet!</div>
-				<a class="btn btn-large btn-info" href="#/outlets/create">Create an outlet</a>
-			</div>
-
-			<div class="span10" ng-show="showCreateOffer()">
-				<div class="alert alert-danger">No programs created yet!</div>
-				<a class="btn btn-large btn-info" href="#/offers/create/loyalty">Create a program</a>
-			</div>	
-			<div class="span12">
-				<div class="span4">
-					<div class="span12">       
-	                    <div class="lead well">
-	                        <center>Total Unique Customers: </center></br><center><i class="fa fa-user fa-3x"></i><b class="twyst-font voffset">&nbsp;{{checkins_count}}</b></center>
-	                    </div>
-	                </div>
-				</div>
-				<div class="span4" ng-if="vouchers_count">
-					<div class="span12">       
-	                    <div class="lead well">
-	                        <center>Total Vouchers Redeemed: </center></br><center><i class="fa fa-gift fa-red fa-3x"></i><b class="twyst-font voffset">&nbsp;{{vouchers_count}}</b></center>
-	                    </div>
-	                </div>
-				</div>
-				<div class="span4" ng-if="dashboard_info.roi">
-					<div class="span12">       
-	                    <div class="lead well">
-	                        <center>Incremental Revenue: </center></br><center><i class="fa fa-inr fa-orange fa-3x"></i><b class="twyst-font voffset">&nbsp;{{dashboard_info.roi}}</b></center>
-	                    </div>
-	                </div>
-				</div>
-			</div>
-			<div class="span12" ng-show="showAnalytics()">
-				<div class="span6">
-					<div class="span12">
-						<div class="lead">
-							Daily Checkins
-						</div>
-					</div>			
-					<div class="span12">
-						<canvas linechart options="options" data="analytics_info.chart1" width="500" height="300"></canvas>
+		<center>
+			<h3>Your Summary on Twyst</h3>
+		</center>
+	</div>
+	<br/>
+	<div class="row-fluid">
+		<center>
+			<span style="font-size:250%">Incremental revenue</span>
+			<i class="fa fa-rupee fa-orange fa-3x"></i>
+			<b class="twyst-font">
+				{{roi}}
+			</b>
+		</center>
+	</div>
+	<br/>
+	<div class="row-fluid">
+		<div class="row-fluid offset1 span10">	
+			<div>
+				<div class="row-fluid">
+					<div class="span4 dashboard-boxes">
+						<a href="/reports/#/current_programs/users">
+							<div>
+								<center class="totally-center">
+									<h3>Total Unique Customers</h3>
+									<br/> 
+									<i class="fa fa-user fa-3x" style="color: gray;"></i>
+									<b class="twyst-font">
+										{{data.user_count}}
+									</b>
+								</center>
+							</div>
+						</a>
+					</div>
+					<div class="span4 dashboard-boxes">
+						<a href="/reports/#/current_programs/checkins">
+							<div>
+								<center class="totally-center">
+									<h3>Total Checkins</h3>
+									<br/> 
+									<i class="fa fa-check fa-orange fa-3x"></i>
+									<b class="twyst-font">
+										{{data.checkin_count}}
+									</b>
+								</center>
+							</div>
+						</a>
+					</div>
+					<div class="span4 dashboard-boxes">
+						<a href="/reports/#/current_programs/redeems">
+							<div>
+								<center class="totally-center">
+									<h3>Total Redemptions</h3>
+									<br/> 
+									<i class="fa fa-gift fa-red fa-3x"></i>
+									<b class="twyst-font">
+										{{data.redeem_count}}
+									</b>
+								</center>
+							</div>
+						</a>
 					</div>
 				</div>
-				<div class="span6">
-					<div class="span12">		
-						<div class="lead">
-							Vouchers Generated
-						</div>
-					</div>				
-					<div class="span12">
-						<canvas barchart options="options" data="analytics_info.chart2" width="500" height="300"></canvas>
-					</div>
+				<br/>
+				<div class="row-fluid">
+					Showing data for last 60 days. Please click on any box to get detailed report.
 				</div>
 			</div>
 		</div>
