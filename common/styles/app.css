@@ -2,7 +2,7 @@
     height: 15em;
     background: #dfdfdf;
 }
-.dashboard-boxes a:hover {
+.dashboard-boxes a {
     text-decoration: none;
 }
 .totally-center {

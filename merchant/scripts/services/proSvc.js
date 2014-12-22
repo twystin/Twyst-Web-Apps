@@ -17,9 +17,12 @@ twystApp.factory('proSupService', function ($log, $http, $location) {
 
     proSupSvc.saveOffer = function ($scope, tier_id, $route) {
         $http({
-            url: '/api/v1/add/offers/' + tier_id,
+            url: '/api/v1/offers/',
             method: "POST",
-            data: $scope.offer
+            data: {
+                tier_id: tier_id,
+                offer: $scope.offer
+            }
         }).success(function (data) {
             $route.reload();
             $scope.message = data.message;
@@ -56,9 +59,12 @@ twystApp.factory('proSupService', function ($log, $http, $location) {
 
     proSupSvc.updateOffer = function ($scope, offer_id, $route) {
         $http({
-            url: '/api/v1/offers/' + offer_id,
+            url: '/api/v1/offers/',
             method: "PUT",
-            data: $scope.offer
+            data: {
+                offer_id: offer_id,
+                offer: $scope.offer
+            }
         }).success(function (data) {
             $route.reload();
             $scope.message = data.message;
@@ -83,7 +89,7 @@ twystApp.factory('proSupService', function ($log, $http, $location) {
 
     proSupSvc.deleteOffer = function ($scope, offer_id, $route, $modalInstance) {
         $http({
-            url: '/api/v1/delete/offer/' + offer_id,
+            url: '/api/v1/offer/' + offer_id,
             method: "DELETE"
         }).success(function (data) {
             $route.reload();

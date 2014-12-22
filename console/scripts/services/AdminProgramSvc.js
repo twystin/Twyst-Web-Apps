@@ -23,7 +23,10 @@ twystConsole.factory('adminProgramService', function ($http, $q) {
         $http({
             'method': 'post',
             'url': '/api/v2/changestatus/program',
-            'data': {program: program}
+            'data': {
+                program_id: program._id,
+                status: program.status
+            }
         }).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
