@@ -151,16 +151,21 @@ $scope.hidePanel = function () {
     });
 }
 $scope.getOutlet = function (outlet_id) {
-  outletService.getOutlet(outlet_id).then(function (data) {
-    $scope.outlet = data.OUTLET;
-    $scope.closed_now = data.closed_now;
-    $scope.opensAt = data.opensAt;
-    $rootScope.o = data.OUTLET;
-     $scope.rewards = data.REWARDS;
-     if($scope.outlet) {
-      setMapData();
-     }
+  if(!outlet_id) {
+    // do nothing
+  }
+  else {
+    outletService.getOutlet(outlet_id).then(function (data) {
+      $scope.outlet = data.OUTLET;
+      $scope.closed_now = data.closed_now;
+      $scope.opensAt = data.opensAt;
+      $rootScope.o = data.OUTLET;
+      $scope.rewards = data.REWARDS;
+      if($scope.outlet) {
+        setMapData();
+      }
     })
+  }
 };
 
 
