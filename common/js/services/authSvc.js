@@ -1,7 +1,8 @@
-angular.module('auth', [])
+angular.module('auth', ['ngCookies'])
 .factory('authSvc', function ($http, $q, $cookieStore){
 
-	var authSvc = {};
+	var authSvc = {},
+		base_url = 'http://twyst.in';
 
 	authSvc.setAuthStatus = function (user) {
         $cookieStore.put('username', user.username);
@@ -69,42 +70,6 @@ angular.module('auth', [])
 	    });
 	    return deferred.promise;
   	}
-  
-	authSvc.getOTP = function (phone) {
-		var deferred = $q.defer();
-		$http.get('/api/v2/otp/' + phone)
-		.success(function(success) {
-		  	deferred.resolve(success);
-		}).error(function(error) {
-			deferred.reject(error);
-		});
-		return deferred.promise;
-	};
-
-	authSvc.updateSocial = function (data) {
-		var deferred = $q.defer();
-		$http.post('/api/v1/auth/login', data)
-		.success(function(success) {
-	      	deferred.resolve(success);
-	    }).error(function(error) {
-	      	deferred.reject(error);
-	    });
-	    return deferred.promise;
-	}
-
-	authSvc.verifyOTP = function (otp, phone) {
-		var deferred = $q.defer();
-		$http.post('/api/v2/otp', {
-			otp: otp,
-			phone: phone,
-			device_id: phone
-		}).success(function(success) {
-		  	deferred.resolve(success);
-		}).error(function(error) {
-		  	deferred.reject(error);
-		});
-		return deferred.promise;
-	};
 
   	return authSvc;
 });

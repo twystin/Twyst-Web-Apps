@@ -1,191 +1,165 @@
-/*   
- * Template Name: Unify - Responsive Bootstrap Template
- * Description: Business, Corporate, Portfolio and Blog Theme.
- * Version: 1.3
- * Author: Html Stream
- * Website: http://htmlstream.com/preview/unify
-*/
-
-var App = function () {
-
-    function handleIEFixes() {
-        //fix html5 placeholder attribute for ie7 & ie8
-        if (jQuery.browser.msie && jQuery.browser.version.substr(0, 1) < 9) { // ie7&ie8
-            jQuery('input[placeholder], textarea[placeholder]').each(function () {
-                var input = jQuery(this);
-
-                jQuery(input).val(input.attr('placeholder'));
-
-                jQuery(input).focus(function () {
-                    if (input.val() == input.attr('placeholder')) {
-                        input.val('');
-                    }
-                });
-
-                jQuery(input).blur(function () {
-                    if (input.val() == '' || input.val() == input.attr('placeholder')) {
-                        input.val(input.attr('placeholder'));
-                    }
-                });
-            });
-        }
-    }
-
-    function handleBootstrap() {
-        jQuery('.carousel').carousel({
-            interval: 15000,
-            pause: 'hover'
+angular.module('twystApp', ['ngAnimate', 'toastr', 'userAuth', 'ui.bootstrap'])
+.directive('backgroundImage', function () {
+  return function (scope, element, attrs) {
+    attrs.$observe('backgroundImage', function (value) {
+      if (value) {
+        var url = 'http://s3-us-west-2.amazonaws.com/twyst-outlets/' + value;
+        element.css({
+            'background': "url('" + url + "')",
+            'background-size':   'cover',                     /* <------ */
+            'background-repeat': 'no-repeat',
+            'background-position': 'center center' 
         });
-        jQuery('.tooltips').tooltip();
-        jQuery('.popovers').popover();
-    }
-
-    function handleSearch() {    
-        jQuery('.search').click(function () {
-            if(jQuery('.search-btn').hasClass('icon-search')){
-                jQuery('.search-open').fadeIn(500);
-                jQuery('.search-btn').removeClass('icon-search');
-                jQuery('.search-btn').addClass('icon-remove');
-            } else {
-                jQuery('.search-open').fadeOut(500);
-                jQuery('.search-btn').addClass('icon-search');
-                jQuery('.search-btn').removeClass('icon-remove');
-            }   
-        }); 
-    }
-
-    function handleSwitcher() {    
-        var panel = jQuery('.style-switcher');
-
-        jQuery('.style-switcher-btn').click(function () {
-            jQuery('.style-switcher').show();
-        });
-
-        jQuery('.theme-close').click(function () {
-            jQuery('.style-switcher').hide();
+      }
+    });
+  };
+})
+.factory('featuredSvc', function($http, $q) {
+    var featuredSvc = {};
+    featuredSvc.getFeatured = function (number) {
+        var deferred = $q.defer();
+        $http.get(
+            '/api/v3/featured_outlets?num=' + number 
+        ).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.reject(data);
         });
         
-        jQuery('li', panel).click(function () {
-            var color = jQuery(this).attr("data-style");
-            var data_header = jQuery(this).attr("data-header");
-            setColor(color, data_header);
-            jQuery('.list-unstyled li', panel).removeClass("theme-active");
-            jQuery(this).addClass("theme-active");
-        });
-
-        var setColor = function (color, data_header) {
-            jQuery('#style_color').attr("href", "assets/css/themes/" + color + ".css");
-            if(data_header == 'light'){
-                jQuery('#style_color-header-1').attr("href", "assets/css/themes/headers/header1-" + color + ".css");
-                jQuery('#logo-header').attr("src", "assets/img/logo1-" + color + ".png");
-                jQuery('#logo-footer').attr("src", "assets/img/logo2-" + color + ".png");
-            } else if(data_header == 'dark'){
-                jQuery('#style_color-header-2').attr("href", "assets/css/themes/headers/header2-" + color + ".css");
-                jQuery('#logo-header').attr("src", "assets/img/logo1-" + color + ".png");
-                jQuery('#logo-footer').attr("src", "assets/img/logo2-" + color + ".png");
-            }
+        return deferred.promise;
+    };
+    return featuredSvc;
+})
+.factory('toastSvc', function (toastr) {
+    return {
+        showToast: function (type, message, head, timeout) {
+            toastr[type](message, 
+                head, 
+                {
+                    timeOut: timeout,
+                    closeButton: true                    
+                });
         }
     }
+})
+.controller('AuthCtrl', function ($scope, $modal, userAuthSvc, toastSvc) {
+    $scope.user = null;
 
-    function handleBoxed() {
-        jQuery('.boxed-layout-btn').click(function(){
-            jQuery(this).addClass("active-switcher-btn");
-            jQuery(".wide-layout-btn").removeClass("active-switcher-btn");
-            jQuery("body").addClass("boxed-layout container");
-        });
-        jQuery('.wide-layout-btn').click(function(){
-            jQuery(this).addClass("active-switcher-btn");
-            jQuery(".boxed-layout-btn").removeClass("active-switcher-btn");
-            jQuery("body").removeClass("boxed-layout container");
-        });
+    userAuthSvc.getLoggedInUser().then(function (res) {
+        $scope.user = userAuthSvc.getAuthStatus();
+        console.log($scope.user)
+        toastSvc.showToast('success', 'Logged-In successfully', null, 5000);
+    }, function (error) {
+        $scope.user = null;
+    });
+
+    $scope.getOTP = function (phone) {
+        userAuthSvc.getOTP(phone).then(function (res) {
+            $scope.user = userAuthSvc.getAuthStatus();
+            console.log($scope.user)    
+            toastSvc.showToast('success', 'You will soon receive a verification code', null, 5000);
+        }, function (error) {
+            toastSvc.showToast('error', 'Error sending verification code', null, 5000);
+        })
     }
 
-    return {
-        init: function () {
-            handleBootstrap();
-            handleIEFixes();
-            handleSearch();
-            handleSwitcher();
-            handleBoxed();
-        },
+    $scope.verifyOTP = function (otp, phone) {
+        userAuthSvc.verifyOTP(otp, phone).then(function (res) {
+            $scope.user = userAuthSvc.getAuthStatus(); 
+            toastSvc.showToast('success', 'successfully logged-in', null, 5000);
+        }, function (error) {
+            toastSvc.showToast('error', 'Wrong verification code', null, 5000);
+        })
+    }
 
-        initSliders: function () {
-            $('#clients-flexslider').flexslider({
-                animation: "slide",
-                easing: "swing",
-                animationLoop: true,
-                itemWidth: 1,
-                itemMargin: 1,
-                minItems: 2,
-                maxItems: 9,
-                controlNav: false,
-                directionNav: false,
-                move: 2
-            });
-            
-            $('#clients-flexslider1').flexslider({
-                animation: "slide",
-                easing: "swing",
-                animationLoop: true,
-                itemWidth: 1,
-                itemMargin: 1,
-                minItems: 2,
-                maxItems: 5,
-                controlNav: false,
-                directionNav: false,
-                move: 2
-            });
-            
-            $('#photo-flexslider').flexslider({
-                animation: "slide",
-                controlNav: false,
-                animationLoop: false,
-                itemWidth: 80,
-                itemMargin: 0
-            }); 
-            
-            $('#testimonal_carousel').collapse({
-                toggle: false
-            });
-        },
+    $scope.logout = function () {
+        userAuthSvc.logout().then(function (res) {
+            $scope.user = userAuthSvc.getAuthStatus();
+            toastSvc.showToast('success', 'successfully logged-out', null, 5000);
+        }, function (error) {
+            toastSvc.showToast('error', 'Error logging out', null, 5000);
+        })
+    }
 
-        initFancybox: function () {
-            jQuery(".fancybox-button").fancybox({
-            groupAttr: 'data-rel',
-            prevEffect: 'none',
-            nextEffect: 'none',
-            closeBtn: true,
-            helpers: {
-                title: {
-                    type: 'inside'
-                    }
-                }
-            });
-        },
-
-        initBxSlider: function () {
-            $('.bxslider').bxSlider({
-                minSlides: 4,
-                maxSlides: 4,
-                slideWidth: 360,
-                slideMargin: 10
-            });            
-
-            $('.bxslider1').bxSlider({
-                minSlides: 3,
-                maxSlides: 3,
-                slideWidth: 360,
-                slideMargin: 10,
-            });            
-
-            $('.bxslider2').bxSlider({
-                minSlides: 2,
-                maxSlides: 2,
-                slideWidth: 360,
-                slideMargin: 10
-            });            
-        },
-
+    $scope.initLogin = function () {
+        var modalInstance = $modal.open({
+            templateUrl: '/home/_partials/login_modal.html',
+            size: 'lg',
+            backdrop: 'static',
+            scope: $scope
+        });
     };
+})
+.controller('FeaturedCtrl', function($scope, $window, featuredSvc, userAuthSvc, toastSvc) {
+    $scope.numOfFeatured = 6;
 
-}();
+    function isMobile() {
+        if($window.innerWidth < 768) {
+            return true;
+        }
+        return false;
+    }
+
+    $scope.isNew = function (outlet) {
+        var date = new Date(outlet.basics.created_at).getTime() + 1296000000;
+        if(date >= new Date().getTime()) {
+            return true;
+        }
+        return false;
+    }
+
+    if(isMobile()) {
+        $scope.numOfFeatured = 3;
+    }
+
+    $scope.getFeatured = function () {
+        featuredSvc.getFeatured($scope.numOfFeatured).then(function (data) {
+            $scope.results = data.info;
+        })
+    }
+
+    $scope.getMobileOperatingSystem = function () {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ) {
+          return 'iOS';
+        }
+        else if( userAgent.match( /Android/i ) ) {
+          return 'Android';
+        }
+        else {
+          return 'unknown';
+        }
+    }
+})
+.controller('ContactCtrl', function($scope, $http) {
+    $scope.user = {};
+    $scope.user.thank_you = false;
+    $scope.user.error = false;
+
+    $scope.contact = function () {
+        if ($scope.user.name &&
+            $scope.user.message &&
+            $scope.user.email) {
+
+            $http.post('/api/v1/beta/users',
+                {   name  : $scope.user.name,
+                    message : $scope.user.message,
+                    email : $scope.user.email
+                })
+                .success(function (data, status, header, config) {
+                    $scope.user = {};
+                    $scope.user.thank_you = true;
+                    $scope.user.error = false;
+                })
+                .error(function (data, status, header, config) {
+                    $scope.user.error = true;
+                    $scope.user.thank_you = false;
+                });
+        }
+        else {
+            $scope.user.thank_you = false;
+            $scope.user.error = false;
+        }
+    };
+    
+});

@@ -1,4 +1,4 @@
-angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngCookies'])
+angular.module('login', ['auth', 'ngAnimate', 'toastr'])
 .config(function ($httpProvider) {
     $httpProvider.interceptors.push(interceptor);
 })
@@ -40,7 +40,7 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngCookies'])
 	}
 });
 
-var interceptor = function ($q, $location) {
+var interceptor = function ($q) {
     return {
         // request: function (config) {
         //     return config;
@@ -51,12 +51,12 @@ var interceptor = function ($q, $location) {
         // },
 
         responseError: function (rejection) {
-            if (rejection.status == 403) {
-                $location.url('/');
-            }
-            else if(rejection.status == 401) {
-            	$location.url('/');
-            }
+            // if (rejection.status == 403) {
+            //     $location.url('/');
+            // }
+            // else if(rejection.status == 401) {
+            // 	$location.url('/');
+            // }
 
             return $q.reject(rejection);
         }

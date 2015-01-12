@@ -1,5 +1,23 @@
 /*Profile
 ------------------------------------*/
+.modal-dialog {
+	height: 300px;
+	right: auto;
+	width: 350px;
+	margin-top: 8em;
+	background-color: #2b2b2b;
+	opacity: 0.8;
+}
+.modal {
+    overflow-y: auto;
+    color: white;
+}
+.modal-body {
+	display: block;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+ }
 .headline h2, .headline h3, .headline h4 {
     border-bottom: 2px solid #f6921e;
 }
@@ -102,6 +120,9 @@ html {
 .padding-bottom-20 {
 	padding-bottom: 20px;
 }
+.padding-login-button {
+	padding-top: 0.35em;
+}
 
 /* xs */
 @media (max-width: 767px) {
@@ -115,7 +136,7 @@ html {
 		font-size: 1.7em;
 	}
 	.padding-top-1pt5em {
-		padding-top: 3.5em;
+		padding-top: 2.5em;
 	}
 	.featured-outlets-xs {
 		margin-left: 0.5em;
