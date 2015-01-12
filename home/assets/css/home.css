@@ -64,11 +64,6 @@
 .header .navbar-default .navbar-nav > li > a {
     color: #fff !important;
 }
-#logo-header {
-	margin-top: 0.4em;
-	height: 2.7em;
-	width: auto;
-}
 
 .app-button {
 	height: 2.5em;
@@ -111,6 +106,11 @@ html {
 /* xs */
 @media (max-width: 767px) {
     /* CSS goes here */
+    #logo-header {
+		margin-top: 0em;
+		height: 2.5em;
+		width: auto;
+	}
     .unlock-reward-text {
 		font-size: 1.7em;
 	}
@@ -138,6 +138,11 @@ html {
 }
 /* md */
 @media (min-width: 992px) {
+	#logo-header {
+		margin-top: 0em;
+		height: 2.7em;
+		width: auto;
+	}
     .unlock-reward-text {
 		font-size: 3.0em;
 	}
@@ -147,6 +152,11 @@ html {
 }
 /* lg */
 @media (min-width: 1200px) {
+	#logo-header {
+		margin-top: 0.2em;
+		height: 2.7em;
+		width: auto;
+	}
     .unlock-reward-text {
 		font-size: 3.5em;
 	}
@@ -157,6 +167,11 @@ html {
 
 /* sm */
 @media (min-width: 768px) and (max-width: 992px) {
+	#logo-header {
+		margin-top: 0em;
+		height: 2.5em;
+		width: auto;
+	}
 	.connect-margin {
 		margin-top: 5em;
 	}
