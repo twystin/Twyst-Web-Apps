@@ -1,5 +1,8 @@
 /*Profile
 ------------------------------------*/
+.headline h2, .headline h3, .headline h4 {
+    border-bottom: 2px solid #f6921e;
+}
 .how-to-twyst-hover {
 	border-bottom: 1px solid #f6921e;
 	display: inline-block !important;
