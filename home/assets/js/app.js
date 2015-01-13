@@ -44,6 +44,10 @@ angular.module('twystApp', ['ngAnimate', 'toastr', 'userAuth', 'ui.bootstrap'])
 })
 .controller('AuthCtrl', function ($scope, $modal, userAuthSvc, toastSvc) {
     $scope.user = null;
+    $scope.login_details = {
+        is_valid_phone: false,
+        phone: null
+    }
 
     userAuthSvc.getLoggedInUser().then(function (res) {
         $scope.user = userAuthSvc.getAuthStatus();
@@ -84,11 +88,28 @@ angular.module('twystApp', ['ngAnimate', 'toastr', 'userAuth', 'ui.bootstrap'])
     $scope.initLogin = function () {
         var modalInstance = $modal.open({
             templateUrl: '/home/_partials/login_modal.html',
-            size: 'lg',
+            size: 'sm',
             backdrop: 'static',
             scope: $scope
         });
     };
+
+    $scope.$watch('login_details.phone', function () {
+        console.log("hhuhui")
+        if($scope.login_details.phone 
+            && ($scope.login_details.phone.length === 10) 
+            && isNumeric($scope.login_details.phone)) {
+            $scope.login_details.is_valid_phone = true;
+        }
+        else {
+            $scope.login_details.is_valid_phone = false;
+        }
+    })
+
+    function isNumeric(str) {
+        var numeric = /^-?[0-9]+$/;
+        return numeric.test(str);
+    }
 })
 .controller('FeaturedCtrl', function($scope, $window, featuredSvc, userAuthSvc, toastSvc) {
     $scope.numOfFeatured = 6;

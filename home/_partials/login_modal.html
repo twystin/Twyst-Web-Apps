@@ -1,17 +1,20 @@
-<div class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body…</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<div class="modal-header">
+    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" ng-click="$dismiss()">×</button>
+    <h4 class="modal-title">Verify your Mobile No.</h4>
+</div>
+<div class="modal-body">
+    <div class="text-center">
+        <div>
+            <input class="input input-lg input-block-level" type="text" style="width: 100%" placeholder="10-digit Number" ng-model="login_details.phone">
+        </div>
+        <div style="padding-bottom: 1em;">
+        
+        </div>
+        <div>
+            <button class="btn btn-block" ng-click="startLogin(phone)" ng-disabled="!login_details.is_valid_phone">VERIFY</button>
+        </div>
+        <div>
+            <h6>If you haven't registered on Twyst before, you will receive a 4 digit code by SMS.</h6>
+        </div>
+    </div>
+</div>

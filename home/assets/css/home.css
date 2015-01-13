@@ -1,16 +1,12 @@
 /*Profile
 ------------------------------------*/
-.modal-dialog {
-	height: 300px;
-	right: auto;
-	width: 350px;
-	margin-top: 8em;
-	background-color: #2b2b2b;
-	opacity: 0.8;
+input{
+   text-align:center;
 }
-.modal {
-    overflow-y: auto;
-    color: white;
+.modal-content {
+	width: 30em;
+	margin-left: 10em;
+	margin-top: 10em;
 }
 .modal-body {
 	display: block;
