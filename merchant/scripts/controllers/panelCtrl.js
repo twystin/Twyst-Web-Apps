@@ -606,14 +606,12 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     };
 
     $scope.getPrograms = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-
-        $http.get('/api/v1/programs/' + user_id).success(function (data) {
-            $scope.programs = JSON.parse(data.info) || [];
+        $http.get('/api/v1/programs/')
+        .success(function (data) {
+            $scope.programs = data.info || [];
             getActiveProgram($scope.programs, $scope.outlet)
-        }).error(function (data) {
-            
+        }).error(function (err) {
+            console.log(err);
         });
     };
 

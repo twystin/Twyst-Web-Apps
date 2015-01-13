@@ -16,7 +16,6 @@ twystApp.controller('AnalyticsCtrl', function ($scope, $http, $location, authSer
 
     //TODO: These two functions are for showing the voucher data on the reports page. Remove
     $scope.outletQuery = function () {
-        var user_id = $scope.auth._id;
         outletService.query().then(function (data) {
             $scope.outlets = data.info;
             $scope.all_outlets = data.info;
@@ -32,9 +31,11 @@ twystApp.controller('AnalyticsCtrl', function ($scope, $http, $location, authSer
     };
 
     $scope.onlyPrograms = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-        programService.query($scope, $http, $location, user_id);
+        programService.query().then(function (data) {
+            $scope.programs = data.info;
+        }, function (err) {
+            console.log(err);
+        });
     };
 
     $scope.getSummaryCheckins = function () {

@@ -27,11 +27,17 @@ twystApp.factory('programService', function ($rootScope, $log, $q, $http) {
         return defer.promise;
     };
 
-    programSvc.query = function ($scope, $http, $location, user_id) {
-        $http.get('/api/v1/programs/' + user_id).success(function (data) {
-            $scope.programs = JSON.parse(data.info);
+    programSvc.query = function () {
+        var deferred = $q.defer();
+        $http.get('/api/v1/programs')
+        .success(function(success) {
+            deferred.resolve(success);
+        }).error(function(error) {
+            deferred.reject(error);
         });
+        return deferred.promise;
     };
+    
     programSvc.onlyPrograms = function ($scope, $http, $location, user_id) {
         $http.get('/api/v1/programs/only/' + user_id).success(function (data) {
             $scope.programs = JSON.parse(data.info);

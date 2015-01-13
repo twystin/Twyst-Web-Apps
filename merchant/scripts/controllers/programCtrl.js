@@ -292,9 +292,11 @@ twystApp.controller('ProgramsCtrl', function ($scope,$timeout,$anchorScroll, $mo
     };
 
     $scope.query = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-        programService.query($scope, $http, $location, user_id);
+        programService.query().then(function (data) {
+            $scope.programs = data.info;
+        }, function (err) {
+            console.log(err);
+        });
     };
 
     $scope.create = function () {
