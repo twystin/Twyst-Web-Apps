@@ -594,8 +594,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         $scope.auth = authService.getAuthStatus();
         var user_id = $scope.auth._id;
         
-        $http.get('/api/v1/outlets/' + user_id).success(function (data) {
-            $scope.outlets = JSON.parse(data.info);
+        $http.get('/api/v1/outlets/').success(function (data) {
+            $scope.outlets = data.info;
             if($scope.outlets.length > 0) {
                 $scope.outlet = $scope.outlets[0];
                 $scope.selected_outlet = $scope.outlets[0]._id;

@@ -187,15 +187,12 @@ controller('WinbackCtrl', function ($http, outletService, authService, OPERATE_H
     };
 
     $scope.outletQuery = function() {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-        outletService.query($scope, $http, $location, user_id);
-    };
-
-    $scope.outletQuery = function() {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-        outletService.query($scope, $http, $location, user_id);
+        outletService.query().then(function (data) {
+            $scope.outlets = data.info;
+            $scope.all_outlets = data.info;
+        }, function (err) {
+            console.log(err);
+        })
     };
 
     $scope.outlet_for = {};

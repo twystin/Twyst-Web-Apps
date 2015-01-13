@@ -1,5 +1,5 @@
 'use strict';
-twystApp.factory('outletService', function ($rootScope, $log) {
+twystApp.factory('outletService', function ($rootScope, $q, $http) {
     var outletSvc = {};
     var _outletSvcMessages = {
         status: null,
@@ -15,13 +15,15 @@ twystApp.factory('outletService', function ($rootScope, $log) {
         return _outletSvcMessages;
     };
 
-    outletSvc.query = function ($scope, $http, $location, user_id) {
-        $http.get('/api/v1/outlets/' + user_id).success(function (data) {
-            $scope.outlets = JSON.parse(data.info);
-            $scope.all_outlets = $scope.outlets;
-        }).error(function (data) {
-            console.log(data);
+    outletSvc.query = function () {
+        var deferred = $q.defer();
+        $http.get('/api/v1/outlets')
+        .success(function(success) {
+            deferred.resolve(success);
+        }).error(function(error) {
+            deferred.reject(error);
         });
+        return deferred.promise;
     };
 
     outletSvc.read = function ($scope, $http, $location, outlet_title) {
