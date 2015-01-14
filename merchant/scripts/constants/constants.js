@@ -1,10 +1,21 @@
-twystApp.constant('APP_NAME','Twyst App')
-twystApp.constant('APP_VERSION','0.1')
+twystApp
+.constant('APP_NAME','Twyst App')
+.constant('APP_VERSION','0.1')
 
-twystApp.constant('_START_REQUEST_', '_START_REQUEST_');
-twystApp.constant('_END_REQUEST_', '_END_REQUEST_');
+.constant('_START_REQUEST_', '_START_REQUEST_')
+.constant('_END_REQUEST_', '_END_REQUEST_')
+.constant('REWARD_CHECK',  [
+    {"text": "Discount", value:"discount"},
+    {"text": "Flat off", value:"flat"},
+    {"text": "Free ", value:"free"},
+    {"text": "Buy one get one ", value:"buy_one_get_one"},
+    {"text": "Happy hours", value:"happy"},
+    {"text": "Reduced price ", value:"reduced"},
+    {"text": "Custom ", value:"custom"}
+])
+.constant('WEEK', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])
 
-twystApp.constant('OPERATE_HOURS', {
+.constant('OPERATE_HOURS', {
     sunday: {
         closed: false,
         timings: [{
