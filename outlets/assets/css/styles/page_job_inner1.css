@@ -418,6 +418,7 @@ div.panel-heading > h4 > a > span {
 }
 .merchant_logo{
     max-height: 8em;
+    max-width: 13em;
 }
 
 .bg{
