@@ -3,6 +3,18 @@ twystConsole.factory('dataService', function ($http, $q) {
 
     var dataSvc = {};
 
+    dataSvc.getSMSJobStatus = function () {
+        var deferred = $q.defer();
+        $http.get(
+            '/api/v3/job_status/sms'
+        ).success(function (data) {
+            deferred.resolve(data);
+        }).error(function (data) {
+            deferred.resolve(data);
+        });
+        return deferred.promise;
+    }
+
     dataSvc.getDownloads = function (outlet_id, start_date, end_date) {
 
         var deferred = $q.defer();

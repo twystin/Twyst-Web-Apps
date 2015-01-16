@@ -1,9 +1,15 @@
-function PublicController($scope, $location, authService) {
+function PublicController($scope, $location, authService, dataService) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
 
+    dataService.getSMSJobStatus().then(function (data) {
+    	console.log(data)
+    	$scope.sms = data.info;
+    }, function (err) {
+    	console.log(err);
+    });
 }
 
 function ReccoController($scope, $location, $http, $route, authService) {

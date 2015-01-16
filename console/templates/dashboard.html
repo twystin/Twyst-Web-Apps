@@ -2,6 +2,17 @@
     <ul class="thumbnails">
         <li class="span4">
             <div class="thumbnail">
+                <h3>SMS Job</h3>
+                <hr/>
+                <span>
+                    Last run time: <b style="color: green">{{sms.last_run_time | date: 'medium'}}</b>
+                </span>
+                </br>
+                <span>
+                    Next run time: <b style="color: red">{{sms.next_run_time | date: 'medium'}}</b>
+                </span>
+            </div>
+            <div class="thumbnail">
                 <h3>Users</h3>
                 <hr/>
                 <a ng-href="/console/#/users" class="btn btn-success">View</a>
