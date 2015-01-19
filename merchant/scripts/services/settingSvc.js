@@ -1,5 +1,5 @@
 'use strict';
-twystApp.factory('settingService', function ($log) {
+twystApp.factory('settingService', function ($log, $q, $http) {
     var settingSvc = {};
     settingSvc.createUser = function ($scope, $http, $location, $window) {
         $log.warn($scope.new_user);
@@ -55,16 +55,20 @@ twystApp.factory('settingService', function ($log) {
             $scope.message = data.message;
         });
     };
-    settingSvc.changePassword = function ($scope, $http, $location, user, user_id) {
+    settingSvc.changePassword = function (pass) {
+        var deferred = $q.defer();
         $http({
-            url: '/api/v1/pass/change/' + user_id,
+            url: '/api/v1/pass/change',
             method: "PUT",
-            data: {password: user.pass1}
+            data: {
+                password: pass
+            }
         }).success(function (data) {
-            $scope.message = data.message;
-        }).error(function (data) {
-            $scope.message = data.message;
+            deferred.resolve(data);
+        }).error(function (error) {
+            deferred.reject(error);
         });
+        return deferred.promise;
     };
     settingSvc.delete = function ($scope, $http, $location, user) {
         $http({

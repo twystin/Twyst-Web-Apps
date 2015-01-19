@@ -97,9 +97,13 @@ twystApp.controller('SettingCtrl', function ($scope, $http, $location, $window, 
     };
 
     $scope.changePassword = function (user) {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-        settingService.changePassword($scope, $http, $location, user, user_id);
+        var pass = $scope.user.pass1;
+        settingService.changePassword(pass).then(function (data) {
+            alert(data.message);
+        }, function (err) {
+            alert(data.message);
+            console.log(err);
+        });
     };
 
     $scope.delete = function (user) {
