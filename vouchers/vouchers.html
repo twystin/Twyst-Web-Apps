@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="col-md-4 col-md-push-4 bg-white">
+		<div ng-repeat="item in active_vouchers | orderBy: 'voucher.validity.end_date'" class="row list-view">
+			<div ng-if="item.voucher.basics.type !== 'WINBACK'">
+				<div class="col-md-2 col-xs-3">
+					<img ng-src="{{imageName(item)}}" class="voucher-img">
+				</div>
+				<div class="col-md-10 col-xs-9">
+					<div class="th2">
+						<strong>{{item.voucher.issue_details.issued_for.basics.title}}</strong>
+					</div>
+					<div>
+						<span ng-show="item.avail_in">
+	                        <strong style="color:red !important">AVAILABLE {{item.avail_in.day | uppercase}} {{item.avail_in.time}}</strong>
+	                    </span>
+	                    <span ng-hide="item.avail_in">
+	                        <strong style="color:green !important">AVAILABLE NOW</strong>
+	                    </span>
+					</div>
+					<div>
+						<small>
+	                        {{item.voucher.issue_details.issued_at[0].basics.name}}
+	                        <br/>
+	                        <span class="text-gray"><i class="fa fa-map-marker"></i> {{item.voucher.issue_details.issued_at[0].contact.location.locality_1[0]}}, {{item.voucher.issue_details.issued_at[0].contact.location.city}}</span>
+	                    </small>
+					</div>
+					<div>
+						<small class="text-gray">
+                            <i class="fa fa-calendar"></i> Valid till {{item.voucher.validity.end_date|date}}
+                        </small>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	.bg-white {
+		background-color: white;
+	}
+	.voucher-img {
+		width:5em;
+	}
+	.th2 {
+	    font-size: 15px;
+	    text-transform: uppercase;
+	}
+	.list-view {
+		padding: 1em 0em 1em 0em;
+		border-bottom: 1.5px solid gray;
+	}
+</style>

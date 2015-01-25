@@ -104,6 +104,7 @@ function NotifController($scope, $http, $location, authService) {
 			if($scope.message.gcms) {
 				obj.gcms = $scope.message.gcms.split(/,|;|\n/);
 			}
+			obj.from = $scope.message.from;
 			obj.head = $scope.message.head;
 			obj.body = $scope.message.body;
 			obj.server_key = $scope.message.server_key;

@@ -50,7 +50,7 @@ angular.module('auth', [])
       		username: username,
       		password: password
     	}).success(function(success) {
-    		authSvc.setAuthStatus(success.user);
+    		authSvc.setAuthStatus(success.info);
 	      	deferred.resolve(success);
 	    }).error(function(error) {
 	      	deferred.reject(error);
