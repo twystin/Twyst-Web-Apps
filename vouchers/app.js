@@ -112,6 +112,20 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 		console.log(error);
 	});
 
+	$scope.getMobileOperatingSystem = function () {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ) {
+          return 'iOS';
+
+        }
+        else if( userAgent.match( /Android/i ) ) {
+          return 'Android';
+        }
+        else {
+          return 'unknown';
+        }
+    }
+
 	$scope.imageName = function(item) {
         var a = '';
         if (item.voucher.basics.type !== 'WINBACK') {

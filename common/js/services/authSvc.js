@@ -4,11 +4,11 @@ angular.module('auth', [])
 	var authSvc = {};
 
 	authSvc.getPhone = function () {
-		return authSvc.phone;
+		return $cookieStore.get('phone');
 	};
 
 	authSvc.setPhone = function (phone) {
-		authSvc.phone = phone;
+		$cookieStore.put('phone', phone);
 	};
 
 	authSvc.setAuthStatus = function (user) {

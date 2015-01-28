@@ -1,5 +1,99 @@
+<div class="header">
+    <style type="text/css">
+        /*
+        CSS for Header goes here
+        */
+        .padding-top-100 {
+            padding-top: 3.5em;
+        }
+        .header .navbar-default .navbar-nav > li > a {
+            color: #fff !important;
+        }
+        #logo-header {
+            margin-top: 0.2em;
+            height: 2.7em;
+            width: auto;
+        }
+
+        .app-button {
+            height: 2.5em;
+        }
+        .header .navbar {
+            background-color: #000 !important;
+        }
+        .margin-top-pt6em {
+            margin-top: -0.8em;
+            margin-left: -1em;
+        }
+        .margin-bottom-about {
+            margin-bottom: 5em; 
+        }
+    </style>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+            <img id="logo-header" src="/discover/assets/img/twyst_logo_2.png" alt="Logo">       
+          </a>
+        </div>
+
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
+          <li class="margin-top-pt6em hidden-xs hidden-sm" >
+            <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android"><img class="app-button" src="/outlets/assets/img/images/googleplay.png"></a>
+          </li>
+          <li class="margin-top-pt6em hidden-xs hidden-sm">
+              <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store"><img class="app-button" src="/outlets/assets/img/images/appstore.png"></a>
+          </li>
+          <li> 
+            <a href="/home">
+              Home
+            </a>
+          </li>
+          <li> 
+            <a href="/discover">
+              Discover
+            </a>
+          </li>
+          <li>
+            <a href="/home/how">
+              How it works
+            </a>                       
+          </li>
+
+          <li>
+            <a href="http://twyst.in/merchant/">
+              For merchants
+            </a>
+          </li>               
+
+        </ul>
+    </div>    
+</div>
+<div class="container" style="margin-top:3.5em;">
+	
+</div>
 <div class="container">
 	<div class="col-md-4 col-md-push-4 bg-white col-xs-12">
+		<div class="row">
+			<div class="th2-heading">
+				<div class="th2">
+					<strong>Active Vouchers</strong>
+				</div>
+				<div>
+					<small>To redeem, give the voucher code to your server at the restaurant or on the phone.</small>
+				</div>
+			</div>
+		</div>
 		<div ng-repeat="item in active_vouchers | orderBy: 'voucher.validity.end_date'" class="row list-view" ng-if="active_vouchers.length != 0">
 			<div ng-if="item.voucher.basics.type !== 'WINBACK'">
 				<div class="col-md-2 col-xs-3">
@@ -10,7 +104,7 @@
 						<strong>{{item.voucher.issue_details.issued_for.basics.title}}</strong>
 					</div>
 					<div class="th2">
-						<strong>Voucher Code: ({{item.voucher.basics.code}})</strong>
+						<strong>Voucher Code: <span style="color: orange;">{{item.voucher.basics.code}}</span></strong>
 					</div>
 					<div>
 						<span ng-show="item.avail_in">
@@ -43,19 +137,87 @@
 		</div>
 	</div>
 </div>
-<style>
-	.bg-white {
-		background-color: white;
-	}
-	.voucher-img {
-		width:5em;
-	}
-	.th2 {
-	    font-size: 15px;
-	    text-transform: uppercase;
-	}
-	.list-view {
-		padding: 1em 0em 1em 0em;
-		border-bottom: 1.5px solid gray;
-	}
-</style>
+<div class="col-xs-12">
+	<div class="footer">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-4 col-sm-12 col-xs-12">
+	                <!-- About -->
+	                <div class="headline">
+	                    <h2>About</h2>
+	                </div>
+	                <p>Twyst is a start-up based out of Gurgaon, started by a team with a combined experience of 40 years across product, strategy, operations and marketing. <a href="about.html">More</a></p>
+	            </div>
+	                <!--/col-md-4-->
+
+	            <div class="col-md-4 col-sm-12 col-xs-12">      
+
+	                <!-- Stay Connected -->
+	                <div class="headline">
+	                    <h2>Follow</h2>
+	                </div>
+	                <ul class="social-icons">
+	                    <li>
+	                        <a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a>
+	                    </li>
+	                    <li>
+	                        <a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a>
+	                    </li>
+	                    <li>
+	                        <a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a>
+	                    </li>
+	                </ul>
+	            </div>
+	                <!--/col-md-4-->
+
+	            <div class="col-md-4 col-sm-12 col-xs-12 connect-margin">
+	                <!-- Monthly Newsletter -->
+	                
+
+	                <!-- Stay Connected -->
+	                <div class="headline">
+	                    <h2>Connect</h2>
+	                </div>
+	                <a class="btn btn-warning" href="/home/contact.html" style="color: white;line-height: 1;">Get in touch</a>
+	                <a class="btn btn-warning" href="/home/careers.html" style="color: white;line-height: 1;">Work with Us</a>
+	            </div>
+	                <!--/col-md-4-->
+	        </div>
+	            <!--/row-->
+	    </div>
+	        <!--/container-->
+	</div>
+	<div>
+		<br/>
+		<br/>
+	</div>
+	<div class="footer navbar-fixed-bottom hidden-md hidden-lg twyst-background" ng-if="getMobileOperatingSystem() === 'Android'">
+        <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android">
+            <div class="text-center download-footer">
+              <span class="color_white">GET THE APP </span>              
+                <img src="/outlets/assets/img/images/googleplay.png" class="google-play-xs">
+            </div>
+        </a>
+        <!-- <div class="text-center"  ng-if="getMobileOperatingSystem() === 'iOS'">
+          <span class="color_white padding-top-pt7">GET THE APP</span>
+          <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4">
+            <img src="/outlets/assets/img/images/appstore.png" class="google-play-xs">
+          </a>
+        </div> -->
+        <style type="text/css">
+            .twyst-background {
+                background-color: #f6921e;
+            }
+            .color_white {
+                color: white;
+            }
+            .google-play-xs {
+                height: 2.7em;
+            }
+            .download-footer {
+                height: 0.3em;
+                margin-top: -0.9em;
+            }
+        </style>
+    </div>
+</div>

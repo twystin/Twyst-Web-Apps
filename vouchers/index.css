@@ -1,6 +1,43 @@
+@media (max-width: 768px) {
+	.voucher-img {
+		width:4.5em;
+	}
+}
+
+@media (min-width: 768px) {
+	.voucher-img {
+		width:5em;
+		padding-right: 1em;
+	}
+}
+
 body {
 	background-color: #2b2b2b !important;
 	overflow-x: hidden;
+}
+
+.bg-white {
+	background-color: white;
+}
+.th2 {
+    font-size: 15px;
+    text-transform: uppercase;
+}
+.list-view {
+	padding: 1em 0em 1em 0em;
+	border-bottom: 1.5px solid gray;
+}
+
+.footer {
+	margin-top: 0px !important;
+}
+
+.th2-heading {
+	margin: 1.5em 0em .5em 1.6em;
+}
+
+.headline h2, .headline h3, .headline h4 {
+    border-bottom: 2px solid #f6921e;
 }
 
 .login-wrapper {
@@ -23,7 +60,7 @@ body {
 	padding:30px 20px 10px 20px;
 	margin:0;
 }
-.login-wrapper .header h3 {
+.login-wrapper .header h4 {
 	line-height:40px;
 	margin:0;
 	padding:0;
