@@ -77,7 +77,7 @@
           </li>
 
           <li>
-            <a href>
+            <a href="/vouchers">
               Hi, {{user.username}}
             </a>
           </li>               
@@ -131,7 +131,11 @@
 						<small class="text-gray">
                             <i class="fa fa-calendar"></i> Valid till {{item.voucher.validity.end_date|date}}
                         </small>
-
+					</div>
+					<div ng-if="item.voucher.issue_details.issued_for.terms">
+						<small class="text-gray">
+                            Terms: {{item.voucher.issue_details.issued_for.terms}}
+                        </small>
 					</div>
 				</div>
 			</div>
