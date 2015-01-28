@@ -2,16 +2,14 @@ body {
 	background-color: #2b2b2b !important;
 	overflow-x: hidden;
 }
-.main-container {
-	margin:10px 10px 10px 10px;
-}
+
 .login-wrapper {
 	position:absolute;
 	top:50%;
 	left:50%;
-	width:380px;
+	width:25em;
 	height:300px;
-	margin-left:-190px;
+	margin-left:-12.5em;
 	margin-top:-150px;
 	background:#fcfcfc;
 	-webkit-border-radius:4px;
