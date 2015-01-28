@@ -1,6 +1,6 @@
-<div class="row">
-	<div class="col-md-4 col-md-push-4 bg-white">
-		<div ng-repeat="item in active_vouchers | orderBy: 'voucher.validity.end_date'" class="row list-view">
+<div class="container">
+	<div class="col-md-4 col-md-push-4 bg-white col-xs-12">
+		<div ng-repeat="item in active_vouchers | orderBy: 'voucher.validity.end_date'" class="row list-view" ng-if="active_vouchers.length != 0">
 			<div ng-if="item.voucher.basics.type !== 'WINBACK'">
 				<div class="col-md-2 col-xs-3">
 					<img ng-src="{{imageName(item)}}" class="voucher-img">
@@ -34,6 +34,11 @@
 
 					</div>
 				</div>
+			</div>
+		</div>
+		<div ng-if="active_vouchers.length === 0" class="row list-view">
+			<div class="th2">
+				<strong style="color:red !important">You do not have any active vouchers currently.</strong>
 			</div>
 		</div>
 	</div>
