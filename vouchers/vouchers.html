@@ -9,6 +9,9 @@
 					<div class="th2">
 						<strong>{{item.voucher.issue_details.issued_for.basics.title}}</strong>
 					</div>
+					<div class="th2">
+						<strong>Voucher Code: ({{item.voucher.basics.code}})</strong>
+					</div>
 					<div>
 						<span ng-show="item.avail_in">
 	                        <strong style="color:red !important">AVAILABLE {{item.avail_in.day | uppercase}} {{item.avail_in.time}}</strong>

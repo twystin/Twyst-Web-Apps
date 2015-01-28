@@ -13,18 +13,17 @@
 		<div class="content">
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
-					<input class="input col-md-12 col-sm-12 email" id="" name="" placeholder="jayram@twyst.in" ng-model="username">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12">
-					<input class="input col-md-12 col-sm-12 password" id="" name="" placeholder="********" type="password" ng-model="pass">
+					<input class="input col-md-12 col-sm-12 email" id="" name="" placeholder="e.g. 9871303236" ng-model="phone" style="width: 100%;text-align:center;">
 				</div>
 			</div>
 		</div>
 		<div class="actions">
-			<button ng-click="login()" class="btn btn-danger">Login</button>
-			<a class="link" href="#">Forgot Password?</a>
+			<div>
+				<button ng-click="getOtp()" class="btn btn-danger" style="width: 100%;">Get verification code</button>
+			</div>
+			<div>
+				<a class="link" href="#/otp">Have a verification code already?</a>
+			</div>
 			<div class="clearfix">
 			</div>
 		</div>

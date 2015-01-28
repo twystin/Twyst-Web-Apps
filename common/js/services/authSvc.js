@@ -3,6 +3,14 @@ angular.module('auth', [])
 
 	var authSvc = {};
 
+	authSvc.getPhone = function () {
+		return authSvc.phone;
+	};
+
+	authSvc.setPhone = function (phone) {
+		authSvc.phone = phone;
+	};
+
 	authSvc.setAuthStatus = function (user) {
         $cookieStore.put('username', user.username);
         $cookieStore.put('role', user.role);
