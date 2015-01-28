@@ -6,7 +6,7 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 		$scope.user = authSvc.getAuthStatus();
 		if(authSvc.getPhone()) {
 			$location.path('/vouchers');
-			toastSvc.showToast('success', 'Logged-In successfully');
+			//toastSvc.showToast('success', 'Logged-In successfully');
 		}
 		else {
 			authSvc.logout().then(function (data) {
@@ -49,7 +49,7 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 	function verifyOtp(otp, phone) {
 		authSvc.verifyOTP(otp, phone).then(function (data) {
 			login(phone);
-			toastSvc.showToast('success', data.message);
+			//toastSvc.showToast('success', data.message);
 		}, function (err) {
 			toastSvc.showToast('error', err.message);
 		});
@@ -58,7 +58,7 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 	function login(phone) {
 		authSvc.login(phone, phone).then(function (data) {
 			$location.path('/vouchers');
-			toastSvc.showToast('success', data.message);
+			//toastSvc.showToast('success', data.message);
 		}, function (err) {
 			toastSvc.showToast('error', err.message);
 		});
@@ -67,7 +67,7 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 	function requestOtp(phone) {
 		authSvc.getOTP(phone).then(function (data) {
 			$location.path('/otp');
-			toastSvc.showToast('success', data.message);
+			//toastSvc.showToast('success', data.message);
 		}, function (err) {
 			toastSvc.showToast('error', err.message);
 		});

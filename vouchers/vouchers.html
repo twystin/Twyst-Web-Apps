@@ -74,6 +74,12 @@
             <a href="http://twyst.in/merchant/">
               For merchants
             </a>
+          </li>
+
+          <li>
+            <a href>
+              Hi, {{user.username}}
+            </a>
           </li>               
 
         </ul>
@@ -103,8 +109,8 @@
 					<div class="th2">
 						<strong>{{item.voucher.issue_details.issued_for.basics.title}}</strong>
 					</div>
-					<div class="th2">
-						<strong>Voucher Code: <span style="color: orange;">{{item.voucher.basics.code}}</span></strong>
+					<div>
+						Voucher Code: <strong class="th2"><span style="color: orange;">{{item.voucher.basics.code}}</span></strong>
 					</div>
 					<div>
 						<span ng-show="item.avail_in">
