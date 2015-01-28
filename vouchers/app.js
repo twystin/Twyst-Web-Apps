@@ -4,8 +4,15 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 
 	authSvc.getLoggedInUser().then(function (res) {
 		$scope.user = authSvc.getAuthStatus();
-		$location.path('/vouchers');
-		toastSvc.showToast('success', 'Logged-In successfully');
+		if(authSvc.getPhone()) {
+			$location.path('/vouchers');
+			toastSvc.showToast('success', 'Logged-In successfully');
+		}
+		else {
+			authSvc.logout().then(function (data) {
+				$location.path('/');
+			});
+		}
 	}, function (error) {
 		$scope.user = null;
 	});
