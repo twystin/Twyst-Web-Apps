@@ -51,7 +51,7 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 			login(phone);
 			toastSvc.showToast('success', data.message);
 		}, function (err) {
-			toastSvc.showToast('error', data.message);
+			toastSvc.showToast('error', err.message);
 		});
 	}
 
