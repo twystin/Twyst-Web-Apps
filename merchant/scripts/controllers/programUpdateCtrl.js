@@ -516,9 +516,9 @@ twystApp.controller('programUpdateCtrl',
 	   	function updateRewardTable(program_id) {
 	   		proSupService.updateRewardTable(program_id)
 	   		.then(function (data) {
-	   			toastSvc.showToast('success', data.message);
+	   			//toastSvc.showToast('success', data.message);
 	   		}, function (err) {
-	   			toastSvc.showToast('error', err.message);
+	   			//toastSvc.showToast('error', err.message);
 	   		});
 	   	}
 
