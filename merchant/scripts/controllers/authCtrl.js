@@ -10,7 +10,12 @@ twystApp.controller('AuthCtrl', function ($scope, $route, $http, $location, $rou
     };
 
     if (authService.isLoggedIn() && authService.getAuthStatus().role <= 4) {
-        $location.path('/dashboard/home');
+        if($location.$$path) {
+            $location.path($location.$$path);
+        }
+        else {
+            $location.path('/dashboard/home');
+        }
     };
 
     // Private functions
