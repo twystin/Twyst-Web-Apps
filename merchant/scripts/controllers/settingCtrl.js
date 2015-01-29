@@ -1,9 +1,7 @@
 'use strict';
 
-twystApp.controller('SettingCtrl', function ($scope, $http, $location, $window, $routeParams, authService, settingService, outletService, $log) {
+twystApp.controller('SettingCtrl', function ($scope, $http, $location, $window, $routeParams, authService, settingService, outletService, $log, toastSvc) {
 
-    // Variable declarations
-    $scope.passwords_same = true;
     $scope.ref_passwords_same = true;
     $scope.user = {};
     $scope.ref_user = {};
@@ -44,10 +42,6 @@ twystApp.controller('SettingCtrl', function ($scope, $http, $location, $window, 
         };
 
         settingService.createUser($scope, $http, $location, $window);
-    };
-
-    $scope.checkPassword = function () {
-        $scope.passwords_same = ($scope.user.pass1 === $scope.user.pass2);
     };
 
     $scope.checkRefPassword = function () {
@@ -99,10 +93,9 @@ twystApp.controller('SettingCtrl', function ($scope, $http, $location, $window, 
     $scope.changePassword = function (user) {
         var pass = $scope.user.pass1;
         settingService.changePassword(pass).then(function (data) {
-            alert(data.message);
+            toastSvc.showToast('success', data.message);
         }, function (err) {
-            alert(data.message);
-            console.log(err);
+            toastSvc.showToast('error', err.message);
         });
     };
 
