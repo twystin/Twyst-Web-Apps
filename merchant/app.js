@@ -1,9 +1,9 @@
 'use strict';
 
-var twystApp = angular.module('twystApp', ["ngRoute", 'angles', 'angularFileUpload', 'ui.bootstrap', 'ngCookies', 'twystHttp']);
+var twystApp = angular.module('twystApp', ["ngRoute", 'ngAnimate', 'angles', 'toastr', 'angularFileUpload', 'ui.bootstrap', 'ngCookies', 'twystHttp']);
 
 twystApp.config(function ($routeProvider, $httpProvider) {
-    $routeProvider.
+    $routeProvider. 
         when('/', {
             controller  : 'AnonCtrl',
             templateUrl : '/merchant/templates/anon/home.html'
@@ -230,4 +230,15 @@ twystApp.config(function ($routeProvider, $httpProvider) {
                 return '';
             }
         }
+})
+.factory('toastSvc', function (toastr) {
+    return {
+        showToast: function (type, message, head) {
+            toastr[type](message, 
+                head, 
+                {
+                    closeButton: true
+                });
+        }
+    }
 });
