@@ -22,7 +22,7 @@ twystApp.factory('programService', function ($rootScope, $log, $q, $http) {
         }).success(function (data) {
             defer.resolve(data);
         }).error(function (data) {
-            defer.resolve(data);
+            defer.reject(data);
         });
         return defer.promise;
     };

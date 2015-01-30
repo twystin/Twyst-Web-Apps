@@ -122,16 +122,7 @@ twystApp.controller('OutletCtrl',
         return sms_off;
     }
 
-    // Service initialization
-    outletService.setOutletSvcMessages(200, null);
     $scope.auth = authService.getAuthStatus();
-    $scope.messages = outletService.getOutletSvcMessages();
-    $scope.$on('handleChangedOutletSvcMessages', function () {
-        $scope.messages = outletService.getOutletSvcMessages();
-        if ($scope.messages.data.status === "success") {
-            $log.warn($scope.outlet);
-        }
-    });
 
     $scope.newTimings = function($event, index){
         if($scope.outlet.business_hours[index].timings.length < 5) {
@@ -257,7 +248,7 @@ twystApp.controller('OutletCtrl',
                 $scope.accuracy = position.coords.accuracy;
             });
             }, function(error) {
-                $scope.message="Error getting location automatically. Please enter co-ordinates manually.";
+                toastSvc.showToast('error', "Error getting location automatically. Please enter co-ordinates manually.");
         });
     };
 

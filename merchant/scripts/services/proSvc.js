@@ -11,7 +11,7 @@ twystApp.factory('proSupService', function ($log, $http, $location, $q) {
         }).success(function (data) {
             defer.resolve(data);
         }).error(function (data) {
-            defer.resolve(data);
+            defer.reject(data);
         });
         return defer.promise;
     };
@@ -25,7 +25,7 @@ twystApp.factory('proSupService', function ($log, $http, $location, $q) {
         }).success(function (data) {
             defer.resolve(data);
         }).error(function (data) {
-            defer.resolve(data);
+            defer.reject(data);
         });
         return defer.promise;
     };
@@ -42,7 +42,7 @@ twystApp.factory('proSupService', function ($log, $http, $location, $q) {
         }).success(function (data) {
             defer.resolve(data);
         }).error(function (data) {
-            defer.resolve(data);
+            defer.reject(data);
         });
         return defer.promise;
     };
@@ -56,7 +56,7 @@ twystApp.factory('proSupService', function ($log, $http, $location, $q) {
         }).success(function (data) {
             defer.resolve(data);
         }).error(function (data) {
-            defer.resolve(data);
+            defer.reject(data);
         });
         return defer.promise;
     };
@@ -70,7 +70,7 @@ twystApp.factory('proSupService', function ($log, $http, $location, $q) {
         }).success(function (data) {
             defer.resolve(data);
         }).error(function (data) {
-            defer.resolve(data);
+            defer.reject(data);
         });
         return defer.promise;
     };
@@ -87,7 +87,7 @@ twystApp.factory('proSupService', function ($log, $http, $location, $q) {
         }).success(function (data) {
             defer.resolve(data);
         }).error(function (data) {
-            defer.resolve(data);
+            defer.reject(data);
         });
         return defer.promise;
     };
@@ -100,7 +100,7 @@ twystApp.factory('proSupService', function ($log, $http, $location, $q) {
         }).success(function (data) {
             defer.resolve(data);
         }).error(function (data) {
-            defer.resolve(data);
+            defer.reject(data);
         });
         return defer.promise;
     };
@@ -113,7 +113,7 @@ twystApp.factory('proSupService', function ($log, $http, $location, $q) {
         }).success(function (data) {
             defer.resolve(data);
         }).error(function (data) {
-            defer.resolve(data);
+            defer.reject(data);
         });
         return defer.promise;
     };    

@@ -31,51 +31,23 @@
 			<div class="row-fluid span10 well one-edge-shadow pull-left">	
 				<div class="lead"><h2>Merchant Sign in</h2></div>
 			    <form role="form" name="signup_form" novalidate>
-				<b class="lead">Username</b>
-				<input class= "span12" type="text" id="username" name="username" ng-model="user.name" required ng-minlength=5 ng-maxlength=256>
-	       		<div class="error" ng-show="signup_form.username.$dirty && signup_form.username.$invalid">
-		            <div class="error"
-		            ng-show="signup_form.username.$error.required">
-		            Required field
-		            </div>
-		            <div class="error"
-		            ng-show="signup_form.username.$error.minlength">
-		            At least 5 characters
-		            </div>
-		            <div class="error"
-		            ng-show="signup_form.username.$error.maxlength">
-		            No more than 256 characters
-		            </div>         
-	          	</div>        
-
-				<b class="lead">Password</b>
-				<input class= "span12" type="password" id="password" name="password" ng-model="user.pass" required ng-minlength=5 ng-maxlength=256>
-	    	  <div class="error" ng-show="signup_form.password.$dirty && signup_form.password.$invalid">
-	            <div class="error" ng-show="signup_form.password.$error.required">
-	            Required field
-	            </div>
-	            <div class="error" ng-show="signup_form.password.$error.minlength">
-	            At least 5 characters
-	            </div>
-	            <div class="error" ng-show="signup_form.password.$error.maxlength">
-	            No more than 256 characters
-	            </div>         
-	          </div>        
-				<div class="error" ng-show="auth.errors">Wrong username or password</div>
-				
-				<div class="span12" style="margin:0px;">
-					<div class="span12">
-						<input type="checkbox" id="remember_me" value="remember_me" ng-model="user.remember_me">Remember me
-					</div>				
-					<button id="signInBtn" class="btn btn-warning btn-large btn-block" ng-click="login()">Sign In
-					</button>
-				</div>
-				<div class="span12" style="margin:0px">
-
-					<div class="span12">
-						<a class="text-info removeUl" ng-click="togglePassword()"><strong>Forgotten your password?</strong></a>
+					<b class="lead">Username</b>
+					<input class= "span12" type="text" id="username" name="username" ng-model="user.name" required>
+					<b class="lead">Password</b>
+					<input class= "span12" type="password" id="password" name="password" ng-model="user.pass" required ng-minlength=5 ng-maxlength=256>				
+					<div class="span12" style="margin:0px;">
+						<div class="span12">
+							<input type="checkbox" id="remember_me" value="remember_me" ng-model="user.remember_me">Remember me
+						</div>				
+						<button id="signInBtn" class="btn btn-warning btn-large btn-block" ng-click="login()">Sign In
+						</button>
 					</div>
-				</div>
+					<div class="span12" style="margin:0px">
+
+						<div class="span12">
+							<a class="text-info removeUl" ng-click="togglePassword()"><strong>Forgotten your password?</strong></a>
+						</div>
+					</div>
 
 				</form>
 			</div>
