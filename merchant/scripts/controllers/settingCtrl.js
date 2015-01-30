@@ -1,11 +1,8 @@
 'use strict';
+twystApp.controller('SettingCtrl', function ($scope, $location, authService, settingService, outletService, toastSvc) {
 
-twystApp.controller('SettingCtrl', function ($scope, $http, $location, $window, $routeParams, authService, settingService, outletService, $log, toastSvc) {
-
-    $scope.ref_passwords_same = true;
     $scope.user = {};
-    $scope.ref_user = {};
-   
+    $scope.ref_user = {};   
     $scope.tabs = [
         {active: true, name: 'info', title: 'Your Info'},
         {active: false, name: 'create', title: 'Create user'},
@@ -31,14 +28,13 @@ twystApp.controller('SettingCtrl', function ($scope, $http, $location, $window, 
     };
 
     function getRefUser() {
-        $scope.auth = authService.getAuthStatus();
         var user = {
             username: $scope.ref_user.username,
             password: $scope.ref_user.pass1,
             email: $scope.ref_user.email,
             outlet: $scope.ref_user.outlet,
             role: Number($scope.ref_user.role),
-            account: $scope.auth._id,
+            account: getUserId(),
             validated: {
                 role_validated: true,
                 email_validated: {
@@ -50,19 +46,22 @@ twystApp.controller('SettingCtrl', function ($scope, $http, $location, $window, 
         return user;
     }
 
-    $scope.checkRefPassword = function () {
-        $scope.ref_passwords_same = ($scope.ref_user.pass1 === $scope.ref_user.pass2);
+    $scope.addInfo = function (user) {
+        var user_id = getUserId();
+        settingService.addInfo(user, user_id).then(function (data) {
+            toastSvc.showToast('success', data.message);
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
+        });
     };
 
-    $scope.addInfo = function (user) {
+    function getUserId() {
         $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-        settingService.addInfo($scope, $http, $location, user, user_id);
-    };
+        return $scope.auth._id;
+    }
 
     $scope.query = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
+        var user_id = getUserId();
         settingService.query(user_id).then(function (data) {
             $scope.users = JSON.parse(data.info);
         }, function (err) {
@@ -70,33 +69,12 @@ twystApp.controller('SettingCtrl', function ($scope, $http, $location, $window, 
         });
     };
 
-    $scope.editUser = function (user) {
-        $scope.ref_user = user;
-        $scope.tabs[1].active = true;
-    };
-
-    $scope.edit = function () {
-        var username = $routeParams.username,
-            request = $http.get('/api/v1/auth/users/' + username);
-        return request.then(function (response) {
-            var user = JSON.parse(response.data.info)[0];
-            $scope.user.name = user.username;
-        }, function (response) {
-            $log.warn(response);
-        });
-    };
-
     $scope.click = function () {
         $scope.user = {};
     };
 
-    $scope.updateUser = function (user) {
-        settingService.update($scope, $http, $location, user);
-    };
-
     $scope.getProfileInfo = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
+        var user_id = getUserId();
         settingService.getProfileInfo(user_id).then(function (data) {
             $scope.user = JSON.parse(data.info)[0];
         }, function (err) {

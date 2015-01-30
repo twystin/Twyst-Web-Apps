@@ -14,16 +14,18 @@ twystApp.factory('settingService', function ($log, $q, $http) {
         });
         return deferred.promise;
     };
-    settingSvc.addInfo = function ($scope, $http, $location, user, username) {
+    settingSvc.addInfo = function (user, username) {
+        var deferred = $q.defer();
         $http({
             url: '/api/v1/auth/users/' + username,
             method: "PUT",
             data: user
         }).success(function (data) {
-            $scope.message = data.message;
-        }).error(function (data) {
-            $scope.message = data.message;
+            deferred.resolve(data);
+        }).error(function (error) {
+            deferred.reject(error);
         });
+        return deferred.promise;
     };
     settingSvc.query = function (user_id) {
         var deferred = $q.defer();
@@ -48,18 +50,6 @@ twystApp.factory('settingService', function ($log, $q, $http) {
             deferred.reject(error);
         });
         return deferred.promise;
-    };
-    settingSvc.update = function ($scope, $http, $location, user) {
-        $http({
-            url: '/api/v1/auth/users/' + user._id,
-            method: "PUT",
-            data: user
-        }).success(function (data) {
-            $scope.message = data.message;
-            $scope.tabs[2].active = true;
-        }).error(function (data) {
-            $scope.message = data.message;
-        });
     };
     settingSvc.changePassword = function (pass) {
         var deferred = $q.defer();
