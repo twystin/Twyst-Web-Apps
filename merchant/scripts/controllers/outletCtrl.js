@@ -1,8 +1,8 @@
 'use strict';
 
 twystApp.controller('OutletCtrl', 
-    ['$scope', '$rootScope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', 'typeaheadService', '$log', 'OPERATE_HOURS',
-    function ($scope, $rootScope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, typeaheadService, $log, OPERATE_HOURS) {
+    ['$scope', '$rootScope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', 'typeaheadService', 'toastSvc', '$log', 'OPERATE_HOURS',
+    function ($scope, $rootScope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, typeaheadService, toastSvc, $log, OPERATE_HOURS) {
 
     if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -388,7 +388,12 @@ twystApp.controller('OutletCtrl',
             shortUrl.push($scope.outlet.shortUrl);
             $scope.outlet.shortUrl = shortUrl;
         }
-        outletService.create($scope, $http, $location);
+        outletService.create($scope.outlet).then(function (data) {
+            $location.path('/outlets');
+            toastSvc.showToast('success', data.message);
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
+        });
     };
 
     $scope.update = function (outlet_id) {
@@ -398,7 +403,12 @@ twystApp.controller('OutletCtrl',
             shortUrl.push($scope.outlet.shortUrl);
             $scope.outlet.shortUrl = shortUrl;
         }
-        outletService.update($scope, $http, $location, outlet_id);
+        outletService.update($scope.outlet).then(function (data) {
+            $location.path('/outlets');
+            toastSvc.showToast('success', data.message);
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
+        });
     };
 
     $scope.uploadImageV3 = function ($files, type, index) {
@@ -464,17 +474,29 @@ twystApp.controller('OutletCtrl',
         return imageObject;
     }
 
-    $scope.deleteOutlet = function (outlet) {
-        var modalInstance = $modal.open({
-            templateUrl : './templates/outlet/delete_outlet.html',
-            controller  : 'OutletDeleteCtrl',
-            backdrop    : true,
-            resolve: {
-              outlet: function(){
-                return outlet;
-              }
-            }
+    $scope.initDelete = function (outlet_id) {
+        $scope.to_be_deleted_outlet_id = outlet_id;
+        $scope.modalInstance = $modal.open({
+            templateUrl: './templates/outlet/delete_outlet.html',
+            backdrop: true,
+            scope: $scope
         });
+    };
+
+    $scope.cancelModal = function () {
+        $scope.modalInstance.dismiss();
+    }
+
+    $scope.deleteOutlet = function () {
+        outletService.delete($scope.to_be_deleted_outlet_id)
+        .then(function (data) {
+            toastSvc.showToast('success', data.message);
+            $scope.cancelModal();
+            $route.reload();
+        }, function (err) {
+            $scope.cancelModal();
+            toastSvc.showToast('error', err.message);
+        });;
     };
 
     $scope.onFileSelect = function ($files) {
@@ -620,19 +642,4 @@ twystApp.controller('OutletCtrl',
         
     });
     
-}]);
-
-twystApp.controller('OutletDeleteCtrl', 
-     ['$scope', '$route', '$http', '$location', '$modalInstance', 'outletService','outlet',
-    function ($scope, $route, $http, $location, $modalInstance, outletService, outlet) {
-
-        var outlet_title = outlet.basics.name;
-
-        $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-        };
-
-        $scope.delete = function () {
-            outletService.delete($scope, $http, $location, outlet_title, $route, $modalInstance);
-        };      
 }]);

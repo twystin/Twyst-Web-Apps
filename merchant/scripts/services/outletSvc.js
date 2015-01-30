@@ -37,48 +37,38 @@ twystApp.factory('outletService', function ($rootScope, $q, $http) {
         });
     };
 
-    outletSvc.create = function ($scope, $http) {
-        $http({
-            url: '/api/v1/outlets',
-            method: "POST",
-            data: $scope.outlet
-        }).success(function (data, status) {
-            $scope.outlet_created = true;
-            $log.warn($scope.outlet);
-            outletSvc.setOutletSvcMessages(status, data);
-        }).error(function (data, status) {
-            outletSvc.setOutletSvcMessages(status, data);
-            $scope.tabs[0].active = true;
+    outletSvc.create = function (outlet) {
+        var deferred = $q.defer();
+        $http.post('/api/v1/outlets', outlet)
+        .success(function(success) {
+            deferred.resolve(success);
+        }).error(function(error) {
+            deferred.reject(error);
         });
+        return deferred.promise;
     };
 
-    outletSvc.update = function ($scope, $http, $location, outlet_id) {
-        $http({
-            url: '/api/v1/outlets/' + outlet_id,
-            method: "PUT",
-            data: $scope.outlet
-        }).success(function (data, status) {
-            outletSvc.setOutletSvcMessages(status, data.message);
-            $location.path('/outlets/');
-        }).error(function (data, status) {
-            outletSvc.setOutletSvcMessages(status, data);
-            $scope.tabs[0].active = true;
+    outletSvc.update = function (outlet) {
+        var deferred = $q.defer(),
+            outlet_id = outlet._id;
+        $http.put('/api/v1/outlets/' + outlet_id, outlet)
+        .success(function(success) {
+            deferred.resolve(success);
+        }).error(function(error) {
+            deferred.reject(error);
         });
+        return deferred.promise;
     };
 
-    outletSvc.delete = function ($scope, $http, $location, outlet_title, $route, $modalInstance) {
-        $http({
-            url: '/api/v1/outlets/' + outlet_title,
-            method: "DELETE"
-        }).success(function (data) {
-            $log.warn(data);
-            $route.reload();
-            $modalInstance.dismiss('cancel');
-        }).error(function (data, status) {
-            $log.warn(data);
-            $scope.status = status;
-            $scope.message = data.message;
+    outletSvc.delete = function (outlet_id) {
+        var deferred = $q.defer();
+        $http.delete('/api/v1/outlets/' + outlet_id)
+        .success(function(success) {
+            deferred.resolve(success);
+        }).error(function(error) {
+            deferred.reject(error);
         });
+        return deferred.promise;
     };
 
     outletSvc.broadcastChange = function () {
