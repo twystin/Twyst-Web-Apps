@@ -321,16 +321,15 @@ twystApp.controller('OutletCtrl',
     }
 
     $scope.view = function () {
-        var outlet_id = $routeParams.outlet_id,
-            request = $http.get('/api/v1/outlets/view/' + outlet_id);
+        var outlet_id = $routeParams.outlet_id;
         $scope.update_flag = true;
-        return request.then(function (response) {
-            var outlet = JSON.parse(response.data.info)[0];
+        outletService.readOne(outlet_id).then(function (data) {
+            var outlet = JSON.parse(data.info)[0];
             $scope.outlet = outlet;
             checkPhotos();
             setSmsOff(outlet.sms_off);
-        }, function (response) {
-            $log.warn(response);
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
         });
     };
 

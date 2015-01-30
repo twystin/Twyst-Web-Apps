@@ -26,6 +26,17 @@ twystApp.factory('outletService', function ($rootScope, $q, $http) {
         return deferred.promise;
     };
 
+    outletSvc.readOne = function (outlet_id) {
+        var deferred = $q.defer();
+        $http.get('/api/v1/outlets/view/' + outlet_id)
+        .success(function(success) {
+            deferred.resolve(success);
+        }).error(function(error) {
+            deferred.reject(error);
+        });
+        return deferred.promise;
+    };
+
     outletSvc.read = function ($scope, $http, $location, outlet_title) {
         $scope.outlet = {};
         var request = $http.get('/api/v1/outlets/' + outlet_title);
