@@ -51,7 +51,7 @@ twystConsole.config(function ($routeProvider) {
 		templateUrl: '/console/templates/data/analytics.html',
 	}).
 	otherwise({
-		redirectTo: '/error'
+		redirectTo: '/dashboard'
 	});
 })
 .factory('toastSvc', function (toastr) {
