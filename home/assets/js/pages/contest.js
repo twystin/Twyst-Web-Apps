@@ -10,7 +10,7 @@ var twystContact = angular.module('twystContest', ['toastr'])
         }
     }
 })
-.controller('ContestCtrl', function($scope, $http, toastSvc) {
+.controller('ContestCtrl', function($scope, $http, $timeout, $window, toastSvc) {
 
     $scope.user = {};
 
@@ -91,11 +91,18 @@ var twystContact = angular.module('twystContest', ['toastr'])
             phone        : $scope.user.phone,
             email               : $scope.user.email
         }).success(function (data, status, header, config) {
+            redirect();
             toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after the results are declared on 10th Feb 2015.');
         })
         .error(function (data, status, header, config) {
+            redirect();
             toastSvc.showToast('error', 'You have already participated in the contest. Results will be declared on 10th Feb 2015.');
         });
     };
-    
+
+    function redirect() {
+        $timeout(function () {
+            $window.location.href = 'http://twyst.in';
+        }, 4000);
+    }
 });
