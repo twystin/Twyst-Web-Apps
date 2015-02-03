@@ -1,4 +1,4 @@
-function AdminProgramCtrl($scope, $http, $location, $modal, authService, adminProgramService) {
+twystConsole.controller('AdminProgramCtrl', function ($scope, $http, $location, $modal, authService, adminProgramService) {
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
@@ -67,9 +67,8 @@ function AdminProgramCtrl($scope, $http, $location, $modal, authService, adminPr
             }
         });
     }
-}
-
-function ProgramStatusChangeCtrl($scope, $route, $modalInstance, data, adminProgramService) {
+})
+.controller('ProgramStatusChangeCtrl', function($scope, $route, $modalInstance, data, adminProgramService) {
 
 	$scope.program = data.program;
 	$scope.status = data.status;
@@ -86,4 +85,4 @@ function ProgramStatusChangeCtrl($scope, $route, $modalInstance, data, adminProg
     		$scope.cancel();
     	})
     }
-}
+});

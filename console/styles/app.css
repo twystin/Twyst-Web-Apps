@@ -1,3 +1,13 @@
+.panel-module {
+  padding-top: 10px;
+  background-color: rgb(223, 221, 221);
+  height: 10em;
+  border: 1px solid gray;
+  text-align: center;
+}
+.margin-bottom-panel {
+  margin-bottom: 20px;
+}
 #aaaa a{
   text-decoration:none;
   color:#fff;

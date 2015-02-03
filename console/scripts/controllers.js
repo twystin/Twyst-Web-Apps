@@ -1,4 +1,4 @@
-function PublicController($scope, $location, authService, dataService) {
+twystConsole.controller('PublicController', function($scope, $location, authService, dataService) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -10,9 +10,8 @@ function PublicController($scope, $location, authService, dataService) {
     }, function (err) {
     	console.log(err);
     });
-}
-
-function ReccoController($scope, $location, $http, $route, authService) {
+})
+.controller('ReccoController', function($scope, $location, $http, $route, authService) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -52,9 +51,8 @@ function ReccoController($scope, $location, $http, $route, authService) {
         });
     }
 
-}
-
-function NotifController($scope, $http, $location, authService) {
+})
+.controller('NotifController', function($scope, $http, $location, authService) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -123,9 +121,8 @@ function NotifController($scope, $http, $location, authService) {
 			$scope.error.message = data.message;
 		});
 	}
-}
-
-function DatePickerCtrl($scope, $timeout) {
+})
+.controller('DatePickerCtrl', function($scope, $timeout) {
 	
 	$scope.today = function() {
         $scope.dt = new Date();
@@ -159,9 +156,8 @@ function DatePickerCtrl($scope, $timeout) {
 
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
     $scope.format = $scope.formats[0];
-}
-
-function AuthController($scope, $http, $location, authService) {
+})
+.controller('AuthController', function ($scope, $http, $location, authService) {
 	
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -183,16 +179,14 @@ function AuthController($scope, $http, $location, authService) {
 	$scope.logout = function () {
 		authService.logout($scope, $http, $location);
 	}
-}
-
-function DashboardController($scope, $http, $location, authService) {
+})
+.controller('DashboardController', function($scope, $http, $location, authService) {
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
 
-}
-
-function AppController($scope, $http, dataService) {
+})
+.controller('AppController', function($scope, $http, dataService) {
 	$scope.date = {};
 	
 	$scope.getDownloads = function () {
@@ -213,9 +207,8 @@ function AppController($scope, $http, dataService) {
 
 		});
 	}
-}
-
-function UsersController($scope, $http, $location, $routeParams, authService) {
+})
+.controller('UsersController', function($scope, $http, $location, $routeParams, authService) {
 	
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -368,4 +361,4 @@ function UsersController($scope, $http, $location, $routeParams, authService) {
 		});
 
 	}
-}
+});

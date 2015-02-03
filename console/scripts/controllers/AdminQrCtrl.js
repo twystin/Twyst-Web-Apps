@@ -1,4 +1,4 @@
-function AdminQrCtrl($scope, $http, $modal, $location, authService, adminQrService) {
+twystConsole.controller('AdminQrCtrl', function($scope, $http, $modal, $location, authService, adminQrService) {
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
@@ -48,9 +48,8 @@ function AdminQrCtrl($scope, $http, $modal, $location, authService, adminQrServi
         });
     }
 
-}
-
-function QrValidityChangeCtrl($scope, $route, $modalInstance, qr, adminQrService) {
+})
+.controller('QrValidityChangeCtrl', function($scope, $route, $modalInstance, qr, adminQrService) {
 
 	$scope.qr = qr;
 
@@ -65,4 +64,4 @@ function QrValidityChangeCtrl($scope, $route, $modalInstance, qr, adminQrService
     		$scope.cancel();
     	})
     }
-}
+});

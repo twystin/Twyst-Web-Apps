@@ -1,4 +1,4 @@
-function AdminOutletCtrl($scope, $http, $modal, $location, authService, adminOutletService) {
+twystConsole.controller('AdminOutletCtrl', function($scope, $http, $modal, $location, authService, adminOutletService) {
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
@@ -62,9 +62,8 @@ function AdminOutletCtrl($scope, $http, $modal, $location, authService, adminOut
         })
     }
 
-}
-
-function OutletStatusChangeCtrl($scope, $route, $modalInstance, data, adminOutletService) {
+})
+.controller('OutletStatusChangeCtrl', function($scope, $route, $modalInstance, data, adminOutletService) {
 
 	$scope.outlet = data.outlet;
 	$scope.status = data.status;
@@ -81,4 +80,4 @@ function OutletStatusChangeCtrl($scope, $route, $modalInstance, data, adminOutle
     		$scope.cancel();
     	})
     }
-}
+});
