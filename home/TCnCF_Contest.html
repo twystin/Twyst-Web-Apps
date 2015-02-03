@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="twystContest"> 
 <head>
-    <title>Twyst | CUPnCAKE Factory's Indian Super League 2014 Contest!</title>
+    <title>Twyst | CUPnCAKE Factory's Grammy 2015 Record of The Year Contest!</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -9,57 +9,35 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="icon" href="assets/img/twyst.ico">
     <!-- CSS Global Compulsory-->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/headers/header1.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="shortcut icon" href="favicon.ico">        
-    <!-- CSS Implementing Plugins -->    
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css" type="text/css" media="screen">          
-    <!-- CSS Page Style -->    
-    <link rel="stylesheet" href="assets/css/pages/page_contact.css">
-    <!-- CSS Theme -->    
-    <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color">
-    <script src="assets/js/angular.min.js"></script>
-    <script type="text/javascript" src="assets/js/pages/contest.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="/common/toastr/toastr.css" rel="stylesheet" />
     <style type="text/css">
-        .flag{
-            width: 30px;
-            padding-top: 3px;
+        .cupcake-image {
+           max-width: 40em; 
         }
-        .prog{
-            width: 100%;
+        @media (max-width: 768px) {
+            .cupcake-image {
+               max-width: 25em; 
+            }
         }
-        .spacing{
-            margin: 14px 0px 0px 0px; 
-            float: left;
-        }
-    </style>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-51763503-1', 'twyst.in');
-      ga('send', 'pageview');
-
-    </script>       
+    </style>   
 </head> 
 
 <body ng-controller="ContestCtrl">
 <!--=== Top ===-->    
-<div class="top">
-    <div class="container">         
-        <ul class="loginbar pull-right">
-        </ul>
-    </div>      
-</div><!--/top-->
-<!--=== End Top ===-->    
+    <div class="top">
+        <div class="container">         
+            <ul class="loginbar pull-right">
+            </ul>
+        </div>      
+    </div><!--/top-->
+    <!--=== End Top ===-->    
 
-<div class="header">
+    <div class="header">
         <style type="text/css">
             .padding-top-100 {
                 padding-top: 3.5em;
@@ -148,233 +126,180 @@
     </div>       
 
 <!--=== Breadcrumbs ===-->
-
-<div class="breadcrumbs">
-    <div class="container">
-        <h1 class="pull-left">The CUPnCAKE Factory Predict & Win Contest</h1>
+    <div class="row" style="padding-top:5em;">
         
     </div>
-</div><!--/breadcrumbs-->
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">The CUPnCAKE Factory Predict & Win Contest</h1>
+        </div>
+    </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 <!--=== Content Part ===-->
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div ng-show="user.thank_you">
-                <h3>
-                    Thank you for participating. We will contact the lucky winners after the results are declared on 25th December 2014.
-                </h3>
-            </div>
-            <div ng-show="user.error">
-                <h3>
-                    You have already participated in the contest. Results will be declared on 25th December 2014.
-                </h3>
-            </div>
-            <div class="headline" ng-hide="user.error || user.thank_you">
-                <h4>To enter the contest, fill out the details below:
-                </h4>
-            </div>
-            <div ng-hide="user.error || user.thank_you">
-                The CUPnCAKE Factory is running a special contest for its valued customers. Simply predict the winner of Indian Super League 2014 and you could win some delicious treats! 3 lucky winners will be chosen at random from all the correct entries we receive.
-            </div>
-            <br>
-            <form ng-hide="user.error || user.thank_you" role="form">
-                <div class="form-group">
-                    <label>Name*</label>
-                    <input class="input-xlarge form-control" type="text" ng-model="user.name"></input>
-                    <div ng-hide="filled.name">
-                        <small style="color:red;">Please enter your name.</small>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="headline">
+                    <h4>To enter the contest, fill out the details below:
+                    </h4>
                 </div>
-                <div class="form-group">
-                    <label>Mobile No* <small>(Winners will receive their voucher code via SMS)</small></label>
-                    <input type="text" class="input-xlarge form-control" required="true" ng-model="user.phone">
-                    <div ng-hide="filled.phone">
-                        <small style="color:red;">Please enter a valid mobile number.</small>
-                    </div>
+                <div>
+                    The CUPnCAKE Factory is running a special contest for its valued customers. Simply predict the Grammy 2015 "Record of The Year" and you could win some delicious treats! 3 lucky winners will be chosen at random from all the correct entries we receive.
                 </div>
-                <div class="form-group" ng-form="contestForm">
-                    <label>Email ID*</label>
-                    <input name="email" class="input-xlarge form-control" type="email" ng-model="user.email" required="true"></input>
-                    <div ng-hide="filled.email">
-                        <small style="color:red;">Please enter a valid email address.</small>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <label>Name*</label>
+                        <input class="input-xlarge form-control" type="text" ng-model="user.name"></input>
                     </div>
-                </div> 
-                <div class="form-group">
-                    <label>Date of birth*</label>
-                    <input name="dob" class="input-xlarge form-control" type="dob" ng-model="user.dob" required="true" placeholder="dd/mm/yyyy"></input>
-                    <div ng-hide="filled.dob">
-                        <small style="color:red;">Please enter a valid dob.</small>
+                    <div class="form-group">
+                        <label>Mobile No* <small>(Winners will receive their voucher code via SMS)</small></label>
+                        <input type="text" class="input-xlarge form-control" required="true" ng-model="user.phone">
                     </div>
-                </div>                
-                <div class="form-group">
-                    <label>My predicted winner for this year is:</label><br>
-                    <div class="col-md-11">
-                        <div class="col-md-6">
-                            <input type="radio" name="country" ng-model="user.message" value="Atlético de Kolkata">&nbsp;Atlético de Kolkata&nbsp;
+                    <div class="form-group" ng-form="contestForm">
+                        <label>Email ID*</label>
+                        <input name="email" class="input-xlarge form-control" type="text" ng-model="user.email" required="true"></input>
+                    </div> 
+                    <div class="form-group">
+                        <label>Date of birth*</label>
+                        <input name="dob" class="input-xlarge form-control" type="dob" ng-model="user.dob" required="true" placeholder="dd/mm/yyyy"></input>
+                    </div>                
+                    <div class="form-group">
+                        <label>My predicted winner for this year is:</label><br>
+                        <div class="col-md-12">
+                            <input type="radio" name="country" ng-model="user.message" value="AllAboutThatBass">&nbsp;"All About That Bass" – Meghan Trainor&nbsp;
                         </div>
-                        <div class="col-md-6">
-                            <input type="radio" name="country" ng-model="user.message" value="Chennaiyin FC">&nbsp;Chennaiyin FC&nbsp;
+                        <div class="col-md-12">
+                            <input type="radio" name="country" ng-model="user.message" value="Chandelier">&nbsp;"Chandelier" – Sia&nbsp;
                         </div>
-                    </div>
-                    <div class="col-md-11">
-                        <div class="col-md-6">
-                            <input type="radio" name="country" ng-model="user.message" value="Mumbai City FC">&nbsp;Mumbai City FC&nbsp;
+                        <div class="col-md-12">
+                            <input type="radio" name="country" ng-model="user.message" value="Fancy">&nbsp;"Fancy" – Iggy Azalea featuring Charli XCX&nbsp;
                         </div>                        
-                        <div class="col-md-6">
-                            <input type="radio" name="country" ng-model="user.message" value="NorthEast United FC">&nbsp;NorthEast United FC&nbsp;
+                        <div class="col-md-12">
+                            <input type="radio" name="country" ng-model="user.message" value="ShakeItOff">&nbsp;"Shake It Off" – Taylor Swift&nbsp;
+                        </div>
+                        <div class="col-md-12">
+                            <input type="radio" name="country" ng-model="user.message" value="StayWithMe">&nbsp;"Stay with Me (Darkchild Version)" – Sam Smith&nbsp;
                         </div>
                     </div>
-                    <div class="col-md-11">
-                        <div class="col-md-6">
-                            <input type="radio" name="country" ng-model="user.message" value="FC Pune City">&nbsp;FC Pune City&nbsp;
-                        </div>
-                        <div class="col-md-6">
-                            <input type="radio" name="country" ng-model="user.message" value="Delhi Dynamos FC">&nbsp;Delhi Dynamos FC&nbsp;
-                        </div>
+                    <div>
+                        &nbsp;
                     </div>
-                    <div class="col-md-11"> 
-                        <div class="col-md-6">
-                            <input type="radio" name="country" ng-model="user.message" value="Kerala Blasters FC">&nbsp;Kerala Blasters FC&nbsp;
-                        </div>
-                        <div class="col-md-6">
-                            <input type="radio" name="country" ng-model="user.message" value="FC Goa">&nbsp;FC Goa&nbsp;
-                        </div>
+                    <div class="form-group">
+                        <label>Also join the CUPnCAKE Factory Program on Twyst!</label>
+                        <img src="../common/images/cupncake.png" class="cupcake-image" />
                     </div>
-                    <br>
-                    <br>
-                </div>
-                <br/>
-                <div ng-hide="filled.message" class="form-gr">
-                    <small style="color:red;">Please select your team.</small>
-                </div>
-                <br>
-                <div>
-                    <div class="col-md-12">
-                        <h4>Also join the CUPnCAKE Factory Program on Twyst!</h4>
-                        <img class="prog" src="../common/images/cupncake.png" alt="" />
+                    <div class="form-group">
+                        <input type="checkbox" name="agree" value="true" checked> I wish to join The CUPnCAKE Factory loyalty program on Twyst.
                     </div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <input type="checkbox" name="agree" value="true" checked> I wish to join The CUPnCAKE Factory loyalty program on Twyst.
-                </div>
-                <div>
-                    <button type="button" class="btn btn-success btn-lg spacing" ng-click="enterContest()">Submit</button>
-                </div>
-            </form>
-        </div>
-        <div class="padding-img">
-            <div class="col-md-5">
-                <img class="prog" src="../common/images/bannerContest.png" alt="" />
+                    <div>
+                        <button type="button" class="btn btn-success btn-lg spacing" ng-click="enterContest()">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-</div>  
+    </div>  
     <!--/container-->     
 <!-- End Content Part -->
 
-<div class="footer">
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 md-margin-bottom-40">
-            <!-- About -->
-            <div class="headline">
-                <h2>About</h2>
-            </div>
-            <p class="margin-bottom-25 md-margin-bottom-40">Twyst is a start-up based out of Gurgaon, started by a team with a combined experience of 40 years across product, strategy, operations and marketing. <a href="about.html">More</a></p>
-
-
-                <!-- <div class="headline">
-                    <h2>Monthly Newsletter</h2>
-                </div>
-                <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
-                <form class="footer-subsribe">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Email Address">
-                        <span class="input-group-btn">
-                        <button class="btn-u" type="button">Subscribe</button>
-                    </span>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 md-margin-bottom-40">
+                    <!-- About -->
+                    <div class="headline">
+                        <h2>About</h2>
                     </div>
-                </form> -->
-            </div>
-            <!--/col-md-4-->
+                    <p class="margin-bottom-25 md-margin-bottom-40">Twyst is a start-up based out of Gurgaon, started by a team with a combined experience of 40 years across product, strategy, operations and marketing. <a href="about.html">More</a></p>
 
-            <div class="col-md-4">
-                <!-- Monthly Newsletter -->
-                
 
-                <!-- Stay Connected -->
-                <div class="headline">
-                    <h2>Follow Us</h2>
+                        <!-- <div class="headline">
+                            <h2>Monthly Newsletter</h2>
+                        </div>
+                        <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
+                        <form class="footer-subsribe">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Email Address">
+                                <span class="input-group-btn">
+                                <button class="btn-u" type="button">Subscribe</button>
+                            </span>
+                            </div>
+                        </form> -->
                 </div>
-                <ul class="social-icons">
-                    <li>
-                        <a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a>
-                    </li>
-                </ul>
-            </div>
-            <!--/col-md-4-->
+                    <!--/col-md-4-->
 
-            <div class="col-md-4">
-                <!-- Monthly Newsletter -->
-                
+                <div class="col-md-4">
+                    <!-- Monthly Newsletter -->
+                    
 
-                <!-- Stay Connected -->
-                <div class="headline">
-                    <h2>Connect With Us</h2>
+                    <!-- Stay Connected -->
+                    <div class="headline">
+                        <h2>Follow Us</h2>
+                    </div>
+                    <ul class="social-icons">
+                        <li>
+                            <a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a>
+                        </li>
+                    </ul>
                 </div>
-                <a class="btn btn-warning" href="contact.html" style="color: white;line-height: 1;">Get in touch</a>
-                <a class="btn btn-warning" href="careers.html" style="color: white;line-height: 1;">Work with Us</a>
+                    <!--/col-md-4-->
+
+                <div class="col-md-4">
+                    <!-- Monthly Newsletter -->
+                    
+
+                    <!-- Stay Connected -->
+                    <div class="headline">
+                        <h2>Connect With Us</h2>
+                    </div>
+                    <a class="btn btn-warning" href="contact.html" style="color: white;line-height: 1;">Get in touch</a>
+                    <a class="btn btn-warning" href="careers.html" style="color: white;line-height: 1;">Work with Us</a>
+                </div>
+                    <!--/col-md-4-->
             </div>
-            <!--/col-md-4-->
+                <!--/row-->
         </div>
-        <!--/row-->
+        <!--/container-->
     </div>
-    <!--/container-->
-</div>
 
 <!--=== Copyright ===-->
-<div class="copyright">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">                      
-                <p class="copyright-space">
-                    2013 &copy; Twyst Technologies Pvt. Ltd. 
-                    <a href="http://twyst.in/legal/Privacy_Policy.pdf">Privacy Policy</a> | <a href="http://twyst.in/legal/terms_of_use.pdf">Terms of Service</a>
-                </p>
-            </div>
-            <div class="col-md-6">  
-                <a href="index.html">
-                    <img id="logo-footer" src="assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
-                </a>
-            </div>
-        </div><!--/row-->
-    </div><!--/container--> 
-</div><!--/copyright--> 
-<!--=== End Copyright ===-->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">                      
+                    <p class="copyright-space">
+                        2013 &copy; Twyst Technologies Pvt. Ltd. 
+                        <a href="http://twyst.in/legal/Privacy_Policy.pdf">Privacy Policy</a> | <a href="http://twyst.in/legal/terms_of_use.pdf">Terms of Service</a>
+                    </p>
+                </div>
+                <div class="col-md-6">  
+                    <a href="index.html">
+                        <img id="logo-footer" src="assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
+                    </a>
+                </div>
+            </div><!--/row-->
+        </div><!--/container--> 
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js" ></script>
+<script src="http://code.angularjs.org/1.3.3/angular-animate.min.js" ></script>
+<script src="/common/toastr/toastr.min.js"></script>
+<script type="text/javascript" src="assets/js/pages/contest.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<!-- JS Global Compulsory -->           
-<script type="text/javascript" src="assets/plugins/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
-<script type="text/javascript" src="assets/plugins/hover-dropdown.min.js"></script> 
-<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
-<!-- JS Implementing Plugins -->           
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript" src="assets/plugins/gmap/gmap.js"></script>
-<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-<!-- JS Page Level -->           
-<script type="text/javascript" src="assets/js/app.js"></script>
-<!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-<![endif]-->
+  ga('create', 'UA-51763503-1', 'twyst.in');
+  ga('send', 'pageview');
 
+</script>
 </body>
 </html> 
