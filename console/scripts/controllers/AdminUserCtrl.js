@@ -68,4 +68,16 @@ twystConsole.controller('AdminUserCtrl', function($scope, $location, $routeParam
             toastSvc.showToast('error', err.message);
         })
     }
+
+    $scope.getTimeline = function () {
+        $scope.info = {};
+        var user = {
+            phone: $scope.phone
+        };
+        adminUserService.getTimeline(user).then(function (data) {
+            $scope.info = data.info;
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
+        });
+    }
 });

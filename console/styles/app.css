@@ -1,3 +1,13 @@
+.color-twyst {
+  color: orange;
+}
+.padding-bottom-search-bar {
+  padding-bottom: 1em;
+}
+.btn-orange {
+  color: white;
+  background-color: #f6921e;
+}
 .panel-module {
   padding-top: 10px;
   background-color: rgb(223, 221, 221);

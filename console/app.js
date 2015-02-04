@@ -30,6 +30,10 @@ twystConsole.config(function ($routeProvider) {
 		controller: 'AdminUserCtrl',
 		templateUrl: '/console/templates/users/view.html',
 	}).
+	when('/users/timeline', {
+		controller: 'AdminUserCtrl',
+		templateUrl: '/console/templates/users/timeline.html',
+	}).
 	when('/users/:username', {
 		controller: 'AdminUserCtrl',
 		templateUrl: '/console/templates/users/edit.html',
