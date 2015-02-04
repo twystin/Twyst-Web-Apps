@@ -77,6 +77,7 @@ twystConsole.controller('AdminUserCtrl', function($scope, $location, $routeParam
         adminUserService.getTimeline(user).then(function (data) {
             $scope.info = data.info;
         }, function (err) {
+            console.log(err)
             toastSvc.showToast('error', err.message);
         });
     }

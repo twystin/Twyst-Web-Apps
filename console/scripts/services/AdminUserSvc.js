@@ -38,7 +38,7 @@ twystConsole.factory('adminUserService', function ($http, $q) {
         ).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
-            deferred.resolve(data);
+            deferred.reject(data);
         });        
         return deferred.promise;
     };
@@ -50,7 +50,7 @@ twystConsole.factory('adminUserService', function ($http, $q) {
         ).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
-            deferred.resolve(data);
+            deferred.reject(data);
         });        
         return deferred.promise;
     };
