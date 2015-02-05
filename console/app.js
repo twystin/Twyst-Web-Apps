@@ -52,6 +52,10 @@ twystConsole.config(function ($routeProvider) {
 	}).
 	when('/notifs', {
 		controller: 'NotifController',
+		templateUrl: '/console/templates/notifs/view.html',
+	}).
+	when('/notifs/add', {
+		controller: 'NotifController',
 		templateUrl: '/console/templates/notifs/notif.html',
 	}).
 	when('/data', {

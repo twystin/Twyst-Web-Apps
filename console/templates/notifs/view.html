@@ -1,0 +1,46 @@
+<div class="row-fluid" ng-init="getNotifs()">
+    <div>
+        <a ng-href="#/dashboard" class="btn">Home</a>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <h3>100 recent DRAFT notifications</h3>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr> 
+                    <th width="40%">
+                        Message
+                    </th>
+                    <th>
+                        Logged at
+                    </th>
+                    <th>
+                        Scheduled at
+                    </th>
+                    <th>
+                        To
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="n in notifs">
+                    <td>
+                        {{n.body}}
+                    </td>
+                    <td>
+                        {{n.logged_at | date: 'medium'}}
+                    </td>
+                    <td>
+                        {{n.scheduled_at | date: 'medium'}}
+                    </td>
+                    <td>
+                        <b>{{(n.phones.length > 1) ? (n.phones.length + ' phones') : (n.phones[0])}}</b>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

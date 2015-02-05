@@ -52,7 +52,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
     }
 
 })
-.controller('NotifController', function($scope, $http, $location, authService) {
+.controller('NotifController', function($scope, $http, $location, authService, toastSvc) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -116,9 +116,19 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 
 	function sendRequest (obj) {
 		$http.post('/api/v2/notifs', {obj:obj}).success(function (data) {
-			$scope.success.message = data.message;
+			toastSvc.showToast('success', data.message);
+			$location.path('/notifs');
 		}).error(function (data) {
-			$scope.error.message = data.message;
+			toastSvc.showToast('error', err.message);
+		});
+	}
+
+	$scope.getNotifs = function () {
+		$http.get('/api/v2/notifs').success(function (data) {
+			$scope.notifs = data.info;
+			console.log(data.info)
+		}).error(function (err) {
+			toastSvc.showToast('error', err.message);
 		});
 	}
 })
