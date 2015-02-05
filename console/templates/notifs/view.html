@@ -10,7 +10,10 @@
     <div class="row-fluid">
         <table class="table table-bordered table-striped">
             <thead>
-                <tr> 
+                <tr>
+                    <th>
+                        Index
+                    </th> 
                     <th width="40%">
                         Message
                     </th>
@@ -27,6 +30,9 @@
             </thead>
             <tbody>
                 <tr ng-repeat="n in notifs">
+                    <td>
+                        {{$index + 1}}
+                    </td>
                     <td>
                         {{n.body}}
                     </td>
