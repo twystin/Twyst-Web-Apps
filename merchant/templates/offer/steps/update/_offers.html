@@ -45,6 +45,14 @@
                 <textarea id="description" class="span10" name="description" placeholder=" Get a free appetizer or desert on your second lunch visit in a week!"  ng-model="offer.basics.description" ng-click="show_tip_5 = true" tooltip="Users on Twyst will be able to see this"  tooltip-trigger="focus" tooltip-placement="right"></textarea>      
               </div>
             </div>
+            <div class="row-fluid">
+                <div class="row-fluid span4">
+                    <label>QR only?</label>
+                </div>
+                <div class="row-fluid span8">
+                    <input type="checkbox" ng-model="offer.qr_only">
+                </div>
+            </div>
           </div>
           <div class="well">
             <div class="row-fluid">
