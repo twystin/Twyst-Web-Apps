@@ -28,6 +28,18 @@ twystConsole.controller('AdminQrCtrl', function($scope, $http, $modal, $location
         $scope.getQrs();
     });
 
+    $scope.selectAll = function () {
+        if($scope.qrs && $scope.qrs.length) {
+            $scope.qrs.forEach(function (q) {
+                $scope.selected_qrs.push(q._id);
+            });
+        }
+    }
+
+    $scope.clearAll = function () {
+        $scope.selected_qrs = [];
+    }
+
     $scope.isValidityEnding = function (qr) {
         return new Date(Date.now() + 864000000) > (new Date(qr.validity.end)) ? true : false;
     }
