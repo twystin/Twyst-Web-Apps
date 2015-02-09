@@ -14,7 +14,7 @@ twystConsole.config(function ($routeProvider) {
 		controller: 'UsersController',
 		templateUrl: '/console/templates/qr/qr.html'
 	}).
-	when('/qrs', {
+	when('/qrs/:outlet_id', {
 		controller: 'AdminQrCtrl',
 		templateUrl: '/console/templates/qr/view.html'
 	}).
@@ -63,7 +63,7 @@ twystConsole.config(function ($routeProvider) {
 		templateUrl: '/console/templates/data/analytics.html',
 	}).
 	otherwise({
-		redirectTo: '/error'
+		redirectTo: '/dashboard'
 	});
 })
 .factory('toastSvc', function (toastr) {
