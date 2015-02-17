@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Twyst - Logged-in</title>
+		<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+		<meta name="description" content="Slick Admin Admin UI">
+		<meta name="keywords" content="Slick Admin, Admin UI, Admin Dashboard, John">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+		<link href="/common/toastr/toastr.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/home/assets/css/headers/header1.css">
+		<link rel="stylesheet" href="/home/assets/css/style.css">
+		<link rel="stylesheet" href="/home/css/home_signed_in.css">
+	</head>
+	<body ng-app="homeApp">
+		<div class="header">
+		    <style type="text/css">
+		        /*
+		        CSS for Header goes here
+		        */
+		        .padding-top-100 {
+		            padding-top: 3.5em;
+		        }
+		        .header .navbar-default .navbar-nav > li > a {
+		            color: #fff !important;
+		        }
+		        #logo-header {
+		            margin-top: 0.2em;
+		            height: 2.7em;
+		            width: auto;
+		        }
+
+		        .app-button {
+		            height: 2.5em;
+		        }
+		        .header .navbar {
+		            background-color: #000 !important;
+		        }
+		        .margin-top-pt6em {
+		            margin-top: -0.8em;
+		            margin-left: -1em;
+		        }
+		        .margin-bottom-about {
+		            margin-bottom: 5em; 
+		        }
+		    </style>
+		    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		    	<div class="container">
+		        <!-- Brand and toggle get grouped for better mobile display -->
+			        <div class="navbar-header page-scroll">
+			          	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				            <span class="sr-only">Toggle navigation</span>
+				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span>
+			         	</button>
+				        <a class="navbar-brand" href="/">
+				            <img id="logo-header" src="/discover/assets/img/twyst_logo_2.png" alt="Logo">       
+				        </a>
+			        </div>
+		        	<ul class="nav navbar-nav navbar-right navbar-collapse collapse">
+						<li class="margin-top-pt6em hidden-xs hidden-sm" >
+							<a href="https://play.google.com/store/apps/details?id=com.twyst.app.android"><img class="app-button" src="/outlets/assets/img/images/googleplay.png"></a>
+						</li>
+		          		<li class="margin-top-pt6em hidden-xs hidden-sm">
+		              		<a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store"><img class="app-button" src="/outlets/assets/img/images/appstore.png"></a>
+		          		</li>
+		          		<li> 
+				            <a href="/home">
+				              	Home
+				            </a>
+		          		</li>
+		          		<li> 
+				            <a href="/discover">
+				              Discover
+				            </a>
+		          		</li>
+		          		<li>
+				            <a href="/home/how">
+				              	How it works
+				            </a>                       
+		          		</li>
+						<li>
+				            <a href="http://twyst.in/merchant/">
+				              For merchants
+				            </a>
+		          		</li>        
+					</ul>
+		    	</div>    
+			</div>
+		</div>
+		<div style="padding-top:4.5em;">
+			&nbsp;
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<div ng-controller="RewardCtrl">
+						<div>
+							<h3>My Active Rewards</h3>
+						</div>
+						<div>
+							&nbsp;
+						</div>
+						<div ng-repeat="item in rewards.vouchers.ACTIVE | limitTo: 3" class="col-md-12 voucher-obj">
+							<div class="col-md-2 col-xs-2">
+								<img ng-src="{{imageName(item)}}" class="voucher-img">
+							</div>
+							<div class="col-md-10 col-xs-10">
+								<div class="th2">
+									<strong>{{item.voucher.issue_details.issued_for.basics.description}}</strong>
+								</div>
+								<div >
+									<span ng-show="item.avail_in">
+				                        <strong style="color:red !important">AVAILABLE {{item.avail_in.day | uppercase}} {{item.avail_in.time}}</strong>
+				                    </span>
+				                    <span ng-hide="item.avail_in">
+				                        <strong style="color:green !important">AVAILABLE NOW</strong>
+				                    </span>
+								</div>
+								<div class="th2">
+									<a ng-href="/{{item.voucher.issue_details.issued_at[0].shortUrl[0]}}">
+										<strong>{{item.voucher.issue_details.issued_at[0].basics.name}}</strong>
+									</a>
+									<small>
+				                        <br/>
+				                        <span class="text-gray"><i class="fa fa-map-marker"></i> {{item.voucher.issue_details.issued_at[0].contact.location.locality_1[0]}}, {{item.voucher.issue_details.issued_at[0].contact.location.city}}</span>
+				                    </small>
+								</div>
+								<div>
+									<span class="text-gray">
+			                            <i class="fa fa-calendar"></i> Valid till {{item.voucher.validity.end_date|date}}
+			                        </span>
+								</div>
+								<div ng-if="item.voucher.issue_details.issued_for.terms">
+									<span class="text-gray">
+			                            T&C: {{item.voucher.issue_details.issued_for.terms}}
+			                        </span>
+								</div>
+								<div class="row padding-icons">
+								</div>
+								<div class="row">
+									<div class="col-md-4 col-xs-6 col-xs-push-1 col-md-push-2">
+										<i class="fa fa-money fa-3x fa-orange"></i>
+										<div>
+											Redeem
+										</div>
+									</div>
+									<div class="col-md-4 col-xs-6 col-xs-push-1 col-md-push-2">
+										<i class="fa fa-share-alt-square fa-3x"></i>
+										<div>
+											Share
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="padding-voucher-recco">
+						&nbsp;
+					</div>
+					<div ng-controller="ReccoCtrl">
+						<div>
+							<h3>Discover / Explore / Recommended for You</h3>
+						</div>	
+						<div>
+							&nbsp;
+						</div>
+						<div ng-repeat="item in recco.reccos | limitTo: 5" class="row voucher-obj">
+							<div class="col-md-2 col-xs-2">
+								<img ng-src="{{imageName(item.outlet_summary)}}" class="voucher-img">
+							</div>
+							<div class="col-md-10 col-xs-10">
+								<div class="th2">
+									<strong>{{item.outlet_summary.basics.name}}</strong>
+								</div>
+								<div ng-hide="!item.closed_now">
+                                    <strong style="color:green !important">OPENS {{item.opensAt.day | uppercase}} {{item.opensAt.time}}</strong>
+                                </div>
+								<div class="th2">
+									<small>
+				                        <span class="text-gray"><i class="fa fa-map-marker"></i> {{item.outlet_summary.contact.location.locality_1[0]}}, {{item.outlet_summary.contact.location.city}}</span>
+				                    </small>
+								</div>
+								<div ng-hide="!item.relevant_reward || item.active_rewards.length">
+									<span>
+			                            {{item.relevant_reward.reward}},
+                                        <ng-pluralize count="item.relevant_reward.count - item.checkin_count" when="{'0': '0 check-ins to go.',
+                                                'one': '1 check-in to go.',
+                                                'other': '{} check-ins to go'}" class="text-gray">
+                                        </ng-pluralize>
+                                    </span>
+								</div>
+                                <div ng-show="item.active_rewards && item.active_rewards.length">
+                                    <i class="icon fa fa-money fa-orange ireward"></i>
+                                    <span>
+                                        <ng-pluralize count="item.active_rewards.length" when="{'0': 'No active vouchers.',
+                                                'one': '1 active voucher.',
+                                                'other': '{} active vouchers.'}">
+                                        </ng-pluralize>
+                                    </span>
+                                    <br/>
+                                    <div ng-show="item.active_rewards.length > 1" class="text-gray">
+                                        {{item.active_rewards[0].basics.description}}, & {{item.active_rewards.length - 1}} more.
+                                    </div>
+                                    <div ng-hide="item.active_rewards.length > 1" class="text-gray">
+                                        {{item.active_rewards[0].basics.description}}
+                                    </div>
+                                </div>	
+								<div class="row padding-icons">
+								</div>
+								<div class="row">
+									<div class="col-md-4 col-xs-6 col-xs-push-1 col-md-push-2">
+										<div ng-if="!item.is_following">
+											<i class="fa fa-plus-square-o fa-3x fa-orange"></i>
+											<div>
+												Follow
+											</div>
+										</div>
+										<div ng-if="item.is_following">
+											<i class="fa fa-plus-square fa-3x fa-orange"></i>
+											<div>
+												Following
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-xs-6 col-xs-push-1 col-md-push-2">
+										<i class="fa fa-share-alt-square fa-3x"></i>
+										<div>
+											Share
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1">
+					
+				</div>
+				<div class="col-md-4" ng-controller="TimelineCtrl">
+					<div class="row">
+						<div class="col-md-12">
+							<h3>Notifications / Activity</h3>
+						</div>
+					</div>
+					<div class="screen-height timeline">
+						<div ng-repeat="t in timeline.results" class="row timeline-obj">
+							<div class="col-md-2">
+								<img ng-src="/common/transparent/{{t.message_object_type}}.png">
+							</div>
+							<div class="col-md-10">
+								<span style="font-size: 15px;">{{t.message}}</span>
+								<span am-time-ago="t.created_date" class="text-gray"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-md-4 col-sm-12 col-xs-12">
+		                <!-- About -->
+		                <div class="headline">
+		                    <h2>About</h2>
+		                </div>
+		                <p>Twyst is a start-up based out of Gurgaon, started by a team with a combined experience of 40 years across product, strategy, operations and marketing. <a href="about.html">More</a></p>
+		            </div>
+		            <div class="col-md-4 col-sm-12 col-xs-12">   
+		                <div class="headline">
+		                    <h2>Follow</h2>
+		                </div>
+		                <ul class="social-icons">
+		                    <li>
+		                        <a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a>
+		                    </li>
+		                    <li>
+		                        <a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a>
+		                    </li>
+		                    <li>
+		                        <a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a>
+		                    </li>
+		                </ul>
+		            </div>
+		            <div class="col-md-4 col-sm-12 col-xs-12 connect-margin">
+		                <div class="headline">
+		                    <h2>Connect</h2>
+		                </div>
+		                <a class="btn btn-warning" href="/home/contact.html" style="color: white;line-height: 1;">Get in touch</a>
+		                <a class="btn btn-warning" href="/home/careers.html" style="color: white;line-height: 1;">Work with Us</a>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<script src="http://code.angularjs.org/1.3.3/angular.min.js" ></script>
+		<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script src="http://code.angularjs.org/1.3.3/angular-animate.min.js" ></script>
+		<script src="https://code.angularjs.org/1.3.3/angular-route.min.js"></script>
+		<script src="https://code.angularjs.org/1.3.3/angular-cookies.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+		<script src="http://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
+		<script src="/common/toastr/toastr.min.js"></script>
+		<script src="/common/js/services/authSvc.js"></script>
+		<script src="./js/homeApp.js"></script>
+	</body>
+</html>
