@@ -15,22 +15,7 @@
             <label>Outlet Name*</label>
           </div>
           <div class="row-fluid span8">
-            <input id="outlet_name" name="outlet_name" required ng-minlength=5 ng-maxlength=256 type="text" ng-model="outlet.basics.name" class="span7">  
-              
-            <div class="error" ng-show="outlet_basics.outlet_name.$dirty && outlet_basics.outlet_name.$invalid">
-              <div class="error"
-              ng-show="outlet_basics.outlet_name.$error.required">
-              Required field
-              </div>
-              <div class="error"
-              ng-show="outlet_basics.outlet_name.$error.minlength">
-              At least 5 characters
-              </div>
-              <div class="error"
-              ng-show="outlet_basics.outlet_name.$error.maxlength">
-              No more than 256 characters
-              </div>         
-            </div>                    
+            <input id="outlet_name" name="outlet_name" required type="text" ng-model="outlet.basics.name" class="span7">                    
           </div>
         </div>
         <div id="spacing" class="row-fluid" style="padding-bottom:10px">
