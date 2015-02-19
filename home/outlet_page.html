@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Twyst - Logged-in</title>
+		<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+		<meta name="description" content="Slick Admin Admin UI">
+		<meta name="keywords" content="Slick Admin, Admin UI, Admin Dashboard, John">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+		<link href="/common/toastr/toastr.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/home/assets/css/headers/header1.css">
+		<link rel="stylesheet" href="/home/assets/css/style.css">
+		<link rel="stylesheet" href="/home/css/outlet_details.css">
+	</head>
+	<body ng-app="homeApp" ng-controller="OutletCtrl">
+		<div class="header">
+		    <style type="text/css">
+		        /*
+		        CSS for Header goes here
+		        */
+		        .padding-top-100 {
+		            padding-top: 3.5em;
+		        }
+		        .header .navbar-default .navbar-nav > li > a {
+		            color: #fff !important;
+		        }
+		        #logo-header {
+		            margin-top: 0.2em;
+		            height: 2.7em;
+		            width: auto;
+		        }
+
+		        .app-button {
+		            height: 2.5em;
+		        }
+		        .header .navbar {
+		            background-color: #000 !important;
+		        }
+		        .margin-top-pt6em {
+		            margin-top: -0.8em;
+		            margin-left: -1em;
+		        }
+		        .margin-bottom-about {
+		            margin-bottom: 5em; 
+		        }
+		    </style>
+		    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		    	<div class="container">
+		        <!-- Brand and toggle get grouped for better mobile display -->
+			        <div class="navbar-header page-scroll">
+			          	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				            <span class="sr-only">Toggle navigation</span>
+				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span>
+			         	</button>
+				        <a class="navbar-brand" href="/">
+				            <img id="logo-header" src="/discover/assets/img/twyst_logo_2.png" alt="Logo">       
+				        </a>
+			        </div>
+		        	<ul class="nav navbar-nav navbar-right navbar-collapse collapse">
+						<li class="margin-top-pt6em hidden-xs hidden-sm" >
+							<a href="https://play.google.com/store/apps/details?id=com.twyst.app.android"><img class="app-button" src="/outlets/assets/img/images/googleplay.png"></a>
+						</li>
+		          		<li class="margin-top-pt6em hidden-xs hidden-sm">
+		              		<a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store"><img class="app-button" src="/outlets/assets/img/images/appstore.png"></a>
+		          		</li>
+		          		<li> 
+				            <a href="/home">
+				              	Home
+				            </a>
+		          		</li>
+		          		<li> 
+				            <a href="/discover">
+				              Discover
+				            </a>
+		          		</li>
+		          		<li>
+				            <a href="/home/how">
+				              	How it works
+				            </a>                       
+		          		</li>
+						<li>
+				            <a href="http://twyst.in/merchant/">
+				              For merchants
+				            </a>
+		          		</li>        
+					</ul>
+		    	</div>    
+			</div>
+		</div>
+		<section>
+			<div ng-if="data.outlet_details" class="row header-bg" background-image="{{data.outlet_details._id + '/' + 'background'}}">
+				<div class="col-md-6 col-md-push-3 outlet-head">
+					<div class="col-md-4 text-center hidden-xs hidden-sm">
+						<div>
+							<img class="outlet-logo" ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{data.outlet_details._id + '/' + 'logo'}}">
+						</div>
+						<div>
+							&nbsp;
+						</div>
+						<div class="fb-like" ng-if="data.outlet_details.links.facebook_url" data-href="{{addhttp(data.outlet_details.links.facebook_url)}}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+					</div>
+					<div class="col-md-8">
+						<!-- <div class="pull-right share-at-corner">
+							<i class="fa fa-share-alt-square fa-3x"></i>
+						</div> -->
+						<div class="text-center outlet-basic-info">
+							<h3>{{data.outlet_details.basics.name}}</h3>
+							<div class="space-text-bottom">
+								<span class="label label-warning label-orange" ng-show="!closed_now">Open now</span>
+    							<span class="label label-warning label-red" ng-show="closed_now && opensAt.time">Opens at {{opensAt.day ? opensAt.day + ' ' : ''}} {{opensAt.time}}</span>
+							</div>
+							<div>
+								<a ng-href="tel:{{data.outlet_details.contact.phones.landline}}" ng-if="data.outlet_details.contact.phones.landline">
+									<span>
+										<i class="fa fa-phone"></i>
+										{{data.outlet_details.contact.phones.landline}}
+									</span>
+								</a>
+								&nbsp;&nbsp;
+								<a ng-href="tel:{{data.outlet_details.contact.phones.mobile[0].num}}" ng-if="data.outlet_details.contact.phones.mobile[0].num">
+									<span>
+										<i class="fa fa-mobile-phone"></i>
+										{{data.outlet_details.contact.phones.mobile[0].num}}
+									</span>
+								</a>
+							</div>
+							<div>
+								<span>
+									<i class="fa fa-home"></i>
+									{{data.outlet_details.contact.location.address}}
+								</span>
+							</div>
+							<div class="space-text-bottom">
+								<a ng-href="{{data.outlet_details.links.website_url}}" ng-if="data.outlet_details.links.website_url">
+									<span>
+										<i class="fa fa-globe"></i>
+										{{data.outlet_details.links.website_url}}
+									</span>
+								</a>
+							</div>
+						</div>
+						<div class="meta-info">
+							<div class="col-md-3 col-xs-3 text-center fa-orange">
+								<span>{{data.total_checkin}}</span> 
+								<p>Check-ins</p>
+							</div>
+							<div class="col-md-3 col-xs-3 text-center fa-orange">
+								<span>{{data.total_follow}}</span> 
+								<p>Followers</p>
+							</div>
+							<div class="col-md-3 col-xs-3 text-center fa-orange">
+								<div ng-if="!data.is_following" data-toggle="tooltip" data-placement="top" title="Click to Follow!" class="text-center">
+									<span>
+										<i class="fa fa-plus-square-o fa-orange"></i>
+									</span>
+									<p>Follow</p>
+								</div>
+								<div ng-if="data.is_following">
+									<span>
+										<i class="fa fa-plus-square fa-orange"></i>
+									</span>
+									<p>Following</p>
+								</div>
+							</div>
+							<div class="col-md-3 col-xs-3 text-center fa-orange">
+								<span><i class="fa fa-share-alt-square fa-orange"></i></span>
+								<p>Share</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 col-xs-12">
+					<div class="panel panel-default">
+      					<div class="panel-heading">
+          					<div class="panel-title">
+            					<h4>Rewards</h4>
+          					</div>
+        				</div>
+        				<div class="panel-body">
+        					<div ng-if="data.reward_tree.rewards" class="text-center col-md-12">
+        						<button class="btn btn-md label-orange hidden-sm hidden-xs">
+        							I want Rewards!
+        						</button>
+        						<button class="btn btn-sm label-orange hidden-md hidden-lg">
+        							I want Rewards!
+        						</button>
+        						<span>
+        							&nbsp;
+        						</span>
+        						<button class="bubble">273 Requests</button>
+        					</div>
+        					<div ng-if="data.active_rewards && data.active_rewards.length">
+        						<h5 class="underline-head"><strong>Your Active Rewards</strong></h5>
+        						<table class="table table-responsive table-bordered">
+					                <tbody>
+					                	<tr ng-repeat="v in data.active_rewards">
+						                    <td class="no-border">{{v.basics.description}}</td>
+						                    <td class="no-border"><button>View</button></td>
+						                </tr>
+					                </tbody>
+					            </table>
+        					</div>
+        					<div>
+        						<h5 class="underline-head"><strong>Coming up next for you</strong></h5>
+        						<div>
+        							{{data.relevant_reward.reward}}, <span class="fa-orange">{{data.checkins_to_next_reward}} check-in(s)</span> to go.
+        						</div>
+        						<div>
+        							You have <span class="fa-orange">{{data.checkin_count}} check-in(s)</span> here.
+        						</div>
+        					</div>
+        					<div ng-if="data.reward_tree.rewards">
+        						<h6 class="margin-bottom-20">Unlock exclusive rewards for being a regular! Check in on 
+	        						<strong class="fa-orange">Twyst</strong> every time you visit us or order.
+	        					</h6>
+	        					<table class="table table-responsive table-bordered">
+					                <thead>
+					                    <th width="16%">Check-in #</th>
+					                    <th>Reward</th>
+					                    <th>Available on</th>
+					                </thead>
+					                <tbody>
+					                	<tr ng-repeat="offer in data.reward_tree.rewards" ng-class="highlight(data.checkin_count, offer.count, data.reward_tree.rewards[$index - 1].count)">
+						                    <td><span>{{offer.count}}</span></td>
+						                    <td ng-click="offer.show = !offer.show">
+						                        <div class="text-muted" class="col-md-10">{{offer.reward}} 
+						                        	<span class="pull-right">
+							                          	<i ng-hide="offer.show" class="fa fa-chevron-down"></i>
+							                          	<i ng-show="offer.show" class="fa fa-chevron-up"></i>
+							                        </span>
+						                        </div>
+						                        <div ng-show="offer.show">
+						                        	{{offer.rewardified}}
+						                        </div>
+						                    </td>
+						                    <td>
+						                    	<i class="fa fa-home fa-orange" title="Available on Dine-in"></i>
+						                    	<i class="fa fa-home" title="Not available on Dine-in"></i>
+						                    	&nbsp;
+						                    	<i class="fa fa-truck fa-orange" title="Available on home delivery"></i>
+						                    	<i class="fa fa-truck" title="Not available on home delivery"></i>
+						                    	&nbsp;
+						                    	<i class="fa fa-mobile-phone fa-orange" title="Available only for App users" style="font-size:120%;"></i>
+						                    </td>
+						                </tr>
+					                </tbody>
+					            </table>
+        					</div>
+        				</div>
+      				</div>
+				</div>
+				<div class="col-md-1">
+					
+				</div>
+				<div class="col-md-4 col-xs-12">					
+					<div class="panel panel-default" ng-if="data.outlet_details.links.facebook_url">
+        				<div class="panel-heading panel_heading_callout" style="text-align: left;">
+          					<h4>From Facebook</h4>
+        				</div>
+        				<div class="fb-like-box" data-href="{{data.outlet_details.links.facebook_url}}" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="true" data-show-border="false">
+        				</div>
+      				</div>
+      				<div class="panel panel-default">
+    					<div class="panel-heading panel_heading_callout">
+          					<h4>Overview</h4>
+        				</div>
+        				<div class="panel-body">
+          					<div>
+          						<strong class="underline-span">Cuisines:</strong>
+          						<div>
+            						{{data.outlet_details.attributes.cuisines.toString()}}
+          						</div>
+        					</div>
+        					<div>
+        						<strong class="underline-span">Cost For Two:</strong>
+        						<div>
+            						INR {{getCostForTwoText(data.outlet_details)}}
+          						</div>
+        					</div>
+        					<div>
+        						&nbsp;
+        					</div>
+        					<div class="font-overview">
+        						<div ng-if="data.outlet_details.attributes.dine_in">
+        							<i class="fa fa-green fa-check-circle"></i>
+        							Dine-in Available
+        						</div>
+        						<div ng-if="!data.outlet_details.attributes.dine_in">
+        							<i class="fa fa-red fa-check-circle"></i>
+        							No Dine-in
+        						</div>
+        						<div ng-if="data.outlet_details.attributes.home_delivery">
+        							<i class="fa fa-green fa-check-circle"></i>
+        							Home Delivery
+        						</div>
+        						<div ng-if="!data.outlet_details.attributes.home_delivery">
+        							<i class="fa fa-red fa-check-circle"></i>
+        							No Home Delivery
+        						</div>
+        						<div ng-if="data.outlet_details.attributes.veg">
+        							<i class="fa fa-green fa-dot-circle-o"></i>
+        							Vegetarian Only
+        						</div>
+        						<div ng-if="!data.outlet_details.attributes.veg">
+        							<i class="fa fa-red fa-dot-circle-o"></i>
+        							Serves non-veg
+        						</div>
+        						<div ng-if="data.outlet_details.attributes.alcohol">
+        							<i class="fa fa-green fa-check-circle"></i>
+        							Serves Alcohol
+        						</div>
+        						<div ng-if="!data.outlet_details.attributes.alcohol">
+        							<i class="fa fa-red fa-check-circle"></i>
+        							No Alcohol
+        						</div>
+        						<div ng-if="data.outlet_details.attributes.smoking">
+        							<i class="fa fa-green fa-check-circle"></i>
+        							Smoking Area Available
+        						</div>
+        						<div ng-if="!data.outlet_details.attributes.smoking">
+        							<i class="fa fa-red fa-check-circle"></i>
+        							No Smoking
+        						</div>
+        						<div ng-if="data.outlet_details.attributes.outdoor">
+        							<i class="fa fa-green fa-check-circle"></i>
+        							Outdoor Seating Available
+        						</div>
+        						<div ng-if="data.outlet_details.attributes.foodcourt">
+        							<i class="fa fa-green fa-check-circle"></i>
+        							Part of a food court
+        						</div>
+        						<div ng-if="data.outlet_details.attributes.air_conditioning">
+        							Air conditioning: {{data.outlet_details.attributes.air_conditioning}}
+        						</div>
+        						<div ng-if="data.outlet_details.attributes.reservation">
+        							Reservation: {{data.outlet_details.attributes.reservation}}
+        						</div>
+        						<div ng-if="data.outlet_details.attributes.wifi">
+        							Wi-fi: {{data.outlet_details.attributes.wifi}}
+        						</div>
+        					</div>
+          				</div>
+    				</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-md-4 col-sm-12 col-xs-12">
+		                <!-- About -->
+		                <div class="headline">
+		                    <h2>About</h2>
+		                </div>
+		                <p>Twyst is a start-up based out of Gurgaon, started by a team with a combined experience of 40 years across product, strategy, operations and marketing. <a href="about.html">More</a></p>
+		            </div>
+		            <div class="col-md-4 col-sm-12 col-xs-12">   
+		                <div class="headline">
+		                    <h2>Follow</h2>
+		                </div>
+		                <ul class="social-icons">
+		                    <li>
+		                        <a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a>
+		                    </li>
+		                    <li>
+		                        <a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a>
+		                    </li>
+		                    <li>
+		                        <a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a>
+		                    </li>
+		                </ul>
+		            </div>
+		            <div class="col-md-4 col-sm-12 col-xs-12 connect-margin">
+		                <div class="headline">
+		                    <h2>Connect</h2>
+		                </div>
+		                <a class="btn btn-warning" href="/home/contact.html" style="color: white;line-height: 1;">Get in touch</a>
+		                <a class="btn btn-warning" href="/home/careers.html" style="color: white;line-height: 1;">Work with Us</a>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<script src="http://code.angularjs.org/1.3.3/angular.min.js" ></script>
+		<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script src="http://code.angularjs.org/1.3.3/angular-animate.min.js" ></script>
+		<script src="https://code.angularjs.org/1.3.3/angular-route.min.js"></script>
+		<script src="https://code.angularjs.org/1.3.3/angular-cookies.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+		<script src="http://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
+		<script src="/common/toastr/toastr.min.js"></script>
+		<script src="/common/js/services/authSvc.js"></script>
+		<script src="./js/homeApp.js"></script>
+	</body>
+</html>

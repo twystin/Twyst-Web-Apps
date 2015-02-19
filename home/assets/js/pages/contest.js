@@ -1,45 +1,71 @@
-var twystContact = angular.module('twystContest', []);
-
-twystContact.controller('ContestCtrl', function($scope, $http) {
+var twystContact = angular.module('twystContest', ['toastr'])
+.factory('toastSvc', function (toastr) {
+    return {
+        showToast: function (type, message, head) {
+            toastr[type](message, 
+                head, 
+                {
+                    closeButton: true
+                });
+        }
+    }
+})
+.controller('ContestCtrl', function($scope, $http, $timeout, $window, toastSvc) {
 
     $scope.user = {};
-    $scope.filled = {
-        'name': true,
-        'message': true,
-        'email': true,
-        'phone': true,
-        'dob': true
-    };
 
     $scope.enterContest = function () {
-        initFilled();
-        if(validateData()) {
-            postData();
+        if(isAllFilled()) {
+            if(isMobileNumber($scope.user.phone)) {
+                if(validateEmail($scope.user.email)) {
+                    postData();
+                }
+                else {
+                    toastSvc.showToast('error', 'Please provide a valid email id');
+                }
+            }
+            else {
+                toastSvc.showToast('error', 'Please provide a valid mobile number');
+            }
+        }
+        else {
+            toastSvc.showToast('error', 'Please fill all the fields');
         }
     }
 
-    function validateData () {
-        if(!$scope.user.name) {
-            $scope.filled.name = false;
-            return false;
+    function isMobileNumber(phone) {
+        if(phone 
+            && (phone.length === 10)
+            && isNumber(phone) 
+            && isValidFirstDigit(phone)) {
+            return true;
+        };
+        return false;
+    }
+
+    function isValidFirstDigit(phone) {
+        if(phone[0] === '7'
+            || phone[0] === '8'
+            || phone[0] === '9') {
+            return true;
         }
-        if(!$scope.user.dob) {
-            $scope.filled.dob = false;
-            return false;
+        return false;
+    }
+
+    function isNumber(str) {
+        var numeric = /^-?[0-9]+$/;
+        return numeric.test(str);
+    }
+
+    function isAllFilled() {
+        if($scope.user.name
+            && $scope.user.phone
+            && $scope.user.email
+            && $scope.user.dob
+            && $scope.user.message) {
+            return true;
         }
-        if(!isValidPhone()) {
-            $scope.filled.phone = false;
-            return false;
-        }
-        if(!isValidEmail()) {
-            $scope.filled.email = false;
-            return false;
-        }
-        if(!$scope.user.message) {
-            $scope.filled.message = false;
-            return false;
-        }
-        return true;
+        return false;
     }
 
     function isValidPhone () {
@@ -52,36 +78,31 @@ twystContact.controller('ContestCtrl', function($scope, $http) {
         return true;
     }
 
-    function isValidEmail () {
-        return $scope.contestForm.email.$valid;
-    }
-
-    function initFilled () {
-        $scope.filled = {
-            'name': true,
-            'message': true,
-            'email': true,
-            'phone': true,
-            'dob': true
-        };
-    }
+    function validateEmail(email) { 
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    } 
 
     function postData() { 
         $scope.user.name = $scope.user.name + ' (dob: ' + $scope.user.dob + ')'
-        $http.post('/api/v1/beta/users', {   
+        $http.post('/api/v1/beta/users', {
             name  : $scope.user.name,
             message         : $scope.user.message,
             phone        : $scope.user.phone,
             email               : $scope.user.email
         }).success(function (data, status, header, config) {
-            $scope.user = {};
-            $scope.user.thank_you = true;
-            $scope.user.error = false;
+            redirect();
+            toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after the results are declared on 10th Feb 2015.');
         })
         .error(function (data, status, header, config) {
-            $scope.user.error = true;
-            $scope.user.thank_you = false;
+            redirect();
+            toastSvc.showToast('error', 'You have already participated in the contest. Results will be declared on 10th Feb 2015.');
         });
     };
-    
+
+    function redirect() {
+        $timeout(function () {
+            $window.location.href = 'http://twyst.in';
+        }, 4000);
+    }
 });

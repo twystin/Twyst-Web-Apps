@@ -1,0 +1,148 @@
+.highlight {
+	background-color: #f6921e;
+}
+.fa-green {
+	color: green;
+}
+.fa-red {
+	color: red;
+}
+.no-border {
+	border-left: 0 !important;
+	border-right: 0 !important;
+}
+.underline-head {
+	border-bottom: 1.5px solid orange;
+	display: inline-block;
+}
+.bubble {
+    position: relative;
+    width: 94px;
+    height: 33px;
+    padding: 0px;
+    background: #D6D6D6;
+    border: #f6911e solid 1px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px !important;
+    -webkit-box-shadow: 2px 2px 10px 0px #616161;
+    -moz-box-shadow: 2px 2px 10px 0px #616161;
+    box-shadow: 2px 2px 10px 0px #616161;
+}
+
+.bubble:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -12px;
+    border-style: solid;
+    border-width: 10px 19px 12px 0;
+    border-color: transparent #D6D6D6;
+    display: block;
+    width: 0;
+    z-index: 1;
+}
+
+.meta-info {
+	border-top: 1px solid gray;
+	padding-top: .5em;
+	margin-top: 2.0em;
+}
+.underline-span {
+	border-bottom: 1px solid #f6921e;
+}
+.service-block {
+	text-align: center;
+	border-radius: 10px !important;
+	margin: 5px 0px 5px 0px;
+	border: solid 1px #eee;
+	background: #ecf0f1;
+	color: orange;
+}
+.service-block span {
+	color: black;
+}
+.fa-orange {
+	color: orange;
+}
+.header-bg a:hover {
+	color: orange;
+}
+.header-bg a {
+	color: white;
+}
+.space-text-bottom {
+	margin-bottom: .5em;
+}
+.label-orange {
+	background-color: rgb(255, 116, 0);
+	color: white;
+}
+.label-red {
+	background-color: red;
+}
+.outlet-basic-info {
+	margin-top: 4em;
+}
+.share-at-corner {
+	margin-right: -2em;
+}
+.padding-follow {
+	padding-top: 0.4em;
+}
+@media (min-width: 768px) {
+	.meta-info p {
+		color: white;
+		font-size: 1em;
+	}
+	.meta-info span {
+		font-size: 120%;
+	}
+	.outlet-logo {
+		max-height: 8em;
+	  	max-width: 13em;
+	  	margin-top:40%;
+	}
+	.outlet-head {
+		height: 20em;
+		background: #262626;
+		opacity: 0.90;
+		margin: 3em 0em;
+	}
+	.header-bg {
+		background-repeat: no-repeat;
+	    background-size: cover !important;
+	    height: 25em;
+	    margin-top: 3em;
+	    color: white;
+	}
+}
+@media (max-width: 767px) {
+	.meta-info p {
+		color: white;
+		font-size: .65em;
+	}
+	.meta-info span {
+		font-size: 120%;
+	}
+	.outlet-basic-info {
+		padding-top: .2em;
+	}
+	.outlet-head {
+		height: 18em;
+		background: #262626;
+		opacity: 0.98;
+		margin: 0em 1em 0em 1em;
+	}
+	.header-bg {
+		background-repeat: no-repeat;
+	    background-size: cover !important;
+	    height: 23em;
+	    color: white;
+	    margin-top: 0.8em;
+	}
+}
+body {
+	font-family: 'Open Sans', sans-serif;
+	overflow-x: hidden;
+}

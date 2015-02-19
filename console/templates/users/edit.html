@@ -1,44 +1,92 @@
-<div ng-init="edit()">
+<div ng-init="getUser()">
 <h3>Edit</h3>
 <div class="alert alert-error" ng-show="auth.errors && auth.messages.info.message"><strong>Error:</strong> {{auth.messages.info.message}}</div>
 <form class="form-horizontal">
 	<div class="control-group">
 		<label class="control-label">User name</label>
 		<div class="controls">
-			<input id="username" name="username" required="" type="text" disabled= "" ng-model="user.name"></input>
+			<input id="username" name="username" required="" type="text" ng-disabled="true" ng-model="user.username"></input>
 		</div>
 	</div>
-
-
-	<div class="control-group">
-		<label class="control-label">Email Id</label>
-		<div class="controls">
-			<input id="email" name="email" required="" type="email" ng-model="user.email"></input>
-		</div>
-	</div>	
 
 	<div class="control-group">
 		<label class="control-label">Role</label>
 		<div class="controls">
 		    <select id="role" name="role" ng-model="user.role">
-		      <option value="root">Admin</option>
-		      <option value="merchant">Merchant</option>
-		      <option value="manager">Manager</option>
+		    	<option ng-repeat="r in [1,2,3,4,5,7]" ng-value="r">{{r}}</option>
 		    </select>
 		</div>
-	</div>	
+	</div>
+
 	<div class="control-group">
-	<label class="control-label">Validated</label>
-	<div class="controls">
-		    <label class="checkbox">
-		      <input name="validated" value="validated" ng-model="user.validated" type="checkbox">		      
-		    </label>
+		<label class="control-label">Phone Number</label>
+		<div class="controls">
+			<input type="text" ng-model="user.phone" ng-disabled="true"></input>
+		</div>
+	</div>
+
+	<div ng-if="user.role === 7">
+		<div class="control-group">
+			<label class="control-label">Email ID</label>
+			<div class="controls">
+				<input type="text" ng-model="user.social_graph.email.email"></input>
+			</div>
+		</div>
+		<div class="control-group" ng-if="user.social_graph.facebook">
+			<label class="control-label">Facebook Data</label>
+			<div class="controls">
+				<table class="table table-bordered table-striped">
+					<thead>
+		                <tr> 
+		                    <th>
+		                    	Key
+		                    </th>
+		                    <th>
+		                    	Value
+		                    </th>
+		                </tr>
+		            </thead>
+            		<tbody>
+		                <tr ng-repeat="(k,v) in user.social_graph.facebook">
+		                    <td>
+		                        {{k}}
+		                    </td>
+		                    <td>
+		                        {{v}}
+		                    </td>
+		                </tr>
+		            </tbody>
+				</table>
+			</div>
+		</div>
+		<div class="control-group">
+		<label class="control-label">Blacklisted</label>
+			<div class="controls">
+			    <label class="checkbox">
+			      <input name="validated" value="validated" ng-model="user.blacklisted" type="checkbox">		      
+			    </label>
 		    </div>
+		</div>
+		<div class="control-group">
+		<label class="control-label">Email Validated</label>
+			<div class="controls">
+			    <label class="checkbox">
+			    	<b>{{user.validated.email_validated.status ? 'YES' : 'NO'}}</b>	      
+			    </label>
+		    </div>
+		</div>
+	</div>
+
+	<div class="control-group" ng-if="user.role !== 7">
+		<label class="control-label">Email ID</label>
+		<div class="controls">
+			<input type="text" ng-model="user.email"></input>
+		</div>
 	</div>		
 
 	<div class="control-group">
 		<div class="controls">
-			<button id="submit" name="submit" ng-click="update(user)" class="btn btn-info">Submit</button>
+			<button id="submit" name="submit" ng-click="updateUser()" class="btn btn-info">Submit</button>
 		</div>
 	</div>		
 

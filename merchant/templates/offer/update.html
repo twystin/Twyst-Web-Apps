@@ -32,7 +32,7 @@
 	    <div class="row-fluid span12" ng-repeat="tier in program.tiers">
 	      <div id="tierNav" class="row-fluid" ng-show="tier.basics.name">
 	        <div class="row-fluid"><small>Tier Name:&nbsp;{{tier.basics.name}} | Opens at:&nbsp;{{tier.basics.start_value}} | Closes at: {{tier.basics.end_value}}</small>
-	        <i class="icon icon-trash pull-right" ng-click="deleteTier(tier)"></i>
+	        <i class="icon icon-trash pull-right" ng-click="deleteTierInit(tier._id)"></i>
 	        <i class="icon icon-edit pull-right" ng-click="editTier(tier)"></i>
 	        </div>
 	      </div>
@@ -44,7 +44,7 @@
 	          <div class="row-fluid span9">
 	            <small>{{offer.basics.title}}</small>
 	          </div>
-	          <i class="icon icon-trash pull-right" ng-click="deleteOffer(offer)"></i>
+	          <i class="icon icon-trash pull-right" ng-click="deleteOfferInit(offer._id)"></i>
 	        	<i class="icon icon-edit pull-right" ng-click="editOffer(offer)"></i>
 	         <!--  <div class="row-fluid span1">
 	            <i ng-click="viewPlay1()" class="icon-remove-sign icon-white"></i>

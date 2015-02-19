@@ -7,7 +7,7 @@
 		<div class="controls">
 			<input id="username" name="username" required="" type="text" ng-model="user.name"></input>
 		</div>
-	</div>
+	</div> 
 
 	<div class="control-group">
 		<label class="control-label">Password</label>
@@ -23,7 +23,10 @@
 			<label class="label label-warning" ng-hide="passwords_same">Passwords dont match</label>
 		</div>
 	</div>	
-
+	<div class="control-group">
+		<small class="text-error" ng-if="user.pass1 && user.pass2 && (user.pass1 !== user.pass2)">*Passwords dont match</small>
+		<small class="text-error" ng-if="user.pass1 && user.pass1.length < 5">*Must be at-least 5 characters</small>
+	</div>
 	<div class="control-group">
 		<label class="control-label">Email Id</label>
 		<div class="controls">

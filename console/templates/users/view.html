@@ -21,7 +21,7 @@
             <thead>
                 <tr> 
                     <th ng-click='getSorted("username")' style="cursor: pointer;" title="Click to sort">
-                        Name <i class="fa fa-arrow-down" ng-show="sort_param === 'username' && sort_order === -1"></i> <i class="fa fa-arrow-up" ng-show="sort_param === 'username' && sort_order === 1"></i>
+                        Username <i class="fa fa-arrow-down" ng-show="sort_param === 'username' && sort_order === -1"></i> <i class="fa fa-arrow-up" ng-show="sort_param === 'username' && sort_order === 1"></i>
                     </th>
                     <th ng-click='getSorted("role")' style="cursor: pointer;" title="Click to sort">
                         Role <i class="fa fa-arrow-down" ng-show="sort_param === 'role' && sort_order === -1"></i> <i class="fa fa-arrow-up" ng-show="sort_param === 'role' && sort_order === 1"></i>
@@ -31,16 +31,15 @@
                     </th>
                     <th ng-click='getSorted("created_at")' style="cursor: pointer;" title="Click to sort">
                         Joined <i class="fa fa-arrow-down" ng-show="sort_param === 'created_at' && sort_order === -1"></i> <i class="fa fa-arrow-up" ng-show="sort_param === 'created_at' && sort_order === 1"></i>
-                    </th >
-                    <th>
-                        Last seen
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="c in users">
                     <td>
-                        {{c.username}}
+                        <a href="#/users/{{c.username}}">
+                            {{c.username}}
+                        </a>
                     </td>
                     <td>
                         {{c.role}}
@@ -50,9 +49,6 @@
                     </td>
                     <td>
                         {{c.created_at | date: 'medium'}}
-                    </td>
-                    <td>
-                        {{c.last_seen | date: 'medium'}}
                     </td>
                 </tr>
             </tbody>

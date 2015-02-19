@@ -17,7 +17,7 @@
     </div>   
     <div class="row">
       <small ng-show="outlet.contact.phones.landline">L:{{outlet.contact.phones.landline}}</small>
-      <small ng-show="outlet.contact.phones.mobile.length && outlet.contact.phones.mobile.0.num" ng-repeat="mobile in outlet.contact.phones.mobile"> | M: {{mobile.num}}</small>     
+      <small ng-show="outlet.contact.phones.mobile && outlet.contact.phones.mobile.length && outlet.contact.phones.mobile[0].num" ng-repeat="mobile in outlet.contact.phones.mobile"> | M: {{mobile.num}}</small>     
     </div> 
     <div class="row">
       <small ng-show="outlet.contact.emails.email"><a href="mailto:{{outlet.basics.email}}">{{outlet.contact.emails.email}}</a></small>  

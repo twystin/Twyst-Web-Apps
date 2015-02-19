@@ -1,9 +1,9 @@
 'use strict';
 
-var twystApp = angular.module('twystApp', ["ngRoute", 'angles', 'angularFileUpload', 'ui.bootstrap', 'ngCookies', 'twystHttp']);
+var twystApp = angular.module('twystApp', ["ngRoute", 'ngAnimate', 'angles', 'toastr', 'angularFileUpload', 'ui.bootstrap', 'ngCookies', 'twystHttp']);
 
 twystApp.config(function ($routeProvider, $httpProvider) {
-    $routeProvider.
+    $routeProvider. 
         when('/', {
             controller  : 'AnonCtrl',
             templateUrl : '/merchant/templates/anon/home.html'
@@ -149,13 +149,17 @@ twystApp.config(function ($routeProvider, $httpProvider) {
             controller  : 'groupProgramUpdateCtrl',
             templateUrl : '/merchant/templates/group_program/update.html'
         }).
-        when('/birth_anniv_program/create/',{
-            controller : 'BirthAnnivProgramCtrl',
-            templateUrl : '/merchant/templates/birth_anniv_program/create.html'
+        when('/special_program/create/',{
+            controller : 'SpecialCtrl',
+            templateUrl : '/merchant/templates/special_programs/create.html'
         }).
-        when('/birth_anniv_program/update/:birth_anniv_program_id', {
-            controller : 'BirthAnnivProgramUpdateCtrl',
-            templateUrl: '/merchant/templates/birth_anniv_program/update.html'
+        when('/special_program/update/:special_id', {
+            controller : 'SpecialCtrl',
+            templateUrl: '/merchant/templates/special_programs/update.html'
+        }).
+        when('/special_program', {
+            controller : 'SpecialCtrl',
+            templateUrl: '/merchant/templates/special_programs/view.html'
         }).
         when('/error', {
             templateUrl : '/merchant/templates/anon/error.html'
@@ -226,4 +230,15 @@ twystApp.config(function ($routeProvider, $httpProvider) {
                 return '';
             }
         }
+})
+.factory('toastSvc', function (toastr) {
+    return {
+        showToast: function (type, message, head) {
+            toastr[type](message, 
+                head, 
+                {
+                    closeButton: true
+                });
+        }
+    }
 });

@@ -1,5 +1,5 @@
 twystApp.controller('programUpdateCtrl', 
-	function ($scope, $routeParams, $timeout, $http, $modal, $parse, $route, $location, authService, outletService, programService, proSupService, imageService, typeaheadService, OPERATE_HOURS) {
+	function ($scope, $routeParams, toastSvc, $timeout, $http, $modal, $parse, $route, $location, authService, outletService, programService, proSupService, imageService, typeaheadService, OPERATE_HOURS) {
 			
 		if (!authService.isLoggedIn()) {
 	        $location.path('/');
@@ -179,7 +179,7 @@ twystApp.controller('programUpdateCtrl',
 	                $scope.rewardCheckedDays.splice($scope.rewardCheckedDays.indexOf(fruit), 1);
 	            }
 	        }
-	    };
+	    }; 
 
 	    $scope.viewPlay1 = function () {
 	        $scope.viewPlay = !$scope.viewPlay;
@@ -216,9 +216,12 @@ twystApp.controller('programUpdateCtrl',
 	    };
 
 	    $scope.outletQuery = function() {
-	        $scope.auth = authService.getAuthStatus();
-	        var user_id = $scope.auth._id;
-	        outletService.query($scope, $http, $location, user_id);
+	        outletService.query().then(function (data) {
+	            $scope.outlets = data.info;
+	            $scope.all_outlets = data.info;
+	        }, function (err) {
+	            console.log(err);
+	        })
 	    };
 
 	    $scope.selectImage = function (image) {
@@ -398,7 +401,14 @@ twystApp.controller('programUpdateCtrl',
 			        $scope.offer.checkin_applicability.day_of_week = $scope.checkinCheckedDays;
 			        $scope.offer.avail_hours = $scope.avail_hours;
 
-			   		proSupService.saveOffer($scope, marked_tier, $route);
+			   		proSupService.saveOffer(marked_tier, $scope.offer)
+			   		.then(function (data) {
+			   			updateRewardTable($scope.program._id);
+			   			toastSvc.showToast('success', data.message);
+			   			$route.reload();
+			   		}, function (err) {
+			   			toastSvc.showToast('error', err.message);
+			   		});
 	   			}
 	   		}
 	   		else {
@@ -409,7 +419,14 @@ twystApp.controller('programUpdateCtrl',
 		
 
 	   $scope.saveTier = function () {
-	   		proSupService.saveTier($scope, $scope.program._id, $route);
+	   		proSupService.saveTier($scope.program._id, $scope.tier)
+	   		.then(function (data) {
+	   			updateRewardTable($scope.program._id);
+	   			toastSvc.showToast('success', data.message);
+	   			$route.reload();
+	   		}, function (err) {
+	   			toastSvc.showToast('error', err.message);
+	   		});
 	   	}
 
 	   	$scope.editProgram = function (program) {
@@ -440,7 +457,14 @@ twystApp.controller('programUpdateCtrl',
 	    };
 
 	    $scope.updateTier = function () {
-	   		proSupService.updateTier($scope, $scope.tier._id, $route);
+	   		proSupService.updateTier($scope.tier._id, $scope.tier)
+	   		.then(function (data) {
+	   			updateRewardTable($scope.program._id);
+	   			toastSvc.showToast('success', data.message);
+	   			$route.reload();
+	   		}, function (err) {
+	   			toastSvc.showToast('error', err.message);
+	   		});
 	   	}
 
 	   	$scope.updateProgram = function () {
@@ -456,11 +480,17 @@ twystApp.controller('programUpdateCtrl',
 	        }
 	        if($scope.program.validity && $scope.program.validity.burn_end) {
 	            $scope.program.validity.burn_end = new Date($scope.program.validity.burn_end).setHours(23,59,59);
-	        }
-	        
+	        }	        
 	   		$scope.program.outlets = $scope.participating_outlets;
 	   		
-	   		proSupService.updateProgram($scope, $scope.program._id, $route);
+	   		proSupService.updateProgram($scope.program._id, $scope.program)
+	   		.then(function (data) {
+	   			updateRewardTable($scope.program._id);
+	   			toastSvc.showToast('success', data.message);
+	   			$route.reload();
+	   		}, function (err) {
+	   			toastSvc.showToast('error', err.message);
+	   		});
 	   	}
 
 	    $scope.updateOffer = function () {
@@ -473,8 +503,24 @@ twystApp.controller('programUpdateCtrl',
 	        $scope.offer.reward_applicability.day_of_week = $scope.rewardCheckedDays;
 	        $scope.offer.checkin_applicability.day_of_week = $scope.checkinCheckedDays;
 	   		$scope.offer.avail_hours = $scope.avail_hours;
-	   		proSupService.updateOffer($scope, $scope.offer._id, $route);
+	   		proSupService.updateOffer($scope.offer._id, $scope.offer)
+	   		.then(function (data) {
+	   			updateRewardTable($scope.program._id);
+	   			toastSvc.showToast('success', data.message);
+	   			$route.reload();
+	   		}, function (err) {
+	   			toastSvc.showToast('error', err.message);
+	   		});
 	   }
+
+	   	function updateRewardTable(program_id) {
+	   		proSupService.updateRewardTable(program_id)
+	   		.then(function (data) {
+	   			//toastSvc.showToast('success', data.message);
+	   		}, function (err) {
+	   			//toastSvc.showToast('error', err.message);
+	   		});
+	   	}
 
 	    $scope.cancelUpdateOffer = function () {
 		   	$scope.selected_reward = {value:''};
@@ -488,29 +534,21 @@ twystApp.controller('programUpdateCtrl',
 		   	$scope.message='offer updation cancelled';
 	   };
 	    
-	   $scope.deleteOffer = function (offer) {
-	        var modalInstance = $modal.open({
+	   $scope.deleteOfferInit = function (offer_id) {
+	   		$scope.to_be_deleted_offer_id = offer_id;
+	        $scope.modalInstance = $modal.open({
 	            templateUrl : './templates/offer/steps/update/delete_offers.html',
-	            controller  : 'programOfferDeleteCtrl',
 	            backdrop    : true,
-	            resolve: {
-			      offer: function(){
-			        return offer;
-			      }
-			    }
+	            scope: $scope
 	        });
 	    };
 
-	    $scope.deleteTier = function (tier) {
-	        var modalInstance = $modal.open({
+	    $scope.deleteTierInit = function (tier_id) {
+	    	$scope.to_be_deleted_tier_id = tier_id;
+	        $scope.modalInstance = $modal.open({
 	            templateUrl : './templates/offer/steps/update/delete_tiers.html',
-	            controller  : 'programTierDeleteCtrl',
 	            backdrop    : true,
-	            resolve: {
-			      tier: function(){
-			        return tier;
-			      }
-			    }
+	            scope: $scope
 	        });
 	    };
 
@@ -590,33 +628,33 @@ twystApp.controller('programUpdateCtrl',
 	    {
 	        return false;
 	    }
-	  };
-});
+	};
 
-twystApp.controller('programTierDeleteCtrl', 
-	function ($scope, $route, $modalInstance, authService, proSupService, tier) {
+	$scope.cancelModal = function () {
+        $scope.modalInstance.dismiss();
+    };
 
-		$scope.tier = tier;
+   	$scope.deleteOffer = function () {
+   		proSupService.deleteOffer($scope.to_be_deleted_offer_id)
+   		.then(function (data) {
+   			$scope.cancelModal();
+   			updateRewardTable($scope.program._id);
+   			toastSvc.showToast('success', data.message);
+   			$route.reload();
+   		}, function (err) {
+   			toastSvc.showToast('error', err.message);
+   		});
+   	}
 
-		$scope.cancel = function () {
-	        $modalInstance.dismiss('cancel');
-	    };
-
-	   $scope.deleteTier = function () {
-	   		proSupService.deleteTier($scope, $scope.tier._id, $route, $modalInstance);
-	   }	    
-});
-
-twystApp.controller('programOfferDeleteCtrl', 
-	function ($scope, $route, $modalInstance, authService, proSupService, offer) {
-
-		$scope.offer = offer;
-
-		$scope.cancel = function () {
-	        $modalInstance.dismiss('cancel');
-	    };
-
-	   $scope.deleteOffer = function () {
-	   		proSupService.deleteOffer($scope, $scope.offer._id, $route, $modalInstance);
-	   }	    
+   	$scope.deleteTier = function () {
+   		proSupService.deleteTier($scope.to_be_deleted_tier_id)
+   		.then(function (data) {
+   			$scope.cancelModal();
+   			updateRewardTable($scope.program._id);
+   			toastSvc.showToast('success', data.message);
+   			$route.reload();
+   		}, function (err) {
+   			toastSvc.showToast('error', err.message);
+   		});
+   	}
 });

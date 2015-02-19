@@ -1,0 +1,83 @@
+<div>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/home/assets/css/style.css">
+	<link rel="stylesheet" href="/home/assets/css/pages/feature_timeline2.css">
+	<div>
+		<a ng-href="#/dashboard" class="btn">Home</a>
+	</div>
+	<div class="text-center padding-bottom-search-bar">
+		<div>
+			<input ng-model="phone">
+			<button class="btn btn-sm btn-orange" ng-click="getTimeline()">
+				Get Timeline
+			</button>
+		</div>
+		<div ng-if="info.phone">
+			<small>Showing timeline for User: <b class="color-twyst">{{info.phone}}</b></small>
+		</div>
+	</div>
+	<div>
+		<ul class="timeline-v2">
+	        <li ng-repeat="d in info.data">
+	            <div ng-if="d.type === 'CHECKIN'">
+	            	<time class="cbp_tmtime" datetime=""><span>{{d.time | date: 'longDate'}}</span> <span>Checked-in</span></time>
+		            <i class="cbp_tmicon rounded-x hidden-xs"></i>
+		            <div class="cbp_tmlabel">
+		                <h2>User Checked-in!</h2>
+		                <div class="row">
+		                    <div class="col-md-8">
+		                        <ul class="list-unstyled">
+		                            <li><i class="fa fa-check color-green"></i> Time: {{d.time | date:'medium'}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Outlet: {{d.details.outlet.basics.name}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Location: {{d.details.outlet.contact.location.locality_1[0]}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Checkin Type: {{d.details.checkin_type}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Checkin Code: {{d.details.checkin_code}}</li>
+		                        </ul> 
+		                        <div class="md-margin-bottom-20"></div>
+		                    </div>
+		                </div>        
+		            </div>
+	            </div>
+	            <div ng-if="d.type === 'UNLOCK'">
+	            	<time class="cbp_tmtime" datetime=""><span>{{d.time | date: 'longDate'}}</span> <span>Unlocked</span></time>
+		            <i class="cbp_tmicon rounded-x hidden-xs"></i>
+		            <div class="cbp_tmlabel">
+		                <h2>Voucher Unlocked by User!</h2>
+		                <div class="row">
+		                    <div class="col-md-8">
+		                        <ul class="list-unstyled">
+		                            <li><i class="fa fa-check color-green"></i> Time: {{d.time | date:'medium'}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Outlet Name: {{d.details.issue_details.issued_at[0].basics.name}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Voucher Code: {{d.details.basics.code}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Type: {{d.details.basics.type}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Reward: {{d.details.basics.description}}</li>
+		                        </ul> 
+		                        <div class="md-margin-bottom-20"></div>
+		                    </div>
+		                </div>
+		            </div>
+	            </div>
+	            <div ng-if="d.type === 'REDEEM'">
+	            	<time class="cbp_tmtime" datetime=""><span>{{d.time | date: 'longDate'}}</span> <span>Redeemed</span></time>
+		            <i class="cbp_tmicon rounded-x hidden-xs"></i>
+		            <div class="cbp_tmlabel">
+		                <h2>Voucher Redeemed by User!</h2>
+		                <div class="row">
+		                    <div class="col-md-8">
+		                        <ul class="list-unstyled">
+		                            <li><i class="fa fa-check color-green"></i> Time: {{d.time | date:'medium'}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Voucher Code: {{d.details.basics.code}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Outlet Name: {{d.details.used_details.used_at.basics.name}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Location: {{d.details.used_details.used_at.contact.location.locality_1[0]}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Status: {{d.details.basics.status}}</li>
+		                            <li><i class="fa fa-check color-green"></i> Reward: {{d.details.basics.description}}</li>
+		                        </ul> 
+		                        <div class="md-margin-bottom-20"></div>
+		                    </div>
+		                </div>
+		            </div>
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+</div>

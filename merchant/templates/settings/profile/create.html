@@ -43,14 +43,14 @@
 				Repeat Password
 			</div>
 			<div class="row-fluid span9">
-			<div class="row-fluid span12" style="margin:0px">
 				<div class="row-fluid span5">
-				<input id="pass2" name="pass2" type="password" ng-model="ref_user.pass2" ng-change="checkRefPassword()"></input>
-				</div>
-				<div class="row-fluid span7"><label class="label label-warning" ng-hide="ref_passwords_same">Passwords dont match</label>
+					<input id="pass2" name="pass2" type="password" ng-model="ref_user.pass2"></input>
 				</div>
 			</div>
-			</div>
+		</div>
+		<div>
+			<small class="text-error" ng-if="ref_user.pass1 && ref_user.pass2 && (ref_user.pass1 !== ref_user.pass2)">*Passwords dont match</small>
+			<small class="text-error" ng-if="ref_user.pass1 && ref_user.pass1.length < 5">*Must be at-least 5 characters</small>
 		</div>
 		<div>
 			<div class="row-fluid span3">
@@ -64,10 +64,7 @@
 			<div class="row-fluid span3">
 			</div>
 			<div class="row-fluid span9" ng-show="!ref_user._id">
-				<button class="btn btn-inverse" ng-disabled="!passwords_same" ng-click="createUser()">Create User</button>
-			</div>
-			<div class="row-fluid span9" ng-show="ref_user._id">
-				<button class="btn btn-success" ng-disabled="!passwords_same" ng-click="updateUser(ref_user)">Update User</button>
+				<button class="btn btn-inverse" ng-disabled="!(ref_user.pass1 || ref_user.pass2) || (ref_user.pass1 !== ref_user.pass2)" ng-click="createUser()">Create User</button>
 			</div>						
 		</div>
 	</div>

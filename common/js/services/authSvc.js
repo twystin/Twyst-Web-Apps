@@ -4,6 +4,14 @@ angular.module('auth', ['ngCookies'])
 	var authSvc = {},
 		base_url = 'http://twyst.in';
 
+	authSvc.getPhone = function () {
+		return $cookieStore.get('phone');
+	};
+
+	authSvc.setPhone = function (phone) {
+		$cookieStore.put('phone', phone);
+	};
+
 	authSvc.setAuthStatus = function (user) {
         $cookieStore.put('username', user.username);
         $cookieStore.put('role', user.role);
@@ -51,7 +59,7 @@ angular.module('auth', ['ngCookies'])
       		username: username,
       		password: password
     	}).success(function(success) {
-    		authSvc.setAuthStatus(success.user);
+    		authSvc.setAuthStatus(success.info);
 	      	deferred.resolve(success);
 	    }).error(function(error) {
 	      	deferred.reject(error);

@@ -138,14 +138,12 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                     if((voucher.basics.status === 'active'
                         || voucher.basics.status === 'user redeemed')) {
                         if(voucher.basics.type === 'WINBACK') {
-                            if((new Date(voucher.validity.end_date) > new Date())
-                                && (new Date(new Date(voucher.basics.created_at).getTime() + 10800000) < new Date())) {
+                            if(new Date(voucher.validity.end_date) > new Date()) {
                                 $scope.filtered_vouchers.push(voucher);
                             }
                         }
                         else {
-                            if((new Date(voucher.issue_details.program.validity.burn_end) > new Date())
-                                && (new Date(new Date(voucher.basics.created_at).getTime() + 10800000) < new Date())) {
+                            if(new Date(voucher.issue_details.program.validity.burn_end) > new Date()) {
                                 $scope.filtered_vouchers.push(voucher);
                             }
                         }
@@ -176,11 +174,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                 })
             } 
             else if(value === 'All') {
-                $scope.vouchers.forEach(function (voucher) {
-                    if((new Date(new Date(voucher.basics.created_at).getTime() + 10800000) < new Date())) {
-                        $scope.filtered_vouchers.push(voucher);
-                    }
-                })
+                $scope.filtered_vouchers = $scope.vouchers;
+                 
             } 
         }
     }
@@ -412,13 +407,15 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     }
 
     function isMobileNumber(phone) {
-        if(isNaN(phone)) {
-            return false;
+        if(phone && (phone.length === 10) && isNumber(phone)) {
+            return true;
         }
-        if(phone.length !== 10) {
-            return false;
-        }
-        return true;
+        return false;
+    }
+
+    function isNumber(str) {
+        var numeric = /^-?[0-9]+$/;
+        return numeric.test(str);
     }
 
     function goForCheckin() {
@@ -532,29 +529,21 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     };
 
     function goForVoucher() {
-        if (($scope.phone !== undefined)) {
-            $scope.loading = true;
-            
-            $http.get('/api/v1/vouchers_by_phone/' + $scope.phone + '/' + $scope.outlet._id).success(function(data, status, header, config) {
-                
+        $scope.loading = true;            
+        $http
+            .get('/api/v1/vouchers_by_phone/' + $scope.phone + '/' + $scope.outlet._id)
+            .success(function(data) {            
                 $scope.loading = false;
-
-                if(data.info) {
-                    $scope.vouchers = data.info.VOUCHERS || [];
-                    $scope.filtered_vouchers = $scope.vouchers || [];
-                    $scope.CHECKIN_COUNT = data.info.CHECKIN_COUNT || 0;
-                    $scope.filterChanged('All');
-                    templateController(false, false, false, true, false);
-                    $scope.voucher_filter = 'All';
-                }
-                else {
-                    errorController(data.status, data.message);
-                }
+                $scope.vouchers = data.info.VOUCHERS || [];
+                $scope.filtered_vouchers = $scope.vouchers || [];
+                $scope.CHECKIN_COUNT = data.info.CHECKIN_COUNT || 0;
+                $scope.filterChanged('All');
+                templateController(false, false, false, true, false);
+                $scope.voucher_filter = 'All';
             }).error(function (data) {    
                 $scope.loading = false;            
                 errorController(data.status, data.message);
             });
-        }
     }
 
     $scope.getDetails = function ( item ) {
@@ -605,8 +594,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         $scope.auth = authService.getAuthStatus();
         var user_id = $scope.auth._id;
         
-        $http.get('/api/v1/outlets/' + user_id).success(function (data) {
-            $scope.outlets = JSON.parse(data.info);
+        $http.get('/api/v1/outlets/').success(function (data) {
+            $scope.outlets = data.info;
             if($scope.outlets.length > 0) {
                 $scope.outlet = $scope.outlets[0];
                 $scope.selected_outlet = $scope.outlets[0]._id;
@@ -617,14 +606,12 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     };
 
     $scope.getPrograms = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-
-        $http.get('/api/v1/programs/' + user_id).success(function (data) {
-            $scope.programs = JSON.parse(data.info) || [];
+        $http.get('/api/v1/programs/')
+        .success(function (data) {
+            $scope.programs = data.info || [];
             getActiveProgram($scope.programs, $scope.outlet)
-        }).error(function (data) {
-            
+        }).error(function (err) {
+            console.log(err);
         });
     };
 

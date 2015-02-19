@@ -1,0 +1,96 @@
+<div class="row-fluid" style="min-height:580px;" ng-init="read()">
+    <div class="offset1 span10">
+        <div class="lead" style="padding-top:30px;">
+            <h2>Your Birthday/Anniversary Programs</h2>
+        </div>
+        <div class="row-fluid">
+            <div ng-repeat="s in specials" class="well span5">
+                <div>
+                    <div class="row-fluid">
+                        <div style="margin:0px;">
+                            <div class="span11">
+                                <h2>{{s.name}}</h2>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <th>
+                                    Field
+                                </th>
+                                <th>
+                                    Value
+                                </th>
+                            </thead> 
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Status
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-lightbulb-o icon-green fa-2x" ng-if="s.status === 'active'" tooltip="Active prgram"></i>
+                                        <i class="fa fa-lightbulb-o icon-red fa-2x" ng-if="s.status === 'archived'" tooltip="Expired prgram"></i>
+                                        <i class="fa fa-lightbulb-o icon-yellow fa-2x" ng-if="s.status === 'draft'" tooltip="Saved prgram"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Description
+                                    </td>
+                                    <td>
+                                        {{s.desc}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Types
+                                    </td>
+                                    <td>
+                                        {{s.types.birth ? 'BIRTHDAY' : ''}} {{(s.types.birth && s.types.anniv) ? ' | ' : ''}}
+                                        {{s.types.anniv ? 'ANNIVERSARY' : ''}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Validity
+                                    </td>
+                                    <td>
+                                        {{s.validity.earn_start | date: 'longDate'}} to {{s.validity.earn_end | date: 'longDate'}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Send voucher before
+                                    </td>
+                                    <td>
+                                        {{s.validity.send_at.days_before}} days
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Send voucher at
+                                    </td>
+                                    <td>
+                                        {{s.validity.send_at.at_hours}} hr(s)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Running on outlets
+                                    </td>
+                                    <td>
+                                        <div ng-repeat="o in s.outlets" style="color: #f6921e;">
+                                        {{o.basics.name}}, {{o.contact.location.locality_1.toString()}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>                    
+                    </div>
+                    <div class="row-fluid">
+                        <a href="#/special_program/update/{{s._id}}" class="btn btn-primary btn-medium">Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 'use strict';
 
-twystApp.controller('AuthCtrl', function ($scope, $route, $http, $location, $routeParams, authService) {
+twystApp.controller('AuthCtrl', function ($scope, $route, $http, $location, $routeParams, authService, toastSvc) {
     $scope.state = {};
     $scope.user = {};
     $scope.passwords_same = true;
@@ -10,7 +10,12 @@ twystApp.controller('AuthCtrl', function ($scope, $route, $http, $location, $rou
     };
 
     if (authService.isLoggedIn() && authService.getAuthStatus().role <= 4) {
-        $location.path('/dashboard/home');
+        if($location.$$path) {
+            $location.path($location.$$path);
+        }
+        else {
+            $location.path('/dashboard/home');
+        }
     };
 
     // Private functions
@@ -33,142 +38,47 @@ twystApp.controller('AuthCtrl', function ($scope, $route, $http, $location, $rou
     });
 
     $scope.login = function () {
-        if ($scope.user.name === undefined) {
-            $scope.missing_message = "Username missing";
-        } else if ($scope.user.pass === undefined) {
-            $scope.missing_message = "Password missing";
+        if($scope.user && $scope.user.name && $scope.user.pass) {
+            var username = $scope.user.name.toLowerCase();
+            authService.login($http, username, $scope.user.pass)
+            .then(function (data) {
+                if(data.info.role > 4) {
+                    $location.path('/panel');
+                }
+                else {
+                    $location.path('/dashboard/home');
+                }
+                toastSvc.showToast('success', data.message);
+            }, function (err) {
+                toastSvc.showToast('error', 'Incorrect Username or Password');
+            });
         } else {
-            authService.login($scope, $http, $location);
+            toastSvc.showToast('error', 'Username and Password is required');
         }
     };
 
     $scope.logout = function () {
-        $scope.user = null;
-        authService.logout($scope, $http, $location);
+        authService.logout($http)
+        .then(function (data) {
+            $location.path('/');
+            toastSvc.showToast('success', data.message);
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
+        });
     };
 
     $scope.register = function () {
-        authService.register($scope, $http, $location);
-    };
-
-    $scope.createUser = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-        $scope.new_user = {
-            username: $scope.user.name,
-            password: $scope.user.pass1,
+        var user = {
+            username: $scope.user.name.toLowerCase(), 
+            password: $scope.user.pass1, 
             email: $scope.user.email,
-            role: $scope.user.role,
-            account: user_id,
-            validated: {
-                role_validated: true,
-                email_validated: {
-                    status: true,
-                    token: String
-                }
-            }
+            role: 3
         };
-        authService.createUser($scope, $http, $location);
-    };
-
-    $scope.checkPassword = function () {
-        $scope.passwords_same = ($scope.user.pass1 === $scope.user.pass2);
-    };
-
-    $scope.addInfo = function (user) {
-        $scope.auth = authService.getAuthStatus();
-        var username = $scope.auth.user;
-        $http({
-            url: '/api/v1/auth/users/' + username,
-            method: "PUT",
-            data: user
-        }).success(function (data, status, headers, config) {
-            $scope.message = data.message;
-            $location.path('/manage/user');
-        }).error(function (data, status, headers, config) {
-            $scope.message = data.message;
-            $location.path('/manage/user');
-        });
-    };
-
-    $scope.query = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id,
-            request = $http.get('/api/v1/getusers/' + user_id);
-        return request.then(function (response) {
-            $scope.users = JSON.parse(response.data.info);
-        }, function (response) {
-            //TODO: Handle error case
-        });
-    };
-    $scope.edit = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id,
-            request = $http.get('/api/v1/auth/users/' + user_id);
-        return request.then(function (response) {
-            var user = JSON.parse(response.data.info)[0];
-            $scope.user.name = user.username;
-            $scope.user.pass1 = user.password;
-            $scope.user.pass2 = user.password;
-        }, function (response) {
-            //TODO: Handle error case
-        });
-    };
-
-    $scope.update = function (user) {
-        $http({
-            url: '/api/v1/auth/users/' + user.name,
-            method: "PUT",
-            data: user
-        }).success(function (data, status, headers, config) {
-            $scope.message = data.message;
-            $location.path('/users');
-        }).error(function (data, status, headers, config) {
-            $scope.message = data.message;
-            $location.path('/users');
-        });
-    };
-
-    $scope.changePassword = function (user) {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-        $http({
-            url: '/api/v1/pass/change/' + user_id,
-            method: "PUT",
-            data: {password: user.pass1}
-        }).success(function (data, status, headers, config) {
-            $scope.message = data.message;
+        authService.register($http, user).then(function (data) {
+            toastSvc.showToast('success', data.message);
             $location.path('/');
-        }).error(function (data, status, headers, config) {
-            $scope.message = data.message;
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
         });
-    };
-
-    $scope.delete = function (user) {
-        $http({
-            url: '/api/v1/auth/users/' + user.username,
-            method: 'DELETE',
-            data: user
-        }).success(function(data, status, headers, config) {
-            $scope.message = data.message;
-            $route.reload();
-        }).error(function(data,status,headers,config) {
-            $scope.message = data.message;
-            $location.path('/users');
-        });
-    };
-
-    $scope.getResetPasswordEmail = function (user) {
-        authService.sendResetEmailService($http, $location, $scope, user.username);
-    };
-
-    $scope.resetPassword = function () {
-        var token = $routeParams.token;
-        authService.ResetCompleteService($http, $location, $scope, token);
-    };
-
-    $scope.setEmailValidated = function () {
-        var token = $routeParams.token;
-        authService.emailValidationCompleteService($http, $location, $scope, token);
     };
 });

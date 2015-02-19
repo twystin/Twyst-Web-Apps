@@ -1,12 +1,17 @@
-function PublicController($scope, $location, authService) {
+twystConsole.controller('PublicController', function($scope, $location, authService, dataService) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
 
-}
-
-function ReccoController($scope, $location, $http, $route, authService) {
+    dataService.getSMSJobStatus().then(function (data) {
+    	console.log(data)
+    	$scope.sms = data.info;
+    }, function (err) {
+    	console.log(err);
+    });
+})
+.controller('ReccoController', function($scope, $location, $http, $route, authService) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -46,9 +51,8 @@ function ReccoController($scope, $location, $http, $route, authService) {
         });
     }
 
-}
-
-function NotifController($scope, $http, $location, authService) {
+})
+.controller('NotifController', function($scope, $http, $location, authService, toastSvc) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -98,6 +102,7 @@ function NotifController($scope, $http, $location, authService) {
 			if($scope.message.gcms) {
 				obj.gcms = $scope.message.gcms.split(/,|;|\n/);
 			}
+			obj.from = $scope.message.from;
 			obj.head = $scope.message.head;
 			obj.body = $scope.message.body;
 			obj.server_key = $scope.message.server_key;
@@ -111,14 +116,23 @@ function NotifController($scope, $http, $location, authService) {
 
 	function sendRequest (obj) {
 		$http.post('/api/v2/notifs', {obj:obj}).success(function (data) {
-			$scope.success.message = data.message;
+			toastSvc.showToast('success', data.message);
+			$location.path('/notifs');
 		}).error(function (data) {
-			$scope.error.message = data.message;
+			toastSvc.showToast('error', err.message);
 		});
 	}
-}
 
-function DatePickerCtrl($scope, $timeout) {
+	$scope.getNotifs = function () {
+		$http.get('/api/v2/notifs').success(function (data) {
+			$scope.notifs = data.info;
+			console.log(data.info)
+		}).error(function (err) {
+			toastSvc.showToast('error', err.message);
+		});
+	}
+})
+.controller('DatePickerCtrl', function($scope, $timeout) {
 	
 	$scope.today = function() {
         $scope.dt = new Date();
@@ -152,9 +166,8 @@ function DatePickerCtrl($scope, $timeout) {
 
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
     $scope.format = $scope.formats[0];
-}
-
-function AuthController($scope, $http, $location, authService) {
+})
+.controller('AuthController', function ($scope, $http, $location, authService) {
 	
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -176,16 +189,14 @@ function AuthController($scope, $http, $location, authService) {
 	$scope.logout = function () {
 		authService.logout($scope, $http, $location);
 	}
-}
-
-function DashboardController($scope, $http, $location, authService) {
+})
+.controller('DashboardController', function($scope, $http, $location, authService) {
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
 
-}
-
-function AppController($scope, $http, dataService) {
+})
+.controller('AppController', function($scope, $http, dataService) {
 	$scope.date = {};
 	
 	$scope.getDownloads = function () {
@@ -206,9 +217,8 @@ function AppController($scope, $http, dataService) {
 
 		});
 	}
-}
-
-function UsersController($scope, $http, $location, $routeParams, authService) {
+})
+.controller('UsersController', function($scope, $http, $location, $routeParams, authService) {
 	
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -361,4 +371,4 @@ function UsersController($scope, $http, $location, $routeParams, authService) {
 		});
 
 	}
-}
+});

@@ -1,8 +1,8 @@
 'use strict';
 
 twystApp.controller('OutletCtrl', 
-    ['$scope', '$rootScope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', 'typeaheadService', '$log', 'OPERATE_HOURS',
-    function ($scope, $rootScope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, typeaheadService, $log, OPERATE_HOURS) {
+    ['$scope', '$rootScope', '$timeout', '$modal', '$window', '$http', '$location', '$upload', '$routeParams','$route', 'authService', 'outletService', 'imageService', 'typeaheadService', 'toastSvc', '$log', 'OPERATE_HOURS',
+    function ($scope, $rootScope, $timeout, $modal, $window, $http, $location, $upload, $routeParams,$route, authService, outletService, imageService, typeaheadService, toastSvc, $log, OPERATE_HOURS) {
 
     if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -122,16 +122,7 @@ twystApp.controller('OutletCtrl',
         return sms_off;
     }
 
-    // Service initialization
-    outletService.setOutletSvcMessages(200, null);
     $scope.auth = authService.getAuthStatus();
-    $scope.messages = outletService.getOutletSvcMessages();
-    $scope.$on('handleChangedOutletSvcMessages', function () {
-        $scope.messages = outletService.getOutletSvcMessages();
-        if ($scope.messages.data.status === "success") {
-            $log.warn($scope.outlet);
-        }
-    });
 
     $scope.newTimings = function($event, index){
         if($scope.outlet.business_hours[index].timings.length < 5) {
@@ -257,7 +248,7 @@ twystApp.controller('OutletCtrl',
                 $scope.accuracy = position.coords.accuracy;
             });
             }, function(error) {
-                $scope.message="Error getting location automatically. Please enter co-ordinates manually.";
+                toastSvc.showToast('error', "Error getting location automatically. Please enter co-ordinates manually.");
         });
     };
 
@@ -267,9 +258,12 @@ twystApp.controller('OutletCtrl',
     };
 
     $scope.query = function () {
-        $scope.auth = authService.getAuthStatus();
-        var user_id = $scope.auth._id;
-        outletService.query($scope, $http, $location, user_id);
+        outletService.query().then(function (data) {
+            $scope.outlets = data.info;
+            $scope.all_outlets = data.info;
+        }, function (err) {
+            console.log(err);
+        })
     };
 
     $scope.read = function (outlet_title) {
@@ -318,16 +312,15 @@ twystApp.controller('OutletCtrl',
     }
 
     $scope.view = function () {
-        var outlet_id = $routeParams.outlet_id,
-            request = $http.get('/api/v1/outlets/view/' + outlet_id);
+        var outlet_id = $routeParams.outlet_id;
         $scope.update_flag = true;
-        return request.then(function (response) {
-            var outlet = JSON.parse(response.data.info)[0];
+        outletService.readOne(outlet_id).then(function (data) {
+            var outlet = JSON.parse(data.info)[0];
             $scope.outlet = outlet;
             checkPhotos();
             setSmsOff(outlet.sms_off);
-        }, function (response) {
-            $log.warn(response);
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
         });
     };
 
@@ -385,7 +378,12 @@ twystApp.controller('OutletCtrl',
             shortUrl.push($scope.outlet.shortUrl);
             $scope.outlet.shortUrl = shortUrl;
         }
-        outletService.create($scope, $http, $location);
+        outletService.create($scope.outlet).then(function (data) {
+            $location.path('/outlets');
+            toastSvc.showToast('success', data.message);
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
+        });
     };
 
     $scope.update = function (outlet_id) {
@@ -395,7 +393,12 @@ twystApp.controller('OutletCtrl',
             shortUrl.push($scope.outlet.shortUrl);
             $scope.outlet.shortUrl = shortUrl;
         }
-        outletService.update($scope, $http, $location, outlet_id);
+        outletService.update($scope.outlet).then(function (data) {
+            $location.path('/outlets');
+            toastSvc.showToast('success', data.message);
+        }, function (err) {
+            toastSvc.showToast('error', err.message);
+        });
     };
 
     $scope.uploadImageV3 = function ($files, type, index) {
@@ -461,17 +464,29 @@ twystApp.controller('OutletCtrl',
         return imageObject;
     }
 
-    $scope.deleteOutlet = function (outlet) {
-        var modalInstance = $modal.open({
-            templateUrl : './templates/outlet/delete_outlet.html',
-            controller  : 'OutletDeleteCtrl',
-            backdrop    : true,
-            resolve: {
-              outlet: function(){
-                return outlet;
-              }
-            }
+    $scope.initDelete = function (outlet_id) {
+        $scope.to_be_deleted_outlet_id = outlet_id;
+        $scope.modalInstance = $modal.open({
+            templateUrl: './templates/outlet/delete_outlet.html',
+            backdrop: true,
+            scope: $scope
         });
+    };
+
+    $scope.cancelModal = function () {
+        $scope.modalInstance.dismiss();
+    }
+
+    $scope.deleteOutlet = function () {
+        outletService.delete($scope.to_be_deleted_outlet_id)
+        .then(function (data) {
+            toastSvc.showToast('success', data.message);
+            $scope.cancelModal();
+            $route.reload();
+        }, function (err) {
+            $scope.cancelModal();
+            toastSvc.showToast('error', err.message);
+        });;
     };
 
     $scope.onFileSelect = function ($files) {
@@ -540,96 +555,5 @@ twystApp.controller('OutletCtrl',
 
     $scope.reload = function(){
         $route.reload();
-    }
-    
-    $scope.$watch('outlet.contact.phones.mobile',function(){
-        if($scope.outlet && $scope.outlet.contact && $scope.outlet.contact.phones && $scope.outlet.contact.phones.mobile)
-        {
-            var str = $scope.outlet.contact.phones.mobile;
-            if(str.length==0)
-            {
-                $scope.mobileError=null;
-            }
-            else if(str.length>=1)
-            {
-                if(str[0]!='7' && str[0]!='8' && str[0]!='9')
-                {
-                    $scope.mobileError="Invalid mobile number. Please enter your 10-digit number";
-                }
-                else if(!/^\d+$/.test(str) )
-                {
-                    $scope.mobileError="Invalid mobile number. Please enter your 10-digit number";
-                }
-                else
-                {
-                    if(str.length<10)
-                    {
-                        $scope.mobileError="Mobile number too short";
-                    }
-                    else if(str.length>10)
-                    {
-                        $scope.mobileError="Mobile number too long";
-                    }
-                    else
-                    {
-                        $scope.mobileError=null;
-                    }
-                }
-            }
-        }
-        
-    });
-    $scope.$watch('outlet.contact.location.pin',function(){
-        if($scope.outlet && $scope.outlet.contact && $scope.outlet.contact.location && $scope.outlet.contact.location.pin)
-        {
-            var str = $scope.outlet.contact.location.pin;
-            if(str.length==0)
-            {
-                $scope.pincodeError=null;
-            }
-            else if(str.length>=1)
-            {
-                if(str[0]=='0' || str[0]=='9')
-                {
-                    $scope.pincodeError="Invalid pin code. Please enter your 6-digit pin code";
-                }
-                else if(!/^\d+$/.test(str) )
-                {
-                    $scope.pincodeError="Invalid pin code. Please enter your 6-digit pin code";
-                }
-                else
-                {
-                    if(str.length<6)
-                    {
-                        $scope.pincodeError="Pin code too short";
-                    }
-                    else if(str.length>6)
-                    {
-                        $scope.pincodeError="Pin code too long";
-                    }
-                    else
-                    {
-                        $scope.pincodeError=null;
-                    }
-                }
-            }
-        }
-        
-    });
-    
-}]);
-
-twystApp.controller('OutletDeleteCtrl', 
-     ['$scope', '$route', '$http', '$location', '$modalInstance', 'outletService','outlet',
-    function ($scope, $route, $http, $location, $modalInstance, outletService, outlet) {
-
-        var outlet_title = outlet.basics.name;
-
-        $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-        };
-
-        $scope.delete = function () {
-            outletService.delete($scope, $http, $location, outlet_title, $route, $modalInstance);
-        };      
+    }    
 }]);
