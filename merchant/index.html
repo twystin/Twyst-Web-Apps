@@ -31,17 +31,6 @@
         <!--   Facebook sharing code ends-->
 
         <div ng-include="'./templates/_partials/header.html'"></div>    
-
-        <!-- <div class="row-fluid offset7" loading-widget>
-            <div ng-if="data" class="voffset">
-                <div class="span2">
-                  <img ng-src="../common/images/ajax_loader.gif"> Loading...
-                </div>
-            </div>
-        </div> -->
-        <div class="span6 offset5">            
-            <alert  ng-show="errorMessage" class="text-center text-muted alert alert-err" close="errorMessage = null">{{errorMessage}}</alert>
-        </div>
         <div ng-view></div>
         <div ng-include="'./templates/_partials/footer.html'"></div>
 
