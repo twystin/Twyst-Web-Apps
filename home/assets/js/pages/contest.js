@@ -13,6 +13,39 @@ var twystContact = angular.module('twystContest', ['toastr'])
 .controller('ContestCtrl', function($scope, $http, $timeout, $window, toastSvc) {
 
     $scope.user = {};
+    $scope.poolA = [
+        'Australia',
+        'Bangladesh',
+        'New Zealand',
+        'England',
+        'Scotland',
+        'Sri Lanka',
+        'Afghanistan',
+    ];
+    $scope.poolB = [
+        'India',
+        'Pakistan',
+        'West Indies',
+        'Ireland',
+        'United Arab Emirates',
+        'South Africa',
+        'Zimbabwe',
+    ];
+    $scope.selected_poolA = [];
+    $scope.selected_poolB = [];
+
+    $scope.togglePool = function (pool, team) {
+        if($scope[pool].length < 4) {
+            if ($scope[pool].indexOf(team) === -1) {
+                $scope[pool].push(team);
+            } else {
+                $scope[pool].splice($scope[pool].indexOf(team), 1);
+            }
+        }
+        else {
+            toastSvc.showToast('error', 'Exactly 4 teams from each pool can be selected');
+        }
+    }
 
     $scope.enterContest = function () {
         if(isAllFilled()) {
@@ -29,7 +62,7 @@ var twystContact = angular.module('twystContest', ['toastr'])
             }
         }
         else {
-            toastSvc.showToast('error', 'Please fill all the fields');
+            toastSvc.showToast('error', 'Please fill all the fields and select 4 teams from each pool');
         }
     }
 
@@ -62,7 +95,8 @@ var twystContact = angular.module('twystContest', ['toastr'])
             && $scope.user.phone
             && $scope.user.email
             && $scope.user.dob
-            && $scope.user.message) {
+            && $scope.selected_poolA.length === 4 
+            && $scope.selected_poolB.length === 4) {
             return true;
         }
         return false;
@@ -81,10 +115,11 @@ var twystContact = angular.module('twystContest', ['toastr'])
     function validateEmail(email) { 
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
-    } 
+    }
 
     function postData() { 
-        $scope.user.name = $scope.user.name + ' (dob: ' + $scope.user.dob + ')'
+        $scope.user.name = $scope.user.name + ' (dob: ' + $scope.user.dob + ')';
+        $scope.user.message = $scope.selected_poolA.toString() + ',' + $scope.selected_poolB.toString();
         $http.post('/api/v1/beta/users', {
             name  : $scope.user.name,
             message         : $scope.user.message,
