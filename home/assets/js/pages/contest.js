@@ -127,11 +127,11 @@ var twystContact = angular.module('twystContest', ['toastr'])
             email               : $scope.user.email
         }).success(function (data, status, header, config) {
             redirect();
-            toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after the results are declared on 10th Feb 2015.');
+            toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after the results are declared after 10th March 2015.');
         })
         .error(function (data, status, header, config) {
             redirect();
-            toastSvc.showToast('error', 'You have already participated in the contest. Results will be declared on 10th Feb 2015.');
+            toastSvc.showToast('error', 'You have already participated in the contest. Results will be declared after 10th March 2015.');
         });
     };
 
