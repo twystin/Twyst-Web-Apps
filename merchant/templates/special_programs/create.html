@@ -57,14 +57,14 @@
         </div>
         <div class="row-fluid">
             <div class="span2">
-                <label>Customer segment and Rewards</label>
+                <label>Customer check-ins and Rewards</label>
             </div>
             <div class="span10">
                 <div ng-repeat="r in special.ranges" class="row-fluid">
                     <div class="row-fluid">
                         <div class="span3">
                             <div class="span6">
-                                Range start:
+                                Check-in from:
                             </div>
                             <div class="span6">
                                 <input type="text" class="span6" ng-model="r.count_from">
@@ -72,14 +72,14 @@
                         </div>
                         <div class="span3">
                             <div class="span6">
-                                Range end:
+                                Check-in to:
                             </div>
                             <div class="span6">
                                 <input type="text" class="span6" ng-model="r.count_till">
                             </div>
                         </div>
                         <div class="span3" ng-if="special.ranges.length > 1">
-                            <button class="btn btn-danger btn-mini" ng-click="removeReward($index)">Remove this segment</button>
+                            <button class="btn btn-danger btn-mini" ng-click="removeReward($index)">Remove this check-in range</button>
                         </div>
                     </div>
                     <div class="row-fluid">
@@ -205,7 +205,7 @@
                     &nbsp;
                 </div>
                 <div class="row-fluid" ng-if="special.ranges.length < 6">
-                    <button class="btn btn-success btn-mini" ng-click="addReward()">Add another Segment</button>
+                    <button class="btn btn-success btn-mini" ng-click="addReward()">Add another check-in range</button>
                 </div>
             </div>
         </div>
