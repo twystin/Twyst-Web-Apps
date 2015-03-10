@@ -59,8 +59,44 @@
             </tbody>
         </table>
         <div ng-show="programs.length === 0" class="text-error">
-            No programs found.
+            No check-in programs found.
         </div>
+        
+        <table class="table table-bordered table-striped" ng-show="specials.length > 0">
+            <h2>Birthday programs</h2>
+            <thead>
+                <tr> 
+                    <th>
+                        Name 
+                    </th>
+                    <th>
+                        Validity start 
+                    </th>
+                    <th>
+                        Validity end 
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in specials">
+                    <td>
+                        {{c.name}}
+                    </td>
+                    <td>
+                        {{c.validity.earn_start | date: 'medium'}}
+                    </td>
+                    <td ng-class="{'validity-end': isValidityEnding(c)}">
+                        {{c.validity.earn_end | date: 'medium'}}
+                    </td>
+                    <td>
+                        {{c.status}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="row-fluid" ng-show="programs.length > 0">
         <div class="row-fluid">

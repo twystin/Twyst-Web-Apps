@@ -18,6 +18,17 @@ twystConsole.factory('adminProgramService', function ($http, $q) {
         return deferred.promise;
     };
 
+    adminProgramSvc.getSpecialPrograms = function() {
+        var deferred = $q.defer();
+        $http.get('/api/v2/specialprograms').success(function(data) {
+            deferred.resolve(data);
+        }).error(function(error) {
+            deferred.reject(error);
+        });
+
+        return deferred.promise;
+    }
+
     adminProgramSvc.changeStatus = function (program) {
         var deferred = $q.defer();
         $http({

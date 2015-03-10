@@ -3,6 +3,12 @@ twystConsole.controller('AdminProgramCtrl', function ($scope, $http, $location, 
         $location.path('/');
     }
     
+    
+    $scope.getSpecialPrograms = function() {
+        adminProgramService.getSpecialPrograms().then(function(data) {
+            $scope.specials = data || [];
+        })
+    }
     function init () {
         $scope.currentPage = 1;
         $scope.totalCountPerPage = 10;
@@ -11,6 +17,7 @@ twystConsole.controller('AdminProgramCtrl', function ($scope, $http, $location, 
         $scope.programs = [];
         $scope.sort_order = -1;
         $scope.sort_param = "validity.earn_end";
+        $scope.getSpecialPrograms();
     }
 
     init();
