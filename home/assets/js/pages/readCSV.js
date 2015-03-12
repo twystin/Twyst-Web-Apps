@@ -71,14 +71,14 @@ uploadUserDetails.controller('uploadCtrl', function ($scope, $http, $timeout, $w
             obj[headers[j].trim()] = currentUser[j].trim();  
           }          
 
-          if(j == 1 && currentUser[j] != undefined) {
+          if(j == 3 && currentUser[j] != undefined) {
             if(!validateEmail(currentUser[j].trim())) {
               alert('wrong email in sheet ' + currentUser[j] + " " + j);
               return false;
             }
           }
 
-          else if(j == 2 && currentUser[j] != undefined) {
+          else if(j == 7 && currentUser[j] != undefined) {
             if(!isMobileNumber(currentUser[j].trim())) {
               alert('wrong mobileNumber in sheet ' + currentUser[j] + " " + j);
               return false;
