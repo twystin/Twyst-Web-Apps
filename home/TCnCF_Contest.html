@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="twystContest"> 
 <head>
-    <title>Twyst | CUPnCAKE Factory's Predict The 8 Qualifying Teams For The Quarter Finals Contest!</title>
+    <title>Twyst | CUPnCAKE Factory's Predict The 4 Qualifying Teams For The Semi Finals Contest!</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -145,7 +145,7 @@
                     </h4>
                 </div>
                 <div>
-                    The CUPnCAKE Factory is running a special cricket world cup contest for its valued customers. Simply predict the 8 qualifying teams for the quarter finals  and you could win some delicious treats! 1 lucky winner will be chosen at random from all the correct entries we receive  till 6 march.
+                    The CUPnCAKE Factory is running a special cricket world cup contest for its valued customers. Simply predict the 4 qualifying teams for the semi finals  and you could win some delicious treats and awesome cupCakes! 1 lucky winner will be chosen at random from all the correct entries we receive  till 21 march.
                 </div>
                 <br>
                 <form>
@@ -167,12 +167,12 @@
                     </div>                
                     <div class="form-group">
                         <label>My predicted teams to qualify for the quarter finals are:</label><br>
-                        <h6>Pool A (select exactly 4 teams)</h6>
+                        <h6>Pool A (select exactly 2 teams)</h6>
                         <div class="col-md-12" ng-repeat="a in poolA">
                             <input type="checkbox" ng-checked="selected_poolA.indexOf(a) != -1" ng-click="togglePool('selected_poolA', a)"> {{a}}
                         </div>
                         <h6>&nbsp;</h6>
-                        <h6>Pool B (select exactly 4 teams)</h6>
+                        <h6>Pool B (select exactly 2 teams)</h6>
                         <div class="col-md-12" ng-repeat="b in poolB">
                             <input type='checkbox' ng-checked="selected_poolB.indexOf(b) != -1" ng-click="togglePool('selected_poolB', b)"> {{b}}
                         </div>

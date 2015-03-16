@@ -17,25 +17,20 @@ var twystContact = angular.module('twystContest', ['toastr'])
         'Australia',
         'Bangladesh',
         'New Zealand',
-        'England',
-        'Scotland',
-        'Sri Lanka',
-        'Afghanistan',
+        'Sri Lanka'
+        
     ];
     $scope.poolB = [
         'India',
         'Pakistan',
         'West Indies',
-        'Ireland',
-        'United Arab Emirates',
-        'South Africa',
-        'Zimbabwe',
+        'South Africa'
     ];
     $scope.selected_poolA = [];
     $scope.selected_poolB = [];
 
     $scope.togglePool = function (pool, team) {
-        if($scope[pool].length < 4) {
+        if($scope[pool].length < 2) {
             if ($scope[pool].indexOf(team) === -1) {
                 $scope[pool].push(team);
             } else {
@@ -43,7 +38,7 @@ var twystContact = angular.module('twystContest', ['toastr'])
             }
         }
         else {
-            toastSvc.showToast('error', 'Exactly 4 teams from each pool can be selected');
+            toastSvc.showToast('error', 'Exactly 2 teams from each pool can be selected');
         }
     }
 
@@ -62,7 +57,7 @@ var twystContact = angular.module('twystContest', ['toastr'])
             }
         }
         else {
-            toastSvc.showToast('error', 'Please fill all the fields and select 4 teams from each pool');
+            toastSvc.showToast('error', 'Please fill all the fields and select 2 teams from each pool');
         }
     }
 
@@ -95,8 +90,8 @@ var twystContact = angular.module('twystContest', ['toastr'])
             && $scope.user.phone
             && $scope.user.email
             && $scope.user.dob
-            && $scope.selected_poolA.length === 4 
-            && $scope.selected_poolB.length === 4) {
+            && $scope.selected_poolA.length === 2 
+            && $scope.selected_poolB.length === 2) {
             return true;
         }
         return false;
@@ -127,11 +122,11 @@ var twystContact = angular.module('twystContest', ['toastr'])
             email               : $scope.user.email
         }).success(function (data, status, header, config) {
             redirect();
-            toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after the results are declared after 10th March 2015.');
+            toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after the results are declared, after 25th March 2015.');
         })
         .error(function (data, status, header, config) {
             redirect();
-            toastSvc.showToast('error', 'You have already participated in the contest. Results will be declared after 10th March 2015.');
+            toastSvc.showToast('error', 'You have already participated in the contest. Results will be declared after 25th March 2015.');
         });
     };
 
