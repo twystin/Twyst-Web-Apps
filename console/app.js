@@ -62,6 +62,10 @@ twystConsole.config(function ($routeProvider) {
 		controller: 'DataCtrl',
 		templateUrl: '/console/templates/data/analytics.html',
 	}).
+	when('/user/card_user', {
+		controller: 'uploadCtrl',
+		templateUrl: '/console/templates/users/card_user.html',
+	}).
 	otherwise({
 		redirectTo: '/dashboard'
 	});

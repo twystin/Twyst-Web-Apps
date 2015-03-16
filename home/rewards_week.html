@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html ng-app="twystRewardsWeek"> 
+<head>
+    <title>Twyst | </title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" href="assets/img/twyst.ico">
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/headers/header1.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="/common/toastr/toastr.css" rel="stylesheet" />
+    <style type="text/css">
+        .cupcake-image {
+           max-width: 40em; 
+        }
+        @media (max-width: 768px) {
+            .cupcake-image {
+               max-width: 25em; 
+            }
+        }
+    </style>   
+</head> 
+
+<body ng-controller="RewardsWeekCtrl">
+<!--=== Top ===-->    
+    <div class="top">
+        <div class="container">         
+            <ul class="loginbar pull-right">
+            </ul>
+        </div>      
+    </div><!--/top-->
+    <!--=== End Top ===-->    
+
+    <div class="header">
+        <style type="text/css">
+            .padding-top-100 {
+                padding-top: 3.5em;
+            }
+            .header .navbar-default .navbar-nav > li > a {
+                color: #fff !important;
+            }
+            #logo-header {
+                margin-top: 0.4em;
+                height: 2.7em;
+                width: auto;
+            }
+
+            .app-button {
+                height: 2.5em;
+            }
+            .header .navbar {
+                background-color: #000 !important;
+            }
+            .margin-top-pt6em {
+                margin-top: -0.6em;
+                margin-left: -1em;
+            }
+            .margin-bottom-about {
+                margin-bottom: 5em; 
+            }
+        </style>
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html">
+                <img id="logo-header" src="assets/img/twyst_logo_2.png" alt="Logo">       
+              </a>
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
+              <li class="margin-top-pt6em hidden-xs hidden-sm" >
+                <a href="https://play.google.com/store/apps/details?id=com.twyst.app.android"><img class="app-button" src="/outlets/assets/img/images/googleplay.png"></a>
+              </li>
+              <li class="margin-top-pt6em hidden-xs hidden-sm">
+                  <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store"><img class="app-button" src="/outlets/assets/img/images/appstore.png"></a>
+              </li>
+              <li> 
+                <a href="/home">
+                  Home
+                </a>
+              </li>
+              <li> 
+                <a href="/discover">
+                  Discover
+                </a>
+              </li>
+              <li>
+                <a href="/home/how">
+                  How it works
+                </a>                       
+              </li>
+
+              <li>
+                <a href="http:/merchant/">
+                  For merchants
+                </a>
+              </li>               
+
+            </ul>
+            <div class="search-open">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-btn">
+                  <button class="btn-u" type="button">Go</button>
+                </span>
+              </div><!-- /input-group -->
+            </div>                
+          </div><!-- /navbar-collapse -->
+        </div>    
+    </div>       
+
+<!--=== Breadcrumbs ===-->
+    <div class="row" style="padding-top:5em;">
+        
+    </div>
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">Twyst Rewards Week</h1>
+        </div>
+    </div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+<!--=== Content Part ===-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="headline">
+                    <h4>To enter the contest, fill out the details below:
+                    </h4>
+                </div>
+                <div>
+                    Some Text 
+                </div>
+                <br>
+                <form>
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                            <label>Name*</label>
+                            <input class="input-xlarge form-control" type="text" ng-model="user.name"></input>
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile No* <small>(Winners will receive their voucher code via SMS)</small></label>
+                            <input type="text" class="input-xlarge form-control" required="true" ng-model="user.phone">
+                        </div>
+                        <div class="form-group" ng-form="contestForm">
+                            <label>Email ID*</label>
+                            <input name="email" class="input-xlarge form-control" type="text" ng-model="user.email" required="true"></input>
+                        </div> 
+                        <div class="form-group">
+                            <label>Date of birth*</label>
+                            <input name="dob" class="input-xlarge form-control" type="dob" ng-model="user.dob" required="true" placeholder="dd/mm/yyyy"></input>
+                        </div>
+                    </div>
+                    <div class = "col-md-12" style = "padding: 0">
+                        <div class="form-group col-md-8">
+                            <div classs = "col-md-12">
+                                <label>Please Select Only 3 of Them:</label><br>
+                                <div class = "col-md-4">
+                                    <h6><b>CAFES</b></h6>
+                                    <div class="col-md-12" ng-repeat="a in Cafes">
+                                        <input type="checkbox" ng-model = "selected_Cafe[$index]"  ng-checked="selected_Cafes.indexOf(a) != -1" ng-click="togglePool($index, 'selected_Cafes', a)" ng-disabled= "disable"> {{a}}
+                                    </div>
+                        <h6>&nbsp;</h6>
+                                </div>
+                                <div class = "col-md-4">
+                                    <h6> <b>PIZZAS</b></h6>
+                                    <div class="col-md-12" ng-repeat="b in Pizzas">
+                                        <input type='checkbox'ng-model = "selected_Pizza[$index]"  ng-checked="selected_Pizzas.indexOf(b) != -1" ng-click="togglePool($index, 'selected_Cafes', b)" ng-disabled= "disable"> {{b}}
+                                    </div>
+                                </div>
+                                <div class = "col-md-4">
+                                    <h6> <b>PUBS</b></h6>
+                                    <div class="col-md-12" ng-repeat="c in Pubs">
+                                        <input type='checkbox' ng-model ="selected_Pub[$index]"   ng-checked="selected_Pubs.indexOf(c) != -1" ng-click="togglePool($index, 'selected_Cafes', c)" ng-disabled= "disable"> {{c}}
+                                    </div>
+                                </div>
+
+
+                            </div>                            
+                        </div>
+                        <div class = "col-md-4">
+                            <h3> My Selection</h3>
+                            <hr>                            
+                            <ul>
+                                <li ng-repeat="a in selected_outlet track by $index">
+                                    {{a}}
+                                </li>
+                            </ul>
+                            <input type = 'button' value = 'Change Selections' ng-click = 'enableSelection()'>
+
+                            
+                        </div>
+                    </div>           
+                    <div class = "col-md-12">
+                        <div>
+                        &nbsp;
+                    </div>
+                    
+                    
+                    <div>
+                        <button type="button" class="btn btn-success btn-lg spacing" ng-click="enterContest()">Submit</button>
+                    </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>  
+    <!--/container-->     
+<!-- End Content Part -->
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 md-margin-bottom-40">
+                    <!-- About -->
+                    <div class="headline">
+                        <h2>About</h2>
+                    </div>
+                    <p class="margin-bottom-25 md-margin-bottom-40">Twyst is a start-up based out of Gurgaon, started by a team with a combined experience of 40 years across product, strategy, operations and marketing. <a href="about.html">More</a></p>
+
+
+                        <!-- <div class="headline">
+                            <h2>Monthly Newsletter</h2>
+                        </div>
+                        <p>Subscribe to our newsletter and stay up to date with the latest news and deals!</p>
+                        <form class="footer-subsribe">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Email Address">
+                                <span class="input-group-btn">
+                                <button class="btn-u" type="button">Subscribe</button>
+                            </span>
+                            </div>
+                        </form> -->
+                </div>
+                    <!--/col-md-4-->
+
+                <div class="col-md-4">
+                    <!-- Monthly Newsletter -->
+                    
+
+                    <!-- Stay Connected -->
+                    <div class="headline">
+                        <h2>Follow Us</h2>
+                    </div>
+                    <ul class="social-icons">
+                        <li>
+                            <a href="http://blog.twyst.in" data-original-title="Feed" class="social_rss"></a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/twystin" data-original-title="Facebook" class="social_facebook"></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/twystin" data-original-title="Twitter" class="social_twitter"></a>
+                        </li>
+                    </ul>
+                </div>
+                    <!--/col-md-4-->
+
+                <div class="col-md-4">
+                    <!-- Monthly Newsletter -->
+                    
+
+                    <!-- Stay Connected -->
+                    <div class="headline">
+                        <h2>Connect With Us</h2>
+                    </div>
+                    <a class="btn btn-warning" href="contact.html" style="color: white;line-height: 1;">Get in touch</a>
+                    <a class="btn btn-warning" href="careers.html" style="color: white;line-height: 1;">Work with Us</a>
+                </div>
+                    <!--/col-md-4-->
+            </div>
+                <!--/row-->
+        </div>
+        <!--/container-->
+    </div>
+
+<!--=== Copyright ===-->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">                      
+                    <p class="copyright-space">
+                        2013 &copy; Twyst Technologies Pvt. Ltd. 
+                        <a href="http://twyst.in/legal/Privacy_Policy.pdf">Privacy Policy</a> | <a href="http://twyst.in/legal/terms_of_use.pdf">Terms of Service</a>
+                    </p>
+                </div>
+                <div class="col-md-6">  
+                    <a href="index.html">
+                        <img id="logo-footer" src="assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
+                    </a>
+                </div>
+            </div><!--/row-->
+        </div><!--/container--> 
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js" ></script>
+<script src="http://code.angularjs.org/1.3.3/angular-animate.min.js" ></script>
+<script src="/common/toastr/toastr.min.js"></script>
+<script type="text/javascript" src="assets/js/pages/rewards_week.js"></script>
+<script type="text/javascript" src="assets/plugins/checklist-model.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51763503-1', 'twyst.in');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html> 
