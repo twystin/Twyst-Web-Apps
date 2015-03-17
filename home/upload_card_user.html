@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="twystContest"> 
+<html ng-app="uploadUserDetails"> 
 <head>
-    <title>Twyst | CUPnCAKE Factory's Predict The 4 Qualifying Teams For The Semi Finals Contest!</title>
+    <title>Twyst</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -27,7 +27,7 @@
     </style>   
 </head> 
 
-<body ng-controller="ContestCtrl">
+<body ng-controller="uploadCtrl">
 <!--=== Top ===-->    
     <div class="top">
         <div class="container">         
@@ -107,7 +107,7 @@
               </li>
 
               <li>
-                <a href="http://twyst.in/merchant/">
+                <a href="/merchant">
                   For merchants
                 </a>
               </li>               
@@ -130,67 +130,21 @@
         
     </div>
 
-    <div class="breadcrumbs">
-        <div class="container">
-            <h1 class="pull-left">The CUPnCAKE Factory Predict & Win Contest</h1>
-        </div>
-    </div><!--/breadcrumbs-->
-<!--=== End Breadcrumbs ===-->
+
 <!--=== Content Part ===-->
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div class="headline">
-                    <h4>To enter the contest, fill out the details below:
-                    </h4>
-                </div>
-                <div>
-                    The CUPnCAKE Factory is running a special cricket world cup contest for its valued customers. Simply predict the 4 qualifying teams for the semi finals  and you could win some delicious treats and awesome cupCakes! 1 lucky winner will be chosen at random from all the correct entries we receive  till 21 march.
-                </div>
                 <br>
-                <form>
-                    <div class="form-group">
-                        <label>Name*</label>
-                        <input class="input-xlarge form-control" type="text" ng-model="user.name"></input>
-                    </div>
-                    <div class="form-group">
-                        <label>Mobile No* <small>(Winners will receive their voucher code via SMS)</small></label>
-                        <input type="text" class="input-xlarge form-control" required="true" ng-model="user.phone">
-                    </div>
-                    <div class="form-group" ng-form="contestForm">
-                        <label>Email ID*</label>
-                        <input name="email" class="input-xlarge form-control" type="text" ng-model="user.email" required="true"></input>
-                    </div> 
-                    <div class="form-group">
-                        <label>Date of birth*</label>
-                        <input name="dob" class="input-xlarge form-control" type="dob" ng-model="user.dob" required="true" placeholder="dd/mm/yyyy"></input>
-                    </div>                
-                    <div class="form-group">
-                        <label>My predicted teams to qualify for the quarter finals are:</label><br>
-                        <h6>Pool A (select exactly 2 teams)</h6>
-                        <div class="col-md-12" ng-repeat="a in poolA">
-                            <input type="checkbox" ng-checked="selected_poolA.indexOf(a) != -1" ng-click="togglePool('selected_poolA', a)"> {{a}}
-                        </div>
-                        <h6>&nbsp;</h6>
-                        <h6>Pool B (select exactly 2 teams)</h6>
-                        <div class="col-md-12" ng-repeat="b in poolB">
-                            <input type='checkbox' ng-checked="selected_poolB.indexOf(b) != -1" ng-click="togglePool('selected_poolB', b)"> {{b}}
-                        </div>
-                    </div>
-                    <div>
-                        &nbsp;
-                    </div>
-                    <div class="form-group">
-                        <label>Also join the CUPnCAKE Factory Program on Twyst!</label>
-                        <img src="../common/images/cupncake.png" class="cupcake-image" />
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="agree" value="true" checked> I wish to join The CUPnCAKE Factory loyalty program on Twyst.
-                    </div>
-                    <div>
-                        <button type="button" class="btn btn-success btn-lg spacing" ng-click="enterContest()">Submit</button>
-                    </div>
-                </form>
+                <input ng-model="csv" onchange="angular.element(this).scope().fileChanged()"
+                                type="file" accept=".csv" id="fileInput"/>
+                     
+                <br>                
+                <div > {{jsonData}}</div>
+                
+                <button type="button" class="btn btn-success btn-lg spacing" ng-click="submitUserList()">Submit</button>
+                
+                 
             </div>
         </div>
     </div>  
@@ -284,7 +238,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js" ></script>
 <script src="http://code.angularjs.org/1.3.3/angular-animate.min.js" ></script>
 <script src="/common/toastr/toastr.min.js"></script>
-<script type="text/javascript" src="assets/js/pages/contest.js"></script>
+<script type="text/javascript" src="assets/js/pages/readCSV.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
