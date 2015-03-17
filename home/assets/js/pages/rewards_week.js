@@ -14,36 +14,128 @@ var twystContact = angular.module('twystRewardsWeek', ['toastr'])
 
     $scope.user = {};
     $scope.Cafes = [
-        'ax',
-        'b',
-        'New c',
-        'd',
-        'eh',
-        'Sri f',
-        'g',
+        'Fruit Press, Cybercity',
+        'Fruit Press, Sector 21',
+        'Lean Chef',
+        'Petooz',
+        'Zaika Punjabi',
+        'Potato Lovers Unltd',
+        'Pitapan',
+        'Pepbox',
+        'Arabian Lites',
+        'Quiznos',
+        'Go Veg',
+        'Sandwedges, Indirapuram',
+        'Sandwedges, Raj Nagar'
+
     ];
     $scope.Pizzas = [
-        'q',
-        'fz',
-        'd Indies',
-        'fa',
-        'United d Emirates',
-        'South z',
-        'ff',
+        'Coffee & Chai Co',
+        'Café Wanderlust',
+        'Madison & Pike',
+        'Chai Adda',
+        'Blackbuck" s Coffee',
+        'The CUPnCAKE Factory',
+        'Sucre Patisserie',
+        'Binge',
+        'Cherry Comet',
+        'Movenpick'
+
     ];
 
     $scope.Pubs = [
-        'a',
-        'ea',
-        's Indies',
-        'v',
-        'f Arab Emirates',
-        'w Africa',
-        'e',
+        'Cocktail & Dreams, Speakeasy',
+        'Vapour',
+        'Striker Pub, Gurgaon',
+        'Striker Pub, Delhi',
+        'Brewer Street',
+        '7 Degrees Brauhaus',
+        'Blues',
+        'Attitude',
+        'Howzatt',
+        'Fork You Too',
+        'Caffe Madhouse',
+        'Lighthouse 13',
+        'The Liquor Warehouse',
+        'Eat @ Joe" s',
+        'Club Rhino',
+        '7 Barrel Bew Pub'
+
     ];
+
+    $scope.Rests = [
+        'Tughlaq',
+        'Joint Café',
+        'Mistral',
+        'The Breakfast Club',
+        'Captain Grub',
+        'Captain Bill$ Deliverz',
+        'Leaping Caravan',
+        'FrenZone',
+        'Litti.in',
+        'Twirteez',
+        'Taxi',
+        '1UP',
+        'Touch Down',
+        'Kebabnama',
+        'The Spice Lab',
+        'Krips',
+        'Amigo"s Hub',
+        'The Kathi" s',
+        'Eat @ Joe" s',
+        'Morsel to Mouth',
+        'Bernardo" s',
+        'Haandi TCT',
+        'Purani Dilli" s Al Karam Kebab House'
+    ];
+
+    $scope.Biryanis = [
+        'Biryani Blues, Supermart 1',
+        'Biryani Blues, Sohna Rd',
+        'Biryani Blues, Sector 23',
+        'Biryani Paradise, Sector 31',
+        'Biryani Paradise, Sector 23',
+        'Andhra Biryani House',
+        'Rumi"s Kitchen',
+        'Canton Spice Co, Cyberhub',
+        'Canton Spice Co, Punjabi Bagh',
+        'Taste of China',
+        'Kung Fu Chow',
+        'China Chowk',
+        'Yo! China, Sector 29'
+    ]
+    $scope.Italians = [
+        'PizzaVito, South Pt Mall',
+        'Crusty',
+        'Italiano, Cyberhub',
+        'Italiano, Nathupur',
+        'Crust Bistro',
+        'Chicago Pizza, HUDA Metropark',
+        'Fat Lulu"s, Galleria',
+        'Fat Lulu"s, Cross Pt Mall',
+        'Fat Lulu"s, Saket',
+        'New York Slice, Hauz Khas Village',
+        'New York Slice, GK2',
+        'New York Slice, Gurgaon',
+        'New York Slice, Manesar',
+        'La Pino"z Pizza, DLF Phase 1',
+        'Flip Bistro, Galleria',
+        'Flip Bistro, Gold Course Rd',
+        'Pizza Square'
+    ]
+
+
+    
+
     $scope.selected_Cafes = [];
     $scope.selected_Pizzas = [];
     $scope.selected_Pubs = [];
+    $scope.selected_Rests = [];
+    $scope.selected_Biryanis = [];
+    $scope.selected_Italians = [];
+    $scope.selected_Rest = [];
+    $scope.selected_Biryani = [];
+    $scope.selected_Italian = [];
     $scope.selected_Cafe = [];
     $scope.selected_Pizza = [];
     $scope.selected_Pub = [];
@@ -51,7 +143,8 @@ var twystContact = angular.module('twystRewardsWeek', ['toastr'])
     
 
     $scope.togglePool = function (ischecked, pool, team) {
-        if($scope.selected_Cafe[ischecked] || $scope.selected_Pizza[ischecked] || $scope.selected_Pub[ischecked]){
+        if($scope.selected_Cafe[ischecked] || $scope.selected_Pizza[ischecked] || $scope.selected_Pub[ischecked]
+                || $scope.selected_Rest[ischecked] || $scope.selected_Biryani[ischecked] || $scope.selected_Italian[ischecked]){
             console.log("checked")
             if($scope[pool].length === 2) {
                 $scope.disable = true;
@@ -82,10 +175,17 @@ var twystContact = angular.module('twystRewardsWeek', ['toastr'])
         $scope.selected_Cafes = [];
         $scope.selected_Pizzas = [];
         $scope.selected_Pubs = [];
+        $scope.selected_Rests = [];
+        $scope.selected_Biryanis = [];
+        $scope.selected_Italians = [];
+        $scope.selected_Rest = [];
+        $scope.selected_Biryani = [];
+        $scope.selected_Italian = [];
         $scope.selected_Cafe = [];
         $scope.selected_Pizza = [];
         $scope.selected_Pub = [];
         $scope.selected_outlet = [];
+    
         
     }
 
@@ -166,7 +266,8 @@ var twystContact = angular.module('twystRewardsWeek', ['toastr'])
             name  : $scope.user.name,
             message         : $scope.user.message,
             phone        : $scope.user.phone,
-            email               : $scope.user.email
+            email               : $scope.user.email,
+            contest: 'twyst_rewards_week'
         }).success(function (data, status, header, config) {
             redirect();
             toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after the results are declared,  after 10th March 2015.');

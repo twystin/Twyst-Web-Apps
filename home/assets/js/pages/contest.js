@@ -119,10 +119,11 @@ var twystContact = angular.module('twystContest', ['toastr'])
             name  : $scope.user.name,
             message         : $scope.user.message,
             phone        : $scope.user.phone,
-            email               : $scope.user.email
+            email               : $scope.user.email,
+            contest: 'tncf'
         }).success(function (data, status, header, config) {
             redirect();
-            toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after the results are declared, after 25th March 2015.');
+            toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after 25th March 2015.');
         })
         .error(function (data, status, header, config) {
             redirect();

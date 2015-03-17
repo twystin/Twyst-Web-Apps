@@ -438,10 +438,19 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                     templateController(true, false, false, false, false);
                 }
                 $scope.refresh();
-            }).error(function (data) {
+            }).error(function (data) {                
                 $scope.checkin.phone_no = '';
                 $scope.loading = false;
                 errorController(data.status, data.message);
+                setTimeout(function() {
+                    var modalInstance = $modal.open({
+                        templateUrl : './templates/panel/user_details.html',
+                        controller  : 'UserDetailsCtrl',
+                        backdrop    : 'static',
+                        keyboard    : true,
+                        scope: $scope
+                    });
+                }, 2000);
                 $scope.refresh();
             });
         }
@@ -810,5 +819,17 @@ controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataSe
             $scope.redeems = data.info.REDEEMS || [];
             $scope.totalRedeems = data.info.totalCount;
         })
+    }
+})
+
+.controller('UserDetailsCtrl', function ($modalInstance, $scope, $location, dataService) {
+  
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };  
+
+    $scope.updateUser = function() {
+        console.log($scope.fname);
+
     }
 })
