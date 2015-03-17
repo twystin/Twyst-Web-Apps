@@ -5,7 +5,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     if (!authService.isLoggedIn()) {
         $location.path('/');
     }
- 
+
     if (authService.isLoggedIn() && authService.getAuthStatus().role > 4) {
         $location.path('/panel');
     }
@@ -116,7 +116,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     $scope.used = {};
     $scope.used.time = new Date();
     $scope.outlet = {};
-    
+
     $interval(function () {
         $scope.refresh();
     }, 1000*60*10);
@@ -132,7 +132,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     $scope.filterChanged = function (value) {
         $scope.filtered_vouchers = [];
         if(value) {
-            if(value === 'Active') { 
+            if(value === 'Active') {
 
                 $scope.vouchers.forEach(function (voucher) {
                     if((voucher.basics.status === 'active'
@@ -149,14 +149,14 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                         }
                     }
                 })
-            } 
+            }
             else if(value === 'Used') {
                 $scope.vouchers.forEach(function (voucher) {
                     if(voucher.basics.status === 'merchant redeemed') {
                         $scope.filtered_vouchers.push(voucher);
                     }
                 })
-            } 
+            }
             else if(value === 'Expired') {
                 $scope.vouchers.forEach(function (voucher) {
                     if(voucher.basics.status !== 'merchant redeemed') {
@@ -172,16 +172,16 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                         }
                     }
                 })
-            } 
+            }
             else if(value === 'All') {
                 $scope.filtered_vouchers = $scope.vouchers;
-                 
-            } 
+
+            }
         }
     }
 
     $scope.$watch('selected_outlet', function() {
-        
+
         $scope.outlet = _.find($scope.outlets, function (obj){
             return obj._id === $scope.selected_outlet;
         });
@@ -308,12 +308,12 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
 
         var mark_valid = false;
 
-        if(voucher.issue_details.issued_for && 
+        if(voucher.issue_details.issued_for &&
             voucher.issue_details.issued_for.reward_applicability &&
             voucher.issue_details.issued_for.reward_applicability.day_of_week.length > 0) {
-            
+
             var today = new Date().getDay();
-            
+
             voucher.issue_details.issued_for.reward_applicability.day_of_week.forEach(function (day) {
                 if(day === 'all days') {
                     mark_valid = true;
@@ -340,7 +340,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     }
 
     function checkApplicabilityTime (voucher) {
-        
+
         var mark_valid = false;
 
         if(voucher.issue_details.issued_for.reward_applicability.time_of_day
@@ -380,12 +380,12 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             $http.get(
                 '/api/v1/getcounts/' + $scope.outlet._id + '/' + $scope.program._id
                 ).success(function(data, status, header, config) {
-                
+
                 $scope.counts.checkin = data.info.checkin_count;
                 $scope.counts.voucher = data.info.voucher_count;
                 $scope.counts.redeem = data.info.redeem_count;
             }).error(function (data) {
-                
+
             });
         }
     }
@@ -400,7 +400,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     };
 
     function errorController(status, message) {
-        
+
         $scope.error.status = status;
         $scope.error.message = message;
         templateController(false, true, false, false, false);
@@ -438,19 +438,19 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                     templateController(true, false, false, false, false);
                 }
                 $scope.refresh();
-            }).error(function (data) {                
+            }).error(function (data) {
                 $scope.checkin.phone_no = '';
                 $scope.loading = false;
                 errorController(data.status, data.message);
-                setTimeout(function() {
-                    var modalInstance = $modal.open({
-                        templateUrl : './templates/panel/user_details.html',
-                        controller  : 'UserDetailsCtrl',
-                        backdrop    : 'static',
-                        keyboard    : true,
-                        scope: $scope
-                    });
-                }, 2000);
+                // setTimeout(function() {
+                //     var modalInstance = $modal.open({
+                //         templateUrl : './templates/panel/user_details.html',
+                //         controller  : 'UserDetailsCtrl',
+                //         backdrop    : 'static',
+                //         keyboard    : true,
+                //         scope: $scope
+                //     });
+                // }, 2000);
                 $scope.refresh();
             });
         }
@@ -483,9 +483,9 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                 used_at: $scope.outlet._id,
                 used_time: used_time
             }).success(function(data, status, header, config) {
-                
+
                 $scope.loading = false;
-                
+
                 if(data.status === 'error') {
                     errorController(data.status, data.message);
                 }
@@ -506,7 +506,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         if (($scope.code)) {
 
             $scope.loading = true;
-            
+
             $http.get('/api/v1/vouchers/' + $scope.code.toUpperCase() + '/'+ $scope.outlet._id, {
                 code: $scope.code,
                 searchedAt: $scope.outlet._id
@@ -514,8 +514,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                 $scope.loading = false;
 
                 if(JSON.parse(data.info) !== null) {
-                    $scope.voucher = JSON.parse(data.info); 
-                    templateController(false, false, true, false, false);                   
+                    $scope.voucher = JSON.parse(data.info);
+                    templateController(false, false, true, false, false);
                 }
                 else {
                     errorController(data.status, data.message);
@@ -538,10 +538,10 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     };
 
     function goForVoucher() {
-        $scope.loading = true;            
+        $scope.loading = true;
         $http
             .get('/api/v1/vouchers_by_phone/' + $scope.phone + '/' + $scope.outlet._id)
-            .success(function(data) {            
+            .success(function(data) {
                 $scope.loading = false;
                 $scope.vouchers = data.info.VOUCHERS || [];
                 $scope.filtered_vouchers = $scope.vouchers || [];
@@ -549,8 +549,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                 $scope.filterChanged('All');
                 templateController(false, false, false, true, false);
                 $scope.voucher_filter = 'All';
-            }).error(function (data) {    
-                $scope.loading = false;            
+            }).error(function (data) {
+                $scope.loading = false;
                 errorController(data.status, data.message);
             });
     }
@@ -562,7 +562,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
 
     $scope.getVoucherNotify = function () {
         $scope.voucher_change_status_error = null;
-        $http.get('/api/v1/notify/voucher').success(function(data) {           
+        $http.get('/api/v1/notify/voucher').success(function(data) {
             if(data.info.length > 0) {
                 $scope.voucher_notify = JSON.parse(data.info);
             }
@@ -572,12 +572,12 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     };
     $scope.getCommonNotify = function (skip) {
         $scope.voucher_change_status_error = null;
-        $http.get('/api/v2/notify/merchants/' + skip).success(function(data) {           
+        $http.get('/api/v2/notify/merchants/' + skip).success(function(data) {
             if(data.info && data.info.length > 0) {
                 $scope.notifs = $scope.notifs.concat(data.info);
             }
         }).error(function (data) {
-           
+
         });
     };
     $scope.loadMore = function () {
@@ -598,11 +598,11 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             $scope.refresh();
         });
     };
-    
+
     $scope.outletQuery = function () {
         $scope.auth = authService.getAuthStatus();
         var user_id = $scope.auth._id;
-        
+
         $http.get('/api/v1/outlets/').success(function (data) {
             $scope.outlets = data.info;
             if($scope.outlets.length > 0) {
@@ -610,7 +610,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                 $scope.selected_outlet = $scope.outlets[0]._id;
             }
         }).error(function (data) {
-            
+
         });
     };
 
@@ -630,7 +630,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             programs.forEach (function (program) {
                 if(program.status === 'active') {
                     var active_program_running = getProgramRunningOnThisOutlet(program, $scope.outlet);
-            
+
                     if(active_program_running) {
                         program_running_on_outlet = active_program_running;
                     }
@@ -697,7 +697,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
 }).
 
 controller('CheckinDataCtrl', function ($modalInstance, $scope, $location, dataService) {
-    
+
 
     function init () {
         $scope.page.currentPage = 1;
@@ -739,7 +739,7 @@ controller('CheckinDataCtrl', function ($modalInstance, $scope, $location, dataS
 }).
 
 controller('VoucherDataCtrl', function ($modalInstance, $scope, $location, dataService) {
-    
+
 
     function init () {
         $scope.page.currentPage = 1;
@@ -781,7 +781,7 @@ controller('VoucherDataCtrl', function ($modalInstance, $scope, $location, dataS
 }).
 
 controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataService) {
-    
+
 
     function init () {
         $scope.page.currentPage = 1;
@@ -823,10 +823,10 @@ controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataSe
 })
 
 .controller('UserDetailsCtrl', function ($modalInstance, $scope, $location, dataService) {
-  
+
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
-    };  
+    };
 
     $scope.updateUser = function() {
         console.log($scope.fname);
