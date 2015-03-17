@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="twystContest"> 
+<html ng-app="twystContest">
 <head>
     <title>Twyst | CUPnCAKE Factory's Predict The 4 Qualifying Teams For The Semi Finals Contest!</title>
 
@@ -17,25 +17,25 @@
     <link href="/common/toastr/toastr.css" rel="stylesheet" />
     <style type="text/css">
         .cupcake-image {
-           max-width: 40em; 
+           max-width: 40em;
         }
         @media (max-width: 768px) {
             .cupcake-image {
-               max-width: 25em; 
+               max-width: 25em;
             }
         }
-    </style>   
-</head> 
+    </style>
+</head>
 
 <body ng-controller="ContestCtrl">
-<!--=== Top ===-->    
+<!--=== Top ===-->
     <div class="top">
-        <div class="container">         
+        <div class="container">
             <ul class="loginbar pull-right">
             </ul>
-        </div>      
+        </div>
     </div><!--/top-->
-    <!--=== End Top ===-->    
+    <!--=== End Top ===-->
 
     <div class="header">
         <style type="text/css">
@@ -62,7 +62,7 @@
                 margin-left: -1em;
             }
             .margin-bottom-about {
-                margin-bottom: 5em; 
+                margin-bottom: 5em;
             }
         </style>
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +76,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="index.html">
-                <img id="logo-header" src="assets/img/twyst_logo_2.png" alt="Logo">       
+                <img id="logo-header" src="assets/img/twyst_logo_2.png" alt="Logo">
               </a>
             </div>
 
@@ -90,12 +90,12 @@
               <li class="margin-top-pt6em hidden-xs hidden-sm">
                   <a href="https://itunes.apple.com/in/app/twyst.in/id907877732?mt=8&uo=4" target="itunes_store"><img class="app-button" src="/outlets/assets/img/images/appstore.png"></a>
               </li>
-              <li> 
+              <li>
                 <a href="/home">
                   Home
                 </a>
               </li>
-              <li> 
+              <li>
                 <a href="/discover">
                   Discover
                 </a>
@@ -103,14 +103,14 @@
               <li>
                 <a href="/home/how">
                   How it works
-                </a>                       
+                </a>
               </li>
 
               <li>
                 <a href="http://twyst.in/merchant/">
                   For merchants
                 </a>
-              </li>               
+              </li>
 
             </ul>
             <div class="search-open">
@@ -120,14 +120,14 @@
                   <button class="btn-u" type="button">Go</button>
                 </span>
               </div><!-- /input-group -->
-            </div>                
+            </div>
           </div><!-- /navbar-collapse -->
-        </div>    
-    </div>       
+        </div>
+    </div>
 
 <!--=== Breadcrumbs ===-->
     <div class="row" style="padding-top:5em;">
-        
+
     </div>
 
     <div class="breadcrumbs">
@@ -160,13 +160,13 @@
                     <div class="form-group" ng-form="contestForm">
                         <label>Email ID*</label>
                         <input name="email" class="input-xlarge form-control" type="text" ng-model="user.email" required="true"></input>
-                    </div> 
+                    </div>
                     <div class="form-group">
                         <label>Date of birth*</label>
                         <input name="dob" class="input-xlarge form-control" type="dob" ng-model="user.dob" required="true" placeholder="dd/mm/yyyy"></input>
-                    </div>                
+                    </div>
                     <div class="form-group">
-                        <label>My predicted teams to qualify for the quarter finals are:</label><br>
+                        <label>My predicted teams to qualify for the semi finals are:</label><br>
                         <h6>Pool A (select exactly 2 teams)</h6>
                         <div class="col-md-12" ng-repeat="a in poolA">
                             <input type="checkbox" ng-checked="selected_poolA.indexOf(a) != -1" ng-click="togglePool('selected_poolA', a)"> {{a}}
@@ -193,8 +193,8 @@
                 </form>
             </div>
         </div>
-    </div>  
-    <!--/container-->     
+    </div>
+    <!--/container-->
 <!-- End Content Part -->
 
     <div class="footer">
@@ -225,7 +225,7 @@
 
                 <div class="col-md-4">
                     <!-- Monthly Newsletter -->
-                    
+
 
                     <!-- Stay Connected -->
                     <div class="headline">
@@ -247,7 +247,7 @@
 
                 <div class="col-md-4">
                     <!-- Monthly Newsletter -->
-                    
+
 
                     <!-- Stay Connected -->
                     <div class="headline">
@@ -267,19 +267,19 @@
     <div class="copyright">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">                      
+                <div class="col-md-6">
                     <p class="copyright-space">
-                        2013 &copy; Twyst Technologies Pvt. Ltd. 
+                        2013 &copy; Twyst Technologies Pvt. Ltd.
                         <a href="http://twyst.in/legal/Privacy_Policy.pdf">Privacy Policy</a> | <a href="http://twyst.in/legal/terms_of_use.pdf">Terms of Service</a>
                     </p>
                 </div>
-                <div class="col-md-6">  
+                <div class="col-md-6">
                     <a href="index.html">
                         <img id="logo-footer" src="assets/img/twyst_logo_2.png" class="pull-right" height="39px" width="110px" alt="" />
                     </a>
                 </div>
             </div><!--/row-->
-        </div><!--/container--> 
+        </div><!--/container-->
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js" ></script>
 <script src="http://code.angularjs.org/1.3.3/angular-animate.min.js" ></script>
@@ -296,4 +296,4 @@
 
 </script>
 </body>
-</html> 
+</html>
