@@ -43,13 +43,13 @@
 			<div class="date-div span10" ng-show="outlets.length > 0">
 			    <div class="form-horizontal" ng-controller="DatePickerCtrl">
 			        <p>
-			            <input id="appendedInput" type="text" class="input-small" datepicker-popup="{{format}}" is-open="opened" min="'2014-03-01'" max="'2015-06-21'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start" type="date" style="margin:0px;" ng-model="range.start" />
+			            <input id="appendedInput" type="text" class="input-small" datepicker-popup="{{format}}" is-open="opened" min="'2014-03-01'" max="'2020-01-01'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start" type="date" style="margin:0px;" ng-model="range.start" />
 			            <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button>
 			        </p>
 			    </div>
 			    <div class="form-horizontal" ng-controller="DatePickerCtrl">
 			        <p>
-			            <input id="appendedInput" type="text" class="input-small" datepicker-popup="{{format}}" is-open="opened" min="'2014-03-05'" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="End" type="date" style="margin:0px;" ng-model="range.end" />
+			            <input id="appendedInput" type="text" class="input-small" datepicker-popup="{{format}}" is-open="opened" min="'2014-03-05'" max="'2020-01-01'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="End" type="date" style="margin:0px;" ng-model="range.end" />
 			            <button class="btn" ng-click="open()"><i class="icon-calendar"></i></button>
 			        </p>
 			    </div>
