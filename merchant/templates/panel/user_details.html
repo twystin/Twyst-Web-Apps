@@ -12,10 +12,10 @@
     <div class = "row-fluid style = "margin-left: 5%"">
         <div class = "row-fluid">
             <div class = 'span4'>
-                <label> <b>First Name</b></label>
+                <label> <b>First Name</b></label> 
             </div>
             <div class = 'span6'>
-                <input type="text" placeholder="First Name" id="first_name" name="first_name"  ng-model="fname" >
+                <input type="text" placeholder="First Name" id="first_name" name="first_name"  ng-model="fname" ng-disabled="disable_fname">
             </div>
         </div>
         
@@ -24,7 +24,7 @@
                 <label> <b>Middle Name</b></label>
             </div> 
             <div class = "span6">
-                <input type="text" placeholder="Middle Name" id="middle_name" name="middle_name"  ng-model="mname" >
+                <input type="text" placeholder="Middle Name" id="middle_name" name="middle_name"  ng-model="mname" ng-disabled="disable_mname">
             </div> 
         </div>
 
@@ -33,7 +33,7 @@
                 <label> <b>Last Name</b></label>
             </div> 
             <div class = "span6">
-                <input type="text" placeholder="last_name" id="last_name" name="lname"   >
+                <input type="text" placeholder="Last Name" id="last_name" name="last_name" ng-model = 'lname'  ng-disabled="disable_lname">
             </div>
         </div>
         
@@ -42,7 +42,7 @@
                 <label> <b>Email</b></label>
             </div>
             <div class = "span6">
-                <input type="email" placeholder="Email" id="email" name="email"  ng-model="user_email" >
+                <input type="email" placeholder="Email" id="email" name="email"  ng-model="email" ng-disabled="disable_email">
             </div>
         </div>
 
@@ -51,15 +51,15 @@
                 <label> <b>Birthday</b></label>
             </div>
             <div class = "span2">
-                <input type="text" placeholder="DD" id="date" name="date"  ng-model="b_date" >
+                <input type="text" placeholder="DD" id="date" name="date"  ng-model="b_date" ng-disabled="disable_day">
             </div>
 
             <div class = "span2">
-                <input type="text" placeholder="MM" id="month" name="month"  ng-model="b_month" >
+                <input type="text" placeholder="MM" id="month" name="month"  ng-model="b_month" ng-disabled="disable_month">
             </div>
 
             <div class = "span2">
-                <input type="text" placeholder="YY" id="year" name="year"  ng-model="b_year" >
+                <input type="text" placeholder="YY" id="year" name="year"  ng-model="b_year" ng-disabled="disable_year">
             </div>
         </div>
         <div class = "row-fluid">

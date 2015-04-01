@@ -418,6 +418,42 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         return numeric.test(str);
     }
 
+    function populateData(data){
+        
+        if(data.info.user.profile.first_name) {
+            $scope.fname = data.info.user.profile.first_name;
+            $scope.disable_fname = true;    
+        }
+        if(data.info.user.profile.middle_name) {
+            $scope.mname = data.info.user.profile.middle_name;
+            $scope.disable_mname = true;    
+        }
+        if(data.info.user.profile.last_name) {
+            $scope.lname = data.info.user.profile.last_name;
+            $scope.disable_lname = true;    
+        }
+        if(data.info.user.profile.email) {
+            $scope.email = data.info.user.profile.email;
+            $scope.disable_email = true;    
+        }
+
+        if(data.info.user.profile.bday) {
+            if(data.info.user.profile.bday.d) {
+                $scope.b_date = data.info.user.profile.bday.d;    
+                $scope.disable_date = true; 
+            }
+            if(data.info.user.profile.bday.d) {
+                scope.b_month = data.info.user.profile.bday.m; 
+                $scope.disable_month = true;    
+            }
+            if(data.info.user.profile.bday.d) {
+                $scope.b_year = data.info.user.profile.bday.y;
+                $scope.disable_year = true; 
+            }
+                
+        }
+    }
+    
     function goForCheckin() {
         if ($scope.outlet._id && $scope.checkin.phone_no) {
 
@@ -434,6 +470,16 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                     errorController(data.status, data.message);
                 }
                 else {
+                    populateData(data);
+                    setTimeout(function() {
+                         var modalInstance = $modal.open({
+                             templateUrl : './templates/panel/user_details.html',
+                             controller  : 'UserDetailsCtrl',
+                             backdrop    : 'static',
+                             keyboard    : true,
+                            scope: $scope
+                         });
+                     }, 2000);
                     $scope.success.message = data.message;
                     templateController(true, false, false, false, false);
                 }
@@ -442,15 +488,6 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                 $scope.checkin.phone_no = '';
                 $scope.loading = false;
                 errorController(data.status, data.message);
-                // setTimeout(function() {
-                //     var modalInstance = $modal.open({
-                //         templateUrl : './templates/panel/user_details.html',
-                //         controller  : 'UserDetailsCtrl',
-                //         backdrop    : 'static',
-                //         keyboard    : true,
-                //         scope: $scope
-                //     });
-                // }, 2000);
                 $scope.refresh();
             });
         }
@@ -602,7 +639,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     $scope.outletQuery = function () {
         $scope.auth = authService.getAuthStatus();
         var user_id = $scope.auth._id;
-
+        console.log('outlet')
         $http.get('/api/v1/outlets/').success(function (data) {
             $scope.outlets = data.info;
             if($scope.outlets.length > 0) {
@@ -830,6 +867,6 @@ controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataSe
 
     $scope.updateUser = function() {
         console.log($scope.fname);
-
     }
+    
 })
