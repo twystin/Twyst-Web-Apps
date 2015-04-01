@@ -10,6 +10,10 @@ twystConsole.config(function ($routeProvider) {
 		controller: 'PublicController',
 		templateUrl: '/console/templates/dashboard.html'
 	}).
+	when('/coupons', {
+		controller: 'AdminCouponCtrl',
+		templateUrl: '/console/templates/coupons/coupons.html'
+	}).
 	when('/qr', {
 		controller: 'UsersController',
 		templateUrl: '/console/templates/qr/qr.html'
@@ -73,8 +77,8 @@ twystConsole.config(function ($routeProvider) {
 .factory('toastSvc', function (toastr) {
     return {
         showToast: function (type, message, head) {
-            toastr[type](message, 
-                head, 
+            toastr[type](message,
+                head,
                 {
                     closeButton: true
                 });

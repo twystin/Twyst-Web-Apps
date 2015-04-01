@@ -37,7 +37,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
         ).success(function (data) {
             $scope.recco_config = data.info;
         }).error(function (data) {
-    
+
         });
     }
 
@@ -47,7 +47,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
         ).success(function (data) {
             $route.reload();
         }).error(function (data) {
-    
+
         });
     }
 
@@ -133,7 +133,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 	}
 })
 .controller('DatePickerCtrl', function($scope, $timeout) {
-	
+
 	$scope.today = function() {
         $scope.dt = new Date();
     };
@@ -168,7 +168,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
     $scope.format = $scope.formats[0];
 })
 .controller('AuthController', function ($scope, $http, $location, authService) {
-	
+
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
@@ -198,7 +198,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 })
 .controller('AppController', function($scope, $http, dataService) {
 	$scope.date = {};
-	
+
 	$scope.getDownloads = function () {
 		$scope.data = null;
 		var outlet_id = $scope.for_outlet,
@@ -216,10 +216,11 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 		}, function(response) {
 
 		});
-	}
+	};
+
 })
 .controller('UsersController', function($scope, $http, $location, $routeParams, authService) {
-	
+
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
@@ -279,7 +280,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			$location.path('/users/view')
 		}).error(function(data,status,headers,config) {
 			$scope.message = data.message;
-			$location.path('/users/view')			
+			$location.path('/users/view')
 		})
 	}
 
@@ -291,8 +292,8 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 		}).success(function(data, status, headers, config) {
 			$scope.message = data.message;
 		}).error(function(data,status,headers,config) {
-			$scope.message = data.message;			
-		})	
+			$scope.message = data.message;
+		})
 	}
 
 	$scope.updateOutlet = function(outlet) {
@@ -319,6 +320,16 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 		});
 	}
 
+
+		$scope.reward_check = [
+				{"text": "Discount", value:"discount"},
+				{"text": "Flat off", value:"flat"},
+				{"text": "Free ", value:"free"},
+				{"text": "Buy one get one ", value:"buy_one_get_one"},
+				{"text": "Happy hours", value:"happy"},
+				{"text": "Reduced price ", value:"reduced"},
+				{"text": "Custom ", value:"custom"}
+		];
 	$scope.editOutlet = function() {
 		var outlet_id = $routeParams.outlet_id;
 
@@ -349,7 +360,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 		console.log(validity);
 		console.log($scope.validity);
 		var max_use_limit;
-		
+
 		if($scope.qrType === 'single') {
 			max_use_limit = 5;
 		}
@@ -384,18 +395,18 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
         });
       };
 
-      var csvFileInput = document.getElementById('fileInput');    
+      var csvFileInput = document.getElementById('fileInput');
       var csvFile = csvFileInput.files[0];
-      reader.readAsText(csvFile);      
+      reader.readAsText(csvFile);
     }
 
 
     $scope.submitUserList = function(){
-      var csvFileInput = document.getElementById('fileInput');  
+      var csvFileInput = document.getElementById('fileInput');
       if(csvFileInput.files[0]) {
         $http.post('/api/v1/populate/card_user', {
           userData  : $scope.jsonData
-          
+
         }).success(function (data, status, header, config) {
             redirect();
             toastSvc.showToast('success', 'Successfully updated');
@@ -404,34 +415,34 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
             redirect();
             toastSvc.showToast('error', 'There is some error in csv file.');
         });
-    
+
       }
       else {
         alert("Plese Upload a CSV File");
         return false;
       }
 
-      
+
     }
-    
+
     function csvTOJson(csvFile){
- 
+
       var allUsers = csvFile.split("\n");
       console.log(allUsers.length+ " allUsers");
-     
+
       var result = [];
-     
+
       var headers = allUsers[0].split(",");
-     
+
       for(var i = 1; i < allUsers.length-1; i++){
-     
+
         var obj = {};
         var currentUser = allUsers[i].split(",");
-     
+
         for(var j = 0; j < headers.length; j++){
           if(currentUser[j] != undefined){
-            obj[headers[j].trim()] = currentUser[j].trim();  
-          }          
+            obj[headers[j].trim()] = currentUser[j].trim();
+          }
 
           if(j == 3 && currentUser[j] != undefined) {
             if(!validateEmail(currentUser[j].trim())) {
@@ -444,19 +455,19 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
             if(!isMobileNumber(currentUser[j].trim())) {
               alert('wrong mobileNumber in sheet ' + currentUser[j] + " " + j);
               return false;
-            }      
+            }
           }
         }
         console.log(obj);
         result.push(obj);
-      }            
-      return result; 
+      }
+      return result;
     }
 
     function isMobileNumber(phone) {
-        if(phone 
+        if(phone
             && (phone.length === 10)
-            && isNumber(phone) 
+            && isNumber(phone)
             && isValidFirstDigit(phone)) {
             return true;
         };
@@ -477,19 +488,19 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
         return numeric.test(str);
     }
 
-    
+
 
     function isValidPhone () {
         if(!$scope.user.phone
             || isNaN($scope.user.phone)
             || $scope.user.phone.length !== 10) {
-            
+
             return false;
         }
         return true;
     }
 
-    function validateEmail(email) { 
+    function validateEmail(email) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }
@@ -498,5 +509,5 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
         $timeout(function () {
             $window.location.href = 'http://twyst.in/console/#/user/card_user';
         }, 4000);
-    }    
+    }
 });
