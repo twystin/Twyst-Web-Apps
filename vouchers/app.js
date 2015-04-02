@@ -1,7 +1,7 @@
 angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 .controller('AuthCtrl', function($scope, $location, authSvc, toastSvc) {
 	$scope.user = null;
-
+	console.log("CAME HERE")
 	authSvc.getLoggedInUser().then(function (res) {
 		$scope.user = authSvc.getAuthStatus();
 		if(authSvc.getPhone()) {
@@ -16,6 +16,15 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 	}, function (error) {
 		$scope.user = null;
 	});
+
+	$scope.logout = function() {
+		console.log("I WAS CALLED!");
+		authSvc.logout().then(function(data) {
+			$location.path('/');
+		}, function(err) {
+			$location.path('/');
+		})
+	}
 
 	$scope.getOtp = function () {
 		if(isMobileNumber($scope.phone)) {
@@ -39,7 +48,7 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 	};
 
 	function isValidOtp(otp) {
-        if(otp 
+        if(otp
         	&& (otp.length === 4)) {
             return true;
         };
@@ -74,9 +83,9 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 	}
 
 	function isMobileNumber(phone) {
-        if(phone 
+        if(phone
         	&& (phone.length === 10)
-        	&& isNumber(phone) 
+        	&& isNumber(phone)
         	&& isValidFirstDigit(phone)) {
             return true;
         };
@@ -153,8 +162,8 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 .factory('toastSvc', function (toastr) {
 	return {
 		showToast: function (type, message, head) {
-			toastr[type](message, 
-				head, 
+			toastr[type](message,
+				head,
 				{
 					closeButton: true
 				});
@@ -166,6 +175,10 @@ angular.module('login', ['auth', 'ngAnimate', 'toastr', 'ngRoute', 'ngCookies'])
 	when('/', {
 		controller: 'AuthCtrl',
 		templateUrl: './home.html'
+	}).
+	when('/logout', {
+		controller: 'AuthCtrl',
+		templateUrl: './logout.html'
 	}).
 	when('/otp', {
 		controller: 'AuthCtrl',
