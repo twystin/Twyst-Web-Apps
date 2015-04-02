@@ -420,34 +420,31 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
 
     function populateData(data){
         
+        $scope.user = data.info.user;
+        $scope.user.profile.bdate = data.info.user.profile.bday.d;
+        $scope.user.profile.bmonth = data.info.user.profile.bday.m;
+        $scope.user.profile.byear = data.info.user.profile.bday.y;
         if(data.info.user.profile.first_name) {
-            $scope.fname = data.info.user.profile.first_name;
             $scope.disable_fname = true;    
         }
-        if(data.info.user.profile.middle_name) {
-            $scope.mname = data.info.user.profile.middle_name;
+        if(data.info.user.profile.middle_name) {        
             $scope.disable_mname = true;    
         }
         if(data.info.user.profile.last_name) {
-            $scope.lname = data.info.user.profile.last_name;
             $scope.disable_lname = true;    
         }
         if(data.info.user.profile.email) {
-            $scope.email = data.info.user.profile.email;
             $scope.disable_email = true;    
         }
 
         if(data.info.user.profile.bday) {
             if(data.info.user.profile.bday.d) {
-                $scope.b_date = data.info.user.profile.bday.d;    
                 $scope.disable_date = true; 
             }
-            if(data.info.user.profile.bday.d) {
-                scope.b_month = data.info.user.profile.bday.m; 
+            if(data.info.user.profile.bday.m) {
                 $scope.disable_month = true;    
             }
-            if(data.info.user.profile.bday.d) {
-                $scope.b_year = data.info.user.profile.bday.y;
+            if(data.info.user.profile.bday.y) {
                 $scope.disable_year = true; 
             }
                 
@@ -859,14 +856,66 @@ controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataSe
     }
 })
 
-.controller('UserDetailsCtrl', function ($modalInstance, $scope, $location, dataService) {
+.controller('UserDetailsCtrl', function ($modalInstance, $http, $scope, toastSvc,  $modal, $location, dataService) {
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.updateUser = function() {
-        console.log($scope.fname);
+    $scope.updateUser = function(user) {
+        $scope.user = user;
+        var userDetails_Obj = {};
+
+        userDetails_Obj = {
+            mobile: $scope.user.phone,
+            firstName: $scope.user.profile.first_name,
+            middleName: $scope.user.profile.middle_name,
+            lastName: $scope.user.profile.last_name,
+            email: $scope.user.profile.email,
+            date: $scope.user.profile.bdate,
+            month: $scope.user.profile.bmonth,
+            year: $scope.user.profile.byear
+        }  
+        if($scope.user.profile.email) {
+            if(validateEmail($scope.user.profile.email)) {
+
+                postData();
+            }
+            else {
+                toastSvc.showToast('error', 'Please provide a valid email id');
+            }
+        }
+
+        function postData() {
+            console.log('sdkjhjdf');
+            $http.post('/api/v1/populate/card_user', {
+                panel: true,
+                userData:  userDetails_Obj  
+            }).success(function(data, status) {
+                $scope.loading = false;
+                if(data.status === 'error') {
+                    toastSvc.showToast('error', 'error in updating details');
+                    $scope.cancel();
+                }
+                else {
+                    $scope.loading = false;
+                    toastSvc.showToast('success', 'Details updated successfully');
+                    $scope.cancel();
+                }
+                $scope.refresh();
+            }).error(function (data) {
+                $scope.loading = false;
+                toastSvc.showToast('error', 'error in updating details');
+                $scope.refresh();
+                $scope.cancel();
+            });
+        }
+
+        function validateEmail(email) { 
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
     }
     
 })
