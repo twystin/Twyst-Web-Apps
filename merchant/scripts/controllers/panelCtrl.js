@@ -418,6 +418,39 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         return numeric.test(str);
     }
 
+    function populateData(data){
+        
+        $scope.user = data.info.user;
+        $scope.user.profile.bdate = data.info.user.profile.bday.d;
+        $scope.user.profile.bmonth = data.info.user.profile.bday.m;
+        $scope.user.profile.byear = data.info.user.profile.bday.y;
+        if(data.info.user.profile.first_name) {
+            $scope.disable_fname = true;    
+        }
+        if(data.info.user.profile.middle_name) {        
+            $scope.disable_mname = true;    
+        }
+        if(data.info.user.profile.last_name) {
+            $scope.disable_lname = true;    
+        }
+        if(data.info.user.profile.email) {
+            $scope.disable_email = true;    
+        }
+
+        if(data.info.user.profile.bday) {
+            if(data.info.user.profile.bday.d) {
+                $scope.disable_date = true; 
+            }
+            if(data.info.user.profile.bday.m) {
+                $scope.disable_month = true;    
+            }
+            if(data.info.user.profile.bday.y) {
+                $scope.disable_year = true; 
+            }
+                
+        }
+    }
+    
     function goForCheckin() {
         if ($scope.outlet._id && $scope.checkin.phone_no) {
 
@@ -434,6 +467,16 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                     errorController(data.status, data.message);
                 }
                 else {
+                    populateData(data);
+                    setTimeout(function() {
+                         var modalInstance = $modal.open({
+                             templateUrl : './templates/panel/user_details.html',
+                             controller  : 'UserDetailsCtrl',
+                             backdrop    : 'static',
+                             keyboard    : true,
+                            scope: $scope
+                         });
+                     }, 2000);
                     $scope.success.message = data.message;
                     templateController(true, false, false, false, false);
                 }
@@ -442,15 +485,6 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                 $scope.checkin.phone_no = '';
                 $scope.loading = false;
                 errorController(data.status, data.message);
-                // setTimeout(function() {
-                //     var modalInstance = $modal.open({
-                //         templateUrl : './templates/panel/user_details.html',
-                //         controller  : 'UserDetailsCtrl',
-                //         backdrop    : 'static',
-                //         keyboard    : true,
-                //         scope: $scope
-                //     });
-                // }, 2000);
                 $scope.refresh();
             });
         }
@@ -602,7 +636,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     $scope.outletQuery = function () {
         $scope.auth = authService.getAuthStatus();
         var user_id = $scope.auth._id;
-
+        console.log('outlet')
         $http.get('/api/v1/outlets/').success(function (data) {
             $scope.outlets = data.info;
             if($scope.outlets.length > 0) {
@@ -822,14 +856,66 @@ controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataSe
     }
 })
 
-.controller('UserDetailsCtrl', function ($modalInstance, $scope, $location, dataService) {
+.controller('UserDetailsCtrl', function ($modalInstance, $http, $scope, toastSvc,  $modal, $location, dataService) {
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.updateUser = function() {
-        console.log($scope.fname);
+    $scope.updateUser = function(user) {
+        $scope.user = user;
+        var userDetails_Obj = {};
+
+        userDetails_Obj = {
+            mobile: $scope.user.phone,
+            firstName: $scope.user.profile.first_name,
+            middleName: $scope.user.profile.middle_name,
+            lastName: $scope.user.profile.last_name,
+            email: $scope.user.profile.email,
+            date: $scope.user.profile.bdate,
+            month: $scope.user.profile.bmonth,
+            year: $scope.user.profile.byear
+        }  
+        if($scope.user.profile.email) {
+            if(validateEmail($scope.user.profile.email)) {
+
+                postData();
+            }
+            else {
+                toastSvc.showToast('error', 'Please provide a valid email id');
+            }
+        }
+
+        function postData() {
+            console.log('sdkjhjdf');
+            $http.post('/api/v1/populate/card_user', {
+                panel: true,
+                userData:  userDetails_Obj  
+            }).success(function(data, status) {
+                $scope.loading = false;
+                if(data.status === 'error') {
+                    toastSvc.showToast('error', 'error in updating details');
+                    $scope.cancel();
+                }
+                else {
+                    $scope.loading = false;
+                    toastSvc.showToast('success', 'Details updated successfully');
+                    $scope.cancel();
+                }
+                $scope.refresh();
+            }).error(function (data) {
+                $scope.loading = false;
+                toastSvc.showToast('error', 'error in updating details');
+                $scope.refresh();
+                $scope.cancel();
+            });
+        }
+
+        function validateEmail(email) { 
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
 
     }
+    
 })
