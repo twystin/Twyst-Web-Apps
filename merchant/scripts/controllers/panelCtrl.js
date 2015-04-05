@@ -421,9 +421,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     function populateData(data){
         
         $scope.user = data.info.user;
-        $scope.user.profile.bdate = data.info.user.profile.bday.d;
-        $scope.user.profile.bmonth = data.info.user.profile.bday.m;
-        $scope.user.profile.byear = data.info.user.profile.bday.y;
+    
         if(data.info.user.profile.first_name) {
             $scope.disable_fname = true;    
         }
@@ -439,12 +437,15 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
 
         if(data.info.user.profile.bday) {
             if(data.info.user.profile.bday.d) {
+                $scope.user.profile.bdate = data.info.user.profile.bday.d;
                 $scope.disable_date = true; 
             }
             if(data.info.user.profile.bday.m) {
+                $scope.user.profile.bmonth = data.info.user.profile.bday.m;
                 $scope.disable_month = true;    
             }
             if(data.info.user.profile.bday.y) {
+                $scope.user.profile.byear = data.info.user.profile.bday.y;
                 $scope.disable_year = true; 
             }
                 
