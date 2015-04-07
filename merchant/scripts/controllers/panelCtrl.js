@@ -419,37 +419,115 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
     }
 
     function populateData(data){
+        $scope.isDisabled = true;
+        
+        $scope.dates = [];
+        for(var i = 1 ; i <= 31; i++){
+          $scope.dates.push(i);
+        } 
+        $scope.months = [];
+        for(var j = 1 ; j <= 12; j++){
+          $scope.months.push(j);
+        }
+
+        var start = 1900;
+        var end = new Date().getFullYear();
+        var options;
+        $scope.options = [];
+        for(var year = start ; year <=end; year++){
+          $scope.options.push(year);
+        }
         
         $scope.user = data.info.user;
     
         if(data.info.user.profile.first_name) {
+            var subStr = data.info.user.profile.first_name.slice(1);
+            subStr = subStr.substr(0, subStr.length-1);
+            var hide = '';
+            for(var i = 0; i < subStr.length; i++) {
+                hide = hide + 'x'
+            }
+            subStr = subStr.replace(subStr, hide);
+            data.info.user.profile.first_name = data.info.user.profile.first_name.charAt(0)+subStr+
+            data.info.user.profile.first_name.slice(data.info.user.profile.first_name.length-1)
+            $scope.user.profile.first_name = data.info.user.profile.first_name;        
             $scope.disable_fname = true;    
         }
-        if(data.info.user.profile.middle_name) {        
+        if(data.info.user.profile.middle_name) {  
+            var m_subStr = data.info.user.profile.middle_name.slice(1);
+            m_subStr = m_subStr.substr(0, m_subStr.length-1);
+            var hide = '';
+            for(var i = 0; i < m_subStr.length; i++) {
+                hide = hide + 'x'
+            }
+            m_subStr = m_subStr.replace(m_subStr, hide);
+            data.info.user.profile.middle_name = data.info.user.profile.middle_name.charAt(0)+m_subStr+
+            data.info.user.profile.middle_name.slice(data.info.user.profile.middle_name.length-1)
+            $scope.user.profile.middle_name = data.info.user.profile.middle_name;       
             $scope.disable_mname = true;    
         }
         if(data.info.user.profile.last_name) {
+            var l_subStr = data.info.user.profile.last_name.slice(1);
+            l_subStr = l_subStr.substr(0, l_subStr.length-1);
+            var hide = '';
+            for(var i = 0; i < l_subStr.length; i++) {
+                hide = hide + 'x'
+            }
+            l_subStr = l_subStr.replace(l_subStr, hide);
+            data.info.user.profile.last_name = data.info.user.profile.last_name.charAt(0)+l_subStr+
+            data.info.user.profile.last_name.slice(data.info.user.profile.last_name.length-1)
+
+            $scope.user.profile.last_name = data.info.user.profile.last_name; 
             $scope.disable_lname = true;    
         }
         if(data.info.user.profile.email) {
+            var first_mail = data.info.user.profile.email.split('@')[0];
+            first_mail = first_mail.slice(1);
+            first_mail = first_mail.substr(0, first_mail.length-1);
+            var hide = '';
+            for(var i = 0; i < first_mail.length; i++) {
+                hide = hide + 'x'
+            }
+            first_mail = first_mail.replace(first_mail, hide);
+
+            var last_mail = data.info.user.profile.email.split('@')[1];
+            last_mail = last_mail.slice(1);
+            last_mail = last_mail.split('.')[0].substr(0, last_mail.length-1);
+            var hide = '';
+            for(var i = 0; i < last_mail.length; i++) {
+                hide = hide + 'x'
+            }
+
+            last_mail = last_mail.replace(last_mail, hide);
+            data.info.user.profile.email = data.info.user.profile.email.charAt(0)+first_mail
+            + data.info.user.profile.email.split('@')[0].slice(data.info.user.profile.email.split('@')[0].length-1) + '@'
+            +  data.info.user.profile.email.split('@')[1].charAt(0) +   last_mail + '.' + data.info.user.profile.email.split('@')[1].split('.')[1];
+            $scope.user.profile.email = data.info.user.profile.email; 
             $scope.disable_email = true;    
         }
 
         if(data.info.user.profile.bday) {
             if(data.info.user.profile.bday.d) {
+
                 $scope.user.profile.bdate = data.info.user.profile.bday.d;
+                $scope.dates = ['xx'];
+                $scope.user.profile.bdate = 'xx';
                 $scope.disable_date = true; 
             }
             if(data.info.user.profile.bday.m) {
                 $scope.user.profile.bmonth = data.info.user.profile.bday.m;
+                $scope.months = ['xx'];
+                $scope.user.profile.bmonth = 'xx';
                 $scope.disable_month = true;    
             }
             if(data.info.user.profile.bday.y) {
                 $scope.user.profile.byear = data.info.user.profile.bday.y;
+                $scope.options = ['xxxx'];
+                $scope.user.profile.byear = 'xxxx';
                 $scope.disable_year = true; 
-            }
-                
+            }       
         }
+        
     }
     
     function goForCheckin() {
@@ -468,16 +546,22 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                     errorController(data.status, data.message);
                 }
                 else {
-                    populateData(data);
-                    setTimeout(function() {
-                         var modalInstance = $modal.open({
-                             templateUrl : './templates/panel/user_details.html',
-                             controller  : 'UserDetailsCtrl',
-                             backdrop    : 'static',
-                             keyboard    : true,
-                            scope: $scope
-                         });
-                     }, 2000);
+
+                    if(!(data.info.user.profile && data.info.user.profile.first_name && data.info.user.profile.middle_name
+                        && data.info.user.profile.last_name && data.info.user.profile.email && data.info.user.profile.bday &&
+                        data.info.user.profile.bday.d && data.info.user.profile.bday.m && data.info.user.profile .bday.y)) {
+                        populateData(data);
+                        setTimeout(function() {
+                             var modalInstance = $modal.open({
+                                 templateUrl : './templates/panel/user_details.html',
+                                 controller  : 'UserDetailsCtrl',
+                                 backdrop    : 'static',
+                                 keyboard    : true,
+                                scope: $scope
+                             });
+                         }, 2000);
+                    }
+                    
                     $scope.success.message = data.message;
                     templateController(true, false, false, false, false);
                 }
@@ -863,10 +947,24 @@ controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataSe
         $modalInstance.dismiss('cancel');
     };
 
+    $scope.enableUpdate = function() {
+        $scope.isDisabled = false;
+    }
+
     $scope.updateUser = function(user) {
         $scope.user = user;
         var userDetails_Obj = {};
+        if($scope.user.profile.bdate == 31 && $scope.user.profile.bmonth == 6 || 
+            $scope.user.profile.bdate == 31 && $scope.user.profile.bmonth == 11 ||
+            $scope.user.profile.bdate == 31 && $scope.user.profile.bmonth == 4 ||
+            $scope.user.profile.bdate == 31 && $scope.user.profile.bmonth == 9 ||
+            $scope.user.profile.bdate == 30 && $scope.user.profile.bmonth == 2 || 
+            $scope.user.profile.bdate == 31 && $scope.user.profile.bmonth == 2) {
 
+            toastSvc.showToast('error', 'Please Enter a Valid Date');
+            return false;
+
+        }
         userDetails_Obj = {
             mobile: $scope.user.phone,
             firstName: $scope.user.profile.first_name,
@@ -884,6 +982,7 @@ controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataSe
             }
             else {
                 toastSvc.showToast('error', 'Please provide a valid email id');
+                return false;
             }
         }
 
@@ -920,3 +1019,4 @@ controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataSe
     }
     
 })
+
