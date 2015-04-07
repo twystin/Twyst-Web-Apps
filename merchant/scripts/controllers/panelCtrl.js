@@ -522,7 +522,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             }
             if(data.info.user.profile.bday.y) {
                 $scope.user.profile.byear = data.info.user.profile.bday.y;
-                $scope.years = ['xxxx'];
+                $scope.options = ['xxxx'];
                 $scope.user.profile.byear = 'xxxx';
                 $scope.disable_year = true; 
             }       
@@ -546,16 +546,22 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                     errorController(data.status, data.message);
                 }
                 else {
-                    populateData(data);
-                    setTimeout(function() {
-                         var modalInstance = $modal.open({
-                             templateUrl : './templates/panel/user_details.html',
-                             controller  : 'UserDetailsCtrl',
-                             backdrop    : 'static',
-                             keyboard    : true,
-                            scope: $scope
-                         });
-                     }, 2000);
+
+                    if(!(data.info.user.profile && data.info.user.profile.first_name && data.info.user.profile.middle_name
+                        && data.info.user.profile.last_name && data.info.user.profile.email && data.info.user.profile.bday &&
+                        data.info.user.profile.bday.d && data.info.user.profile.bday.m && data.info.user.profile .bday.y)) {
+                        populateData(data);
+                        setTimeout(function() {
+                             var modalInstance = $modal.open({
+                                 templateUrl : './templates/panel/user_details.html',
+                                 controller  : 'UserDetailsCtrl',
+                                 backdrop    : 'static',
+                                 keyboard    : true,
+                                scope: $scope
+                             });
+                         }, 2000);
+                    }
+                    
                     $scope.success.message = data.message;
                     templateController(true, false, false, false, false);
                 }
