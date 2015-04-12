@@ -440,7 +440,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         
         $scope.user = data.info.user;
     
-        if(data.info.user.profile.first_name) {
+        if(data.info.user.profile.first_name && data.info.user.profile.first_name != null &&
+            data.info.user.profile.first_name != '' && data.info.user.profile.first_name != undefined) {
             var subStr = data.info.user.profile.first_name.slice(1);
             subStr = subStr.substr(0, subStr.length-1);
             var hide = '';
@@ -453,7 +454,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             $scope.user.profile.first_name = data.info.user.profile.first_name;        
             $scope.disable_fname = true;    
         }
-        if(data.info.user.profile.middle_name) {  
+        if(data.info.user.profile.middle_name && data.info.user.profile.middle_name != null &&
+            data.info.user.profile.middle_name != '' && data.info.user.profile.middle_name != undefined) {  
             var m_subStr = data.info.user.profile.middle_name.slice(1);
             m_subStr = m_subStr.substr(0, m_subStr.length-1);
             var hide = '';
@@ -466,7 +468,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             $scope.user.profile.middle_name = data.info.user.profile.middle_name;       
             $scope.disable_mname = true;    
         }
-        if(data.info.user.profile.last_name) {
+        if(data.info.user.profile.last_name && data.info.user.profile.last_name != null &&
+            data.info.user.profile.last_name != '' && data.info.user.profile.last_mail != undefined) {
             var l_subStr = data.info.user.profile.last_name.slice(1);
             l_subStr = l_subStr.substr(0, l_subStr.length-1);
             var hide = '';
@@ -480,7 +483,8 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             $scope.user.profile.last_name = data.info.user.profile.last_name; 
             $scope.disable_lname = true;    
         }
-        if(data.info.user.profile.email) {
+        if(data.info.user.profile.email && data.info.user.profile.email != null &&
+            data.info.user.profile.email != '' && data.info.user.profile.email != undefined)  {
             var first_mail = data.info.user.profile.email.split('@')[0];
             first_mail = first_mail.slice(1);
             first_mail = first_mail.substr(0, first_mail.length-1);
@@ -507,20 +511,20 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
         }
 
         if(data.info.user.profile.bday) {
-            if(data.info.user.profile.bday.d) {
+            if(data.info.user.profile.bday.d && data.info.user.profile.bday.d != null) {
 
                 $scope.user.profile.bdate = data.info.user.profile.bday.d;
                 $scope.dates = ['xx'];
                 $scope.user.profile.bdate = 'xx';
                 $scope.disable_date = true; 
             }
-            if(data.info.user.profile.bday.m) {
+            if(data.info.user.profile.bday.m && data.info.user.profile.bday.m != null) {
                 $scope.user.profile.bmonth = data.info.user.profile.bday.m;
                 $scope.months = ['xx'];
                 $scope.user.profile.bmonth = 'xx';
                 $scope.disable_month = true;    
             }
-            if(data.info.user.profile.bday.y) {
+            if(data.info.user.profile.bday.y && data.info.user.profile.bday.y != null) {
                 $scope.user.profile.byear = data.info.user.profile.bday.y;
                 $scope.options = ['xxxx'];
                 $scope.user.profile.byear = 'xxxx';
@@ -985,9 +989,11 @@ controller('RedeemDataCtrl', function ($modalInstance, $scope, $location, dataSe
                 return false;
             }
         }
+        else {
+           postData(); 
+        }
 
         function postData() {
-            console.log('sdkjhjdf');
             $http.post('/api/v1/populate/card_user', {
                 panel: true,
                 userData:  userDetails_Obj  

@@ -16,7 +16,7 @@
                 <label> <b>First Name</b></label> 
             </div>
             <div class = 'span6'>
-                <input type="text" placeholder="First Name" id="first_name" name="first_name"  ng-model="user.profile.first_name" ng-disabled="disable_fname" ng-change = 'enableUpdate()'>
+                <input type="text" placeholder="First Name" id="first_name" ng-model="user.profile.first_name" ng-disabled="disable_fname" ng-change = 'enableUpdate()'>
             </div>
         </div>
         
@@ -25,7 +25,7 @@
                 <label> <b>Middle Name</b></label>
             </div> 
             <div class = "span6">
-                <input type="text" placeholder="Middle Name" id="middle_name" name="middle_name"  ng-model="user.profile.middle_name" ng-disabled="disable_mname" ng-change = 'enableUpdate()'>
+                <input type="text" placeholder="Middle Name" id="middle_name"   ng-model="user.profile.middle_name" ng-disabled="disable_mname" ng-change = 'enableUpdate()'>
             </div> 
         </div>
 
@@ -34,7 +34,7 @@
                 <label> <b>Last Name</b></label>
             </div> 
             <div class = "span6">
-                <input type="text" placeholder="Last Name" id="last_name" name="last_name" ng-model = 'user.profile.last_name'  ng-disabled="disable_lname" ng-change = 'enableUpdate()'>
+                <input type="text" placeholder="Last Name" id="last_name"  ng-model = 'user.profile.last_name'  ng-disabled="disable_lname" ng-change = 'enableUpdate()'>
             </div>
         </div>
         
@@ -52,20 +52,20 @@
                 <label> <b>Birthday</b></label>
             </div>
             <div class="span2">
-                <select placeholder="DD" id="date" name="date"  ng-model="user.profile.bdate" ng-disabled="disable_date" style="width: 55px;"  ng-change = 'enableUpdate()'>
+                <select placeholder="DD" id="date"   ng-model="user.profile.bdate" ng-disabled="disable_date" style="width: 55px;"  ng-change = 'enableUpdate()'>
                     <option ng-repeat="date in dates">{{date}}</option>
                 </select>
             </div>
             
             <div class="span2">
-                <select placeholder="MM" id="month" name="month"  ng-model="user.profile.bmonth" ng-disabled="disable_month" style="width: 55px;" ng-change = 'enableUpdate()'>
+                <select placeholder="MM" id="month"  ng-model="user.profile.bmonth" ng-disabled="disable_month" style="width: 55px;" ng-change = 'enableUpdate()'>
                    <option ng-repeat="month in months">{{month}}</option>
                 </select>
             </div>
 
             <div class="span2">
-                <select placeholder="YY" id="year" name="year"  ng-model="user.profile.byear" ng-disabled="disable_year" style="width: 70px;" >
-                    <option>YY</option>
+                <select placeholder="YY" id="year"  ng-model="user.profile.byear" ng-disabled="disable_year" style="width: 70px;" >
+                    
                     <option ng-repeat="option in options">{{option}}</option>
                     
                 </select>
