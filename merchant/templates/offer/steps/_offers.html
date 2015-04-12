@@ -344,6 +344,14 @@
                     </div>
                 </div>
             </div>
+            <div class="well">
+                <div class="row-fluid">
+                  <div class="row-fluid span4">
+                    <label>Voucher Valid For</label>
+                  </div>
+                  <input id="title" placeholder=" e.g. n " type="text" ng-model="tmpo.offer.voucher_valid_for_days" ng-click="show_tip_4 = true" tooltip="Number of days voucher should valid after voucher earned"  tooltip-trigger="focus" tooltip-placement="right">  Days       
+                </div>
+            </div>
         </div>
         <div class="span5 preview-detail" ng-include="'/merchant/templates/offer/preview.html'"></div>
     </div>
