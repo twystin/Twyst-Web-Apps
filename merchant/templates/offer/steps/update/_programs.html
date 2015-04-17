@@ -108,7 +108,7 @@
                             <div class="form-horizontal">
                                 <p>
                                     <input id="appendedInput" type="text" datepicker-popup="{{format}}" is-open="opened" min="minDate" max="'2020-01-01'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start date"
-                                    type="date" style="margin:0px;" ng-model="program.validity.burn_start" />
+                                    type="date" style="margin:0px;" ng-model="program.validity.burn_start" ng-disabled= "true" />
                                     <button class="btn" ng-click="open()"><i class="icon-calendar"></i>
                                     </button>
                                 </p>
@@ -121,8 +121,8 @@
                             <div class="form-horizontal">
                                 <p>
                                     <input id="appendedInput" type="text" datepicker-popup="{{format}}" is-open="opened" min="minDate" max="'2020-01-01'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="End date" type="date"
-                                    style="margin:0px" ng-model="program.validity.burn_end" />
-                                    <button class="btn" ng-click="open()"><i class="icon-calendar"></i>
+                                    style="margin:0px" ng-model="program.validity.burn_end" ng-disabled= "true"/>
+                                    <button class="btn" ng-click="open()"><i class="icon-calendar" ></i>
                                     </button>
                                 </p>
                             </div>
