@@ -24,11 +24,22 @@
 			<input type="text" ng-model="user.phone" ng-disabled="true"></input>
 		</div>
 	</div>
+	<div class="control-group">
+	<label class="control-label">Blacklisted</label>
+		<div class="controls">
+		    <label class="checkbox">
+		      <input ng-model="user.blacklisted" type="checkbox">		      
+		    </label>
+	    </div>
+	</div>
 
 	<div ng-if="user.role === 7">
 		<div class="control-group">
 			<label class="control-label">Email ID</label>
-			<div class="controls">
+			<div class="controls" ng-if = "user.profile.email != undefined">
+				<input type="text" ng-model="user.profile.email"></input>
+			</div>
+			<div class="controls" ng-if = "user.profile.email == undefined">
 				<input type="text" ng-model="user.social_graph.email.email"></input>
 			</div>
 		</div>
@@ -59,14 +70,7 @@
 				</table>
 			</div>
 		</div>
-		<div class="control-group">
-		<label class="control-label">Blacklisted</label>
-			<div class="controls">
-			    <label class="checkbox">
-			      <input name="validated" value="validated" ng-model="user.blacklisted" type="checkbox">		      
-			    </label>
-		    </div>
-		</div>
+		
 		<div class="control-group">
 		<label class="control-label">Email Validated</label>
 			<div class="controls">
@@ -79,6 +83,9 @@
 
 	<div class="control-group" ng-if="user.role !== 7">
 		<label class="control-label">Email ID</label>
+		<div class="controls" ng-if = "user.profile.email != undefined">
+			<input type="text" ng-model="user.profile.email"></input>
+		</div>
 		<div class="controls">
 			<input type="text" ng-model="user.email"></input>
 		</div>
