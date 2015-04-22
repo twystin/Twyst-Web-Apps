@@ -12,7 +12,7 @@
 	<div class="control-group">
 		<label class="control-label">Role</label>
 		<div class="controls">
-		    <select id="role" name="role" ng-model="user.role">
+		    <select id="role" name="role" ng-model="user.role" ng-disabled="true">
 		    	<option ng-repeat="r in [1,2,3,4,5,6,7]" ng-value="r">{{r}}</option>
 		    </select>
 		</div>
