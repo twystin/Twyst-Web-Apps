@@ -13,7 +13,7 @@
 		<label class="control-label">Role</label>
 		<div class="controls">
 		    <select id="role" name="role" ng-model="user.role">
-		    	<option ng-repeat="r in [1,2,3,4,5,7]" ng-value="r">{{r}}</option>
+		    	<option ng-repeat="r in [1,2,3,4,5,6,7]" ng-value="r">{{r}}</option>
 		    </select>
 		</div>
 	</div>
@@ -86,7 +86,7 @@
 		<div class="controls" ng-if = "user.profile.email != undefined">
 			<input type="text" ng-model="user.profile.email"></input>
 		</div>
-		<div class="controls">
+		<div class="controls" ng-if = "user.profile.email == undefined">
 			<input type="text" ng-model="user.email"></input>
 		</div>
 	</div>		
