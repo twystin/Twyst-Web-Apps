@@ -1,0 +1,37 @@
+<ion-view>
+    <ion-nav-buttons side="left" style="padding:none !important">
+        <div class="col-top">
+            <img src="assets/fav_icon.png" width="40px" height="auto">
+        </div>
+    </ion-nav-buttons>
+    <ion-content>
+        <div ng-if="flash.show === true">
+            <div class="card">
+                <div class="item item-text-wrap {{flash.color}}">
+                    <i class='icon ion-information-circled'></i> {{flash.message}}
+                </div>
+            </div>
+        </div>
+
+        <div class="list list-inset">
+            <form name="otpForm" novalidate>
+                <h4>Enter your verification code</h4>
+                <label class="item item-input">
+                    <input type="number" name='otp' ng-model="user.otp" placeholder="4 digit number only" ng-pattern='/^\d{4}$/' required>
+                </label>
+                <p ng-show="otpForm.otp.$invalid && !otpForm.otp.$pristine" class="error"><i class="icon ion-information-circled"></i> 4 digits</p>
+
+                <button ng-disabled="loginForm.$invalid" class="button button-energized button-block" ng-click="verify()" ng-disabled="button_clicked.otp || button_clicked.verify">
+                    Confirm verification code
+                </button>
+            </form>
+
+            <div class="lead mark fade-in padding" style="margin-top:30px !important;">
+                <p>Didn't get a verification code?</p>
+                <button class="button button-energized button-block" ng-click="otp()" ng-disabled="button_clicked.otp || button_clicked.verify">Resend OTP code</button>
+                <div ng-show="user.phone" class="small text-gray">Will be sent to {{user.phone}}.</div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

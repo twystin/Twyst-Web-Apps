@@ -1,0 +1,25 @@
+<ion-view>
+  <ion-content ng-controller="MapCtrl">
+<!--     <ion-refresher on-refresh="doRefresh()" pulling-text="Pull to refresh..." refreshing-text="Refreshing!" refreshing-icon="ion-loading-c">
+    </ion-refresher> -->
+
+    <div class="list card">
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input type="search" placeholder="search for outlets" ng-model="searchText" class="searchinput">
+        </label>      
+
+        <span ng-hide="search.clicked" class="padding-horizontal">
+            <button class="button button-small button-energized" ng-click="redrawMap()">Search</button>
+        </span>
+        <span ng-show="search.clicked">
+            <button class="button button-small button-energized"><i class="icon ion-loading-c"></i>
+            </button>
+        </span>
+      </div>
+
+      <div style="width:100%;height:300px" id="map_canvas"></div>
+    </div>
+  </ion-content>
+</ion-view>

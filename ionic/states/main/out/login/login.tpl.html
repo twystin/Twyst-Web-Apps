@@ -1,0 +1,49 @@
+<ion-view hide-back-button="true">
+    <ion-nav-buttons side="left" style="padding:none !important">
+        <div class="col-top">
+            <img src="assets/fav_icon.png" width="40px" height="auto">
+        </div>
+    </ion-nav-buttons>
+    <ion-content>
+        <div ng-if="flash.show === true">
+            <div class="card">
+                <div class="item item-text-wrap {{flash.color}}">
+                    <i class='icon ion-information-circled'></i> {{flash.message}}
+                </div>
+            </div>
+        </div>
+
+        <div class="list list-inset">
+            <div ng-repeat="error in errors">
+                {{error.message}}
+            </div>
+
+            <h4>Please verify your mobile number to continue.</h4>
+            <form name="loginForm" novalidate>
+
+                <label class="item item-input">
+                    <input type="number" name="phone" ng-model="user.phone" placeholder="10-digit number only" ng-pattern='/^\d{10}$/' required>
+                </label>
+                <p ng-show="loginForm.phone.$invalid && !loginForm.phone.$pristine" class="error"><i class="icon ion-information-circled"></i> 10 digits</p>
+
+                <!--                 <div ng-hide="button.clicked">
+ -->
+                <button ng-disabled="loginForm.$invalid" class="button button-energized button-block" ng-click="login()">
+                    VERIFY
+                </button>
+                <!--                 </div>
+ -->
+                <!--                 <div ng-show="button.clicked">
+                    <button class="button button-energized button-block"><i class="icon ion-loading-c"></i>
+                    </button>
+                </div> -->
+            </form>
+
+            <p class="dark lead mark">You will receive a verification code by SMS if you are new to Twyst.</p>
+
+            <p>
+                <div class="small text-gray" ng-click="go_otp()">Already have an unused verification code?</div>
+            </p>
+        </div>
+    </ion-content>
+</ion-view>

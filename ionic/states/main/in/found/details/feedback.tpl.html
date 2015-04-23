@@ -1,0 +1,63 @@
+<ion-view>
+    <ion-content>
+        <div ng-show="recco">
+            <div class="item item-text-wrap">
+                <div class="th2">
+                    <strong>{{recco.outlet_summary.basics.name}} - SEND FEEDBACK</strong>
+                </div>
+                <p>
+                    <span><i class="icon ion-location"></i> {{recco.outlet_summary.contact.location.address}}</span>
+                </p>
+                <div class="th2 energized">
+                    <i class="icon fa fa-comments fa-2x"></i> We'd love to hear from you.</div>
+                <div>
+                    <small class="text-gray">(Your feedback will be seen directly by the owner / management)</small>
+                </div>
+                <br/>
+                <form name="feedbackForm" novalidate>
+
+                    <div class="th2">
+                        <strong>YOUR FEEDBACK</strong>
+                    </div>
+                    <div class="list">
+                        <label class="item item-input item-select">
+                            <div class="input-label">
+                                Select type:
+                            </div>
+                            <select ng-model="feedback.type" name="type" required>
+                                <option>Appreciation</option>
+
+                                <option>Complaint</option>
+                                <option selected>Suggestion</option>
+                            </select>
+                        </label>
+                        <p ng-show="feedbackForm.type.$invalid && !feedbackForm.type.$pristine" class="error"><i class="icon ion-information-circled"></i> Required field</p>
+
+                        <label class="item item-input oldlistitem">
+                            <textarea name="comment" placeholder="Your comments here" rows="7" ng-model="feedback.comment" required></textarea>
+                        </label>
+                        <p ng-show="feedbackForm.comment.$invalid && !feedbackForm.comment.$pristine" class="error"><i class="icon ion-information-circled"></i> Required field</p>
+                    </div>
+                    <div class="list">
+                        <span>
+                        <button class="button button-gray2" ng-click="camera()">
+                            Attach photo&nbsp;&nbsp; <i class="icon ion-ios7-camera"></i>
+                        </button>
+                    </span>
+                        <span ng-show="feedback.photo !== null">
+                        <img ng-src="data:image/jpeg;base64, {{feedback.photo}}" height="100" width="auto">
+                    </span>
+                    </div>
+                    <button ng-disabled="feedbackForm.$invalid" class="button button-block button-energized" ng-click="send_feedback()">Send!</button>
+                </form>
+            </div>
+        </div>
+        <div ng-hide="recco">
+            <div class="item item-text-wrap">
+                <div class="th2">
+                    <center><strong>SORRY - CAN'T SEND FEEDBACK AT THIS TIME!</strong></center>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

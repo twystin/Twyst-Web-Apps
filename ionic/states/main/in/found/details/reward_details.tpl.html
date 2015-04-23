@@ -1,0 +1,128 @@
+<ion-view>
+    <ion-content ng-show="item !== null && reward !== null">
+        <div class="list padding-top">
+            <div ng-hide="is_redeemed(reward.voucher.basics.code)">
+                <center><span style="font-size:18px"><strong>REWARD VOUCHER</strong></span>
+                </center>
+            </div>
+
+            <div ng-show="is_redeemed(reward.voucher.basics.code)">
+                <center><span style="font-size:18px"><strong>VOUCHER REDEEMED!</strong></span>
+                </center>
+            </div>
+        </div>
+
+        <div class="list" ng-show="is_redeemed(reward.voucher.basics.code)">
+            <div class="list-inset nounderline">
+                <center>
+                    <div style="font-size:18px;"><strong>Your voucher code</strong>
+                    </div>
+                    <div style="font-size:18px; color:#f6921e"><strong><i class="fa fa-money"></i> {{reward.voucher.basics.code}}</strong>
+                    </div>
+                </center>
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-avatar item-text-wrap voucher">
+                <img ng-src="{{imageName(reward)}}">
+                <div ng-if="reward.voucher.basics.type !== 'WINBACK'">
+                <span class="th2">
+                    <strong>{{reward.voucher.issue_details.issued_for.basics.description}}</strong>
+                </span>
+                </div>
+                <div ng-if="reward.voucher.basics.type === 'WINBACK'">
+                <span class="th2">
+                    <strong>{{reward.voucher.basics.description}}</strong>
+                </span>
+                </div>
+                <br/>
+
+                <small class="text-gray">{{reward.voucher.issue_details.issued_for.terms}}</small>
+                <span ng-hide="is_redeemed(reward.voucher.basics.code)">
+                    <br/>
+                    <small class="text-gray">
+                        <i class="fa fa-calendar"></i> VALID TILL {{reward.voucher.issue_details.program.validity.burn_end|date}}
+                    </small>
+                    <br/>
+
+                    <small ng-show="reward.avail_in">
+                        <span style="color:red !important"><i class="fa fa-clock-o"></i> AVAILABLE AT {{reward.avail_in.day | uppercase}} {{reward.avail_in.time}}</span>
+                </small>
+
+                <small ng-hide="reward.avail_in">
+                        <span style="color:green !important"><i class="fa fa-clock-o"></i> AVAILABLE NOW</span>
+                    </small>
+                </span>
+
+                <br/>
+                <small class="text-gray" ng-click="terms()">View T&C</small>
+            </div>
+        </div>
+
+        <div class="list list-inset nounderline" ng-show="is_redeemed(reward.voucher.basics.code)" ng-controller="ShareCtrl" ng-init="initContent('I just used a #TwystReward (' + reward.voucher.basics.description  + ') at ' + reward.voucher.issue_details.issued_at.0.basics.name + '! Wish you were here? Check out all rewards http://twyst.in/'+reward.voucher.issue_details.issued_at.0.shortUrl[0], 'I just used a #TwystReward (' + reward.voucher.basics.description + ') at ' + reward.voucher.issue_details.issued_at.0.basics.name + '! Check out all rewards here http://twyst.in/' + reward.voucher.issue_details.issued_at.0.shortUrl[0])">
+
+            <p>Please give this voucher code to your server (at the restaurant or on the phone) within the next 60 minutes at {{selected.basics.name}}, {{selected.contact.location.locality_1.0}}</p>
+            <br/>
+            <center>
+                <div class="th2 text-gray">LET YOUR FRIENDS KNOW!</div>
+                <button class="button button-icon icon ion-social-facebook" style="color: #415E9B;" ng-click="facebook()"></button>
+                <button class="button button-icon icon flaticon-whatsapp" style="color: #44BB2F" ng-click="whatsapp()"></button>
+                <button class="button button-icon icon flaticon-twitter12" style="color:#55ACEE" ng-click="twitter()"></button>
+            </center>
+
+        <div class="list list-inset">
+            <button class="button button-energized button-block" ng-click="feedback(selected._id)"><i class="icon fa fa-comments fa-2x"></i> Send feedback
+            </button>
+        </div>
+
+        </div>
+
+        <div ng-hide="is_redeemed(reward.voucher.basics.code)">
+
+            <div class="list list-inset nounderline">
+                <div class="th2">
+                    <strong>Redeem at {{reward.voucher.issue_details.issued_at.0.basics.name}}, at any of these locations</strong>
+                </div>
+                <form name="outletForm" novalidate>
+                   <label class="item item-input item-select">
+                        <small class="input-label">
+                            Select location:
+                        </small>
+                        <select ng-options="o.contact.location.locality_1 for o in reward.voucher.issue_details.issued_at" ng-model="selected"></select>
+                    </label>
+                </form>
+
+                <span ng-hide="reward.avail_in">
+                    <button class="button button-energized button-block" ng-click="redeem(reward.voucher.basics.code, selected)"><i class="fa fa-money"></i> REDEEM NOW</button>
+                </span>
+                <span ng-show="reward.avail_in">
+                    <button class="button button-gray button-block"><i class="fa fa-money"></i> REDEEM NOW</button>
+                </span>
+
+            </div>
+
+
+            <div class="item item-inset">
+                <strong class="th">When can I use this reward?</strong>
+                <table width="100%">
+                    <tr>
+                        <td><strong>Day</strong>
+                        </td>
+                        <td><strong>Timings</strong>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="d in days">
+                        <td>{{d | capitalize}}</td>
+                        <td>
+                            <span ng-repeat="i in reward.voucher.issue_details.issued_for.avail_hours[d].timings">
+                            <span>{{format_time(i.open.hr,i.open.min)}} - {{format_time(i.close.hr,i.close.min)}}</span>
+                            <br/>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

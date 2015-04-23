@@ -1,0 +1,7 @@
+<ion-view>
+    <ion-slide-box does-continue="true" auto-play="false">  
+            <ion-slide ng-repeat="p in photo.outlet_details.photos.others" style="background-color: black; opacity: 0.9; padding-top: 0px !important;">
+                <img ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{photo.outlet_details._id}}/{{p.image._sm}}" class="photo_slider">
+            </ion-slide>
+    </ion-slide-box>
+</ion-view>

@@ -1,0 +1,38 @@
+<ion-view>
+    <ion-content>
+        <div class="list list-inset" ng-init="getUser()">
+            <div class="mark th1">Manage your profile</div><br/>
+            <div ng-show="phone.phone">Logged in with phone number: {{phone.phone}}</div><br/>
+
+            <div ng-show="social_graph.facebook">
+                <p>
+                    <i class="fa fa-facebook-square"></i> Connected to Facebook as {{social_graph.facebook.name}}.                
+                </p>
+            </div> 
+            <div ng-hide="social_graph.facebook">
+                <p>Connect to:</p>            
+                <button class="button button-block button-positive" ng-click="fbLogin()"><i class="fa fa-facebook-square"></i> Facebook</button>
+                <p class="mark">
+                    <small>We will NEVER post anything without your consent.</small>
+                </p>
+            </div>                       
+
+            <div class="padding-top">
+                <p>Update your email:</p>
+                <form name="socialForm" novalidate>
+                    <div class="list">
+                        <div class="item item-input-inset">
+                            <label class="item-input-wrapper">
+                                <input class="small" type="email" name="email" ng-model="user.email" placeholder="email@example.com" required>
+                            </label>
+                            <button ng-disabled="socialForm.$invalid" class="button button-energized button-small" ng-click="emLogin()">Go</button>
+                        </div>
+                        <div class="item item-input-inset item-text-wrap" ng-show="socialForm.email.$invalid && !socialForm.email.$pristine">
+                            <span class="small energized"><i class="icon ion-information-circled"></i> Please enter a valid email</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

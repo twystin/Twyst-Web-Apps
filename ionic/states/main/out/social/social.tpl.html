@@ -1,0 +1,36 @@
+<ion-view hide-back-button="true">
+    <ion-nav-buttons side="left" style="padding:none !important">
+        <div class="col-top"><img src="assets/fav_icon.png" width="40px" height="auto">
+        </div>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list list-inset">
+            <div class="mark th1">Complete your sign up!</div>
+            <p>Connect to:</p>            
+            <button class="button button-block button-positive" ng-click="fbLogin()"><i class="fa fa-facebook-square"></i> Facebook</button>
+            <p class="mark">
+                <small>We will NEVER post anything without your consent.</small>
+            </p>
+            <center>
+                <h4>OR</h4>
+            </center>
+
+            <div class="padding-top">
+                <p>Add any other email</p>
+                <form name="socialForm" novalidate>
+                    <div class="list">
+                        <div class="item item-input-inset">
+                            <label class="item-input-wrapper">
+                                <input class="small" type="email" name="email" ng-model="user.email" placeholder="email@example.com" required>
+                            </label>
+                            <button ng-disabled="socialForm.$invalid" class="button button-energized button-small" ng-click="emLogin()">Go</button>
+                        </div>
+                        <div class="item item-input-inset item-text-wrap" ng-show="socialForm.email.$invalid && !socialForm.email.$pristine">
+                            <span class="small energized"><i class="icon ion-information-circled"></i> Please enter a valid email</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

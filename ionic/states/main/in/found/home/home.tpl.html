@@ -1,0 +1,545 @@
+<ion-view hide-back-button="true" title='<img class="title-image" src="assets/fav_icon.png" class="icoimg"/>'>
+
+    <ion-nav-buttons side="left" style="padding:none !important">
+        <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()">
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-map" ng-click="showMap()">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-side-menus>
+        <ion-side-menu-content drag-content="true">
+            <ion-tabs class="tabs-top tabs-energized" animation="slide-left-right" delegate-handle="myTabs">
+
+                <ion-tab title="DISCOVER" ng-controller="DiscoverCtrl" on-select="onTabSelected()">
+                    <ion-content has-tabs="true">
+                        <ion-refresher on-refresh="refresh(searchText)" pulling-text="Pull to refresh..." refreshing-text="Refreshing!">
+
+                        </ion-refresher>
+                        <div class="item item-input-inset">
+                            <label class="item-input-wrapper">
+                                <i class="icon ion-ios7-search placeholder-icon"></i>
+                                <input type="search" placeholder="search outlets, locations or cuisines" ng-model="search.searchText" class="searchinput">
+                            </label>
+                            <div ng-hide="search.showing">
+                                <div ng-show="search.searchText">
+                                <button class="button-med button-energized" ng-click="searchReccos(search.searchText)">Go</button>
+                                </div>
+                                <div ng-hide="search.searchText">
+                                <button class="button-med button-energized" ng-click="searchReccos(search.searchText)" disabled>Go</button>
+                                </div>
+                            </div>
+                            <div ng-show="search.showing">
+                                <button class="button-med button-energized" ng-click="clearSearch(search.searchText)"><i class="icon ion-close"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="item item-inset text-gray" style="padding-top:0px !important; padding-bottom:0px !important" ng-init="sortOrder='total'"><small>
+                            <button class="button button-small button-nostyle" disabled>Sort by:</button>
+                            <button class="button button-small button-nostyle" ng-click="sortOrder='total'" ng-class="sortClass('total', sortOrder)">Relevance</button>
+
+                            <button class="button button-small button-nostyle" ng-click="sortOrder='distance'" ng-class="sortClass('distance', sortOrder)">Distance</button>
+                        </div>
+                            <div ng-repeat="item in reccos | orderBy:sortOrder" ng-if="checkDate(item)">
+                                <div class="item  item-avatar item-text-wrap listitem" ng-click="showOutletDetails(item.outlet_summary)">
+                                    <img ng-src="{{iconSrc(item)}}">
+                                    <span class="th2">
+                                        <strong>{{item.outlet_summary.basics.name}}</strong>
+                                    </span>&nbsp;
+
+                                    <small ng-hide="!item.closed_now">
+                                        <strong style="color:green !important">OPENS {{item.opensAt.day | uppercase}} {{item.opensAt.time}}</strong>
+                                    </small>
+                                    <br/>
+
+                                    <small class="text-gray"><i class="icon ion-ios7-location"></i> {{item.outlet_summary.contact.location.locality_1.0}}, {{item.outlet_summary.contact.location.city}}, {{item.distance}} kms</small>
+                                    <br/>
+
+                                    <span ng-hide="item.relevant_reward === null">
+                                        <small ng-hide="item.active_rewards">
+                                            {{item.relevant_reward.reward}},
+                                            <span class="energized">
+                                                <ng-pluralize count="item.relevant_reward.count - item.checkin_count" when="{'0': '0 check-ins to go.',
+                                                        'one': '1 check-in to go.',
+                                                        'other': '{} check-ins to go'}">
+                                                </ng-pluralize>
+                                            </span>
+                                    </small>
+                                    </span>
+
+                                    <small ng-show="item.active_rewards">
+                                        <i class="icon fa fa-money ireward"></i>
+                                        <span>
+                                            <ng-pluralize count="item.active_rewards.length" when="{'0': 'No active vouchers.',
+                                                    'one': '1 active voucher.',
+                                                    'other': '{} active vouchers.'}">
+                                            </ng-pluralize>
+                                        </span>
+                                        <br/>
+                                        <div ng-show="item.active_rewards.length > 1">
+                                            {{item.active_rewards.0.basics.description}}, & {{item.active_rewards.length - 1}} more.
+                                        </div>
+                                        <div ng-hide="item.active_rewards.length > 1">
+                                            {{item.active_rewards.0.basics.description}}
+                                        </div>
+                                    </small>
+                                </div>
+                                <div class="row action">
+                                    <div class="col">
+                                        <div ng-show="getPhone(item.outlet_summary)">
+                                            <center>
+                                                <a ng-href="tel:{{getPhone(item.outlet_summary)}}"><i class="fa fa-phone-square fa-2x icall"></i></a>
+                                                <div class="smalltext">Call</div>
+                                            </center>
+                                        </div>
+                                        <div ng-hide="getPhone(item.outlet_summary)">
+                                            <center>
+                                                <i class="fa fa-phone-square fa-2x ishare"></i>
+                                                <div class="smalltext">Call</div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <span ng-hide="following.{{item.outlet_summary._id}}">
+                                        <div class="col" ng-click="follow(item)">
+                                            <center><i class="fa fa-plus-square-o fa-2x ifollowing"></i>
+                                                <div class="smalltext">Follow</div>
+                                            </center>
+                                        </div>
+                                    </span>
+                                    <span ng-show="following.{{item.outlet_summary._id}}">
+                                        <div class="col" ng-click="unfollow(item)">
+                                            <center><i class="fa fa-plus-square fa-2x ifollow"></i>
+                                                <div class="smalltext">Following</div>
+                                            </center>
+                                        </div>
+                                    </span>
+
+
+                                    <div class="col" ng-controller="ShareCtrl" ng-click="sharePopup('Awesome #TwystRewards at ' + item.outlet_summary.basics.name + ' (' + item.outlet_summary.contact.location.locality_1[0] + ', #'  +  item.outlet_summary.contact.location.city + ')! ' +  item.relevant_reward.rewardified + ', and more! Who\'s coming with me? Check out all rewards you can unlock: http://twyst.in/' + item.outlet_summary.shortUrl[0], 'Awesome #TwystRewards at ' + item.outlet_summary.basics.name + ' (' + item.outlet_summary.contact.location.locality_1[0] + ', #'  +  item.outlet_summary.contact.location.city + ')!' + ' Check them out at: http://twyst.in/' + item.outlet_summary.shortUrl[0])">
+                                        <span><center><i class="fa fa-share-alt-square fa-2x ishare"></i>
+                                                <div class="smalltext">Share</div>
+                                            </center>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div ng-if="$last">
+                                    <div ng-hide="search.showing">
+                                        <div ng-show="end < total">
+                                            <div class="small text-gray padding" ng-click="getReccos(true)">
+                                                <center>More</center>
+                                            </div>
+                                        </div>
+                                        <div style="padding:100px"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <!-- <div ng-if="sortOrder =='distance'"> -->
+                            <div ng-repeat="item in nearby | orderBy:sortOrder">
+                                <div class="item  item-avatar item-text-wrap listitem" ng-click="showOutletDetails(item.outlet_summary)">
+                                    <img ng-src="{{iconSrc(item)}}">
+                                    <span class="th2">
+                                        <strong>{{item.outlet_summary.basics.name}}</strong>
+                                    </span>&nbsp;
+
+                                    <small ng-hide="!item.closed_now">
+                                        <strong style="color:green !important">OPENS {{item.opensAt.day | uppercase}} {{item.opensAt.time}}</strong>
+                                    </small>
+                                    <br/>
+
+                                    <small class="text-gray"><i class="icon ion-ios7-location"></i> {{item.outlet_summary.contact.location.locality_1.0}}, {{item.outlet_summary.contact.location.city}}, {{item.distance}} kms</small>
+                                    <br/>
+
+                                    <span ng-hide="item.relevant_reward === null">
+                                        <small ng-hide="item.active_rewards">
+                                            {{item.relevant_reward.reward}},
+                                            <span class="energized">
+                                                <ng-pluralize count="item.relevant_reward.count - item.checkin_count" when="{'0': '0 check-ins to go.',
+                                                        'one': '1 check-in to go.',
+                                                        'other': '{} check-ins to go'}">
+                                                </ng-pluralize>
+                                            </span>
+                                    </small>
+                                    </span>
+
+                                    <small ng-show="item.active_rewards">
+                                        <i class="icon fa fa-money ireward"></i>
+                                        <span>
+                                            <ng-pluralize count="item.active_rewards.length" when="{'0': 'No active vouchers.',
+                                                    'one': '1 active voucher.',
+                                                    'other': '{} active vouchers.'}">
+                                            </ng-pluralize>
+                                        </span>
+                                        <br/>
+                                        <div ng-show="item.active_rewards.length > 1">
+                                            {{item.active_rewards.0.basics.description}}, & {{item.active_rewards.length - 1}} more.
+                                        </div>
+                                        <div ng-hide="item.active_rewards.length > 1">
+                                            {{item.active_rewards.0.basics.description}}
+                                        </div>
+                                    </small>
+                                </div>
+                                <div class="row action">
+                                    <div class="col">
+                                        <div ng-show="getPhone(item.outlet_summary)">
+                                            <center>
+                                                <a ng-href="tel:{{getPhone(item.outlet_summary)}}"><i class="fa fa-phone-square fa-2x icall"></i></a>
+                                                <div class="smalltext">Call</div>
+                                            </center>
+                                        </div>
+                                        <div ng-hide="getPhone(item.outlet_summary)">
+                                            <center>
+                                                <i class="fa fa-phone-square fa-2x ishare"></i>
+                                                <div class="smalltext">Call</div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <span ng-hide="following.{{item.outlet_summary._id}}">
+                                        <div class="col" ng-click="follow(item)">
+                                            <center><i class="fa fa-plus-square-o fa-2x ifollowing"></i>
+                                                <div class="smalltext">Follow</div>
+                                            </center>
+                                        </div>
+                                    </span>
+                                    <span ng-show="following.{{item.outlet_summary._id}}">
+                                        <div class="col" ng-click="unfollow(item)">
+                                            <center><i class="fa fa-plus-square fa-2x ifollow"></i>
+                                                <div class="smalltext">Following</div>
+                                            </center>
+                                        </div>
+                                    </span>
+
+
+                                    <div class="col" ng-controller="ShareCtrl" ng-click="sharePopup('Awesome #TwystRewards at ' + item.outlet_summary.basics.name + ' (' + item.outlet_summary.contact.location.locality_1[0] + ', #'  +  item.outlet_summary.contact.location.city + ')! ' +  item.relevant_reward.rewardified + ', and more! Who\'s coming with me? Check out all rewards you can unlock: http://twyst.in/' + item.outlet_summary.shortUrl[0], 'Awesome #TwystRewards at ' + item.outlet_summary.basics.name + ' (' + item.outlet_summary.contact.location.locality_1[0] + ', #'  +  item.outlet_summary.contact.location.city + ')!' + ' Check them out at: http://twyst.in/' + item.outlet_summary.shortUrl[0])">
+                                        <span><center><i class="fa fa-share-alt-square fa-2x ishare"></i>
+                                                <div class="smalltext">Share</div>
+                                            </center>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div ng-if="$last">
+                                    <div ng-hide="search.showing">
+                                        <div ng-show="end < total">
+                                            <div class="small text-gray padding" ng-click="getReccos(true)">
+                                                <center>More</center>
+                                            </div>
+                                        </div>
+                                        <div style="padding:100px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-show="search.showing">
+                            <div ng-show="!reccos || reccos.length === 0">
+                                <center>
+                                    <div class="th2 energized">NO SEARCH RESULTS</div>
+                                </center>
+                            </div>
+                            <div class="small text-gray padding" ng-click="clearSearch(search.searchText)">
+                                <center>Clear search</center>
+                            </div>
+                            <div style="padding:50px"></div>
+                        </div>
+
+
+                    </ion-content>
+                    <div class="bar bar-footer footsie">
+                        <div ng-click="checkin()" class="th2 energized roundie">
+                            <img src="assets/checked-in.png" class="icoimg" />
+                            <br/>
+                            <span style="font-size:12px">TAP TO CHECK-IN</span>
+                        </div>
+                    </div>
+
+                </ion-tab>
+
+
+                <ion-tab title="MY REWARDS" ng-controller="RewardsCtrl">
+
+                    <ion-content>
+                        <ion-refresher on-refresh="getRewards()" pulling-text="Pull to refresh..." refreshing-text="Refreshing!">
+                        </ion-refresher>
+                        <div ng-show="total_count !== 0">
+                            <div ng-repeat="item in active_rewards | orderBy: 'voucher.issue_details.program.validity.burn_end'">
+                                <div class="item item-avatar item-text-wrap listitem" ng-click="showRewardDetails(item)" ng-if="item.voucher.basics.type !== 'WINBACK'">
+                                    <img ng-src="{{imageName(item)}}">
+                                    <span class="th2">
+                                        <strong>{{item.voucher.issue_details.issued_for.basics.title}}</strong>
+                                    </span>
+                                    <br/>
+                                    <small>
+                                        <span ng-show="item.avail_in">
+                                            <strong style="color:red !important">AVAILABLE {{item.avail_in.day | uppercase}} {{item.avail_in.time}}</strong>
+                                        </span>
+                                        <span ng-hide="item.avail_in">
+                                            <strong style="color:green !important">AVAILABLE NOW</strong>
+                                        </span>
+                                    </small>
+                                    <br/>
+
+                                    <small>
+                                        {{item.voucher.issue_details.issued_at.0.basics.name}}
+                                        <br/>
+                                        <span class="text-gray"><i class="icon ion-ios7-location"></i> {{item.voucher.issue_details.issued_at.0.contact.location.locality_1.0}}, {{item.voucher.issue_details.issued_at.0.contact.location.city}}, {{item.distance}} kms</span>
+                                    </small>
+                                    <br/>
+                                    <small class="text-gray">
+                                        <i class="icon ion-ios7-calendar"></i> Valid till {{item.voucher.issue_details.program.validity.burn_end|date}}</small>
+                                </div>
+
+                                <div class="row action" ng-if="item.voucher.basics.type !== 'WINBACK'">
+
+                                    <div class="col">
+                                        <div ng-show="getPhone(item.voucher.issue_details.issued_at.0)">
+                                            <center>
+                                                <a ng-href="tel:{{getPhone(item.voucher.issue_details.issued_at.0)}}"><i class="fa fa-phone-square fa-2x icall"></i></a>
+                                                <div class="smalltext">Call</div>
+                                            </center>
+                                        </div>
+                                        <div ng-hide="getPhone(item.voucher.issue_details.issued_at.0)">
+                                            <center>
+                                                <i class="fa fa-phone-square fa-2x ishare"></i>
+                                                <div class="smalltext">Call</div>
+                                            </center>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col">
+                                        <center>
+                                            <span ng-hide="is_redeemed(item.voucher.basics.code)">
+                                                <i class="fa fa-money fa-2x iredeem" ng-click="showRewardDetails(item)"></i>
+                                                <div class="smalltext">Redeem</div>
+                                            </span>
+                                            <span ng-show="is_redeemed(item.voucher.basics.code)">
+                                                <div class="ivoucher" style="padding-bottom:7px;">{{item.voucher.basics.code}}</div>
+                                                <div class="smalltext">Voucher</div>
+
+                                            </span>
+                                        </center>
+                                    </div>
+
+                                    <div class="col">
+                                        <center>
+                                            <i class="fa fa-bell-o fa-2x iremind" ng-click="remind(item)"></i>
+                                            <div class="smalltext">Remind me</div>
+                                        </center>
+                                    </div>
+                                    <div class="col" ng-controller="ShareCtrl" ng-controller="ShareCtrl" ng-click="sharePopup('I have an unused #TwystReward at ' + item.voucher.issue_details.issued_at[0].basics.name + ', ' + item.voucher.issue_details.issued_at.0.contact.location.locality_1.0 + ', #' + item.voucher.issue_details.issued_at.0.contact.location.city + ' (' + item.voucher.issue_details.issued_for.basics.title +  ') ...yay! Who\'s coming with me to redeem? Check out the rewards you can unlock: http://www.twyst.in/' + item.voucher.issue_details.issued_at.0.shortUrl[0], 'I have a #TwystReward at ' + item.voucher.issue_details.issued_at[0].basics.name + '! Who\'s coming with me to redeem? Check out all rewards: http://www.twyst.in/' + item.voucher.issue_details.issued_at.0.shortUrl[0])">
+                                        <center><i class="fa fa-share-alt-square fa-2x ishare"></i>
+                                            <div class="smalltext">Share</div>
+                                        </center>
+                                    </div>
+                                </div>
+                                <div class="item item-avatar item-text-wrap listitem" ng-click="showRewardDetails(item)" ng-if="item.voucher.basics.type === 'WINBACK'">
+                                    <img ng-src="{{imageName(item)}}">
+                                    <span class="th2">
+                                        <strong>{{item.voucher.basics.description}}</strong>
+                                    </span>
+                                    <br/>
+                                    <small>
+                                        <span ng-show="item.avail_in">
+                                            <strong style="color:red !important">AVAILABLE {{item.avail_in.day | uppercase}} {{item.avail_in.time}}</strong>
+                                        </span>
+                                        <span ng-hide="item.avail_in">
+                                            <strong style="color:green !important">AVAILABLE NOW</strong>
+                                        </span>
+                                    </small>
+                                    <br/>
+
+                                    <small>
+                                        {{item.voucher.issue_details.issued_at.0.basics.name}}
+                                        <br/>
+                                        <span class="text-gray"><i class="icon ion-ios7-location"></i> {{item.voucher.issue_details.issued_at.0.contact.location.locality_1.0}}, {{item.voucher.issue_details.issued_at.0.contact.location.city}}, {{item.distance}} kms</span>
+                                    </small>
+                                    <br/>
+                                    <small class="text-gray">
+                                        <i class="icon ion-ios7-calendar"></i> Valid till {{item.voucher.validity.end_date|date}}</small>
+                                </div>
+
+                                <div class="row action" ng-if="item.voucher.basics.type === 'WINBACK'">
+
+                                    <div class="col">
+                                        <div ng-show="getPhone(item.voucher.issue_details.issued_at.0)">
+                                            <center>
+                                                <a ng-href="tel:{{getPhone(item.voucher.issue_details.issued_at.0)}}"><i class="fa fa-phone-square fa-2x icall"></i></a>
+                                                <div class="smalltext">Call</div>
+                                            </center>
+                                        </div>
+                                        <div ng-hide="getPhone(item.voucher.issue_details.issued_at.0)">
+                                            <center>
+                                                <i class="fa fa-phone-square fa-2x ishare"></i>
+                                                <div class="smalltext">Call</div>
+                                            </center>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col">
+                                        <center>
+                                            <span ng-hide="is_redeemed(item.voucher.basics.code)">
+                                                <i class="fa fa-money fa-2x iredeem" ng-click="showRewardDetails(item)"></i>
+                                                <div class="smalltext">Redeem</div>
+                                            </span>
+                                            <span ng-show="is_redeemed(item.voucher.basics.code)">
+                                                <div class="ivoucher" style="padding-bottom:7px;">{{item.voucher.basics.code}}</div>
+                                                <div class="smalltext">Voucher</div>
+
+                                            </span>
+                                        </center>
+                                    </div>
+
+                                    <div class="col">
+                                        <center>
+                                            <i class="fa fa-bell-o fa-2x iremind" ng-click="remind(item)"></i>
+                                            <div class="smalltext">Remind me</div>
+                                        </center>
+                                    </div>
+                                    <div class="col" ng-controller="ShareCtrl" ng-controller="ShareCtrl" ng-click="sharePopup(item.voucher.issue_details.issued_for.basics.title, item.voucher.issue_details.issued_for.basics.title)">
+                                        <center><i class="fa fa-share-alt-square fa-2x ishare"></i>
+                                            <div class="smalltext">Share</div>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="used_rewards && used_rewards.length !== 0">
+                                <div class="item item-divider">Used rewards</div>
+                                <div ng-repeat="item in used_rewards | orderBy:'-used_details.used_time'">
+                                    <div class="item item-avatar item-text-wrap listitem">
+                                        <img ng-src="{{imageNameUsed(item)}}">
+                                        <span class="th2">
+                                            <span ng-show="item.basics.type === 'WINBACK'">
+                                            <strong>{{item.basics.description}}</strong>
+                                            </span>
+                                            <span ng-hide="item.basics.type === 'WINBACK'">
+                                            <strong>{{item.issue_details.issued_for.basics.title}}</strong>
+                                            </span>
+                                        </span>
+                                        <br/>
+
+                                        <small>
+                                            {{item.issue_details.issued_at.0.basics.name}}
+                                            <br/>
+                                            <span class="text-gray"><i class="icon ion-ios7-location"></i> {{item.issue_details.issued_at.0.contact.location.locality_1.0}}, {{item.issue_details.issued_at.0.contact.location.city}}, {{item.distance}} kms</span>
+                                        </small>
+                                        <br/>
+                                        <!-- <small class="text-gray">
+                                            <i class="icon ion-ios7-calendar"></i> Valid till {{item.issue_details.program.validity.burn_end|date}}</small>
+                                        <br/> -->
+                                        <small><i class="fa fa-money"></i> Voucher: {{item.basics.code}}</small><br/>
+                                        <small>USED ON: {{item.used_details.used_time|date}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="expired_rewards && expired_rewards.length !== 0">
+                                <div class="item item-divider">Expired rewards</div>
+                                <div ng-repeat="item in expired_rewards | orderBy:'-issue_details.program.validity.burn_end'">
+                                    <div class="item item-avatar item-text-wrap listitem">
+                                        <img ng-src="{{imageNameUsed(item)}}">
+                                        <span class="th2">
+                                            <strong>{{item.issue_details.issued_for.basics.title}}</strong>
+                                        </span>
+                                        <br/>
+
+                                        <small>
+                                            {{item.issue_details.issued_at.0.basics.name}}
+                                            <br/>
+                                            <span class="text-gray"><i class="icon ion-ios7-location"></i> {{item.issue_details.issued_at.0.contact.location.locality_1.0}}, {{item.issue_details.issued_at.0.contact.location.city}}, {{item.distance}} kms</span>
+                                        </small>
+                                        <br/>
+                                        <small>EXPIRED ON: {{item.issue_details.program.validity.burn_end|date}}</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="small text-gray padding" ng-click="getRewards(true)">
+                                <center>More</center>
+                                <div style="padding-bottom:100px"></div>
+                            </div>
+
+                        </div>
+                        <div ng-hide="total_count !== 0">
+                            <div class="th2 energized">
+                                <center>You don't have any rewards yet!</center>
+                            </div>
+                        </div>
+                    </ion-content>
+
+                    <div class="bar bar-footer footsie">
+                        <div ng-click="checkin()" class="th2 energized roundie">
+                            <img src="assets/checked-in.png" class="icoimg" />
+                            <br/>
+                            <span style="font-size:12px">TAP TO CHECK-IN</span>
+                        </div>
+                    </div>
+                </ion-tab>
+
+                <ion-tab title="ACTIVITY" ng-controller="ActivityCtrl">
+                    <ion-content>
+                        <ion-refresher on-refresh="getActivity()" pulling-text="Pull to refresh..." refreshing-text="Refreshing!">
+
+                        </ion-refresher>
+
+                        <div ng-show="timeline && timeline.results && timeline.results.length !== 0">
+                            <div ng-repeat="item in timeline.results">
+                                <div class="item  item-avatar item-text-wrap listitem" ng-click="showActivityDetails(item)">
+                                    <img ng-src="assets/images/{{item.message_object_type}}.png" width="60px" height="auto">
+                                    <span class="tl">{{item.message}}</span>
+                                    <small class="text-gray">
+                                        <span am-time-ago="item.created_date"></span>
+                                    </small>
+                                </div>
+                                <div ng-if="$last">
+                                    <div class="small text-gray padding" ng-click="getActivity(true)">
+                                        <center>More</center>
+                                    </div>
+                                    <div style="padding:100px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-hide="timeline.results.length !== 0">
+                            <div class="th2 energized">
+                                <center>Start checking-in to see your activity!</center>
+                            </div>
+                        </div>
+
+                    </ion-content>
+                    <div class="bar bar-footer footsie">
+                        <div ng-click="checkin()" class="th2 energized roundie">
+                            <img src="assets/checked-in.png" class="icoimg" />
+                            <br/>
+                            <span style="font-size:12px">TAP TO CHECK-IN</span>
+                        </div>
+                    </div>
+
+                </ion-tab>
+            </ion-tabs>
+        </ion-side-menu-content>
+
+        <ion-side-menu side="left">
+            <ion-content>
+                <ul class="list">
+                    <a ng-show="username" class="item" menu-close><i class="fa fa-asterisk"></i> Hi {{username | limitTo:50}}</a>
+                    <a class="item" ng-click="manage()" menu-close><i class="fa fa-user"></i> Manage your profile</a>
+                    <a class="item" ng-click="rate()" menu-close><i class="fa fa-heart-o"></i> Rate the Twyst app</a>
+<!--                     <a class="item" ng-click="fblike()" menu-close><i class="fa fa-facebook"></i> Like us on Facebook</a> -->
+
+                    <a class="item" ng-click="get_in_touch()" menu-close><i class="fa fa-comment-o"></i> Get in touch with us</a>
+                    <a class="item" ng-click="suggest_outlet()" menu-close><i class="fa fa-gift"></i> Suggest an outlet</a>
+
+                    <a class="item" ng-click="tou()" menu-close><i class="fa fa-info"></i> Terms of use</a>
+
+                    <a class="item" ng-click="privacy()" menu-close><i class="fa fa-gavel"></i> Privacy policy</a>
+<!--                     <div class="item item-divider energized">
+                        <a ng-click="restore()" menu-close><i class="icon ion-alert-circled"></i> Reset Twyst</a>
+                    </div> -->
+                </ul>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
+</ion-view>

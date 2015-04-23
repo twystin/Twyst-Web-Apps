@@ -1,0 +1,227 @@
+<ion-view>
+    <ion-nav-buttons side="right">
+        <button ng-controller="ShareCtrl" class="button button-icon icon ion-android-share" ng-click="sharePopup('Awesome #TwystRewards at ' + item.outlet_details.basics.name + ' (' + item.outlet_details.contact.location.locality_1[0] + ',#'  +  item.outlet_details.contact.location.city + ')! ' +  item.relevant_reward.rewardified + ', and more! Who\'s coming with me? Check out all rewards you can unlock: http://twyst.in/' + item.outlet_details.shortUrl[0], 'Awesome #TwystRewards at ' + item.outlet_details.basics.name + ' (' + item.outlet_details.contact.location.locality_1[0] + ',#'  +  item.outlet_details.contact.location.city + ')!' + ' Check them out at: http://twyst.in/' + item.outlet_details.shortUrl[0])">
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content ng-show="item !== null" ng-init="showLoading()">
+        <div ng-if="item.programs_details.images.0">
+            <img class="full-image" ng-src="{{item.programs_details.images.0}}" imageonload>
+        </div>
+        <div class="item item-text-wrap nounderline">
+            <div class="th1">
+                <strong>{{item.outlet_details.basics.name}}</strong>&nbsp;
+            </div>
+            <div class="item item-icon-right" style="padding: 0px !important; margin-top: 5px important!; margin-bottom:5px !important; border:none !important">
+                <span ng-show="item.total_checkin"><span class="small text-gray"><span class="energized">{{item.total_checkin}}</span> check-ins.</span>
+                </span>
+
+                <span class="small text-gray"><span class="energized">{{item.total_follow}}</span> follower(s).</span>
+
+                <span ng-show="followed || following.{{item.outlet_details._id}}">
+                <small><i class="icon ion-ios7-plus-outline ifollow" style="font-size:14px !important" ng-click="unfollow(item)">Following</i></small>
+            </span>
+                <span ng-hide="followed || following.{{item.outlet_details._id}}">
+                <small><i class="icon ion-ios7-plus-outline ifollowing" style="font-size:14px !important" ng-click="follow(item)">Follow</i></small>
+            </span>
+            </div>
+        </div>
+        <div class="item item-text-wrap item-icon-right nounderline">
+            <small class="text-gray">{{item.outlet_details.contact.location.address}}</small>
+            <span ng-repeat="mobile in item.outlet_details.contact.phones.mobile | limitTo:1">
+                <a style="text-decoration:none !important;" ng-href="tel:{{mobile.num}}"><i class="icon fa fa-phone-square fa-2x icall"></i></a>
+            </span>
+        </div>
+        <div class="item item-inset nounderline">
+            <button class="button button-block button-energized item-icon-left item-icon-right" ng-click="feedback(item)"><i class="icon fa fa-comments fa-2x"></i> Send feedback <i class="icon ion-ios7-arrow-right"></i>
+            </button>
+        </div>
+
+        <div ng-show="item.active_rewards">
+            <div class="item item-divider"><i class="fa fa-money iredeem"></i> Your active vouchers</div>
+            <div class="item item-inset item-text-wrap">
+                <table width="100%" style="border:none !important">
+                    <tr style="border:none !important" ng-repeat="r in item.active_rewards" ng-click="showRewardDetails(r)">
+                        <td style="border:none !important">{{r.basics.description}}</td>
+                        <td style="border:none !important">
+                            <i class="fa fa-angle-right"></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div ng-hide="item.active_rewards">
+            <div class="item nounderline">
+                <i class="fa fa-gift ifollow"></i> Coming up next for you
+            </div>
+            <div class="item item-text-wrap">
+                <small>{{item.relevant_reward.reward}}, </small>
+                <small class="assertive">{{item.checkins_to_next_reward}} check-ins to go.</small>
+            </div>
+        </div>
+
+
+        <div class="item item-divider">Rewards at this outlet</div>
+        <div class="item item-inset item-text-wrap">
+            <p>You have {{item.checkin_count}} check-ins here.</p>
+            <table width="100%">
+                <tr>
+                    <td class="tg" colspan="2">
+                        <strong>On check-in number</strong>
+                    </td>
+                </tr>
+                <tr ng-repeat="r in limitRewards() | limitTo:rewards.count" ng-class="highlight(item.checkin_count, r.count, limitedRewards[$index - 1].count)" ng-click="showDetail=!showDetail">
+                    <td>{{r.count}}</td>
+                    <td>
+                        {{r.reward}}
+                        <div ng-show="showDetail">
+                            {{r.description}}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div ng-show="rewards.count === 5">
+                <small class="text-gray" ng-click="rewards.count = rewards.count + 5">View more</small>
+            </div>
+            <div ng-show="rewards.count > 5 && rewards.count < 100">
+                <small class="text-gray" ng-click="rewards.count = rewards.count + 5">View more |</small>
+                <small class="text-gray" ng-click="rewards.count = rewards.count - 5">View less</small>
+            </div>
+            <div ng-show="rewards.count === 100">
+                <small class="text-gray" ng-click="rewards.count = rewards.count - 5">View less</small>
+            </div>
+        </div>
+        <div ng-hide="item.outlet_details.photos.others.length === 0">
+            <div class="item item-divider">
+                Photos
+            </div>
+            <div class="item item-text-wrap">
+                <span ng-repeat="p in item.outlet_details.photos.others | limitTo:3">
+                    <span class="frame">
+                        <span class="helper">
+                            <img class="outlet_image" ng-click="photos(item)" ng-src="https://s3-us-west-2.amazonaws.com/twyst-outlets/{{item.outlet_details._id}}/{{p.image._th}}">
+                        </span>
+                </span>
+                </span>
+                <small class="text-gray" ng-click="photos(item)">More</small>
+
+            </div>
+        </div>
+
+
+        <div class="item item-divider">
+            Outlet details
+        </div>
+        <div class="item item-text-wrap">
+            <p>
+                <i class="fa fa-clock-o"></i><span class="padding-left"> Timings: {{item.outlet_details.attributes.timings}}</span>
+                <br/>
+                <i class="fa fa-cutlery"></i><span class="padding-left"> Cuisines: {{item.outlet_details.attributes.cuisines | limitTo:3 | texticle}}</span>
+                <br/>
+                <i class="fa fa-credit-card text-gray"></i><span class="padding-left"> Payment: {{item.outlet_details.attributes.payment_options|limitTo:3|texticle}}</span>
+            </p>
+        </div>
+        <div class="item item-divider">
+            Quick facts
+        </div>
+        <div class="item item-text-wrap">
+            <div class="small text-gray">
+                <span>
+                    <span ng-show="item.outlet_details.attributes.home_delivery === true"><i class="fa fa-check-circle" style="color:green"></i> Home delivery available
+                    </span>
+                    <span ng-hide="item.outlet_details.attributes.home_delivery === true"><i class="fa fa-times-circle" style="color:gray"></i> No home delivery
+                    </span>
+                </span>
+                <br/>
+
+                <span>
+                    <span ng-show="item.outlet_details.attributes.veg === true"><i class="fa fa-dot-circle-o" style="color:green"></i> Serves only veg
+                    </span>
+                    <span ng-hide="item.outlet_details.attributes.veg === true"><i class="fa fa-dot-circle-o" style="color:red"></i> Serves non-veg
+                    </span>
+                </span>
+                <br/>
+
+                <span>
+                    <span ng-show="item.outlet_details.attributes.dine_in === true"><i class="fa fa-check-circle" style="color:green"></i> Dine-in available
+                    </span>
+                    <span ng-hide="item.outlet_details.attributes.dine_in === true"><i class="fa fa-times-circle" style="color:gray"></i> No dine-in
+                    </span>
+                </span>
+                <br/>
+                <div ng-show="item.outlet_details.attributes.dine_in === true">
+                    <span>
+                        <span ng-show="item.outlet_details.attributes.alcohol === true"><i class="fa fa-check-circle" style="color:green"></i> Bar available 
+                        </span>
+                        <span ng-hide="item.outlet_details.attributes.alcohol === true"><i class="fa fa-times-circle" style="color:gray"></i> No alcohol
+
+                        </span>
+                    </span>
+                    <br/>
+
+                    <span>
+                        <span ng-show="item.outlet_details.attributes.smoking === true"><i class="fa fa-check-circle" style="color:green"></i> Smoking area available
+                        </span>
+                        <span ng-hide="item.outlet_details.attributes.smoking === true"><i class="fa fa-times-circle" style="color:gray"></i> No smoking
+                        </span>
+                    </span>
+                    <br/>
+
+
+                    <span>
+                        <span ng-show="item.outlet_details.attributes.air_conditioning === 'Available'"><i class="fa fa-check-circle" style="color:green"></i>
+                         AC available </span>
+                        <span ng-hide="item.outlet_details.attributes.air_conditioning === 'Available'"><i class="fa fa-times-circle" style="color:gray"></i> AC not available
+                        </span>
+                    </span>
+                    <br/>
+
+
+                    <span>
+                        <span ng-show="item.outlet_details.attributes.parking !== 'Not Available'"><i class="fa fa-check-circle" style="color:green"></i> Parking available
+                        </span>
+                        <span ng-hide="item.outlet_details.attributes.parking !== 'Not Available'"><i class="fa fa-times-circle" style="color:gray"></i> Parking not available
+                        </span>
+                    </span>
+                    <br/>
+
+                    <span>
+                        <span ng-show="item.outlet_details.attributes.reservation === 'Recommended'"><i class="fa fa-check-circle" style="color:green"></i> Reservation recommended
+                        </span>
+                        <span ng-hide="item.outlet_details.attributes.reservation === 'Recommended'"><i class="fa fa-times-circle" style="color:gray"></i> Reservation not required
+                        </span>
+                    </span>
+                    <br/>
+
+                    <span>
+                        <span ng-show="item.outlet_details.attributes.wifi !== 'Not Available'"><i class="fa fa-check-circle" style="color:green"></i> Wi-Fi available
+                        </span>
+                        <span ng-hide="item.outlet_details.attributes.wifi !== 'Not Available'"><i class="fa fa-times-circle" style="color:gray"></i> Wi-Fi not available
+                        </span>
+                    </span>
+                    <br/>
+
+                    <span>
+                        <span ng-show="item.outlet_details.attributes.outdoor === true"><i class="fa fa-check-circle" style="color:green"></i> Outdoor seating available
+                        <br/>
+                        </span>
+                    </span>
+                    <span>
+                        <span ng-show="item.outlet_details.attributes.foodcourt === true"><i class="fa fa-check-circle" style="color:green"></i> Part of a food-court
+                        </span>
+                    </span>
+                    <br/>
+                </div>
+
+            </div class="small text-gray">
+        </div>
+        <div style="padding-bottom:100px !important"></div>
+    </ion-content>
+    <div class="bar bar-footer footsie" ng-show="item !== null">
+        <div ng-click="checkin()" class="th2 energized roundie">
+            <img src="assets/checked-in.png" class="icoimg" />
+            <br/>
+            <span style="font-size:12px">TAP TO CHECK-IN</span>
+        </div>
+    </div>
+</ion-view>

@@ -1,0 +1,36 @@
+<ion-view>
+    <ion-content>
+        <div class="list">
+            <div class="item item-inset item-icon-right item-text-wrap">
+            	<i class="fa fa-check-circle-o fa-2x" style="color:#f6921e"></i>
+            	<span style="font-size:18px"><strong>CHECKED-IN!</strong></span>
+            	<br/><br/>
+            	<span>You have checked-in into {{data.info.outlet.basics.name}}, {{data.info.outlet.contact.location.locality_1.0}}.</span>
+            	<br/>
+				<span ng-hide="data.info.reward_distance">
+					<span>Awesome! You have just unlocked a reward: </span>
+					<strong>{{data.info.reward.rewardified}}</strong><br/>
+					<small class="text-gray">This reward will be available in your My Rewards in some time.</small>				
+				</span>
+				<span ng-show="data.info.reward_distance">
+					<span>You are {{data.info.reward_distance}} check-ins away from your next reward.</span><br/>
+					<span>Coming up for you:</span>
+					<strong>{{data.info.reward.rewardified}}</strong>	
+				</span>
+            </div>
+        </div>
+
+        <div class="list list-inset" ng-controller="ShareCtrl" ng-init="initContent('I just checked-in at ' + data.info.outlet.basics.name + '(' + data.info.outlet.contact.location.locality_1 + ',' + data.info.outlet.contact.location.city + '). Check out all rewards: http://twyst.in/' + data.info.outlet.shortUrl[0], 'I just checked-in at ' + data.info.outlet.basics.name + '(' + data.info.outlet.contact.location.locality_1 + ',' + data.info.outlet.contact.location.city + '). Check out all rewards: http://twyst.in/' + data.info.outlet.shortUrl[0])">
+            <center>
+                <div class="th2 text-gray">LET YOUR FRIENDS KNOW!</div>
+                <button class="button button-icon icon ion-social-facebook" style="color: #415E9B;" ng-click="facebook()"></button>
+                <button class="button button-icon icon flaticon-whatsapp" style="color: #44BB2F"ng-click="whatsapp()"></button>
+                <button class="button button-icon icon flaticon-twitter12" style="color:#55ACEE"ng-click="twitter()"></button>
+            </center>
+        </div>
+        <div class="list list-inset">
+        	<button class="button button-energized button-block" ng-click="feedback(data.info.outlet._id)"><i class="icon fa fa-comments fa-2x"></i> Send feedback 
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
