@@ -47,8 +47,7 @@ factory('dataSvc', function($http, $q, $rootScope, $window, $ionicLoading, $time
         logSvc.event('Network', 'Network error', 'Network error', '1');
 
         if (!$rootScope.network_error_shown) {
-            $window.navigator.notification.alert("Please enable data or connect to wi-fi to get the full Twyst experience.",
-                function() {}, "NO DATA CONNECTION", "OK");
+            $window.alert("Please enable data or connect to wi-fi to get the full Twyst experience.");
             $rootScope.network_error_shown = true;
             $timeout(function() {
                 $rootScope.network_error_shown = false;

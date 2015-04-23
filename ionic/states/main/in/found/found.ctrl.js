@@ -78,8 +78,7 @@ twystApp.controller('DiscoverCtrl', function($rootScope, $ionicPopup, urlp, $ion
 
     $scope.$on('no_location', function() {
         if (!$scope.location_error_shown) {
-            $window.navigator.notification.alert("Please enable location services and give Twyst access to your location to get accurate distances and map information.",
-                function() {}, "CANNOT FIND LOCATION", "OK");
+            $window.navigator.notification.alert("Please enable location services and give Twyst access to your location to get accurate distances and map information.");
             $scope.location_error_shown = true;
             $timeout(function() {
                 $scope.location_error_shown = false;
@@ -329,8 +328,7 @@ twystApp.controller('RewardsCtrl', function($rootScope, $ionicPopup, $ionicLoadi
         var success = function(message) {
             logSvc.event('Remind', 'Reminder success', 'Reminder created from My Rewards', '1');
 
-            $window.navigator.notification.alert("Reminder set for " + startMoment.format('Do-MMM'),
-                function() {}, "SUCCESS", "OK");
+            $window.alert("Reminder set for " + startMoment.format('Do-MMM'));
         };
         var error = function(message) {
             logSvc.event('Remind', 'Reminder error', 'Reminder error from My Rewards', '1');
@@ -521,7 +519,7 @@ twystApp.controller('OnInFoundCtrl', function($rootScope, $ionicPlatform, $scope
 
 
 
-    
+
     $scope.fblike = function() {
         var window_ref = $window.open('http://www.facebook.com/twystin', '_blank');
     }
@@ -539,8 +537,7 @@ twystApp.controller('OnInFoundCtrl', function($rootScope, $ionicPlatform, $scope
         $window.navigator.notification.confirm("Restoring Twyst will remove all data and reset your account. Are you sure?",
             function() {
                 storageSvc.clear();
-                $window.navigator.notification.alert("",
-                    function() {}, "SUCCESSFULLY RESET TWYST", "OK");
+                $window.alert("");
             }, "RESET TWYST", ["OK", "CANCEL"]);
     }
 

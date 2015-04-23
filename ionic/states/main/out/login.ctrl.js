@@ -11,16 +11,7 @@ twystApp.controller('LoginCtrl', function($scope, $state, $window, $rootScope, $
         storageSvc.set('user', $scope.user);
         var promise = dataSvc.login($scope.user.phone);
         promise.then(function(success) {
-                    if (success && success.info && success.info.social_graph) {
-                        s = success.info.social_graph;
-                        if (s.email && s.email.email || s.facebook) {
-                            $state.go('main.in.found.home');
-                        } else {
-                            $state.go('main.out.social');
-                        }
-                    } else {
-                        $state.go('main.out.social');
-                    }
+          $state.go('main.in.found.home');
         }, function(error) {
             if (error === 'Unauthorized') {
                 $scope.otp();
@@ -41,21 +32,17 @@ twystApp.controller('LoginCtrl', function($scope, $state, $window, $rootScope, $
         storageSvc.set('user', $scope.user);
         var promise = dataSvc.getOTP($scope.user.phone);
         promise.then(function(success) {
-            $window.navigator.notification.alert("You should receive a verification code soon.",
-                function() {
-                    $scope.button_clicked.otp = false;
-                    $state.go('main.out.otp');
-                }, "VERIFICATION", "OK");
+            $window.alert("You should receive a verification code soon.");
+            $scope.button_clicked.otp = false;
+            $state.go('main.out.otp');
         }, function(error) {
             if (error === 'network_error') {
                 $scope.button_clicked.otp = false;
                 dataSvc.showNetworkError();
             } else {
-                $window.navigator.notification.alert("We could not send a verification code. Please try again. Error: " + error.message,
-                    function() {
-                        $scope.button_clicked.otp = false;
-                        $ionicLoading.hide();
-                    }, "VERIFICATION ERROR", "OK");
+                $window.navigator.notification.alert("We could not send a verification code. Please try again. Error: " + error.message);
+                $scope.button_clicked.otp = false;
+                $ionicLoading.hide();
             }
         });
     };
@@ -76,11 +63,9 @@ twystApp.controller('LoginCtrl', function($scope, $state, $window, $rootScope, $
                 $scope.button_clicked.verify = false;
                 dataSvc.showNetworkError();
             } else {
-                $window.navigator.notification.alert("Incorrect verification code entered. Please try again.",
-                    function() {
-                        $scope.button_clicked.verify = false;
-                        $ionicLoading.hide();
-                    }, "VERIFICATION ERROR", "OK");
+                $window.navigator.notification.alert("Incorrect verification code entered. Please try again.");
+                $scope.button_clicked.verify = false;
+                $ionicLoading.hide();
             }
         });
     };

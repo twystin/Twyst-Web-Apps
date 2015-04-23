@@ -3,13 +3,13 @@ twystApp.controller('ShareCtrl', function($scope, $ionicPopup, $window, $ionicLo
         logSvc.event('Share', 'Share popup', 'Share popup called', '1');
 
         $scope.sharecontent = {long:long, short:short};
-    
+
         var alertPopup = $ionicPopup.alert({
             title: 'LET YOUR FRIENDS KNOW',
             templateUrl: 'js/common/shareModal.html',
             scope: $scope,
             okText: 'Close', // String (default: 'OK'). The text of the OK button.
-            okType: 'button-energized'            
+            okType: 'button-energized'
         });
     }
 
@@ -37,8 +37,7 @@ twystApp.controller('ShareCtrl', function($scope, $ionicPopup, $window, $ionicLo
                 logSvc.event('Share', 'Share whatsapp', 'Share whatsapp error', '1');
 
                 $ionicLoading.hide();
-                $window.navigator.notification.alert("Could not share with WhatsApp",
-                    function() {}, "SHARING ERROR", "OK");
+                $window.alert("Could not share with WhatsApp");
             });
     };
 
@@ -61,10 +60,9 @@ twystApp.controller('ShareCtrl', function($scope, $ionicPopup, $window, $ionicLo
                 logSvc.event('Share', 'Share twitter', 'Share twitter error', '1');
 
                 $ionicLoading.hide();
-                $window.navigator.notification.alert("Could not share with Twitter",
-                    function() {}, "SHARING ERROR", "OK");
-            });    
-    }; 
+                $window.alert("Could not share with Twitter");
+            });
+    };
 
     $scope.facebook = function() {
         logSvc.event('Share', 'Share facebook', 'Share facebook called', '1');
@@ -83,8 +81,7 @@ twystApp.controller('ShareCtrl', function($scope, $ionicPopup, $window, $ionicLo
             function(errormsg) {
                 logSvc.event('Share', 'Share facebook', 'Share facebook error', '1');
                 $ionicLoading.hide();
-                $window.navigator.notification.alert("Could not share with Facebook",
-                    function() {}, "SHARING ERROR", "OK");
+                $window.alert("Could not share with Facebook");
             });
     }
 
