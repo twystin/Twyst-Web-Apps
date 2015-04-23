@@ -1,5 +1,5 @@
 var twystApp = angular.module('twystApp', ['ionic', 'twyst.cordova.googleanalytics', 'twyst.store', 'twyst.data', 'twyst.preload', 'AngularGM', 'angularMoment'])
-    .constant('urlp', 'http://staging.twyst.in')
+    .constant('urlp', 'http://localhost:3000')
     .config(function($httpProvider) {
         $httpProvider.interceptors.push(function($rootScope) {
             return {
