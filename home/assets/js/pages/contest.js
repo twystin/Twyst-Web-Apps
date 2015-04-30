@@ -14,10 +14,15 @@ var twystContact = angular.module('twystContest', ['toastr'])
 
     $scope.user = {};
     $scope.poolA = [
-        'Australia',
-        'Bangladesh',
-        'New Zealand',
-        'Sri Lanka'
+        'Rajasthan Royals',
+        'Chennai Super Kings',
+        'Kolkata Knight Riders',
+        'Delhi Daredevils',
+        'Mumbai Indians',
+        'Kings XI Punjab',
+        'Royal Challengers Bangalore',
+        'Sunrisers Hyderabad'
+        
         
     ];
     $scope.poolB = [
@@ -30,7 +35,7 @@ var twystContact = angular.module('twystContest', ['toastr'])
     $scope.selected_poolB = [];
 
     $scope.togglePool = function (pool, team) {
-        if($scope[pool].length < 2) {
+        if($scope[pool].length < 1) {
             if ($scope[pool].indexOf(team) === -1) {
                 $scope[pool].push(team);
             } else {
@@ -38,7 +43,7 @@ var twystContact = angular.module('twystContest', ['toastr'])
             }
         }
         else {
-            toastSvc.showToast('error', 'Exactly 2 teams from each pool can be selected');
+            toastSvc.showToast('error', 'Exactly 1 team can be selected');
         }
     }
 
@@ -57,7 +62,7 @@ var twystContact = angular.module('twystContest', ['toastr'])
             }
         }
         else {
-            toastSvc.showToast('error', 'Please fill all the fields and select 2 teams from each pool');
+            toastSvc.showToast('error', 'Please fill all the fields and select 1 team from pool');
         }
     }
 
@@ -90,8 +95,7 @@ var twystContact = angular.module('twystContest', ['toastr'])
             && $scope.user.phone
             && $scope.user.email
             && $scope.user.dob
-            && $scope.selected_poolA.length === 2 
-            && $scope.selected_poolB.length === 2) {
+            && $scope.selected_poolA.length === 1 ) {
             return true;
         }
         return false;
@@ -114,20 +118,20 @@ var twystContact = angular.module('twystContest', ['toastr'])
 
     function postData() { 
         $scope.user.name = $scope.user.name + ' (dob: ' + $scope.user.dob + ')';
-        $scope.user.message = $scope.selected_poolA.toString() + ',' + $scope.selected_poolB.toString();
+        $scope.user.message = $scope.selected_poolA.toString();
         $http.post('/api/v1/beta/users', {
             name  : $scope.user.name,
             message         : $scope.user.message,
             phone        : $scope.user.phone,
             email               : $scope.user.email,
-            contest: 'tncf'
+            contest: 'tncf IPL2015'
         }).success(function (data, status, header, config) {
             redirect();
-            toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after 25th March 2015.');
+            toastSvc.showToast('success', 'Thank you for participating. We will contact the lucky winners after 26th May 2015.');
         })
         .error(function (data, status, header, config) {
             redirect();
-            toastSvc.showToast('error', 'You have already participated in the contest. Results will be declared after 25th March 2015.');
+            toastSvc.showToast('error', 'You have already participated in the contest. Results will be declared after 26th May 2015.');
         });
     };
 

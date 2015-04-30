@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="twystContest">
 <head>
-    <title>Twyst | CUPnCAKE Factory's Predict The 4 Qualifying Teams For The Semi Finals Contest!</title>
+    <title>Twyst | CUPnCAKE Factory's Predict The Winner of T20 Contest!</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -132,7 +132,7 @@
 
     <div class="breadcrumbs">
         <div class="container">
-            <h1 class="pull-left">The CUPnCAKE Factory Predict & Win Contest</h1>
+            <h1 class="pull-left">The CUPnCAKE Factory Predict & Win Cricket Contest</h1>
         </div>
     </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
@@ -145,7 +145,7 @@
                     </h4>
                 </div>
                 <div>
-                    The CUPnCAKE Factory is running a special cricket world cup contest for its valued customers. Simply predict the 4 qualifying teams for the semi finals  and you could win some delicious treats and awesome cupCakes! 1 lucky winner will be chosen at random from all the correct entries we receive  till 21 march.
+                    The CUPnCAKE Factory is running a special  Predict & Win cricket contest for its valued customers. Simply predict the winner for this T20 Tournament and you could win some delicious treats and awesome CupCakes! 3 lucky winners will be chosen at random from all the correct entries we receive till 23 May 2015.
                 </div>
                 <br>
                 <form>
@@ -166,16 +166,13 @@
                         <input name="dob" class="input-xlarge form-control" type="dob" ng-model="user.dob" required="true" placeholder="dd/mm/yyyy"></input>
                     </div>
                     <div class="form-group">
-                        <label>My predicted teams to qualify for the semi finals are:</label><br>
-                        <h6>Pool A (select exactly 2 teams)</h6>
+                        <label>My predicted team to win this tournament is:</label><br>
+                        
                         <div class="col-md-12" ng-repeat="a in poolA">
                             <input type="checkbox" ng-checked="selected_poolA.indexOf(a) != -1" ng-click="togglePool('selected_poolA', a)"> {{a}}
                         </div>
                         <h6>&nbsp;</h6>
-                        <h6>Pool B (select exactly 2 teams)</h6>
-                        <div class="col-md-12" ng-repeat="b in poolB">
-                            <input type='checkbox' ng-checked="selected_poolB.indexOf(b) != -1" ng-click="togglePool('selected_poolB', b)"> {{b}}
-                        </div>
+                        
                     </div>
                     <div>
                         &nbsp;
