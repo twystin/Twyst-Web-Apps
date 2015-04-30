@@ -23,7 +23,7 @@
         <b>Reward Applicability: </b>{{voucher.issue_details.issued_for.reward_applicability.time_of_day.toString() === 'all day' ? 'All through the day;': voucher.issue_details.issued_for.reward_applicability.time_of_day.toString()+";"}} {{voucher.issue_details.issued_for.reward_applicability.day_of_week.toString() === 'all days' ? 'All days of the week' : voucher.issue_details.issued_for.reward_applicability.day_of_week.toString()}} 
     </div> -->
     <div>
-        <b>Validity: </b>{{voucher.issue_details.program ? (voucher.issue_details.program.validity.burn_start | date:'medium') : (voucher.validity.start_date | date:'medium')}} to {{voucher.issue_details.program ? (voucher.issue_details.program.validity.burn_end | date:'medium') : (voucher.validity.end_date | date:'medium')}}
+        <b>Validity: </b>{{voucher.issue_details.program ? (voucher.validity.start_date | date:'medium') : (voucher.validity.start_date | date:'medium')}} to {{voucher.issue_details.program ? (voucher.validity.end_date | date:'medium') : (voucher.validity.end_date | date:'medium')}}
     </div>
     <hr/>
     <div class="row-fluid" ng-show="voucher.basics.status === 'active' && !isVoucherExpired(voucher)">

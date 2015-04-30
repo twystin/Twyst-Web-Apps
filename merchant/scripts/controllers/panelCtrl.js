@@ -143,7 +143,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                             }
                         }
                         else {
-                            if(new Date(voucher.issue_details.program.validity.burn_end) > new Date()) {
+                            if(new Date(voucher.validity.end_date) > new Date()) {
                                 $scope.filtered_vouchers.push(voucher);
                             }
                         }
@@ -166,7 +166,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                             }
                         }
                         else {
-                            if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+                            if(new Date(voucher.validity.end_date) <= new Date()) {
                                 $scope.filtered_vouchers.push(voucher);
                             }
                         }
@@ -218,7 +218,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             }
         }
         else {
-            if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+            if(new Date(voucher.validity.end_date) <= new Date()) {
                 return 'voucher-redeemed';
             }
 
@@ -243,7 +243,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             }
             return false;
         }
-        if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+        if(new Date(voucher.validity.end_date) <= new Date()) {
             return true;
         }
         return false;
@@ -268,7 +268,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             }
         }
         else {
-            if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+            if(new Date(voucher.validity.end_date) <= new Date()) {
                 return 'has Expired.';
             }
             if(checkApplicabilityDay(voucher) && checkApplicabilityTime(voucher)) {
@@ -296,7 +296,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             }
         }
         else {
-            if(new Date(voucher.issue_details.program.validity.burn_end) <= new Date()) {
+            if(new Date(voucher.validity.end_date) <= new Date()) {
                 return 'Expired';
             }
         }
@@ -469,7 +469,7 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
             $scope.disable_mname = true;
         }
         if(data.info.user.profile.last_name && data.info.user.profile.last_name != null &&
-            data.info.user.profile.last_name != '' && data.info.user.profile.last_mail != undefined) {
+            data.info.user.profile.last_name != '' && data.info.user.profile.last_name != undefined) {
             var l_subStr = data.info.user.profile.last_name.slice(1);
             l_subStr = l_subStr.substr(0, l_subStr.length-1);
             var hide = '';
@@ -555,15 +555,15 @@ twystApp.controller('PanelCtrl', function ($scope, $modal, $timeout, $interval, 
                         && data.info.user.profile.last_name && data.info.user.profile.email && data.info.user.profile.bday &&
                         data.info.user.profile.bday.d && data.info.user.profile.bday.m && data.info.user.profile .bday.y)) {
                         populateData(data);
-                        setTimeout(function() {
-                             var modalInstance = $modal.open({
-                                 templateUrl : './templates/panel/user_details.html',
-                                 controller  : 'UserDetailsCtrl',
-                                 backdrop    : 'static',
-                                 keyboard    : true,
-                                scope: $scope
-                             });
-                         }, 2000);
+                        
+                        var modalInstance = $modal.open({
+                            templateUrl : './templates/panel/user_details.html',
+                            controller  : 'UserDetailsCtrl',
+                            backdrop    : 'static',
+                            keyboard    : true,
+                            scope: $scope
+                        });
+                         
                     }
 
                     $scope.success.message = data.message;
