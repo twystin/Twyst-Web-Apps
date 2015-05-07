@@ -14,10 +14,10 @@
         <b>Issued to: </b>{{voucher.issue_details.issued_to.phone}}
     </div>
     <div>
-        <b>Reward details: </b> {{voucher.issue_details.winback ? rewardify(voucher.issue_details.winback) : rewardify(voucher.issue_details.issued_for)}}
+        <b>Reward details: </b> {{voucher.issue_details.winback ? rewardify(voucher.issue_details.winback) : rewardify(voucher.issue_details.issued_for) || voucher.basics.description }}
     </div>
     <div>
-        <b>T & C: </b>{{voucher.issue_details.issued_for.terms || voucher.issue_details.winback.terms}}
+        <b>T & C: </b>{{voucher.issue_details.issued_for.terms || voucher.issue_details.winback.terms || voucher.terms }}
     </div>
     <!-- <div> 
         <b>Reward Applicability: </b>{{voucher.issue_details.issued_for.reward_applicability.time_of_day.toString() === 'all day' ? 'All through the day;': voucher.issue_details.issued_for.reward_applicability.time_of_day.toString()+";"}} {{voucher.issue_details.issued_for.reward_applicability.day_of_week.toString() === 'all days' ? 'All days of the week' : voucher.issue_details.issued_for.reward_applicability.day_of_week.toString()}} 
