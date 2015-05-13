@@ -1,0 +1,86 @@
+<div class="row-fluid" style="min-height:580px;" ng-init="read()">	
+	<div class="lead row-fluid offset1 span11" style="padding-top:30px;">
+		<div class="span6">
+			<h2>Deal</h2>
+		</div>
+		<div>
+			<a class="btn btn-success btn-large" ng-href="#/deal/create">Create</a>
+		</div>
+	</div>
+	<div class="row-fluid offset1">
+		<div ng-repeat="d in deals" class="well span5">
+			<div>
+				<div class="row-fluid">
+					<div style="margin:0px;">
+						<div class="span11">
+							<h2>{{d.detail}}</h2>
+						</div>
+	              	</div>
+	              	<table class="table table-bordered table-hover">
+                        <thead>
+                            <th>
+                                Field
+                            </th>
+                            <th>
+                                Value
+                            </th>
+                        </thead> 
+                        <tbody>
+                        	<tr>
+                                <td>
+                                	Status
+                                </td>
+                                <td>
+                                	<i class="fa fa-lightbulb-o icon-green fa-2x" ng-if="d.status === 'active'" tooltip="Active prgram"></i>
+									<i class="fa fa-lightbulb-o icon-red fa-2x" ng-if="d.status === 'archived'" tooltip="Expired prgram"></i>
+									<i class="fa fa-lightbulb-o icon-yellow fa-2x" ng-if="d.status === 'draft'" tooltip="Saved prgram"></i>
+                                </td>
+                            </tr>
+                           
+                            <tr>
+                                <td>
+                                	Deal Details
+                                </td>
+                                <td>
+                                	{{d.info}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Terms & Conditions
+                                </td>
+                                <td>
+                                	{{d.tc}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                	Voucher valid Till 
+                                </td>
+                                <td>
+                                	{{d.end_date}} 
+                                </td>
+                            </tr>
+                            
+                            
+                           
+                            <tr>
+                                <td>
+                                	Running on outlets
+                                </td>
+                                <td>
+                                	<div ng-repeat="o in d.outlets" style="color: #f6921e;">
+									{{o.basics.name}}, {{o.contact.location.locality_1.toString()}}
+									</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>					
+				</div>
+				<div class="row-fluid">
+					<a href="#/deal/update/{{d._id}}" class="btn btn-primary btn-medium">Update</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
