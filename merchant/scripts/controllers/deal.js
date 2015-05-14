@@ -55,9 +55,9 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
         outlets: []
     };
     
-    $scope.avail_hours = OPERATE_HOURS;
+
     $scope.validationArray = [true, true, true, true, true, true, true, true];
-    $scope.week = ['monday' ,'tuesday' ,'wednesday' ,'thursday' ,'friday', 'saturday', 'sunday'];
+    $scope.week = ['1' ,'2' ,'3' ,'4' ,'5', '6', '7'];
     
     $scope.create = function () {
         $scope.deal.avaiable_at = {};
@@ -176,6 +176,7 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
     function setdealForUpdate(data) {
         $scope.deal = data;
         $scope.avail_hours = $scope.deal.avaiable_at;
+        console.log(JSON.stringify($scope.avail_hours))
         $scope.deal.outlets = $scope.deal.outlets.map(function (o) {
             return o._id;
         });
@@ -187,7 +188,7 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
         for (var i = 0; i < 7; i++){
             flag = 0;
             if ($scope.avail_hours[$scope.week[i]].closed == false && 
-                $scope.avail_hours[$scope.week[i]].timings.length > 1){
+                $scope.avail_hours[$scope.week[i]].length > 1){
                 for (var j = 0; j < $scope.avail_hours[$scope.week[i]].timings.length-1; j++){
                     for (var k = j + 1 ; k < $scope.avail_hours[$scope.week[i]].timings.length; k++){
                         if ((sendTime(1, i, j) < sendTime(0, i, k)) && (sendTime(0, i, j) > sendTime(1, i, k))){
