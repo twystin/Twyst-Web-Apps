@@ -15,10 +15,10 @@ twystApp.factory('dealService', function ($http, $q) {
     }
 
     DealSvc.update = function(deal) {
-        console.log(JSON.stringify(deal) + 'ooooooooo')
         var defer = $q.defer();
+        console.log('deal ' + JSON.stringify(deal))
         $http.put(
-            '/api/v1/deals', deal
+            '/api/v1/update_deal/', deal
         ).success(function (data) {
             defer.resolve(data);
         });
@@ -33,7 +33,6 @@ twystApp.factory('dealService', function ($http, $q) {
         ).success(function (data) {
             defer.resolve(data);
         });
-        console.log(defer.promise)
         return defer.promise;
     }
 
@@ -57,7 +56,7 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
     
 
     $scope.validationArray = [true, true, true, true, true, true, true, true];
-    $scope.week = ['1' ,'2' ,'3' ,'4' ,'5', '6', '7'];
+    $scope.week = ['monday' ,'tuesday' ,'wednesday' ,'thursday' ,'friday', 'saturday', 'sunday'];
     
     $scope.create = function () {
         $scope.deal.avaiable_at = {};
@@ -149,9 +148,89 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
     };
 
     $scope.update = function () {
-        
-        $scope.deal.avaiable_at = $scope.avail_hours;
-        console.log(JSON.stringify($scope.deal) + "xdvidfj")
+        console.log('deal ' + JSON.stringify($scope.deal))
+
+        $scope.deal.avaiable_at = {};
+
+        $scope.deal.avaiable_at = {
+          1: {
+            s: {
+                h: $scope.avail_hours.monday.timings[0].open.hr,
+                m: $scope.avail_hours.monday.timings[0].open.min
+            },
+            e: {
+                h: $scope.avail_hours.monday.timings[0].close.hr,
+                m: $scope.avail_hours.monday.timings[0].close.min
+            },
+            closed: $scope.avail_hours.monday.closed
+          },
+          2: {
+            s: {
+                h: $scope.avail_hours.tuesday.timings[0].open.hr,
+                m: $scope.avail_hours.tuesday.timings[0].open.min
+            },
+            e: {
+                h: $scope.avail_hours.tuesday.timings[0].close.hr,
+                m: $scope.avail_hours.tuesday.timings[0].close.min
+            },
+            closed: $scope.avail_hours.tuesday.closed
+          },
+          3: {
+            s: {
+                h: $scope.avail_hours.wednesday.timings[0].open.hr,
+                m: $scope.avail_hours.wednesday.timings[0].open.min
+            },
+            e: {
+                h: $scope.avail_hours.wednesday.timings[0].close.hr,
+                m: $scope.avail_hours.wednesday.timings[0].close.min
+            },
+            closed: $scope.avail_hours.wednesday.closed
+          },
+          4: {
+            s: {
+                h: $scope.avail_hours.thursday.timings[0].open.hr,
+                m: $scope.avail_hours.thursday.timings[0].open.min
+            },
+            e: {
+                h: $scope.avail_hours.thursday.timings[0].close.hr,
+                m: $scope.avail_hours.thursday.timings[0].close.min
+            },
+            closed: $scope.avail_hours.thursday.closed
+          },
+          5: {
+            s: {
+                h: $scope.avail_hours.friday.timings[0].open.hr,
+                m: $scope.avail_hours.friday.timings[0].open.min
+            },
+            e: {
+                h: $scope.avail_hours.friday.timings[0].close.hr,
+                m: $scope.avail_hours.friday.timings[0].close.min
+            },
+            closed: $scope.avail_hours.friday.closed
+          },
+          6: {
+            s: {
+                h: $scope.avail_hours.saturday.timings[0].open.hr,
+                m: $scope.avail_hours.saturday.timings[0].open.min
+            },
+            e: {
+                h: $scope.avail_hours.saturday.timings[0].close.hr,
+                m: $scope.avail_hours.saturday.timings[0].close.min
+            },
+            closed: $scope.avail_hours.saturday.closed
+          },
+          7: {
+            s: {
+                h: $scope.avail_hours.sunday.timings[0].open.hr,
+                m: $scope.avail_hours.sunday.timings[0].open.min
+            },
+            e: {
+                h: $scope.avail_hours.sunday.timings[0].close.hr,
+                m: $scope.avail_hours.sunday.timings[0].close.min
+            },
+            closed: $scope.avail_hours.sunday.closed
+          }
+        } 
         dealService.update($scope.deal).then(function(data) {
             if(data.status = "success"){
                 $location.path("/deal");
@@ -161,7 +240,9 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
 
     $scope.read = function () {
         dealService.read().then(function(data) {
-            console.log(JSON.stringify(data) + 'okokokok')
+            for(var i = 0; i < data.length; i++) {    
+                console.log(JSON.stringify(data[i].outlets))    
+            }
             $scope.deals = data;
         });
     };
@@ -175,12 +256,107 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
 
     function setdealForUpdate(data) {
         $scope.deal = data;
-        $scope.avail_hours = $scope.deal.avaiable_at;
-        console.log(JSON.stringify($scope.avail_hours))
-        $scope.deal.outlets = $scope.deal.outlets.map(function (o) {
-            return o._id;
-        });
-        
+        $scope.avail_hours = {};
+        $scope.avail_hours = {
+            monday : { 
+                closed: data.avaiable_at[1].closed,
+                timings: [ {
+                   close: {
+                        hr:  data.avaiable_at[1].e.h,
+                        min: data.avaiable_at[1].e.m
+                        
+                    },
+                    open:  {
+                        hr:  data.avaiable_at[1].s.h,
+                        min: data.avaiable_at[1].s.m 
+                    }
+                } ]
+            },
+            tuesday : {
+                closed: data.avaiable_at[2].closed,
+                timings: [ {
+                   close: {
+                        hr:  data.avaiable_at[2].e.h,
+                        min: data.avaiable_at[2].e.m
+                        
+                    },
+                    open:  {
+                        hr:  data.avaiable_at[2].s.h,
+                        min: data.avaiable_at[2].s.m 
+                    }
+                } ]
+            },
+            wednesday: {
+                closed: data.avaiable_at[3].closed,
+                timings: [ {
+                   close: {
+                        hr:  data.avaiable_at[3].e.h,
+                        min: data.avaiable_at[3].e.m
+                        
+                    },
+                    open:  {
+                        hr:  data.avaiable_at[3].s.h,
+                        min: data.avaiable_at[3].s.m 
+                    }
+                } ]
+            },
+            thursday: {
+                closed: data.avaiable_at[4].closed,
+                timings: [ {
+                   close: {
+                        hr:  data.avaiable_at[4].e.h,
+                        min: data.avaiable_at[4].e.m
+                        
+                    },
+                    open:  {
+                        hr:  data.avaiable_at[4].s.h,
+                        min: data.avaiable_at[4].s.m 
+                    }
+                } ]
+            },
+            friday: {
+                closed: data.avaiable_at[5].closed,
+                timings: [ {
+                   close: {
+                        hr:  data.avaiable_at[5].e.h,
+                        min: data.avaiable_at[5].e.m
+                        
+                    },
+                    open:  {
+                        hr:  data.avaiable_at[5].s.h,
+                        min: data.avaiable_at[5].s.m 
+                    }
+                } ]
+            },
+            saturday: {
+                closed: data.avaiable_at[6].closed,
+                timings: [ {
+                   close: {
+                        hr:  data.avaiable_at[6].e.h,
+                        min: data.avaiable_at[6].e.m
+                        
+                    },
+                    open:  {
+                        hr:  data.avaiable_at[6].s.h,
+                        min: data.avaiable_at[6].s.m 
+                    }
+                } ]
+            },
+            sunday: {
+                closed: data.avaiable_at[7].closed,
+                timings: [ {
+                   close: {
+                        hr:  data.avaiable_at[7].e.h,
+                        min: data.avaiable_at[7].e.m
+                        
+                    },
+                    open:  {
+                        hr:  data.avaiable_at[7].s.h,
+                        min: data.avaiable_at[7].s.m 
+                    }
+                } ]
+            }
+        }                  
     }
 
     $scope.timingsValidation = function () {
@@ -242,6 +418,15 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
         }
     }
 
+   $scope.toggleOutlets = function (fruit) {
+        if ($scope.program.outlets.indexOf(fruit) === -1) {
+            $scope.program.outlets.push(fruit);
+        } else {
+            $scope.program.outlets.splice($scope.program.outlets.indexOf(fruit), 1);
+        }
+
+    };
+
     $scope.toggleOutlets = function (fruit) {
         if ($scope.program.outlets.indexOf(fruit) === -1) {
             $scope.program.outlets.push(fruit);
@@ -255,6 +440,7 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
         outletService.query().then(function (data) {
             $scope.outlets = data.info;
             $scope.all_outlets = data.info;
+            console.log(JSON.stringify(data.info) + 'okokok')
         }, function (err) {
             console.log(err);
         })
@@ -278,6 +464,7 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
         }
 
     };
+
 
 
 });
