@@ -7,8 +7,10 @@
 			<a class="btn btn-success btn-large" ng-href="#/deal/create">Create</a>
 		</div>
 	</div>
+    
+    
 	<div class="row-fluid offset1">
-		<div ng-repeat="d in deals" class="well span5">
+		<div ng-repeat="d in deals track by $index" class="well span5">
 			<div>
 				<div class="row-fluid">
 					<div style="margin:0px;">
@@ -61,7 +63,16 @@
                                 	{{d.end_date}} 
                                 </td>
                             </tr>
-                            
+                            <tr>
+                                <td>
+                                    Running on outlets
+                                </td>
+                                <td>
+                                    <div  style="color: #f6921e;">
+                                    {{d.outlet_name}}, {{d.contact}}
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>					
 				</div>
@@ -70,5 +81,6 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 </div>
