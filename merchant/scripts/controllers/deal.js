@@ -4,7 +4,6 @@ twystApp.factory('dealService', function ($http, $q) {
     var DealSvc = {};
 
     DealSvc.create = function(deal) {
-        console.log('deal '+ JSON.stringify(deal))
         var defer = $q.defer();
         $http.post(
             '/api/v1/deals', deal
@@ -16,7 +15,6 @@ twystApp.factory('dealService', function ($http, $q) {
 
     DealSvc.update = function(deal) {
         var defer = $q.defer();
-        console.log('deal ' + JSON.stringify(deal))
         $http.put(
             '/api/v1/update_deal/', deal
         ).success(function (data) {
@@ -148,7 +146,6 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
     };
 
     $scope.update = function () {
-        console.log('deal ' + JSON.stringify($scope.deal))
 
         $scope.deal.avaiable_at = {};
 
@@ -239,13 +236,33 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
     };
 
     $scope.read = function () {
+        var my_outlets = [];
+        var outlet_name = [];
         dealService.read().then(function(data) {
-            for(var i = 0; i < data.length; i++) {    
-                console.log(JSON.stringify(data[i].outlets))    
-            }
-            $scope.deals = data;
+            outletService.query().then(function (currentOutlet) {
+                $scope.outlets = data.info;
+                for(var i = 0; i < currentOutlet.info.length; i++) { 
+                    for(var j = 0; j < data.length; j++) {
+                        if(currentOutlet.info[i]._id  == data[j].outlets) {
+                            data[j].outlet_name = currentOutlet.info[i].basics.name;
+                            data[j].contact = currentOutlet.info[i].contact.location.locality_1.toString()
+                            my_outlets.push(data[j]);
+                            
+                        }    
+                    } 
+                }
+                $scope.deals = my_outlets;
+
+                //$scope.outlet_name = outlet_name;
+                //console.log(JSON.stringify( $scope.deals.outlets[0].basics))
+                }, function (err) {
+                    console.log(err);
+            })
+            
         });
     };
+
+
 
     $scope.readOne = function () {
         var id = $routeParams.deal_id;
@@ -440,7 +457,6 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
         outletService.query().then(function (data) {
             $scope.outlets = data.info;
             $scope.all_outlets = data.info;
-            console.log(JSON.stringify(data.info) + 'okokok')
         }, function (err) {
             console.log(err);
         })
