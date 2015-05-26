@@ -1,5 +1,5 @@
 'use strict';
-twystApp.factory('dealService', function ($http, $q) {
+twystApp.factory('dealService', function ($http, $q, toastSvc) {
 
     var DealSvc = {};
 
@@ -8,7 +8,11 @@ twystApp.factory('dealService', function ($http, $q) {
         $http.post(
             '/api/v1/deals', deal
         ).success(function (data) {
+            toastSvc.showToast('success', 'Deal Created Successfully');
             defer.resolve(data);
+        }).error(function(error) {
+            toastSvc.showToast('error', 'Please enter all required fields');
+            defer.reject(error);
         });
         return defer.promise;
     }
@@ -18,8 +22,12 @@ twystApp.factory('dealService', function ($http, $q) {
         $http.put(
             '/api/v1/update_deal/', deal
         ).success(function (data) {
+            toastSvc.showToast('success', 'Deal Updated Successfully');
             defer.resolve(data);
-        });
+        }).error(function(error) {
+            toastSvc.showToast('error', 'Please enter all required fields');
+            defer.reject(error);
+        });;
         return defer.promise;
     }
 
@@ -30,7 +38,7 @@ twystApp.factory('dealService', function ($http, $q) {
             '/api/v1/deals'
         ).success(function (data) {
             defer.resolve(data);
-        });
+        })
         return defer.promise;
     }
 
@@ -47,7 +55,7 @@ twystApp.factory('dealService', function ($http, $q) {
 
     return DealSvc;
 }).
-controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOURS, $scope, $location, $routeParams, dealService) {
+controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOURS, $scope, $location, $routeParams, dealService, toastSvc) {
     $scope.deal = {
         outlets: []
     };
@@ -142,6 +150,7 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
             if(data.status = "success"){
                 $location.path("/deal");
             }
+            
         })   
     };
 
@@ -246,11 +255,14 @@ controller('DealCtrl', function ($http, outletService, authService, OPERATE_HOUR
                         if(currentOutlet.info[i]._id  == data[j].outlets) {
                             data[j].outlet_name = currentOutlet.info[i].basics.name;
                             data[j].contact = currentOutlet.info[i].contact.location.locality_1.toString()
+                            data[j].start_date = data[j].start_date.toString();
+                            data[j].end_date = data[j].end_date.toString()
                             my_outlets.push(data[j]);
                             
                         }    
                     } 
                 }
+
                 $scope.deals = my_outlets;
 
                 //$scope.outlet_name = outlet_name;

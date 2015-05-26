@@ -73,11 +73,13 @@ twystConsole.controller('AdminOutletCtrl', function($scope, $http, $modal, $loca
     };
 
     $scope.changeStatus = function () {
+         console.log('ok')
     	$scope.outlet.outlet_meta.status = $scope.status.toLowerCase();
     	adminOutletService.changeStatus($scope.outlet).then(function (data) {
     		//$route.reload();
             $scope.getOutlets();
     		$scope.cancel();
+
     	})
     }
 });

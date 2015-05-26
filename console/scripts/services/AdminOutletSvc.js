@@ -23,6 +23,7 @@ twystConsole.factory('adminOutletService', function ($http, $q) {
             'url': '/api/v2/changestatus/outlet',
             'data': {outlet: outlet}
         }).success(function (data) {
+            console.log('ppp')
             deferred.resolve(data);
         }).error(function (data) {
             deferred.resolve(data);

@@ -499,4 +499,212 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
             $window.location.href = 'http://twyst.in/console/#/user/card_user';
         }, 4000);
     }    
-});
+}).controller('reportCtrl', function ($scope, $http, $modal, $timeout, $window, toastSvc,  authService, Excel) {
+
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
+    $scope.report = {}
+     $scope.exportToExcel=function(table1){ // ex: '#my-table'
+            var exportHref=Excel.tableToExcel(table1,'sheet name');
+            $timeout(function(){location.href=exportHref;},100); // trigger download
+        }
+    
+    $scope.getReport = function() {
+    	
+    	
+     	if($scope.report.end_date && $scope.report.start_date && $scope.report.checkin_type) {
+     		if($scope.report.end_date.getTime() < $scope.report.start_date.getTime()){
+
+	      		toastSvc.showToast('error', 'Start date can not be greater than end Date');
+	      		return false;
+	      	}
+	      	else {
+	      		$scope.query = {
+	      			start_date: $scope.report.start_date,
+	      			end_date: $scope.report.end_date,
+	      			checkin_type: $scope.report.checkin_type
+	      		}
+	      		getSummary();
+	      	}	
+     	}
+     	else {
+     		toastSvc.showToast('error', 'Please Select dates and checkin type');	
+     	}
+    }
+
+    function getSummary() {
+    	$http({
+			url: '/api/v2/summary_metric',
+			method: "POST",
+			data: $scope.query
+        }).success(function (data, status, header, config) {
+        	//console.log(JSON.stringify(data.info[0]) + 'bag');
+        	if(data.info && data.info[0] && data.info[0].checkin_count) {
+        		//console.log(data.info + 'checkin_type');
+        		var modalInstance = $modal.open({
+	                templateUrl : './templates/report/checkin_report.html',
+	                controller  : 'reportCtrl',
+	                backdrop    : 'static',
+	                keyboard    : true,
+	                scope: $scope
+	            });
+	            
+				function groupBy( array , f )
+				{
+				  var groups = {};
+				  array.forEach( function( o )
+				  {
+				    var group = JSON.stringify( f(o) );
+				    groups[group] = groups[group] || [];
+				    groups[group].push( o );  
+				  });
+				  return Object.keys(groups).map( function( group )
+				  {
+				    return groups[group]; 
+				  })
+				}
+
+				var result = groupBy(list, function(item)
+				{
+				  return [item.lastname, item.age];
+				});
+				
+				
+	            $scope.start_date = $scope.report.start_date;
+	            $scope.checkin = data.info	
+        	}
+        	else if(data.info && data.info[0] && data.info[0].redeem_count){
+        		console.log(data.info);
+        		var modalInstance = $modal.open({
+	                templateUrl : './templates/report/redeem_report.html',
+	                controller  : 'reportCtrl',
+	                backdrop    : 'static',
+	                keyboard    : true,
+	                scope: $scope
+	            });
+	            console.log(data.info);
+	            $scope.start_date = $scope.report.start_date;
+	            $scope.redeem = data.info
+        	}
+        	else {
+        			toastSvc.showToast('error', 'There is no record for selected range.');
+        	}
+            
+
+        })
+        .error(function (data, status, header, config) {
+            
+            //toastSvc.showToast('error', 'There is some error in csv file.');
+        });
+    }
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+    
+}).controller('checkinCtrl', function ($scope, $http, $timeout, $window, toastSvc,  authService) {
+
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
+    $scope.fileChanged = function() {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $scope.$apply(function() {
+          $scope.jsonData = csvTOJson(reader.result);
+        });
+      };
+
+      var csvFileInput = document.getElementById('fileInput');    
+      var csvFile = csvFileInput.files[0];
+      reader.readAsText(csvFile);      
+    }
+
+
+    $scope.submitUserList = function(){
+      var csvFileInput = document.getElementById('fileInput');  
+      if(csvFileInput.files[0]) {
+        $http.post('/api/v1/bulk/panel_checkins', {
+          rows  : $scope.jsonData
+          
+        }).success(function (data, status, header, config) {
+           
+            toastSvc.showToast('success', 'Checkins Successfully Processed');
+        })
+        .error(function (data, status, header, config) {
+            
+            toastSvc.showToast('error', 'There is some error in csv file.');
+        });
+    
+      }
+      else {
+        alert("Plese Upload a CSV File");
+        return false;
+      }
+
+      
+    }
+    
+    function csvTOJson(csvFile){
+ 
+      var allUsers = csvFile.split("\n");
+      console.log(allUsers.length+ " allUsers");
+     
+      var result = [];
+     
+      var headers = allUsers[0].split(",");
+     
+      for(var i = 1; i < allUsers.length-1; i++){
+     
+        var obj = {};
+        var currentUser = allUsers[i].split(",");
+     
+        for(var j = 0; j < headers.length; j++){
+          if(currentUser[j] != undefined){
+            obj[headers[j].trim()] = currentUser[j].trim();  
+          }                    
+        }
+        //console.log(obj);
+        result.push(obj);
+      }            
+      return result; 
+    }
+
+    function isMobileNumber(phone) {
+        if(phone 
+            && (phone.length === 10)
+            && isNumber(phone) 
+            && isValidFirstDigit(phone)) {
+            return true;
+        };
+        return false;
+    }
+
+    function isValidFirstDigit(phone) {
+        if(phone[0] === '7'
+            || phone[0] === '8'
+            || phone[0] === '9') {
+            return true;
+        }
+        return false;
+    }
+
+    function isNumber(str) {
+        var numeric = /^-?[0-9]+$/;
+        return numeric.test(str);
+    }
+
+    
+
+    function isValidPhone () {
+        if(!$scope.user.phone
+            || isNaN($scope.user.phone)
+            || $scope.user.phone.length !== 10) {
+            
+            return false;
+        }
+        return true;
+    }
+
+})

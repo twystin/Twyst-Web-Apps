@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h3>Redeem data</h3>
+</div>
+<div class="modal-body">
+    <div class="modal-body-scroll">
+        <div>
+            <table id = 'table1' class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Outlet Code</th>
+                        <th ng-repeat="check in redeem">
+                            {{check._id.usedDate}}
+                        </th> 
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody ng-repeat="check in redeem">
+                        
+                       
+                        <td>{{check._id.outlet}}</td>
+                        <td>{{check.redeem_count}}</td>
+                        
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+     <button class="btn btn-link" ng-click="exportToExcel('#table1')">
+        <span class="glyphicon glyphicon-share"></span> Export to Excel
+    </button>
+    
+    <button type="button btn-danger" ng-click="cancel()" class="btn">Cancel</button>
+</div>s
