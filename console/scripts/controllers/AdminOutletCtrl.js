@@ -78,6 +78,7 @@ twystConsole.controller('AdminOutletCtrl', function($scope, $http, $modal, $loca
     		//$route.reload();
             $scope.getOutlets();
     		$scope.cancel();
+
     	})
     }
 });

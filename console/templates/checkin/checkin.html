@@ -1,0 +1,22 @@
+<div class="row-fluid">
+    <div class="row-fluid">
+        <div class="span8">
+            <h3>Upload a CSV file in requested formet</h3>
+            <div class="col-md-6">
+                <br>
+                <input ng-model="csv" onchange="angular.element(this).scope().fileChanged()"
+                                type="file" accept=".csv" id="fileInput"/>
+                     
+                <br>        
+                   <p ng-if = "jsonData">File Uploaded Successfully, Click Submit Button To Checkin</p>     
+                
+                <button type="button" class="btn btn-success btn-lg spacing" ng-click="submitUserList()">Submit</button>
+                
+                 
+            </div>
+        </div>
+    </div>
+    
+    
+
+</div>
