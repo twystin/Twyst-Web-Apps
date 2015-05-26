@@ -161,6 +161,18 @@ twystApp.config(function ($routeProvider, $httpProvider) {
             controller : 'SpecialCtrl',
             templateUrl: '/merchant/templates/special_programs/view.html'
         }).
+        when('/deal', {
+            controller : 'DealCtrl',
+            templateUrl: '/merchant/templates/deal/view.html'
+        }).
+        when('/deal/create', {
+            controller  : 'DealCtrl',
+            templateUrl : '/merchant/templates/deal/create.html'
+        }).
+        when('/deal/update/:deal_id', {
+            controller : 'DealCtrl',
+            templateUrl: '/merchant/templates/deal/update.html'
+        }).
         when('/error', {
             templateUrl : '/merchant/templates/anon/error.html'
         }).
