@@ -636,18 +636,19 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
     $scope.submitUserList = function(){
       var csvFileInput = document.getElementById('fileInput');
       if(csvFileInput.files[0]) {
-        $http.post('/api/v1/bulk/panel_checkins', {
-          rows  : $scope.jsonData
-
-        }).success(function (data, status, header, config) {
-
-            toastSvc.showToast('success', 'Checkins Successfully Processed');
-        })
-        .error(function (data, status, header, config) {
-
-            toastSvc.showToast('error', 'There is some error in csv file.');
-        });
-
+  		for (var i = 0; i < $scope.jsonData.length; i++) {
+  			$http.post('/api/v1/bulk/panel_checkins', {
+	          rows  : $scope.jsonData[i]
+	          
+	        }).success(function (data, status, header, config) {
+	           
+	            toastSvc.showToast('success', 'Checkins Successfully Processed');
+	        })
+	        .error(function (data, status, header, config) {
+	            
+	            toastSvc.showToast('error',  JSON.stringify(data.message.message));
+	        });		
+  		};
       }
       else {
         alert("Plese Upload a CSV File");
@@ -666,7 +667,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 
       var headers = allUsers[0].split(",");
 
-      for(var i = 1; i < allUsers.length-1; i++){
+      for(var i = 1; i < allUsers.length; i++){
 
         var obj = {};
         var currentUser = allUsers[i].split(",");
