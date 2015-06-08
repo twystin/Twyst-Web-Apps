@@ -5,32 +5,23 @@
     <div class="modal-body-scroll">
         <div>
             <table id = 'table1' class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Outlet Code</th>
-                        <th ng-repeat="check in redeem">
-                            {{check._id.usedDate}}
-                        </th> 
+                
+                <tbody>
                         
-                        
-                    </tr>
-                </thead>
-                <tbody ng-repeat="check in redeem">
-                        
-                       
-                        <td>{{check._id.outlet}}</td>
-                        <td>{{check.redeem_count}}</td>
-                        
-                  
+                    
+                        <tr ng-repeat="re in redeems">
+                         <td> {{re.outlet}}</td>
+                        <td >{{re.redeem_count}}</td>    
+                        <td >{{re.date}}-2015</td>    
+                        </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-     <button class="btn btn-link" ng-click="exportToExcel('#table1')">
-        <span class="glyphicon glyphicon-share"></span> Export to Excel
-    </button>
+     <button type="button" ng-csv="redeem_csv"  ng-click = 'addRandomRow()'filename="test.csv">Export</button>
+        
     
     <button type="button btn-danger" ng-click="cancel()" class="btn">Cancel</button>
 </div>s

@@ -510,17 +510,13 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
             $window.location.href = 'http://twyst.in/console/#/user/card_user';
         }, 4000);
     }
-}).controller('reportCtrl', function ($scope, $http, $modal, $timeout, $window, toastSvc,  authService, Excel) {
+}).controller('reportCtrl', function ($scope, $http, $modal, $timeout, $window, toastSvc,  authService) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
     $scope.report = {}
-     $scope.exportToExcel=function(table1){ // ex: '#my-table'
-            var exportHref=Excel.tableToExcel(table1,'sheet name');
-            $timeout(function(){location.href=exportHref;},100); // trigger download
-        }
-
+     
     $scope.getReport = function() {
 
 
@@ -543,16 +539,15 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
      		toastSvc.showToast('error', 'Please Select dates and checkin type');
      	}
     }
-
     function getSummary() {
     	$http({
 			url: '/api/v2/summary_metric',
 			method: "POST",
 			data: $scope.query
-        }).success(function (data, status, header, config) {
-        	//console.log(JSON.stringify(data.info[0]) + 'bag');
-        	if(data.info && data.info[0] && data.info[0].checkin_count) {
-        		//console.log(data.info + 'checkin_type');
+        }).success(function (data, status, header, config) {	
+        	console.log(JSON.stringify(data.info) + 'checkin_type');
+        	if(data.info && data.info && data.info.isCheckin) {
+        		
         		var modalInstance = $modal.open({
 	                templateUrl : './templates/report/checkin_report.html',
 	                controller  : 'reportCtrl',
@@ -560,33 +555,43 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 	                keyboard    : true,
 	                scope: $scope
 	            });
-
-				function groupBy( array , f )
-				{
-				  var groups = {};
-				  array.forEach( function( o )
-				  {
-				    var group = JSON.stringify( f(o) );
-				    groups[group] = groups[group] || [];
-				    groups[group].push( o );
-				  });
-				  return Object.keys(groups).map( function( group )
-				  {
-				    return groups[group];
-				  })
-				}
-
-				var result = groupBy(list, function(item)
-				{
-				  return [item.lastname, item.age];
-				});
-
-
-	            $scope.start_date = $scope.report.start_date;
-	            $scope.checkin = data.info
+        	
+	            
+	            $scope.checkins= data.info;
+	        
+			    getCsvForCheckin($scope.checkins);
+			    
+			    function getCsvForCheckin(data) {
+			        $scope.checkin_csv = [];
+			        for (var key in $scope.checkins) {
+			        	//console.log($scope.checkins[key])
+			        	var a = $scope.checkins[key];
+			        	for(var check in a) {
+			        		if(check == 0) {
+			        			var obj = {
+				                    'outlet': 'outlet',
+				   		            'date': key+'-2015'
+				                };	
+			        		}
+			        		else {
+			        			var obj = {
+				                    'outlet': a[check].outlet,
+				                    'checkin_count': a[check].count
+				                };
+			        		}
+			        		
+		                $scope.checkin_csv.push(obj);
+			        	}
+			        	   
+			        }
+			     
+			    };
+			    
+			    $scope.cancel = function () {
+			        $modalInstance.dismiss('cancel');
+			    };
         	}
-        	else if(data.info && data.info[0] && data.info[0].redeem_count){
-        		console.log(data.info);
+        	else if(data.info  && data.info.isRedeem){
         		var modalInstance = $modal.open({
 	                templateUrl : './templates/report/redeem_report.html',
 	                controller  : 'reportCtrl',
@@ -594,9 +599,34 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 	                keyboard    : true,
 	                scope: $scope
 	            });
-	            console.log(data.info);
-	            $scope.start_date = $scope.report.start_date;
-	            $scope.redeem = data.info
+	            $scope.redeems = data.info;
+	            
+			    getCsvForRedeems($scope.redeems);
+	            function getCsvForRedeems(data) {
+			        $scope.redeem_csv = [];
+			        for (var key in $scope.redeems) {
+			        	//console.log($scope.checkins[key])
+			        	var a = $scope.redeems[key];
+			        	for(var check in a) {
+			        		if(check == 0) {
+			        			var obj = {
+				                    'outlet': 'outlet',
+				   		            'date': key+'-2015'
+				                };	
+			        		}
+			        		else {
+			        			var obj = {
+				                    'outlet': a[check].outlet,
+				                    'checkin_count': a[check].count
+				                };
+			        		}
+			        		
+		                $scope.redeem_csv.push(obj);
+			        	}
+			        	   
+			        }
+			    };
+	            
         	}
         	else {
         			toastSvc.showToast('error', 'There is no record for selected range.');
@@ -609,10 +639,8 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
             //toastSvc.showToast('error', 'There is some error in csv file.');
         });
     }
+   	
 
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
 
 }).controller('checkinCtrl', function ($scope, $http, $timeout, $window, toastSvc,  authService) {
 
@@ -637,17 +665,25 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
       var csvFileInput = document.getElementById('fileInput');
       if(csvFileInput.files[0]) {
   		for (var i = 0; i < $scope.jsonData.length; i++) {
-  			$http.post('/api/v1/bulk/panel_checkins', {
-	          rows  : $scope.jsonData[i]
+  			console.log(JSON.stringify($scope.jsonData[i]) + 'oo')
+  			if($scope.jsonData[i].outlet_id != '') {
+  				$http.post('/api/v1/bulk/panel_checkins', {
+	          	rows  : $scope.jsonData[i]
 	          
-	        }).success(function (data, status, header, config) {
-	           
-	            toastSvc.showToast('success', 'Checkins Successfully Processed');
-	        })
-	        .error(function (data, status, header, config) {
-	            
-	            toastSvc.showToast('error',  JSON.stringify(data.message.message));
-	        });		
+		        }).success(function (data, status, header, config) {
+		           	
+		            toastSvc.showToast('success',  i + ': ' +JSON.stringify(data.message));
+		        })
+		        .error(function (data, status, header, config) {
+		            
+		            toastSvc.showToast('error',  JSON.stringify(data.message.message));
+		        });	
+  			}
+  			else {
+  				toastSvc.showToast('success',  'Bulk Checkin Completed');
+  				return false;
+  			}
+  					
   		};
       }
       else {
