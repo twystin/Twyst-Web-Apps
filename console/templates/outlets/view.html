@@ -24,6 +24,9 @@
                         ID
                     </th>
                     <th>
+                        Short Url
+                    </th>
+                    <th>
                         Location
                     </th>
                     <th>
@@ -47,6 +50,9 @@
                     </td>
                     <td>
                         {{c._id}}
+                    </td>
+                    <td ng-repeat= "short in c.shortUrl">
+                        {{short}}
                     </td>
                     <td>
                         {{c.contact.location.locality_1.toString()}}

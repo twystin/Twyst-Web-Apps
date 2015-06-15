@@ -511,17 +511,52 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
         }, 4000);
     }
 }).controller('reportCtrl', function ($scope, $http, $modal, $timeout, $window, toastSvc,  authService) {
-
+	$scope.get_checkin_data = false;
+	$scope.get_redeemption_data = false;
+	$scope.show_redeemption_type = false;
+	$scope.showRedeepmtionType = function(type) {
+		if(type == 'REDEEM' || $scope.report.checkin_type == 'REDEEM') {
+			$scope.get_checkin_data = false;
+			$scope.get_redeemption_data = false;
+			$scope.show_redeemption_type = true;	
+		}
+		else{
+			$scope.show_redeemption_type = false;
+			$scope.get_redeemption_data = false;
+			$scope.get_checkin_data = false;
+		}
+	}
 	if (!authService.isLoggedIn()) {
         $location.path('/');
     }
     $scope.report = {}
      
     $scope.getReport = function() {
+    	if($scope.report.checkin_type == 'REDEEM') {
+    		if($scope.report.end_date && $scope.report.start_date && $scope.report.checkin_type && $scope.report.redeeption_type) {
+	     		if($scope.report.end_date.getTime() < $scope.report.start_date.getTime()){
 
-
-     	if($scope.report.end_date && $scope.report.start_date && $scope.report.checkin_type) {
-     		if($scope.report.end_date.getTime() < $scope.report.start_date.getTime()){
+		      		toastSvc.showToast('error', 'Start date can not be greater than end Date');
+		      		return false;
+		      	}
+		      	else {
+		      		$scope.query = {
+		      			start_date: $scope.report.start_date,
+		      			end_date: $scope.report.end_date,
+		      			checkin_type: $scope.report.checkin_type,
+		      			voucher_type: $scope.report.redeeption_type
+		      		}
+		      		getSummary();
+		      	}	
+	     	}
+	     	else {
+	     		toastSvc.showToast('error', 'Please Select dates, redeemption type');
+	     		
+	     	}	
+    	}
+    	else if($scope.report.end_date && $scope.report.start_date && $scope.report.checkin_type) {
+    		
+    		if($scope.report.end_date.getTime() < $scope.report.start_date.getTime()){
 
 	      		toastSvc.showToast('error', 'Start date can not be greater than end Date');
 	      		return false;
@@ -534,10 +569,12 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 	      		}
 	      		getSummary();
 	      	}
+
+    	}
+    	else {
+     		toastSvc.showToast('error', 'Please Select dates, checkin type');
      	}
-     	else {
-     		toastSvc.showToast('error', 'Please Select dates and checkin type');
-     	}
+     	
     }
     function getSummary() {
     	$http({
@@ -545,18 +582,8 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			method: "POST",
 			data: $scope.query
         }).success(function (data, status, header, config) {	
-        	console.log(JSON.stringify(data.info) + 'checkin_type');
-        	if(data.info && data.info && data.info.isCheckin) {
+        	if(data.info && data.info.isCheckin) {
         		
-        		var modalInstance = $modal.open({
-	                templateUrl : './templates/report/checkin_report.html',
-	                controller  : 'reportCtrl',
-	                backdrop    : 'static',
-	                keyboard    : true,
-	                scope: $scope
-	            });
-        	
-	            
 	            $scope.checkins= data.info;
 	        
 			    getCsvForCheckin($scope.checkins);
@@ -581,24 +608,15 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			        		}
 			        		
 		                $scope.checkin_csv.push(obj);
+		                $scope.get_checkin_data = true;
 			        	}
 			        	   
 			        }
 			     
 			    };
-			    
-			    $scope.cancel = function () {
-			        $modalInstance.dismiss('cancel');
-			    };
         	}
         	else if(data.info  && data.info.isRedeem){
-        		var modalInstance = $modal.open({
-	                templateUrl : './templates/report/redeem_report.html',
-	                controller  : 'reportCtrl',
-	                backdrop    : 'static',
-	                keyboard    : true,
-	                scope: $scope
-	            });
+        		
 	            $scope.redeems = data.info;
 	            
 			    getCsvForRedeems($scope.redeems);
@@ -622,6 +640,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			        		}
 			        		
 		                $scope.redeem_csv.push(obj);
+		                $scope.get_redeemption_data = true;
 			        	}
 			        	   
 			        }
@@ -639,8 +658,6 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
             //toastSvc.showToast('error', 'There is some error in csv file.');
         });
     }
-   	
-
 
 }).controller('checkinCtrl', function ($scope, $http, $timeout, $window, toastSvc,  authService) {
 
@@ -665,7 +682,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
       var csvFileInput = document.getElementById('fileInput');
       if(csvFileInput.files[0]) {
   		for (var i = 0; i < $scope.jsonData.length; i++) {
-  			console.log(JSON.stringify($scope.jsonData[i]) + 'oo')
+  			//console.log(JSON.stringify($scope.jsonData[i]) + 'oo')
   			if($scope.jsonData[i].outlet_id != '') {
   				$http.post('/api/v1/bulk/panel_checkins', {
 	          	rows  : $scope.jsonData[i]
@@ -697,7 +714,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
     function csvTOJson(csvFile){
 
       var allUsers = csvFile.split("\n");
-      console.log(allUsers.length+ " allUsers");
+      //console.log(allUsers.length+ " allUsers");
 
       var result = [];
 
