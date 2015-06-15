@@ -32,21 +32,36 @@
     <div class="control-group">
       <label class="control-label">Select File Type</label>
       <div class="controls">
-        <select id="day_of_week" name="day_of_week" class="span4" value="offer.applicability.day_of_week" ng-model="report.checkin_type">
+        <select id="day_of_week" name="day_of_week" class="span4" value="" ng-model="report.checkin_type" ng-change="showRedeepmtionType(report.checkin_type)">>
           <option value="BATCH">BATCH</option>
           <option value="PANEL">PANEL</option>
           <option value="POS">POS</option>
           <option value="QR">QR</option>
           <option value="SMS">SMS</option>
-          <option value="REDEEM">REDEEM</option>
+          <option value="REDEEM">REDEMPTION</option>
           
+        </select>
+      </div>
+      
+      <div class="controls" ng-show = 'show_redeemption_type'>
+        <label class="control-label">Select Redemption Type</label>
+        <select id="" name="" class="span4" value="" ng-model="report.redeeption_type" 
+        ng-change="showRedeepmtionType(report.redeeption_type)">
+          <option value="BATCH">BATCH</option>
+          <option value="PANEL">PANEL</option>
+          <option value="POS">POS</option>
+          <option value="QR">QR</option>
+          <option value="SMS">SMS</option>
+          <option value="WINBACK">WINBACK</option>
+          <option value="BIRTHDAY">BIRTHDAY</option>
+          <option value="CORPORATE">CORPORATE</option>
         </select>
       </div>
     </div>
 
     <button type="button" class="btn btn-success btn-lg spacing" ng-click="getReport()">Submit</button>
                 
-    
-    
+<button type="button" ng-show = 'get_checkin_data' ng-csv="checkin_csv"  ng-click = 'addRandomRow()' ng-show = 'get_redeemption_data' filename="checkin.csv">Export</button> 
+<button type="button" ng-show = 'get_redeemption_data' ng-csv="redeem_csv"  ng-click = 'addRandomRow()'filename="redeem.csv">Export</button>    
 
 </div>
