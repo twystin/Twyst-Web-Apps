@@ -108,5 +108,22 @@ twystConsole.factory('dataService', function ($http, $q) {
         return deferred.promise;
     };
 
+    dataSvc.getUserMetric = function (query) {
+
+        var deferred = $q.defer();
+
+        $http({
+            url: '/api/v2/analytics_data/users/',
+            method: "POST",
+            data: query
+        }).success(function (data) {
+            deferred.resolve(data.info);
+        }).error(function (data) {
+            deferred.resolve(data.info);
+        });
+        
+        return deferred.promise;
+        };
+
     return dataSvc;
 });

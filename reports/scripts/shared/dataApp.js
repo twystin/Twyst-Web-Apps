@@ -394,6 +394,7 @@
 
         $scope.getAllUniqueUsers = function () {
             var query = {
+                'outlets': getOutletIds($scope.selected.outlets),
                 'programs': getProgramIds($scope.selected.programs),
                 'data_type': 'unique'
             };

@@ -52,7 +52,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
     }
 
 })
-.controller('NotifController', function($scope, $http, $location, authService, toastSvc) {
+.controller('NotifController', function($scope, $http, $location, authService, toastSvc, dataService) {
 
 	if (!authService.isLoggedIn()) {
         $location.path('/');
@@ -63,10 +63,11 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 	$scope.message = {};
 	$scope.min_date = new Date();
     $scope.max_date = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    $scope.outlets = [];
 
 	function isValid() {
 		if(($scope.message.phones
-			|| $scope.message.gcms
+			|| $scope.message.gcms || $scope.message.outlet
 			)
 			&& $scope.message.head
 			&& $scope.message.body
@@ -85,37 +86,74 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 	}
 
 	$scope.makeEmpty = function(type) {
+
 		$scope.success = {};
 		$scope.error = {};
 		$scope.message = {};
 		$scope.message.type = type;
 	}
 
+	$scope.fileChanged = function() {
+      var reader = new FileReader();
+      	reader.onload = function(e) {
+	        $scope.$apply(function() {
+	          $scope.message.phones = csvToArray(reader.result);
+	        });
+	    };
+	    var csvFileInput = document.getElementById('fileInput');
+      	var csvFile = csvFileInput.files[0];
+      	reader.readAsText(csvFile);
+    }
+
+	function csvToArray(csvFile){
+		var allUsers = csvFile.split("\n");
+		var result = [];
+		for(var i = 0; i < allUsers.length; i++){	
+			if(allUsers[i]) {
+				result.push(allUsers[i]);	
+			}
+			
+		}
+		return result;
+    }
+
 	$scope.addNotif = function () {
 
 		var obj = {};
 		obj.message_type = $scope.message.type;
+
 		if(isValid()) {
-			if($scope.message.phones) {
-				obj.phones = $scope.message.phones.split(/,|;|\n/);
-			}
-			if($scope.message.gcms) {
-				obj.gcms = $scope.message.gcms.split(/,|;|\n/);
-			}
 			obj.from = $scope.message.from;
 			obj.head = $scope.message.head;
 			obj.body = $scope.message.body;
 			obj.server_key = $scope.message.server_key;
+			var msgLength = Math.ceil(obj.body.length/160);
+			var numOfCust = $scope.message.phones.length;
 			obj.scheduled_at = $scope.message.date.setHours($scope.message.hours, $scope.message.minutes ,0);
-			sendRequest(obj);
+			alert('you are scheduling '+ msgLength*numOfCust  + " messages " + ' for ' + numOfCust + ' customers')
+			if($scope.message.phones) {
+				while($scope.message.phones.length) {
+					var phones = $scope.message.phones.splice(0, 100);
+					
+					sendRequest(obj, phones);
+				}				
+			}
+			else if($scope.message.outlet) {
+				obj.outlet = $scope.message.outlet;
+				sendRequest(obj);
+			}
+			else if($scope.message.gcms) {
+				obj.gcms = $scope.message.gcms.split(/,|;|\n/);
+			}
 		}
 		else {
 			$scope.error.message = "Please fill all the fields."
 		}
 	}
 
-	function sendRequest (obj) {
-		$http.post('/api/v2/notifs', {obj:obj}).success(function (data) {
+	function sendRequest (obj, phones) {
+		obj.phones = phones;
+		$http.post('/api/v2/notifs', {obj:obj, phones}).success(function (data) {
 			toastSvc.showToast('success', data.message);
 			$location.path('/notifs');
 		}).error(function (data) {
@@ -126,10 +164,34 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 	$scope.getNotifs = function () {
 		$http.get('/api/v2/notifs').success(function (data) {
 			$scope.notifs = data.info;
-			console.log(data.info)
 		}).error(function (err) {
 			toastSvc.showToast('error', err.message);
 		});
+	}
+
+	$scope.outletQuery = function() {
+		var request = $http.get('/api/v1/outlet/console/');
+		return request.then(function(response) {
+			$scope.outlets = eval(eval(response).data.info);
+		}, function(response) {
+
+		});
+	};
+
+	$scope.getNumbers = function(outlet) {
+		var q = {
+                outlets: [$scope.message.outlet],
+                data_type: 'unique',
+                programs: [$scope.message.outlet]//should not write this line
+            };
+		
+        dataService.getUserMetric(q).then(function(data) {
+            $scope.message.phones = data;
+            $scope.message.from = data[data.length-1];
+        });
+
+
+       
 	}
 })
 .controller('DatePickerCtrl', function($scope, $timeout) {
@@ -583,7 +645,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			data: $scope.query
         }).success(function (data, status, header, config) {	
         	if(data.info && data.info.isCheckin) {
-        		
+        		//console.log(JSON.stringify(data.info))
 	            $scope.checkins= data.info;
 	        
 			    getCsvForCheckin($scope.checkins);
@@ -591,9 +653,11 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			    function getCsvForCheckin(data) {
 			        $scope.checkin_csv = [];
 			        for (var key in $scope.checkins) {
-			        	//console.log($scope.checkins[key])
+			        	
 			        	var a = $scope.checkins[key];
+
 			        	for(var check in a) {
+			        		//console.log(check)
 			        		if(check == 0) {
 			        			var obj = {
 				                    'outlet': 'outlet',
