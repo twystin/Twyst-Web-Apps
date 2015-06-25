@@ -1,26 +1,38 @@
 <div class="row-fluid">
 	<h4 class="alert alert-info lead">Schedule notifications</h4>
     
-    <div class="row-fluid">
+    <div class="row-fluid" ng-init="outletQuery()">
         <div class="row-fluid">
             <div class="span4">
-                Notif type
+                Notif Type
             </div>
-            <div class="span8" ng-init="message.type = 'SMS'">
+            <div class="span8" >
                 <input type="radio" ng-model="message.type" value="SMS" ng-click="makeEmpty('SMS')"> SMS 
                 <input type="radio" ng-model="message.type" value="GCM" ng-click="makeEmpty('GCM')"> GCM
+                
             </div>
         </div>
-    	<div class="row-fluid" ng-show="message.type === 'SMS'">
+    	<div class="row-fluid" ng-show="message.type === 'FILE'">
+
+            
             <div class="span4">
-                Phone number(s) <small>(separated by comma or semi-colon)</small>
+                Phone number(s) <small>(upload a csv file)</small>
             </div>
             <div class="span8">
-                <textarea ng-model="message.phones">
-                    
-                </textarea>
+                <input ng-model="csv" onchange="angular.element(this).scope().fileChanged()"type="file" accept=".csv" id="fileInput"/>
+                     
+                <br>        
+                   <p ng-if = "jsonData">File Uploaded Successfully, Click Submit Button To update</p>     
+           
             </div>
     	</div>
+        <div class="row-fluid" ng-show="message.type === 'SMS'">
+            <div class="span4"> Select a source</div>
+            <div class="span8">
+                <input type="radio" ng-model="message.type" ng-show="message.type === 'SMS'"value="OUTLET" ng-click="makeEmpty('OUTLET')"> Choose  from outlets
+                 <input type="radio" ng-model="message.type" ng-show="message.type === 'SMS'"value="FILE" ng-click="makeEmpty('FILE')"> Upload a file   
+            </div>
+        </div>
         <div class="row-fluid" ng-show="message.type === 'GCM'">
             <div class="span4">
                 GCM ID(s) <small>(separated by comma or semi-colon)</small>
@@ -29,6 +41,16 @@
                 <textarea ng-model="message.gcms">
                     
                 </textarea>
+            </div>
+        </div>
+        <div class="row-fluid" ng-show="message.type === 'OUTLET'">
+            <div class="span4">
+                Select Outlet
+            </div>
+           <div class="span8">
+                <select ng-model="message.outlet" ng-change = "getNumbers()">
+                    <option ng-repeat="outlet in outlets"  value="{{outlet._id}}">{{outlet.basics.name}}, {{outlet.contact.location.locality_1.toString()}}</option>
+                </select>   
             </div>
         </div>
         <div class="row-fluid"  ng-show="message.type === 'GCM'">
