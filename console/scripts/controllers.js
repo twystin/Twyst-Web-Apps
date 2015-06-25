@@ -120,7 +120,10 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 	$scope.addNotif = function () {
 
 		var obj = {};
-		obj.message_type = $scope.message.type;
+		if($scope.message.type == 'SMS' || $scope.message.type == 'OUTLET'  || $scope.message.type == 'FILE') {
+			obj.message_type = 'SMS'
+		}
+		
 
 		if(isValid()) {
 			obj.from = $scope.message.from;
