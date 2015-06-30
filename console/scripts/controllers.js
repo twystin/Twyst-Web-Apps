@@ -648,7 +648,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			data: $scope.query
         }).success(function (data, status, header, config) {	
         	if(data.info && data.info.isCheckin) {
-        		//console.log(JSON.stringify(data.info))
+        		
 	            $scope.checkins= data.info;
 	        
 			    getCsvForCheckin($scope.checkins);
@@ -658,24 +658,35 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			        for (var key in $scope.checkins) {
 			        	
 			        	var a = $scope.checkins[key];
-
+			        	
 			        	for(var check in a) {
-			        		//console.log(check)
+			        		
 			        		if(check == 0) {
 			        			var obj = {
 				                    'outlet': 'outlet',
 				   		            'date': key+'-2015'
-				                };	
+				                };
+				                var first_obj = {
+				                    'outlet': a[check].outlet,
+				                    'checkin_count': a[check].count
+				                };
 			        		}
 			        		else {
+			        			
 			        			var obj = {
 				                    'outlet': a[check].outlet,
 				                    'checkin_count': a[check].count
 				                };
 			        		}
-			        		
-		                $scope.checkin_csv.push(obj);
-		                $scope.get_checkin_data = true;
+				        	if (check == 0) {
+				        		$scope.checkin_csv.push(obj);	
+				        		$scope.checkin_csv.push(first_obj);
+				        	}
+				        	else{
+				        		$scope.checkin_csv.push(obj);
+				        	}
+			                
+			                $scope.get_checkin_data = true;
 			        	}
 			        	   
 			        }
@@ -686,27 +697,38 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
         		
 	            $scope.redeems = data.info;
 	            
-			    getCsvForRedeems($scope.redeems);
-	            function getCsvForRedeems(data) {
+			    getCsvForRedemption($scope.redeems);
+	            function getCsvForRedemption(data) {
 			        $scope.redeem_csv = [];
-			        for (var key in $scope.redeems) {
-			        	//console.log($scope.checkins[key])
+			        for (var key in $scope.redeems) {				        	
 			        	var a = $scope.redeems[key];
 			        	for(var check in a) {
 			        		if(check == 0) {
 			        			var obj = {
 				                    'outlet': 'outlet',
 				   		            'date': key+'-2015'
-				                };	
+				                };
+				                var first_obj = {
+				                    'outlet': a[check].outlet,
+				                    'checkin_count': a[check].count
+				                };
 			        		}
 			        		else {
+			        			
 			        			var obj = {
 				                    'outlet': a[check].outlet,
 				                    'checkin_count': a[check].count
 				                };
 			        		}
+				        	if (check == 0) {
+				        		$scope.redeem_csv.push(obj);	
+				        		$scope.redeem_csv.push(first_obj);
+				        	}
+				        	else{
+				        		$scope.redeem_csv.push(obj);
+				        	}
 			        		
-		                $scope.redeem_csv.push(obj);
+		                
 		                $scope.get_redeemption_data = true;
 			        	}
 			        	   
@@ -722,7 +744,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
         })
         .error(function (data, status, header, config) {
 
-            //toastSvc.showToast('error', 'There is some error in csv file.');
+            toastSvc.showToast('error', 'Error in getting data.');
         });
     }
 
@@ -756,17 +778,13 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 	          
 		        }).success(function (data, status, header, config) {
 		           	
-		            toastSvc.showToast('success',  i + ': ' +JSON.stringify(data.message));
+		            toastSvc.showToast('success', JSON.stringify(data.message));
 		        })
 		        .error(function (data, status, header, config) {
 		            
 		            toastSvc.showToast('error',  JSON.stringify(data.message.message));
 		        });	
-  			}
-  			else {
-  				toastSvc.showToast('success',  'Bulk Checkin Completed');
-  				return false;
-  			}
+  			}  			
   					
   		};
       }
@@ -798,6 +816,197 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
           }
         }
         //console.log(obj);
+        result.push(obj);
+      }
+      return result;
+    }
+
+    function isMobileNumber(phone) {
+        if(phone
+            && (phone.length === 10)
+            && isNumber(phone)
+            && isValidFirstDigit(phone)) {
+            return true;
+        };
+        return false;
+    }
+
+    function isValidFirstDigit(phone) {
+        if(phone[0] === '7'
+            || phone[0] === '8'
+            || phone[0] === '9') {
+            return true;
+        }
+        return false;
+    }
+
+    function isNumber(str) {
+        var numeric = /^-?[0-9]+$/;
+        return numeric.test(str);
+    }
+
+
+
+    function isValidPhone () {
+        if(!$scope.user.phone
+            || isNaN($scope.user.phone)
+            || $scope.user.phone.length !== 10) {
+
+            return false;
+        }
+        return true;
+    }
+
+}).controller('smsReportCtrl', function ($scope, $http, $timeout, $window, toastSvc,  authService) {
+
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
+    
+   	$scope.sms = {}
+
+  	$scope.getSmsReport = function(){
+   		if($scope.sms.end_date && $scope.sms.start_date) {
+     		if($scope.sms.end_date.getTime() < $scope.sms.start_date.getTime()){
+
+	      		toastSvc.showToast('error', 'Start date can not be greater than end date');
+	      		return false;
+	      	}
+	      	else {
+	      		$scope.query = {};
+			    $scope.query.start_date = $scope.sms.start_date;
+			    $scope.query.end_date = $scope.sms.end_date;
+	      		getReport();
+	      	}	
+     	}
+     	else {
+     		toastSvc.showToast('error', 'Please Select Date Range');
+     		
+     	}
+    }
+    getReport = function(){      
+      $http({
+			url: '/api/v2/smsReport',
+			method: "POST",
+			data: $scope.query
+        }).success(function (data, status, header, config) {	
+        	if(data.info) {        		
+			    $scope.sms_csv = [];
+			    var prev = 0;
+		        for (var i = 0; i < data.info.length; i++) {		   		        
+		        	if(data.info[i].from && data.info[i+1] && data.info[i+1].from && data.info[i].from == data.info[i+1].from) {		        		
+		        		prev =  prev + data.info[i].phones.length;		                		    
+		        	}
+		        	else if(data.info[i] && data.info[i].from && data.info[i-1] && data.info[i-1].from && data.info[i].from == data.info[i-1].from) {
+		        		
+		        		var obj = {
+		                    'date': data.info[i].logged_at,	
+		                    'from': data.info[i].from,
+		                    'number': data.info[i].phones.length + prev,
+		                    'total sms': Math.ceil(data.info[i].body.length/160)*(data.info[i].phones.length + prev)
+		                };
+		                prev = 0;
+		                
+			        	$scope.sms_csv.push(obj);
+			        	$scope.get_sms_data = true;
+			        }
+			        else {
+			        	var obj = {
+		                    'date': data.info[i].logged_at,	
+		                    'from': data.info[i].from,
+		                    'number': data.info[i].phones.length,
+		                    'total sms': Math.ceil(data.info[i].body.length/160)*data.info[i].phones.length
+		                };
+		                
+			        	$scope.sms_csv.push(obj);
+			        	$scope.get_sms_data = true;	
+			        	prev = 0;
+			        }
+		        	
+		        }	
+			        
+        	}
+        	
+        	else {
+        			toastSvc.showToast('error', 'There is no record for selected range.');
+        	}
+        })
+        .error(function (data, status, header, config) {
+
+            //toastSvc.showToast('error', 'There is some error in csv file.');
+        });
+    }
+
+    
+}).controller('batchCheckinCtrl', function ($scope, $http, $timeout, $window, toastSvc,  authService) {
+
+	if (!authService.isLoggedIn()) {
+        $location.path('/');
+    }
+    $scope.fileChanged = function() {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $scope.$apply(function() {
+          $scope.jsonData = csvTOJson(reader.result);
+        });
+      };
+
+      var csvFileInput = document.getElementById('fileInput');
+      var csvFile = csvFileInput.files[0];
+      reader.readAsText(csvFile);
+    }
+
+
+    $scope.submitUserList = function(){
+      var csvFileInput = document.getElementById('fileInput');
+      if(csvFileInput.files[0]) {
+  		for (var i = 0; i < $scope.jsonData.length; i++) {  			
+  			if($scope.jsonData[i].outlet_id != '') {
+  				$http.post('/api/v1/bulk/panel_checkins', {
+	          	rows  : $scope.jsonData[i]
+	          
+		        }).success(function (data, status, header, config) {
+		           	
+		            toastSvc.showToast('success',  i + ': ' +JSON.stringify(data.message));
+		        })
+		        .error(function (data, status, header, config) {
+		            
+		            toastSvc.showToast('error',  JSON.stringify(data.message.message));
+		        });	
+  			}
+  			else {
+  				toastSvc.showToast('success',  'Bulk Checkin Completed');
+  				return false;
+  			}
+  					
+  		};
+      }
+      else {
+        alert("Plese Upload a CSV File");
+        return false;
+      }
+
+
+    }
+
+    function csvTOJson(csvFile){
+
+      var allUsers = csvFile.split("\n");
+      var result = [];
+
+      var headers = allUsers[0].split(",");
+
+      for(var i = 1; i < allUsers.length; i++){
+
+        var obj = {};
+        var currentUser = allUsers[i].split(",");
+
+        for(var j = 0; j < headers.length; j++){
+          if(currentUser[j] != undefined){
+            obj[headers[j].trim()] = currentUser[j].trim();
+          }
+        }
+        console.log(obj);
         result.push(obj);
       }
       return result;
