@@ -78,6 +78,14 @@ twystConsole.config(function ($routeProvider) {
 		controller: 'checkinCtrl',
 		templateUrl: '/console/templates/checkin/checkin.html',
 	}).
+	when('/sms/report', {
+		controller: 'smsReportCtrl',
+		templateUrl: '/console/templates/report/sms_report.html',
+	}).
+	when('/batch/checkin', {
+		controller: 'batchCheckinCtrl',
+		templateUrl: '/console/templates/checkin/batch_checkin.html',
+	}).
 	otherwise({
 		redirectTo: '/dashboard'
 	});
