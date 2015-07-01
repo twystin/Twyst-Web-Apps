@@ -900,7 +900,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 		        	else if(data.info[i] && data.info[i].from && data.info[i-1] && data.info[i-1].from && data.info[i].from == data.info[i-1].from) {
 		        		
 		        		var obj = {
-		                    'date': data.info[i].logged_at,	
+		                    'date': new Date(data.info[i].logged_at),	
 		                    'from': data.info[i].from,
 		                    'number': data.info[i].phones.length + prev,
 		                    'total sms': Math.ceil(data.info[i].body.length/160)*(data.info[i].phones.length + prev)
@@ -912,7 +912,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			        }
 			        else {
 			        	var obj = {
-		                    'date': data.info[i].logged_at,	
+		                    'date': new Date(data.info[i].logged_at),	
 		                    'from': data.info[i].from,
 		                    'number': data.info[i].phones.length,
 		                    'total sms': Math.ceil(data.info[i].body.length/160)*data.info[i].phones.length
