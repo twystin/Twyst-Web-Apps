@@ -960,25 +960,30 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
     $scope.submitUserList = function(){
       var csvFileInput = document.getElementById('fileInput');
       if(csvFileInput.files[0]) {
-  		for (var i = 0; i < $scope.jsonData.length; i++) {  			
-  			if($scope.jsonData[i].outlet_id != '') {
-  				$http.post('/api/v1/bulk/panel_checkins', {
-	          	rows  : $scope.jsonData[i]
-	          
-		        }).success(function (data, status, header, config) {
-		           	
-		            toastSvc.showToast('success',  i + ': ' +JSON.stringify(data.message));
-		        })
-		        .error(function (data, status, header, config) {
-		            
-		            toastSvc.showToast('error',  JSON.stringify(data.message.message));
-		        });	
-  			}
-  			else {
-  				toastSvc.showToast('success',  'Bulk Checkin Completed');
-  				return false;
-  			}
-  					
+  		for (var i = 0; i < $scope.jsonData.length; i++) { 
+  			$scope.query = {}
+  			$scope.query = {
+	      		outlet: $scope.jsonData[0].outlet_id,
+  			 	phone :$scope.jsonData[i].mobile_number,
+	  			created_date: $scope.jsonData[0].checkin_date,
+	  			sms_sender_id :$scope.jsonData[0].sms_handler,
+	  			message: $scope.jsonData[0].checkin_message
+	      	}
+  			
+			$http({
+				url: '/api/v3/batch_checkins',
+				method: "POST",
+				data: $scope.query
+          
+	        }).success(function (data, status, header, config) {
+	           	
+	            toastSvc.showToast('success',  i + ': ' +JSON.stringify(data.message));
+	        })
+	        .error(function (data, status, header, config) {
+	            
+	            toastSvc.showToast('error',  JSON.stringify(data.message));
+	        });	
+  				
   		};
       }
       else {
@@ -1006,7 +1011,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
             obj[headers[j].trim()] = currentUser[j].trim();
           }
         }
-        console.log(obj);
+        //console.log(obj);
         result.push(obj);
       }
       return result;
