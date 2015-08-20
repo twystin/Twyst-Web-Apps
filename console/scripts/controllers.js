@@ -67,8 +67,8 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 
 	function isValid() {
 		if(($scope.message.phones
-			|| $scope.message.gcms || $scope.message.outlet
-			)
+			|| $scope.message.gcms)
+			&& $scope.message.outlet
 			&& $scope.message.head
 			&& $scope.message.body
 			&& $scope.message.date
@@ -129,6 +129,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
 			obj.from = $scope.message.from;
 			obj.head = $scope.message.head;
 			obj.body = $scope.message.body;
+			obj.outlet = $scope.message.outlet;
 			obj.server_key = $scope.message.server_key;
 			var msgLength = Math.ceil(obj.body.length/160);
 			var numOfCust = $scope.message.phones.length;
@@ -189,7 +190,7 @@ twystConsole.controller('PublicController', function($scope, $location, authServ
             };
 		
         dataService.getUserMetric(q).then(function(data) {
-            $scope.message.phones = data;
+            $scope.message.phones = _.map(data, function(obj) { return obj._id; });
             $scope.message.from = data[data.length-1];
         });
 
